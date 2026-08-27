@@ -196,7 +196,6 @@ function submitWithRetry(app,retriesLeft){
       document.getElementById('apf_msg').textContent='제출 중 오류가 발생했습니다: '+err.message+' (잠시 후 다시 시도해주세요)';
     });
 }
-}
 
 document.addEventListener('DOMContentLoaded',function(){
   initTheme();
