@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>교육 관리</title>
+  <meta name="description" content="해외지사 · Agent · 고객사 담당자 설비교육 Level 0~3 관리">
+  <meta name="format-detection" content="date=no,telephone=no,address=no">
+  <script>
+    (function(){var t=localStorage.getItem('edu_theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+  </script>
+  <link rel="stylesheet" href="style.css?v=20260827a">
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="ttl">🎓 교육 관리</span>
+        <div class="conn-dot" id="connStatus" onclick="checkConn()" title="클릭하면 연결 상태 확인">
+          <div class="conn-led" id="connLed"></div>
+          <span id="connTxt">연결 확인</span>
+        </div>
+        <button class="sidebar-toggle" id="themeToggle" onclick="toggleTheme()" title="다크/라이트 모드 전환">🌙</button>
+      </div>
+      <div class="tright" id="topbarRight">
+        <div id="tools_schedule" style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+          <input type="text" class="gantt-search" placeholder="검색" oninput="schSearch(this.value)" autocomplete="off">
+          <div id="schStatusChips" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"></div>
+          <button class="btn pri" onclick="openVisitModal(null)">+ 교육 방문 등록</button>
+        </div>
+        <div id="tools_trainee" style="display:none;gap:6px;align-items:center;flex-wrap:wrap">
+          <input type="text" class="gantt-search" placeholder="이름/소속 검색" oninput="trSearch(this.value)" autocomplete="off">
+          <select id="trCountrySel" onchange="trFilterCountry(this.value)" style="width:auto"></select>
+          <button class="btn pri" onclick="openTraineeModal(null)">+ 대상자 등록</button>
+        </div>
+        <div id="tools_course" style="display:none"></div>
+        <div id="tools_history" style="display:none"></div>
+        <button class="btn" onclick="openSheetsSettings()">⚙ Sheets 설정</button>
+        <div class="shortcut-wrap" id="shortcutWrap">
+          <button class="btn shortcut-trigger" onclick="toggleShortcut(event)">🔗 바로가기</button>
+          <div class="shortcut-menu" id="shortcutMenu">
+            <div class="shortcut-menu-header">BU2 바로가기</div>
+            <a class="shortcut-item" href="https://portal.intekplus.com/" target="_blank" rel="noopener">
+              <div class="shortcut-icon" style="background:#e0f2fe;">🗂️</div>
+              <div class="si-info"><div class="si-name">INTEKPLUS Project Portal</div><div class="si-meta">portal.intekplus.com</div></div>
+            </a>
+            <a class="shortcut-item" href="https://do-intekplus.atlassian.net/wiki/spaces/lbi1bSfvdkX5/pages/1752367120" target="_blank" rel="noopener">
+              <div class="shortcut-icon" style="background:#fef9c3;">📝</div>
+              <div class="si-info"><div class="si-name">회의록</div><div class="si-meta">Confluence</div></div>
+            </a>
+            <a class="shortcut-item" href="https://bu-2-portal-git-main-2-23ca.vercel.app/" target="_blank" rel="noopener">
+              <div class="shortcut-icon" style="background:#fce7f3;">🏠</div>
+              <div class="si-info"><div class="si-name">BU2 Portal (전체 링크 모음)</div><div class="si-meta">bu-2-portal…vercel.app</div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-bar">
+      <div class="tab-nav">
+        <button class="tab-btn on" id="tab_schedule" onclick="switchTab('schedule')">📅 교육 일정</button>
+        <button class="tab-btn" id="tab_trainee" onclick="switchTab('trainee')">👤 대상자별 이수 현황</button>
+        <button class="tab-btn" id="tab_course" onclick="switchTab('course')">📚 교육 과정 관리</button>
+        <button class="tab-btn" id="tab_history" onclick="switchTab('history')">📋 이력 관리</button>
+      </div>
+    </div>
+    <div class="content" id="view_schedule">
+      <div class="main"><div class="scroll-main" id="sch_wrap"></div></div>
+    </div>
+    <div class="content" id="view_trainee" style="display:none">
+      <div class="main"><div class="scroll-main" id="tr_wrap"></div></div>
+    </div>
+    <div class="content" id="view_course" style="display:none">
+      <div class="main"><div class="scroll-main" id="course_wrap"></div></div>
+    </div>
+    <div class="content" id="view_history" style="display:none">
+      <div class="main"><div class="scroll-main" id="hist_wrap"></div></div>
+    </div>
+  </div>
+  <div id="mc"></div>
+
+  <script src="data.js?v=20260827a"></script>
+  <script src="app.js?v=20260827a"></script>
+  <script src="schedule.js?v=20260827a"></script>
+  <script src="trainee.js?v=20260827a"></script>
+  <script src="course.js?v=20260827a"></script>
+  <script src="history.js?v=20260827a"></script>
+  <script>
+    // 상태 필터 체크박스 + 국가 셀렉트를 데이터 로드 후 채움 (data.js 상수 사용)
+    document.getElementById('schStatusChips').innerHTML = VISIT_STATUS.map(function(s){
+      return '<label class="chkrow"><input type="checkbox" checked onchange="toggleSchStatus(\''+s.id+'\',this.checked)"><span style="color:'+s.color+'">●</span> '+s.label+'</label>';
+    }).join('');
+    document.getElementById('trCountrySel').innerHTML = '<option value="all">전체 국가</option>' + COUNTRIES.map(function(c){return '<option value="'+c+'">'+c+'</option>';}).join('');
+  </script>
+</body>
+</html>
