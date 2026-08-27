@@ -199,7 +199,8 @@ function levelSection(traineeId,level){
   }
 
   var statusBadge=appr&&appr.status==='approved'
-    ?'<span class="lv-cur-badge">승인 완료 · '+esc(appr.approvalDate||'')+'</span>'
+    ?('<span class="lv-cur-badge">승인 완료 · '+esc(appr.approvalDate||'')+'</span>'
+      +'<button class="btn sm gsh" onclick="event.stopPropagation();openCertificate(\''+traineeId+'\','+level+')">🎓 이수증 발급</button>')
     :(prog.pct===100?'<span class="lv-cur-badge wait">전 항목 이수 · 승인 대기</span>':'<span class="lv-cur-badge none">진행중</span>');
 
   return '<div class="td-section">'

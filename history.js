@@ -47,6 +47,7 @@ function renderHistoryTab(){
       +'<td style="font-size:11px">'+esc(r.a.trainerSign||'')+'</td>'
       +'<td style="font-size:11px">'+esc(r.a.partLeadSign||'')+'</td>'
       +'<td style="font-size:11px">'+(r.a.level===3?(r.a.followUpDone?('완료 · '+esc(r.a.followUpDate||'')):'대기'):'-')+'</td>'
+      +'<td>'+(r.t.name?('<button class="btn sm gsh" onclick="openCertificate(\''+r.a.traineeId+'\','+r.a.level+')">🎓 이수증</button>'):'-')+'</td>'
     +'</tr>';
   }).join('');
 
@@ -78,7 +79,7 @@ function renderHistoryTab(){
       +'<span>Level 승인 이력 ('+apprList.length+'건)</span>'
       +'<button class="btn sm" onclick="exportApprovalsCSV()">⬇ CSV 내보내기</button>'
     +'</div>'
-      +'<table class="dtbl sm"><thead><tr><th style="width:100px">승인일자</th><th>이름</th><th>구분</th><th>소속</th><th>국가</th><th style="width:70px">Level</th><th style="width:100px">교육담당자</th><th style="width:100px">파트장</th><th style="width:120px">Follow-Up(L3)</th></tr></thead><tbody>'+(apprRows||'<tr><td colspan="9" class="empty">이력이 없습니다.</td></tr>')+'</tbody></table>'
+      +'<table class="dtbl sm"><thead><tr><th style="width:100px">승인일자</th><th>이름</th><th>구분</th><th>소속</th><th>국가</th><th style="width:70px">Level</th><th style="width:100px">교육담당자</th><th style="width:100px">파트장</th><th style="width:120px">Follow-Up(L3)</th><th style="width:90px">이수증</th></tr></thead><tbody>'+(apprRows||'<tr><td colspan="10" class="empty">이력이 없습니다.</td></tr>')+'</tbody></table>'
     +'</div>'
     +'<div class="td-section"><div class="td-sectitle" style="display:flex;justify-content:space-between">'
       +'<span>방문 이력 (완료/취소, '+visitList.length+'건)</span>'

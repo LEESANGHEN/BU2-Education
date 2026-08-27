@@ -9,7 +9,7 @@
   <script>
     (function(){var t=localStorage.getItem('edu_theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
   </script>
-  <link rel="stylesheet" href="style.css?v=20260827d">
+  <link rel="stylesheet" href="style.css?v=20260827e">
 </head>
 <body>
   <div class="app">
@@ -87,14 +87,16 @@
     </div>
   </div>
   <div id="mc"></div>
+  <div id="certOverlay" class="cert-overlay" style="display:none"></div>
 
   <script src="data.js?v=20260827a"></script>
   <script src="app.js?v=20260827c"></script>
   <script src="applications.js?v=20260827c"></script>
   <script src="schedule.js?v=20260827a"></script>
-  <script src="trainee.js?v=20260827a"></script>
+  <script src="trainee.js?v=20260827e"></script>
   <script src="course.js?v=20260827a"></script>
-  <script src="history.js?v=20260827a"></script>
+  <script src="history.js?v=20260827e"></script>
+  <script src="certificate.js?v=20260827a"></script>
   <script>
     // 상태 필터 체크박스 + 국가 셀렉트를 데이터 로드 후 채움 (data.js 상수 사용)
     document.getElementById('schStatusChips').innerHTML = VISIT_STATUS.map(function(s){
