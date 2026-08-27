@@ -185,21 +185,23 @@ document.addEventListener('click',function(e){
 /* ═══════════════════════════════════════════
    탭 전환
 ═══════════════════════════════════════════ */
-var _activeTab='schedule';
+var _activeTab='apply';
 function switchTab(tab){
   _activeTab=tab;
-  ['schedule','trainee','course','history'].forEach(function(t){
+  ['apply','schedule','trainee','course','history'].forEach(function(t){
     document.getElementById('view_'+t).style.display=(t===tab)?'flex':'none';
     document.getElementById('tab_'+t).className='tab-btn'+(t===tab?' on':'');
     var tools=document.getElementById('tools_'+t);
     if(tools)tools.style.display=(t===tab)?'flex':'none';
   });
+  if(tab==='apply')renderApplyTab();
   if(tab==='schedule')renderScheduleTab();
   if(tab==='trainee')renderTraineeTab();
   if(tab==='course')renderCourseTab();
   if(tab==='history')renderHistoryTab();
 }
 function renderAll(){
+  if(_activeTab==='apply')renderApplyTab();
   renderScheduleTab();
   if(_activeTab==='trainee')renderTraineeTab();
   if(_activeTab==='course')renderCourseTab();
@@ -212,8 +214,9 @@ function renderAll(){
 document.addEventListener('DOMContentLoaded',function(){
   initTheme();
   loadData();
-  switchTab('schedule');
+  switchTab('apply');
   loadFromSheets(function(){renderAll();});
+  loadApplications(function(){renderAll();});
   (function bgRefresh(){
     var url=getSheetsUrl();
     if(!url||location.protocol==='file:')return;
@@ -221,6 +224,7 @@ document.addEventListener('DOMContentLoaded',function(){
       var mc=document.getElementById('mc');
       if(mc&&mc.innerHTML&&mc.innerHTML.length>0)return;
       loadFromSheets(function(){renderAll();});
+      loadApplications(function(){renderAll();});
     },5*60*1000);
   })();
 });

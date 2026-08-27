@@ -23,7 +23,12 @@
         <button class="sidebar-toggle" id="themeToggle" onclick="toggleTheme()" title="다크/라이트 모드 전환">🌙</button>
       </div>
       <div class="tright" id="topbarRight">
-        <div id="tools_schedule" style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <div id="tools_apply" style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+          <button class="btn" onclick="refreshApplications()">⟳ 새로고침</button>
+          <button class="btn" onclick="openApplyLinkInfo()">🔗 신청서 링크</button>
+          <button class="btn" onclick="openApplySheetsSettings()">⚙ 신청서 Sheets 설정</button>
+        </div>
+        <div id="tools_schedule" style="display:none;gap:6px;align-items:center;flex-wrap:wrap">
           <input type="text" class="gantt-search" placeholder="검색" oninput="schSearch(this.value)" autocomplete="off">
           <div id="schStatusChips" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"></div>
           <button class="btn pri" onclick="openVisitModal(null)">+ 교육 방문 등록</button>
@@ -58,13 +63,17 @@
     </div>
     <div class="tab-bar">
       <div class="tab-nav">
-        <button class="tab-btn on" id="tab_schedule" onclick="switchTab('schedule')">📅 교육 일정</button>
+        <button class="tab-btn on" id="tab_apply" onclick="switchTab('apply')">📥 신청 접수함</button>
+        <button class="tab-btn" id="tab_schedule" onclick="switchTab('schedule')">📅 교육 일정</button>
         <button class="tab-btn" id="tab_trainee" onclick="switchTab('trainee')">👤 대상자별 이수 현황</button>
         <button class="tab-btn" id="tab_course" onclick="switchTab('course')">📚 교육 과정 관리</button>
         <button class="tab-btn" id="tab_history" onclick="switchTab('history')">📋 이력 관리</button>
       </div>
     </div>
-    <div class="content" id="view_schedule">
+    <div class="content" id="view_apply">
+      <div class="main"><div class="scroll-main" id="apply_wrap"></div></div>
+    </div>
+    <div class="content" id="view_schedule" style="display:none">
       <div class="main"><div class="scroll-main" id="sch_wrap"></div></div>
     </div>
     <div class="content" id="view_trainee" style="display:none">
@@ -81,6 +90,7 @@
 
   <script src="data.js?v=20260827a"></script>
   <script src="app.js?v=20260827a"></script>
+  <script src="applications.js?v=20260827a"></script>
   <script src="schedule.js?v=20260827a"></script>
   <script src="trainee.js?v=20260827a"></script>
   <script src="course.js?v=20260827a"></script>

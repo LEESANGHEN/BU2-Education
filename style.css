@@ -1006,3 +1006,48 @@ textarea:focus{border-color:#1a6bbf}
 /* 이력 관리 필터 바 */
 .hist-filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px;padding:10px;background:var(--bg-panel);border:1px solid var(--bd-main);border-radius:8px}
 .hist-filters select,.hist-filters input[type=date]{width:auto}
+
+/* ═══════════════════════════════════════════
+   📥 신청 접수함 (관리자)
+═══════════════════════════════════════════ */
+.app-status{font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.app-status.pending{background:#3a2a00;color:#e0a838;border:1px solid #5a4400}
+.app-status.registered{background:#0f3a26;color:#4ade9a;border:1px solid #0f9e6e}
+.app-status.rejected{background:#3a0a0a;color:#e07070;border:1px solid #7a1010}
+
+/* ═══════════════════════════════════════════
+   📝 교육 신청서 (외부 공개 페이지)
+═══════════════════════════════════════════ */
+html:has(.apf-body),.apf-body{height:auto;overflow:auto}
+.apf-body{background:var(--bg-base);min-height:100vh}
+.apf-topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1.5px solid var(--bd-strong);background:var(--bg-panel);position:sticky;top:0;z-index:10}
+.apf-root{max-width:900px;margin:0 auto;padding:20px 16px 60px}
+.apf-card{background:var(--bg-panel);border:1px solid var(--bd-main);border-radius:10px;padding:28px 32px}
+.apf-card h1{font-size:19px;font-weight:700;color:var(--tx-primary);margin-bottom:4px}
+.apf-sub{font-size:12px;color:var(--tx-second);margin-bottom:20px}
+.apf-sec{margin-bottom:24px;padding-top:16px;border-top:1px solid var(--bd-light)}
+.apf-sec h2{font-size:13px;font-weight:600;color:var(--tx-primary);margin-bottom:12px}
+.apf-hint{font-size:11px;color:var(--tx-faint);margin-top:4px;margin-bottom:8px}
+.apf-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.apf-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.apf-field{margin-bottom:12px}
+.apf-field label{font-size:11px;color:var(--tx-second);margin-bottom:4px;display:block;font-weight:500}
+.apf-field textarea{width:100%}
+.apf-tblwrap{overflow-x:auto;border:1px solid var(--bd-main);border-radius:8px}
+.apf-tbl{width:100%;border-collapse:collapse;background:var(--bg-input);font-size:11px}
+.apf-tbl th{text-align:left;padding:7px 8px;background:var(--bg-alt);color:var(--tx-dim);border-bottom:1.5px solid var(--bd-strong);white-space:nowrap}
+.apf-tbl td{padding:6px 8px;border-bottom:1px solid var(--bd-light);vertical-align:top}
+.apf-tbl select,.apf-tbl input{font-size:11px;padding:4px 6px}
+.apf-has{width:90px}
+.apf-msg{color:#e07070;font-size:12px;margin-top:10px;min-height:16px}
+.apf-submit{width:100%;padding:12px;font-size:14px;font-weight:600;border-radius:8px;border:none;background:#1a6bbf;color:#fff;cursor:pointer;margin-top:8px}
+.apf-submit:hover{background:#155299}
+.apf-submit:disabled{opacity:.6;cursor:default}
+.apf-warn{background:var(--bg-danger);border:1px solid var(--bd-danger);border-radius:8px;padding:16px;color:var(--tx-primary);font-size:13px}
+.apf-done{text-align:center;padding:60px 32px}
+.apf-done h1{font-size:22px;margin-bottom:14px}
+.apf-done p{font-size:13px;color:var(--tx-second);line-height:1.7}
+@media (max-width:700px){
+  .apf-row2,.apf-row3{grid-template-columns:1fr}
+  .apf-card{padding:20px 16px}
+}
