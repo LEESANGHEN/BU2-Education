@@ -42,13 +42,13 @@
         <div id="tools_history" style="display:none"></div>
         <div id="tools_prelearn" style="display:none;gap:6px;align-items:center;flex-wrap:wrap">
           <button class="btn" onclick="refreshPrelearn()">⟳ 새로고침</button>
-          <button class="btn" onclick="openPrelearnLinkInfo()">🔗 학습 링크</button>
+          <button class="btn admin-only-btn" style="display:none" onclick="openPrelearnLinkInfo()">🔗 학습 링크</button>
           <button class="btn admin-only-btn" style="display:none" onclick="openQuizAdmin()">📝 퀴즈 관리</button>
           <button class="btn pri" id="qaToolbarSaveBtn" style="display:none" onclick="saveQuizOverridesForSection()">💾 변경사항 저장</button>
           <button class="btn admin-only-btn" style="display:none" onclick="openPrelearnSheetsSettings()">⚙ 사전학습 Sheets 설정</button>
         </div>
         <button class="btn admin-only-btn" style="display:none" onclick="openSheetsSettings()">⚙ Sheets 설정</button>
-        <div class="shortcut-wrap" id="shortcutWrap">
+        <div class="shortcut-wrap admin-only-btn" id="shortcutWrap" style="display:none">
           <button class="btn shortcut-trigger" onclick="toggleShortcut(event)">🔗 바로가기</button>
           <div class="shortcut-menu" id="shortcutMenu">
             <div class="shortcut-menu-header">BU2 바로가기</div>
