@@ -10,6 +10,13 @@ var COURSE_DATA={
   smtv:{chapters:(typeof PRELEARN_CHAPTERS_SMTV!=='undefined')?PRELEARN_CHAPTERS_SMTV:null,quiz:(typeof PRELEARN_QUIZ_SMTV!=='undefined')?PRELEARN_QUIZ_SMTV:null},
   nbga:{chapters:(typeof PRELEARN_CHAPTERS_NBGA!=='undefined')?PRELEARN_CHAPTERS_NBGA:null,quiz:(typeof PRELEARN_QUIZ_NBGA!=='undefined')?PRELEARN_QUIZ_NBGA:null}
 };
+/* 관리자가 "퀴즈 관리"에서 수정한 문제은행 (설비/섹션별). 있으면 코드 내장 기본 문제 대신 이걸 사용한다. */
+var QUIZ_OVERRIDES={};
+function quizPoolFor(equip,code){
+  var ov=QUIZ_OVERRIDES&&QUIZ_OVERRIDES[equip]&&QUIZ_OVERRIDES[equip][code];
+  if(ov&&ov.length)return ov;
+  return (COURSE_DATA[equip]&&COURSE_DATA[equip].quiz&&COURSE_DATA[equip].quiz[code])||[];
+}
 
 var PL={record:null,equip:null,ci:0,si:0,li:0,mode:'pick',quizPick:{}};
 
@@ -173,7 +180,7 @@ function loadAllRecords(cb){
   if(!PRELEARN_SHEETS_URL){cb([]);return;}
   fetch(PRELEARN_SHEETS_URL+'?action=load')
     .then(function(r){return r.json();})
-    .then(function(data){cb(data.records||[]);})
+    .then(function(data){QUIZ_OVERRIDES=data.quizOverrides||{};cb(data.records||[]);})
     .catch(function(){cb([]);});
 }
 
@@ -271,7 +278,7 @@ function advanceSection(){
 function renderQuiz(){
   var root=document.getElementById('plRoot');
   var sec=curSection();
-  var qs=pickSectionQuiz(COURSE_DATA[PL.equip].quiz[sec.code]||[],sec);
+  var qs=pickSectionQuiz(quizPoolFor(PL.equip,sec.code),sec);
   var rows=qs.map(function(q,qi){
     return '<div class="pl-qrow" id="pl_qrow_'+qi+'">'
       +'<div class="pl-qtext" id="pl_qtext_'+qi+'">'+(qi+1)+'. '+esc(tx(q.q))+'</div>'
@@ -296,7 +303,7 @@ function renderQuiz(){
 function plPick(qi,idx){PL.quizPick[qi]=idx;}
 function submitQuiz(){
   var sec=curSection();
-  var qs=pickSectionQuiz(COURSE_DATA[PL.equip].quiz[sec.code]||[],sec);
+  var qs=pickSectionQuiz(quizPoolFor(PL.equip,sec.code),sec);
   if(Object.keys(PL.quizPick).length<qs.length){alert(pt('quizAnswerAll'));return;}
   var correct=0;
   qs.forEach(function(q,qi){

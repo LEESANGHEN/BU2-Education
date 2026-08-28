@@ -2,12 +2,18 @@
    🧑‍🎓 사전학습 현황 (관리자 — 설비별 학습자 진도/퀴즈 결과 조회)
 ═══════════════════════════════════════════ */
 var PRELEARN_LS_KEY='edu_prelearn_sheets_url';
-var PLA={list:[],equipFilter:'all'};
+var PLA={list:[],equipFilter:'all',viewMode:'progress'};
 
 var ADMIN_COURSE_CHAPTERS={
   smtv:(typeof PRELEARN_CHAPTERS_SMTV!=='undefined')?PRELEARN_CHAPTERS_SMTV:null,
   nbga:(typeof PRELEARN_CHAPTERS_NBGA!=='undefined')?PRELEARN_CHAPTERS_NBGA:null
 };
+var ADMIN_COURSE_QUIZ={
+  smtv:(typeof PRELEARN_QUIZ_SMTV!=='undefined')?PRELEARN_QUIZ_SMTV:{},
+  nbga:(typeof PRELEARN_QUIZ_NBGA!=='undefined')?PRELEARN_QUIZ_NBGA:{}
+};
+/* 퀴즈 관리 화면 상태 */
+var QA={equip:null,code:null,pool:[],overrides:{}};
 
 function getPrelearnSheetsUrl(){try{return localStorage.getItem(PRELEARN_LS_KEY)||'';}catch(e){return '';}}
 function setPrelearnSheetsUrl(u){try{localStorage.setItem(PRELEARN_LS_KEY,u);}catch(e){}}
@@ -59,11 +65,17 @@ function loadPrelearn(cb){
     .then(function(data){
       if(data.error)throw new Error(data.error);
       PLA.list=data.records||[];
+      QA.overrides=data.quizOverrides||{};
       if(cb)cb();
     })
     .catch(function(err){console.warn('사전학습 불러오기 실패:',err.message);if(cb)cb();});
 }
-function refreshPrelearn(){loadPrelearn(function(){renderPrelearnTab();});}
+function refreshPrelearn(){
+  loadPrelearn(function(){
+    if(PLA.viewMode==='quiz'){qaLoadPool();renderQuizAdminView();}
+    else renderPrelearnTab();
+  });
+}
 function savePrelearnRecords(){
   var url=getPrelearnSheetsUrl();
   if(!url)return;
@@ -86,6 +98,7 @@ function plFlattenRows(){
 function renderPrelearnTab(){
   var wrap=document.getElementById('prelearn_wrap');
   if(!wrap)return;
+  if(PLA.viewMode==='quiz'){renderQuizAdminView();return;}
   if(!getPrelearnSheetsUrl()){
     wrap.innerHTML='<div class="empty">사전학습 Sheets가 아직 연결되지 않았습니다.<br><br>상단 "⚙ 사전학습 Sheets 설정"에서 Code-Prelearn.gs 배포 URL을 입력해주세요.</div>';
     return;
@@ -158,4 +171,125 @@ function deletePrelearnRecord(id){
   PLA.list=PLA.list.filter(function(r){return r.id!==id;});
   savePrelearnRecords();
   cm();renderPrelearnTab();
+}
+
+/* ═══════════════════════════════════════════
+   📝 퀴즈 관리 (설비/섹션별 문제·보기·정답 확인/수정/삭제/추가)
+═══════════════════════════════════════════ */
+function openQuizAdmin(){
+  var url=getPrelearnSheetsUrl();
+  if(!url){alert('먼저 상단 "⚙ 사전학습 Sheets 설정"에서 URL을 입력해주세요.');return;}
+  PLA.viewMode='quiz';
+  var wrap=document.getElementById('prelearn_wrap');
+  if(wrap)wrap.innerHTML='<div class="empty">불러오는 중...</div>';
+  fetch(url+'?action=load')
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(function(data){
+      if(data.error)throw new Error(data.error);
+      QA.overrides=data.quizOverrides||{};
+      if(!QA.equip)QA.equip=EQUIPMENT_LIST[0].id;
+      qaEnsureValidSection();
+      qaLoadPool();
+      renderQuizAdminView();
+    })
+    .catch(function(err){alert('불러오기 실패: '+err.message);PLA.viewMode='progress';renderPrelearnTab();});
+}
+function closeQuizAdmin(){PLA.viewMode='progress';renderPrelearnTab();}
+function qaEnsureValidSection(){
+  var secs=plSectionsFor(QA.equip);
+  if(!QA.code||!secs.some(function(s){return s.code===QA.code;}))QA.code=secs.length?secs[0].code:null;
+}
+function qaLoadPool(){
+  var ov=QA.overrides[QA.equip]&&QA.overrides[QA.equip][QA.code];
+  var base=(ADMIN_COURSE_QUIZ[QA.equip]&&ADMIN_COURSE_QUIZ[QA.equip][QA.code])||[];
+  QA.pool=deepCopy((ov&&ov.length)?ov:base);
+}
+function qaSwitchEquip(v){QA.equip=v;qaEnsureValidSection();qaLoadPool();renderQuizAdminView();}
+function qaSwitchSection(v){QA.code=v;qaLoadPool();renderQuizAdminView();}
+function qaSetQ(qi,langK,val){QA.pool[qi].q[langK]=val;}
+function qaSetChoice(qi,ci,langK,val){QA.pool[qi].choices[ci][langK]=val;}
+function qaSetAnswer(qi,ci){QA.pool[qi].answer=ci;}
+function qaDeleteQ(qi){
+  if(!confirm('이 문항을 삭제할까요? (하단 "변경사항 저장"을 눌러야 실제로 반영됩니다)'))return;
+  QA.pool.splice(qi,1);
+  renderQuizAdminView();
+}
+function qaAddQ(){
+  QA.pool.push({q:{ko:'',en:'',zhCN:'',zhTW:'',ja:''},choices:[0,1,2,3].map(function(){return {ko:'',en:'',zhCN:'',zhTW:'',ja:''};}),answer:0});
+  renderQuizAdminView();
+  var el=document.getElementById('qa_card_'+(QA.pool.length-1));
+  if(el)el.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function qaValidatePool(){
+  for(var i=0;i<QA.pool.length;i++){
+    var q=QA.pool[i];
+    if(!q.q.en&&!q.q.ko){alert('문항 '+(i+1)+': 문제 내용을 최소 1개 언어 이상 입력해주세요.');return false;}
+    for(var c=0;c<q.choices.length;c++){
+      if(!q.choices[c].en&&!q.choices[c].ko){alert('문항 '+(i+1)+' 보기 '+(c+1)+': 내용을 최소 1개 언어 이상 입력해주세요.');return false;}
+    }
+  }
+  return true;
+}
+function saveQuizOverridesForSection(){
+  if(!qaValidatePool())return;
+  QA.overrides[QA.equip]=QA.overrides[QA.equip]||{};
+  QA.overrides[QA.equip][QA.code]=QA.pool;
+  var url=getPrelearnSheetsUrl();
+  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'saveQuizOverrides',quizOverrides:QA.overrides})})
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(data.ok){alert('저장되었습니다.');renderQuizAdminView();}
+      else alert('저장 실패: '+(data.error||''));
+    })
+    .catch(function(err){alert('저장 실패: '+err.message);});
+}
+function resetQuizSection(){
+  if(!confirm('이 섹션의 문제를 기본값으로 되돌릴까요? (관리자가 수정한 내용이 사라집니다)'))return;
+  if(QA.overrides[QA.equip])delete QA.overrides[QA.equip][QA.code];
+  var url=getPrelearnSheetsUrl();
+  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'saveQuizOverrides',quizOverrides:QA.overrides})})
+    .then(function(r){return r.json();})
+    .then(function(){qaLoadPool();renderQuizAdminView();})
+    .catch(function(err){alert('실패: '+err.message);});
+}
+function renderQuizAdminView(){
+  var wrap=document.getElementById('prelearn_wrap');
+  if(!wrap)return;
+  var secs=plSectionsFor(QA.equip);
+  var hasOverride=!!(QA.overrides[QA.equip]&&QA.overrides[QA.equip][QA.code]&&QA.overrides[QA.equip][QA.code].length);
+  var html='<div style="margin-bottom:12px"><a href="javascript:void(0)" onclick="closeQuizAdmin()" style="font-size:12px;color:var(--tx-second)">← 사전학습 현황으로</a></div>'
+    +'<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px">'
+      +'<select onchange="qaSwitchEquip(this.value)">'+EQUIPMENT_LIST.map(function(e){return '<option value="'+e.id+'"'+(e.id===QA.equip?' selected':'')+'>'+esc(e.name)+'</option>';}).join('')+'</select>'
+      +'<select onchange="qaSwitchSection(this.value)">'+secs.map(function(s){return '<option value="'+s.code+'"'+(s.code===QA.code?' selected':'')+'>'+s.code+' '+esc((s.title&&s.title.ko)||'')+'</option>';}).join('')+'</select>'
+      +'<span style="font-size:12px;color:'+(hasOverride?'#f0ad4e':'var(--tx-second)')+'">'+(hasOverride?'⚠ 관리자가 수정한 문제 사용 중':'● 기본값(자동 생성) 사용 중')+'</span>'
+      +(hasOverride?'<button class="btn sm" onclick="resetQuizSection()">기본값으로 초기화</button>':'')
+    +'</div>'
+    +'<div style="font-size:11.5px;color:var(--tx-second);margin-bottom:14px">학습 사이트는 섹션마다 이 문제은행 중 1~2개를 학습자별로 고정 랜덤 선택해 보여줍니다. 내용을 확인하고 필요하면 직접 수정·삭제·추가하세요.</div>'
+    +QA.pool.map(function(q,qi){return qaRenderQuestion(q,qi);}).join('')
+    +'<div style="display:flex;gap:8px;margin-top:6px">'
+      +'<button class="btn" onclick="qaAddQ()">+ 문제 추가</button>'
+      +'<button class="btn pri" onclick="saveQuizOverridesForSection()" style="margin-left:auto">💾 변경사항 저장</button>'
+    +'</div>';
+  wrap.innerHTML=html;
+}
+function qaRenderQuestion(q,qi){
+  var qLangs=LANGS.map(function(l){
+    var k=langKey(l.id);
+    return '<input type="text" value="'+esc(q.q[k]||'')+'" placeholder="'+l.label+'" oninput="qaSetQ('+qi+',\''+k+'\',this.value)" style="font-size:11.5px;margin-bottom:4px;width:100%;box-sizing:border-box">';
+  }).join('');
+  var choicesHtml=q.choices.map(function(c,ci){
+    var cLangs=LANGS.map(function(l){
+      var k=langKey(l.id);
+      return '<input type="text" value="'+esc(c[k]||'')+'" placeholder="'+l.label+'" oninput="qaSetChoice('+qi+','+ci+',\''+k+'\',this.value)" style="font-size:11px;margin-bottom:3px;width:100%;box-sizing:border-box">';
+    }).join('');
+    return '<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;padding:6px;border-radius:6px;background:'+(q.answer===ci?'rgba(74,222,154,.1)':'transparent')+'">'
+      +'<label style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--tx-second);white-space:nowrap;padding-top:4px"><input type="radio" name="qa_ans_'+qi+'" '+(q.answer===ci?'checked':'')+' onchange="qaSetAnswer('+qi+','+ci+')"> 정답</label>'
+      +'<div style="flex:1">'+cLangs+'</div>'
+    +'</div>';
+  }).join('');
+  return '<div class="apf-card" id="qa_card_'+qi+'" style="margin-bottom:14px">'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><b style="font-size:12px">문항 '+(qi+1)+'</b><button class="btn sm red" onclick="qaDeleteQ('+qi+')">🗑 삭제</button></div>'
+    +'<div style="margin-bottom:10px">'+qLangs+'</div>'
+    +choicesHtml
+  +'</div>';
 }
