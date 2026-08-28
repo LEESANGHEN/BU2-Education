@@ -8,12 +8,14 @@ var LANGS=[
   {id:'zh-TW',label:'中文(繁體)'},
   {id:'ja',label:'日本語'}
 ];
-var LANG_LS_KEY='edu_apply_lang';
-function getLang(){try{return localStorage.getItem(LANG_LS_KEY)||'ko';}catch(e){return 'ko';}}
+var LANG_LS_KEY='edu_lang';
+function getLang(){try{return localStorage.getItem(LANG_LS_KEY)||'en';}catch(e){return 'en';}}
 function setLang(l){try{localStorage.setItem(LANG_LS_KEY,l);}catch(e){}}
+/* 'zh-CN'/'zh-TW'(언어 선택값) <-> 'zhCN'/'zhTW'(데이터 파일의 JS 객체 키, 하이픈 불가) 변환 */
+function langKey(lang){return (lang||getLang()).replace('-','');}
 function t(key){
   var lang=getLang();
-  var d=(I18N[lang]&&I18N[lang][key]!==undefined)?I18N[lang][key]:I18N.ko[key];
+  var d=(I18N[lang]&&I18N[lang][key]!==undefined)?I18N[lang][key]:I18N.en[key];
   return d;
 }
 function tOrgType(id){var lang=getLang();return (I18N[lang]&&I18N[lang].orgTypeLbl[id])||I18N.ko.orgTypeLbl[id]||id;}
@@ -34,7 +36,9 @@ ko:{
   traineeName:'성명',traineePosition:'직책/직급',traineeTask:'담당 업무',
   visitCategory:'방문 구분',priorLevel:'재방문 시 이전 이수 Level',experienceYears:'현 업무 경력(년)',
   priorLevelNone:'-',
+  traineeEmail:'교육 대상자 이메일',
   sec3:'3. 방문 계획 및 희망 Level',
+  equipment:'교육 희망 설비',
   desiredLevel:'희망 Level',desiredStart:'방문 희망 시작일',desiredEnd:'방문 희망 종료일',
   totalDays:'총 방문일수',altNote:'대안 가능 기간 / 비고',
   sec4:'4. 사전 역량 자가진단',
@@ -54,7 +58,7 @@ ko:{
   doneMsg:'담당자 검토 후 방문 일정과 확정 Level을 별도로 안내드립니다.<br>문의사항은 본사 교육 담당자에게 연락해주세요.',
   warnMsg:'⚠ 이 신청서 페이지는 아직 연결 설정이 완료되지 않았습니다. 관리자에게 문의해주세요. (apply.js의 APPLY_SHEETS_URL 미설정)',
   errPrefix:'제출 중 오류가 발생했습니다: ',errSuffix:' (잠시 후 다시 시도해주세요)',
-  reqOrg:'지사/Agent/고객사명',reqApplicant:'신청자(작성자)',reqContact:'연락처/이메일',reqTrainee:'대상자 성명',reqStart:'방문 희망 시작일',reqEnd:'방문 희망 종료일',
+  reqOrg:'지사/Agent/고객사명',reqApplicant:'신청자(작성자)',reqContact:'연락처/이메일',reqTrainee:'대상자 성명',reqEmail:'교육 대상자 이메일',emailInvalid:'이(가) 올바른 이메일 형식이 아닙니다.',reqStart:'방문 희망 시작일',reqEnd:'방문 희망 종료일',
   reqSuffix:'을(를) 입력해주세요.',dateOrderErr:'방문 희망 종료일이 시작일보다 빠를 수 없습니다.',
   daysUnit:'일',
   orgTypeLbl:{branch:'해외지사',agent:'Agent(협력사)',customer:'고객사'},
@@ -88,7 +92,9 @@ en:{
   traineeName:'Full Name',traineePosition:'Position/Title',traineeTask:'Responsibilities',
   visitCategory:'Visit Type',priorLevel:'Previous Level Completed (if revisit)',experienceYears:'Years of Experience',
   priorLevelNone:'-',
+  traineeEmail:'Trainee Email',
   sec3:'3. Visit Plan & Desired Level',
+  equipment:'Equipment',
   desiredLevel:'Desired Level',desiredStart:'Desired Visit Start Date',desiredEnd:'Desired Visit End Date',
   totalDays:'Total Visit Days',altNote:'Alternative Period / Notes',
   sec4:'4. Self-Assessment of Prior Competency',
@@ -108,7 +114,7 @@ en:{
   doneMsg:'The visit schedule and confirmed Level will be communicated separately after review.<br>For inquiries, please contact the HQ training coordinator.',
   warnMsg:'⚠ This application page has not been configured yet. Please contact the administrator. (APPLY_SHEETS_URL not set in apply.js)',
   errPrefix:'An error occurred while submitting: ',errSuffix:' (please try again shortly)',
-  reqOrg:'Branch/Agent/Customer name',reqApplicant:'Applicant (Writer)',reqContact:'Contact/Email',reqTrainee:'Trainee name',reqStart:'Desired visit start date',reqEnd:'Desired visit end date',
+  reqOrg:'Branch/Agent/Customer name',reqApplicant:'Applicant (Writer)',reqContact:'Contact/Email',reqTrainee:'Trainee name',reqEmail:'Trainee email',emailInvalid:' is not a valid email address.',reqStart:'Desired visit start date',reqEnd:'Desired visit end date',
   reqSuffix:' is required.',dateOrderErr:'The end date cannot be earlier than the start date.',
   daysUnit:' day(s)',
   orgTypeLbl:{branch:'Overseas Branch',agent:'Agent (Partner)',customer:'Customer'},
@@ -142,7 +148,9 @@ en:{
   traineeName:'姓名',traineePosition:'职务/职级',traineeTask:'负责工作',
   visitCategory:'到访类型',priorLevel:'再次到访时之前已完成的Level',experienceYears:'当前工作经验(年)',
   priorLevelNone:'-',
+  traineeEmail:'培训对象邮箱',
   sec3:'3. 到访计划及期望Level',
+  equipment:'培训设备',
   desiredLevel:'期望Level',desiredStart:'期望到访开始日',desiredEnd:'期望到访结束日',
   totalDays:'总到访天数',altNote:'可选备用期间 / 备注',
   sec4:'4. 事先能力自我评估',
@@ -162,7 +170,7 @@ en:{
   doneMsg:'负责人审核后将另行通知到访日程及确定Level。<br>如有咨询事项，请联系总部培训负责人。',
   warnMsg:'⚠ 此申请页面尚未完成连接设置，请联系管理员。(apply.js中未设置APPLY_SHEETS_URL)',
   errPrefix:'提交过程中发生错误：',errSuffix:'（请稍后再试）',
-  reqOrg:'分公司/Agent/客户名称',reqApplicant:'申请人(填写人)',reqContact:'联系方式/邮箱',reqTrainee:'培训对象姓名',reqStart:'期望到访开始日',reqEnd:'期望到访结束日',
+  reqOrg:'分公司/Agent/客户名称',reqApplicant:'申请人(填写人)',reqContact:'联系方式/邮箱',reqTrainee:'培训对象姓名',reqEmail:'培训对象邮箱',emailInvalid:'不是有效的邮箱格式。',reqStart:'期望到访开始日',reqEnd:'期望到访结束日',
   reqSuffix:'为必填项。',dateOrderErr:'期望到访结束日不能早于开始日。',
   daysUnit:'天',
   orgTypeLbl:{branch:'海外分公司',agent:'Agent(合作商)',customer:'客户'},
@@ -196,7 +204,9 @@ en:{
   traineeName:'姓名',traineePosition:'職務/職級',traineeTask:'負責業務',
   visitCategory:'到訪類型',priorLevel:'再次到訪時之前已完成的Level',experienceYears:'目前工作經歷(年)',
   priorLevelNone:'-',
+  traineeEmail:'教育對象郵箱',
   sec3:'3. 到訪計畫及期望Level',
+  equipment:'教育設備',
   desiredLevel:'期望Level',desiredStart:'期望到訪開始日',desiredEnd:'期望到訪結束日',
   totalDays:'總到訪天數',altNote:'可選替代期間 / 備註',
   sec4:'4. 事前能力自我評估',
@@ -216,7 +226,7 @@ en:{
   doneMsg:'負責人審核後將另行通知到訪行程及確定Level。<br>如有詢問事項，請聯絡總部教育負責人。',
   warnMsg:'⚠ 此申請頁面尚未完成連接設定，請聯絡管理員。(apply.js中未設定APPLY_SHEETS_URL)',
   errPrefix:'提交過程中發生錯誤：',errSuffix:'（請稍後再試）',
-  reqOrg:'分公司/Agent/客戶名稱',reqApplicant:'申請人(填寫人)',reqContact:'聯絡方式/電子郵件',reqTrainee:'教育對象姓名',reqStart:'期望到訪開始日',reqEnd:'期望到訪結束日',
+  reqOrg:'分公司/Agent/客戶名稱',reqApplicant:'申請人(填寫人)',reqContact:'聯絡方式/電子郵件',reqTrainee:'教育對象姓名',reqEmail:'教育對象郵箱',emailInvalid:'不是有效的電子郵件格式。',reqStart:'期望到訪開始日',reqEnd:'期望到訪結束日',
   reqSuffix:'為必填項目。',dateOrderErr:'期望到訪結束日不能早於開始日。',
   daysUnit:'天',
   orgTypeLbl:{branch:'海外分公司',agent:'Agent(合作商)',customer:'客戶'},
@@ -250,7 +260,9 @@ ja:{
   traineeName:'氏名',traineePosition:'役職',traineeTask:'担当業務',
   visitCategory:'訪問区分',priorLevel:'再訪問時の以前修了Level',experienceYears:'現業務経歴(年)',
   priorLevelNone:'-',
+  traineeEmail:'対象者メールアドレス',
   sec3:'3. 訪問計画及び希望Level',
+  equipment:'教育設備',
   desiredLevel:'希望Level',desiredStart:'訪問希望開始日',desiredEnd:'訪問希望終了日',
   totalDays:'総訪問日数',altNote:'代替可能期間 / 備考',
   sec4:'4. 事前力量自己診断',
@@ -270,7 +282,7 @@ ja:{
   doneMsg:'担当者の検討後、訪問日程と確定Levelを別途ご案内いたします。<br>お問い合わせは本社教育担当者までご連絡ください。',
   warnMsg:'⚠ この申込ページはまだ接続設定が完了していません。管理者にお問い合わせください。(apply.jsのAPPLY_SHEETS_URL未設定)',
   errPrefix:'提出中にエラーが発生しました: ',errSuffix:' (しばらくしてから再度お試しください)',
-  reqOrg:'支社/Agent/顧客名',reqApplicant:'申込者(作成者)',reqContact:'連絡先/メール',reqTrainee:'対象者氏名',reqStart:'訪問希望開始日',reqEnd:'訪問希望終了日',
+  reqOrg:'支社/Agent/顧客名',reqApplicant:'申込者(作成者)',reqContact:'連絡先/メール',reqTrainee:'対象者氏名',reqEmail:'対象者メールアドレス',emailInvalid:'有効なメールアドレス形式ではありません。',reqStart:'訪問希望開始日',reqEnd:'訪問希望終了日',
   reqSuffix:'を入力してください。',dateOrderErr:'訪問希望終了日は開始日より前にできません。',
   daysUnit:'日',
   orgTypeLbl:{branch:'海外支社',agent:'Agent(協力会社)',customer:'顧客'},

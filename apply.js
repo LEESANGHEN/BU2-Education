@@ -85,18 +85,20 @@ function renderForm(){
         +field(t('priorLevel'),'priorLevel','<select id="f_priorLevel"><option value="">'+esc(t('priorLevelNone'))+'</option>'+levelOpts+'</select>')
         +field(t('experienceYears'),'experienceYears','<input type="text" id="f_experienceYears">')
       +'</div>'
+      +field(t('traineeEmail'),'traineeEmail','<input type="text" id="f_traineeEmail" required placeholder="name@example.com">')
     +'</div>'
 
     +'<div class="apf-sec"><h2>'+esc(t('sec3'))+'</h2>'
       +'<div class="apf-row3">'
+        +field(t('equipment'),'equipment','<select id="f_equipment">'+EQUIPMENT_LIST.map(function(e){return '<option value="'+e.id+'">'+esc(equipmentName(e.id,langKey()))+'</option>';}).join('')+'</select>')
         +field(t('desiredLevel'),'desiredLevel','<select id="f_desiredLevel">'+levelOpts+'</select>')
         +field(t('desiredStart'),'desiredStart','<input type="date" id="f_desiredStart" onchange="calcDays()">')
-        +field(t('desiredEnd'),'desiredEnd','<input type="date" id="f_desiredEnd" onchange="calcDays()">')
       +'</div>'
       +'<div class="apf-row2">'
+        +field(t('desiredEnd'),'desiredEnd','<input type="date" id="f_desiredEnd" onchange="calcDays()">')
         +field(t('totalDays'),'totalDays','<input type="text" id="f_totalDays" readonly>')
-        +field(t('altNote'),'altNote','<input type="text" id="f_altNote">')
       +'</div>'
+      +field(t('altNote'),'altNote','<input type="text" id="f_altNote">')
     +'</div>'
 
     +'<div class="apf-sec"><h2>'+esc(t('sec4'))+'</h2>'
@@ -142,7 +144,7 @@ function val(id){var el=document.getElementById(id);return el?el.value.trim():''
 function checked(id){var el=document.getElementById(id);return el?el.checked:false;}
 
 function submitApplication(){
-  var required=[['f_org',t('reqOrg')],['f_applicantName',t('reqApplicant')],['f_applicantContact',t('reqContact')],['f_traineeName',t('reqTrainee')],['f_desiredStart',t('reqStart')],['f_desiredEnd',t('reqEnd')]];
+  var required=[['f_org',t('reqOrg')],['f_applicantName',t('reqApplicant')],['f_applicantContact',t('reqContact')],['f_traineeName',t('reqTrainee')],['f_traineeEmail',t('reqEmail')],['f_desiredStart',t('reqStart')],['f_desiredEnd',t('reqEnd')]];
   for(var i=0;i<required.length;i++){
     if(!val(required[i][0])){
       alert(required[i][1]+t('reqSuffix'));
@@ -152,6 +154,11 @@ function submitApplication(){
   }
   if(val('f_desiredEnd')<val('f_desiredStart')){
     alert(t('dateOrderErr'));
+    return;
+  }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('f_traineeEmail'))){
+    alert(t('reqEmail')+t('emailInvalid'));
+    document.getElementById('f_traineeEmail').focus();
     return;
   }
 
@@ -167,7 +174,9 @@ function submitApplication(){
     orgType:val('f_orgType'),org:val('f_org'),country:val('f_country'),
     applicantName:val('f_applicantName'),applicantPosition:val('f_applicantPosition'),applicantContact:val('f_applicantContact'),
     traineeName:val('f_traineeName'),traineePosition:val('f_traineePosition'),traineeTask:val('f_traineeTask'),
+    traineeEmail:val('f_traineeEmail'),
     visitCategory:val('f_visitCategory'),priorLevel:val('f_priorLevel'),experienceYears:val('f_experienceYears'),
+    equipment:val('f_equipment'),
     desiredLevel:Number(val('f_desiredLevel')),desiredStart:val('f_desiredStart'),desiredEnd:val('f_desiredEnd'),
     totalDays:val('f_totalDays'),altNote:val('f_altNote'),
     selfAssessment:selfAssessment,
