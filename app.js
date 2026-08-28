@@ -188,7 +188,7 @@ document.addEventListener('click',function(e){
 var _activeTab='apply';
 function switchTab(tab){
   _activeTab=tab;
-  ['apply','schedule','trainee','course','history'].forEach(function(t){
+  ['apply','schedule','trainee','course','history','prelearn'].forEach(function(t){
     document.getElementById('view_'+t).style.display=(t===tab)?'flex':'none';
     document.getElementById('tab_'+t).className='tab-btn'+(t===tab?' on':'');
     var tools=document.getElementById('tools_'+t);
@@ -199,6 +199,7 @@ function switchTab(tab){
   if(tab==='trainee')renderTraineeTab();
   if(tab==='course')renderCourseTab();
   if(tab==='history')renderHistoryTab();
+  if(tab==='prelearn')renderPrelearnTab();
 }
 function renderAll(){
   if(_activeTab==='apply')renderApplyTab();
@@ -206,6 +207,7 @@ function renderAll(){
   if(_activeTab==='trainee')renderTraineeTab();
   if(_activeTab==='course')renderCourseTab();
   if(_activeTab==='history')renderHistoryTab();
+  if(_activeTab==='prelearn')renderPrelearnTab();
 }
 
 /* ═══════════════════════════════════════════
