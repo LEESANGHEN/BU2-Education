@@ -580,7 +580,13 @@ var PRELEARN_QUIZ_SMTV={
    answer:0},
   {q:{en:'Where is 3D thickness valuation inspection measured on?',ko:'Thickness Valuation 3D 검사는 어디에서 측정됩니까?',zhCN:'Thickness Valuation的3D检测在何处测量?',zhTW:'Thickness Valuation的3D檢測在何處測量?',ja:'Thickness Valuationの3D検査はどこで測定されますか?'},
    choices:[{en:'A moving conveyor belt',ko:'이동하는 컨베이어 벨트',zhCN:'移动的传送带',zhTW:'移動的輸送帶',ja:'移動するコンベアベルト'},{en:'A suction jig with precise flatness',ko:'정밀한 평탄도의 Suction Jig',zhCN:'具有精密平面度的吸附治具(Suction Jig)',zhTW:'具有精密平面度的吸附治具(Suction Jig)',ja:'精密な平面度を持つ吸着治具(Suction Jig)'},{en:'A rotating turntable',ko:'회전하는 턴테이블',zhCN:'旋转的转台',zhTW:'旋轉的轉台',ja:'回転するターンテーブル'},{en:'A water bath',ko:'수조',zhCN:'水槽',zhTW:'水槽',ja:'水槽'}],
-   answer:1}
+   answer:1},
+  {q:{en:'Which items are listed as inspection targets of iSIS-SMTV?',ko:'iSIS-SMTV의 검사 대상으로 명시된 것은?',zhCN:'iSIS-SMTV明确列出的检测对象是什么?',zhTW:'iSIS-SMTV明確列出的檢測對象是什麼?',ja:'iSIS-SMTVの検査対象として明記されているものは?'},
+   choices:[{en:'FC-BGA and FC-CSP',ko:'FC-BGA와 FC-CSP',zhCN:'FC-BGA和FC-CSP',zhTW:'FC-BGA和FC-CSP',ja:'FC-BGAとFC-CSP'},{en:'Bare silicon wafers',ko:'베어 실리콘 웨이퍼',zhCN:'裸硅晶圆',zhTW:'裸矽晶圓',ja:'ベアシリコンウェハ'},{en:'PCB bare boards',ko:'PCB Bare Board',zhCN:'PCB裸板',zhTW:'PCB裸板',ja:'PCBベア基板'},{en:'Wire-bonded packages',ko:'와이어본딩 패키지',zhCN:'引线键合封装',zhTW:'打線接合封裝',ja:'ワイヤーボンディングパッケージ'}],
+   answer:0},
+  {q:{en:'Which of the following is NOT listed among the iSIS-SMTV inspection items?',ko:'다음 중 iSIS-SMTV의 검사 항목으로 명시되지 않은 것은?',zhCN:'以下哪一项未被列为iSIS-SMTV的检测项目?',zhTW:'以下哪一項未被列為iSIS-SMTV的檢測項目?',ja:'次のうちiSIS-SMTVの検査項目として明記されていないものは?'},
+   choices:[{en:'Bump Height',ko:'Bump Height',zhCN:'Bump Height',zhTW:'Bump Height',ja:'Bump Height'},{en:'Bump Missing',ko:'Bump Missing',zhCN:'Bump Missing',zhTW:'Bump Missing',ja:'Bump Missing'},{en:'Solder Ball Voiding',ko:'Solder Ball Voiding',zhCN:'Solder Ball Voiding',zhTW:'Solder Ball Voiding',ja:'Solder Ball Voiding'},{en:'Warpage',ko:'Warpage',zhCN:'Warpage',zhTW:'Warpage',ja:'Warpage'}],
+   answer:2}
 ],
 '1.1.2':[
   {q:{en:'What kind of light source is suitable for WSI inspection?',ko:'WSI 검사에 적합한 광원의 특성은?',zhCN:'适合WSI检测的光源具有什么特性?',zhTW:'適合WSI檢測的光源具有什麼特性?',ja:'WSI検査に適した光源の特性は?'},
@@ -588,6 +594,12 @@ var PRELEARN_QUIZ_SMTV={
    answer:0},
   {q:{en:'What creates the interference pattern used to build the 3D Z-map?',ko:'3D Z-map을 만드는 데 사용되는 것은?',zhCN:'用于生成3D Z-map的是什么?',zhTW:'用於生成3D Z-map的是什麼?',ja:'3D Z-mapを作成するために使用されるものは?'},
    choices:[{en:'Signal strength of the interference pattern',ko:'간섭무늬의 신호 세기',zhCN:'干涉条纹的信号强度',zhTW:'干涉條紋的訊號強度',ja:'干渉縞の信号強度'},{en:'Camera exposure time',ko:'카메라 노출 시간',zhCN:'相机曝光时间',zhTW:'相機曝光時間',ja:'カメラの露光時間'},{en:'Motor encoder position',ko:'모터 엔코더 위치',zhCN:'电机编码器位置',zhTW:'馬達編碼器位置',ja:'モーターエンコーダーの位置'},{en:'Tray barcode data',ko:'트레이 바코드 데이터',zhCN:'托盘条码数据',zhTW:'托盤條碼資料',ja:'トレイのバーコードデータ'}],
+   answer:0},
+  {q:{en:'In the interference experiment with monochromatic light, what happens where two crests overlap?',ko:'단색광 간섭 실험에서 마루와 마루가 겹치는 곳에서는 어떻게 됩니까?',zhCN:'在单色光干涉实验中,波峰与波峰重叠处会发生什么?',zhTW:'在單色光干涉實驗中,波峰與波峰重疊處會發生什麼?',ja:'単色光の干渉実験において、山と山が重なる箇所ではどうなりますか?'},
+   choices:[{en:'The light becomes stronger',ko:'빛이 강해진다',zhCN:'光会增强',zhTW:'光會增強',ja:'光が強くなる'},{en:'The light disappears completely',ko:'빛이 완전히 사라진다',zhCN:'光会完全消失',zhTW:'光會完全消失',ja:'光が完全に消える'},{en:'The light changes color',ko:'빛의 색이 변한다',zhCN:'光的颜色会改变',zhTW:'光的顏色會改變',ja:'光の色が変わる'},{en:'Nothing changes',ko:'아무 변화가 없다',zhCN:'没有任何变化',zhTW:'沒有任何變化',ja:'何も変化しない'}],
+   answer:0},
+  {q:{en:'What component splits the single light source beam into two beams (d1, d2) for the interference measurement?',ko:'간섭 측정을 위해 단일 광원의 빔을 두 개(d1, d2)로 나누는 부품은?',zhCN:'在干涉测量中,将单一光源光束分成两束(d1、d2)的部件是什么?',zhTW:'在干涉測量中,將單一光源光束分成兩束(d1、d2)的部件是什麼?',ja:'干渉測定のために単一光源のビームを2つ(d1、d2)に分けるのは何ですか?'},
+   choices:[{en:'Beam splitter (B/S)',ko:'B/S(Beam Splitter)',zhCN:'分光镜(B/S)',zhTW:'分光鏡(B/S)',ja:'ビームスプリッター(B/S)'},{en:'Bandpass filter',ko:'대역통과 필터',zhCN:'带通滤波器',zhTW:'帶通濾波器',ja:'バンドパスフィルター'},{en:'Polarizer',ko:'편광판',zhCN:'偏振片',zhTW:'偏光片',ja:'偏光板'},{en:'Diffraction grating',ko:'회절격자',zhCN:'衍射光栅',zhTW:'繞射光柵',ja:'回折格子'}],
    answer:0}
 ],
 '1.2.1':[
@@ -596,7 +608,13 @@ var PRELEARN_QUIZ_SMTV={
    answer:2},
   {q:{en:'How many sets of 3D Vision does the machine have?',ko:'설비의 3D Vision 세트 수는?',zhCN:'该设备共有几组3D Vision?',zhTW:'該設備共有幾組3D Vision?',ja:'設備の3D Visionセット数は?'},
    choices:[{en:'1 SET',ko:'1 SET',zhCN:'1 SET',zhTW:'1 SET',ja:'1 SET'},{en:'2 SET',ko:'2 SET',zhCN:'2 SET',zhTW:'2 SET',ja:'2 SET'},{en:'3 SET',ko:'3 SET',zhCN:'3 SET',zhTW:'3 SET',ja:'3 SET'},{en:'4 SET',ko:'4 SET',zhCN:'4 SET',zhTW:'4 SET',ja:'4 SET'}],
-   answer:1}
+   answer:1},
+  {q:{en:'What is the approximate weight of the iSIS-SMTV equipment (Specification #1)?',ko:'iSIS-SMTV 설비의 대략적인 중량(규격 #1 기준)은?',zhCN:'iSIS-SMTV设备的大致重量(依规格#1)是多少?',zhTW:'iSIS-SMTV設備的大致重量(依規格#1)是多少?',ja:'iSIS-SMTV設備のおおよその重量(仕様#1基準)は?'},
+   choices:[{en:'4800kg (4.8 ton)',ko:'4800kg (4.8톤)',zhCN:'4800kg(4.8吨)',zhTW:'4800kg(4.8噸)',ja:'4800kg(4.8トン)'},{en:'1200kg',ko:'1200kg',zhCN:'1200kg',zhTW:'1200kg',ja:'1200kg'},{en:'9600kg',ko:'9600kg',zhCN:'9600kg',zhTW:'9600kg',ja:'9600kg'},{en:'800kg',ko:'800kg',zhCN:'800kg',zhTW:'800kg',ja:'800kg'}],
+   answer:0},
+  {q:{en:'How many trays does the Input Tray Stacker hold, per JEDEC standard?',ko:'JEDEC 규격 기준 Input Tray Stacker의 수용 매수는?',zhCN:'依JEDEC规格,Input Tray Stacker可容纳多少片托盘?',zhTW:'依JEDEC規格,Input Tray Stacker可容納多少片托盤?',ja:'JEDEC規格基準でInput Tray Stackerが収容できる枚数は?'},
+   choices:[{en:'45 trays',ko:'45장',zhCN:'45片',zhTW:'45片',ja:'45枚'},{en:'10 trays',ko:'10장',zhCN:'10片',zhTW:'10片',ja:'10枚'},{en:'100 trays',ko:'100장',zhCN:'100片',zhTW:'100片',ja:'100枚'},{en:'20 trays',ko:'20장',zhCN:'20片',zhTW:'20片',ja:'20枚'}],
+   answer:0}
 ],
 '1.2.2':[
   {q:{en:'What is the F.O.V of the 12M 3D Vision camera?',ko:'12M 3D Vision 카메라의 F.O.V는?',zhCN:'12M 3D Vision相机的F.O.V是多少?',zhTW:'12M 3D Vision相機的F.O.V是多少?',ja:'12M 3D VisionカメラのF.O.Vは?'},
@@ -604,12 +622,27 @@ var PRELEARN_QUIZ_SMTV={
    answer:1},
   {q:{en:'What AF method does the 3D Vision module use?',ko:'3D Vision 모듈이 사용하는 AF 방식은?',zhCN:'3D Vision模块使用的AF方式是什么?',zhTW:'3D Vision模組使用的AF方式是什麼?',ja:'3D VisionモジュールのAF方式は?'},
    choices:[{en:'Contact-based autofocusing',ko:'접촉식 오토포커싱',zhCN:'基于接触式的自动对焦',zhTW:'基於接觸式的自動對焦',ja:'接触式のオートフォーカス'},{en:'Optical Triangulation Based Autofocusing',ko:'광학 삼각측량 방식 오토포커싱',zhCN:'基于光学三角测量法的自动对焦',zhTW:'基於光學三角測量法的自動對焦',ja:'光学三角測量方式のオートフォーカス'},{en:'Manual focus only',ko:'수동 포커스만',zhCN:'仅手动对焦',zhTW:'僅手動對焦',ja:'マニュアルフォーカスのみ'},{en:'Sonar-based ranging',ko:'소나 방식 거리측정',zhCN:'基于声纳的测距',zhTW:'基於聲納的測距',ja:'ソナー方式の測距'}],
-   answer:1}
+   answer:1},
+  {q:{en:'What is the pixel resolution of the 25M 3D Vision camera?',ko:'25M 3D Vision 카메라의 픽셀 해상도는?',zhCN:'25M 3D Vision相机的像素解析度是多少?',zhTW:'25M 3D Vision相機的像素解析度是多少?',ja:'25M 3D Visionカメラのピクセル解像度は?'},
+   choices:[{en:'5K x 5K',ko:'5K x 5K',zhCN:'5K x 5K',zhTW:'5K x 5K',ja:'5K x 5K'},{en:'4K x 3K',ko:'4K x 3K',zhCN:'4K x 3K',zhTW:'4K x 3K',ja:'4K x 3K'},{en:'8K x 6K',ko:'8K x 6K',zhCN:'8K x 6K',zhTW:'8K x 6K',ja:'8K x 6K'},{en:'2K x 2K',ko:'2K x 2K',zhCN:'2K x 2K',zhTW:'2K x 2K',ja:'2K x 2K'}],
+   answer:0},
+  {q:{en:'Which inspection items are handled by the 2D Vision (12M) module?',ko:'2D Vision(12M) 모듈이 담당하는 검사 항목은?',zhCN:'2D Vision(12M)模块负责的检测项目是什么?',zhTW:'2D Vision(12M)模組負責的檢測項目是什麼?',ja:'2D Vision(12M)モジュールが担当する検査項目は?'},
+   choices:[{en:'Diameter, Top Diameter, Bridge, FM, SC',ko:'Diameter, Top Diameter, Bridge, FM, SC',zhCN:'Diameter、Top Diameter、Bridge、FM、SC',zhTW:'Diameter、Top Diameter、Bridge、FM、SC',ja:'Diameter、Top Diameter、Bridge、FM、SC'},{en:'Bump Height, Warpage, Coplanarity',ko:'Bump Height, Warpage, Coplanarity',zhCN:'Bump Height、Warpage、Coplanarity',zhTW:'Bump Height、Warpage、Coplanarity',ja:'Bump Height、Warpage、Coplanarity'},{en:'Voltage, Current, KVA',ko:'전압, 전류, KVA',zhCN:'电压、电流、KVA',zhTW:'電壓、電流、KVA',ja:'電圧、電流、KVA'},{en:'Cycle Time, Yield, UPH',ko:'Cycle Time, Yield, UPH',zhCN:'Cycle Time、Yield、UPH',zhTW:'Cycle Time、Yield、UPH',ja:'Cycle Time、Yield、UPH'}],
+   answer:0}
 ],
 '1.2.3':[
   {q:{en:'When are safety stickers attached?',ko:'안전 스티커는 언제 부착합니까?',zhCN:'安全标签在何时粘贴?',zhTW:'安全標籤在何時黏貼?',ja:'安全ステッカーはいつ貼付しますか?'},
    choices:[{en:'Always in a fixed standard position',ko:'항상 고정된 표준 위치에',zhCN:'始终贴在固定的标准位置',zhTW:'始終貼在固定的標準位置',ja:'常に固定の標準位置に'},{en:'According to the customer\'s request',ko:'고객사의 요청에 따라',zhCN:'根据客户的要求',zhTW:'根據客戶的要求',ja:'顧客の要請に応じて'},{en:'Only for export equipment',ko:'수출용 설비에만',zhCN:'仅限出口设备',zhTW:'僅限出口設備',ja:'輸出向け設備のみ'},{en:'Never — they are optional',ko:'부착하지 않음 — 선택 사항',zhCN:'从不粘贴——为选配项',zhTW:'從不黏貼——為選配項',ja:'貼付しない——任意項目である'}],
-   answer:1}
+   answer:1},
+  {q:{en:'Who determines where/whether safety stickers are attached on iSIS-SMTV?',ko:'iSIS-SMTV의 안전 스티커 부착 위치·여부는 누가 결정합니까?',zhCN:'iSIS-SMTV安全标签的粘贴位置及是否粘贴由谁决定?',zhTW:'iSIS-SMTV安全標籤的黏貼位置及是否黏貼由誰決定?',ja:'iSIS-SMTVの安全ステッカーの貼付位置・要否は誰が決めますか?'},
+   choices:[{en:'The customer, based on their request',ko:'고객사, 고객사의 요청에 따라',zhCN:'客户,依客户的要求',zhTW:'客戶,依客戶的要求',ja:'顧客、顧客の要請に基づき'},{en:'A fixed international standard applied to all customers',ko:'모든 고객사에 동일하게 적용되는 고정 국제 표준',zhCN:'适用于所有客户的固定国际标准',zhTW:'適用於所有客戶的固定國際標準',ja:'すべての顧客に一律適用される固定の国際規格'},{en:'The equipment operator, at their own discretion',ko:'설비 운영자가 임의로',zhCN:'由设备操作人员自行决定',zhTW:'由設備操作人員自行決定',ja:'設備オペレーターが独自に'},{en:'Random selection by the field engineer',ko:'현장 엔지니어가 무작위로 선택',zhCN:'由现场工程师随机选择',zhTW:'由現場工程師隨機選擇',ja:'現場エンジニアがランダムに選択'}],
+   answer:0},
+  {q:{en:'Does iSIS-SMTV use one identical safety sticker layout for every customer?',ko:'iSIS-SMTV는 모든 고객사에 동일한 안전 스티커 배치를 사용합니까?',zhCN:'iSIS-SMTV是否对所有客户使用相同的安全标签配置?',zhTW:'iSIS-SMTV是否對所有客戶使用相同的安全標籤配置?',ja:'iSIS-SMTVはすべての顧客に対して同一の安全ステッカー配置を使用しますか?'},
+   choices:[{en:'No, the layout follows each customer\'s request',ko:'아니오, 배치는 고객사의 요청에 따라 다릅니다',zhCN:'不是,配置依各客户的要求而定',zhTW:'不是,配置依各客戶的要求而定',ja:'いいえ、配置は各顧客の要請によって異なります'},{en:'Yes, it is always identical',ko:'예, 항상 동일합니다',zhCN:'是的,始终相同',zhTW:'是的,始終相同',ja:'はい、常に同一です'},{en:'Only Level 0 units get stickers',ko:'Level 0 유닛에만 스티커를 부착합니다',zhCN:'仅Level 0机型贴标',zhTW:'僅Level 0機型貼標',ja:'Level 0のユニットにのみ貼付します'},{en:'Only when requested by Intekplus headquarters',ko:'Intekplus 본사가 요청할 때만 부착합니다',zhCN:'仅在Intekplus总部要求时粘贴',zhTW:'僅在Intekplus總部要求時黏貼',ja:'Intekplus本社が要請した場合のみ貼付します'}],
+   answer:0},
+  {q:{en:'When installing safety stickers on the equipment, what should the installer refer to?',ko:'설비에 안전 스티커를 부착할 때 작업자는 무엇을 참고해야 합니까?',zhCN:'在设备上粘贴安全标签时,安装人员应参考什么?',zhTW:'在設備上黏貼安全標籤時,安裝人員應參考什麼?',ja:'設備に安全ステッカーを取り付ける際、作業者は何を参考にすべきですか?'},
+   choices:[{en:'The customer\'s request',ko:'고객사의 요청',zhCN:'客户的要求',zhTW:'客戶的要求',ja:'顧客の要請'},{en:'The engineer\'s personal preference',ko:'엔지니어 개인의 취향',zhCN:'工程师个人喜好',zhTW:'工程師個人喜好',ja:'エンジニア個人の好み'},{en:'A generic factory default set that never changes',ko:'변경되지 않는 공장 기본 세트',zhCN:'从不改变的工厂预设组合',zhTW:'從不改變的工廠預設組合',ja:'変更されない工場出荷時のデフォルトセット'},{en:'No reference is needed; stickers are not required',ko:'참고할 필요 없음, 스티커는 불필요함',zhCN:'无需参考,不需要粘贴标签',zhTW:'無需參考,不需要黏貼標籤',ja:'参考は不要、ステッカーは不要である'}],
+   answer:0}
 ],
 '1.3.1':[
   {q:{en:'Which PC is only turned on after the UPS is turned on?',ko:'UPS를 켠 후에만 켜는 PC는?',zhCN:'哪台PC必须在UPS开启后才能开启?',zhTW:'哪台PC必須在UPS開啟後才能開啟?',ja:'UPSをオンにした後にのみオンにするPCは?'},
@@ -617,6 +650,12 @@ var PRELEARN_QUIZ_SMTV={
    answer:2},
   {q:{en:'What does TTM stand for?',ko:'TTM은 무엇의 약자입니까?',zhCN:'TTM是什么的缩写?',zhTW:'TTM是什麼的縮寫?',ja:'TTMは何の略ですか?'},
    choices:[{en:'Tray Transfer Module',ko:'Tray Transfer Module',zhCN:'Tray Transfer Module(托盘传送模块)',zhTW:'Tray Transfer Module(托盤傳送模組)',ja:'Tray Transfer Module(トレイ搬送モジュール)'},{en:'Total Test Machine',ko:'Total Test Machine',zhCN:'Total Test Machine(全测试机)',zhTW:'Total Test Machine(全測試機)',ja:'Total Test Machine(トータルテストマシン)'},{en:'Tool Torque Monitor',ko:'Tool Torque Monitor',zhCN:'Tool Torque Monitor(工具扭矩监视器)',zhTW:'Tool Torque Monitor(工具扭矩監視器)',ja:'Tool Torque Monitor(工具トルクモニター)'},{en:'Test Track Manager',ko:'Test Track Manager',zhCN:'Test Track Manager(测试轨道管理器)',zhTW:'Test Track Manager(測試軌道管理器)',ja:'Test Track Manager(テストトラックマネージャー)'}],
+   answer:0},
+  {q:{en:'How many ports does the PC KVM have?',ko:'PC KVM의 포트 수는?',zhCN:'PC KVM有多少个端口?',zhTW:'PC KVM有多少個埠?',ja:'PC KVMのポート数は?'},
+   choices:[{en:'8 port',ko:'8포트',zhCN:'8端口',zhTW:'8埠',ja:'8ポート'},{en:'4 port',ko:'4포트',zhCN:'4端口',zhTW:'4埠',ja:'4ポート'},{en:'16 port',ko:'16포트',zhCN:'16端口',zhTW:'16埠',ja:'16ポート'},{en:'2 port',ko:'2포트',zhCN:'2端口',zhTW:'2埠',ja:'2ポート'}],
+   answer:0},
+  {q:{en:'What does MSM stand for in the internal layout?',ko:'내부 레이아웃에서 MSM은 무엇의 약자입니까?',zhCN:'内部布局中的MSM是什么的缩写?',zhTW:'內部佈局中的MSM是什麼的縮寫?',ja:'内部レイアウトにおけるMSMは何の略ですか?'},
+   choices:[{en:'Multi Sorter Module',ko:'Multi Sorter Module',zhCN:'Multi Sorter Module(多分选模块)',zhTW:'Multi Sorter Module(多分選模組)',ja:'Multi Sorter Module(マルチソーターモジュール)'},{en:'Main System Monitor',ko:'Main System Monitor',zhCN:'Main System Monitor(主系统监视器)',zhTW:'Main System Monitor(主系統監視器)',ja:'Main System Monitor(メインシステムモニター)'},{en:'Motor Sensor Module',ko:'Motor Sensor Module',zhCN:'Motor Sensor Module(电机传感器模块)',zhTW:'Motor Sensor Module(馬達感測器模組)',ja:'Motor Sensor Module(モーターセンサーモジュール)'},{en:'Multi Stacker Mechanism',ko:'Multi Stacker Mechanism',zhCN:'Multi Stacker Mechanism(多堆栈机构)',zhTW:'Multi Stacker Mechanism(多堆疊機構)',ja:'Multi Stacker Mechanism(マルチスタッカー機構)'}],
    answer:0}
 ],
 '1.3.2':[
@@ -625,6 +664,12 @@ var PRELEARN_QUIZ_SMTV={
    answer:2},
   {q:{en:'In Auto Mode, when does motor power get cut off?',ko:'Auto Mode에서 모터 전원이 차단되는 경우는?',zhCN:'在Auto Mode下,电机电源何时被切断?',zhTW:'在Auto Mode下,馬達電源何時被切斷?',ja:'Auto Modeでは、どのようなときにモーター電源が遮断されますか?'},
    choices:[{en:'When the upper door is unlocked',ko:'상부 도어가 unlock될 때',zhCN:'当上部门被解锁(unlock)时',zhTW:'當上部門被解鎖(unlock)時',ja:'上部ドアがunlockされたとき'},{en:'When the Reset button is pressed',ko:'Reset 버튼을 누를 때',zhCN:'当按下Reset按钮时',zhTW:'當按下Reset按鈕時',ja:'Resetボタンが押されたとき'},{en:'When Teach Mode is selected',ko:'Teach Mode를 선택할 때',zhCN:'当选择Teach Mode时',zhTW:'當選擇Teach Mode時',ja:'Teach Modeが選択されたとき'},{en:'When the Job is saved',ko:'Job을 저장할 때',zhCN:'当保存Job时',zhTW:'當儲存Job時',ja:'Jobが保存されたとき'}],
+   answer:0},
+  {q:{en:'When an alarm occurs during automatic operation, what is the first step to resolve it?',ko:'자동운전 중 알람이 발생했을 때 가장 먼저 해야 할 조치는?',zhCN:'自动运行中发生报警时,应最先采取的措施是什么?',zhTW:'自動運行中發生警報時,應最先採取的措施是什麼?',ja:'自動運転中にアラームが発生した場合、最初に行う措置は?'},
+   choices:[{en:'Click Reset',ko:'Reset 클릭',zhCN:'点击Reset',zhTW:'點擊Reset',ja:'Resetをクリックする'},{en:'Open the door immediately',ko:'즉시 문을 연다',zhCN:'立即开门',zhTW:'立即開門',ja:'すぐにドアを開ける'},{en:'Turn off the main breaker',ko:'메인 차단기를 끈다',zhCN:'关闭主断路器',zhTW:'關閉主斷路器',ja:'メインブレーカーを切る'},{en:'Call Intekplus without taking any action',ko:'아무 조치 없이 Intekplus에 연락한다',zhCN:'不采取任何措施,直接联系Intekplus',zhTW:'不採取任何措施,直接聯繫Intekplus',ja:'何も対応せずIntekplusに連絡する'}],
+   answer:0},
+  {q:{en:'Who is authorized to release the upper door interlock for maintenance?',ko:'유지보수를 위해 상부 도어 인터록을 해제할 수 있는 사람은?',zhCN:'谁有权限为维护而解除上部门联锁?',zhTW:'誰有權限為維護而解除上部門連鎖?',ja:'メンテナンスのために上部ドアのインターロックを解除できるのは誰ですか?'},
+   choices:[{en:'Only engineers authorized by Intekplus',ko:'Intekplus가 허용한 엔지니어만',zhCN:'仅经Intekplus授权的工程师',zhTW:'僅經Intekplus授權的工程師',ja:'Intekplusが許可したエンジニアのみ'},{en:'Any operator on shift',ko:'근무 중인 아무 작업자나',zhCN:'当班的任何操作人员',zhTW:'當班的任何操作人員',ja:'勤務中の作業者であれば誰でも'},{en:'Only the customer\'s safety officer',ko:'고객사의 안전 담당자만',zhCN:'仅客户的安全负责人',zhTW:'僅客戶的安全負責人',ja:'顧客の安全担当者のみ'},{en:'No one — it can never be released',ko:'아무도 없음 — 절대 해제할 수 없음',zhCN:'任何人都不可以——绝对无法解除',zhTW:'任何人都不可以——絕對無法解除',ja:'誰もいない——絶対に解除できない'}],
    answer:0}
 ],
 '1.3.3':[
@@ -633,6 +678,12 @@ var PRELEARN_QUIZ_SMTV={
    answer:1},
   {q:{en:'What happens to units after inspection in the Unit Sorting step?',ko:'Unit Sorting 단계에서 검사 후 유닛은 어떻게 됩니까?',zhCN:'在Unit Sorting步骤中,检测完成后的Unit会如何处理?',zhTW:'在Unit Sorting步驟中,檢測完成後的Unit會如何處理?',ja:'Unit Sortingステップでは、検査後のユニットはどうなりますか?'},
    choices:[{en:'They are classified as Good or Reject',ko:'양품/불량으로 분류된다',zhCN:'被分类为Good(良品)或Reject(不良品)',zhTW:'被分類為Good(良品)或Reject(不良品)',ja:'Good(良品)またはReject(不良品)に分類される'},{en:'They are re-inspected automatically',ko:'자동으로 재검사된다',zhCN:'自动重新检测',zhTW:'自動重新檢測',ja:'自動的に再検査される'},{en:'They are discarded',ko:'폐기된다',zhCN:'被丢弃',zhTW:'被丟棄',ja:'廃棄される'},{en:'They are relabeled with a new barcode',ko:'새 바코드가 재부착된다',zhCN:'重新贴上新的条码',zhTW:'重新貼上新的條碼',ja:'新しいバーコードが再付与される'}],
+   answer:0},
+  {q:{en:'What is used to separate trays one by one when preparing them for loading?',ko:'트레이를 투입하기 위해 한 장씩 분리할 때 사용하는 것은?',zhCN:'在准备投入托盘时,用于逐张分离托盘的是什么?',zhTW:'在準備投入托盤時,用於逐張分離托盤的是什麼?',ja:'トレイを投入するために1枚ずつ分離する際に使用するものは?'},
+   choices:[{en:'Elevator and Stacker',ko:'Elevator와 Stacker',zhCN:'Elevator和Stacker',zhTW:'Elevator和Stacker',ja:'ElevatorとStacker'},{en:'Aligner and Jig',ko:'Aligner와 Jig',zhCN:'Aligner和Jig',zhTW:'Aligner和Jig',ja:'AlignerとJig'},{en:'TTM and MSM',ko:'TTM과 MSM',zhCN:'TTM和MSM',zhTW:'TTM和MSM',ja:'TTMとMSM'},{en:'Barcode reader and camera',ko:'바코드 리더와 카메라',zhCN:'条码读取器和相机',zhTW:'條碼讀取器和相機',ja:'バーコードリーダーとカメラ'}],
+   answer:0},
+  {q:{en:'What method(s) can be used to read a unit\'s barcode in the R.O.I area?',ko:'R.O.I 영역의 Unit Barcode를 읽는 방식은?',zhCN:'读取R.O.I区域Unit条码的方式是什么?',zhTW:'讀取R.O.I區域Unit條碼的方式是什麼?',ja:'R.O.I領域のUnitバーコードを読み取る方式は?'},
+   choices:[{en:'OCR or Matrix barcode',ko:'OCR 또는 Matrix barcode',zhCN:'OCR或Matrix barcode',zhTW:'OCR或Matrix barcode',ja:'OCRまたはMatrix barcode'},{en:'QR code scanner only',ko:'QR코드 스캐너만',zhCN:'仅QR码扫描器',zhTW:'僅QR碼掃描器',ja:'QRコードスキャナーのみ'},{en:'RFID tag',ko:'RFID 태그',zhCN:'RFID标签',zhTW:'RFID標籤',ja:'RFIDタグ'},{en:'Manual keyboard entry',ko:'수동 키보드 입력',zhCN:'手动键盘输入',zhTW:'手動鍵盤輸入',ja:'手動キーボード入力'}],
    answer:0}
 ],
 '2.1.1':[
@@ -641,26 +692,68 @@ var PRELEARN_QUIZ_SMTV={
    answer:1},
   {q:{en:'In Teach mode, what is required to supply motor power when Reset is pushed?',ko:'Teach mode에서 Reset을 눌러 모터 전원을 공급하려면?',zhCN:'在Teach mode下,按下Reset以供给电机电源需要满足什么条件?',zhTW:'在Teach mode下,按下Reset以供給馬達電源需要滿足什麼條件?',ja:'Teach modeでResetを押してモーター電源を供給するために必要な条件は?'},
    choices:[{en:'All EMS buttons must be in the pull (released) state',ko:'모든 EMS 버튼이 pull(해제) 상태여야 함',zhCN:'所有EMS按钮必须处于pull(释放)状态',zhTW:'所有EMS按鈕必須處於pull(釋放)狀態',ja:'すべてのEMSボタンがpull(解除)状態であること'},{en:'The main breaker must be off',ko:'메인 차단기가 꺼져 있어야 함',zhCN:'主断路器必须处于关闭状态',zhTW:'主斷路器必須處於關閉狀態',ja:'メインブレーカーがオフであること'},{en:'The Job file must be open',ko:'Job 파일이 열려 있어야 함',zhCN:'必须打开Job文件',zhTW:'必須開啟Job檔案',ja:'Jobファイルが開かれていること'},{en:'The UPS must be off',ko:'UPS가 꺼져 있어야 함',zhCN:'UPS必须处于关闭状态',zhTW:'UPS必須處於關閉狀態',ja:'UPSがオフであること'}],
+   answer:0},
+  {q:{en:'Which air line supplies the ISO Jig Pocket Vacuum?',ko:'ISO Jig Pocket Vacuum에 공급되는 Air 라인은?',zhCN:'供给ISO Jig Pocket Vacuum的Air管路是哪一条?',zhTW:'供給ISO Jig Pocket Vacuum的Air管路是哪一條?',ja:'ISO Jig Pocket Vacuumに供給されるAirラインは?'},
+   choices:[{en:'Air2',ko:'Air2',zhCN:'Air2',zhTW:'Air2',ja:'Air2'},{en:'Air1',ko:'Air1',zhCN:'Air1',zhTW:'Air1',ja:'Air1'},{en:'Air3',ko:'Air3',zhCN:'Air3',zhTW:'Air3',ja:'Air3'},{en:'Air4',ko:'Air4',zhCN:'Air4',zhTW:'Air4',ja:'Air4'}],
+   answer:0},
+  {q:{en:'When does the Utility panel power lamp turn on?',ko:'Utility panel 수전 lamp는 언제 켜집니까?',zhCN:'Utility panel受电灯何时点亮?',zhTW:'Utility panel受電燈何時點亮?',ja:'Utility panelの受電ランプはいつ点灯しますか?'},
+   choices:[{en:'Only when the CP01 power lamp breaker is turned on',ko:'CP01 Power Lamp 차단기를 On 했을 때만',zhCN:'仅在打开CP01 Power Lamp断路器时',zhTW:'僅在開啟CP01 Power Lamp斷路器時',ja:'CP01 Power Lampブレーカーをオンにしたときのみ'},{en:'Automatically once air pressure reaches 6bar',ko:'공압이 6bar에 도달하면 자동으로',zhCN:'气压达到6bar时自动点亮',zhTW:'氣壓達到6bar時自動點亮',ja:'エア圧が6barに達すると自動的に'},{en:'As soon as the main power cable is plugged in',ko:'메인 전원 케이블을 꽂는 즉시',zhCN:'主电源电缆一插上即点亮',zhTW:'主電源電纜一插上即點亮',ja:'メイン電源ケーブルを差し込んだ直後'},{en:'Never — no equipment has this lamp',ko:'절대 켜지지 않음 — 어떤 설비에도 없음',zhCN:'永远不会点亮——所有设备均无此灯',zhTW:'永遠不會點亮——所有設備均無此燈',ja:'点灯しない——どの設備にもこのランプはない'}],
    answer:0}
 ],
 '2.1.2':[
   {q:{en:'What happens automatically when the LED controller is turned on?',ko:'LED Controller를 켜면 자동으로 일어나는 일은?',zhCN:'打开LED Controller时会自动发生什么?',zhTW:'開啟LED Controller時會自動發生什麼?',ja:'LED Controllerをオンにすると自動的に起こることは?'},
    choices:[{en:'The camera also turns on (varies by spec)',ko:'카메라도 함께 켜짐(사양에 따라 다름)',zhCN:'相机也会随之开启(依规格而异)',zhTW:'相機也會隨之開啟(依規格而異)',ja:'カメラも連動してオンになる(仕様により異なる)'},{en:'The Host PC shuts down',ko:'Host PC가 종료됨',zhCN:'Host PC关机',zhTW:'Host PC關機',ja:'Host PCがシャットダウンする'},{en:'The PZT controller resets',ko:'PZT 컨트롤러가 리셋됨',zhCN:'PZT控制器重置',zhTW:'PZT控制器重置',ja:'PZTコントローラーがリセットされる'},{en:'The tray ejects',ko:'트레이가 배출됨',zhCN:'托盘排出',zhTW:'托盤排出',ja:'トレイが排出される'}],
+   answer:0},
+  {q:{en:'What may happen if equipment power is raised while the PZT/AF controller power button is already turned on?',ko:'PZT/AF 컨트롤러 전원 버튼이 이미 켜진 상태에서 장비 전원을 올리면 어떻게 됩니까?',zhCN:'若在PZT/AF控制器电源按钮已开启的状态下再升高设备电源,会发生什么?',zhTW:'若在PZT/AF控制器電源按鈕已開啟的狀態下再升高設備電源,會發生什麼?',ja:'PZT/AFコントローラーの電源ボタンが既にオンの状態で設備電源を上げるとどうなりますか?'},
+   choices:[{en:'The controller may be damaged by overvoltage',ko:'과전압으로 컨트롤러가 손상될 수 있다',zhCN:'控制器可能因过电压而损坏',zhTW:'控制器可能因過電壓而損壞',ja:'過電圧によりコントローラーが破損するおそれがある'},{en:'Nothing — this is the recommended method',ko:'아무 문제 없음 — 권장되는 방법이다',zhCN:'没有问题——这是推荐的方法',zhTW:'沒有問題——這是推薦的方法',ja:'問題ない——これは推奨される方法である'},{en:'The camera resolution automatically increases',ko:'카메라 해상도가 자동으로 높아진다',zhCN:'相机分辨率会自动提高',zhTW:'相機解析度會自動提高',ja:'カメラの解像度が自動的に上がる'},{en:'The Host PC automatically reboots',ko:'Host PC가 자동으로 재부팅된다',zhCN:'Host PC会自动重启',zhTW:'Host PC會自動重新啟動',ja:'Host PCが自動的に再起動する'}],
+   answer:0},
+  {q:{en:'Which controllers are turned on for both 3D#1 and 3D#2?',ko:'3D#1, 3D#2에 대해 공통으로 전원을 켜는 컨트롤러는?',zhCN:'针对3D#1、3D#2共同开启电源的控制器是什么?',zhTW:'針對3D#1、3D#2共同開啟電源的控制器是什麼?',ja:'3D#1、3D#2に対して共通で電源を入れるコントローラーは?'},
+   choices:[{en:'PZT and AF Controllers',ko:'PZT, AF Controller',zhCN:'PZT、AF Controller',zhTW:'PZT、AF Controller',ja:'PZT、AF Controller'},{en:'Only LED controllers',ko:'LED Controller만',zhCN:'仅LED Controller',zhTW:'僅LED Controller',ja:'LED Controllerのみ'},{en:'Only the Host PC',ko:'Host PC만',zhCN:'仅Host PC',zhTW:'僅Host PC',ja:'Host PCのみ'},{en:'KVM and HUB',ko:'KVM, HUB',zhCN:'KVM、HUB',zhTW:'KVM、HUB',ja:'KVM、HUB'}],
+   answer:0},
+  {q:{en:'Which PCs are turned on in this step of the power-on sequence?',ko:'이 단계에서 전원을 켜는 PC는?',zhCN:'在此步骤中开启电源的PC是哪些?',zhTW:'在此步驟中開啟電源的PC是哪些?',ja:'この段階で電源を入れるPCはどれですか?'},
+   choices:[{en:'HOST, 2D, 3D#1, 3D#2',ko:'HOST, 2D, 3D#1, 3D#2',zhCN:'HOST、2D、3D#1、3D#2',zhTW:'HOST、2D、3D#1、3D#2',ja:'HOST、2D、3D#1、3D#2'},{en:'Only the HOST PC',ko:'HOST PC만',zhCN:'仅HOST PC',zhTW:'僅HOST PC',ja:'HOST PCのみ'},{en:'HOST and 2D only',ko:'HOST와 2D만',zhCN:'仅HOST和2D',zhTW:'僅HOST和2D',ja:'HOSTと2Dのみ'},{en:'All PCs plus a backup server',ko:'모든 PC와 백업 서버',zhCN:'所有PC及备份服务器',zhTW:'所有PC及備份伺服器',ja:'すべてのPCとバックアップサーバー'}],
    answer:0}
 ],
 '2.1.3':[
   {q:{en:'In what order should the equipment be turned off?',ko:'설비를 끌 때의 올바른 순서는?',zhCN:'关闭设备时应遵循什么顺序?',zhTW:'關閉設備時應遵循什麼順序?',ja:'設備をオフにする際の正しい順序は?'},
    choices:[{en:'Same order as turning on',ko:'켤 때와 동일한 순서',zhCN:'与开启时相同的顺序',zhTW:'與開啟時相同的順序',ja:'オンにするときと同じ順序'},{en:'Reverse order of turning on',ko:'켤 때의 반대 순서',zhCN:'与开启时相反的顺序',zhTW:'與開啟時相反的順序',ja:'オンにするときと逆の順序'},{en:'Any order is fine',ko:'순서는 상관없음',zhCN:'顺序无所谓',zhTW:'順序無所謂',ja:'順序はどうでもよい'},{en:'Main panel first, then controllers',ko:'메인 패널을 먼저, 그 다음 컨트롤러',zhCN:'先关主面板,再关控制器',zhTW:'先關主面板,再關控制器',ja:'メインパネルを先に、その後コントローラー'}],
-   answer:1}
+   answer:1},
+  {q:{en:'What is the first step in the equipment turn-off sequence?',ko:'설비 전원 차단 시 가장 먼저 수행하는 단계는?',zhCN:'设备关闭电源时最先执行的步骤是什么?',zhTW:'設備關閉電源時最先執行的步驟是什麼?',ja:'設備の電源を遮断する際、最初に行う手順は?'},
+   choices:[{en:'Turn off Controller (AF, LED, PZT, PC)',ko:'컨트롤러(AF, LED, PZT, PC) 전원 오프',zhCN:'关闭控制器(AF、LED、PZT、PC)',zhTW:'關閉控制器(AF、LED、PZT、PC)',ja:'コントローラー(AF、LED、PZT、PC)の電源オフ'},{en:'Turn off the Main panel',ko:'메인 패널 오프',zhCN:'关闭主面板',zhTW:'關閉主面板',ja:'メインパネルオフ'},{en:'Turn off the UPS',ko:'UPS 오프',zhCN:'关闭UPS',zhTW:'關閉UPS',ja:'UPSオフ'},{en:'Turn off the power strip',ko:'멀티탭 오프',zhCN:'关闭电源排插',zhTW:'關閉電源排插',ja:'電源タップオフ'}],
+   answer:0},
+  {q:{en:'What is the last step in the equipment turn-off sequence?',ko:'설비 전원 차단 시 마지막에 수행하는 단계는?',zhCN:'设备关闭电源时最后执行的步骤是什么?',zhTW:'設備關閉電源時最後執行的步驟是什麼?',ja:'設備の電源を遮断する際、最後に行う手順は?'},
+   choices:[{en:'Turn off the Main panel',ko:'메인 패널 오프',zhCN:'关闭主面板',zhTW:'關閉主面板',ja:'メインパネルオフ'},{en:'Turn off Controller (AF, LED, PZT, PC)',ko:'컨트롤러(AF, LED, PZT, PC) 전원 오프',zhCN:'关闭控制器(AF、LED、PZT、PC)',zhTW:'關閉控制器(AF、LED、PZT、PC)',ja:'コントローラー(AF、LED、PZT、PC)の電源オフ'},{en:'Turn off the power strip',ko:'멀티탭 오프',zhCN:'关闭电源排插',zhTW:'關閉電源排插',ja:'電源タップオフ'},{en:'Turn off the UPS',ko:'UPS 오프',zhCN:'关闭UPS',zhTW:'關閉UPS',ja:'UPSオフ'}],
+   answer:0},
+  {q:{en:'What may happen if the turn-off order is not followed?',ko:'전원 차단 순서를 지키지 않으면 어떻게 됩니까?',zhCN:'若不遵守关闭电源的顺序,会发生什么?',zhTW:'若不遵守關閉電源的順序,會發生什麼?',ja:'電源遮断の順序を守らない場合、どうなりますか?'},
+   choices:[{en:'Electrical components may be damaged',ko:'전기 부품이 손상될 수 있다',zhCN:'电气部件可能损坏',zhTW:'電氣部件可能損壞',ja:'電気部品が破損するおそれがある'},{en:'The Job file is automatically deleted',ko:'Job 파일이 자동 삭제된다',zhCN:'Job文件会自动删除',zhTW:'Job檔案會自動刪除',ja:'Jobファイルが自動削除される'},{en:'The equipment cannot be turned back on for 24 hours',ko:'24시간 동안 재기동이 불가능하다',zhCN:'24小时内无法重新开机',zhTW:'24小時內無法重新開機',ja:'24時間は再起動できなくなる'},{en:'Nothing — the order does not matter',ko:'아무 문제 없음 — 순서는 상관없다',zhCN:'没有问题——顺序无所谓',zhTW:'沒有問題——順序無所謂',ja:'問題ない——順序はどうでもよい'}],
+   answer:0}
 ],
 '2.2.1':[
   {q:{en:'Which key combination switches between HOST/Vision PC screens?',ko:'HOST/Vision PC 화면 전환 단축키는?',zhCN:'切换HOST/Vision PC画面的快捷键是什么?',zhTW:'切換HOST/Vision PC畫面的快捷鍵是什麼?',ja:'HOST/Vision PC画面を切り替えるキー操作は?'},
    choices:[{en:'Alt+Tab',ko:'Alt+Tab',zhCN:'Alt+Tab',zhTW:'Alt+Tab',ja:'Alt+Tab'},{en:'Ctrl+Ctrl+1~4',ko:'Ctrl+Ctrl+1~4',zhCN:'Ctrl+Ctrl+1~4',zhTW:'Ctrl+Ctrl+1~4',ja:'Ctrl+Ctrl+1~4'},{en:'Ctrl+Alt+Del',ko:'Ctrl+Alt+Del',zhCN:'Ctrl+Alt+Del',zhTW:'Ctrl+Alt+Del',ja:'Ctrl+Alt+Del'},{en:'F1~F4',ko:'F1~F4',zhCN:'F1~F4',zhTW:'F1~F4',ja:'F1~F4'}],
-   answer:1}
+   answer:1},
+  {q:{en:'Which number switches the screen to 3D Vision2?',ko:'화면을 3D Vision2로 전환하는 번호는?',zhCN:'切换至3D Vision2画面的数字是?',zhTW:'切換至3D Vision2畫面的數字是?',ja:'画面を3D Vision2に切り替える番号は?'},
+   choices:[{en:'1',ko:'1',zhCN:'1',zhTW:'1',ja:'1'},{en:'2',ko:'2',zhCN:'2',zhTW:'2',ja:'2'},{en:'3',ko:'3',zhCN:'3',zhTW:'3',ja:'3'},{en:'4',ko:'4',zhCN:'4',zhTW:'4',ja:'4'}],
+   answer:2},
+  {q:{en:'Which program is run after switching to the HOST screen?',ko:'HOST 화면으로 전환한 후 실행하는 프로그램은?',zhCN:'切换至HOST画面后运行的程序是什么?',zhTW:'切換至HOST畫面後執行的程式是什麼?',ja:'HOST画面に切り替えた後に実行するプログラムは?'},
+   choices:[{en:'iSMTV_Host',ko:'iSMTV_Host',zhCN:'iSMTV_Host',zhTW:'iSMTV_Host',ja:'iSMTV_Host'},{en:'VisionTray',ko:'VisionTray',zhCN:'VisionTray',zhTW:'VisionTray',ja:'VisionTray'},{en:'Init Handler',ko:'Init Handler',zhCN:'Init Handler',zhTW:'Init Handler',ja:'Init Handler'},{en:'Job Open',ko:'Job Open',zhCN:'Job Open',zhTW:'Job Open',ja:'Job Open'}],
+   answer:0},
+  {q:{en:'Which program is run on the 3D Vision1, 3D Vision2, and 2D Vision screens?',ko:'3D Vision1, 3D Vision2, 2D Vision 화면에서 실행하는 프로그램은?',zhCN:'在3D Vision1、3D Vision2、2D Vision画面上运行的程序是什么?',zhTW:'在3D Vision1、3D Vision2、2D Vision畫面上執行的程式是什麼?',ja:'3D Vision1、3D Vision2、2D Vision画面で実行するプログラムは?'},
+   choices:[{en:'VisionTray',ko:'VisionTray',zhCN:'VisionTray',zhTW:'VisionTray',ja:'VisionTray'},{en:'iSMTV_Host',ko:'iSMTV_Host',zhCN:'iSMTV_Host',zhTW:'iSMTV_Host',ja:'iSMTV_Host'},{en:'Empty Handler',ko:'Empty Handler',zhCN:'Empty Handler',zhTW:'Empty Handler',ja:'Empty Handler'},{en:'Lot Cancel',ko:'Lot Cancel',zhCN:'Lot Cancel',zhTW:'Lot Cancel',ja:'Lot Cancel'}],
+   answer:0}
 ],
 '2.2.2':[
   {q:{en:'When can inspection proceed based on the system status?',ko:'검사를 진행할 수 있는 시스템 상태 조건은?',zhCN:'根据系统状态,何时可以进行检测?',zhTW:'根據系統狀態,何時可以進行檢測?',ja:'システム状態に基づき、いつ検査を開始できますか?'},
    choices:[{en:'When all statuses show ready (green)',ko:'모든 상태가 준비(녹색)일 때',zhCN:'所有状态均显示为就绪(绿色)时',zhTW:'所有狀態均顯示為就緒(綠色)時',ja:'すべての状態が準備完了(緑色)のとき'},{en:'When only Vision is ready',ko:'Vision만 준비된 상태일 때',zhCN:'仅Vision就绪时',zhTW:'僅Vision就緒時',ja:'Visionのみ準備完了のとき'},{en:'As soon as the Host PC boots',ko:'Host PC가 부팅되는 즉시',zhCN:'Host PC启动后立即',zhTW:'Host PC啟動後立即',ja:'Host PC起動直後'},{en:'After 5 minutes of warm-up',ko:'5분 예열 후',zhCN:'预热5分钟后',zhTW:'預熱5分鐘後',ja:'5分間のウォームアップ後'}],
+   answer:0},
+  {q:{en:'What should be checked if the Vision status is not ready?',ko:'Vision 상태가 준비되지 않았을 때 확인해야 할 항목은?',zhCN:'当Vision状态未就绪时,应检查什么?',zhTW:'當Vision狀態未就緒時,應檢查什麼?',ja:'Vision状態が準備完了でない場合、確認すべき項目は?'},
+   choices:[{en:'Vision PC IP, program version match, and Vision program status',ko:'Vision PC의 IP, 버전 일치 여부, 프로그램 상태',zhCN:'Vision PC的IP、程序版本是否一致、Vision程序状态',zhTW:'Vision PC的IP、程式版本是否一致、Vision程式狀態',ja:'Vision PCのIP、プログラムバージョンの一致、Visionプログラムの状態'},{en:'Only the color of the LAN cable',ko:'LAN 케이블 색상만',zhCN:'仅LAN线的颜色',zhTW:'僅LAN線的顏色',ja:'LANケーブルの色のみ'},{en:'The barcode reader firmware',ko:'바코드 리더 펌웨어',zhCN:'条码读取器固件',zhTW:'條碼讀取器韌體',ja:'バーコードリーダーのファームウェア'},{en:'The tray stacker count',ko:'트레이 스태커 수량',zhCN:'托盘堆栈器数量',zhTW:'托盤堆疊器數量',ja:'トレイスタッカーの数'}],
+   answer:0},
+  {q:{en:'What must be done to resolve a not-ready Interlock status?',ko:'Interlock 상태가 준비되지 않았을 때 해결 방법은?',zhCN:'当Interlock状态未就绪时,应如何解决?',zhTW:'當Interlock狀態未就緒時,應如何解決?',ja:'Interlock状態が準備完了でない場合の対処法は?'},
+   choices:[{en:'Confirm all doors are closed, then click Interlock',ko:'모든 도어가 닫혔는지 확인 후 Interlock 클릭',zhCN:'确认所有门已关闭后点击Interlock',zhTW:'確認所有門已關閉後點擊Interlock',ja:'すべてのドアが閉まっていることを確認後Interlockをクリック'},{en:'Restart the Host PC',ko:'Host PC를 재시작한다',zhCN:'重新启动Host PC',zhTW:'重新啟動Host PC',ja:'Host PCを再起動する'},{en:'Open all doors and click Reset',ko:'모든 도어를 열고 Reset을 클릭한다',zhCN:'打开所有门并点击Reset',zhTW:'打開所有門並點擊Reset',ja:'すべてのドアを開けてResetをクリックする'},{en:'Replace the EMS button',ko:'EMS 버튼을 교체한다',zhCN:'更换EMS按钮',zhTW:'更換EMS按鈕',ja:'EMSボタンを交換する'}],
+   answer:0},
+  {q:{en:'What does a not-ready Motor status typically require checking?',ko:'Motor 상태가 준비되지 않았을 때 확인해야 할 것은?',zhCN:'Motor状态未就绪时,通常需要检查什么?',zhTW:'Motor狀態未就緒時,通常需要檢查什麼?',ja:'Motor状態が準備完了でない場合、通常確認すべきことは?'},
+   choices:[{en:'OP panel power and EMS state',ko:'OP Panel 전원 및 EMS 상태',zhCN:'OP Panel电源及EMS状态',zhTW:'OP Panel電源及EMS狀態',ja:'OP Panel電源及びEMS状態'},{en:'Vision PC IP address',ko:'Vision PC의 IP 주소',zhCN:'Vision PC的IP地址',zhTW:'Vision PC的IP位址',ja:'Vision PCのIPアドレス'},{en:'Job file version',ko:'Job 파일 버전',zhCN:'Job文件版本',zhTW:'Job檔案版本',ja:'Jobファイルのバージョン'},{en:'Barcode format',ko:'바코드 형식',zhCN:'条码格式',zhTW:'條碼格式',ja:'バーコード形式'}],
    answer:0}
 ],
 '2.2.3':[
@@ -669,12 +762,27 @@ var PRELEARN_QUIZ_SMTV={
    answer:1},
   {q:{en:'What does the UPH field on the Host UI represent?',ko:'Host UI의 UPH 항목이 의미하는 것은?',zhCN:'Host UI中的UPH项目代表什么?',zhTW:'Host UI中的UPH項目代表什麼?',ja:'Host UIのUPH項目が意味するものは?'},
    choices:[{en:'Units produced per hour',ko:'시간당 생산되는 Unit 수',zhCN:'每小时生产的Unit数量',zhTW:'每小時生產的Unit數量',ja:'1時間あたりの生産Unit数'},{en:'Total unit count',ko:'전체 Unit 수량',zhCN:'Unit总数量',zhTW:'Unit總數量',ja:'Unit総数'},{en:'Unit pass rate',ko:'Unit 합격률',zhCN:'Unit合格率',zhTW:'Unit合格率',ja:'Unit合格率'},{en:'Upload history',ko:'업로드 이력',zhCN:'上传历史记录',zhTW:'上傳歷史記錄',ja:'アップロード履歴'}],
+   answer:0},
+  {q:{en:'Which button is used to select a recipe (Job) file?',ko:'레시피(Job) 파일을 선택할 때 사용하는 버튼은?',zhCN:'用于选择配方(Job)文件的按钮是什么?',zhTW:'用於選擇配方(Job)檔案的按鈕是什麼?',ja:'レシピ(Job)ファイルを選択する際に使用するボタンは?'},
+   choices:[{en:'Job Open',ko:'Job Open',zhCN:'Job Open',zhTW:'Job Open',ja:'Job Open'},{en:'Job Save',ko:'Job Save',zhCN:'Job Save',zhTW:'Job Save',ja:'Job Save'},{en:'Process',ko:'Process',zhCN:'Process',zhTW:'Process',ja:'Process'},{en:'LTS V1/V2',ko:'LTS V1/V2',zhCN:'LTS V1/V2',zhTW:'LTS V1/V2',ja:'LTS V1/V2'}],
+   answer:0},
+  {q:{en:'Which status area shows whether doors are open or locked?',ko:'도어의 열림/잠김 상태를 보여주는 영역은?',zhCN:'显示门开启/锁定状态的区域是什么?',zhTW:'顯示門開啟/鎖定狀態的區域是什麼?',ja:'ドアの開閉/ロック状態を表示するエリアは?'},
+   choices:[{en:'Safety Status',ko:'Safety Status',zhCN:'Safety Status',zhTW:'Safety Status',ja:'Safety Status'},{en:'Unit Status',ko:'Unit Status',zhCN:'Unit Status',zhTW:'Unit Status',ja:'Unit Status'},{en:'Yield',ko:'Yield',zhCN:'Yield',zhTW:'Yield',ja:'Yield'},{en:'Log',ko:'Log',zhCN:'Log',zhTW:'Log',ja:'Log'}],
    answer:0}
 ],
 '2.2.4':[
   {q:{en:'What color change indicates the Handler has completed initialization?',ko:'Handler 초기화 완료 시 아이콘 색상 변화는?',zhCN:'Handler完成初始化时,图标颜色会如何变化?',zhTW:'Handler完成初始化時,圖示顏色會如何變化?',ja:'Handlerの初期化完了時、アイコンの色はどう変化しますか?'},
    choices:[{en:'Green to red',ko:'녹색에서 빨간색으로',zhCN:'绿色变红色',zhTW:'綠色變紅色',ja:'緑色から赤色へ'},{en:'Red to green',ko:'빨간색에서 녹색으로',zhCN:'红色变绿色',zhTW:'紅色變綠色',ja:'赤色から緑色へ'},{en:'Yellow to blue',ko:'노란색에서 파란색으로',zhCN:'黄色变蓝色',zhTW:'黃色變藍色',ja:'黄色から青色へ'},{en:'No color change',ko:'색상 변화 없음',zhCN:'颜色不变',zhTW:'顏色不變',ja:'色は変わらない'}],
-   answer:1}
+   answer:1},
+  {q:{en:'Which button starts the equipment initialization process?',ko:'설비 초기화를 시작하는 버튼은?',zhCN:'启动设备初始化流程的按钮是什么?',zhTW:'啟動設備初始化流程的按鈕是什麼?',ja:'設備の初期化プロセスを開始するボタンは?'},
+   choices:[{en:'Init Handler',ko:'Init Handler',zhCN:'Init Handler',zhTW:'Init Handler',ja:'Init Handler'},{en:'Empty Handler',ko:'Empty Handler',zhCN:'Empty Handler',zhTW:'Empty Handler',ja:'Empty Handler'},{en:'Job Open',ko:'Job Open',zhCN:'Job Open',zhTW:'Job Open',ja:'Job Open'},{en:'Lot Cancel',ko:'Lot Cancel',zhCN:'Lot Cancel',zhTW:'Lot Cancel',ja:'Lot Cancel'}],
+   answer:0},
+  {q:{en:'What does a red icon next to Handler indicate before clicking Init Handler?',ko:'Init Handler 클릭 전 Handler 옆의 빨간색 아이콘이 의미하는 것은?',zhCN:'点击Init Handler之前,Handler旁的红色图标代表什么?',zhTW:'點擊Init Handler之前,Handler旁的紅色圖示代表什麼?',ja:'Init Handlerをクリックする前のHandler横の赤色アイコンが意味するものは?'},
+   choices:[{en:'Initialization is not yet complete',ko:'초기화가 아직 완료되지 않았음',zhCN:'尚未完成初始化',zhTW:'尚未完成初始化',ja:'初期化がまだ完了していない'},{en:'The equipment is already running a Lot',ko:'설비가 이미 Lot을 진행 중임',zhCN:'设备已在运行Lot',zhTW:'設備已在運行Lot',ja:'設備が既にLotを実行中である'},{en:'A hardware failure has occurred',ko:'하드웨어 고장이 발생했음',zhCN:'发生了硬件故障',zhTW:'發生了硬體故障',ja:'ハードウェア故障が発生した'},{en:'The camera is disconnected',ko:'카메라 연결이 끊어짐',zhCN:'相机连接已断开',zhTW:'相機連接已中斷',ja:'カメラの接続が切断された'}],
+   answer:0},
+  {q:{en:'What confirms that equipment initialization has completed successfully?',ko:'설비 초기화가 성공적으로 완료되었음을 확인하는 방법은?',zhCN:'如何确认设备初始化已成功完成?',zhTW:'如何確認設備初始化已成功完成?',ja:'設備の初期化が正常に完了したことを確認する方法は?'},
+   choices:[{en:'The Handler icon changes from red to green',ko:'Handler 아이콘이 빨간색에서 녹색으로 바뀜',zhCN:'Handler图标由红色变为绿色',zhTW:'Handler圖示由紅色變為綠色',ja:'Handlerアイコンが赤色から緑色に変わる'},{en:'A pop-up asks for the Lot ID',ko:'Lot ID 입력 팝업이 뜸',zhCN:'弹出要求输入Lot ID的窗口',zhTW:'彈出要求輸入Lot ID的視窗',ja:'Lot IDの入力を求めるポップアップが表示される'},{en:'The UPS automatically turns off',ko:'UPS가 자동으로 꺼짐',zhCN:'UPS自动关闭',zhTW:'UPS自動關閉',ja:'UPSが自動的にオフになる'},{en:'The Job file automatically closes',ko:'Job 파일이 자동으로 닫힘',zhCN:'Job文件自动关闭',zhTW:'Job檔案自動關閉',ja:'Jobファイルが自動的に閉じる'}],
+   answer:0}
 ],
 '2.3.1':[
   {q:{en:'What is the minimum number of empty trays required in the Empty Stacker to start a Lot?',ko:'Lot을 시작하기 위해 Empty Stacker에 필요한 최소 Empty Tray 수는?',zhCN:'启动Lot时,Empty Stacker中所需的最少Empty Tray数量是多少?',zhTW:'啟動Lot時,Empty Stacker中所需的最少Empty Tray數量是多少?',ja:'Lotを開始するためにEmpty Stackerに必要な最小Empty Tray数は?'},
@@ -682,6 +790,12 @@ var PRELEARN_QUIZ_SMTV={
    answer:2},
   {q:{en:'What does clicking \'Lot Cancel\' followed by \'Yes\' do?',ko:'[Lot Cancel] 후 [Yes]를 클릭하면?',zhCN:'点击[Lot Cancel]后再点击[Yes]会执行什么操作?',zhTW:'點擊[Lot Cancel]後再點擊[Yes]會執行什麼操作?',ja:'[Lot Cancel]の後に[Yes]をクリックすると何が起こりますか?'},
    choices:[{en:'Pauses the Lot temporarily',ko:'Lot을 일시 정지함',zhCN:'暂时暂停Lot',zhTW:'暫時暫停Lot',ja:'Lotを一時的に一時停止する'},{en:'Ends the Lot',ko:'Lot을 종료함',zhCN:'结束Lot',zhTW:'結束Lot',ja:'Lotを終了する'},{en:'Restarts the equipment',ko:'설비를 재시작함',zhCN:'重新启动设备',zhTW:'重新啟動設備',ja:'設備を再起動する'},{en:'Saves the current Job',ko:'현재 Job을 저장함',zhCN:'保存当前Job',zhTW:'儲存目前Job',ja:'現在のJobを保存する'}],
-   answer:1}
+   answer:1},
+  {q:{en:'Where should the unit tray be placed to start inspection?',ko:'검사를 시작하려면 unit tray를 어디에 올려놓아야 합니까?',zhCN:'要开始检测,unit tray应放置在何处?',zhTW:'要開始檢測,unit tray應放置在何處?',ja:'検査を開始するにはunit trayをどこに載せる必要がありますか?'},
+   choices:[{en:'On the first (leftmost) loader stacker',ko:'좌측 첫번째 loader stacker',zhCN:'最左侧第一个loader stacker',zhTW:'最左側第一個loader stacker',ja:'左側の1番目のloader stacker'},{en:'On the 2nd empty stacker',ko:'두번째 empty stacker',zhCN:'第二个empty stacker',zhTW:'第二個empty stacker',ja:'2番目のempty stacker'},{en:'On the reject-empty stacker',ko:'reject empty stacker',zhCN:'reject empty stacker',zhTW:'reject empty stacker',ja:'reject empty stacker'},{en:'Directly onto the Jig',ko:'Jig에 직접',zhCN:'直接放在Jig上',zhTW:'直接放在Jig上',ja:'Jigに直接'}],
+   answer:0},
+  {q:{en:'What does clicking \'No\' on the Loader Stacker sensor pop-up allow the operator to do?',ko:'Loader Stacker 센서 팝업에서 [No]를 클릭하면 무엇을 할 수 있습니까?',zhCN:'在Loader Stacker传感器弹出窗口中点击[No]可以做什么?',zhTW:'在Loader Stacker感測器彈出視窗中點擊[No]可以做什麼?',ja:'Loader Stackerセンサーのポップアップで[No]をクリックすると何ができますか?'},
+   choices:[{en:'Insert more trays into the Loader Stacker and keep the Lot running',ko:'Loader Stacker에 트레이를 추가 투입하고 Lot을 계속 진행',zhCN:'向Loader Stacker追加投入托盘并继续运行Lot',zhTW:'向Loader Stacker追加投入托盤並繼續運行Lot',ja:'Loader Stackerにトレイを追加投入しLotを継続する'},{en:'Immediately end the Lot',ko:'즉시 Lot을 종료',zhCN:'立即结束Lot',zhTW:'立即結束Lot',ja:'即座にLotを終了する'},{en:'Cancel the current Job',ko:'현재 Job을 취소',zhCN:'取消当前Job',zhTW:'取消目前Job',ja:'現在のJobをキャンセルする'},{en:'Turn off the UPS',ko:'UPS를 끔',zhCN:'关闭UPS',zhTW:'關閉UPS',ja:'UPSをオフにする'}],
+   answer:0}
 ]
 };

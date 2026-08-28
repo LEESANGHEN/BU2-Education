@@ -22,6 +22,38 @@ function tx(obj){ // {ko,en,zhCN,zhTW,ja} 중 현재 언어 텍스트, 없으면
 }
 function fmtQuizMsg(tpl,pct){return tpl.replace('{0}',pct);}
 
+/* 학습자 x 설비 x 섹션 별로 결정론적인(같은 사람은 항상 같은 결과) 시드 기반 난수.
+   같은 학습자는 재접속/재응시해도 항상 같은 문제 조합을 받고, 서로 다른 학습자는
+   (대개) 서로 다른 문제 조합을 받는다. */
+function seededPRNG(seedStr){
+  var h=1779033703^seedStr.length;
+  for(var i=0;i<seedStr.length;i++){
+    h=Math.imul(h^seedStr.charCodeAt(i),3432918353);
+    h=h<<13|h>>>19;
+  }
+  return function(){
+    h=Math.imul(h^h>>>16,2246822507);
+    h=Math.imul(h^h>>>13,3266489909);
+    h^=h>>>16;
+    return (h>>>0)/4294967296;
+  };
+}
+/* 섹션 문제은행(pool)에서 학습자별로 고정된 1~2문항을 뽑는다 (pool이 2개 이하면 그대로 전부 사용) */
+function pickSectionQuiz(pool,sec){
+  if(!pool||!pool.length)return [];
+  var n=Math.min(2,pool.length);
+  if(pool.length<=n)return pool;
+  var learnerId=(PL.record&&PL.record.id)||'anon';
+  var rand=seededPRNG(learnerId+'|'+PL.equip+'|'+sec.code);
+  var idxs=pool.map(function(_,i){return i;});
+  for(var i=idxs.length-1;i>0;i--){
+    var j=Math.floor(rand()*(i+1));
+    var tmp=idxs[i];idxs[i]=idxs[j];idxs[j]=tmp;
+  }
+  idxs=idxs.slice(0,n).sort(function(a,b){return a-b;});
+  return idxs.map(function(i){return pool[i];});
+}
+
 function initTheme(){
   var saved=localStorage.getItem('edu_theme')||'dark';
   document.documentElement.setAttribute('data-theme',saved);
@@ -239,12 +271,12 @@ function advanceSection(){
 function renderQuiz(){
   var root=document.getElementById('plRoot');
   var sec=curSection();
-  var qs=COURSE_DATA[PL.equip].quiz[sec.code]||[];
+  var qs=pickSectionQuiz(COURSE_DATA[PL.equip].quiz[sec.code]||[],sec);
   var rows=qs.map(function(q,qi){
-    return '<div class="pl-qrow">'
-      +'<div class="pl-qtext">'+(qi+1)+'. '+esc(tx(q.q))+'</div>'
+    return '<div class="pl-qrow" id="pl_qrow_'+qi+'">'
+      +'<div class="pl-qtext" id="pl_qtext_'+qi+'">'+(qi+1)+'. '+esc(tx(q.q))+'</div>'
       +q.choices.map(function(c,idx){
-        return '<label class="pl-choice"><input type="radio" name="q'+qi+'" value="'+idx+'" onchange="plPick('+qi+','+idx+')"> '+esc(tx(c))+'</label>';
+        return '<label class="pl-choice" id="pl_choice_'+qi+'_'+idx+'"><input type="radio" name="q'+qi+'" value="'+idx+'" onchange="plPick('+qi+','+idx+')"> '+esc(tx(c))+'</label>';
       }).join('')
     +'</div>';
   }).join('');
@@ -256,7 +288,7 @@ function renderQuiz(){
       +'<div class="apf-card">'
       +rows
       +'<div id="pl_quiz_result"></div>'
-      +'<div class="mfoot"><button class="btn" onclick="PL.mode=\'slide\';renderViewer()">'+esc(pt('backToSlide'))+'</button><button class="btn pri" onclick="submitQuiz()">'+esc(pt('submitBtn'))+'</button></div>'
+      +'<div class="mfoot"><button class="btn" onclick="PL.mode=\'slide\';renderViewer()">'+esc(pt('backToSlide'))+'</button><button class="btn pri" id="pl_submit_btn" onclick="submitQuiz()">'+esc(pt('submitBtn'))+'</button></div>'
       +'</div>'
     +'</div>'
   +'</div>';
@@ -264,20 +296,40 @@ function renderQuiz(){
 function plPick(qi,idx){PL.quizPick[qi]=idx;}
 function submitQuiz(){
   var sec=curSection();
-  var qs=COURSE_DATA[PL.equip].quiz[sec.code]||[];
+  var qs=pickSectionQuiz(COURSE_DATA[PL.equip].quiz[sec.code]||[],sec);
   if(Object.keys(PL.quizPick).length<qs.length){alert(pt('quizAnswerAll'));return;}
   var correct=0;
-  qs.forEach(function(q,qi){if(PL.quizPick[qi]===q.answer)correct++;});
+  qs.forEach(function(q,qi){
+    var ok=PL.quizPick[qi]===q.answer;
+    if(ok)correct++;
+    var row=document.getElementById('pl_qrow_'+qi);
+    if(row){
+      row.classList.add(ok?'pl-qrow-ok':'pl-qrow-bad');
+      var mark=document.createElement('span');
+      mark.className='pl-qmark';
+      mark.textContent=' '+(ok?pt('markCorrect'):fmtQuizMsg(pt('markWrong'),tx(q.choices[q.answer])));
+      document.getElementById('pl_qtext_'+qi).appendChild(mark);
+      var pickedEl=document.getElementById('pl_choice_'+qi+'_'+PL.quizPick[qi]);
+      if(pickedEl)pickedEl.classList.add(ok?'pl-correct-choice':'pl-wrong-choice');
+      if(!ok){
+        var correctEl=document.getElementById('pl_choice_'+qi+'_'+q.answer);
+        if(correctEl)correctEl.classList.add('pl-correct-choice');
+      }
+      row.querySelectorAll('input[type=radio]').forEach(function(inp){inp.disabled=true;});
+    }
+  });
   var passed=(correct/qs.length)>=PASS_RATIO;
   var prog=courseProgress();
   prog[sec.code]={viewed:true,quizScore:correct,quizTotal:qs.length,passed:passed,attempts:((prog[sec.code]&&prog[sec.code].attempts)||0)+1};
   saveProgress();
+  var submitBtn=document.getElementById('pl_submit_btn');
+  if(submitBtn)submitBtn.disabled=true;
   var msg=passed
     ?('<div style="color:#4ade9a;font-weight:600;margin-top:10px">✅ '+correct+'/'+qs.length+' '+esc(pt('quizPass'))+'</div>')
     :('<div style="color:#e07070;font-weight:600;margin-top:10px">❌ '+correct+'/'+qs.length+' '+esc(fmtQuizMsg(pt('quizFail'),Math.round(PASS_RATIO*100)))+'</div>');
   document.getElementById('pl_quiz_result').innerHTML=msg
     +'<div class="mfoot"><button class="btn" onclick="PL.mode=\'slide\';PL.li=0;renderViewer()">'+esc(pt('reviewBtn'))+'</button>'
-    +(passed?('<button class="btn pri" onclick="advanceSection()">'+esc(pt('nextSectionBtn'))+'</button>'):('<button class="btn pri" onclick="PL.quizPick={};renderQuiz()">'+esc(pt('retryBtn'))+'</button>'))
+    +(passed?('<button class="btn pri" onclick="advanceSection()">'+esc(pt('nextSectionBtn'))+'</button>'):'')
     +'</div>';
 }
 

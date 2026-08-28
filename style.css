@@ -1113,7 +1113,14 @@ html:has(.apf-body),.apf-body{height:auto;overflow:auto}
 .pl-ko{color:var(--tx-second);margin-top:8px;padding-top:8px;border-top:1px solid var(--bd-light);font-size:12.5px}
 .pl-nav{display:flex;align-items:center;justify-content:space-between;margin-top:16px}
 .pl-qrow{margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--bd-light)}
+.pl-qrow-ok{background:rgba(74,222,154,.08);border-radius:8px;padding:10px;margin:0 -10px 20px -10px}
+.pl-qrow-bad{background:rgba(224,112,112,.08);border-radius:8px;padding:10px;margin:0 -10px 20px -10px}
 .pl-qtext{font-size:13px;color:var(--tx-primary);margin-bottom:4px;font-weight:500}
+.pl-qmark{font-weight:700}
+.pl-qrow-ok .pl-qmark{color:#4ade9a}
+.pl-qrow-bad .pl-qmark{color:#e07070}
+.pl-choice.pl-correct-choice{color:#4ade9a;font-weight:600}
+.pl-choice.pl-wrong-choice{color:#e07070;font-weight:600}
 .pl-qtextko{font-size:11.5px;color:var(--tx-second);margin-bottom:10px;font-weight:400}
 .pl-choice{display:block;font-size:12.5px;color:var(--tx-primary);padding:6px 8px;border-radius:5px;cursor:pointer}
 .pl-choice:hover{background:var(--bg-hover)}
