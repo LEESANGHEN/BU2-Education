@@ -44,6 +44,7 @@
           <button class="btn" onclick="refreshPrelearn()">⟳ 새로고침</button>
           <button class="btn" onclick="openPrelearnLinkInfo()">🔗 학습 링크</button>
           <button class="btn admin-only-btn" style="display:none" onclick="openQuizAdmin()">📝 퀴즈 관리</button>
+          <button class="btn pri" id="qaToolbarSaveBtn" style="display:none" onclick="saveQuizOverridesForSection()">💾 변경사항 저장</button>
           <button class="btn admin-only-btn" style="display:none" onclick="openPrelearnSheetsSettings()">⚙ 사전학습 Sheets 설정</button>
         </div>
         <button class="btn admin-only-btn" style="display:none" onclick="openSheetsSettings()">⚙ Sheets 설정</button>
@@ -111,7 +112,7 @@
   <script src="course.js?v=20260827a"></script>
   <script src="history.js?v=20260827e"></script>
   <script src="certificate.js?v=20260827a"></script>
-  <script src="prelearn-admin.js?v=20260828c"></script>
+  <script src="prelearn-admin.js?v=20260828d"></script>
   <script>
     // 상태 필터 체크박스 + 국가 셀렉트를 데이터 로드 후 채움 (data.js 상수 사용)
     document.getElementById('schStatusChips').innerHTML = VISIT_STATUS.map(function(s){

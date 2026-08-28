@@ -191,10 +191,17 @@ function openQuizAdmin(){
       qaEnsureValidSection();
       qaLoadPool();
       renderQuizAdminView();
+      var sb=document.getElementById('qaToolbarSaveBtn');
+      if(sb)sb.style.display='';
     })
     .catch(function(err){alert('불러오기 실패: '+err.message);PLA.viewMode='progress';renderPrelearnTab();});
 }
-function closeQuizAdmin(){PLA.viewMode='progress';renderPrelearnTab();}
+function closeQuizAdmin(){
+  PLA.viewMode='progress';
+  var sb=document.getElementById('qaToolbarSaveBtn');
+  if(sb)sb.style.display='none';
+  renderPrelearnTab();
+}
 function qaEnsureValidSection(){
   var secs=plSectionsFor(QA.equip);
   if(!QA.code||!secs.some(function(s){return s.code===QA.code;}))QA.code=secs.length?secs[0].code:null;
