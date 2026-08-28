@@ -4,7 +4,7 @@
    새 설비군이 추가되면 이 배열에 한 줄 추가 + prelearn-data-XXX.js 파일만 새로 만들면 됩니다.
 ═══════════════════════════════════════════ */
 var EQUIPMENT_LIST=[
-  {id:'smtv',name:{ko:'iSIS-SMTV (Bump-AOI)',en:'iSIS-SMTV (Bump-AOI)',zhCN:'iSIS-SMTV (Bump-AOI)',zhTW:'iSIS-SMTV (Bump-AOI)',ja:'iSIS-SMTV (Bump-AOI)'}},
+  {id:'smtv',name:{ko:'iSIS-SMTV(NTV)',en:'iSIS-SMTV(NTV)',zhCN:'iSIS-SMTV(NTV)',zhTW:'iSIS-SMTV(NTV)',ja:'iSIS-SMTV(NTV)'}},
   {id:'nbga',name:{ko:'iSIS-NBGA',en:'iSIS-NBGA',zhCN:'iSIS-NBGA',zhTW:'iSIS-NBGA',ja:'iSIS-NBGA'}}
 ];
 function equipmentById(id){return EQUIPMENT_LIST.find(function(e){return e.id===id;});}
