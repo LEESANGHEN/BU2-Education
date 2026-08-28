@@ -7,6 +7,25 @@ function uid(p){return p+'_'+Date.now().toString(36)+Math.random().toString(36).
 /* onclick="fn('+jarg(id)+')" 형태로 쓰면 id가 null이어도 문자열 "null"로 뭉개지지 않고 실제 null이 전달된다 */
 function jarg(id){return id?("'"+id+"'"):'null';}
 function deepCopy(o){return JSON.parse(JSON.stringify(o));}
+
+/* ═══════════════════════════════════════════
+   관리자 모드 (BU2 Portal과 동일한 방식 — 제목 Ctrl+클릭으로 전환)
+   Sheets 설정류 버튼은 관리자 모드일 때만 노출한다.
+═══════════════════════════════════════════ */
+var ADMIN_MODE_KEY='edu_admin_mode';
+function isAdminMode(){try{return localStorage.getItem(ADMIN_MODE_KEY)==='1';}catch(e){return false;}}
+function setAdminMode(v){try{localStorage.setItem(ADMIN_MODE_KEY,v?'1':'0');}catch(e){}}
+function toggleAdminMode(e){
+  if(!e||(!e.ctrlKey&&!e.metaKey))return;
+  var next=!isAdminMode();
+  setAdminMode(next);
+  applyAdminModeUI();
+  alert(next?'🔓 관리자 모드로 전환되었습니다.':'🔒 일반 모드로 전환되었습니다.');
+}
+function applyAdminModeUI(){
+  var on=isAdminMode();
+  document.querySelectorAll('.admin-only-btn').forEach(function(el){el.style.display=on?'':'none';});
+}
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function normDate(s){
   if(!s)return '';
@@ -215,6 +234,7 @@ function renderAll(){
 ═══════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded',function(){
   initTheme();
+  applyAdminModeUI();
   loadData();
   switchTab('apply');
   loadFromSheets(function(){renderAll();});

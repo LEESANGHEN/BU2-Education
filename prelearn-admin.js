@@ -209,6 +209,48 @@ function qaSwitchSection(v){QA.code=v;qaLoadPool();renderQuizAdminView();}
 function qaSetQ(qi,langK,val){QA.pool[qi].q[langK]=val;}
 function qaSetChoice(qi,ci,langK,val){QA.pool[qi].choices[ci][langK]=val;}
 function qaSetAnswer(qi,ci){QA.pool[qi].answer=ci;}
+/* 한국어 입력을 기준으로 영/중간/중번/일 4개 언어를 Apps Script LanguageApp으로 일괄 번역해 채워넣는다 */
+function qaTranslateAll(qi){
+  var koQ=(document.getElementById('qa_q_'+qi+'_ko')||{}).value||'';
+  if(!koQ.trim()){alert('한국어 문항 내용을 먼저 입력해주세요.');return;}
+  var koChoices=[0,1,2,3].map(function(ci){return (document.getElementById('qa_c_'+qi+'_'+ci+'_ko')||{}).value||'';});
+  var texts=[koQ].concat(koChoices);
+  var url=getPrelearnSheetsUrl();
+  if(!url)return;
+  var btn=document.getElementById('qa_translate_btn_'+qi);
+  if(btn){btn.disabled=true;btn.textContent='번역 중...';}
+  var realKeys={en:'en',zhCN:'zh-CN',zhTW:'zh-TW',ja:'ja'};
+  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'translate',texts:texts,source:'ko',targets:['en','zh-CN','zh-TW','ja']})})
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(!data.ok){alert('번역 실패: '+(data.error||''));return;}
+      var res=data.results||[];
+      if(res[0]){
+        Object.keys(realKeys).forEach(function(k){
+          var val=res[0][realKeys[k]];
+          if(val){
+            QA.pool[qi].q[k]=val;
+            var el=document.getElementById('qa_q_'+qi+'_'+k);
+            if(el)el.value=val;
+          }
+        });
+      }
+      [0,1,2,3].forEach(function(ci){
+        var cr=res[ci+1];
+        if(!cr)return;
+        Object.keys(realKeys).forEach(function(k){
+          var val=cr[realKeys[k]];
+          if(val){
+            QA.pool[qi].choices[ci][k]=val;
+            var el=document.getElementById('qa_c_'+qi+'_'+ci+'_'+k);
+            if(el)el.value=val;
+          }
+        });
+      });
+    })
+    .catch(function(err){alert('번역 요청 실패: '+err.message);})
+    .then(function(){if(btn){btn.disabled=false;btn.textContent='🌐 한국어 기준 전체 번역';}});
+}
 function qaDeleteQ(qi){
   if(!confirm('이 문항을 삭제할까요? (하단 "변경사항 저장"을 눌러야 실제로 반영됩니다)'))return;
   QA.pool.splice(qi,1);
@@ -272,15 +314,18 @@ function renderQuizAdminView(){
     +'</div>';
   wrap.innerHTML=html;
 }
+function qaFieldRow(id,val,label,onInputCall){
+  return '<input type="text" id="'+id+'" value="'+esc(val||'')+'" placeholder="'+label+'" oninput="'+onInputCall+'" style="font-size:inherit;width:100%;box-sizing:border-box">';
+}
 function qaRenderQuestion(q,qi){
   var qLangs=LANGS.map(function(l){
     var k=langKey(l.id);
-    return '<input type="text" value="'+esc(q.q[k]||'')+'" placeholder="'+l.label+'" oninput="qaSetQ('+qi+',\''+k+'\',this.value)" style="font-size:11.5px;margin-bottom:4px;width:100%;box-sizing:border-box">';
+    return '<div style="margin-bottom:4px;font-size:11.5px">'+qaFieldRow('qa_q_'+qi+'_'+k,q.q[k],l.label,"qaSetQ("+qi+",'"+k+"',this.value)")+'</div>';
   }).join('');
   var choicesHtml=q.choices.map(function(c,ci){
     var cLangs=LANGS.map(function(l){
       var k=langKey(l.id);
-      return '<input type="text" value="'+esc(c[k]||'')+'" placeholder="'+l.label+'" oninput="qaSetChoice('+qi+','+ci+',\''+k+'\',this.value)" style="font-size:11px;margin-bottom:3px;width:100%;box-sizing:border-box">';
+      return '<div style="margin-bottom:3px;font-size:11px">'+qaFieldRow('qa_c_'+qi+'_'+ci+'_'+k,c[k],l.label,"qaSetChoice("+qi+","+ci+",'"+k+"',this.value)")+'</div>';
     }).join('');
     return '<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;padding:6px;border-radius:6px;background:'+(q.answer===ci?'rgba(74,222,154,.1)':'transparent')+'">'
       +'<label style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--tx-second);white-space:nowrap;padding-top:4px"><input type="radio" name="qa_ans_'+qi+'" '+(q.answer===ci?'checked':'')+' onchange="qaSetAnswer('+qi+','+ci+')"> 정답</label>'
@@ -288,7 +333,13 @@ function qaRenderQuestion(q,qi){
     +'</div>';
   }).join('');
   return '<div class="apf-card" id="qa_card_'+qi+'" style="margin-bottom:14px">'
-    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><b style="font-size:12px">문항 '+(qi+1)+'</b><button class="btn sm red" onclick="qaDeleteQ('+qi+')">🗑 삭제</button></div>'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'
+      +'<b style="font-size:12px">문항 '+(qi+1)+'</b>'
+      +'<div style="display:flex;gap:6px">'
+        +'<button class="btn sm" id="qa_translate_btn_'+qi+'" onclick="qaTranslateAll('+qi+')">🌐 한국어 기준 전체 번역</button>'
+        +'<button class="btn sm red" onclick="qaDeleteQ('+qi+')">🗑 삭제</button>'
+      +'</div>'
+    +'</div>'
     +'<div style="margin-bottom:10px">'+qLangs+'</div>'
     +choicesHtml
   +'</div>';
