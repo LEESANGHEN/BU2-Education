@@ -44,6 +44,8 @@ function renderLangSelect(){
 function changeLang(v){setLang(v);renderCurrentMode();}
 function renderCurrentMode(){
   document.getElementById('pageTitle').textContent=pt('pageTitle');
+  var lbl=document.getElementById('langLabelText');
+  if(lbl)lbl.textContent=pt('langLabel');
   if(PL.mode==='pick')renderPick();
   else if(PL.mode==='gate')renderGate();
   else renderViewer();
@@ -299,6 +301,7 @@ document.addEventListener('DOMContentLoaded',function(){
   initTheme();
   renderLangSelect();
   document.getElementById('pageTitle').textContent=pt('pageTitle');
+  document.getElementById('langLabelText').textContent=pt('langLabel');
   var params=new URLSearchParams(location.search);
   var eq=params.get('eq');
   if(eq&&equipmentById(eq)&&COURSE_DATA[eq]&&COURSE_DATA[eq].chapters){

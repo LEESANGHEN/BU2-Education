@@ -25,6 +25,7 @@ function tModule(id,field){var lang=getLang();var m=(I18N[lang]&&I18N[lang].modu
 
 var I18N={
 ko:{
+  langLabel:'언어 선택 :',
   pageTitle:'🎓 BU2 교육 신청서',
   formTitle:'해외지사 · Agent · 고객사 담당자 교육 신청서',
   formSub:'BU2 FCBGA Substrate 검사 장비 Level 0~3 교육 · Training Application Form',
@@ -81,6 +82,7 @@ ko:{
   }
 },
 en:{
+  langLabel:'Language:',
   pageTitle:'🎓 BU2 Training Application',
   formTitle:'Training Application Form — Overseas Branch · Agent · Customer',
   formSub:'BU2 FCBGA Substrate Inspection Equipment Level 0~3 Training',
@@ -137,6 +139,7 @@ en:{
   }
 },
 'zh-CN':{
+  langLabel:'语言选择：',
   pageTitle:'🎓 BU2 培训申请书',
   formTitle:'海外分公司 · Agent · 客户负责人培训申请书',
   formSub:'BU2 FCBGA Substrate检测设备 Level 0~3 培训 · Training Application Form',
@@ -193,6 +196,7 @@ en:{
   }
 },
 'zh-TW':{
+  langLabel:'語言選擇：',
   pageTitle:'🎓 BU2 教育申請書',
   formTitle:'海外分公司 · Agent · 客戶負責人教育申請書',
   formSub:'BU2 FCBGA Substrate檢測設備 Level 0~3 教育 · Training Application Form',
@@ -249,6 +253,7 @@ en:{
   }
 },
 ja:{
+  langLabel:'言語選択：',
   pageTitle:'🎓 BU2 教育申込書',
   formTitle:'海外支社 · Agent · 顧客担当者教育申込書',
   formSub:'BU2 FCBGA Substrate検査装置 Level 0~3 教育 · Training Application Form',

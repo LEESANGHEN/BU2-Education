@@ -1047,6 +1047,7 @@ html:has(.apf-body),.apf-body{height:auto;overflow:auto}
 .apf-done{text-align:center;padding:60px 32px}
 .apf-done h1{font-size:22px;margin-bottom:14px}
 .apf-done p{font-size:13px;color:var(--tx-second);line-height:1.7}
+.apf-langlabel{font-size:12px;color:var(--tx-second);white-space:nowrap}
 .apf-langsel{width:auto;padding:5px 8px;font-size:12px;border:1px solid var(--bd-strong);border-radius:5px;background:var(--bg-input);color:var(--tx-primary);cursor:pointer}
 @media (max-width:700px){
   .apf-row2,.apf-row3{grid-template-columns:1fr}

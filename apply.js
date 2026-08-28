@@ -31,6 +31,8 @@ function renderLangSelect(){
 function changeLang(v){
   setLang(v);
   document.getElementById('pageTitle').textContent=t('pageTitle');
+  var lbl=document.getElementById('langLabelText');
+  if(lbl)lbl.textContent=t('langLabel');
   renderForm();
 }
 
@@ -223,5 +225,6 @@ document.addEventListener('DOMContentLoaded',function(){
   initTheme();
   renderLangSelect();
   document.getElementById('pageTitle').textContent=t('pageTitle');
+  document.getElementById('langLabelText').textContent=t('langLabel');
   renderForm();
 });

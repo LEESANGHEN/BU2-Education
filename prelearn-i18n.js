@@ -8,9 +8,10 @@ function pt(key){
 }
 var PL_I18N={
 ko:{
+  langLabel:'언어 선택 :',
   pageTitle:'🎓 사전 선행학습',
   pickTitle:'교육받으실 설비를 선택해주세요',
-  pickSub:'Please select the equipment you will be trained on.',
+  pickSub:'학습하실 설비를 선택해주세요.',
   gateTitle:'사전 선행학습',
   gateIntro1:'본사 방문 전, 아래 정보를 입력하고 전체',
   gateIntro2:'개 섹션을 학습해주세요.',
@@ -36,9 +37,10 @@ ko:{
   warnMsg:'⚠ 이 학습 페이지는 아직 연결 설정이 완료되지 않았습니다. 관리자에게 문의해주세요.'
 },
 en:{
+  langLabel:'Language:',
   pageTitle:'🎓 Pre-Learning',
   pickTitle:'Please select the equipment you will be trained on',
-  pickSub:'교육받으실 설비를 선택해주세요.',
+  pickSub:'Select the equipment you will be trained on to begin.',
   gateTitle:'Online Pre-Learning',
   gateIntro1:'Before your visit, please enter your info and complete all',
   gateIntro2:'sections.',
@@ -64,6 +66,7 @@ en:{
   warnMsg:'⚠ This learning page has not been configured yet. Please contact the administrator.'
 },
 'zh-CN':{
+  langLabel:'语言选择：',
   pageTitle:'🎓 事先学习',
   pickTitle:'请选择您将接受培训的设备',
   pickSub:'请选择要培训的设备。',
@@ -92,6 +95,7 @@ en:{
   warnMsg:'⚠ 此学习页面尚未完成连接设置，请联系管理员。'
 },
 'zh-TW':{
+  langLabel:'語言選擇：',
   pageTitle:'🎓 事前學習',
   pickTitle:'請選擇您將接受教育訓練的設備',
   pickSub:'請選擇要學習的設備。',
@@ -120,6 +124,7 @@ en:{
   warnMsg:'⚠ 此學習頁面尚未完成連線設定，請聯絡管理員。'
 },
 ja:{
+  langLabel:'言語選択：',
   pageTitle:'🎓 事前学習',
   pickTitle:'教育を受ける設備を選択してください',
   pickSub:'学習する設備を選択してください。',
