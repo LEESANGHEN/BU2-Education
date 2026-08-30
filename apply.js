@@ -92,7 +92,7 @@ function renderForm(){
 
     +'<div class="apf-sec"><h2>'+esc(t('sec3'))+'</h2>'
       +'<div class="apf-row3">'
-        +field(t('equipment'),'equipment','<select id="f_equipment">'+EQUIPMENT_LIST.map(function(e){return '<option value="'+e.id+'">'+esc(equipmentName(e.id,langKey()))+'</option>';}).join('')+'</select>')
+        +field(t('equipment'),'equipment','<div class="apf-checkgrp">'+EQUIPMENT_LIST.map(function(e){return '<label class="apf-checkitem"><input type="checkbox" class="f_equipment_cb" value="'+e.id+'"> '+esc(equipmentName(e.id,langKey()))+'</label>';}).join('')+'</div>')
         +field(t('desiredLevel'),'desiredLevel','<select id="f_desiredLevel">'+levelOpts+'</select>')
         +field(t('desiredStart'),'desiredStart','<input type="date" id="f_desiredStart" onchange="calcDays()">')
       +'</div>'
@@ -163,6 +163,11 @@ function submitApplication(){
     document.getElementById('f_traineeEmail').focus();
     return;
   }
+  var equipmentIds=Array.prototype.slice.call(document.querySelectorAll('.f_equipment_cb:checked')).map(function(el){return el.value;});
+  if(!equipmentIds.length){
+    alert(t('reqEquipment'));
+    return;
+  }
 
   // 자가진단 항목명은 한국어 원문으로 저장(관리자 앱은 한국어 전용) — 화면 표시만 언어별로 다르게 보여준다
   var selfAssessment=DEF_MODULES.map(function(m){
@@ -178,7 +183,7 @@ function submitApplication(){
     traineeName:val('f_traineeName'),traineePosition:val('f_traineePosition'),traineeTask:val('f_traineeTask'),
     traineeEmail:val('f_traineeEmail'),
     visitCategory:val('f_visitCategory'),priorLevel:val('f_priorLevel'),experienceYears:val('f_experienceYears'),
-    equipment:val('f_equipment'),
+    equipment:equipmentIds,
     desiredLevel:Number(val('f_desiredLevel')),desiredStart:val('f_desiredStart'),desiredEnd:val('f_desiredEnd'),
     totalDays:val('f_totalDays'),altNote:val('f_altNote'),
     selfAssessment:selfAssessment,

@@ -1033,6 +1033,9 @@ html:has(.apf-body),.apf-body{height:auto;overflow:auto}
 .apf-field{margin-bottom:12px}
 .apf-field label{font-size:11px;color:var(--tx-second);margin-bottom:4px;display:block;font-weight:500}
 .apf-field textarea{width:100%}
+.apf-checkgrp{display:flex;flex-wrap:wrap;gap:10px}
+.apf-checkitem{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--tx-primary);padding:8px 12px;border:1px solid var(--bd-strong);border-radius:8px;cursor:pointer;background:var(--bg-input)}
+.apf-checkitem:has(input:checked){border-color:#534AB7;background:rgba(83,74,183,.12)}
 .apf-tblwrap{overflow-x:auto;border:1px solid var(--bd-main);border-radius:8px}
 .apf-tbl{width:100%;border-collapse:collapse;background:var(--bg-input);font-size:11px}
 .apf-tbl th{text-align:left;padding:7px 8px;background:var(--bg-alt);color:var(--tx-dim);border-bottom:1.5px solid var(--bd-strong);white-space:nowrap}

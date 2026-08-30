@@ -18,7 +18,7 @@ function quizPoolFor(equip,code){
   return (COURSE_DATA[equip]&&COURSE_DATA[equip].quiz&&COURSE_DATA[equip].quiz[code])||[];
 }
 
-var PL={record:null,equip:null,ci:0,si:0,li:0,mode:'pick',quizPick:{}};
+var PL={record:null,equip:null,ci:0,si:0,li:0,mode:'pick',quizPick:{},allowedEquip:null};
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function uid(p){return p+'_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
@@ -93,11 +93,13 @@ function renderCurrentMode(){
 /* ── 설비 선택 ── */
 function renderPick(){
   var root=document.getElementById('plRoot');
+  var list=(PL.allowedEquip&&PL.allowedEquip.length)?EQUIPMENT_LIST.filter(function(e){return PL.allowedEquip.indexOf(e.id)>=0;}):EQUIPMENT_LIST;
+  if(!list.length)list=EQUIPMENT_LIST; // 신청서의 설비 id가 현재 목록과 안 맞으면 전체를 보여준다(안전장치)
   root.innerHTML='<div class="apf-card pl-gate">'
     +'<h1>🎓 '+esc(pt('pickTitle'))+'</h1>'
     +'<p class="apf-sub">'+esc(pt('pickSub'))+'</p>'
     +'<div class="pl-equip-grid">'
-    +EQUIPMENT_LIST.map(function(e){
+    +list.map(function(e){
       var has=COURSE_DATA[e.id]&&COURSE_DATA[e.id].chapters;
       return '<div class="pl-equip-card'+(has?'':' disabled')+'" '+(has?('onclick="pickEquipment(\''+e.id+'\')"'):'')+'>'
         +'<div class="pl-equip-name">'+esc(equipmentName(e.id,langKey()))+'</div>'
@@ -362,9 +364,11 @@ document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('pageTitle').textContent=pt('pageTitle');
   document.getElementById('langLabelText').textContent=pt('langLabel');
   var params=new URLSearchParams(location.search);
-  var eq=params.get('eq');
-  if(eq&&equipmentById(eq)&&COURSE_DATA[eq]&&COURSE_DATA[eq].chapters){
-    PL.equip=eq;PL.mode='gate';renderGate();
+  var eqParam=params.get('eq');
+  var allowed=eqParam?eqParam.split(',').map(function(s){return s.trim();}).filter(function(id){return equipmentById(id)&&COURSE_DATA[id]&&COURSE_DATA[id].chapters;}):[];
+  PL.allowedEquip=allowed.length?allowed:null;
+  if(allowed.length===1){
+    PL.equip=allowed[0];PL.mode='gate';renderGate();
   }else{
     renderPick();
   }

@@ -4,6 +4,14 @@
 var APPLY_LS_KEY='edu_apply_sheets_url';
 var APPS={list:[],filter:'pending'};
 
+/* a.equipment는 배열(다중 선택)이 정상이나, 이 기능 도입 전 제출된 신청서는 단일 문자열이었다.
+   두 형태 모두 지원하기 위해 항상 배열로 정규화해서 사용한다. */
+function appEquipList(a){
+  if(Array.isArray(a.equipment))return a.equipment.length?a.equipment:['smtv'];
+  return a.equipment?[a.equipment]:['smtv'];
+}
+function appEquipNames(a){return appEquipList(a).map(function(id){return equipmentName(id);}).join(', ');}
+
 function getApplySheetsUrl(){try{return localStorage.getItem(APPLY_LS_KEY)||'';}catch(e){return '';}}
 function setApplySheetsUrl(u){try{localStorage.setItem(APPLY_LS_KEY,u);}catch(e){}}
 
@@ -76,7 +84,7 @@ function renderApplyTab(){
       +'<td><b>'+esc(a.traineeName||'')+'</b></td>'
       +'<td><span class="grpbadge" style="background:'+ot.color+'">'+esc(ot.label)+'</span></td>'
       +'<td>'+esc(a.org||'')+'</td>'
-      +'<td>'+esc(equipmentName(a.equipment||'smtv','ko'))+'</td>'
+      +'<td>'+esc(appEquipNames(a))+'</td>'
       +'<td>Level '+a.desiredLevel+'</td>'
       +'<td>'+esc(a.desiredStart||'')+' ~ '+esc(a.desiredEnd||'')+'</td>'
       +'<td>'+esc(a.applicantName||'')+'</td>'
@@ -129,7 +137,7 @@ function openApplicationDetail(id){
 
     +'<div class="td-section"><div class="td-sectitle">3. 방문 계획 및 희망 Level</div>'
       +'<div class="fr" style="grid-template-columns:repeat(3,1fr)">'
-        +infoBox('교육 희망 설비',equipmentName(a.equipment||'smtv','ko'))+infoBox('희망 Level','Level '+a.desiredLevel)+infoBox('방문 희망 시작일',a.desiredStart)
+        +infoBox('교육 희망 설비',appEquipNames(a))+infoBox('희망 Level','Level '+a.desiredLevel)+infoBox('방문 희망 시작일',a.desiredStart)
         +infoBox('방문 희망 종료일',a.desiredEnd)+infoBox('총 방문일수',a.totalDays)+infoBox('대안 가능기간/비고',a.altNote)
         +infoBox('국가',a.country)
       +'</div></div>'
@@ -199,11 +207,11 @@ function registerFromApplication(id){
 function sendPrelearnEmailFor(a,cb){
   var url=getApplySheetsUrl();
   if(!url||!a.traineeEmail){if(cb)cb(false,'이메일 주소 없음');return;}
-  var eqId=a.equipment||'smtv';
-  var link=location.origin+location.pathname.replace(/index\.html$/,'').replace(/\/$/,'')+'/prelearn.html?eq='+encodeURIComponent(eqId);
+  var eqIds=appEquipList(a);
+  var link=location.origin+location.pathname.replace(/index\.html$/,'').replace(/\/$/,'')+'/prelearn.html?eq='+encodeURIComponent(eqIds.join(','));
   fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({
     action:'sendPrelearnEmail',to:a.traineeEmail,traineeName:a.traineeName,
-    equipment:eqId,equipmentName:equipmentName(eqId,'en'),link:link
+    equipment:eqIds.join(','),equipmentName:appEquipNames(a),link:link
   })})
     .then(function(r){return r.text();})
     .then(function(text){
