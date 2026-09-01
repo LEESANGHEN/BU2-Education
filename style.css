@@ -1104,6 +1104,7 @@ html:has(.apf-body){height:100%;overflow:hidden}
 .pl-toc-sec:hover{background:var(--bg-hover)}
 .pl-toc-sec.on{background:var(--bg-sel);color:var(--tx-primary);font-weight:600}
 .pl-toc-sec.done{color:#4ade9a}
+.pl-toc-sec.failed{color:#e07070}
 .pl-toc-code{font-weight:700;margin-right:4px}
 .pl-main{flex:1;min-width:0}
 .pl-progwrap{display:flex;align-items:center;gap:10px;margin-bottom:12px}

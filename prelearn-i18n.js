@@ -26,7 +26,7 @@ ko:{
   quizTitle:'섹션 확인 퀴즈',
   quizAnswerAll:'모든 문항에 답해주세요.',
   quizPass:'정답 — 통과했습니다!',
-  quizFail:'정답 — 기준({0}%) 미달입니다. 아래에서 틀린 문항을 확인하고, 슬라이드를 다시 학습한 뒤 섹션 처음부터 진행해주세요.',
+  quizFail:'정답 — 기준({0}%) 미달입니다. 아래에서 틀린 문항을 확인해주세요. 이 섹션은 미통과로 기록되며, 방문 전 슬라이드를 복습할 수 있습니다.',
   markCorrect:'✅ 정답',markWrong:'❌ 오답 (정답: {0})',
   backToSlide:'← 슬라이드로',submitBtn:'제출',
   reviewBtn:'슬라이드 복습',nextSectionBtn:'다음 섹션 →',
@@ -35,6 +35,8 @@ ko:{
   doneMsg2:'본사 방문 시 담당자가 이수 내역을 확인합니다.',
   colSection:'섹션',colTitle:'제목',colScore:'점수',colResult:'결과',
   passLbl:'통과',failLbl:'미완료',
+  allPassedMsg:'✅ 전체 섹션 통과 — Level 0~1 사전학습 인증 기준을 충족했습니다.',
+  notAllPassedMsg:'⚠ 일부 섹션 미통과 — 방문 중 Level 0부터 교육이 진행됩니다.',
   warnMsg:'⚠ 이 학습 페이지는 아직 연결 설정이 완료되지 않았습니다. 관리자에게 문의해주세요.'
 },
 en:{
@@ -56,7 +58,7 @@ en:{
   quizTitle:'Section Quiz',
   quizAnswerAll:'Please answer all questions.',
   quizPass:'correct — Passed!',
-  quizFail:'correct — below the {0}% threshold. Check the marked question(s) below, review the slides again, and go through the section from the start.',
+  quizFail:'correct — below the {0}% threshold. Check the marked question(s) below — this section is recorded as not passed. You may still review the slides before your visit.',
   markCorrect:'✅ Correct',markWrong:'❌ Incorrect (correct answer: {0})',
   backToSlide:'← Back to slides',submitBtn:'Submit',
   reviewBtn:'Review slides',nextSectionBtn:'Next Section →',
@@ -65,6 +67,8 @@ en:{
   doneMsg2:'The training coordinator will review your completion before your visit.',
   colSection:'Section',colTitle:'Title',colScore:'Score',colResult:'Result',
   passLbl:'Passed',failLbl:'Incomplete',
+  allPassedMsg:'✅ All sections passed — you meet the Level 0~1 pre-learning certification criteria.',
+  notAllPassedMsg:'⚠ Some sections were not passed — training will start from Level 0 on-site.',
   warnMsg:'⚠ This learning page has not been configured yet. Please contact the administrator.'
 },
 'zh-CN':{
@@ -86,7 +90,7 @@ en:{
   quizTitle:'章节确认测验',
   quizAnswerAll:'请回答所有问题。',
   quizPass:'个正确 — 已通过！',
-  quizFail:'个正确 — 未达到{0}%标准。请查看下方标记的错误题目，重新学习幻灯片后从本节开头重新开始。',
+  quizFail:'个正确 — 未达到{0}%标准。请查看下方标记的错误题目 — 本节将被记录为未通过，您仍可在到访前复习幻灯片。',
   markCorrect:'✅ 正确',markWrong:'❌ 错误（正确答案：{0}）',
   backToSlide:'← 返回幻灯片',submitBtn:'提交',
   reviewBtn:'复习幻灯片',nextSectionBtn:'下一章节 →',
@@ -95,6 +99,8 @@ en:{
   doneMsg2:'负责人将在您到访前确认学习完成情况。',
   colSection:'章节',colTitle:'标题',colScore:'分数',colResult:'结果',
   passLbl:'通过',failLbl:'未完成',
+  allPassedMsg:'✅ 全部章节通过 — 已达到Level 0~1事先学习认证标准。',
+  notAllPassedMsg:'⚠ 部分章节未通过 — 到访期间将从Level 0开始培训。',
   warnMsg:'⚠ 此学习页面尚未完成连接设置，请联系管理员。'
 },
 'zh-TW':{
@@ -116,7 +122,7 @@ en:{
   quizTitle:'章節確認測驗',
   quizAnswerAll:'請回答所有問題。',
   quizPass:'題正確 — 已通過！',
-  quizFail:'題正確 — 未達到{0}%標準。請查看下方標記的錯誤題目，重新學習投影片後從本節開頭重新開始。',
+  quizFail:'題正確 — 未達到{0}%標準。請查看下方標記的錯誤題目 — 本節將被記錄為未通過，您仍可在到訪前複習投影片。',
   markCorrect:'✅ 正確',markWrong:'❌ 錯誤（正確答案：{0}）',
   backToSlide:'← 返回投影片',submitBtn:'提交',
   reviewBtn:'複習投影片',nextSectionBtn:'下一章節 →',
@@ -125,6 +131,8 @@ en:{
   doneMsg2:'負責人將在您到訪前確認學習完成情況。',
   colSection:'章節',colTitle:'標題',colScore:'分數',colResult:'結果',
   passLbl:'通過',failLbl:'未完成',
+  allPassedMsg:'✅ 全部章節通過 — 已達到Level 0~1事前學習認證標準。',
+  notAllPassedMsg:'⚠ 部分章節未通過 — 到訪期間將從Level 0開始教育。',
   warnMsg:'⚠ 此學習頁面尚未完成連線設定，請聯絡管理員。'
 },
 ja:{
@@ -146,7 +154,7 @@ ja:{
   quizTitle:'セクション確認クイズ',
   quizAnswerAll:'すべての設問に回答してください。',
   quizPass:'正解 — 合格しました！',
-  quizFail:'正解 — 基準({0}%)未達です。下記の誤答箇所を確認し、スライドを復習してからセクションの最初からやり直してください。',
+  quizFail:'正解 — 基準({0}%)未達です。下記の誤答箇所をご確認ください — このセクションは不合格として記録されます。訪問前にスライドを復習することは可能です。',
   markCorrect:'✅ 正解',markWrong:'❌ 不正解（正解: {0}）',
   backToSlide:'← スライドに戻る',submitBtn:'提出',
   reviewBtn:'スライド復習',nextSectionBtn:'次のセクション →',
@@ -155,6 +163,8 @@ ja:{
   doneMsg2:'担当者が訪問前に修了状況を確認します。',
   colSection:'セクション',colTitle:'タイトル',colScore:'得点',colResult:'結果',
   passLbl:'合格',failLbl:'未完了',
+  allPassedMsg:'✅ 全セクション合格 — Level 0~1事前学習の認証基準を満たしました。',
+  notAllPassedMsg:'⚠ 一部セクション未合格 — 訪問中はLevel 0から教育を行います。',
   warnMsg:'⚠ この学習ページはまだ接続設定が完了していません。管理者にお問い合わせください。'
 }
 };

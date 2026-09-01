@@ -148,10 +148,61 @@ function openTraineeDetail(id,openLevel){
 
   mw('<div class="mtit">'+esc(t.name)+' <span class="grpbadge" style="background:'+ot.color+'">'+esc(ot.label)+'</span> <span style="color:var(--tx-second);font-size:12px;font-weight:400">'+esc(t.org||'')+' · '+esc(t.country||'')+'</span></div>'
     +'<div class="td-section"><div class="td-sectitle">사전 선행학습 (Level 0~1, 방문 전 자가학습)</div>'
+      +renderPrelearnSummary(t)
       +'<table class="dtbl sm"><thead><tr><th style="width:60px">Level</th><th>학습 항목</th><th style="width:70px">이수</th><th style="width:120px">학습일자</th><th>비고</th></tr></thead><tbody>'+preRows+'</tbody></table>'
     +'</div>'
     +levelSections
     +'<div class="mfoot"><button class="btn sm" onclick="cm()">닫기</button></div>',true);
+}
+/* 온라인 사전학습(prelearn) 기록을 이름·소속으로 매칭해 이 대상자의 이수 현황 화면에 요약으로 보여준다 */
+function renderPrelearnSummary(t){
+  if(typeof findPrelearnRecord!=='function')return '';
+  var rec=findPrelearnRecord(t.name,t.org);
+  if(!rec){
+    return '<div class="dbox" style="margin-bottom:10px;font-size:11.5px;color:var(--tx-second)">온라인 사전학습 기록 없음 (이름·소속 일치 기준 — 교육 신청서 등록 시 자동 발송된 링크로 학습을 완료하면 여기에 표시됩니다)</div>';
+  }
+  var courses=rec.courses||{};
+  var eqIds=Object.keys(courses);
+  if(!eqIds.length){
+    return '<div class="dbox" style="margin-bottom:10px;font-size:11.5px;color:var(--tx-second)">온라인 사전학습을 시작했지만 아직 진행한 설비가 없습니다.</div>';
+  }
+  var rows=eqIds.map(function(eq){
+    var course=courses[eq];
+    var total=plSectionsFor(eq).length,passed=plPassedCount(course,eq);
+    var pct=total?Math.round(passed/total*100):0;
+    var verdict=!course.completedAt
+      ?('<span style="color:var(--tx-second)">진행중</span>')
+      :(plCourseAllPassed(course,eq)?'<span style="color:#4ade9a">✅ 전체 통과</span>':'<span style="color:#e07070">⚠ 일부 미통과 · Level0 재교육 필요</span>');
+    return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px">'
+      +'<b style="min-width:110px">'+esc(equipmentName(eq,'ko'))+'</b>'
+      +'<div class="lv-progbar" style="width:100px"><div class="lv-progfill" style="width:'+pct+'%"></div></div>'
+      +'<span style="min-width:40px">'+passed+'/'+total+'</span>'+verdict
+    +'</div>';
+  }).join('');
+  return '<div class="dbox" style="margin-bottom:10px">'+rows
+    +'<button class="btn sm pri" style="margin-top:6px" onclick="applyPrelearnToChecklist(\''+t.id+'\')">✅ 사전학습 결과 반영</button>'
+  +'</div>';
+}
+function applyPrelearnToChecklist(traineeId){
+  var t=trainee(traineeId);
+  if(!t)return;
+  var rec=findPrelearnRecord(t.name,t.org);
+  if(!rec){alert('매칭되는 온라인 사전학습 기록을 찾을 수 없습니다 (이름·소속 기준).');return;}
+  var courses=rec.courses||{};
+  var passedEq=Object.keys(courses).find(function(eq){return courses[eq].completedAt&&plCourseAllPassed(courses[eq],eq);});
+  if(!passedEq){alert('전체 섹션을 통과한 사전학습 기록이 없습니다. 방문 중 Level 0부터 교육을 진행해야 합니다.');return;}
+  if(!confirm('사전학습('+equipmentName(passedEq,'ko')+') 통과 결과를 이수 체크리스트(Level 0~1, 7개 항목)에 반영할까요?'))return;
+  var pre=checklistFor(0,'pre').concat(checklistFor(1,'pre'));
+  var today=todayStr();
+  pre.forEach(function(it){
+    var c=completionOf(traineeId,it.id);
+    if(!c){c={id:uid('cp'),traineeId:traineeId,itemId:it.id,done:'N',trainer:'',date:'',note:''};S.completions.push(c);}
+    c.done='Y';c.date=today;c.note='온라인 사전학습 자동반영 ('+equipmentName(passedEq,'ko')+')';
+  });
+  saveData();
+  window._curDetailTrainee=traineeId;
+  openTraineeDetail(traineeId);
+  renderTraineeTab();
 }
 function preItemRow(traineeId,it){
   var c=completionOf(traineeId,it.id)||{};

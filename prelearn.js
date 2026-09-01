@@ -206,7 +206,8 @@ function resumePosition(){
   var secs=allSections();
   for(var i=0;i<secs.length;i++){
     var p=prog[secs[i].code];
-    if(!p||!p.passed){PL.ci=secs[i].ci;PL.si=secs[i].si;PL.li=0;return;}
+    // 퀴즈를 제출(시도)한 적 있는 섹션은 통과 여부와 무관하게 완료로 보고 다음 섹션부터 재개한다
+    if(!p){PL.ci=secs[i].ci;PL.si=secs[i].si;PL.li=0;return;}
   }
   PL.mode='done';
 }
@@ -247,8 +248,9 @@ function renderToc(){
     return '<div class="pl-toc-ch">'+esc(tx(ch.title))+'</div>'
       +ch.sections.map(function(sec,si){
         var p=prog[sec.code];
-        var cls='pl-toc-sec'+((ci===PL.ci&&si===PL.si)?' on':'')+(p&&p.passed?' done':'');
-        return '<div class="'+cls+'" onclick="plJump('+ci+','+si+')"><span class="pl-toc-code">'+sec.code+'</span> '+esc(tx(sec.title))+(p&&p.passed?' ✓':'')+'</div>';
+        var cls='pl-toc-sec'+((ci===PL.ci&&si===PL.si)?' on':'')+(p?(p.passed?' done':' failed'):'');
+        var mark=p?(p.passed?' ✓':' ✗'):'';
+        return '<div class="'+cls+'" onclick="plJump('+ci+','+si+')"><span class="pl-toc-code">'+sec.code+'</span> '+esc(tx(sec.title))+mark+'</div>';
       }).join('');
   }).join('');
 }
@@ -262,7 +264,9 @@ function plNext(){
   var sec=curSection();
   if(PL.li<sec.slides.length-1){PL.li++;renderViewer();return;}
   var p=courseProgress()[sec.code];
-  if(p&&p.passed){advanceSection();return;}
+  // 퀴즈는 섹션당 1회만 제출한다 — 이미 제출한 적 있으면(통과 여부 무관) 다음으로 진행,
+  // 슬라이드 복습은 언제든 가능하지만 재응시는 불가
+  if(p){advanceSection();return;}
   PL.mode='quiz';PL.quizPick={};
   renderViewer();
 }
@@ -338,14 +342,16 @@ function submitQuiz(){
     :('<div style="color:#e07070;font-weight:600;margin-top:10px">❌ '+correct+'/'+qs.length+' '+esc(fmtQuizMsg(pt('quizFail'),Math.round(PASS_RATIO*100)))+'</div>');
   document.getElementById('pl_quiz_result').innerHTML=msg
     +'<div class="mfoot"><button class="btn" onclick="PL.mode=\'slide\';PL.li=0;renderViewer()">'+esc(pt('reviewBtn'))+'</button>'
-    +(passed?('<button class="btn pri" onclick="advanceSection()">'+esc(pt('nextSectionBtn'))+'</button>'):'')
+    +'<button class="btn pri" onclick="advanceSection()">'+esc(pt('nextSectionBtn'))+'</button>'
     +'</div>';
 }
 
 /* ── 완료 화면 ── */
 function renderDone(){
   var root=document.getElementById('plRoot');
-  var rows=allSections().map(function(s){
+  var secs=allSections();
+  var allPassed=secs.every(function(s){var p=courseProgress()[sectionAt(s.ci,s.si).code];return p&&p.passed;});
+  var rows=secs.map(function(s){
     var sec=sectionAt(s.ci,s.si);
     var p=courseProgress()[sec.code];
     return '<tr><td>'+sec.code+'</td><td>'+esc(tx(sec.title))+'</td><td>'+(p?(p.quizScore+'/'+p.quizTotal):'-')+'</td><td>'+(p&&p.passed?('<span style="color:#4ade9a">'+esc(pt('passLbl'))+'</span>'):('<span style="color:#e07070">'+esc(pt('failLbl'))+'</span>'))+'</td></tr>';
@@ -353,6 +359,7 @@ function renderDone(){
   root.innerHTML='<div class="apf-card apf-done">'
     +'<h1>'+esc(pt('doneTitle'))+'</h1>'
     +'<p>'+esc(PL.record.name)+' ('+esc(PL.record.org)+') — '+esc(equipmentName(PL.equip,langKey()))+'<br>'+esc(pt('doneMsg1'))+' '+esc(pt('doneMsg2'))+'</p>'
+    +'<div style="margin-top:14px;font-weight:600;color:'+(allPassed?'#4ade9a':'#e07070')+'">'+esc(allPassed?pt('allPassedMsg'):pt('notAllPassedMsg'))+'</div>'
     +'<table class="dtbl sm" style="margin-top:20px;text-align:left"><thead><tr><th>'+esc(pt('colSection'))+'</th><th>'+esc(pt('colTitle'))+'</th><th>'+esc(pt('colScore'))+'</th><th>'+esc(pt('colResult'))+'</th></tr></thead><tbody>'+rows+'</tbody></table>'
     +'<div style="margin-top:16px"><a href="javascript:void(0)" onclick="PL.mode=\'pick\';renderPick()" style="font-size:12px;color:var(--tx-second)">← '+esc(pt('changeEquip'))+'</a></div>'
   +'</div>';

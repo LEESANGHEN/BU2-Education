@@ -239,6 +239,8 @@ document.addEventListener('DOMContentLoaded',function(){
   switchTab('apply');
   loadFromSheets(function(){renderAll();});
   loadApplications(function(){renderAll();});
+  // 대상자별 이수 현황(사전학습 연동 표시)에서 쓸 수 있도록 활성 탭과 무관하게 미리 불러온다
+  if(typeof loadPrelearn==='function')loadPrelearn(function(){renderAll();});
   (function bgRefresh(){
     var url=getSheetsUrl();
     if(!url||location.protocol==='file:')return;
