@@ -1,152 +1,312 @@
-/* ══════════════════════════════════════════
-   다국어 지원 (1단계: 상단바/탭/공용 툴바/표 헤더 등 핵심 UI)
-   모달 내부 입력 폼, 상태값(진행중/완료 등 사용자가 입력한 데이터)은
-   이번 1단계 범위에서 제외 — 필요 시 추후 확장.
-══════════════════════════════════════════ */
-var LANG_KEY='trip_lang';
-var LANG_LABELS={ko:'한국어',en:'English',zhHans:'简体中文',zhHant:'繁體中文',ja:'日本語'};
+/* ═══════════════════════════════════════════
+   교육 신청서 다국어 지원 (한국어 기본 / EN / 中文简体 / 中文繁體 / 日本語)
+═══════════════════════════════════════════ */
+var LANGS=[
+  {id:'ko',label:'한국어'},
+  {id:'en',label:'English'},
+  {id:'zh-CN',label:'中文(简体)'},
+  {id:'zh-TW',label:'中文(繁體)'},
+  {id:'ja',label:'日本語'}
+];
+var LANG_LS_KEY='edu_lang';
+function getLang(){try{return localStorage.getItem(LANG_LS_KEY)||'en';}catch(e){return 'en';}}
+function setLang(l){try{localStorage.setItem(LANG_LS_KEY,l);}catch(e){}}
+/* 'zh-CN'/'zh-TW'(언어 선택값) <-> 'zhCN'/'zhTW'(데이터 파일의 JS 객체 키, 하이픈 불가) 변환 */
+function langKey(lang){return (lang||getLang()).replace('-','');}
+function t(key){
+  var lang=getLang();
+  var d=(I18N[lang]&&I18N[lang][key]!==undefined)?I18N[lang][key]:I18N.en[key];
+  return d;
+}
+function tOrgType(id){var lang=getLang();return (I18N[lang]&&I18N[lang].orgTypeLbl[id])||I18N.ko.orgTypeLbl[id]||id;}
+function tVisitCat(id){var lang=getLang();return (I18N[lang]&&I18N[lang].visitCatLbl[id])||I18N.ko.visitCatLbl[id]||id;}
+function tCountry(koName){var lang=getLang();return (I18N[lang]&&I18N[lang].countryLbl[koName])||koName;}
+function tModule(id,field){var lang=getLang();var m=(I18N[lang]&&I18N[lang].modules[id])||I18N.ko.modules[id];return m?m[field]:'';}
 
 var I18N={
 ko:{
-  appTitle:'출장 일정 관리', connOk:'연결 정상', connChecking:'연결 확인', themeToggleTitle:'다크/라이트 모드 전환',
-  langSelectTitle:'언어 선택',
-  tabProjects:'🗂️ 프로젝트 관리', tabGantt:'📅 간트 차트', tabPerson:'👤 인원 출장일', tabVision:'📊 월별 집계',
-  btnExcel:'⬇ 엑셀', btnSheetsSettings:'⚙ Sheets 설정', btnSiteMgr:'사이트 관리', btnAddEvent:'★ 이벤트 등록', btnAddSchedule:'+ 출장 등록',
-  btnHidden:'숨김 보기', searchPh:'검색', zoomWeek:'주', zoomBiweek:'격주', zoomMonth:'월',
-  filterSchedule:'출장일정', filterEvent:'이벤트', filterWork:'작업',
-  legendHq:'본사계열', legendOutsource:'외주계열', legendDone:'완료', legendGoing:'출장중', legendExt1:'1차 연장', legendExt2:'2차 연장', legendPlan:'예정',
-  ghTask:'업무', ghTraveler:'출장자', siteFilter:'사이트 필터',
-  mpSearchPh:'고객사/프로젝트 검색...', mpRegion:'지역', mpStatus:'상태', mpCustomer:'고객사', mpShipMonth:'출하월',
-  mpHideInactive:'진행중만 보기', mpAddProject:'+ 프로젝트 등록', optAll:'전체', btnEdit:'수정', btnDelete:'삭제',
-  colCategory:'구분', colProject:'프로젝트', colSerial:'프로젝트 시리얼', colUnitCombined:'생산/고객사 호기',
-  colSetupPeriod:'생산 셋업 기간', colShipDate:'설비 출하 일정', colManage:'관리',
-  pmSearchPh:'이름 검색...', pmStatusAll:'전체', pmStatusGoing:'출장중', pmStatusHome:'국내',
-  pmTypeHq:'본사', pmTypeOutsource:'외주', pmTypeLocalOutsource:'현지외주', pmTypeTech:'기술', pmTypeVision:'비전', pmTypeHost:'호스트',
-  pmSortLabel:'정렬', pmSortName:'이름', pmSortDays:'최초 출장일수', pmSortGrandTotal:'전체 출장일수', pmHideDone:'완료 숨기기',
-  statRegisteredPersons:'등록 인원', statAllTravelers:'전체 출장자', statOnTripNow:'현재 출장 중', statTodayBasis:'오늘 기준', pmBdOutsource:'외주', pmPersonTypeLabel:'인원',
-  colName:'이름', colCountry:'국가', colCity:'지역', colSite:'사이트', colFirstDays:'최초 출장일수', colExt1Days:'1차 연장일수', colExt2Days:'2차 연장일수', colStatusBadge:'상태', colGrandTotal:'전체 출장일수',
-  maMonth:'월', maHqCount:'본사 셋업 설비 수', maHqList:'본사 셋업 설비군', maSiteCount:'현장 셋업 설비 수', maSiteList:'현장 셋업 설비군', maPeople:'출장 인원', maPeopleList:'출장 인원 명단'
+  langLabel:'언어 선택 :',
+  pageTitle:'🎓 BU2 교육 신청서',
+  formTitle:'해외지사 · Agent · 고객사 담당자 교육 신청서',
+  formSub:'BU2 FCBGA Substrate 검사 장비 Level 0~3 교육 · Training Application Form',
+  sec1:'1. 신청 정보',
+  applyDate:'신청일자',orgType:'소속 유형',org:'지사 · Agent · 고객사명',
+  applicantName:'신청자(작성자)',applicantPosition:'직책/직급',applicantContact:'연락처 / 이메일',
+  country:'국가',
+  sec2:'2. 교육 대상자 정보',
+  traineeName:'성명',traineePosition:'직책/직급',traineeTask:'담당 업무',
+  visitCategory:'방문 구분',priorLevel:'재방문 시 이전 이수 Level',experienceYears:'현 업무 경력(년)',
+  priorLevelNone:'-',
+  traineeEmail:'교육 대상자 이메일',
+  sec3:'3. 방문 계획 및 희망 Level',
+  equipment:'교육 희망 설비',
+  desiredLevel:'희망 Level',desiredStart:'방문 희망 시작일',desiredEnd:'방문 희망 종료일',
+  totalDays:'총 방문일수',altNote:'대안 가능 기간 / 비고',
+  sec4:'4. 사전 역량 자가진단',
+  sec4hint:'이미 보유한 역량은 방문 중 교육에서 스킵하고, 부족한 영역에 집중 배정합니다.',
+  thCode:'코드',thLevel:'Level',thModule:'교육 영역(모듈)',thHas:'보유 여부',thNote:'비고',
+  hasN:'N (없음)',hasPartial:'일부',hasY:'Y (보유)',
+  assessNotePh:'관련 경력·이전 교육 이력 등',
+  sec5:'5. 사전 선행학습 이수 이력 (재방문 시 참고용)',
+  pre0:'Level 0 이론 선행학습(Manual) 이수',pre1:'Level 1 SW 조작 기초 선행학습(Manual) 이수',
+  methodPh:'학습 방법',
+  sec5hint:'※ 신규 방문자는 신청서 등록 완료 후 안내되는 온라인 사전 학습 사이트에서 방문 전 Level 0~1 학습을 진행합니다. 아래 항목은 재방문자가 과거에 이수한 이력이 있는 경우에만 참고용으로 기재해주세요.',
+  sec6:'6. 특이사항 및 요청사항',sec6ph:'언어 · 비자 · 숙소 · 안전/알레르기 등',
+  sec7:'7. 신청자 확인',branchApprover:'지사장 / Agent 대표 승인자명',submitDate:'제출일자',
+  sec7hint:'본 신청서는 방문 최소 4주 전 제출을 권장합니다. 제출된 자가진단 결과에 따라 최종 Level·Plan·방문 일정이 조정될 수 있습니다.',
+  submitBtn:'신청서 제출',submitting:'제출 중...',
+  doneTitle:'✅ 신청이 접수되었습니다',
+  doneMsg:'담당자 검토 후 방문 일정과 확정 Level을 별도로 안내드립니다.<br>문의사항은 본사 교육 담당자에게 연락해주세요.',
+  warnMsg:'⚠ 이 신청서 페이지는 아직 연결 설정이 완료되지 않았습니다. 관리자에게 문의해주세요. (apply.js의 APPLY_SHEETS_URL 미설정)',
+  errPrefix:'제출 중 오류가 발생했습니다: ',errSuffix:' (잠시 후 다시 시도해주세요)',
+  reqOrg:'지사/Agent/고객사명',reqApplicant:'신청자(작성자)',reqContact:'연락처/이메일',reqTrainee:'대상자 성명',reqEmail:'교육 대상자 이메일',emailInvalid:'이(가) 올바른 이메일 형식이 아닙니다.',reqStart:'방문 희망 시작일',reqEnd:'방문 희망 종료일',reqEquipment:'교육 희망 설비를 1개 이상 선택해주세요.',
+  reqSuffix:'을(를) 입력해주세요.',dateOrderErr:'방문 희망 종료일이 시작일보다 빠를 수 없습니다.',
+  daysUnit:'일',
+  orgTypeLbl:{branch:'해외지사',agent:'Agent(협력사)',customer:'고객사'},
+  visitCatLbl:{new:'신규',revisit:'재방문'},
+  countryLbl:{'한국':'한국','중국':'중국','대만':'대만','일본':'일본','베트남':'베트남','말레이시아':'말레이시아','싱가폴':'싱가폴','태국':'태국','필리핀':'필리핀','인도':'인도','미국':'미국','유럽':'유럽','기타':'기타'},
+  modules:{
+    md_a:{name:'설비 기본 구성',detail:'설비 HW, 전장 구성 소개'},
+    md_b:{name:'광학 검사 이론 기초',detail:'2D/3D 검사 원리, 조명·카메라·이미지 처리 개념'},
+    md_c:{name:'Software 조작(Main UI)',detail:'실행 절차, 로그인, 화면 구성, 기능 설명'},
+    md_d:{name:'Recipe 운용',detail:'Recipe Open/Run, 검사 결과 확인, Data Report&Log 저장/백업'},
+    md_e:{name:'기본 알람 대응',detail:'대표 알람 확인/리셋, 알람 로그 확인'},
+    md_f:{name:'정기 유지 보수(PM)',detail:'일일/주간/월간 PM, 청소, LTS 검증'},
+    md_g:{name:'소모품 점검/교체',detail:'Camera, 조명, Controller, PC Board, Motor, Driver 등 소모품 점검 및 교체'},
+    md_h:{name:'기초 트러블슈팅',detail:'대표 고장 Module 3종 이상에 대한 원인 분석 및 1차 조치'},
+    md_i:{name:'Recipe Vision Parameter 수정',detail:'Gerber File, 조명/Camera/PZT, Alignment, 검사 Parameter 수정'},
+    md_j:{name:'고급 트러블슈팅/Data 검증',detail:'HW(PC, Camera, Controller) 설정, 2D/3D 광학 Module Tuning, Data 검증'},
+    md_k:{name:'근본원인분석 및 검증 Report 작성',detail:'고장 이력 분석 및 보고서 작성, Data 검증 후 Report 작성 방법'},
+    md_l:{name:'Recipe 생성/검사 최적화',detail:'신규 검사 Recipe(Job) 생성, 검출률/오검율/UPH 최적화'},
+    md_m:{name:'교육 스킬(Train-the-Trainer)',detail:'모의 교육 상황 시연, 교육 자료 활용법'}
+  }
 },
 en:{
-  appTitle:'Trip Schedule Management', connOk:'Connected', connChecking:'Checking...', themeToggleTitle:'Toggle dark/light mode',
-  langSelectTitle:'Select language',
-  tabProjects:'🗂️ Projects', tabGantt:'📅 Gantt Chart', tabPerson:'👤 Trip Days', tabVision:'📊 Monthly Summary',
-  btnExcel:'⬇ Excel', btnSheetsSettings:'⚙ Sheets Settings', btnSiteMgr:'Site Mgmt', btnAddEvent:'★ Add Event', btnAddSchedule:'+ Add Trip',
-  btnHidden:'Show Hidden', searchPh:'Search', zoomWeek:'Week', zoomBiweek:'2-Week', zoomMonth:'Month',
-  filterSchedule:'Trips', filterEvent:'Events', filterWork:'Work',
-  legendHq:'HQ Group', legendOutsource:'Outsource Group', legendDone:'Done', legendGoing:'On Trip', legendExt1:'Ext. 1', legendExt2:'Ext. 2', legendPlan:'Planned',
-  ghTask:'Task', ghTraveler:'Traveler', siteFilter:'Site Filter',
-  mpSearchPh:'Search customer/project...', mpRegion:'Region', mpStatus:'Status', mpCustomer:'Customer', mpShipMonth:'Ship Month',
-  mpHideInactive:'Active only', mpAddProject:'+ Add Project', optAll:'All', btnEdit:'Edit', btnDelete:'Delete',
-  colCategory:'Category', colProject:'Project', colSerial:'Project Serial', colUnitCombined:'Production/Customer Unit',
-  colSetupPeriod:'Setup Period', colShipDate:'Ship Date', colManage:'Manage',
-  pmSearchPh:'Search name...', pmStatusAll:'All', pmStatusGoing:'On Trip', pmStatusHome:'Domestic',
-  pmTypeHq:'HQ', pmTypeOutsource:'Outsource', pmTypeLocalOutsource:'Local Outsource', pmTypeTech:'Tech', pmTypeVision:'Vision', pmTypeHost:'Host',
-  pmSortLabel:'Sort', pmSortName:'Name', pmSortDays:'Initial Days', pmSortGrandTotal:'Total Days', pmHideDone:'Hide Done',
-  statRegisteredPersons:'Registered', statAllTravelers:'All travelers', statOnTripNow:'Currently on trip', statTodayBasis:'As of today', pmBdOutsource:'Outsource', pmPersonTypeLabel:'Type',
-  colName:'Name', colCountry:'Country', colCity:'Region', colSite:'Site', colFirstDays:'Initial Days', colExt1Days:'Ext.1 Days', colExt2Days:'Ext.2 Days', colStatusBadge:'Status', colGrandTotal:'Total Days',
-  maMonth:'Month', maHqCount:'HQ Setup Units', maHqList:'HQ Setup Details', maSiteCount:'Site Setup Units', maSiteList:'Site Setup Details', maPeople:'Travelers', maPeopleList:'Traveler List'
+  langLabel:'Language:',
+  pageTitle:'🎓 BU2 Training Application',
+  formTitle:'Training Application Form — Overseas Branch · Agent · Customer',
+  formSub:'BU2 FCBGA Substrate Inspection Equipment Level 0~3 Training',
+  sec1:'1. Application Info',
+  applyDate:'Application Date',orgType:'Organization Type',org:'Branch / Agent / Customer Name',
+  applicantName:'Applicant (Writer)',applicantPosition:'Position/Title',applicantContact:'Contact / Email',
+  country:'Country',
+  sec2:'2. Trainee Info',
+  traineeName:'Full Name',traineePosition:'Position/Title',traineeTask:'Responsibilities',
+  visitCategory:'Visit Type',priorLevel:'Previous Level Completed (if revisit)',experienceYears:'Years of Experience',
+  priorLevelNone:'-',
+  traineeEmail:'Trainee Email',
+  sec3:'3. Visit Plan & Desired Level',
+  equipment:'Equipment',
+  desiredLevel:'Desired Level',desiredStart:'Desired Visit Start Date',desiredEnd:'Desired Visit End Date',
+  totalDays:'Total Visit Days',altNote:'Alternative Period / Notes',
+  sec4:'4. Self-Assessment of Prior Competency',
+  sec4hint:'Skills you already have will be skipped during on-site training, allowing focus on areas that need it.',
+  thCode:'Code',thLevel:'Level',thModule:'Training Area (Module)',thHas:'Have',thNote:'Notes',
+  hasN:'N (None)',hasPartial:'Partial',hasY:'Y (Have)',
+  assessNotePh:'Related experience, prior training history, etc.',
+  sec5:'5. Pre-Learning Completion History (Reference for Revisits)',
+  pre0:'Completed Level 0 theory pre-learning (Manual)',pre1:'Completed Level 1 SW operation basics pre-learning (Manual)',
+  methodPh:'Learning method',
+  sec5hint:'※ First-time visitors will complete Level 0~1 pre-learning through the online course sent after your application is registered. The items below are for reference only, for revisiting trainees who completed pre-learning in the past.',
+  sec6:'6. Special Notes & Requests',sec6ph:'Language, visa, accommodation, safety/allergies, etc.',
+  sec7:'7. Applicant Confirmation',branchApprover:'Branch Manager / Agent Representative Approver Name',submitDate:'Submission Date',
+  sec7hint:'This application is recommended to be submitted at least 4 weeks before the visit. The final Level, Plan, and visit schedule may be adjusted based on the self-assessment results.',
+  submitBtn:'Submit Application',submitting:'Submitting...',
+  doneTitle:'✅ Application Submitted',
+  doneMsg:'The visit schedule and confirmed Level will be communicated separately after review.<br>For inquiries, please contact the HQ training coordinator.',
+  warnMsg:'⚠ This application page has not been configured yet. Please contact the administrator. (APPLY_SHEETS_URL not set in apply.js)',
+  errPrefix:'An error occurred while submitting: ',errSuffix:' (please try again shortly)',
+  reqOrg:'Branch/Agent/Customer name',reqApplicant:'Applicant (Writer)',reqContact:'Contact/Email',reqTrainee:'Trainee name',reqEmail:'Trainee email',emailInvalid:' is not a valid email address.',reqStart:'Desired visit start date',reqEnd:'Desired visit end date',reqEquipment:'Please select at least one equipment.',
+  reqSuffix:' is required.',dateOrderErr:'The end date cannot be earlier than the start date.',
+  daysUnit:' day(s)',
+  orgTypeLbl:{branch:'Overseas Branch',agent:'Agent (Partner)',customer:'Customer'},
+  visitCatLbl:{new:'New',revisit:'Revisit'},
+  countryLbl:{'한국':'Korea','중국':'China','대만':'Taiwan','일본':'Japan','베트남':'Vietnam','말레이시아':'Malaysia','싱가폴':'Singapore','태국':'Thailand','필리핀':'Philippines','인도':'India','미국':'USA','유럽':'Europe','기타':'Other'},
+  modules:{
+    md_a:{name:'Basic Equipment Configuration',detail:'Introduction to equipment HW and electrical panel configuration'},
+    md_b:{name:'Optical Inspection Theory Basics',detail:'2D/3D inspection principles, lighting/camera/image processing concepts'},
+    md_c:{name:'Software Operation (Main UI)',detail:'Launch procedure, login, screen layout, function overview'},
+    md_d:{name:'Recipe Operation',detail:'Recipe Open/Run, checking inspection results, Data Report & Log save/backup'},
+    md_e:{name:'Basic Alarm Response',detail:'Checking/resetting common alarms, alarm log review'},
+    md_f:{name:'Regular Maintenance (PM)',detail:'Daily/weekly/monthly PM, cleaning, LTS verification'},
+    md_g:{name:'Consumables Inspection/Replacement',detail:'Inspection and replacement of consumables such as Camera, lighting, Controller, PC Board, Motor, Driver'},
+    md_h:{name:'Basic Troubleshooting',detail:'Root cause analysis and initial response for 3+ common failure modules'},
+    md_i:{name:'Recipe Vision Parameter Modification',detail:'Gerber File, lighting/Camera/PZT, Alignment, inspection parameter modification'},
+    md_j:{name:'Advanced Troubleshooting / Data Verification',detail:'HW (PC, Camera, Controller) setup, 2D/3D optical module tuning, data verification'},
+    md_k:{name:'Root Cause Analysis & Verification Report Writing',detail:'Failure history analysis and report writing, report writing method after data verification'},
+    md_l:{name:'Recipe Creation / Inspection Optimization',detail:'Creating new inspection Recipe (Job), optimizing detection rate/false-call rate/UPH'},
+    md_m:{name:'Training Skills (Train-the-Trainer)',detail:'Mock training demonstration, how to use training materials'}
+  }
 },
-zhHans:{
-  appTitle:'出差日程管理', connOk:'连接正常', connChecking:'检查中...', themeToggleTitle:'切换深色/浅色模式',
-  langSelectTitle:'选择语言',
-  tabProjects:'🗂️ 项目管理', tabGantt:'📅 甘特图', tabPerson:'👤 人员出差日', tabVision:'📊 月度汇总',
-  btnExcel:'⬇ 导出Excel', btnSheetsSettings:'⚙ Sheets设置', btnSiteMgr:'站点管理', btnAddEvent:'★ 添加事件', btnAddSchedule:'+ 添加出差',
-  btnHidden:'显示隐藏', searchPh:'搜索', zoomWeek:'周', zoomBiweek:'双周', zoomMonth:'月',
-  filterSchedule:'出差日程', filterEvent:'事件', filterWork:'工作',
-  legendHq:'总部系列', legendOutsource:'外包系列', legendDone:'完成', legendGoing:'出差中', legendExt1:'第1次延长', legendExt2:'第2次延长', legendPlan:'预定',
-  ghTask:'任务', ghTraveler:'出差人员', siteFilter:'站点筛选',
-  mpSearchPh:'搜索客户/项目...', mpRegion:'地区', mpStatus:'状态', mpCustomer:'客户', mpShipMonth:'出货月份',
-  mpHideInactive:'仅看进行中', mpAddProject:'+ 添加项目', optAll:'全部', btnEdit:'修改', btnDelete:'删除',
-  colCategory:'分类', colProject:'项目', colSerial:'项目序列号', colUnitCombined:'生产/客户机台',
-  colSetupPeriod:'生产安装周期', colShipDate:'设备出货日期', colManage:'管理',
-  pmSearchPh:'搜索姓名...', pmStatusAll:'全部', pmStatusGoing:'出差中', pmStatusHome:'国内',
-  pmTypeHq:'总部', pmTypeOutsource:'外包', pmTypeLocalOutsource:'当地外包', pmTypeTech:'技术', pmTypeVision:'视觉', pmTypeHost:'主机厂',
-  pmSortLabel:'排序', pmSortName:'姓名', pmSortDays:'首次出差天数', pmSortGrandTotal:'总出差天数', pmHideDone:'隐藏已完成',
-  statRegisteredPersons:'登记人数', statAllTravelers:'全部出差人员', statOnTripNow:'当前出差中', statTodayBasis:'截至今天', pmBdOutsource:'外包', pmPersonTypeLabel:'人员',
-  colName:'姓名', colCountry:'国家', colCity:'地区', colSite:'站点', colFirstDays:'首次出差天数', colExt1Days:'第1次延长天数', colExt2Days:'第2次延长天数', colStatusBadge:'状态', colGrandTotal:'总出差天数',
-  maMonth:'月份', maHqCount:'总部安装设备数', maHqList:'总部安装设备清单', maSiteCount:'现场安装设备数', maSiteList:'现场安装设备清单', maPeople:'出差人数', maPeopleList:'出差人员名单'
+'zh-CN':{
+  langLabel:'语言选择：',
+  pageTitle:'🎓 BU2 培训申请书',
+  formTitle:'海外分公司 · Agent · 客户负责人培训申请书',
+  formSub:'BU2 FCBGA Substrate检测设备 Level 0~3 培训 · Training Application Form',
+  sec1:'1. 申请信息',
+  applyDate:'申请日期',orgType:'所属类型',org:'分公司 · Agent · 客户名称',
+  applicantName:'申请人(填写人)',applicantPosition:'职务/职级',applicantContact:'联系方式 / 邮箱',
+  country:'国家',
+  sec2:'2. 培训对象信息',
+  traineeName:'姓名',traineePosition:'职务/职级',traineeTask:'负责工作',
+  visitCategory:'到访类型',priorLevel:'再次到访时之前已完成的Level',experienceYears:'当前工作经验(年)',
+  priorLevelNone:'-',
+  traineeEmail:'培训对象邮箱',
+  sec3:'3. 到访计划及期望Level',
+  equipment:'培训设备',
+  desiredLevel:'期望Level',desiredStart:'期望到访开始日',desiredEnd:'期望到访结束日',
+  totalDays:'总到访天数',altNote:'可选备用期间 / 备注',
+  sec4:'4. 事先能力自我评估',
+  sec4hint:'已具备的能力将在到访培训中跳过，集中安排在不足的领域。',
+  thCode:'编号',thLevel:'Level',thModule:'培训领域(模块)',thHas:'具备与否',thNote:'备注',
+  hasN:'N (无)',hasPartial:'部分',hasY:'Y (具备)',
+  assessNotePh:'相关经历·以往培训经历等',
+  sec5:'5. 事先预习完成历史 (再次到访参考用)',
+  pre0:'完成Level 0理论预习(手册)',pre1:'完成Level 1软件操作基础预习(手册)',
+  methodPh:'学习方法',
+  sec5hint:'※ 首次到访者将在申请登记完成后收到的在线预习网站上完成Level 0~1预习。以下项目仅供再次到访且过去已完成预习的对象参考填写。',
+  sec6:'6. 特殊事项及请求事项',sec6ph:'语言 · 签证 · 住宿 · 安全/过敏等',
+  sec7:'7. 申请人确认',branchApprover:'分公司长 / Agent代表批准人姓名',submitDate:'提交日期',
+  sec7hint:'建议至少在到访前4周提交本申请书。最终Level、Plan、到访日程可能根据提交的自我评估结果进行调整。',
+  submitBtn:'提交申请书',submitting:'提交中...',
+  doneTitle:'✅ 申请已受理',
+  doneMsg:'负责人审核后将另行通知到访日程及确定Level。<br>如有咨询事项，请联系总部培训负责人。',
+  warnMsg:'⚠ 此申请页面尚未完成连接设置，请联系管理员。(apply.js中未设置APPLY_SHEETS_URL)',
+  errPrefix:'提交过程中发生错误：',errSuffix:'（请稍后再试）',
+  reqOrg:'分公司/Agent/客户名称',reqApplicant:'申请人(填写人)',reqContact:'联系方式/邮箱',reqTrainee:'培训对象姓名',reqEmail:'培训对象邮箱',emailInvalid:'不是有效的邮箱格式。',reqStart:'期望到访开始日',reqEnd:'期望到访结束日',reqEquipment:'请至少选择一个培训设备。',
+  reqSuffix:'为必填项。',dateOrderErr:'期望到访结束日不能早于开始日。',
+  daysUnit:'天',
+  orgTypeLbl:{branch:'海外分公司',agent:'Agent(合作商)',customer:'客户'},
+  visitCatLbl:{new:'新访',revisit:'再访'},
+  countryLbl:{'한국':'韩国','중국':'中国','대만':'台湾','일본':'日本','베트남':'越南','말레이시아':'马来西亚','싱가폴':'新加坡','태국':'泰国','필리핀':'菲律宾','인도':'印度','미국':'美国','유럽':'欧洲','기타':'其他'},
+  modules:{
+    md_a:{name:'设备基本构成',detail:'设备硬件、电气系统构成介绍'},
+    md_b:{name:'光学检测理论基础',detail:'2D/3D检测原理，照明·相机·图像处理概念'},
+    md_c:{name:'软件操作(主界面)',detail:'启动流程、登录、画面构成、功能说明'},
+    md_d:{name:'Recipe运用',detail:'Recipe打开/运行，检测结果确认，数据报告&日志保存/备份'},
+    md_e:{name:'基本报警应对',detail:'常见报警确认/复位，报警日志确认'},
+    md_f:{name:'定期维护保养(PM)',detail:'日/周/月度PM，清洁，LTS验证'},
+    md_g:{name:'耗材检查/更换',detail:'Camera、照明、Controller、PC Board、Motor、Driver等耗材检查及更换'},
+    md_h:{name:'基础故障排除',detail:'针对3种以上代表性故障模块的原因分析及初步处理'},
+    md_i:{name:'Recipe Vision参数修改',detail:'Gerber File，照明/Camera/PZT，Alignment，检测参数修改'},
+    md_j:{name:'高级故障排除/数据验证',detail:'HW(PC、Camera、Controller)设置，2D/3D光学模块调优，数据验证'},
+    md_k:{name:'根本原因分析及验证报告撰写',detail:'故障历史分析及报告撰写，数据验证后的报告撰写方法'},
+    md_l:{name:'Recipe生成/检测优化',detail:'新建检测Recipe(Job)，检出率/误判率/UPH优化'},
+    md_m:{name:'培训技能(培训师培训)',detail:'模拟培训情境演示，培训资料使用方法'}
+  }
 },
-zhHant:{
-  appTitle:'出差日程管理', connOk:'連線正常', connChecking:'檢查中...', themeToggleTitle:'切換深色/淺色模式',
-  langSelectTitle:'選擇語言',
-  tabProjects:'🗂️ 專案管理', tabGantt:'📅 甘特圖', tabPerson:'👤 人員出差日', tabVision:'📊 月度彙總',
-  btnExcel:'⬇ 匯出Excel', btnSheetsSettings:'⚙ Sheets設定', btnSiteMgr:'站點管理', btnAddEvent:'★ 新增事件', btnAddSchedule:'+ 新增出差',
-  btnHidden:'顯示隱藏', searchPh:'搜尋', zoomWeek:'週', zoomBiweek:'雙週', zoomMonth:'月',
-  filterSchedule:'出差日程', filterEvent:'事件', filterWork:'工作',
-  legendHq:'總部系列', legendOutsource:'外包系列', legendDone:'完成', legendGoing:'出差中', legendExt1:'第1次延長', legendExt2:'第2次延長', legendPlan:'預定',
-  ghTask:'任務', ghTraveler:'出差人員', siteFilter:'站點篩選',
-  mpSearchPh:'搜尋客戶/專案...', mpRegion:'地區', mpStatus:'狀態', mpCustomer:'客戶', mpShipMonth:'出貨月份',
-  mpHideInactive:'僅看進行中', mpAddProject:'+ 新增專案', optAll:'全部', btnEdit:'修改', btnDelete:'刪除',
-  colCategory:'分類', colProject:'專案', colSerial:'專案序號', colUnitCombined:'生產/客戶機台',
-  colSetupPeriod:'生產安裝週期', colShipDate:'設備出貨日期', colManage:'管理',
-  pmSearchPh:'搜尋姓名...', pmStatusAll:'全部', pmStatusGoing:'出差中', pmStatusHome:'國內',
-  pmTypeHq:'總部', pmTypeOutsource:'外包', pmTypeLocalOutsource:'當地外包', pmTypeTech:'技術', pmTypeVision:'視覺', pmTypeHost:'主機廠',
-  pmSortLabel:'排序', pmSortName:'姓名', pmSortDays:'首次出差天數', pmSortGrandTotal:'總出差天數', pmHideDone:'隱藏已完成',
-  statRegisteredPersons:'登記人數', statAllTravelers:'全部出差人員', statOnTripNow:'目前出差中', statTodayBasis:'截至今天', pmBdOutsource:'外包', pmPersonTypeLabel:'人員',
-  colName:'姓名', colCountry:'國家', colCity:'地區', colSite:'站點', colFirstDays:'首次出差天數', colExt1Days:'第1次延長天數', colExt2Days:'第2次延長天數', colStatusBadge:'狀態', colGrandTotal:'總出差天數',
-  maMonth:'月份', maHqCount:'總部安裝設備數', maHqList:'總部安裝設備清單', maSiteCount:'現場安裝設備數', maSiteList:'現場安裝設備清單', maPeople:'出差人數', maPeopleList:'出差人員名單'
+'zh-TW':{
+  langLabel:'語言選擇：',
+  pageTitle:'🎓 BU2 教育申請書',
+  formTitle:'海外分公司 · Agent · 客戶負責人教育申請書',
+  formSub:'BU2 FCBGA Substrate檢測設備 Level 0~3 教育 · Training Application Form',
+  sec1:'1. 申請資訊',
+  applyDate:'申請日期',orgType:'所屬類型',org:'分公司 · Agent · 客戶名稱',
+  applicantName:'申請人(填寫人)',applicantPosition:'職務/職級',applicantContact:'聯絡方式 / 電子郵件',
+  country:'國家',
+  sec2:'2. 教育對象資訊',
+  traineeName:'姓名',traineePosition:'職務/職級',traineeTask:'負責業務',
+  visitCategory:'到訪類型',priorLevel:'再次到訪時之前已完成的Level',experienceYears:'目前工作經歷(年)',
+  priorLevelNone:'-',
+  traineeEmail:'教育對象郵箱',
+  sec3:'3. 到訪計畫及期望Level',
+  equipment:'教育設備',
+  desiredLevel:'期望Level',desiredStart:'期望到訪開始日',desiredEnd:'期望到訪結束日',
+  totalDays:'總到訪天數',altNote:'可選替代期間 / 備註',
+  sec4:'4. 事前能力自我評估',
+  sec4hint:'已具備的能力將在到訪教育中跳過，集中安排在不足的領域。',
+  thCode:'編號',thLevel:'Level',thModule:'教育領域(模組)',thHas:'具備與否',thNote:'備註',
+  hasN:'N (無)',hasPartial:'部分',hasY:'Y (具備)',
+  assessNotePh:'相關經歷·過往教育經歷等',
+  sec5:'5. 事前預習完成歷史 (再次到訪參考用)',
+  pre0:'完成Level 0理論預習(手冊)',pre1:'完成Level 1軟體操作基礎預習(手冊)',
+  methodPh:'學習方法',
+  sec5hint:'※ 首次到訪者將在申請登記完成後收到的線上預習網站上完成Level 0~1預習。以下項目僅供再次到訪且過去已完成預習的對象參考填寫。',
+  sec6:'6. 特殊事項及請求事項',sec6ph:'語言 · 簽證 · 住宿 · 安全/過敏等',
+  sec7:'7. 申請人確認',branchApprover:'分公司長 / Agent代表核准人姓名',submitDate:'提交日期',
+  sec7hint:'建議至少在到訪前4週提交本申請書。最終Level、Plan、到訪行程可能根據提交的自我評估結果進行調整。',
+  submitBtn:'提交申請書',submitting:'提交中...',
+  doneTitle:'✅ 申請已受理',
+  doneMsg:'負責人審核後將另行通知到訪行程及確定Level。<br>如有詢問事項，請聯絡總部教育負責人。',
+  warnMsg:'⚠ 此申請頁面尚未完成連接設定，請聯絡管理員。(apply.js中未設定APPLY_SHEETS_URL)',
+  errPrefix:'提交過程中發生錯誤：',errSuffix:'（請稍後再試）',
+  reqOrg:'分公司/Agent/客戶名稱',reqApplicant:'申請人(填寫人)',reqContact:'聯絡方式/電子郵件',reqTrainee:'教育對象姓名',reqEmail:'教育對象郵箱',emailInvalid:'不是有效的電子郵件格式。',reqStart:'期望到訪開始日',reqEnd:'期望到訪結束日',reqEquipment:'請至少選擇一個教育設備。',
+  reqSuffix:'為必填項目。',dateOrderErr:'期望到訪結束日不能早於開始日。',
+  daysUnit:'天',
+  orgTypeLbl:{branch:'海外分公司',agent:'Agent(合作商)',customer:'客戶'},
+  visitCatLbl:{new:'新訪',revisit:'再訪'},
+  countryLbl:{'한국':'韓國','중국':'中國','대만':'台灣','일본':'日本','베트남':'越南','말레이시아':'馬來西亞','싱가폴':'新加坡','태국':'泰國','필리핀':'菲律賓','인도':'印度','미국':'美國','유럽':'歐洲','기타':'其他'},
+  modules:{
+    md_a:{name:'設備基本構成',detail:'設備硬體、電氣系統構成介紹'},
+    md_b:{name:'光學檢測理論基礎',detail:'2D/3D檢測原理，照明·相機·影像處理概念'},
+    md_c:{name:'軟體操作(主介面)',detail:'啟動流程、登入、畫面構成、功能說明'},
+    md_d:{name:'Recipe運用',detail:'Recipe開啟/執行，檢測結果確認，數據報告&日誌儲存/備份'},
+    md_e:{name:'基本警報應對',detail:'常見警報確認/重置，警報日誌確認'},
+    md_f:{name:'定期維護保養(PM)',detail:'日/週/月度PM，清潔，LTS驗證'},
+    md_g:{name:'耗材檢查/更換',detail:'Camera、照明、Controller、PC Board、Motor、Driver等耗材檢查及更換'},
+    md_h:{name:'基礎故障排除',detail:'針對3種以上代表性故障模組的原因分析及初步處理'},
+    md_i:{name:'Recipe Vision參數修改',detail:'Gerber File，照明/Camera/PZT，Alignment，檢測參數修改'},
+    md_j:{name:'高級故障排除/數據驗證',detail:'HW(PC、Camera、Controller)設定，2D/3D光學模組調優，數據驗證'},
+    md_k:{name:'根本原因分析及驗證報告撰寫',detail:'故障歷史分析及報告撰寫，數據驗證後的報告撰寫方法'},
+    md_l:{name:'Recipe生成/檢測優化',detail:'新建檢測Recipe(Job)，檢出率/誤判率/UPH優化'},
+    md_m:{name:'培訓技能(培訓師培訓)',detail:'模擬培訓情境演示，培訓資料使用方法'}
+  }
 },
 ja:{
-  appTitle:'出張スケジュール管理', connOk:'接続正常', connChecking:'確認中...', themeToggleTitle:'ダーク/ライトモード切替',
-  langSelectTitle:'言語選択',
-  tabProjects:'🗂️ プロジェクト管理', tabGantt:'📅 ガントチャート', tabPerson:'👤 出張日数', tabVision:'📊 月別集計',
-  btnExcel:'⬇ Excel', btnSheetsSettings:'⚙ Sheets設定', btnSiteMgr:'サイト管理', btnAddEvent:'★ イベント登録', btnAddSchedule:'+ 出張登録',
-  btnHidden:'非表示を表示', searchPh:'検索', zoomWeek:'週', zoomBiweek:'隔週', zoomMonth:'月',
-  filterSchedule:'出張予定', filterEvent:'イベント', filterWork:'作業',
-  legendHq:'本社系列', legendOutsource:'外注系列', legendDone:'完了', legendGoing:'出張中', legendExt1:'1次延長', legendExt2:'2次延長', legendPlan:'予定',
-  ghTask:'業務', ghTraveler:'出張者', siteFilter:'サイトフィルター',
-  mpSearchPh:'顧客/プロジェクト検索...', mpRegion:'地域', mpStatus:'状態', mpCustomer:'顧客', mpShipMonth:'出荷月',
-  mpHideInactive:'進行中のみ表示', mpAddProject:'+ プロジェクト登録', optAll:'全体', btnEdit:'編集', btnDelete:'削除',
-  colCategory:'区分', colProject:'プロジェクト', colSerial:'プロジェクトシリアル', colUnitCombined:'生産/顧客号機',
-  colSetupPeriod:'生産セットアップ期間', colShipDate:'設備出荷日程', colManage:'管理',
-  pmSearchPh:'名前検索...', pmStatusAll:'全体', pmStatusGoing:'出張中', pmStatusHome:'国内',
-  pmTypeHq:'本社', pmTypeOutsource:'外注', pmTypeLocalOutsource:'現地外注', pmTypeTech:'技術', pmTypeVision:'ビジョン', pmTypeHost:'ホスト',
-  pmSortLabel:'並び替え', pmSortName:'名前', pmSortDays:'初回出張日数', pmSortGrandTotal:'全体出張日数', pmHideDone:'完了を非表示',
-  statRegisteredPersons:'登録人数', statAllTravelers:'全出張者', statOnTripNow:'現在出張中', statTodayBasis:'本日時点', pmBdOutsource:'外注', pmPersonTypeLabel:'人員',
-  colName:'名前', colCountry:'国', colCity:'地域', colSite:'サイト', colFirstDays:'初回出張日数', colExt1Days:'1次延長日数', colExt2Days:'2次延長日数', colStatusBadge:'状態', colGrandTotal:'全体出張日数',
-  maMonth:'月', maHqCount:'本社セットアップ設備数', maHqList:'本社セットアップ設備群', maSiteCount:'現場セットアップ設備数', maSiteList:'現場セットアップ設備群', maPeople:'出張人員', maPeopleList:'出張人員名簿'
-}
-};
-
-var _lang=(function(){
-  try{var v=localStorage.getItem(LANG_KEY);return (v&&I18N[v])?v:'ko';}catch(e){return 'ko';}
-})();
-
-function t(key){
-  var dict=I18N[_lang]||I18N.ko;
-  return (key in dict)?dict[key]:(I18N.ko[key]!==undefined?I18N.ko[key]:key);
-}
-
-function _langSelectHtml(){
-  return Object.keys(LANG_LABELS).map(function(code){
-    return '<option value="'+code+'"'+(code===_lang?' selected':'')+'>'+LANG_LABELS[code]+'</option>';
-  }).join('');
-}
-
-// data-i18n(텍스트) / data-i18n-title(title 속성)이 붙은 정적 요소들을 현재 언어로 갱신
-function applyLanguage(){
-  document.documentElement.setAttribute('lang', _lang==='ko'?'ko':(_lang==='en'?'en':(_lang==='ja'?'ja':'zh')));
-  Array.prototype.slice.call(document.querySelectorAll('[data-i18n]')).forEach(function(el){
-    el.textContent=t(el.getAttribute('data-i18n'));
-  });
-  Array.prototype.slice.call(document.querySelectorAll('[data-i18n-title]')).forEach(function(el){
-    el.title=t(el.getAttribute('data-i18n-title'));
-  });
-  Array.prototype.slice.call(document.querySelectorAll('[data-i18n-ph]')).forEach(function(el){
-    el.placeholder=t(el.getAttribute('data-i18n-ph'));
-  });
-  var sel=document.getElementById('langSelect');
-  if(sel){
-    if(!sel.options.length) sel.innerHTML=_langSelectHtml();
-    sel.value=_lang;
+  langLabel:'言語選択：',
+  pageTitle:'🎓 BU2 教育申込書',
+  formTitle:'海外支社 · Agent · 顧客担当者教育申込書',
+  formSub:'BU2 FCBGA Substrate検査装置 Level 0~3 教育 · Training Application Form',
+  sec1:'1. 申込情報',
+  applyDate:'申込日',orgType:'所属区分',org:'支社 · Agent · 顧客名',
+  applicantName:'申込者(作成者)',applicantPosition:'役職',applicantContact:'連絡先 / メール',
+  country:'国',
+  sec2:'2. 教育対象者情報',
+  traineeName:'氏名',traineePosition:'役職',traineeTask:'担当業務',
+  visitCategory:'訪問区分',priorLevel:'再訪問時の以前修了Level',experienceYears:'現業務経歴(年)',
+  priorLevelNone:'-',
+  traineeEmail:'対象者メールアドレス',
+  sec3:'3. 訪問計画及び希望Level',
+  equipment:'教育設備',
+  desiredLevel:'希望Level',desiredStart:'訪問希望開始日',desiredEnd:'訪問希望終了日',
+  totalDays:'総訪問日数',altNote:'代替可能期間 / 備考',
+  sec4:'4. 事前力量自己診断',
+  sec4hint:'既に保有しているスキルは訪問中の教育でスキップし、不足している領域に集中配分します。',
+  thCode:'コード',thLevel:'Level',thModule:'教育領域(モジュール)',thHas:'保有有無',thNote:'備考',
+  hasN:'N (なし)',hasPartial:'一部',hasY:'Y (保有)',
+  assessNotePh:'関連経歴・以前の教育履歴等',
+  sec5:'5. 事前先行学習修了履歴 (再訪問時の参考用)',
+  pre0:'Level 0理論先行学習(マニュアル)修了',pre1:'Level 1 SW操作基礎先行学習(マニュアル)修了',
+  methodPh:'学習方法',
+  sec5hint:'※ 初回訪問者は、申込登録完了後に案内されるオンライン事前学習サイトでLevel 0~1の学習を行います。以下は再訪問者で過去に修了履歴がある場合のみ、参考として記入してください。',
+  sec6:'6. 特記事項及び要請事項',sec6ph:'言語 · ビザ · 宿泊 · 安全/アレルギー等',
+  sec7:'7. 申込者確認',branchApprover:'支社長 / Agent代表承認者氏名',submitDate:'提出日',
+  sec7hint:'本申込書は訪問最低4週間前の提出を推奨します。提出された自己診断結果により最終Level・Plan・訪問日程が調整される場合があります。',
+  submitBtn:'申込書を提出',submitting:'提出中...',
+  doneTitle:'✅ 申込を受け付けました',
+  doneMsg:'担当者の検討後、訪問日程と確定Levelを別途ご案内いたします。<br>お問い合わせは本社教育担当者までご連絡ください。',
+  warnMsg:'⚠ この申込ページはまだ接続設定が完了していません。管理者にお問い合わせください。(apply.jsのAPPLY_SHEETS_URL未設定)',
+  errPrefix:'提出中にエラーが発生しました: ',errSuffix:' (しばらくしてから再度お試しください)',
+  reqOrg:'支社/Agent/顧客名',reqApplicant:'申込者(作成者)',reqContact:'連絡先/メール',reqTrainee:'対象者氏名',reqEmail:'対象者メールアドレス',emailInvalid:'有効なメールアドレス形式ではありません。',reqStart:'訪問希望開始日',reqEnd:'訪問希望終了日',reqEquipment:'教育を受ける設備を1つ以上選択してください。',
+  reqSuffix:'を入力してください。',dateOrderErr:'訪問希望終了日は開始日より前にできません。',
+  daysUnit:'日',
+  orgTypeLbl:{branch:'海外支社',agent:'Agent(協力会社)',customer:'顧客'},
+  visitCatLbl:{new:'新規',revisit:'再訪問'},
+  countryLbl:{'한국':'韓国','중국':'中国','대만':'台湾','일본':'日本','베트남':'ベトナム','말레이시아':'マレーシア','싱가폴':'シンガポール','태국':'タイ','필리핀':'フィリピン','인도':'インド','미국':'アメリカ','유럽':'ヨーロッパ','기타':'その他'},
+  modules:{
+    md_a:{name:'設備基本構成',detail:'設備HW、電装構成の紹介'},
+    md_b:{name:'光学検査理論基礎',detail:'2D/3D検査原理、照明・カメラ・画像処理の概念'},
+    md_c:{name:'ソフトウェア操作(メインUI)',detail:'起動手順、ログイン、画面構成、機能説明'},
+    md_d:{name:'レシピ運用',detail:'Recipe Open/Run、検査結果確認、Data Report&Log保存/バックアップ'},
+    md_e:{name:'基本アラーム対応',detail:'代表アラームの確認/リセット、アラームログ確認'},
+    md_f:{name:'定期メンテナンス(PM)',detail:'日次/週次/月次PM、清掃、LTS検証'},
+    md_g:{name:'消耗品点検/交換',detail:'Camera、照明、Controller、PC Board、Motor、Driver等の消耗品点検および交換'},
+    md_h:{name:'基礎トラブルシューティング',detail:'代表的な故障モジュール3種以上の原因分析および初期対応'},
+    md_i:{name:'Recipe Visionパラメータ修正',detail:'Gerber File、照明/Camera/PZT、Alignment、検査パラメータ修正'},
+    md_j:{name:'高度なトラブルシューティング/データ検証',detail:'HW(PC、Camera、Controller)設定、2D/3D光学モジュールチューニング、データ検証'},
+    md_k:{name:'根本原因分析および検証レポート作成',detail:'故障履歴分析およびレポート作成、データ検証後のレポート作成方法'},
+    md_l:{name:'レシピ生成/検査最適化',detail:'新規検査Recipe(Job)生成、検出率/誤検率/UPH最適化'},
+    md_m:{name:'教育スキル(Train-the-Trainer)',detail:'模擬教育状況のデモンストレーション、教育資料活用法'}
   }
 }
-
-function setLanguage(code){
-  if(!I18N[code]) return;
-  _lang=code;
-  try{localStorage.setItem(LANG_KEY,code);}catch(e){}
-  applyLanguage();
-  if(typeof _activeTab!=='undefined'&&typeof switchTab==='function') switchTab(_activeTab);
-}
+};
