@@ -70,13 +70,16 @@
     </div>
     <div class="tab-bar">
       <div class="tab-nav">
+        <button class="tab-btn" id="tab_course" onclick="switchTab('course')">📚 교육 과정 관리</button>
         <button class="tab-btn on" id="tab_apply" onclick="switchTab('apply')">📥 신청 접수함</button>
         <button class="tab-btn" id="tab_schedule" onclick="switchTab('schedule')">📅 교육 일정</button>
         <button class="tab-btn" id="tab_trainee" onclick="switchTab('trainee')">👤 대상자별 이수 현황</button>
-        <button class="tab-btn" id="tab_course" onclick="switchTab('course')">📚 교육 과정 관리</button>
         <button class="tab-btn" id="tab_history" onclick="switchTab('history')">📋 이력 관리</button>
         <button class="tab-btn" id="tab_prelearn" onclick="switchTab('prelearn')">🧑‍🎓 사전학습 현황</button>
       </div>
+    </div>
+    <div class="content" id="view_course" style="display:none">
+      <div class="main"><div class="scroll-main" id="course_wrap"></div></div>
     </div>
     <div class="content" id="view_apply">
       <div class="main"><div class="scroll-main" id="apply_wrap"></div></div>
@@ -86,9 +89,6 @@
     </div>
     <div class="content" id="view_trainee" style="display:none">
       <div class="main"><div class="scroll-main" id="tr_wrap"></div></div>
-    </div>
-    <div class="content" id="view_course" style="display:none">
-      <div class="main"><div class="scroll-main" id="course_wrap"></div></div>
     </div>
     <div class="content" id="view_history" style="display:none">
       <div class="main"><div class="scroll-main" id="hist_wrap"></div></div>
