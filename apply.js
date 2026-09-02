@@ -73,7 +73,10 @@ function renderForm(){
         +field(t('applicantPosition'),'applicantPosition','<input type="text" id="f_applicantPosition" oninput="syncTraineeFromApplicant()">')
         +field(t('applicantContact'),'applicantContact','<input type="text" id="f_applicantContact" required oninput="syncTraineeFromApplicant()">')
       +'</div>'
-      +field(t('country'),'country','<select id="f_country">'+countryOpts+'</select>')
+      +'<div class="apf-row2">'
+        +field(t('applicantEmail'),'applicantEmail','<input type="text" id="f_applicantEmail" required placeholder="name@example.com" oninput="syncTraineeFromApplicant()">')
+        +field(t('country'),'country','<select id="f_country">'+countryOpts+'</select>')
+      +'</div>'
     +'</div>'
 
     +'<div class="apf-sec"><h2>'+esc(t('sec2'))+'</h2>'
@@ -88,7 +91,10 @@ function renderForm(){
         +field(t('priorLevel'),'priorLevel','<select id="f_priorLevel"><option value="">'+esc(t('priorLevelNone'))+'</option>'+levelOpts+'</select>')
         +field(t('experienceYears'),'experienceYears','<input type="text" id="f_experienceYears">')
       +'</div>'
-      +field(t('traineeEmail'),'traineeEmail','<input type="text" id="f_traineeEmail" required placeholder="name@example.com">')
+      +'<div class="apf-row2">'
+        +field(t('traineeContact'),'traineeContact','<input type="text" id="f_traineeContact">')
+        +field(t('traineeEmail'),'traineeEmail','<input type="text" id="f_traineeEmail" required placeholder="name@example.com">')
+      +'</div>'
     +'</div>'
 
     +'<div class="apf-sec"><h2>'+esc(t('sec3'))+'</h2>'
@@ -153,11 +159,12 @@ function syncTraineeFromApplicant(){
   if(!checked('f_samePerson'))return;
   document.getElementById('f_traineeName').value=val('f_applicantName');
   document.getElementById('f_traineePosition').value=val('f_applicantPosition');
-  document.getElementById('f_traineeEmail').value=val('f_applicantContact');
+  document.getElementById('f_traineeContact').value=val('f_applicantContact');
+  document.getElementById('f_traineeEmail').value=val('f_applicantEmail');
 }
 
 function submitApplication(){
-  var required=[['f_orgType',t('orgType')],['f_org',t('reqOrg')],['f_applicantName',t('reqApplicant')],['f_applicantContact',t('reqContact')],['f_country',t('country')],['f_traineeName',t('reqTrainee')],['f_traineeEmail',t('reqEmail')],['f_visitCategory',t('visitCategory')],['f_desiredLevel',t('desiredLevel')],['f_desiredStart',t('reqStart')],['f_desiredEnd',t('reqEnd')]];
+  var required=[['f_orgType',t('orgType')],['f_org',t('reqOrg')],['f_applicantName',t('reqApplicant')],['f_applicantContact',t('reqContact')],['f_applicantEmail',t('applicantEmail')],['f_country',t('country')],['f_traineeName',t('reqTrainee')],['f_traineeEmail',t('reqEmail')],['f_visitCategory',t('visitCategory')],['f_desiredLevel',t('desiredLevel')],['f_desiredStart',t('reqStart')],['f_desiredEnd',t('reqEnd')]];
   for(var i=0;i<required.length;i++){
     if(!val(required[i][0])){
       alert(required[i][1]+t('reqSuffix'));
@@ -169,9 +176,16 @@ function submitApplication(){
     alert(t('dateOrderErr'));
     return;
   }
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val('f_traineeEmail'))){
+  // 연락처(전화번호)가 실수로 이 필드에 섞여 들어와도 걸러지도록, 이메일에 흔히 쓰이는 문자만 허용한다
+  var EMAIL_RE=/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+  if(!EMAIL_RE.test(val('f_traineeEmail'))){
     alert(t('reqEmail')+t('emailInvalid'));
     document.getElementById('f_traineeEmail').focus();
+    return;
+  }
+  if(!EMAIL_RE.test(val('f_applicantEmail'))){
+    alert(t('applicantEmail')+t('emailInvalid'));
+    document.getElementById('f_applicantEmail').focus();
     return;
   }
   var equipmentIds=Array.prototype.slice.call(document.querySelectorAll('.f_equipment_cb:checked')).map(function(el){return el.value;});
@@ -190,9 +204,9 @@ function submitApplication(){
   var app={
     applyDate:val('f_applyDate'),
     orgType:val('f_orgType'),org:val('f_org'),country:val('f_country'),
-    applicantName:val('f_applicantName'),applicantPosition:val('f_applicantPosition'),applicantContact:val('f_applicantContact'),
+    applicantName:val('f_applicantName'),applicantPosition:val('f_applicantPosition'),applicantContact:val('f_applicantContact'),applicantEmail:val('f_applicantEmail'),
     traineeName:val('f_traineeName'),traineePosition:val('f_traineePosition'),traineeTask:val('f_traineeTask'),
-    traineeEmail:val('f_traineeEmail'),
+    traineeContact:val('f_traineeContact'),traineeEmail:val('f_traineeEmail'),
     visitCategory:val('f_visitCategory'),priorLevel:val('f_priorLevel'),experienceYears:val('f_experienceYears'),
     equipment:equipmentIds,
     desiredLevel:Number(val('f_desiredLevel')),desiredStart:val('f_desiredStart'),desiredEnd:val('f_desiredEnd'),

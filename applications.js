@@ -123,7 +123,7 @@ function openApplicationDetail(id){
     +'<div class="td-section"><div class="td-sectitle">1. 신청 정보</div>'
       +'<div class="fr" style="grid-template-columns:repeat(3,1fr)">'
         +infoBox('신청일자',a.applyDate)+infoBox('소속 유형',ot.label)+infoBox('소속',a.org)
-        +infoBox('신청자',a.applicantName)+infoBox('직책',a.applicantPosition)+infoBox('연락처',a.applicantContact)
+        +infoBox('신청자',a.applicantName)+infoBox('직책',a.applicantPosition)+infoBox('연락처',a.applicantContact)+infoBox('신청자 이메일',a.applicantEmail)
       +'</div></div>'
 
     +'<div class="td-section"><div class="td-sectitle">2. 교육 대상자 정보</div>'
@@ -131,8 +131,8 @@ function openApplicationDetail(id){
         +infoBox('성명',a.traineeName)+infoBox('직책',a.traineePosition)+infoBox('담당업무',a.traineeTask)
         +infoBox('방문구분',(VISIT_CATS.find(function(v){return v.id===a.visitCategory;})||{}).label)
         +infoBox('이전 이수 Level',a.priorLevel!==''&&a.priorLevel!=null?('Level '+a.priorLevel):'-')
-        +infoBox('경력(년)',a.experienceYears)
-        +infoBox('대상자 이메일 (사전학습 링크 발송)',a.traineeEmail)
+        +infoBox('경력(년)',a.experienceYears)+infoBox('대상자 연락처',a.traineeContact)
+        +'<div class="fg"><label class="fl">대상자 이메일 (사전학습 링크 발송)</label><div class="dbox" style="margin-bottom:0;display:flex;justify-content:space-between;align-items:center;gap:8px"><span>'+(a.traineeEmail?esc(a.traineeEmail):'-')+'</span><button class="btn sm" style="flex-shrink:0" onclick="event.stopPropagation();editApplicationEmail(\''+id+'\')">✏️ 수정</button></div></div>'
       +'</div></div>'
 
     +'<div class="td-section"><div class="td-sectitle">3. 방문 계획 및 희망 Level</div>'
@@ -167,6 +167,18 @@ function openApplicationDetail(id){
       +'<button class="btn sm" onclick="cm()">닫기</button>'
       +(a.status==='pending'?('<button class="btn sm pri" onclick="registerFromApplication(\''+id+'\')">대상자로 등록</button>'):'')
     +'</div>',true);
+}
+/* 신청서 제출 당시 잘못 입력된 대상자 이메일(예: 연락처와 뒤섞임)을 관리자가 직접 고칠 수 있게 한다 */
+function editApplicationEmail(id){
+  var a=APPS.list.find(function(x){return x.id===id;});
+  if(!a)return;
+  var v=prompt('교육 대상자 이메일을 입력해주세요.',a.traineeEmail||'');
+  if(v==null)return;
+  v=v.trim();
+  if(!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(v)){alert('올바른 이메일 형식이 아닙니다.');return;}
+  a.traineeEmail=v;
+  saveApplications();
+  openApplicationDetail(id);
 }
 function infoBox(label,val){
   return '<div class="fg"><label class="fl">'+esc(label)+'</label><div class="dbox" style="margin-bottom:0">'+(val?esc(val):'-')+'</div></div>';
@@ -203,7 +215,7 @@ function confirmRegisterFromApplication(id){
   var t={
     id:uid('tr'),name:a.traineeName,orgType:a.orgType||'branch',org:a.org||'',
     country:a.country||'한국',region:'',position:a.traineePosition||'',task:a.traineeTask||'',
-    contact:a.applicantContact||'',email:a.traineeEmail||'',visitCategory:a.visitCategory||'new',
+    contact:a.traineeContact||a.applicantContact||'',email:a.traineeEmail||'',visitCategory:a.visitCategory||'new',
     experienceYears:a.experienceYears||'',note:'교육 신청서 기반 자동 등록 ('+(a.applyDate||'')+')'
   };
   S.trainees.push(t);
