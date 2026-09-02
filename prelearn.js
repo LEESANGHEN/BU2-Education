@@ -125,7 +125,7 @@ function renderGate(){
     +'<p style="font-size:12px;color:var(--tx-second);line-height:1.7;margin:14px 0">'+esc(pt('gateIntro1'))+' '+total+' '+esc(pt('gateIntro2'))+' '+esc(pt('gateIntro3'))+'</p>'
     +'<div class="apf-row2">'
       +'<div class="apf-field"><label>'+esc(pt('name'))+'</label><input type="text" id="pl_name"></div>'
-      +'<div class="apf-field"><label>'+esc(pt('orgType'))+'</label><select id="pl_orgtype">'+ORG_TYPES.map(function(o){return '<option value="'+o.id+'">'+esc(tOrgType(o.id))+'</option>';}).join('')+'</select></div>'
+      +'<div class="apf-field"><label>'+esc(pt('orgType'))+'</label><input type="text" id="pl_orgtype" list="plOrgTypeDatalist"><datalist id="plOrgTypeDatalist">'+ORG_TYPES.map(function(o){return '<option value="'+esc(tOrgType(o.id))+'">';}).join('')+'</datalist></div>'
     +'</div>'
     +'<div class="apf-row2">'
       +'<div class="apf-field"><label>'+esc(pt('org'))+'</label><input type="text" id="pl_org"></div>'
