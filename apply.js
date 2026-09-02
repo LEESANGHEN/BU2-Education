@@ -42,9 +42,9 @@ function renderForm(){
     root.innerHTML='<div class="apf-warn">'+t('warnMsg')+'</div>';
     return;
   }
-  var orgOpts=ORG_TYPES.map(function(o){return '<option value="'+o.id+'">'+esc(tOrgType(o.id))+'</option>';}).join('');
-  var countryOpts=COUNTRIES.map(function(c){return '<option value="'+c+'">'+esc(tCountry(c))+'</option>';}).join('');
-  var visitCatOpts=VISIT_CATS.map(function(v){return '<option value="'+v.id+'">'+esc(tVisitCat(v.id))+'</option>';}).join('');
+  var orgOpts='<option value="">-</option>'+ORG_TYPES.map(function(o){return '<option value="'+o.id+'">'+esc(tOrgType(o.id))+'</option>';}).join('');
+  var countryOpts='<option value="">-</option>'+COUNTRIES.map(function(c){return '<option value="'+c+'">'+esc(tCountry(c))+'</option>';}).join('');
+  var visitCatOpts='<option value="">-</option>'+VISIT_CATS.map(function(v){return '<option value="'+v.id+'">'+esc(tVisitCat(v.id))+'</option>';}).join('');
   var levelOpts=[0,1,2,3].map(function(n){return '<option value="'+n+'">Level '+n+'</option>';}).join('');
 
   var assessRows=DEF_MODULES.slice().sort(function(a,b){return a.level-b.level||a.code.localeCompare(b.code);}).map(function(m){
@@ -94,7 +94,7 @@ function renderForm(){
     +'<div class="apf-sec"><h2>'+esc(t('sec3'))+'</h2>'
       +'<div class="apf-row2">'
         +field(t('equipment'),'equipment','<div class="apf-checkgrp">'+EQUIPMENT_LIST.map(function(e){return '<label class="apf-checkitem"><input type="checkbox" class="f_equipment_cb" value="'+e.id+'"> '+esc(equipmentName(e.id,langKey()))+'</label>';}).join('')+'</div>')
-        +field(t('desiredLevel'),'desiredLevel','<select id="f_desiredLevel">'+levelOpts+'</select>')
+        +field(t('desiredLevel'),'desiredLevel','<select id="f_desiredLevel"><option value="">-</option>'+levelOpts+'</select>')
       +'</div>'
       +'<div class="apf-row3">'
         +field(t('desiredStart'),'desiredStart','<input type="date" id="f_desiredStart" onchange="calcDays()">')
@@ -157,7 +157,7 @@ function syncTraineeFromApplicant(){
 }
 
 function submitApplication(){
-  var required=[['f_org',t('reqOrg')],['f_applicantName',t('reqApplicant')],['f_applicantContact',t('reqContact')],['f_traineeName',t('reqTrainee')],['f_traineeEmail',t('reqEmail')],['f_desiredStart',t('reqStart')],['f_desiredEnd',t('reqEnd')]];
+  var required=[['f_orgType',t('orgType')],['f_org',t('reqOrg')],['f_applicantName',t('reqApplicant')],['f_applicantContact',t('reqContact')],['f_country',t('country')],['f_traineeName',t('reqTrainee')],['f_traineeEmail',t('reqEmail')],['f_visitCategory',t('visitCategory')],['f_desiredLevel',t('desiredLevel')],['f_desiredStart',t('reqStart')],['f_desiredEnd',t('reqEnd')]];
   for(var i=0;i<required.length;i++){
     if(!val(required[i][0])){
       alert(required[i][1]+t('reqSuffix'));
