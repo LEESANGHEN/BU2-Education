@@ -160,9 +160,11 @@ function openApplicationDetail(id){
 
     +(a.status==='registered'&&a.registeredBy?('<div style="font-size:11px;color:var(--tx-second);margin-bottom:4px">✅ 승인 담당자 · '+esc(a.registeredBy.name||'')+(a.registeredBy.org?(' · '+esc(a.registeredBy.org)):'')+(a.registeredBy.position?(' · '+esc(a.registeredBy.position)):'')+' ('+esc((a.registeredBy.at||'').replace('T',' ').slice(0,16))+')</div>'):'')
     +(a.status==='registered'?('<div style="font-size:11px;color:var(--tx-second);margin-bottom:8px">'+(a.prelearnEmailSentAt?('📧 사전학습 링크 발송됨 · '+esc(a.prelearnEmailSentAt.replace('T',' ').slice(0,16))):'⚠ 사전학습 링크 발송 기록 없음')+'</div>'):'')
+    +(a.status==='rejected'&&a.rejectedBy?('<div style="font-size:11px;color:var(--tx-second);margin-bottom:4px">🚫 반려 담당자 · '+esc(a.rejectedBy.name||'')+(a.rejectedBy.org?(' · '+esc(a.rejectedBy.org)):'')+' ('+esc((a.rejectedBy.at||'').replace('T',' ').slice(0,16))+')<br>사유: '+esc(a.rejectedBy.reason||'')+'</div>'):'')
+    +(a.status==='rejected'?('<div style="font-size:11px;color:var(--tx-second);margin-bottom:8px">'+(a.rejectionEmailSentAt?('📧 반려 안내 메일 발송됨 · '+esc(a.rejectionEmailSentAt.replace('T',' ').slice(0,16))):'⚠ 반려 안내 메일 발송 기록 없음')+'</div>'):'')
     +'<div class="mfoot">'
       +'<button class="btn sm red" onclick="deleteApplication(\''+id+'\')" style="margin-right:auto">삭제</button>'
-      +(a.status==='pending'?('<button class="btn sm warn" onclick="rejectApplication(\''+id+'\')">반려</button>'):'')
+      +(a.status==='pending'?('<button class="btn sm warn" onclick="openRejectModal(\''+id+'\')">반려</button>'):'')
       +(a.status==='registered'?('<button class="btn sm" onclick="resendPrelearnEmail(\''+id+'\')">📧 링크 재발송</button>'):'')
       +'<button class="btn sm" onclick="cm()">닫기</button>'
       +(a.status==='pending'?('<button class="btn sm pri" onclick="registerFromApplication(\''+id+'\')">대상자로 등록</button>'):'')
@@ -202,7 +204,13 @@ function registerFromApplication(id){
 function _lastCoordinator(){
   try{return JSON.parse(localStorage.getItem('edu_last_coordinator')||'{}');}catch(e){return {};}
 }
-function _saveLastCoordinator(c){try{localStorage.setItem('edu_last_coordinator',JSON.stringify(c));}catch(e){}}
+/* 등록 담당자/반려 담당자 입력창은 서로 다른 필드 조합(직책 vs 이메일)을 쓰므로,
+   넘어온 필드만 기존 값 위에 덮어써서 두 화면이 같은 "마지막 담당자" 정보를 공유하게 한다 */
+function _saveLastCoordinator(c){
+  var cur=_lastCoordinator();
+  var merged={name:c.name!=null?c.name:cur.name,org:c.org!=null?c.org:cur.org,position:c.position!=null?c.position:cur.position,email:c.email!=null?c.email:cur.email};
+  try{localStorage.setItem('edu_last_coordinator',JSON.stringify(merged));}catch(e){}
+}
 function confirmRegisterFromApplication(id){
   var a=APPS.list.find(function(x){return x.id===id;});
   if(!a)return;
@@ -271,13 +279,54 @@ function resendPrelearnEmail(id){
     if(ok){cm();openApplicationDetail(id);}
   });
 }
-function rejectApplication(id){
+/* 반려 담당자 정보(이름/소속/이메일)와 반려 사유를 입력받은 뒤, 신청자 이메일로 반려 안내 메일을 발송한다 */
+function openRejectModal(id){
   var a=APPS.list.find(function(x){return x.id===id;});
   if(!a)return;
-  if(!confirm('이 신청서를 반려 처리할까요?'))return;
+  var last=_lastCoordinator();
+  mw('<div class="mtit">'+esc(a.traineeName||'')+' 신청서 반려</div>'
+    +'<div style="font-size:12px;color:var(--tx-second);margin-bottom:12px">아래 내용을 입력하고 제출하면 신청자 이메일로 반려 안내 메일이 발송됩니다.</div>'
+    +'<div class="fg"><label class="fl">담당자 이름*</label><input type="text" id="rej_name" value="'+esc(last.name||'')+'"></div>'
+    +'<div class="fr" style="grid-template-columns:1fr 1fr">'
+      +'<div class="fg"><label class="fl">소속</label><input type="text" id="rej_org" value="'+esc(last.org||'')+'"></div>'
+      +'<div class="fg"><label class="fl">담당자 이메일*</label><input type="text" id="rej_email" value="'+esc(last.email||'')+'" placeholder="name@example.com"></div>'
+    +'</div>'
+    +'<div class="fg"><label class="fl">반려 사유*</label><textarea id="rej_reason" rows="4" placeholder="반려 사유를 구체적으로 입력해주세요."></textarea></div>'
+    +'<div class="mfoot"><button class="btn sm" onclick="cm()">취소</button><button class="btn sm warn" onclick="confirmRejectApplication(\''+id+'\')">반려 제출</button></div>');
+}
+function confirmRejectApplication(id){
+  var a=APPS.list.find(function(x){return x.id===id;});
+  if(!a)return;
+  var name=document.getElementById('rej_name').value.trim();
+  var org=document.getElementById('rej_org').value.trim();
+  var email=document.getElementById('rej_email').value.trim();
+  var reason=document.getElementById('rej_reason').value.trim();
+  if(!name){alert('담당자 이름을 입력해주세요.');return;}
+  if(!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)){alert('담당자 이메일을 올바르게 입력해주세요.');return;}
+  if(!reason){alert('반려 사유를 입력해주세요.');return;}
+  _saveLastCoordinator({name:name,org:org,email:email});
+
   a.status='rejected';
+  a.rejectedBy={name:name,org:org,email:email,reason:reason,at:new Date().toISOString()};
   saveApplications();
   cm();renderApplyTab();
+
+  var to=a.applicantEmail||a.traineeEmail;
+  if(!to){alert('반려 처리되었습니다. (신청자 이메일이 없어 안내 메일은 발송하지 못했습니다.)');return;}
+  var url=getApplySheetsUrl();
+  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({
+    action:'sendRejectionEmail',to:to,traineeName:a.traineeName,applicantName:a.applicantName,
+    reviewerName:name,reviewerOrg:org,reviewerEmail:email,reason:reason
+  })})
+    .then(function(r){return r.text();})
+    .then(function(text){
+      var data;try{data=JSON.parse(text);}catch(e){data={error:'invalid response'};}
+      if(data.error){alert('반려 처리되었습니다. (안내 메일 발송 실패: '+data.error+')');return;}
+      a.rejectionEmailSentAt=new Date().toISOString();
+      saveApplications();
+      alert('반려 처리되었고, 신청자 이메일로 안내 메일을 발송했습니다.');
+    })
+    .catch(function(err){alert('반려 처리되었습니다. (안내 메일 발송 실패: '+err.message+')');});
 }
 function deleteApplication(id){
   if(!confirm('이 신청서를 완전히 삭제할까요?'))return;
