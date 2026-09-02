@@ -190,26 +190,14 @@ function infoBox(label,val){
 function registerFromApplication(id){
   var a=APPS.list.find(function(x){return x.id===id;});
   if(!a)return;
-  var lastCoord=_lastCoordinator();
   mw('<div class="mtit">'+esc(a.traineeName)+' 님 대상자로 등록</div>'
     +'<div style="font-size:12px;color:var(--tx-second);margin-bottom:12px">승인 처리하는 교육 담당자 정보를 입력해주세요. 등록되는 교육 일정에 대상자와 함께 표시됩니다.</div>'
-    +'<div class="fg"><label class="fl">담당자 이름*</label><input type="text" id="reg_coord_name" value="'+esc(lastCoord.name)+'"></div>'
+    +'<div class="fg"><label class="fl">담당자 이름*</label><input type="text" id="reg_coord_name"></div>'
     +'<div class="fr" style="grid-template-columns:1fr 1fr">'
-      +'<div class="fg"><label class="fl">소속</label><input type="text" id="reg_coord_org" value="'+esc(lastCoord.org)+'"></div>'
-      +'<div class="fg"><label class="fl">직책</label><input type="text" id="reg_coord_position" value="'+esc(lastCoord.position)+'"></div>'
+      +'<div class="fg"><label class="fl">소속</label><input type="text" id="reg_coord_org"></div>'
+      +'<div class="fg"><label class="fl">직책</label><input type="text" id="reg_coord_position"></div>'
     +'</div>'
     +'<div class="mfoot"><button class="btn sm" onclick="cm()">취소</button><button class="btn sm pri" onclick="confirmRegisterFromApplication(\''+id+'\')">등록</button></div>');
-}
-/* 마지막으로 입력했던 담당자 정보를 기억해두어 다음 승인 때 다시 입력하지 않아도 되게 한다 */
-function _lastCoordinator(){
-  try{return JSON.parse(localStorage.getItem('edu_last_coordinator')||'{}');}catch(e){return {};}
-}
-/* 등록 담당자/반려 담당자 입력창은 서로 다른 필드 조합(직책 vs 이메일)을 쓰므로,
-   넘어온 필드만 기존 값 위에 덮어써서 두 화면이 같은 "마지막 담당자" 정보를 공유하게 한다 */
-function _saveLastCoordinator(c){
-  var cur=_lastCoordinator();
-  var merged={name:c.name!=null?c.name:cur.name,org:c.org!=null?c.org:cur.org,position:c.position!=null?c.position:cur.position,email:c.email!=null?c.email:cur.email};
-  try{localStorage.setItem('edu_last_coordinator',JSON.stringify(merged));}catch(e){}
 }
 function confirmRegisterFromApplication(id){
   var a=APPS.list.find(function(x){return x.id===id;});
@@ -218,7 +206,6 @@ function confirmRegisterFromApplication(id){
   if(!coordName){alert('담당자 이름을 입력해주세요.');return;}
   var coordOrg=document.getElementById('reg_coord_org').value.trim();
   var coordPosition=document.getElementById('reg_coord_position').value.trim();
-  _saveLastCoordinator({name:coordName,org:coordOrg,position:coordPosition});
 
   var t={
     id:uid('tr'),name:a.traineeName,orgType:a.orgType||'branch',org:a.org||'',
@@ -283,13 +270,12 @@ function resendPrelearnEmail(id){
 function openRejectModal(id){
   var a=APPS.list.find(function(x){return x.id===id;});
   if(!a)return;
-  var last=_lastCoordinator();
   mw('<div class="mtit">'+esc(a.traineeName||'')+' 신청서 반려</div>'
     +'<div style="font-size:12px;color:var(--tx-second);margin-bottom:12px">아래 내용을 입력하고 제출하면 신청자 이메일로 반려 안내 메일이 발송됩니다.</div>'
-    +'<div class="fg"><label class="fl">담당자 이름*</label><input type="text" id="rej_name" value="'+esc(last.name||'')+'"></div>'
+    +'<div class="fg"><label class="fl">담당자 이름*</label><input type="text" id="rej_name"></div>'
     +'<div class="fr" style="grid-template-columns:1fr 1fr">'
-      +'<div class="fg"><label class="fl">소속</label><input type="text" id="rej_org" value="'+esc(last.org||'')+'"></div>'
-      +'<div class="fg"><label class="fl">담당자 이메일*</label><input type="text" id="rej_email" value="'+esc(last.email||'')+'" placeholder="name@example.com"></div>'
+      +'<div class="fg"><label class="fl">소속</label><input type="text" id="rej_org"></div>'
+      +'<div class="fg"><label class="fl">담당자 이메일*</label><input type="text" id="rej_email" placeholder="name@example.com"></div>'
     +'</div>'
     +'<div class="fg"><label class="fl">반려 사유*</label><textarea id="rej_reason" rows="4" placeholder="반려 사유를 구체적으로 입력해주세요."></textarea></div>'
     +'<div class="mfoot"><button class="btn sm" onclick="cm()">취소</button><button class="btn sm warn" onclick="confirmRejectApplication(\''+id+'\')">반려 제출</button></div>');
@@ -304,7 +290,6 @@ function confirmRejectApplication(id){
   if(!name){alert('담당자 이름을 입력해주세요.');return;}
   if(!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)){alert('담당자 이메일을 올바르게 입력해주세요.');return;}
   if(!reason){alert('반려 사유를 입력해주세요.');return;}
-  _saveLastCoordinator({name:name,org:org,email:email});
 
   a.status='rejected';
   a.rejectedBy={name:name,org:org,email:email,reason:reason,at:new Date().toISOString()};
