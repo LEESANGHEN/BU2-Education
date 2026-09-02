@@ -69,14 +69,15 @@ function renderForm(){
         +field(t('org'),'org','<input type="text" id="f_org" required>')
       +'</div>'
       +'<div class="apf-row3">'
-        +field(t('applicantName'),'applicantName','<input type="text" id="f_applicantName" required>')
-        +field(t('applicantPosition'),'applicantPosition','<input type="text" id="f_applicantPosition">')
-        +field(t('applicantContact'),'applicantContact','<input type="text" id="f_applicantContact" required>')
+        +field(t('applicantName'),'applicantName','<input type="text" id="f_applicantName" required oninput="syncTraineeFromApplicant()">')
+        +field(t('applicantPosition'),'applicantPosition','<input type="text" id="f_applicantPosition" oninput="syncTraineeFromApplicant()">')
+        +field(t('applicantContact'),'applicantContact','<input type="text" id="f_applicantContact" required oninput="syncTraineeFromApplicant()">')
       +'</div>'
       +field(t('country'),'country','<select id="f_country">'+countryOpts+'</select>')
     +'</div>'
 
     +'<div class="apf-sec"><h2>'+esc(t('sec2'))+'</h2>'
+      +'<label class="apf-samechk"><input type="checkbox" id="f_samePerson" onchange="toggleSamePerson(this.checked)"> '+esc(t('samePersonLbl'))+'</label>'
       +'<div class="apf-row3">'
         +field(t('traineeName'),'traineeName','<input type="text" id="f_traineeName" required>')
         +field(t('traineePosition'),'traineePosition','<input type="text" id="f_traineePosition">')
@@ -91,16 +92,15 @@ function renderForm(){
     +'</div>'
 
     +'<div class="apf-sec"><h2>'+esc(t('sec3'))+'</h2>'
-      +'<div class="apf-row3">'
+      +'<div class="apf-row2">'
         +field(t('equipment'),'equipment','<div class="apf-checkgrp">'+EQUIPMENT_LIST.map(function(e){return '<label class="apf-checkitem"><input type="checkbox" class="f_equipment_cb" value="'+e.id+'"> '+esc(equipmentName(e.id,langKey()))+'</label>';}).join('')+'</div>')
         +field(t('desiredLevel'),'desiredLevel','<select id="f_desiredLevel">'+levelOpts+'</select>')
-        +field(t('desiredStart'),'desiredStart','<input type="date" id="f_desiredStart" onchange="calcDays()">')
       +'</div>'
-      +'<div class="apf-row2">'
+      +'<div class="apf-row3">'
+        +field(t('desiredStart'),'desiredStart','<input type="date" id="f_desiredStart" onchange="calcDays()">')
         +field(t('desiredEnd'),'desiredEnd','<input type="date" id="f_desiredEnd" onchange="calcDays()">')
         +field(t('totalDays'),'totalDays','<input type="text" id="f_totalDays" readonly>')
       +'</div>'
-      +field(t('altNote'),'altNote','<input type="text" id="f_altNote">')
     +'</div>'
 
     +'<div class="apf-sec"><h2>'+esc(t('sec4'))+'</h2>'
@@ -144,6 +144,17 @@ function calcDays(){
 }
 function val(id){var el=document.getElementById(id);return el?el.value.trim():'';}
 function checked(id){var el=document.getElementById(id);return el?el.checked:false;}
+/* '신청자와 대상자가 동일합니다' 체크 시 신청자 정보를 대상자 필드로 복사하고,
+   체크된 상태에서 신청자 정보를 계속 고치면 대상자 필드도 함께 갱신된다 */
+function toggleSamePerson(isChecked){
+  if(isChecked)syncTraineeFromApplicant();
+}
+function syncTraineeFromApplicant(){
+  if(!checked('f_samePerson'))return;
+  document.getElementById('f_traineeName').value=val('f_applicantName');
+  document.getElementById('f_traineePosition').value=val('f_applicantPosition');
+  document.getElementById('f_traineeEmail').value=val('f_applicantContact');
+}
 
 function submitApplication(){
   var required=[['f_org',t('reqOrg')],['f_applicantName',t('reqApplicant')],['f_applicantContact',t('reqContact')],['f_traineeName',t('reqTrainee')],['f_traineeEmail',t('reqEmail')],['f_desiredStart',t('reqStart')],['f_desiredEnd',t('reqEnd')]];
@@ -185,7 +196,7 @@ function submitApplication(){
     visitCategory:val('f_visitCategory'),priorLevel:val('f_priorLevel'),experienceYears:val('f_experienceYears'),
     equipment:equipmentIds,
     desiredLevel:Number(val('f_desiredLevel')),desiredStart:val('f_desiredStart'),desiredEnd:val('f_desiredEnd'),
-    totalDays:val('f_totalDays'),altNote:val('f_altNote'),
+    totalDays:val('f_totalDays'),
     selfAssessment:selfAssessment,
     pre0Done:checked('f_pre0Done'),pre0Method:val('f_pre0Method'),
     pre1Done:checked('f_pre1Done'),pre1Method:val('f_pre1Method'),

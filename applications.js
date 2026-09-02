@@ -138,7 +138,7 @@ function openApplicationDetail(id){
     +'<div class="td-section"><div class="td-sectitle">3. 방문 계획 및 희망 Level</div>'
       +'<div class="fr" style="grid-template-columns:repeat(3,1fr)">'
         +infoBox('교육 희망 설비',appEquipNames(a))+infoBox('희망 Level','Level '+a.desiredLevel)+infoBox('방문 희망 시작일',a.desiredStart)
-        +infoBox('방문 희망 종료일',a.desiredEnd)+infoBox('총 방문일수',a.totalDays)+infoBox('대안 가능기간/비고',a.altNote)
+        +infoBox('방문 희망 종료일',a.desiredEnd)+infoBox('총 방문일수',a.totalDays)
         +infoBox('국가',a.country)
       +'</div></div>'
 
@@ -156,8 +156,9 @@ function openApplicationDetail(id){
       +'<div class="dbox">'+esc(a.specialNotes||'(없음)')+'</div></div>'
 
     +'<div class="td-section"><div class="td-sectitle">7. 신청자 확인</div>'
-      +'<div class="fr">'+infoBox('지사장/Agent대표 승인자명',a.branchApproverName)+infoBox('접수 시각',(a.submittedAt||'').replace('T',' ').slice(0,19))+'</div></div>'
+      +'<div class="fr">'+infoBox('신청자 서명',a.branchApproverName)+infoBox('접수 시각',(a.submittedAt||'').replace('T',' ').slice(0,19))+'</div></div>'
 
+    +(a.status==='registered'&&a.registeredBy?('<div style="font-size:11px;color:var(--tx-second);margin-bottom:4px">✅ 승인 담당자 · '+esc(a.registeredBy.name||'')+(a.registeredBy.org?(' · '+esc(a.registeredBy.org)):'')+(a.registeredBy.position?(' · '+esc(a.registeredBy.position)):'')+' ('+esc((a.registeredBy.at||'').replace('T',' ').slice(0,16))+')</div>'):'')
     +(a.status==='registered'?('<div style="font-size:11px;color:var(--tx-second);margin-bottom:8px">'+(a.prelearnEmailSentAt?('📧 사전학습 링크 발송됨 · '+esc(a.prelearnEmailSentAt.replace('T',' ').slice(0,16))):'⚠ 사전학습 링크 발송 기록 없음')+'</div>'):'')
     +'<div class="mfoot">'
       +'<button class="btn sm red" onclick="deleteApplication(\''+id+'\')" style="margin-right:auto">삭제</button>'
@@ -171,10 +172,33 @@ function infoBox(label,val){
   return '<div class="fg"><label class="fl">'+esc(label)+'</label><div class="dbox" style="margin-bottom:0">'+(val?esc(val):'-')+'</div></div>';
 }
 
+/* 담당자 정보(이름/소속/직책)를 입력받은 뒤 등록을 확정한다 — 교육 일정에 대상자와 함께 표시된다 */
 function registerFromApplication(id){
   var a=APPS.list.find(function(x){return x.id===id;});
   if(!a)return;
-  if(!confirm(esc(a.traineeName)+' 님을 대상자로 등록하고 방문 일정을 생성할까요?'))return;
+  var lastCoord=_lastCoordinator();
+  mw('<div class="mtit">'+esc(a.traineeName)+' 님 대상자로 등록</div>'
+    +'<div style="font-size:12px;color:var(--tx-second);margin-bottom:12px">승인 처리하는 교육 담당자 정보를 입력해주세요. 등록되는 교육 일정에 대상자와 함께 표시됩니다.</div>'
+    +'<div class="fg"><label class="fl">담당자 이름*</label><input type="text" id="reg_coord_name" value="'+esc(lastCoord.name)+'"></div>'
+    +'<div class="fr" style="grid-template-columns:1fr 1fr">'
+      +'<div class="fg"><label class="fl">소속</label><input type="text" id="reg_coord_org" value="'+esc(lastCoord.org)+'"></div>'
+      +'<div class="fg"><label class="fl">직책</label><input type="text" id="reg_coord_position" value="'+esc(lastCoord.position)+'"></div>'
+    +'</div>'
+    +'<div class="mfoot"><button class="btn sm" onclick="cm()">취소</button><button class="btn sm pri" onclick="confirmRegisterFromApplication(\''+id+'\')">등록</button></div>');
+}
+/* 마지막으로 입력했던 담당자 정보를 기억해두어 다음 승인 때 다시 입력하지 않아도 되게 한다 */
+function _lastCoordinator(){
+  try{return JSON.parse(localStorage.getItem('edu_last_coordinator')||'{}');}catch(e){return {};}
+}
+function _saveLastCoordinator(c){try{localStorage.setItem('edu_last_coordinator',JSON.stringify(c));}catch(e){}}
+function confirmRegisterFromApplication(id){
+  var a=APPS.list.find(function(x){return x.id===id;});
+  if(!a)return;
+  var coordName=document.getElementById('reg_coord_name').value.trim();
+  if(!coordName){alert('담당자 이름을 입력해주세요.');return;}
+  var coordOrg=document.getElementById('reg_coord_org').value.trim();
+  var coordPosition=document.getElementById('reg_coord_position').value.trim();
+  _saveLastCoordinator({name:coordName,org:coordOrg,position:coordPosition});
 
   var t={
     id:uid('tr'),name:a.traineeName,orgType:a.orgType||'branch',org:a.org||'',
@@ -188,12 +212,14 @@ function registerFromApplication(id){
     id:uid('vis'),traineeId:t.id,planType:'custom',
     startDate:a.desiredStart,endDate:a.desiredEnd,
     targetLevel:Number(a.desiredLevel)||0,confirmedLevel:'',status:'planned',
-    note:'신청서 기반 자동 등록'+(a.altNote?(' · 대안기간: '+a.altNote):'')
+    coordinatorName:coordName,coordinatorOrg:coordOrg,coordinatorPosition:coordPosition,
+    note:'신청서 기반 자동 등록'
   };
   S.visits.push(v);
   saveData();
 
   a.status='registered';
+  a.registeredBy={name:coordName,org:coordOrg,position:coordPosition,at:new Date().toISOString()};
   saveApplications();
 
   cm();

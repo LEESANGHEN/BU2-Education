@@ -53,11 +53,11 @@ function renderScheduleTab(){
     return '<div class="sch-row" onclick="openVisitModal(\''+v.id+'\')">'
       +'<div class="sch-fix">'
         +'<span class="grpbadge" style="background:'+ot.color+'">'+esc(ot.label)+'</span>'
-        +'<div class="sch-name">'+esc(t.name)+'<span class="sch-org">'+esc(t.org||'')+'</span></div>'
+        +'<div class="sch-name">'+esc(t.name)+'<span class="sch-org">'+esc(t.org||'')+'</span>'+(v.coordinatorName?('<span class="sch-coord">👤 '+esc(v.coordinatorName)+'</span>'):'')+'</div>'
       +'</div>'
       +'<div class="sch-track">'
-        +'<div class="sch-bar" style="left:'+left+'%;width:'+width+'%;background:'+st.color+'" title="'+esc(t.name)+' · '+v.startDate+' ~ '+v.endDate+' · '+st.label+'">'
-          +'<span class="sch-barlbl">Lv'+(v.targetLevel!=null?v.targetLevel:'-')+' · '+esc(st.label)+(planLbl?(' · '+planLbl.id):'')+'</span>'
+        +'<div class="sch-bar" style="left:'+left+'%;width:'+width+'%;background:'+st.color+'" title="'+esc(t.name)+' · '+v.startDate+' ~ '+v.endDate+' · '+st.label+(v.coordinatorName?(' · 담당: '+esc(v.coordinatorName)):'')+'">'
+          +'<span class="sch-barlbl">Lv'+(v.targetLevel!=null?v.targetLevel:'-')+' · '+esc(st.label)+(planLbl?(' · '+planLbl.id):'')+(v.coordinatorName?(' · 👤'+esc(v.coordinatorName)):'')+'</span>'
         +'</div>'
       +'</div>'
     +'</div>';
@@ -105,6 +105,11 @@ function openVisitModal(id){
       +'<div class="fg"><label class="fl">희망 Level</label><select id="v_target">'+[0,1,2,3].map(function(n){return '<option value="'+n+'"'+(Number(v.targetLevel)===n?' selected':'')+'>Level '+n+'</option>';}).join('')+'</select></div>'
       +'<div class="fg"><label class="fl">확정 Level (선택)</label><select id="v_confirmed"><option value="">-</option>'+[0,1,2,3].map(function(n){return '<option value="'+n+'"'+(String(v.confirmedLevel)===String(n)?' selected':'')+'>Level '+n+'</option>';}).join('')+'</select></div>'
     +'</div>'
+    +'<div class="fr" style="grid-template-columns:1fr 1fr 1fr">'
+      +'<div class="fg"><label class="fl">담당자 이름</label><input type="text" id="v_coord_name" value="'+esc(v.coordinatorName||'')+'"></div>'
+      +'<div class="fg"><label class="fl">담당자 소속</label><input type="text" id="v_coord_org" value="'+esc(v.coordinatorOrg||'')+'"></div>'
+      +'<div class="fg"><label class="fl">담당자 직책</label><input type="text" id="v_coord_position" value="'+esc(v.coordinatorPosition||'')+'"></div>'
+    +'</div>'
     +'<div class="fg"><label class="fl">비고</label><input type="text" id="v_note" value="'+esc(v.note||'')+'"></div>'
     +'<div class="mfoot">'
       +(id?'<button class="btn sm red" onclick="deleteVisit(\''+id+'\')" style="margin-right:auto">삭제</button>':'')
@@ -125,6 +130,9 @@ function saveVisit(id){
     targetLevel:Number(document.getElementById('v_target').value),
     confirmedLevel:document.getElementById('v_confirmed').value,
     status:document.getElementById('v_status').value,
+    coordinatorName:document.getElementById('v_coord_name').value.trim(),
+    coordinatorOrg:document.getElementById('v_coord_org').value.trim(),
+    coordinatorPosition:document.getElementById('v_coord_position').value.trim(),
     note:document.getElementById('v_note').value.trim()
   };
   if(id){
