@@ -42,7 +42,7 @@ function renderForm(){
     root.innerHTML='<div class="apf-warn">'+t('warnMsg')+'</div>';
     return;
   }
-  var orgOpts='<option value="">-</option>'+ORG_TYPES.map(function(o){return '<option value="'+o.id+'">'+esc(tOrgType(o.id))+'</option>';}).join('');
+  var orgTypeSuggestions=ORG_TYPES.map(function(o){return '<option value="'+esc(tOrgType(o.id))+'">';}).join('');
   var countryOpts='<option value="">-</option>'+COUNTRIES.map(function(c){return '<option value="'+c+'">'+esc(tCountry(c))+'</option>';}).join('');
   var visitCatOpts='<option value="">-</option>'+VISIT_CATS.map(function(v){return '<option value="'+v.id+'">'+esc(tVisitCat(v.id))+'</option>';}).join('');
   var levelOpts=[0,1,2,3].map(function(n){return '<option value="'+n+'">Level '+n+'</option>';}).join('');
@@ -65,7 +65,7 @@ function renderForm(){
     +'<div class="apf-sec"><h2>'+esc(t('sec1'))+'</h2>'
       +'<div class="apf-row3">'
         +field(t('applyDate'),'applyDate','<input type="date" id="f_applyDate" value="'+todayStr()+'">')
-        +field(t('orgType'),'orgType','<select id="f_orgType">'+orgOpts+'</select>')
+        +field(t('orgType'),'orgType','<input type="text" id="f_orgType" list="orgTypeDatalist" placeholder="'+esc(t('orgTypePh'))+'"><datalist id="orgTypeDatalist">'+orgTypeSuggestions+'</datalist>')
         +field(t('org'),'org','<input type="text" id="f_org" required>')
       +'</div>'
       +'<div class="apf-row3">'

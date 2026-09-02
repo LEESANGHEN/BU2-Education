@@ -72,7 +72,7 @@ function openTraineeModal(id,afterSave){
   mw('<div class="mtit">'+(id?'대상자 정보 수정':'+ 대상자 등록')+'</div>'
     +'<div class="fr">'
       +'<div class="fg"><label class="fl">이름</label><input type="text" id="t_name" value="'+esc(t.name)+'"></div>'
-      +'<div class="fg"><label class="fl">소속 구분</label><select id="t_orgtype">'+ORG_TYPES.map(function(o){return '<option value="'+o.id+'"'+(t.orgType===o.id?' selected':'')+'>'+o.label+'</option>';}).join('')+'</select></div>'
+      +'<div class="fg"><label class="fl">소속 구분</label><input type="text" id="t_orgtype" list="orgTypeDatalistAdmin" value="'+esc(orgType(t.orgType).label)+'" placeholder="예: 해외지사, Agent, 고객사, 자사 신입사원 등"><datalist id="orgTypeDatalistAdmin">'+ORG_TYPES.map(function(o){return '<option value="'+esc(o.label)+'">';}).join('')+'</datalist></div>'
     +'</div>'
     +'<div class="fr">'
       +'<div class="fg"><label class="fl">소속명 (지사/Agent/고객사)</label><input type="text" id="t_org" value="'+esc(t.org)+'"></div>'
@@ -104,7 +104,7 @@ function saveTrainee(id,hasCallback){
   if(!name){alert('이름을 입력해주세요.');return;}
   var rec={
     id:id||uid('tr'),name:name,
-    orgType:document.getElementById('t_orgtype').value,
+    orgType:document.getElementById('t_orgtype').value.trim(),
     org:document.getElementById('t_org').value.trim(),
     country:document.getElementById('t_country').value,
     region:document.getElementById('t_region').value.trim(),

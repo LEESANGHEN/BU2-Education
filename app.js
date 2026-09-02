@@ -36,7 +36,9 @@ function normDate(s){
 }
 function todayStr(){return normDate(new Date());}
 function pd(s){var d=new Date(s);d.setHours(0,0,0,0);return d;}
-function orgType(id){return ORG_TYPES.find(function(o){return o.id===id;})||ORG_TYPES[0];}
+/* id('branch' 등 기존 코드값) 또는 자유 입력 텍스트(자사 신입사원 등) 둘 다 지원한다.
+   알려진 소속 유형이 아니면 입력한 텍스트를 그대로 라벨로 보여준다(기본값으로 잘못 표시하지 않기 위함) */
+function orgType(v){return ORG_TYPES.find(function(o){return o.id===v||o.label===v;})||{id:v||'',label:v||'-',color:'#6b6b8a'};}
 function visitStatus(id){return VISIT_STATUS.find(function(v){return v.id===id;})||VISIT_STATUS[0];}
 function trainee(id){return S.trainees.find(function(t){return t.id===id;});}
 function levelDef(n){return S.levels.find(function(l){return l.level===Number(n);});}
