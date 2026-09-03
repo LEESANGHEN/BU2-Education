@@ -14,6 +14,14 @@ function openCertificate(traineeId,level){
     return '<div class="cert-sign"><div class="cert-signname">'+esc(appr[r]||'')+'</div><div class="cert-signline"></div><div class="cert-role">'+esc(ROLE_LBL[r])+'</div></div>';
   }).join('');
 
+  var items=checklistFor(level,'onsite');
+  var itemRows=items.map(function(it){
+    var c=completionOf(traineeId,it.id)||{};
+    return '<tr><td>'+esc(it.module)+'</td><td>'+esc(it.item)+'</td><td class="ctr">'+(c.done==='Y'?'✅':'—')+'</td><td>'+esc(c.date||'-')+'</td><td>'+esc(c.note||'-')+'</td></tr>';
+  }).join('');
+  var itemsHtml='<div class="cert-items-title">세부 이수 항목</div>'
+    +'<table class="cert-items"><thead><tr><th>모듈</th><th>이수 항목</th><th>이수</th><th>확인일자</th><th>비고</th></tr></thead><tbody>'+itemRows+'</tbody></table>';
+
   var followUp='';
   if(level===3&&appr.followUpDone){
     followUp='<div class="cert-row"><div class="cert-lbl">Follow-Up 확인</div><div class="cert-val">완료 · '+esc(appr.followUpDate||'')+'</div></div>';
@@ -32,6 +40,7 @@ function openCertificate(traineeId,level){
       +'<div class="cert-statement">위 사람은 BU2 FCBGA Substrate 검사 장비 교육 과정 중<br><b>Level '+level+' · '+esc(lv.title||'')+'</b> 과정을 성실히 이수하였음을 증명합니다.</div>'
       +'<div class="cert-comp"><div class="cert-comp-title">핵심 역량 (Level '+level+')</div><div class="cert-comp-text">'+esc(lv.competency||'')+'</div></div>'
       +'<div class="cert-row"><div class="cert-lbl">이수 항목</div><div class="cert-val">'+prog.done+' / '+prog.total+' ('+prog.pct+'%)</div><div class="cert-lbl">이수(승인)일자</div><div class="cert-val">'+esc(appr.approvalDate||'')+'</div></div>'
+      +itemsHtml
       +followUp
       +'<div class="cert-issuedate">발급일 '+todayStr()+'</div>'
       +'<div class="cert-signs">'+signHtml+'</div>'
@@ -68,6 +77,10 @@ function sendCertificateEmailFor(traineeId,level){
   var prog=levelProgress(traineeId,level);
   var roles=(APPROVAL_ROLES.find(function(r){return r.level===level;})||{roles:[]}).roles;
   var signatures=roles.map(function(r){return {role:ROLE_LBL[r],name:appr[r]||''};});
+  var items=checklistFor(level,'onsite').map(function(it){
+    var c=completionOf(traineeId,it.id)||{};
+    return {module:it.module,item:it.item,done:c.done==='Y',date:c.date||'',note:c.note||''};
+  });
   var btn=document.getElementById('cert_email_btn');
   if(btn){btn.disabled=true;btn.textContent='전송 중...';}
   fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({
@@ -77,7 +90,7 @@ function sendCertificateEmailFor(traineeId,level){
     doneCount:prog.done,totalCount:prog.total,pct:prog.pct,
     approvalDate:appr.approvalDate||'',issueDate:todayStr(),
     certNo:appr.id||('CERT-'+traineeId+'-L'+level),
-    signatures:signatures,
+    signatures:signatures,items:items,
     followUp:(level===3&&appr.followUpDone)?true:false,followUpDate:appr.followUpDate||''
   })})
     .then(function(r){return r.text();})

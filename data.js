@@ -102,9 +102,9 @@ var EVAL_CRITERIA=[
   {level:3,method:'종합실기 · 타 엔지니어 교육 시연 · 심사위원 심사 · 3개월 현장 Follow-Up',pass:'평가자+심사위원 과반 이상 승인 · Follow-Up 결과 이상無',evaluator:'교육 담당자 + 파트장 + 그룹장 + 심사위원',retry:'보완 요구사항 이행 후 재심사, 또는 차기 방문 시 재도전'}
 ];
 var APPROVAL_ROLES=[
-  {level:0,roles:['trainerSign','partLeadSign']},
-  {level:1,roles:['trainerSign','partLeadSign']},
-  {level:2,roles:['trainerSign','partLeadSign']},
+  {level:0,roles:['trainerSign','partLeadSign','groupLeadSign']},
+  {level:1,roles:['trainerSign','partLeadSign','groupLeadSign']},
+  {level:2,roles:['trainerSign','partLeadSign','groupLeadSign']},
   {level:3,roles:['trainerSign','partLeadSign','groupLeadSign','committeeSign']}
 ];
 var ROLE_LBL={trainerSign:'교육담당자',partLeadSign:'파트장',groupLeadSign:'그룹장',committeeSign:'심사위원'};

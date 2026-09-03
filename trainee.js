@@ -391,6 +391,11 @@ function approveLevel(traineeId,level){
     if(el)rec[r]=el.value.trim();
   });
   var missing=roles.filter(function(r){return !rec[r];});
+  /* 그룹장이 곧 교육 담당자인 경우(동일인) 파트장 서명 없이도 승인 가능 */
+  if(missing.indexOf('partLeadSign')!==-1&&rec.groupLeadSign&&rec.trainerSign
+     &&rec.groupLeadSign.trim().toLowerCase()===rec.trainerSign.trim().toLowerCase()){
+    missing=missing.filter(function(r){return r!=='partLeadSign';});
+  }
   if(missing.length){
     if(!confirm('서명(승인자) 미입력 항목이 있습니다 ('+missing.map(function(r){return ROLE_LBL[r];}).join(', ')+'). 그래도 저장할까요?'))return;
   }
