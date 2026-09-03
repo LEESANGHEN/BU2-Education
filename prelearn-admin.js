@@ -31,11 +31,19 @@ function plPassedCount(course,eq){
   plSectionsFor(eq).forEach(function(s){if(course.progress[s.code]&&course.progress[s.code].passed)n++;});
   return n;
 }
-/* 전 섹션(80% 기준) 통과 여부 — Level 0~1 사전학습 인증 기준 충족 여부 판단에 쓰인다 */
+/* 코스 전체(모든 섹션) 퀴즈 문항 합산 점수 — 정답 수/전체 문항 수/정답률(%) */
+function plQuizStats(course,eq){
+  var correct=0,total=0;
+  plSectionsFor(eq).forEach(function(s){
+    var p=course&&course.progress&&course.progress[s.code];
+    if(p){correct+=(p.quizScore||0);total+=(p.quizTotal||0);}
+  });
+  return {correct:correct,total:total,pct:total?Math.round(correct/total*100):0};
+}
+/* 전체 문항 합산 정답률 80% 이상 — Level 0~1 사전학습 인증 기준 충족 여부 판단에 쓰인다 */
 function plCourseAllPassed(course,eq){
-  var secs=plSectionsFor(eq);
-  if(!secs.length||!course||!course.progress)return false;
-  return secs.every(function(s){var p=course.progress[s.code];return p&&p.passed;});
+  var st=plQuizStats(course,eq);
+  return st.total>0&&st.pct>=80;
 }
 /* 이름+소속으로 사전학습 기록을 찾는다 (신청서/대상자 등록 시점의 표기와 대소문자·공백 차이 허용) */
 function findPrelearnRecord(name,org){
@@ -139,6 +147,7 @@ function renderPrelearnTab(){
     var total=plSectionsFor(eq).length;
     var passed=plPassedCount(course,eq);
     var pct=total?Math.round(passed/total*100):0;
+    var qs=plQuizStats(course,eq);
     return '<tr onclick="openPrelearnDetail(\''+r.id+'\',\''+eq+'\')">'
       +'<td><b>'+esc(r.name||'')+'</b></td>'
       +'<td><span class="grpbadge" style="background:'+ot.color+'">'+esc(ot.label)+'</span></td>'
@@ -146,6 +155,7 @@ function renderPrelearnTab(){
       +'<td>'+esc(r.contact||'-')+'</td>'
       +'<td>'+esc(equipmentName(eq,'ko'))+'</td>'
       +'<td><div class="lv-progbar" style="width:100px;display:inline-block;vertical-align:middle;margin-right:6px"><div class="lv-progfill" style="width:'+pct+'%"></div></div>'+passed+'/'+total+'</td>'
+      +'<td style="font-size:11px;color:'+(qs.total&&qs.pct>=80?'#4ade9a':'var(--tx-second)')+'">'+qs.correct+'/'+qs.total+(qs.total?(' ('+qs.pct+'%)'):'')+'</td>'
       +'<td style="font-size:11px">'+esc((course.startedAt||'').slice(0,10))+'</td>'
       +'<td style="font-size:11px">'+esc((r.lastActivityAt||'').replace('T',' ').slice(0,16))+'</td>'
       +'<td>'+(course.completedAt?(plCourseAllPassed(course,eq)?'<span class="lv-cur-badge">✅ 인증기준 충족</span>':'<span class="lv-cur-badge wait">⚠ Level0 재교육 필요</span>'):'<span class="lv-cur-badge none">진행중</span>')+'</td>'
@@ -154,7 +164,7 @@ function renderPrelearnTab(){
 
   wrap.innerHTML='<div class="sum-row">'+cards+'</div>'
     +'<div class="tbl-wrap"><table class="dtbl"><thead><tr>'
-      +'<th>이름</th><th>구분</th><th>소속</th><th>연락처</th><th>설비</th><th style="width:150px">진행률</th><th>시작일</th><th>최근 활동</th><th>상태</th>'
+      +'<th>이름</th><th>구분</th><th>소속</th><th>연락처</th><th>설비</th><th style="width:150px">진행률</th><th>퀴즈 정답</th><th>시작일</th><th>최근 활동</th><th>상태</th>'
     +'</tr></thead><tbody>'+trows+'</tbody></table></div>';
 }
 function plSetEquipFilter(eq){PLA.equipFilter=eq;renderPrelearnTab();}
@@ -169,11 +179,13 @@ function openPrelearnDetail(id,eq){
     var p=course.progress&&course.progress[s.code];
     return '<tr><td>'+s.code+'</td><td>'+esc((s.title&&s.title.ko)||'')+'</td><td>'+(p?(p.quizScore+'/'+p.quizTotal):'-')+'</td><td>'+(p?(p.attempts||1):'-')+'</td><td>'+(p&&p.passed?'<span style="color:#4ade9a">통과</span>':(p?'<span style="color:#e07070">미통과</span>':'<span style="color:var(--tx-faint)">미학습</span>'))+'</td></tr>';
   }).join('');
-  var verdict=!course.completedAt?'<span class="lv-cur-badge none">진행중</span>':(plCourseAllPassed(course,eq)?'<span class="lv-cur-badge">✅ 인증기준 충족 (Level0~1 사전학습 통과)</span>':'<span class="lv-cur-badge wait">⚠ 일부 섹션 미통과 — 방문 중 Level0부터 교육 필요</span>');
+  var qs=plQuizStats(course,eq);
+  var verdict=!course.completedAt?'<span class="lv-cur-badge none">진행중</span>':(plCourseAllPassed(course,eq)?'<span class="lv-cur-badge">✅ 인증기준 충족 (퀴즈 정답률 '+qs.pct+'%)</span>':'<span class="lv-cur-badge wait">⚠ 인증기준 미충족(정답률 '+qs.pct+'%) — 방문 중 Level0부터 교육 필요</span>');
   mw('<div class="mtit">'+esc(r.name)+' <span class="grpbadge" style="background:'+ot.color+'">'+esc(ot.label)+'</span> <span style="font-size:12px;color:var(--tx-second);font-weight:400">'+esc(r.org||'')+' · '+esc(equipmentName(eq,'ko'))+'</span></div>'
     +'<div style="margin-bottom:12px">'+verdict+'</div>'
-    +'<div class="fr" style="grid-template-columns:repeat(3,1fr);margin-bottom:14px">'
+    +'<div class="fr" style="grid-template-columns:repeat(4,1fr);margin-bottom:14px">'
       +'<div class="fg"><label class="fl">연락처</label><div class="dbox" style="margin-bottom:0">'+esc(r.contact||'-')+'</div></div>'
+      +'<div class="fg"><label class="fl">퀴즈 정답</label><div class="dbox" style="margin-bottom:0">'+qs.correct+'/'+qs.total+(qs.total?(' ('+qs.pct+'%)'):'')+'</div></div>'
       +'<div class="fg"><label class="fl">시작일</label><div class="dbox" style="margin-bottom:0">'+esc((course.startedAt||'').slice(0,10))+'</div></div>'
       +'<div class="fg"><label class="fl">완료일</label><div class="dbox" style="margin-bottom:0">'+(course.completedAt?esc(course.completedAt.slice(0,10)):'-')+'</div></div>'
     +'</div>'

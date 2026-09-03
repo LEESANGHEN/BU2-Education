@@ -170,13 +170,15 @@ function renderPrelearnSummary(t){
     var course=courses[eq];
     var total=plSectionsFor(eq).length,passed=plPassedCount(course,eq);
     var pct=total?Math.round(passed/total*100):0;
+    var qs=plQuizStats(course,eq);
     var verdict=!course.completedAt
       ?('<span style="color:var(--tx-second)">진행중</span>')
-      :(plCourseAllPassed(course,eq)?'<span style="color:#4ade9a">✅ 전체 통과</span>':'<span style="color:#e07070">⚠ 일부 미통과 · Level0 재교육 필요</span>');
+      :(plCourseAllPassed(course,eq)?'<span style="color:#4ade9a">✅ 인증기준 충족('+qs.pct+'%)</span>':'<span style="color:#e07070">⚠ 인증기준 미충족('+qs.pct+'%) · Level0 재교육 필요</span>');
     return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px">'
       +'<b style="min-width:110px">'+esc(equipmentName(eq,'ko'))+'</b>'
       +'<div class="lv-progbar" style="width:100px"><div class="lv-progfill" style="width:'+pct+'%"></div></div>'
-      +'<span style="min-width:40px">'+passed+'/'+total+'</span>'+verdict
+      +'<span style="min-width:40px">'+passed+'/'+total+'</span>'
+      +'<span style="min-width:80px;color:var(--tx-second)">퀴즈 '+qs.correct+'/'+qs.total+'</span>'+verdict
     +'</div>';
   }).join('');
   return '<div class="dbox" style="margin-bottom:10px">'+rows

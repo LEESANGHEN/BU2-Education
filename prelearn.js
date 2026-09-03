@@ -109,7 +109,10 @@ function renderPick(){
     +'</div>'
   +'</div>';
 }
-function pickEquipment(id){PL.equip=id;PL.mode='gate';renderGate();}
+function pickEquipment(id){
+  if(!confirm(pt('equipConfirmMsg')))return;
+  PL.equip=id;PL.mode='gate';renderGate();
+}
 
 /* ── 시작 화면(Gate) ── */
 function renderGate(){
@@ -263,10 +266,7 @@ function plPrev(){
 function plNext(){
   var sec=curSection();
   if(PL.li<sec.slides.length-1){PL.li++;renderViewer();return;}
-  var p=courseProgress()[sec.code];
-  // 퀴즈는 섹션당 1회만 제출한다 — 이미 제출한 적 있으면(통과 여부 무관) 다음으로 진행,
-  // 슬라이드 복습은 언제든 가능하지만 재응시는 불가
-  if(p){advanceSection();return;}
+  // 이미 제출한 섹션이면 renderQuiz()가 자동으로 확인용(읽기전용) 화면을 보여준다
   PL.mode='quiz';PL.quizPick={};
   renderViewer();
 }
@@ -280,10 +280,17 @@ function advanceSection(){
   renderViewer();
 }
 
-/* ── 섹션 퀴즈 ── */
+/* ── 섹션 퀴즈 ──
+   섹션당 퀴즈 제출은 1회뿐이다. 이미 제출한 섹션이면(prog 존재) 항상 확인용(읽기전용)
+   화면을 보여주고, 아직 제출 전이면 답을 고를 수 있는 화면을 보여준다. */
 function renderQuiz(){
-  var root=document.getElementById('plRoot');
   var sec=curSection();
+  var prog=courseProgress()[sec.code];
+  if(prog){renderQuizReview(sec,prog);return;}
+  renderQuizFresh(sec);
+}
+function renderQuizFresh(sec){
+  var root=document.getElementById('plRoot');
   var qs=pickSectionQuiz(quizPoolFor(PL.equip,sec.code),sec);
   var rows=qs.map(function(q,qi){
     return '<div class="pl-qrow" id="pl_qrow_'+qi+'">'
@@ -294,14 +301,14 @@ function renderQuiz(){
     +'</div>';
   }).join('');
 
+  // 답을 제출하기 전까지는 슬라이드/다른 섹션으로 빠져나갈 방법을 주지 않는다(제출만 가능)
   root.innerHTML='<div class="pl-layout">'
     +'<div class="pl-side">'+renderToc()+'</div>'
     +'<div class="pl-main">'
       +'<div class="pl-crumb">'+esc(sec.code)+' '+esc(tx(sec.title))+' — '+esc(pt('quizTitle'))+'</div>'
       +'<div class="apf-card">'
       +rows
-      +'<div id="pl_quiz_result"></div>'
-      +'<div class="mfoot"><button class="btn" onclick="PL.mode=\'slide\';renderViewer()">'+esc(pt('backToSlide'))+'</button><button class="btn pri" id="pl_submit_btn" onclick="submitQuiz()">'+esc(pt('submitBtn'))+'</button></div>'
+      +'<div class="mfoot"><button class="btn pri" id="pl_submit_btn" onclick="submitQuiz()">'+esc(pt('submitBtn'))+'</button></div>'
       +'</div>'
     +'</div>'
   +'</div>';
@@ -311,46 +318,72 @@ function submitQuiz(){
   var sec=curSection();
   var qs=pickSectionQuiz(quizPoolFor(PL.equip,sec.code),sec);
   if(Object.keys(PL.quizPick).length<qs.length){alert(pt('quizAnswerAll'));return;}
-  var correct=0;
+  if(!confirm(pt('submitConfirm')))return;
+  var correct=0,picks={};
   qs.forEach(function(q,qi){
-    var ok=PL.quizPick[qi]===q.answer;
-    if(ok)correct++;
-    var row=document.getElementById('pl_qrow_'+qi);
-    if(row){
-      row.classList.add(ok?'pl-qrow-ok':'pl-qrow-bad');
-      var mark=document.createElement('span');
-      mark.className='pl-qmark';
-      mark.textContent=' '+(ok?pt('markCorrect'):fmtQuizMsg(pt('markWrong'),tx(q.choices[q.answer])));
-      document.getElementById('pl_qtext_'+qi).appendChild(mark);
-      var pickedEl=document.getElementById('pl_choice_'+qi+'_'+PL.quizPick[qi]);
-      if(pickedEl)pickedEl.classList.add(ok?'pl-correct-choice':'pl-wrong-choice');
-      if(!ok){
-        var correctEl=document.getElementById('pl_choice_'+qi+'_'+q.answer);
-        if(correctEl)correctEl.classList.add('pl-correct-choice');
-      }
-      row.querySelectorAll('input[type=radio]').forEach(function(inp){inp.disabled=true;});
-    }
+    picks[qi]=PL.quizPick[qi];
+    if(PL.quizPick[qi]===q.answer)correct++;
   });
   var passed=(correct/qs.length)>=PASS_RATIO;
   var prog=courseProgress();
-  prog[sec.code]={viewed:true,quizScore:correct,quizTotal:qs.length,passed:passed,attempts:((prog[sec.code]&&prog[sec.code].attempts)||0)+1};
+  prog[sec.code]={viewed:true,quizScore:correct,quizTotal:qs.length,passed:passed,attempts:((prog[sec.code]&&prog[sec.code].attempts)||0)+1,picks:picks};
   saveProgress();
-  var submitBtn=document.getElementById('pl_submit_btn');
-  if(submitBtn)submitBtn.disabled=true;
-  var msg=passed
-    ?('<div style="color:#4ade9a;font-weight:600;margin-top:10px">✅ '+correct+'/'+qs.length+' '+esc(pt('quizPass'))+'</div>')
-    :('<div style="color:#e07070;font-weight:600;margin-top:10px">❌ '+correct+'/'+qs.length+' '+esc(fmtQuizMsg(pt('quizFail'),Math.round(PASS_RATIO*100)))+'</div>');
-  document.getElementById('pl_quiz_result').innerHTML=msg
-    +'<div class="mfoot"><button class="btn" onclick="PL.mode=\'slide\';PL.li=0;renderViewer()">'+esc(pt('reviewBtn'))+'</button>'
-    +'<button class="btn pri" onclick="advanceSection()">'+esc(pt('nextSectionBtn'))+'</button>'
+  renderQuizReview(sec,prog[sec.code]);
+}
+/* 이미 제출한 섹션의 퀴즈를 다시 보여준다 — 어떤 문항을 맞고 틀렸는지 확인용이며 수정은 불가하다 */
+function renderQuizReview(sec,prog){
+  var root=document.getElementById('plRoot');
+  var qs=pickSectionQuiz(quizPoolFor(PL.equip,sec.code),sec);
+  var picks=prog.picks||{};
+  var rows=qs.map(function(q,qi){
+    var pickedIdx=picks[qi];
+    var ok=pickedIdx===q.answer;
+    var choicesHtml=q.choices.map(function(c,idx){
+      var extra='';
+      if(idx===pickedIdx)extra=ok?' pl-correct-choice':' pl-wrong-choice';
+      else if(idx===q.answer&&!ok)extra=' pl-correct-choice';
+      return '<label class="pl-choice'+extra+'"><input type="radio" disabled '+(idx===pickedIdx?'checked':'')+'> '+esc(tx(c))+'</label>';
+    }).join('');
+    return '<div class="pl-qrow '+(ok?'pl-qrow-ok':'pl-qrow-bad')+'">'
+      +'<div class="pl-qtext">'+(qi+1)+'. '+esc(tx(q.q))+' <span class="pl-qmark">'+(ok?pt('markCorrect'):fmtQuizMsg(pt('markWrong'),tx(q.choices[q.answer])))+'</span></div>'
+      +choicesHtml
     +'</div>';
+  }).join('');
+  var passed=prog.passed;
+  var msg=passed
+    ?('<div style="color:#4ade9a;font-weight:600;margin-top:10px">✅ '+prog.quizScore+'/'+prog.quizTotal+' '+esc(pt('quizPass'))+'</div>')
+    :('<div style="color:#e07070;font-weight:600;margin-top:10px">❌ '+prog.quizScore+'/'+prog.quizTotal+' '+esc(fmtQuizMsg(pt('quizFail'),Math.round(PASS_RATIO*100)))+'</div>');
+  root.innerHTML='<div class="pl-layout">'
+    +'<div class="pl-side">'+renderToc()+'</div>'
+    +'<div class="pl-main">'
+      +'<div class="pl-crumb">'+esc(sec.code)+' '+esc(tx(sec.title))+' — '+esc(pt('quizTitle'))+' · '+esc(pt('reviewOnlyLbl'))+'</div>'
+      +'<div class="apf-card">'
+      +rows
+      +msg
+      +'<div class="mfoot"><button class="btn" onclick="PL.mode=\'slide\';PL.li=0;renderViewer()">'+esc(pt('reviewBtn'))+'</button>'
+      +'<button class="btn pri" onclick="advanceSection()">'+esc(pt('nextSectionBtn'))+'</button>'
+      +'</div>'
+      +'</div>'
+    +'</div>'
+  +'</div>';
+}
+
+/* 코스 전체(모든 섹션)의 퀴즈 문항 합산 점수/정답률 — "인증기준 충족" 여부(80% 이상)에 쓰인다 */
+function courseQuizStats(){
+  var correct=0,total=0;
+  allSections().forEach(function(s){
+    var p=courseProgress()[sectionAt(s.ci,s.si).code];
+    if(p){correct+=(p.quizScore||0);total+=(p.quizTotal||0);}
+  });
+  return {correct:correct,total:total,pct:total?Math.round(correct/total*100):0};
 }
 
 /* ── 완료 화면 ── */
 function renderDone(){
   var root=document.getElementById('plRoot');
   var secs=allSections();
-  var allPassed=secs.every(function(s){var p=courseProgress()[sectionAt(s.ci,s.si).code];return p&&p.passed;});
+  var stats=courseQuizStats();
+  var allPassed=stats.total>0&&stats.pct>=80;
   var rows=secs.map(function(s){
     var sec=sectionAt(s.ci,s.si);
     var p=courseProgress()[sec.code];
@@ -359,9 +392,9 @@ function renderDone(){
   root.innerHTML='<div class="apf-card apf-done">'
     +'<h1>'+esc(pt('doneTitle'))+'</h1>'
     +'<p>'+esc(PL.record.name)+' ('+esc(PL.record.org)+') — '+esc(equipmentName(PL.equip,langKey()))+'<br>'+esc(pt('doneMsg1'))+' '+esc(pt('doneMsg2'))+'</p>'
-    +'<div style="margin-top:14px;font-weight:600;color:'+(allPassed?'#4ade9a':'#e07070')+'">'+esc(allPassed?pt('allPassedMsg'):pt('notAllPassedMsg'))+'</div>'
+    +'<div style="margin-top:14px;font-weight:600;color:'+(allPassed?'#4ade9a':'#e07070')+'">'+esc(allPassed?pt('allPassedMsg'):pt('notAllPassedMsg'))+' ('+stats.correct+'/'+stats.total+', '+stats.pct+'%)</div>'
     +'<table class="dtbl sm" style="margin-top:20px;text-align:left"><thead><tr><th>'+esc(pt('colSection'))+'</th><th>'+esc(pt('colTitle'))+'</th><th>'+esc(pt('colScore'))+'</th><th>'+esc(pt('colResult'))+'</th></tr></thead><tbody>'+rows+'</tbody></table>'
-    +'<div style="margin-top:16px"><a href="javascript:void(0)" onclick="PL.mode=\'pick\';renderPick()" style="font-size:12px;color:var(--tx-second)">← '+esc(pt('changeEquip'))+'</a></div>'
+    +'<div style="margin-top:16px"><button class="btn" onclick="PL.mode=\'pick\';renderPick()">'+esc(pt('endLearningBtn'))+'</button></div>'
   +'</div>';
 }
 
