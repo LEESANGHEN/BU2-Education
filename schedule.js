@@ -1,12 +1,25 @@
 /* ═══════════════════════════════════════════
-   📅 교육 일정 (방문 타임라인)
+   📅 교육 일정 (방문 타임라인 · 월 단위 / 일 단위)
 ═══════════════════════════════════════════ */
-var SCH={statusFilter:VISIT_STATUS.map(function(v){return v.id;}),search:''};
+var SCH=(function(){
+  var d=new Date();
+  return {statusFilter:VISIT_STATUS.map(function(v){return v.id;}),search:'',viewMode:'month',dayYear:d.getFullYear(),dayMonth:d.getMonth()};
+})();
 
 function renderScheduleTab(){
   var wrap=document.getElementById('sch_wrap');
   if(!wrap)return;
-  var visits=S.visits.filter(function(v){
+  var mBtn=document.getElementById('schViewMonthBtn'),dBtn=document.getElementById('schViewDayBtn'),nav=document.getElementById('schDayNav');
+  if(mBtn)mBtn.classList.toggle('active',SCH.viewMode!=='day');
+  if(dBtn)dBtn.classList.toggle('active',SCH.viewMode==='day');
+  if(nav)nav.style.display=SCH.viewMode==='day'?'flex':'none';
+
+  if(SCH.viewMode==='day'){renderScheduleDayView(wrap);return;}
+  renderScheduleMonthView(wrap);
+}
+
+function schVisibleVisits(){
+  return S.visits.filter(function(v){
     if(SCH.statusFilter.indexOf(v.status)<0)return false;
     if(SCH.search){
       var t=trainee(v.traineeId);
@@ -15,6 +28,10 @@ function renderScheduleTab(){
     }
     return true;
   });
+}
+
+function renderScheduleMonthView(wrap){
+  var visits=schVisibleVisits();
 
   if(!S.visits.length){
     wrap.innerHTML='<div class="empty">등록된 교육 방문 일정이 없습니다.<br><br>상단 "+ 교육 방문 등록" 버튼으로 첫 일정을 등록하세요.</div>';
@@ -40,6 +57,17 @@ function renderScheduleTab(){
   while(cur<=rangeEnd){
     months.push({label:(cur.getMonth()+1)+'월',left:pctOf(cur)});
     cur=new Date(cur.getFullYear(),cur.getMonth()+1,1);
+  }
+  // 주차 헤더(일요일 시작 기준 — 일 단위 보기의 주차 계산과 동일한 방식)
+  var weekTicks=[],curW=new Date(rangeStart);
+  curW.setDate(curW.getDate()-curW.getDay());
+  while(curW<=rangeEnd){
+    if(curW>=rangeStart){
+      var firstOfM=new Date(curW.getFullYear(),curW.getMonth(),1);
+      var wom=Math.ceil((curW.getDate()+firstOfM.getDay())/7);
+      weekTicks.push({label:wom+'주',left:pctOf(curW)});
+    }
+    curW=new Date(curW.getFullYear(),curW.getMonth(),curW.getDate()+7);
   }
   var todayPct=pctOf(today);
 
@@ -68,10 +96,83 @@ function renderScheduleTab(){
       +'<div class="sch-fix sch-headfix">대상자</div>'
       +'<div class="sch-track sch-headtrack">'
         +months.map(function(m){return '<div class="sch-monthtick" style="left:'+m.left+'%">'+m.label+'</div>';}).join('')
+        +weekTicks.map(function(w){return '<div class="sch-weektick" style="left:'+w.left+'%">'+w.label+'</div>';}).join('')
         +(todayPct>=0&&todayPct<=100?'<div class="sch-todayline" style="left:'+todayPct+'%"></div>':'')
       +'</div>'
     +'</div>'
     +'<div class="sch-body">'+rows+'</div>';
+}
+
+/* ── 일 단위(캘린더) 보기 ── */
+function schSetView(mode){SCH.viewMode=mode;renderScheduleTab();}
+function schMoveMonth(delta){
+  var d=new Date(SCH.dayYear,SCH.dayMonth+delta,1);
+  SCH.dayYear=d.getFullYear();SCH.dayMonth=d.getMonth();
+  renderScheduleTab();
+}
+function schGotoToday(){
+  var d=new Date();
+  SCH.dayYear=d.getFullYear();SCH.dayMonth=d.getMonth();
+  renderScheduleTab();
+}
+
+function renderScheduleDayView(wrap){
+  var y=SCH.dayYear,m=SCH.dayMonth;
+  var navLbl=document.getElementById('schDayNavLbl');
+  if(navLbl)navLbl.textContent=y+'년 '+(m+1)+'월';
+
+  var visits=schVisibleVisits();
+  var daysInMonth=new Date(y,m+1,0).getDate();
+  var firstOfMonth=new Date(y,m,1);
+  var lastOfMonth=new Date(y,m,daysInMonth);
+  var gridStart=new Date(y,m,1-firstOfMonth.getDay());
+  var gridEnd=new Date(y,m,daysInMonth+(6-lastOfMonth.getDay()));
+
+  var weeks=[],cur=new Date(gridStart);
+  while(cur<=gridEnd){
+    var row=[];
+    for(var i=0;i<7;i++){row.push(new Date(cur));cur.setDate(cur.getDate()+1);}
+    weeks.push(row);
+  }
+  var todayS=todayStr();
+  var dowLbl=['일','월','화','수','목','금','토'];
+
+  var rowsHtml=weeks.map(function(row,wi){
+    var cellsHtml=row.map(function(d){
+      var ds=normDate(d);
+      var inMonth=d.getMonth()===m;
+      var dow=d.getDay();
+      var isHoliday=KR_HOLIDAYS.indexOf(ds)>=0;
+      var numCls=(dow===6?'sat':((dow===0||isHoliday)?'sun':''));
+      var dayVisits=visits.filter(function(v){return ds>=v.startDate&&ds<=(v.endDate||v.startDate);});
+      var chips=dayVisits.map(function(v){
+        var t=trainee(v.traineeId)||{name:'(삭제된 대상자)'};
+        var st=(v.dayStatus&&v.dayStatus[ds])||'';
+        return '<span class="sch-cal-chip'+(st?(' '+st):'')+'" title="'+esc(t.name)+' · 클릭할 때마다 미표시→진행(초록)→미진행(노랑) 순으로 바뀝니다" onclick="event.stopPropagation();toggleVisitDay(\''+v.id+'\',\''+ds+'\')">'+esc(t.name)+'</span>';
+      }).join('');
+      return '<td class="'+(inMonth?'':'sch-cal-out')+(ds===todayS?' sch-cal-today':'')+'">'
+        +'<div class="sch-cal-daynum '+numCls+'">'+d.getDate()+'</div>'
+        +chips
+      +'</td>';
+    }).join('');
+    return '<tr><td class="sch-cal-wk">'+(wi+1)+'주</td>'+cellsHtml+'</tr>';
+  }).join('');
+
+  wrap.innerHTML='<table class="sch-cal"><thead><tr><th></th>'
+    +dowLbl.map(function(l,i){return '<th style="'+(i===6?'color:#3d8bff':(i===0?'color:#e04040':''))+'">'+l+'</th>';}).join('')
+    +'</tr></thead><tbody>'+rowsHtml+'</tbody></table>';
+}
+
+function toggleVisitDay(visitId,dateStr){
+  var v=S.visits.find(function(x){return x.id===visitId;});
+  if(!v)return;
+  if(!v.dayStatus)v.dayStatus={};
+  var cur=v.dayStatus[dateStr];
+  if(cur==='done')v.dayStatus[dateStr]='skip';
+  else if(cur==='skip')delete v.dayStatus[dateStr];
+  else v.dayStatus[dateStr]='done';
+  saveData();
+  renderScheduleTab();
 }
 
 function toggleSchStatus(id,checked){
@@ -123,6 +224,7 @@ function saveVisit(id){
   var start=document.getElementById('v_start').value,end=document.getElementById('v_end').value;
   if(!start||!end){alert('방문 시작일/종료일을 입력해주세요.');return;}
   if(end<start){alert('종료일이 시작일보다 빠를 수 없습니다.');return;}
+  var existing=id?S.visits.find(function(x){return x.id===id;}):null;
   var rec={
     id:id||uid('vis'),traineeId:traineeId,
     planType:document.getElementById('v_plan').value,
@@ -133,7 +235,8 @@ function saveVisit(id){
     coordinatorName:document.getElementById('v_coord_name').value.trim(),
     coordinatorOrg:document.getElementById('v_coord_org').value.trim(),
     coordinatorPosition:document.getElementById('v_coord_position').value.trim(),
-    note:document.getElementById('v_note').value.trim()
+    note:document.getElementById('v_note').value.trim(),
+    dayStatus:(existing&&existing.dayStatus)?existing.dayStatus:{}
   };
   if(id){
     var i=S.visits.findIndex(function(x){return x.id===id;});

@@ -9,7 +9,7 @@
   <script>
     (function(){var t=localStorage.getItem('edu_theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
   </script>
-  <link rel="stylesheet" href="style.css?v=20260903b">
+  <link rel="stylesheet" href="style.css?v=20260903c">
 </head>
 <body>
   <div class="app">
@@ -31,6 +31,16 @@
         <div id="tools_schedule" style="display:none;gap:6px;align-items:center;flex-wrap:wrap">
           <input type="text" class="gantt-search" placeholder="검색" oninput="schSearch(this.value)" autocomplete="off">
           <div id="schStatusChips" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"></div>
+          <div class="btn-group">
+            <button class="btn sm" id="schViewMonthBtn" onclick="schSetView('month')">월 단위</button>
+            <button class="btn sm" id="schViewDayBtn" onclick="schSetView('day')">일 단위</button>
+          </div>
+          <div id="schDayNav" style="display:none;gap:4px;align-items:center">
+            <button class="btn sm" onclick="schMoveMonth(-1)">◀</button>
+            <span id="schDayNavLbl" style="font-size:12px;min-width:80px;text-align:center;display:inline-block"></span>
+            <button class="btn sm" onclick="schMoveMonth(1)">▶</button>
+            <button class="btn sm" onclick="schGotoToday()">오늘</button>
+          </div>
           <button class="btn pri" onclick="openVisitModal(null)">+ 교육 방문 등록</button>
         </div>
         <div id="tools_trainee" style="display:none;gap:6px;align-items:center;flex-wrap:wrap">
@@ -100,16 +110,16 @@
   <div id="mc"></div>
   <div id="certOverlay" class="cert-overlay" style="display:none"></div>
 
-  <script src="data.js?v=20260903b"></script>
+  <script src="data.js?v=20260903c"></script>
   <script src="i18n.js?v=20260902e"></script>
   <script src="prelearn-equipment.js?v=20260828c"></script>
   <script src="prelearn-data-smtv.js?v=20260828b"></script>
   <script src="prelearn-data-nbga.js?v=20260828b"></script>
   <script src="app.js?v=20260903c"></script>
-  <script src="applications.js?v=20260902e"></script>
-  <script src="schedule.js?v=20260902a"></script>
+  <script src="applications.js?v=20260903a"></script>
+  <script src="schedule.js?v=20260903a"></script>
   <script src="trainee.js?v=20260903b"></script>
-  <script src="course.js?v=20260827a"></script>
+  <script src="course.js?v=20260903a"></script>
   <script src="history.js?v=20260827e"></script>
   <script src="cert-i18n.js?v=20260903b"></script>
   <script src="certificate.js?v=20260903d"></script>

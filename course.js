@@ -36,8 +36,12 @@ function renderCourseTab(){
     return '<div class="sum-card"><div class="sum-n">'+h+'h</div><div class="sum-l">Level '+lv+' 합계 ('+(h/8).toFixed(1)+'일)</div></div>';
   }).join('');
 
-  var evalRows=EVAL_CRITERIA.map(function(e){
-    return '<tr><td>Level '+e.level+'</td><td style="font-size:11px">'+esc(e.method)+'</td><td style="font-size:11px">'+esc(e.pass)+'</td><td style="font-size:11px">'+esc(e.evaluator)+'</td><td style="font-size:11px;color:var(--tx-second)">'+esc(e.retry)+'</td></tr>';
+  var evalRows=S.levels.slice().sort(function(a,b){return a.level-b.level;}).map(function(l){
+    var fb=evalCritFallback(l.level);
+    var pass=(l.evalPass!=null&&l.evalPass!=='')?l.evalPass:fb.pass;
+    var evaluator=(l.evalEvaluator!=null&&l.evalEvaluator!=='')?l.evalEvaluator:fb.evaluator;
+    var retry=(l.evalRetry!=null&&l.evalRetry!=='')?l.evalRetry:fb.retry;
+    return '<tr><td>Level '+l.level+'</td><td style="font-size:11px">'+esc(l.evalMethod||'')+'</td><td style="font-size:11px">'+esc(pass||'')+'</td><td style="font-size:11px">'+esc(evaluator||'')+'</td><td style="font-size:11px;color:var(--tx-second)">'+esc(retry||'')+'</td></tr>';
   }).join('');
 
   wrap.innerHTML=
@@ -57,15 +61,25 @@ function renderCourseTab(){
     +'</div>';
 }
 
+/* S.levels에 evalPass/evalEvaluator/evalRetry가 없는 구버전 캐시 데이터를 위한 대체값 */
+function evalCritFallback(level){return EVAL_CRITERIA.find(function(e){return e.level===level;})||{};}
 function openLevelModal(id){
   var l=S.levels.find(function(x){return x.id===id;});
   if(!l)return;
+  var fb=evalCritFallback(l.level);
+  var pass=(l.evalPass!=null&&l.evalPass!=='')?l.evalPass:(fb.pass||'');
+  var evaluator=(l.evalEvaluator!=null&&l.evalEvaluator!=='')?l.evalEvaluator:(fb.evaluator||'');
+  var retry=(l.evalRetry!=null&&l.evalRetry!=='')?l.evalRetry:(fb.retry||'');
   mw('<div class="mtit">Level '+l.level+' 정의 편집</div>'
     +'<div class="fg"><label class="fl">교육 목표</label><input type="text" id="l_title" value="'+esc(l.title)+'"></div>'
     +'<div class="fg"><label class="fl">주요 대상</label><input type="text" id="l_target" value="'+esc(l.target)+'"></div>'
     +'<div class="fg"><label class="fl">핵심 역량</label><textarea id="l_comp" rows="3">'+esc(l.competency)+'</textarea></div>'
     +'<div class="fg"><label class="fl">평가 방법</label><input type="text" id="l_eval" value="'+esc(l.evalMethod)+'"></div>'
     +'<div class="fg"><label class="fl">예상 소요기간</label><input type="text" id="l_dur" value="'+esc(l.duration)+'"></div>'
+    +'<div class="td-sectitle" style="margin:14px 0 6px;font-size:12px">하단 "Level별 평가 기준" 표에 반영되는 항목</div>'
+    +'<div class="fg"><label class="fl">합격 기준</label><input type="text" id="l_pass" value="'+esc(pass)+'"></div>'
+    +'<div class="fg"><label class="fl">평가자</label><input type="text" id="l_evaluator" value="'+esc(evaluator)+'"></div>'
+    +'<div class="fg"><label class="fl">불합격 시 조치(재평가 규정)</label><input type="text" id="l_retry" value="'+esc(retry)+'"></div>'
     +'<div class="mfoot"><button class="btn sm" onclick="cm()">취소</button><button class="btn sm pri" onclick="saveLevel(\''+id+'\')">저장</button></div>');
 }
 function saveLevel(id){
@@ -75,6 +89,9 @@ function saveLevel(id){
   l.competency=document.getElementById('l_comp').value.trim();
   l.evalMethod=document.getElementById('l_eval').value.trim();
   l.duration=document.getElementById('l_dur').value.trim();
+  l.evalPass=document.getElementById('l_pass').value.trim();
+  l.evalEvaluator=document.getElementById('l_evaluator').value.trim();
+  l.evalRetry=document.getElementById('l_retry').value.trim();
   saveData();cm();renderCourseTab();
 }
 

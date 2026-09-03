@@ -2,7 +2,7 @@
    📥 신청 접수함 (관리자 — 외부 신청서 검토 및 대상자 등록)
 ═══════════════════════════════════════════ */
 var APPLY_LS_KEY='edu_apply_sheets_url';
-var APPS={list:[],filter:'pending'};
+var APPS={list:[],filter:'all'};
 
 /* a.equipment는 배열(다중 선택)이 정상이나, 이 기능 도입 전 제출된 신청서는 단일 문자열이었다.
    두 형태 모두 지원하기 위해 항상 배열로 정규화해서 사용한다. */
@@ -67,10 +67,10 @@ function renderApplyTab(){
 
   var counts={pending:0,registered:0,rejected:0};
   APPS.list.forEach(function(a){if(counts[a.status]!==undefined)counts[a.status]++;});
-  var cards='<div class="sum-card" onclick="appSetFilter(\'all\')" style="cursor:pointer"><div class="sum-n">'+APPS.list.length+'</div><div class="sum-l">전체 신청</div></div>'
-    +'<div class="sum-card" onclick="appSetFilter(\'pending\')" style="cursor:pointer"><div class="sum-n" style="color:#e0a838">'+counts.pending+'</div><div class="sum-l">대기중</div></div>'
-    +'<div class="sum-card" onclick="appSetFilter(\'registered\')" style="cursor:pointer"><div class="sum-n" style="color:#4ade9a">'+counts.registered+'</div><div class="sum-l">등록완료</div></div>'
-    +'<div class="sum-card" onclick="appSetFilter(\'rejected\')" style="cursor:pointer"><div class="sum-n" style="color:#e07070">'+counts.rejected+'</div><div class="sum-l">반려</div></div>';
+  var cards='<div class="sum-card'+(APPS.filter==='all'?' active':'')+'" onclick="appSetFilter(\'all\')" style="cursor:pointer"><div class="sum-n">'+APPS.list.length+'</div><div class="sum-l">전체 신청</div></div>'
+    +'<div class="sum-card'+(APPS.filter==='pending'?' active':'')+'" onclick="appSetFilter(\'pending\')" style="cursor:pointer"><div class="sum-n" style="color:#e0a838">'+counts.pending+'</div><div class="sum-l">대기중</div></div>'
+    +'<div class="sum-card'+(APPS.filter==='registered'?' active':'')+'" onclick="appSetFilter(\'registered\')" style="cursor:pointer"><div class="sum-n" style="color:#4ade9a">'+counts.registered+'</div><div class="sum-l">등록완료</div></div>'
+    +'<div class="sum-card'+(APPS.filter==='rejected'?' active':'')+'" onclick="appSetFilter(\'rejected\')" style="cursor:pointer"><div class="sum-n" style="color:#e07070">'+counts.rejected+'</div><div class="sum-l">반려</div></div>';
 
   if(!list.length){
     wrap.innerHTML='<div class="sum-row">'+cards+'</div><div class="empty">해당 조건의 신청서가 없습니다.</div>';
