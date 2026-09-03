@@ -175,7 +175,8 @@ function saveSheetsUrl(){
 /* ═══════════════════════════════════════════
    모달 헬퍼
 ═══════════════════════════════════════════ */
-function mw(inner,wide){document.getElementById('mc').innerHTML='<div class="mover" onmousedown="if(event.target===this)cm()"><div class="modal'+(wide?' wide':'')+'">'+inner+'</div></div>';}
+/* 모달 바깥(배경) 클릭으로는 닫히지 않는다 — 각 모달 하단의 "닫기" 버튼(cm())으로만 닫을 수 있다 */
+function mw(inner,wide){document.getElementById('mc').innerHTML='<div class="mover"><div class="modal'+(wide?' wide':'')+'">'+inner+'</div></div>';}
 function cm(){document.getElementById('mc').innerHTML='';}
 
 /* ═══════════════════════════════════════════

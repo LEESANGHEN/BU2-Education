@@ -9,6 +9,14 @@ function ctd(key){var lang=getCertLang();var d=CERT_I18N[lang]&&CERT_I18N[lang].
 function ctRole(role){var lang=getCertLang();var d=CERT_I18N[lang]&&CERT_I18N[lang].roles;return (d&&d[role])||CERT_I18N.ko.roles[role]||role;}
 function ctLevel(level,field){var lang=getCertLang();var d=(CERT_I18N[lang]&&CERT_I18N[lang].levels[level])||CERT_I18N.ko.levels[level];return d?d[field]:'';}
 function ctItem(id,field){var lang=getCertLang();var d=(CERT_I18N[lang]&&CERT_I18N[lang].items[id])||CERT_I18N.ko.items[id];return d?d[field]:'';}
+/* trainee.js의 applyExamResultToChecklist()가 자동 기입하는 "온라인 필기평가 자동반영 (54/54, 100%)" 형식의 비고를
+   선택된 언어로 재구성한다. 이 패턴과 일치하지 않는 자유 기입 비고는 번역하지 않고 그대로 둔다. */
+function ctNote(note){
+  if(!note)return note;
+  var m=/^온라인 필기평가 자동반영 \((\d+)\/(\d+),\s*(\d+)%\)$/.exec(note);
+  if(!m)return note;
+  return ctd('examAutoNote')+' ('+m[1]+'/'+m[2]+', '+m[3]+'%)';
+}
 
 var CERT_I18N={
 ko:{
@@ -18,7 +26,8 @@ ko:{
     competencyTitle:'핵심 역량',itemsDone:'이수 항목',approvalDate:'이수(승인)일자',
     itemsTitle:'세부 이수 항목',thModule:'모듈',thItem:'이수 항목',thDone:'이수',thDate:'확인일자',thNote:'비고',
     followUp:'Follow-Up 확인',followUpDone:'완료',issueDate:'발급일',
-    footer:'BU2 기술운영1그룹 · 교육 담당자'
+    footer:'BU2 기술운영1그룹 · 교육 담당자',
+    examAutoNote:'온라인 필기평가 자동반영'
   },
   roles:{trainerSign:'교육담당자',partLeadSign:'파트장',groupLeadSign:'그룹장',committeeSign:'심사위원'},
   levels:{
@@ -61,7 +70,8 @@ en:{
     competencyTitle:'Core Competency',itemsDone:'Completed Items',approvalDate:'Completion (Approval) Date',
     itemsTitle:'Detailed Completion Items',thModule:'Module',thItem:'Item',thDone:'Done',thDate:'Date',thNote:'Notes',
     followUp:'Follow-Up Confirmation',followUpDone:'Completed',issueDate:'Issue Date',
-    footer:'BU2 Technical Operations Group 1 · Training Coordinator'
+    footer:'BU2 Technical Operations Group 1 · Training Coordinator',
+    examAutoNote:'Auto-applied from online written exam'
   },
   roles:{trainerSign:'Training Coordinator',partLeadSign:'Part Leader',groupLeadSign:'Group Leader',committeeSign:'Committee Member'},
   levels:{
@@ -104,7 +114,8 @@ en:{
     competencyTitle:'核心能力',itemsDone:'完成项目',approvalDate:'完成(批准)日期',
     itemsTitle:'详细完成项目',thModule:'模块',thItem:'项目',thDone:'完成',thDate:'日期',thNote:'备注',
     followUp:'Follow-Up确认',followUpDone:'已完成',issueDate:'发证日期',
-    footer:'BU2技术运营1组 · 培训负责人'
+    footer:'BU2技术运营1组 · 培训负责人',
+    examAutoNote:'在线笔试自动反映'
   },
   roles:{trainerSign:'培训负责人',partLeadSign:'部长',groupLeadSign:'组长',committeeSign:'评审委员'},
   levels:{
@@ -147,7 +158,8 @@ en:{
     competencyTitle:'核心能力',itemsDone:'完成項目',approvalDate:'完成(核准)日期',
     itemsTitle:'詳細完成項目',thModule:'模組',thItem:'項目',thDone:'完成',thDate:'日期',thNote:'備註',
     followUp:'Follow-Up確認',followUpDone:'已完成',issueDate:'發證日期',
-    footer:'BU2技術運營1組 · 教育負責人'
+    footer:'BU2技術運營1組 · 教育負責人',
+    examAutoNote:'線上筆試自動反映'
   },
   roles:{trainerSign:'教育負責人',partLeadSign:'部長',groupLeadSign:'組長',committeeSign:'評審委員'},
   levels:{
@@ -190,7 +202,8 @@ ja:{
     competencyTitle:'コアコンピテンシー',itemsDone:'修了項目',approvalDate:'修了(承認)日',
     itemsTitle:'詳細修了項目',thModule:'モジュール',thItem:'項目',thDone:'完了',thDate:'確認日',thNote:'備考',
     followUp:'フォローアップ確認',followUpDone:'完了',issueDate:'発行日',
-    footer:'BU2技術運営1グループ・教育担当者'
+    footer:'BU2技術運営1グループ・教育担当者',
+    examAutoNote:'オンライン筆記評価自動反映'
   },
   roles:{trainerSign:'教育担当者',partLeadSign:'パート長',groupLeadSign:'グループ長',committeeSign:'審査委員'},
   levels:{

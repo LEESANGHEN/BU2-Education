@@ -21,7 +21,7 @@ function openCertificate(traineeId,level){
     var c=completionOf(traineeId,it.id)||{};
     var modTxt=ctItem(it.id,'module')||it.module;
     var itemTxt=ctItem(it.id,'item')||it.item;
-    return '<tr><td>'+esc(modTxt)+'</td><td>'+esc(itemTxt)+'</td><td class="ctr">'+(c.done==='Y'?'✅':'—')+'</td><td>'+esc(c.date||'-')+'</td><td>'+esc(c.note||'-')+'</td></tr>';
+    return '<tr><td>'+esc(modTxt)+'</td><td>'+esc(itemTxt)+'</td><td class="ctr">'+(c.done==='Y'?'✅':'—')+'</td><td>'+esc(c.date||'-')+'</td><td>'+esc(ctNote(c.note)||'-')+'</td></tr>';
   }).join('');
   var itemsHtml='<div class="cert-items-title">'+esc(ctd('itemsTitle'))+'</div>'
     +'<table class="cert-items"><thead><tr><th>'+esc(ctd('thModule'))+'</th><th>'+esc(ctd('thItem'))+'</th><th>'+esc(ctd('thDone'))+'</th><th>'+esc(ctd('thDate'))+'</th><th>'+esc(ctd('thNote'))+'</th></tr></thead><tbody>'+itemRows+'</tbody></table>';
@@ -92,7 +92,7 @@ function sendCertificateEmailFor(traineeId,level){
   var signatures=roles.map(function(r){return {role:ctRole(r),name:appr[r]||''};});
   var items=checklistFor(level,'onsite').map(function(it){
     var c=completionOf(traineeId,it.id)||{};
-    return {module:ctItem(it.id,'module')||it.module,item:ctItem(it.id,'item')||it.item,done:c.done==='Y',date:c.date||'',note:c.note||''};
+    return {module:ctItem(it.id,'module')||it.module,item:ctItem(it.id,'item')||it.item,done:c.done==='Y',date:c.date||'',note:ctNote(c.note)||''};
   });
   var labels={
     title:ctd('title'),certNo:ctd('certNo'),name:ctd('name'),org:ctd('org'),position:ctd('position'),country:ctd('country'),
