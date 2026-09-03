@@ -161,6 +161,9 @@ function doPost(e) {
       if (!cTo) return _json_({ error: 'missing recipient email' });
       var cLevel = (body.level != null) ? body.level : '';
       var cSubject = '[BU2] Certificate of Completion — Level ' + cLevel + ' (' + (body.traineeName || '') + ')';
+      // 이수증 화면(certificate.js)에서 이미 선택된 언어로 번역해 전달한 라벨 — 없으면 한국어 기본값 사용
+      var L = body.labels || {};
+      var lbl = function (key, fallback) { return (L[key] != null && L[key] !== '') ? L[key] : fallback; };
       var signsHtml = (body.signatures || []).map(function (s) {
         return '<div style="display:inline-block;text-align:center;margin:0 16px 10px;min-width:100px">' +
           '<div style="font-weight:600">' + _esc_(s.name || '') + '</div>' +
@@ -169,7 +172,7 @@ function doPost(e) {
           '</div>';
       }).join('');
       var followUpHtml = body.followUp
-        ? ('<div style="font-size:12px;color:#555;margin-bottom:10px">Follow-Up 확인: 완료 · ' + _esc_(body.followUpDate || '') + '</div>')
+        ? ('<div style="font-size:12px;color:#555;margin-bottom:10px">' + _esc_(lbl('followUp', 'Follow-Up 확인')) + ': ' + _esc_(lbl('followUpDone', '완료')) + ' · ' + _esc_(body.followUpDate || '') + '</div>')
         : '';
       var itemRowsHtml = (body.items || []).map(function (it) {
         return '<tr>' +
@@ -181,44 +184,44 @@ function doPost(e) {
           '</tr>';
       }).join('');
       var itemsHtml = itemRowsHtml
-        ? ('<div style="font-weight:700;color:#7a5a1e;font-size:12px;margin:16px 0 4px">세부 이수 항목</div>' +
+        ? ('<div style="font-weight:700;color:#7a5a1e;font-size:12px;margin:16px 0 4px">' + _esc_(lbl('itemsTitle', '세부 이수 항목')) + '</div>' +
           '<table style="width:100%;border-collapse:collapse;font-size:12px"><thead><tr>' +
-          '<th style="border:1px solid #e2e2ea;padding:5px 8px;background:#f8f8fb">모듈</th>' +
-          '<th style="border:1px solid #e2e2ea;padding:5px 8px;background:#f8f8fb">이수 항목</th>' +
-          '<th style="border:1px solid #e2e2ea;padding:5px 8px;background:#f8f8fb">이수</th>' +
-          '<th style="border:1px solid #e2e2ea;padding:5px 8px;background:#f8f8fb">확인일자</th>' +
-          '<th style="border:1px solid #e2e2ea;padding:5px 8px;background:#f8f8fb">비고</th>' +
+          '<th style="border:1px solid #e2e2ea;padding:5px 8px;background:#f8f8fb">' + _esc_(lbl('thModule', '모듈')) + '</th>' +
+          '<th style="border:1px solid #e2e2ea;padding:5px 8px;background:#f8f8fb">' + _esc_(lbl('thItem', '이수 항목')) + '</th>' +
+          '<th style="border:1px solid #e2e2ea;padding:5px 8px;background:#f8f8fb">' + _esc_(lbl('thDone', '이수')) + '</th>' +
+          '<th style="border:1px solid #e2e2ea;padding:5px 8px;background:#f8f8fb">' + _esc_(lbl('thDate', '확인일자')) + '</th>' +
+          '<th style="border:1px solid #e2e2ea;padding:5px 8px;background:#f8f8fb">' + _esc_(lbl('thNote', '비고')) + '</th>' +
           '</tr></thead><tbody>' + itemRowsHtml + '</tbody></table>')
         : '';
       var cHtml =
         '<div style="font-family:Arial,sans-serif;font-size:14px;color:#222;border:2px solid #b8860b;padding:28px;max-width:640px;margin:0 auto">' +
         '<div style="text-align:center;margin-bottom:16px">' +
         '<div style="font-size:12px;letter-spacing:2px;color:#888">BU2 · INTEKPLUS</div>' +
-        '<div style="font-size:24px;font-weight:700;margin-top:6px">교육 이수증</div>' +
+        '<div style="font-size:24px;font-weight:700;margin-top:6px">' + _esc_(lbl('title', '교육 이수증')) + '</div>' +
         '<div style="font-size:12px;color:#888">CERTIFICATE OF COMPLETION</div>' +
         '</div>' +
-        '<div style="font-size:11px;color:#888;text-align:right">발급번호 ' + _esc_(body.certNo || '') + '</div>' +
+        '<div style="font-size:11px;color:#888;text-align:right">' + _esc_(lbl('certNo', '발급번호')) + ' ' + _esc_(body.certNo || '') + '</div>' +
         '<table style="width:100%;font-size:13px;margin:14px 0"><tr>' +
-        '<td style="color:#888;width:70px">성명</td><td style="font-weight:600">' + _esc_(body.traineeName || '') + '</td>' +
-        '<td style="color:#888;width:70px">소속</td><td style="font-weight:600">' + _esc_(body.org || '') + '</td>' +
+        '<td style="color:#888;width:70px">' + _esc_(lbl('name', '성명')) + '</td><td style="font-weight:600">' + _esc_(body.traineeName || '') + '</td>' +
+        '<td style="color:#888;width:70px">' + _esc_(lbl('org', '소속')) + '</td><td style="font-weight:600">' + _esc_(body.org || '') + '</td>' +
         '</tr><tr>' +
-        '<td style="color:#888">직책</td><td>' + _esc_(body.position || '-') + '</td>' +
-        '<td style="color:#888">국가</td><td>' + _esc_(body.country || '-') + '</td>' +
+        '<td style="color:#888">' + _esc_(lbl('position', '직책')) + '</td><td>' + _esc_(body.position || '-') + '</td>' +
+        '<td style="color:#888">' + _esc_(lbl('country', '국가')) + '</td><td>' + _esc_(body.country || '-') + '</td>' +
         '</tr></table>' +
-        '<p style="line-height:1.8">위 사람은 BU2 FCBGA Substrate 검사 장비 교육 과정 중<br><b>Level ' + cLevel + ' · ' + _esc_(body.levelTitle || '') + '</b> 과정을 성실히 이수하였음을 증명합니다.</p>' +
+        '<p style="line-height:1.8">' + _esc_(lbl('statement1', '위 사람은 BU2 FCBGA Substrate 검사 장비 교육 과정 중')) + '<br><b>Level ' + cLevel + ' · ' + _esc_(body.levelTitle || '') + '</b> ' + _esc_(lbl('statement2', '과정을 성실히 이수하였음을 증명합니다.')) + '</p>' +
         '<div style="background:#f7f5ef;padding:12px 16px;margin:14px 0;border-radius:4px">' +
-        '<div style="font-weight:600;margin-bottom:4px">핵심 역량 (Level ' + cLevel + ')</div>' +
+        '<div style="font-weight:600;margin-bottom:4px">' + _esc_(lbl('competencyTitle', '핵심 역량')) + ' (Level ' + cLevel + ')</div>' +
         '<div style="font-size:12px;color:#555">' + _esc_(body.competency || '') + '</div>' +
         '</div>' +
         '<table style="width:100%;font-size:13px;margin:14px 0"><tr>' +
-        '<td style="color:#888;width:100px">이수 항목</td><td>' + (body.doneCount != null ? body.doneCount : '') + ' / ' + (body.totalCount != null ? body.totalCount : '') + ' (' + (body.pct != null ? body.pct : '') + '%)</td>' +
-        '<td style="color:#888;width:100px">이수(승인)일자</td><td>' + _esc_(body.approvalDate || '') + '</td>' +
+        '<td style="color:#888;width:100px">' + _esc_(lbl('itemsDone', '이수 항목')) + '</td><td>' + (body.doneCount != null ? body.doneCount : '') + ' / ' + (body.totalCount != null ? body.totalCount : '') + ' (' + (body.pct != null ? body.pct : '') + '%)</td>' +
+        '<td style="color:#888;width:100px">' + _esc_(lbl('approvalDate', '이수(승인)일자')) + '</td><td>' + _esc_(body.approvalDate || '') + '</td>' +
         '</tr></table>' +
         itemsHtml +
         followUpHtml +
-        '<div style="text-align:right;font-size:11px;color:#888;margin-bottom:16px">발급일 ' + _esc_(body.issueDate || '') + '</div>' +
+        '<div style="text-align:right;font-size:11px;color:#888;margin-bottom:16px">' + _esc_(lbl('issueDate', '발급일')) + ' ' + _esc_(body.issueDate || '') + '</div>' +
         '<div style="text-align:center">' + signsHtml + '</div>' +
-        '<div style="text-align:center;font-size:11px;color:#888;margin-top:10px">BU2 기술운영1그룹 · 교육 담당자</div>' +
+        '<div style="text-align:center;font-size:11px;color:#888;margin-top:10px">' + _esc_(lbl('footer', 'BU2 기술운영1그룹 · 교육 담당자')) + '</div>' +
         '</div>';
       try {
         MailApp.sendEmail({ to: cTo, subject: cSubject, htmlBody: cHtml });
