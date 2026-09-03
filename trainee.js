@@ -235,7 +235,26 @@ function openExamLinkInfo(traineeId){
   mw('<div class="mtit">📝 '+esc(t.name)+' 필기평가 링크</div>'
     +'<div style="font-size:12px;color:var(--tx-second);margin-bottom:12px">방문 당일 현장 PC에서 이 주소를 열어 감독 하에 응시하게 하세요. '+esc(equipmentName(t.equipment,'ko'))+'에 등록된 전체 문항이 출제됩니다 (섹션별 랜덤 1~2개가 아닌 전체 문항).</div>'
     +'<div class="fg"><input type="text" value="'+esc(url)+'" readonly onclick="this.select()" style="font-size:11px"></div>'
-    +'<div class="mfoot"><button class="btn sm" onclick="cm()">닫기</button></div>');
+    +'<div class="mfoot"><button class="btn sm" onclick="cm()">닫기</button><button class="btn sm pri" onclick="sendExamEmailFor(\''+traineeId+'\')">📧 이메일로 전송</button></div>');
+}
+/* 필기평가 링크를 대상자 이메일로 발송한다 — 사전학습 링크 발송과 동일하게 신청서 백엔드(MailApp)를 사용한다 */
+function sendExamEmailFor(traineeId){
+  var t=trainee(traineeId);
+  if(!t||!t.equipment)return;
+  if(!t.email){alert('대상자 이메일이 등록되어 있지 않습니다. 대상자 정보 수정에서 먼저 입력해주세요.');return;}
+  var url=(typeof getApplySheetsUrl==='function')?getApplySheetsUrl():'';
+  if(!url){alert('신청서 Sheets가 연결되어 있지 않아 이메일을 보낼 수 없습니다. 상단 "⚙ 신청서 Sheets 설정"을 먼저 확인해주세요.');return;}
+  var link=location.origin+location.pathname.replace(/index\.html$/,'').replace(/\/$/,'')+'/exam.html?eq='+encodeURIComponent(t.equipment);
+  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({
+    action:'sendExamEmail',to:t.email,traineeName:t.name,equipmentName:equipmentName(t.equipment,'ko'),link:link
+  })})
+    .then(function(r){return r.text();})
+    .then(function(text){
+      var data;try{data=JSON.parse(text);}catch(e){data={error:'invalid response'};}
+      if(data.error){alert('발송 실패: '+data.error);return;}
+      alert('대상자 이메일('+t.email+')로 필기평가 링크를 발송했습니다.');
+    })
+    .catch(function(err){alert('발송 실패: '+err.message);});
 }
 function applyExamResultToChecklist(traineeId){
   var t=trainee(traineeId);
