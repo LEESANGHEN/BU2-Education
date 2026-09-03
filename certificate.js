@@ -39,6 +39,7 @@ function openCertificate(traineeId,level){
     +'</div>'
     +'<div class="cert-actions no-print">'
       +'<button class="btn pri" onclick="window.print()">🖨 인쇄 / PDF 저장</button>'
+      +(t.email?('<button class="btn" id="cert_email_btn" onclick="sendCertificateEmailFor(\''+traineeId+'\','+level+')">📧 이메일로 전송</button>'):'')
       +'<button class="btn" onclick="closeCertificate()">닫기</button>'
     +'</div>'
   +'</div>';
@@ -53,4 +54,41 @@ function closeCertificate(){
   var ov=document.getElementById('certOverlay');
   ov.style.display='none';
   ov.innerHTML='';
+}
+/* 화면의 이수증과 동일한 정보를 신청서 백엔드(MailApp)를 통해 대상자 이메일로 발송한다 */
+function sendCertificateEmailFor(traineeId,level){
+  var t=trainee(traineeId);
+  var appr=approvalOf(traineeId,level);
+  if(!t||!appr||appr.status!=='approved')return;
+  if(!t.email){alert('대상자 이메일이 등록되어 있지 않습니다.');return;}
+  var url=(typeof getApplySheetsUrl==='function')?getApplySheetsUrl():'';
+  if(!url){alert('신청서 Sheets가 연결되어 있지 않아 이메일을 보낼 수 없습니다. 상단 "⚙ 신청서 Sheets 설정"을 먼저 확인해주세요.');return;}
+  var lv=levelDef(level)||{};
+  var ot=orgType(t.orgType||'branch');
+  var prog=levelProgress(traineeId,level);
+  var roles=(APPROVAL_ROLES.find(function(r){return r.level===level;})||{roles:[]}).roles;
+  var signatures=roles.map(function(r){return {role:ROLE_LBL[r],name:appr[r]||''};});
+  var btn=document.getElementById('cert_email_btn');
+  if(btn){btn.disabled=true;btn.textContent='전송 중...';}
+  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({
+    action:'sendCertificateEmail',to:t.email,
+    traineeName:t.name,org:ot.label+' · '+(t.org||''),position:t.position||'',country:t.country||'',
+    level:level,levelTitle:lv.title||'',competency:lv.competency||'',
+    doneCount:prog.done,totalCount:prog.total,pct:prog.pct,
+    approvalDate:appr.approvalDate||'',issueDate:todayStr(),
+    certNo:appr.id||('CERT-'+traineeId+'-L'+level),
+    signatures:signatures,
+    followUp:(level===3&&appr.followUpDone)?true:false,followUpDate:appr.followUpDate||''
+  })})
+    .then(function(r){return r.text();})
+    .then(function(text){
+      var data;try{data=JSON.parse(text);}catch(e){data={error:'invalid response'};}
+      if(btn){btn.disabled=false;btn.textContent='📧 이메일로 전송';}
+      if(data.error){alert('발송 실패: '+data.error);return;}
+      alert('대상자 이메일('+t.email+')로 이수증을 발송했습니다.');
+    })
+    .catch(function(err){
+      if(btn){btn.disabled=false;btn.textContent='📧 이메일로 전송';}
+      alert('발송 실패: '+err.message);
+    });
 }
