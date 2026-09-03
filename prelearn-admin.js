@@ -2,7 +2,7 @@
    🧑‍🎓 사전학습 현황 (관리자 — 설비별 학습자 진도/퀴즈 결과 조회)
 ═══════════════════════════════════════════ */
 var PRELEARN_LS_KEY='edu_prelearn_sheets_url';
-var PLA={list:[],equipFilter:'all',viewMode:'progress'};
+var PLA={list:[],equipFilter:'all',viewMode:'progress',examResults:[]};
 
 var ADMIN_COURSE_CHAPTERS={
   smtv:(typeof PRELEARN_CHAPTERS_SMTV!=='undefined')?PRELEARN_CHAPTERS_SMTV:null,
@@ -51,6 +51,14 @@ function findPrelearnRecord(name,org){
   var n=String(name).toLowerCase().trim(),o=String(org).toLowerCase().trim();
   return PLA.list.find(function(r){return r.name&&r.org&&r.name.toLowerCase().trim()===n&&r.org.toLowerCase().trim()===o;})||null;
 }
+/* 이름+소속(+설비)으로 필기평가(exam.html) 응시 기록을 찾는다 — 최근 제출 순으로 정렬 */
+function findExamResults(name,org,equip){
+  if(!name||!org)return [];
+  var n=String(name).toLowerCase().trim(),o=String(org).toLowerCase().trim();
+  return (PLA.examResults||[]).filter(function(r){
+    return r.traineeName&&r.traineeOrg&&r.traineeName.toLowerCase().trim()===n&&r.traineeOrg.toLowerCase().trim()===o&&(!equip||r.equipment===equip);
+  }).sort(function(a,b){return (b.submittedAt||'')<(a.submittedAt||'')?-1:1;});
+}
 
 function openPrelearnSheetsSettings(){
   var cur=getPrelearnSheetsUrl();
@@ -86,6 +94,7 @@ function loadPrelearn(cb){
       if(data.error)throw new Error(data.error);
       PLA.list=data.records||[];
       QA.overrides=data.quizOverrides||{};
+      PLA.examResults=data.examResults||[];
       if(cb)cb();
     })
     .catch(function(err){console.warn('사전학습 불러오기 실패:',err.message);if(cb)cb();});

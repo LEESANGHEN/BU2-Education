@@ -40,6 +40,12 @@ ko:{
   passLbl:'통과',failLbl:'미완료',
   allPassedMsg:'✅ 전체 섹션 통과 — Level 0~1 사전학습 인증 기준을 충족했습니다.',
   notAllPassedMsg:'⚠ 일부 섹션 미통과 — 방문 중 Level 0부터 교육이 진행됩니다.',
+  examPageTitle:'📝 필기평가',examPickTitle:'평가받으실 설비를 선택해주세요',examGateTitle:'필기평가',
+  examGateIntro:'아래 정보를 입력하고 필기평가를 시작해주세요. 이 설비에 등록된 모든 문항이 출제됩니다.',
+  examStartBtn:'평가 시작',examTitle:'필기평가',examQuestionsUnit:'문항',examSubmitBtn:'제출',
+  examSubmitConfirm:'한번 제출하면 답을 수정할 수 없습니다. 그래도 제출하시겠습니까?',examSubmitting:'제출 중...',
+  examResultTitle:'필기평가 결과',examPassMsg:'합격 기준(80%)을 충족했습니다.',examFailMsg:'합격 기준(80%)에 미달했습니다.',
+  examThanks:'수고하셨습니다. 결과는 담당자가 확인합니다.',
   warnMsg:'⚠ 이 학습 페이지는 아직 연결 설정이 완료되지 않았습니다. 관리자에게 문의해주세요.'
 },
 en:{
@@ -75,6 +81,12 @@ en:{
   passLbl:'Passed',failLbl:'Incomplete',
   allPassedMsg:'✅ All sections passed — you meet the Level 0~1 pre-learning certification criteria.',
   notAllPassedMsg:'⚠ Some sections were not passed — training will start from Level 0 on-site.',
+  examPageTitle:'📝 Written Exam',examPickTitle:'Please select the equipment for this exam',examGateTitle:'Written Exam',
+  examGateIntro:'Enter your information below and start the exam. All questions registered for this equipment will be included.',
+  examStartBtn:'Start Exam',examTitle:'Written Exam',examQuestionsUnit:' questions',examSubmitBtn:'Submit',
+  examSubmitConfirm:'Once submitted, your answers cannot be changed. Do you want to submit?',examSubmitting:'Submitting...',
+  examResultTitle:'Exam Result',examPassMsg:'You met the passing criteria (80%).',examFailMsg:'You did not meet the passing criteria (80%).',
+  examThanks:'Thank you. The coordinator will review your result.',
   warnMsg:'⚠ This learning page has not been configured yet. Please contact the administrator.'
 },
 'zh-CN':{
@@ -110,6 +122,12 @@ en:{
   passLbl:'通过',failLbl:'未完成',
   allPassedMsg:'✅ 全部章节通过 — 已达到Level 0~1事先学习认证标准。',
   notAllPassedMsg:'⚠ 部分章节未通过 — 到访期间将从Level 0开始培训。',
+  examPageTitle:'📝 笔试评估',examPickTitle:'请选择本次评估的设备',examGateTitle:'笔试评估',
+  examGateIntro:'请输入以下信息并开始评估。将出题该设备下已登记的全部题目。',
+  examStartBtn:'开始评估',examTitle:'笔试评估',examQuestionsUnit:'题',examSubmitBtn:'提交',
+  examSubmitConfirm:'提交后将无法修改答案。确定要提交吗？',examSubmitting:'提交中...',
+  examResultTitle:'笔试评估结果',examPassMsg:'已达到及格标准(80%)。',examFailMsg:'未达到及格标准(80%)。',
+  examThanks:'辛苦了。负责人将确认您的结果。',
   warnMsg:'⚠ 此学习页面尚未完成连接设置，请联系管理员。'
 },
 'zh-TW':{
@@ -145,6 +163,12 @@ en:{
   passLbl:'通過',failLbl:'未完成',
   allPassedMsg:'✅ 全部章節通過 — 已達到Level 0~1事前學習認證標準。',
   notAllPassedMsg:'⚠ 部分章節未通過 — 到訪期間將從Level 0開始教育。',
+  examPageTitle:'📝 筆試評估',examPickTitle:'請選擇本次評估的設備',examGateTitle:'筆試評估',
+  examGateIntro:'請輸入以下資訊並開始評估。將出題該設備下已登記的全部題目。',
+  examStartBtn:'開始評估',examTitle:'筆試評估',examQuestionsUnit:'題',examSubmitBtn:'提交',
+  examSubmitConfirm:'提交後將無法修改答案。確定要提交嗎？',examSubmitting:'提交中...',
+  examResultTitle:'筆試評估結果',examPassMsg:'已達到及格標準(80%)。',examFailMsg:'未達到及格標準(80%)。',
+  examThanks:'辛苦了。負責人將確認您的結果。',
   warnMsg:'⚠ 此學習頁面尚未完成連線設定，請聯絡管理員。'
 },
 ja:{
@@ -180,6 +204,12 @@ ja:{
   passLbl:'合格',failLbl:'未完了',
   allPassedMsg:'✅ 全セクション合格 — Level 0~1事前学習の認証基準を満たしました。',
   notAllPassedMsg:'⚠ 一部セクション未合格 — 訪問中はLevel 0から教育を行います。',
+  examPageTitle:'📝 筆記試験',examPickTitle:'評価を受ける設備を選択してください',examGateTitle:'筆記試験',
+  examGateIntro:'以下の情報を入力して試験を開始してください。この設備に登録されているすべての問題が出題されます。',
+  examStartBtn:'試験開始',examTitle:'筆記試験',examQuestionsUnit:'問',examSubmitBtn:'提出',
+  examSubmitConfirm:'一度提出すると回答を修正できません。それでも提出しますか？',examSubmitting:'提出中...',
+  examResultTitle:'筆記試験結果',examPassMsg:'合格基準(80%)を満たしました。',examFailMsg:'合格基準(80%)に達しませんでした。',
+  examThanks:'お疲れ様でした。結果は担当者が確認します。',
   warnMsg:'⚠ この学習ページはまだ接続設定が完了していません。管理者にお問い合わせください。'
 }
 };

@@ -68,7 +68,7 @@ function trSearch(v){TR.search=v;renderTraineeTab();}
 
 /* ── 대상자 등록/수정 ── */
 function openTraineeModal(id,afterSave){
-  var t=id?trainee(id):{id:'',name:'',orgType:'branch',org:'',country:'한국',region:'',position:'',task:'',contact:'',email:'',visitCategory:'new',priorLevel:'',experienceYears:'',note:''};
+  var t=id?trainee(id):{id:'',name:'',orgType:'branch',org:'',country:'한국',region:'',position:'',task:'',contact:'',email:'',visitCategory:'new',priorLevel:'',experienceYears:'',equipment:'',note:''};
   mw('<div class="mtit">'+(id?'대상자 정보 수정':'+ 대상자 등록')+'</div>'
     +'<div class="fr">'
       +'<div class="fg"><label class="fl">이름</label><input type="text" id="t_name" value="'+esc(t.name)+'"></div>'
@@ -87,7 +87,8 @@ function openTraineeModal(id,afterSave){
       +'<div class="fg"><label class="fl">연락처</label><input type="text" id="t_contact" value="'+esc(t.contact||'')+'"></div>'
       +'<div class="fg"><label class="fl">이메일</label><input type="text" id="t_email" value="'+esc(t.email||'')+'"></div>'
     +'</div>'
-    +'<div class="fr">'
+    +'<div class="fr" style="grid-template-columns:1fr 1fr 1fr">'
+      +'<div class="fg"><label class="fl">교육 설비</label><select id="t_equipment"><option value="">-</option>'+EQUIPMENT_LIST.map(function(e){return '<option value="'+e.id+'"'+(t.equipment===e.id?' selected':'')+'>'+esc(e.name)+'</option>';}).join('')+'</select></div>'
       +'<div class="fg"><label class="fl">방문 구분</label><select id="t_visitcat">'+VISIT_CATS.map(function(v){return '<option value="'+v.id+'"'+(t.visitCategory===v.id?' selected':'')+'>'+v.label+'</option>';}).join('')+'</select></div>'
       +'<div class="fg"><label class="fl">현 업무 경력(년)</label><input type="text" id="t_exp" value="'+esc(t.experienceYears||'')+'"></div>'
     +'</div>'
@@ -114,6 +115,7 @@ function saveTrainee(id,hasCallback){
     email:document.getElementById('t_email').value.trim(),
     visitCategory:document.getElementById('t_visitcat').value,
     experienceYears:document.getElementById('t_exp').value.trim(),
+    equipment:document.getElementById('t_equipment').value,
     note:document.getElementById('t_note').value.trim()
   };
   if(id){
@@ -206,6 +208,51 @@ function applyPrelearnToChecklist(traineeId){
   openTraineeDetail(traineeId);
   renderTraineeTab();
 }
+/* Level 0 전용 — 온사이트 별도 페이지(exam.html)에서 응시한 필기평가 결과를 보여주고,
+   합격 시 "os6: Level0 필기평가 합격" 항목에 반영하는 버튼을 제공한다 */
+function renderExamBlock(traineeId){
+  var t=trainee(traineeId);
+  if(!t)return '';
+  var eq=t.equipment;
+  var results=(typeof findExamResults==='function'&&eq)?findExamResults(t.name,t.org,eq):[];
+  var latest=results[0];
+  var latestHtml=latest
+    ?('<div style="font-size:12px;margin-bottom:6px">최근 응시: '+latest.score+'/'+latest.total+' ('+latest.pct+'%) · '+esc((latest.submittedAt||'').replace('T',' ').slice(0,16))+' — '+(latest.passed?'<span style="color:#4ade9a">합격</span>':'<span style="color:#e07070">미달</span>')+'</div>')
+    :('<div style="font-size:12px;color:var(--tx-second);margin-bottom:6px">'+(eq?'응시 기록 없음':'대상자 정보에 교육 설비가 설정되어 있지 않습니다 — 대상자 수정에서 먼저 지정해주세요.')+'</div>');
+  return '<div class="td-approve" style="margin-bottom:12px">'
+    +'<div style="font-weight:600;font-size:12px;margin-bottom:8px">📝 필기평가 (온사이트 별도 페이지 — 해당 설비 전체 문항 출제)</div>'
+    +latestHtml
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap">'
+    +(eq?('<button class="btn sm" onclick="event.stopPropagation();openExamLinkInfo(\''+traineeId+'\')">🔗 필기평가 링크</button>'):'')
+    +(latest?('<button class="btn sm pri" onclick="event.stopPropagation();applyExamResultToChecklist(\''+traineeId+'\')">✅ 필기평가 결과 반영</button>'):'')
+    +'</div>'
+  +'</div>';
+}
+function openExamLinkInfo(traineeId){
+  var t=trainee(traineeId);
+  if(!t||!t.equipment){alert('대상자 정보에 교육 설비를 먼저 설정해주세요.');return;}
+  var url=location.origin+location.pathname.replace(/index\.html$/,'').replace(/\/$/,'')+'/exam.html?eq='+encodeURIComponent(t.equipment);
+  mw('<div class="mtit">📝 '+esc(t.name)+' 필기평가 링크</div>'
+    +'<div style="font-size:12px;color:var(--tx-second);margin-bottom:12px">방문 당일 현장 PC에서 이 주소를 열어 감독 하에 응시하게 하세요. '+esc(equipmentName(t.equipment,'ko'))+'에 등록된 전체 문항이 출제됩니다 (섹션별 랜덤 1~2개가 아닌 전체 문항).</div>'
+    +'<div class="fg"><input type="text" value="'+esc(url)+'" readonly onclick="this.select()" style="font-size:11px"></div>'
+    +'<div class="mfoot"><button class="btn sm" onclick="cm()">닫기</button></div>');
+}
+function applyExamResultToChecklist(traineeId){
+  var t=trainee(traineeId);
+  if(!t)return;
+  var results=findExamResults(t.name,t.org,t.equipment);
+  var latest=results[0];
+  if(!latest){alert('응시 기록이 없습니다.');return;}
+  if(!latest.passed){alert('최근 응시 결과가 합격 기준(80%)에 미달합니다 ('+latest.pct+'%). 반영할 수 없습니다.');return;}
+  if(!confirm('필기평가 결과('+latest.score+'/'+latest.total+', '+latest.pct+'%)를 "Level0 필기평가 합격" 항목에 반영할까요?'))return;
+  var c=completionOf(traineeId,'os6');
+  if(!c){c={id:uid('cp'),traineeId:traineeId,itemId:'os6',done:'N',trainer:'',date:'',note:''};S.completions.push(c);}
+  c.done='Y';c.date=todayStr();c.note='온라인 필기평가 자동반영 ('+latest.score+'/'+latest.total+', '+latest.pct+'%)';
+  saveData();
+  window._curDetailTrainee=traineeId;
+  openTraineeDetail(traineeId,0);
+  renderTraineeTab();
+}
 function preItemRow(traineeId,it){
   var c=completionOf(traineeId,it.id)||{};
   return '<tr>'
@@ -265,6 +312,7 @@ function levelSection(traineeId,level){
     +'</div>'
     +(open?(
       '<table class="dtbl sm"><thead><tr><th>모듈</th><th>세부 이수 항목</th><th style="width:60px">이수</th><th style="width:110px">확인 트레이너</th><th style="width:120px">확인일자</th><th>비고</th></tr></thead><tbody>'+rows+'</tbody></table>'
+      +(level===0?renderExamBlock(traineeId):'')
       +'<div class="td-approve">'
         +'<div class="fr" style="grid-template-columns:repeat('+Math.max(roles.length,1)+',1fr)">'+signRows+'</div>'
         +'<div class="fr">'
