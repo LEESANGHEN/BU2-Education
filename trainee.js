@@ -281,13 +281,28 @@ function toggleLevelSection(level){
   var t=window._curDetailTrainee;
   if(t)openTraineeDetail(t);
 }
+/* 이수 체크를 하면 확인일자를 체크한 날짜로 자동 기입하고, 체크를 풀면 날짜도 함께 비운다 */
 function setPreDone(traineeId,itemId,checked){
-  setCompField(traineeId,itemId,'done',checked?'Y':'N');
+  setDoneWithDate(traineeId,itemId,checked);
+  window._curDetailTrainee=traineeId;
+  openTraineeDetail(traineeId);
 }
 function setOnsiteDone(traineeId,itemId,level,checked){
-  setCompField(traineeId,itemId,'done',checked?'Y':'N');
+  setDoneWithDate(traineeId,itemId,checked);
   window._curDetailTrainee=traineeId;
   openTraineeDetail(traineeId,level);
+}
+function setDoneWithDate(traineeId,itemId,checked){
+  window._curDetailTrainee=traineeId;
+  var c=completionOf(traineeId,itemId);
+  if(!c){
+    c={id:uid('cp'),traineeId:traineeId,itemId:itemId,done:'N',trainer:'',date:'',note:''};
+    S.completions.push(c);
+  }
+  c.done=checked?'Y':'N';
+  c.date=checked?todayStr():'';
+  saveData();
+  renderTraineeTab();
 }
 function setCompField(traineeId,itemId,field,value){
   window._curDetailTrainee=traineeId;
