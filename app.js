@@ -45,13 +45,21 @@ function levelDef(n){return S.levels.find(function(l){return l.level===Number(n)
 
 /* 기존에 저장된 데이터(Google Sheet 캐시 등)에는 checklistItems에 moduleId가 없을 수 있으므로,
    불러올 때마다 DEF_CHECKLIST를 기준으로 누락된 moduleId만 채워 넣는다(이미 값이 있으면 건드리지 않음).
-   이 연결이 있어야 교육 과정 관리 탭에서 모듈을 편집했을 때 대상자별 이수 현황 모달에도 반영된다. */
+   이 연결이 있어야 교육 과정 관리 탭에서 모듈을 편집했을 때 대상자별 이수 현황 모달에도 반영된다.
+   반환값 true면 데이터가 실제로 바뀐 것이므로 호출부에서 saveData()로 반영해야 한다. */
 function ensureChecklistModuleIds(){
   var defById={};
   DEF_CHECKLIST.forEach(function(d){defById[d.id]=d.moduleId;});
+  var changed=false;
   (S.checklistItems||[]).forEach(function(it){
-    if(!('moduleId' in it)&&defById.hasOwnProperty(it.id))it.moduleId=defById[it.id];
+    if(!('moduleId' in it)&&defById.hasOwnProperty(it.id)){it.moduleId=defById[it.id];changed=true;}
   });
+  /* 1회성 보정: 커리큘럼 매트릭스에서 F 모듈이 '정기 유지 보수(PM)' → 'Handler Teaching'으로 재편되면서
+     os13(정기 PM 절차)이 더는 어떤 모듈과도 대응하지 않게 되었다. 예전 버그로 os13이 md_f에 잘못 연결되어
+     "Handler Teaching"으로 잘못 표시되고 있던 경우, 이를 원래 라벨로 되돌린다. */
+  var os13=(S.checklistItems||[]).find(function(it){return it.id==='os13';});
+  if(os13&&os13.moduleId==='md_f'){os13.moduleId=null;os13.module='정기 유지보수';changed=true;}
+  return changed;
 }
 
 /* ── 조회 헬퍼 ── */
@@ -147,7 +155,10 @@ function loadFromSheets(callback){
       if(!S.levels.length)S.levels=deepCopy(DEF_LEVELS);
       if(!S.modules.length)S.modules=deepCopy(DEF_MODULES);
       if(!S.checklistItems.length)S.checklistItems=deepCopy(DEF_CHECKLIST);
-      ensureChecklistModuleIds();
+      /* moduleId 백필/보정으로 실제 데이터가 바뀐 경우, 캐시에만 남기지 않고 Sheet에도 즉시 반영해
+         다음 사용자·기기에서도 같은 값을 보도록 한다(loadData의 캐시 전용 경로에서는 저장하지 않음 —
+         네트워크 데이터보다 먼저 그려지는 임시 화면이라 여기서만 확정 저장한다) */
+      if(ensureChecklistModuleIds())saveData();
       saveCache();
       if(led){led.className='conn-led ok';txt.textContent='연결 정상';}
       if(callback)callback();
