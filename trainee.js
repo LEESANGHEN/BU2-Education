@@ -34,7 +34,7 @@ function renderTraineeTab(){
     var curLv=currentApprovedLevel(t.id);
     var visits=traineeVisits(t.id);
     var lastVisit=visits.length?visits[visits.length-1]:null;
-    return '<tr onclick="openTraineeDetail(\''+t.id+'\')">'
+    return '<tr onclick="_detailOpenLevel=-1;openTraineeDetail(\''+t.id+'\')">'
       +'<td><b>'+esc(t.name)+'</b></td>'
       +'<td><span class="grpbadge" style="background:'+ot.color+'">'+esc(ot.label)+'</span></td>'
       +'<td>'+esc(t.org||'-')+'</td>'
@@ -136,7 +136,7 @@ function deleteTrainee(id){
 }
 
 /* ── 대상자 상세: 사전학습 + Level별 체크리스트 + 승인 서명 ── */
-var _detailOpenLevel=0;
+var _detailOpenLevel=-1;
 function openTraineeDetail(id,openLevel){
   var t=trainee(id);
   if(!t)return;

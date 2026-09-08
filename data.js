@@ -77,40 +77,42 @@ var DEF_MODULES=[
   {id:'md_m',code:'M',name:'교육 스킬(Train-the-Trainer)',detail:'모의 교육 상황 시연, 교육 자료 활용법',level:3,method:'이론+시연',hours:8,resources:'교육자료 템플릿'}
 ];
 
-/* phase: 'pre'(방문 전 사전 선행학습, Level0~1만) / 'onsite'(본사 방문 중 이수 체크리스트, Level0~3) */
+/* phase: 'pre'(방문 전 사전 선행학습, Level0~1만) / 'onsite'(본사 방문 중 이수 체크리스트, Level0~3)
+   moduleId: 커리큘럼 매트릭스(DEF_MODULES)의 어느 모듈에 속한 항목인지 연결하는 키 —
+   교육 과정 관리 탭에서 해당 모듈을 편집하면 이 연결로 module/level이 자동 갱신된다(평가 전용 항목은 moduleId 없음, syncChecklistFromModule 참고) */
 var DEF_CHECKLIST=[
-  {id:'pre1',no:1,phase:'pre',level:0,module:'HW 기초',item:'HW Module 구성 및 구조의 이해',order:0},
-  {id:'pre2',no:2,phase:'pre',level:0,module:'전장 기초',item:'전장 구성 및 구조의 이해',order:1},
-  {id:'pre3',no:3,phase:'pre',level:0,module:'광학 기초',item:'2D/3D 광학 원리의 이해',order:2},
-  {id:'pre4',no:4,phase:'pre',level:0,module:'시스템 구성',item:'PC, Board, Controller, Camera 연동 원리의 이해',order:3},
-  {id:'pre5',no:5,phase:'pre',level:0,module:'검사 개념',item:'Image 처리의 개념',order:4},
-  {id:'pre6',no:6,phase:'pre',level:1,module:'SW 조작',item:'SW 설치, 실행, 로그인',order:5},
-  {id:'pre7',no:7,phase:'pre',level:1,module:'SW 조작',item:'Main UI 구성 및 기능 이해(개념)',order:6},
+  {id:'pre1',no:1,phase:'pre',level:0,module:'HW 기초',moduleId:'md_a',item:'HW Module 구성 및 구조의 이해',order:0},
+  {id:'pre2',no:2,phase:'pre',level:0,module:'전장 기초',moduleId:'md_a',item:'전장 구성 및 구조의 이해',order:1},
+  {id:'pre3',no:3,phase:'pre',level:0,module:'광학 기초',moduleId:'md_b',item:'2D/3D 광학 원리의 이해',order:2},
+  {id:'pre4',no:4,phase:'pre',level:0,module:'시스템 구성',moduleId:'md_b',item:'PC, Board, Controller, Camera 연동 원리의 이해',order:3},
+  {id:'pre5',no:5,phase:'pre',level:0,module:'검사 개념',moduleId:'md_b',item:'Image 처리의 개념',order:4},
+  {id:'pre6',no:6,phase:'pre',level:1,module:'SW 조작',moduleId:'md_c',item:'SW 설치, 실행, 로그인',order:5},
+  {id:'pre7',no:7,phase:'pre',level:1,module:'SW 조작',moduleId:'md_c',item:'Main UI 구성 및 기능 이해(개념)',order:6},
 
-  {id:'os1', no:1, phase:'onsite',level:0,module:'설비 기본 구성',   item:'HW Module 구성 및 구조의 이해',order:0},
-  {id:'os2', no:2, phase:'onsite',level:0,module:'설비 기본 구성',   item:'전장 구성 및 구조의 이해',order:1},
-  {id:'os3', no:3, phase:'onsite',level:0,module:'광학검사 이론',    item:'2D/3D 광학 원리의 이해',order:2},
-  {id:'os4', no:4, phase:'onsite',level:0,module:'광학검사 이론',    item:'PC, Board, Controller, Camera 연동 원리의 이해',order:3},
-  {id:'os5', no:5, phase:'onsite',level:0,module:'검사 개념',        item:'Image 처리의 개념',order:4},
-  {id:'os6', no:6, phase:'onsite',level:0,module:'평가',            item:'Level0 필기평가 합격 (80% 이상 정답)',order:5},
-  {id:'os7', no:7, phase:'onsite',level:1,module:'SW 조작',          item:'SW 설치, 실행, 로그인',order:6},
-  {id:'os8', no:8, phase:'onsite',level:1,module:'SW 조작',          item:'Main UI 구성, 기능 이해, 조작 방법',order:7},
-  {id:'os9', no:9, phase:'onsite',level:1,module:'Recipe 운용(Job)', item:'제품 Recipe(Job) Open 및 Run 실행',order:8},
-  {id:'os10',no:10,phase:'onsite',level:1,module:'기본 알람 대응',   item:'기본 알람 확인 및 리셋 조치',order:9},
-  {id:'os11',no:11,phase:'onsite',level:1,module:'Recipe 운용(Job)', item:'검사 및 Log Data 저장/백업 절차 수행',order:10},
-  {id:'os12',no:12,phase:'onsite',level:1,module:'평가',            item:'Level1 실기평가 합격 (체크리스트 전 항목 Pass)',order:11},
-  {id:'os13',no:13,phase:'onsite',level:2,module:'정기 유지보수',    item:'정기 PM 절차(청소/Calibration) 독립 수행',order:12},
-  {id:'os14',no:14,phase:'onsite',level:2,module:'정기 유지보수',    item:'소모품(조명/Controller 등) 점검 및 교체',order:13},
-  {id:'os15',no:15,phase:'onsite',level:2,module:'기초 트러블슈팅',  item:'대표 고장 Module 3종 이상에 대한 원인 분석 및 1차 조치',order:14},
-  {id:'os16',no:16,phase:'onsite',level:2,module:'Recipe 운용(검사)',item:'Gerber File, 조명/Camera/PZT, Alignment, 검사 Parameter 수정',order:15},
-  {id:'os17',no:17,phase:'onsite',level:2,module:'평가',            item:'Level2 실기시험(고장 시나리오 2종 이상) 합격',order:16},
-  {id:'os18',no:18,phase:'onsite',level:2,module:'평가',            item:'독립수행 관찰평가 2회 이상 통과',order:17},
-  {id:'os19',no:19,phase:'onsite',level:3,module:'고급 트러블슈팅',  item:'HW(PC, Camera, Controller) 설정, 2D/3D 광학 Module Tuning, Data 검증',order:18},
-  {id:'os20',no:20,phase:'onsite',level:3,module:'레시피 개발',      item:'신규 검사 Recipe 생성, 검출률/오검율/UPH 최적화',order:19},
-  {id:'os21',no:21,phase:'onsite',level:3,module:'근본원인분석',     item:'고장 이력 분석 및 보고서 작성, Data 검증 후 Report 작성 방법',order:20},
-  {id:'os22',no:22,phase:'onsite',level:3,module:'교육 스킬',        item:'모의 교육 상황 시연, 교육 자료 활용법',order:21},
-  {id:'os23',no:23,phase:'onsite',level:3,module:'평가',            item:'Level3 종합실기 + 승인위원회 심사 합격',order:22},
-  {id:'os24',no:24,phase:'onsite',level:3,module:'평가',            item:'3개월 현장 Follow-Up 결과 확인 (최종 승인조건)',order:23}
+  {id:'os1', no:1, phase:'onsite',level:0,module:'설비 기본 구성',   moduleId:'md_a',item:'HW Module 구성 및 구조의 이해',order:0},
+  {id:'os2', no:2, phase:'onsite',level:0,module:'설비 기본 구성',   moduleId:'md_a',item:'전장 구성 및 구조의 이해',order:1},
+  {id:'os3', no:3, phase:'onsite',level:0,module:'광학검사 이론',    moduleId:'md_b',item:'2D/3D 광학 원리의 이해',order:2},
+  {id:'os4', no:4, phase:'onsite',level:0,module:'광학검사 이론',    moduleId:'md_b',item:'PC, Board, Controller, Camera 연동 원리의 이해',order:3},
+  {id:'os5', no:5, phase:'onsite',level:0,module:'검사 개념',        moduleId:'md_b',item:'Image 처리의 개념',order:4},
+  {id:'os6', no:6, phase:'onsite',level:0,module:'평가',            moduleId:null,item:'Level0 필기평가 합격 (80% 이상 정답)',order:5},
+  {id:'os7', no:7, phase:'onsite',level:1,module:'SW 조작',          moduleId:'md_c',item:'SW 설치, 실행, 로그인',order:6},
+  {id:'os8', no:8, phase:'onsite',level:1,module:'SW 조작',          moduleId:'md_c',item:'Main UI 구성, 기능 이해, 조작 방법',order:7},
+  {id:'os9', no:9, phase:'onsite',level:1,module:'Recipe 운용(Job)', moduleId:'md_d',item:'제품 Recipe(Job) Open 및 Run 실행',order:8},
+  {id:'os10',no:10,phase:'onsite',level:1,module:'기본 알람 대응',   moduleId:'md_e',item:'기본 알람 확인 및 리셋 조치',order:9},
+  {id:'os11',no:11,phase:'onsite',level:1,module:'Recipe 운용(Job)', moduleId:'md_d',item:'검사 및 Log Data 저장/백업 절차 수행',order:10},
+  {id:'os12',no:12,phase:'onsite',level:1,module:'평가',            moduleId:null,item:'Level1 실기평가 합격 (체크리스트 전 항목 Pass)',order:11},
+  {id:'os13',no:13,phase:'onsite',level:2,module:'정기 유지보수',    moduleId:'md_f',item:'정기 PM 절차(청소/Calibration) 독립 수행',order:12},
+  {id:'os14',no:14,phase:'onsite',level:2,module:'정기 유지보수',    moduleId:'md_g',item:'소모품(조명/Controller 등) 점검 및 교체',order:13},
+  {id:'os15',no:15,phase:'onsite',level:2,module:'기초 트러블슈팅',  moduleId:'md_h',item:'대표 고장 Module 3종 이상에 대한 원인 분석 및 1차 조치',order:14},
+  {id:'os16',no:16,phase:'onsite',level:2,module:'Recipe 운용(검사)',moduleId:'md_i',item:'Gerber File, 조명/Camera/PZT, Alignment, 검사 Parameter 수정',order:15},
+  {id:'os17',no:17,phase:'onsite',level:2,module:'평가',            moduleId:null,item:'Level2 실기시험(고장 시나리오 2종 이상) 합격',order:16},
+  {id:'os18',no:18,phase:'onsite',level:2,module:'평가',            moduleId:null,item:'독립수행 관찰평가 2회 이상 통과',order:17},
+  {id:'os19',no:19,phase:'onsite',level:3,module:'고급 트러블슈팅',  moduleId:'md_j',item:'HW(PC, Camera, Controller) 설정, 2D/3D 광학 Module Tuning, Data 검증',order:18},
+  {id:'os20',no:20,phase:'onsite',level:3,module:'레시피 개발',      moduleId:'md_l',item:'신규 검사 Recipe 생성, 검출률/오검율/UPH 최적화',order:19},
+  {id:'os21',no:21,phase:'onsite',level:3,module:'근본원인분석',     moduleId:'md_k',item:'고장 이력 분석 및 보고서 작성, Data 검증 후 Report 작성 방법',order:20},
+  {id:'os22',no:22,phase:'onsite',level:3,module:'교육 스킬',        moduleId:'md_m',item:'모의 교육 상황 시연, 교육 자료 활용법',order:21},
+  {id:'os23',no:23,phase:'onsite',level:3,module:'평가',            moduleId:null,item:'Level3 종합실기 + 승인위원회 심사 합격',order:22},
+  {id:'os24',no:24,phase:'onsite',level:3,module:'평가',            moduleId:null,item:'3개월 현장 Follow-Up 결과 확인 (최종 승인조건)',order:23}
 ];
 
 /* Level별 평가기준/재평가 규정 · 승인 절차 참고 자료 (읽기전용 — 커리큘럼 관리 탭에 표시) */

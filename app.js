@@ -43,6 +43,17 @@ function visitStatus(id){return VISIT_STATUS.find(function(v){return v.id===id;}
 function trainee(id){return S.trainees.find(function(t){return t.id===id;});}
 function levelDef(n){return S.levels.find(function(l){return l.level===Number(n);});}
 
+/* 기존에 저장된 데이터(Google Sheet 캐시 등)에는 checklistItems에 moduleId가 없을 수 있으므로,
+   불러올 때마다 DEF_CHECKLIST를 기준으로 누락된 moduleId만 채워 넣는다(이미 값이 있으면 건드리지 않음).
+   이 연결이 있어야 교육 과정 관리 탭에서 모듈을 편집했을 때 대상자별 이수 현황 모달에도 반영된다. */
+function ensureChecklistModuleIds(){
+  var defById={};
+  DEF_CHECKLIST.forEach(function(d){defById[d.id]=d.moduleId;});
+  (S.checklistItems||[]).forEach(function(it){
+    if(!('moduleId' in it)&&defById.hasOwnProperty(it.id))it.moduleId=defById[it.id];
+  });
+}
+
 /* ── 조회 헬퍼 ── */
 function checklistFor(level,phase){
   return S.checklistItems.filter(function(c){return c.level===Number(level)&&c.phase===phase;})
@@ -94,11 +105,13 @@ function loadData(){
         if(!S.levels.length)S.levels=deepCopy(DEF_LEVELS);
         if(!S.modules.length)S.modules=deepCopy(DEF_MODULES);
         if(!S.checklistItems.length)S.checklistItems=deepCopy(DEF_CHECKLIST);
+        ensureChecklistModuleIds();
         return;
       }
     }
   }catch(e){}
   FIELDS.forEach(function(f){S[f]=deepCopy(DEF[f]);});
+  ensureChecklistModuleIds();
 }
 function saveCache(){
   try{
@@ -134,6 +147,7 @@ function loadFromSheets(callback){
       if(!S.levels.length)S.levels=deepCopy(DEF_LEVELS);
       if(!S.modules.length)S.modules=deepCopy(DEF_MODULES);
       if(!S.checklistItems.length)S.checklistItems=deepCopy(DEF_CHECKLIST);
+      ensureChecklistModuleIds();
       saveCache();
       if(led){led.className='conn-led ok';txt.textContent='연결 정상';}
       if(callback)callback();
