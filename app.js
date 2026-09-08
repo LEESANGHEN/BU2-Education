@@ -54,11 +54,27 @@ function ensureChecklistModuleIds(){
   (S.checklistItems||[]).forEach(function(it){
     if(!('moduleId' in it)&&defById.hasOwnProperty(it.id)){it.moduleId=defById[it.id];changed=true;}
   });
-  /* 1회성 보정: 커리큘럼 매트릭스에서 F 모듈이 '정기 유지 보수(PM)' → 'Handler Teaching'으로 재편되면서
-     os13(정기 PM 절차)이 더는 어떤 모듈과도 대응하지 않게 되었다. 예전 버그로 os13이 md_f에 잘못 연결되어
-     "Handler Teaching"으로 잘못 표시되고 있던 경우, 이를 원래 라벨로 되돌린다. */
-  var os13=(S.checklistItems||[]).find(function(it){return it.id==='os13';});
-  if(os13&&os13.moduleId==='md_f'){os13.moduleId=null;os13.module='정기 유지보수';changed=true;}
+  return changed;
+}
+/* 모듈 하나에 연결된(moduleId 일치) 체크리스트 항목들을 그 모듈의 현재 name/detail/level로 맞춘다.
+   교육 과정 관리에서 모듈을 편집·저장할 때(course.js saveModule)와, 데이터를 불러올 때마다(즉시 반영되도록)
+   모두 호출한다. 연결된 항목이 정확히 1개인 모듈은 항목명(module)뿐 아니라 세부 문구(item)도 모듈의
+   세부 교육내용과 동일하게 맞춘다 — 그 모듈을 그대로 대표하는 항목이라 문구를 그대로 반영해도 안전하다.
+   연결된 항목이 여러 개인 모듈(A/B/C/D 등)은 각 항목이 서로 다른 세부 작업을 나타내므로 item 문구는
+   건드리지 않고 module 표시명·level만 맞춘다. 반환값 true면 실제로 값이 바뀐 것이다. */
+function syncChecklistFromModule(m){
+  var linked=S.checklistItems.filter(function(it){return it.moduleId===m.id;});
+  var changed=false;
+  linked.forEach(function(it){
+    if(it.module!==m.name){it.module=m.name;changed=true;}
+    if(it.level!==m.level){it.level=m.level;changed=true;}
+    if(linked.length===1&&it.item!==m.detail){it.item=m.detail;changed=true;}
+  });
+  return changed;
+}
+function syncAllChecklistFromModules(){
+  var changed=false;
+  (S.modules||[]).forEach(function(m){if(syncChecklistFromModule(m))changed=true;});
   return changed;
 }
 
@@ -114,12 +130,14 @@ function loadData(){
         if(!S.modules.length)S.modules=deepCopy(DEF_MODULES);
         if(!S.checklistItems.length)S.checklistItems=deepCopy(DEF_CHECKLIST);
         ensureChecklistModuleIds();
+        syncAllChecklistFromModules();
         return;
       }
     }
   }catch(e){}
   FIELDS.forEach(function(f){S[f]=deepCopy(DEF[f]);});
   ensureChecklistModuleIds();
+  syncAllChecklistFromModules();
 }
 function saveCache(){
   try{
@@ -155,10 +173,13 @@ function loadFromSheets(callback){
       if(!S.levels.length)S.levels=deepCopy(DEF_LEVELS);
       if(!S.modules.length)S.modules=deepCopy(DEF_MODULES);
       if(!S.checklistItems.length)S.checklistItems=deepCopy(DEF_CHECKLIST);
-      /* moduleId 백필/보정으로 실제 데이터가 바뀐 경우, 캐시에만 남기지 않고 Sheet에도 즉시 반영해
-         다음 사용자·기기에서도 같은 값을 보도록 한다(loadData의 캐시 전용 경로에서는 저장하지 않음 —
-         네트워크 데이터보다 먼저 그려지는 임시 화면이라 여기서만 확정 저장한다) */
-      if(ensureChecklistModuleIds())saveData();
+      /* moduleId 백필과, 커리큘럼 매트릭스 모듈 내용과의 동기화로 실제 데이터가 바뀐 경우,
+         캐시에만 남기지 않고 Sheet에도 즉시 반영해 다음 사용자·기기에서도 같은 값을 보도록 한다
+         (loadData의 캐시 전용 경로에서는 저장하지 않음 — 네트워크 데이터보다 먼저 그려지는
+         임시 화면이라 여기서만 확정 저장한다) */
+      var idsFilled=ensureChecklistModuleIds();
+      var synced=syncAllChecklistFromModules();
+      if(idsFilled||synced)saveData();
       saveCache();
       if(led){led.className='conn-led ok';txt.textContent='연결 정상';}
       if(callback)callback();

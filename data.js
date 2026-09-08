@@ -101,7 +101,7 @@ var DEF_CHECKLIST=[
   {id:'os10',no:10,phase:'onsite',level:1,module:'기본 알람 대응',   moduleId:'md_e',item:'기본 알람 확인 및 리셋 조치',order:9},
   {id:'os11',no:11,phase:'onsite',level:1,module:'Recipe 운용(Job)', moduleId:'md_d',item:'검사 및 Log Data 저장/백업 절차 수행',order:10},
   {id:'os12',no:12,phase:'onsite',level:1,module:'평가',            moduleId:null,item:'Level1 실기평가 합격 (체크리스트 전 항목 Pass)',order:11},
-  {id:'os13',no:13,phase:'onsite',level:2,module:'정기 유지보수',    moduleId:null,item:'정기 PM 절차(청소/Calibration) 독립 수행',order:12},
+  {id:'os13',no:13,phase:'onsite',level:2,module:'Handler Teaching',moduleId:'md_f',item:'각 Module 축의 이동 위치 Position Teaching 방법 교육',order:12},
   {id:'os14',no:14,phase:'onsite',level:2,module:'정기 유지보수',    moduleId:'md_g',item:'소모품(조명/Controller 등) 점검 및 교체',order:13},
   {id:'os15',no:15,phase:'onsite',level:2,module:'기초 트러블슈팅',  moduleId:'md_h',item:'대표 고장 Module 3종 이상에 대한 원인 분석 및 1차 조치',order:14},
   {id:'os16',no:16,phase:'onsite',level:2,module:'Recipe 운용(검사)',moduleId:'md_i',item:'Gerber File, 조명/Camera/PZT, Alignment, 검사 Parameter 수정',order:15},

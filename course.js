@@ -133,13 +133,7 @@ function saveModule(id){
   }else S.modules.push(rec);
   saveData();cm();renderCourseTab();
 }
-/* 모듈 편집 저장 시, 이 모듈에 연결된(moduleId 일치) 체크리스트 항목들의 module 표시명과 level을
-   함께 갱신한다 — 대상자별 이수 현황 모달(trainee.js levelSection)이 바로 이 값을 그려서 보여준다 */
-function syncChecklistFromModule(m){
-  S.checklistItems.forEach(function(it){
-    if(it.moduleId===m.id){it.module=m.name;it.level=m.level;}
-  });
-}
+/* syncChecklistFromModule()는 app.js에 정의되어 있다(데이터 로드 시 자동 재동기화와 공유하기 위함) */
 function deleteModule(id){
   if(!confirm('이 모듈을 삭제할까요?'))return;
   S.modules=S.modules.filter(function(m){return m.id!==id;});
