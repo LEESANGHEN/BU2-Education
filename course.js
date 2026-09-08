@@ -36,6 +36,23 @@ function renderCourseTab(){
     return '<div class="sum-card"><div class="sum-n">'+h+'h</div><div class="sum-l">Level '+lv+' 합계 ('+(h/8).toFixed(1)+'일)</div></div>';
   }).join('');
 
+  var moduleOptLabel={};
+  S.modules.forEach(function(m){moduleOptLabel[m.id]=m.code+'. '+m.name;});
+  var phaseLbl={pre:'사전학습',onsite:'온사이트'};
+  var ciRows=S.checklistItems.slice().sort(function(a,b){
+    return (a.phase===b.phase?0:(a.phase==='pre'?-1:1))||a.level-b.level||a.order-b.order;
+  }).map(function(it){
+    var modLbl=it.moduleId?(moduleOptLabel[it.moduleId]||'(연결된 모듈 없음)'):'';
+    return '<tr>'
+      +'<td>'+(phaseLbl[it.phase]||it.phase)+'</td>'
+      +'<td>Level '+it.level+'</td>'
+      +'<td style="font-size:11px">'+esc(it.module)+(modLbl?'<br><span style="color:var(--tx-second)">🔗 '+esc(modLbl)+'</span>':'')+'</td>'
+      +'<td style="font-size:11px">'+esc(it.item)+'</td>'
+      +'<td>'+it.order+'</td>'
+      +'<td><button class="btn sm" onclick="openChecklistItemModal(\''+it.id+'\')">편집</button> <button class="btn sm red" onclick="deleteChecklistItem(\''+it.id+'\')">삭제</button></td>'
+    +'</tr>';
+  }).join('');
+
   var evalRows=S.levels.slice().sort(function(a,b){return a.level-b.level;}).map(function(l){
     var fb=evalCritFallback(l.level);
     var pass=(l.evalPass!=null&&l.evalPass!=='')?l.evalPass:fb.pass;
@@ -55,6 +72,14 @@ function renderCourseTab(){
       +'</div>'
       +'<div class="sum-row">'+hoursSummary+'</div>'
       +'<table class="dtbl sm"><thead><tr><th style="width:36px">No</th><th style="width:160px">모듈명</th><th>세부 교육내용</th><th style="width:70px">Level</th><th style="width:90px">교육방법</th><th style="width:60px">시간</th><th style="width:140px">필요 자료/장비</th><th style="width:110px"></th></tr></thead><tbody>'+moduleRows+'</tbody></table>'
+    +'</div>'
+    +'<div class="td-section">'
+      +'<div class="td-sectitle" style="display:flex;justify-content:space-between;align-items:center">'
+        +'<span>이수 체크리스트 관리 (사전학습·온사이트)</span>'
+        +'<button class="btn sm pri" onclick="openChecklistItemModal(null)">+ 항목 추가</button>'
+      +'</div>'
+      +'<div class="dbox" style="margin-bottom:10px;font-size:11.5px;color:var(--tx-second)">대상자별 이수 현황 모달에 표시되는 개별 체크 항목입니다. 🔗로 표시된 항목은 커리큘럼 매트릭스의 모듈과 연결되어 있어 그 모듈을 편집하면 모듈명·Level(및 항목이 1개뿐이면 문구까지)이 자동으로 따라 바뀝니다.</div>'
+      +'<table class="dtbl sm"><thead><tr><th style="width:70px">구분</th><th style="width:70px">Level</th><th style="width:160px">모듈</th><th>세부 이수 항목</th><th style="width:50px">순서</th><th style="width:110px"></th></tr></thead><tbody>'+ciRows+'</tbody></table>'
     +'</div>'
     +'<div class="td-section"><div class="td-sectitle">Level별 평가 기준 및 재평가 규정 (참고)</div>'
       +'<table class="dtbl sm"><thead><tr><th style="width:60px">Level</th><th>평가 방법</th><th>합격 기준</th><th style="width:150px">평가자</th><th>불합격 시 조치</th></tr></thead><tbody>'+evalRows+'</tbody></table>'
@@ -137,5 +162,62 @@ function saveModule(id){
 function deleteModule(id){
   if(!confirm('이 모듈을 삭제할까요?'))return;
   S.modules=S.modules.filter(function(m){return m.id!==id;});
+  saveData();cm();renderCourseTab();
+}
+
+/* ── 이수 체크리스트(사전학습/온사이트) 항목 관리 ── */
+function openChecklistItemModal(id){
+  var it=id?S.checklistItems.find(function(x){return x.id===id;}):null;
+  if(id&&!it)return;
+  if(!it)it={id:'',phase:'onsite',level:2,moduleId:'',module:'',item:'',order:S.checklistItems.filter(function(x){return x.phase==='onsite'&&x.level===2;}).length};
+  var modOpts='<option value=""'+(!it.moduleId?' selected':'')+'>(연결 안 됨 — 모듈 표시명 직접 입력)</option>'
+    +S.modules.slice().sort(function(a,b){return a.code.localeCompare(b.code);}).map(function(m){
+      return '<option value="'+m.id+'"'+(it.moduleId===m.id?' selected':'')+'>'+esc(m.code+'. '+m.name)+'</option>';
+    }).join('');
+  mw('<div class="mtit">'+(id?'이수 체크리스트 항목 편집':'+ 이수 체크리스트 항목 추가')+'</div>'
+    +'<div class="fr">'
+      +'<div class="fg"><label class="fl">구분</label><select id="ci_phase"><option value="pre"'+(it.phase==='pre'?' selected':'')+'>사전학습(pre)</option><option value="onsite"'+(it.phase==='onsite'?' selected':'')+'>온사이트(onsite)</option></select></div>'
+      +'<div class="fg"><label class="fl">Level (사전학습은 0~1만 사용)</label><select id="ci_level">'+[0,1,2,3].map(function(n){return '<option value="'+n+'"'+(it.level===n?' selected':'')+'>Level '+n+'</option>';}).join('')+'</select></div>'
+    +'</div>'
+    +'<div class="fg"><label class="fl">모듈 연결</label><select id="ci_moduleId">'+modOpts+'</select></div>'
+    +'<div class="fg"><label class="fl">모듈 표시명 (연결 안 할 경우에만 직접 입력 — 연결했으면 저장 시 그 모듈의 현재 이름으로 자동 대체됩니다)</label><input type="text" id="ci_module" value="'+esc(it.module||'')+'"></div>'
+    +'<div class="fg"><label class="fl">세부 이수 항목</label><textarea id="ci_item" rows="2">'+esc(it.item||'')+'</textarea></div>'
+    +'<div class="fg"><label class="fl">정렬 순서 (같은 구분·Level 내에서 낮을수록 위에 표시)</label><input type="text" id="ci_order" value="'+(it.order!=null?it.order:0)+'"></div>'
+    +'<div class="mfoot">'
+      +(id?'<button class="btn sm red" onclick="deleteChecklistItem(\''+id+'\')" style="margin-right:auto">삭제</button>':'')
+      +'<button class="btn sm" onclick="cm()">취소</button><button class="btn sm pri" onclick="saveChecklistItem('+jarg(id)+')">저장</button>'
+    +'</div>');
+}
+function saveChecklistItem(id){
+  var moduleId=document.getElementById('ci_moduleId').value||null;
+  var rec={
+    id:id||uid('ci'),
+    no:0,
+    phase:document.getElementById('ci_phase').value,
+    level:Number(document.getElementById('ci_level').value),
+    moduleId:moduleId,
+    module:document.getElementById('ci_module').value.trim(),
+    item:document.getElementById('ci_item').value.trim(),
+    order:Number(document.getElementById('ci_order').value)||0
+  };
+  if(!rec.item){alert('세부 이수 항목 내용을 입력해주세요.');return;}
+  var linkedModule=moduleId?S.modules.find(function(x){return x.id===moduleId;}):null;
+  if(linkedModule)rec.module=linkedModule.name;
+  else if(!rec.module){alert('모듈을 연결하지 않을 경우 모듈 표시명을 입력해주세요.');return;}
+  if(id){
+    var i=S.checklistItems.findIndex(function(x){return x.id===id;});
+    rec.no=S.checklistItems[i].no;
+    S.checklistItems[i]=rec;
+  }else{
+    rec.no=S.checklistItems.filter(function(x){return x.phase===rec.phase;}).length+1;
+    S.checklistItems.push(rec);
+  }
+  if(linkedModule)syncChecklistFromModule(linkedModule);
+  saveData();cm();renderCourseTab();
+}
+function deleteChecklistItem(id){
+  if(!confirm('이 이수 체크리스트 항목을 삭제할까요? (이미 기록된 이수 체크 데이터도 함께 삭제됩니다)'))return;
+  S.checklistItems=S.checklistItems.filter(function(x){return x.id!==id;});
+  S.completions=S.completions.filter(function(c){return c.itemId!==id;});
   saveData();cm();renderCourseTab();
 }
