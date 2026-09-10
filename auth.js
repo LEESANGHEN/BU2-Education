@@ -84,15 +84,23 @@ function renderAuthGate(mode, errMsg){
     +'</div>'
     +(isSignup?'':'<div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="doResetPw()" style="font-size:20px;color:var(--tx-second)">'+esc(_at('forgotPw'))+'</a></div>');
   /* 브라우저(Chrome 등)가 이전에 저장해둔 로그인 정보를 이 빈 입력창에 자동으로 채워 넣는
-     경우가 있어, 매번 완전히 빈 상태로 시작하도록 렌더링 직후 강제로 한 번 더 비운다. */
-  setTimeout(function(){
+     경우가 있는데, 그 시점이 렌더링 직후일 수도, 페이지 로드가 다 끝난 뒤일 수도 있어
+     한두 번의 지연 실행만으로는 못 막는 경우가 있었다. 그래서 "사용자가 실제로 이 입력창을
+     건드리기 전까지"는 짧은 간격으로 계속 비워서, 자동입력이 언제 끼어들든 화면엔 항상
+     빈 칸으로 보이게 한다. 사용자가 직접 클릭/입력한 순간부터는 더 이상 건드리지 않는다. */
+  var _e=document.getElementById('auth_email'), _p=document.getElementById('auth_pw');
+  var _touched=false;
+  function _markTouched(){_touched=true;}
+  if(_e){_e.addEventListener('focus',_markTouched);_e.addEventListener('keydown',_markTouched);}
+  if(_p){_p.addEventListener('focus',_markTouched);_p.addEventListener('keydown',_markTouched);}
+  var _clears=0;
+  var _clearTimer=setInterval(function(){
+    _clears++;
+    if(_touched||_clears>20){clearInterval(_clearTimer);return;}
     var e=document.getElementById('auth_email'), p=document.getElementById('auth_pw');
-    if(e)e.value=''; if(p)p.value='';
-  },0);
-  setTimeout(function(){
-    var e=document.getElementById('auth_email'), p=document.getElementById('auth_pw');
-    if(e)e.value=''; if(p)p.value='';
-  },150);
+    if(e&&document.activeElement!==e)e.value='';
+    if(p&&document.activeElement!==p)p.value='';
+  },100);
 }
 
 function doSignup(){

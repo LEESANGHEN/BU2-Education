@@ -214,7 +214,7 @@ input[type=text]:focus,input[type=date]:focus,input[type=email]:focus,input[type
    .mtit/.fl/input/.btn 등은 앱 전역 공용 클래스라 여기서는 .auth-box 하위로만 범위를
    좁혀 재정의해서, 다른 모달·폼에는 영향을 주지 않는다. */
 .auth-overlay{display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;
-  background:linear-gradient(rgba(10,14,22,.62),rgba(10,14,22,.62)),url('images/login-bg.jpg') center/cover no-repeat,var(--bg-base)}
+  background:linear-gradient(rgba(10,14,22,.62),rgba(10,14,22,.62)),url('Images/login-bg.jpg') center/cover no-repeat,var(--bg-base)}
 .auth-box{width:640px;max-width:94vw;background:var(--bg-panel);border:1.5px solid var(--bd-strong);border-radius:20px;padding:48px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
 .auth-box .auth-langbar{display:flex;justify-content:flex-end;margin-bottom:12px}
 .auth-box .auth-langbar select{width:auto;padding:6px 10px;font-size:13px}
