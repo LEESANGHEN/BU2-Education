@@ -233,6 +233,19 @@ input[type=text]:focus,input[type=date]:focus,input[type=email]:focus,input[type
 @keyframes onAutoFillCancel{from{}to{}}
 .auth-box input:-webkit-autofill{animation-name:onAutoFillStart}
 .auth-box input:not(:-webkit-autofill){animation-name:onAutoFillCancel}
+/* JS가 실제 값을 비우기까지 한 프레임 정도 화면에 글자가 잠깐 보이는 "깜빡임"을 없애기
+   위해, 자동완성 상태가 되는 즉시 글자 자체를 투명하게(배경도 원래 색으로) 만든다.
+   타이밍에 상관없이 항상 안 보인다. */
+.auth-box input:-webkit-autofill,
+.auth-box input:-webkit-autofill:hover,
+.auth-box input:-webkit-autofill:focus,
+.auth-box input:-webkit-autofill:active{
+  -webkit-text-fill-color:transparent!important;
+  -webkit-box-shadow:0 0 0px 1000px var(--bg-input) inset!important;
+  box-shadow:0 0 0px 1000px var(--bg-input) inset!important;
+  caret-color:var(--tx-primary);
+  transition:background-color 9999s ease-in-out 0s;
+}
 .chkrow{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--tx-primary);padding:4px 0;cursor:pointer}
 #ganttTools .chkrow{white-space:nowrap;flex-shrink:0}
 .chkrow input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:#534AB7}
