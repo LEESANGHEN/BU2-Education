@@ -83,24 +83,18 @@ function renderAuthGate(mode, errMsg){
       +'<button class="btn sm pri" onclick="'+(isSignup?'doSignup()':'doLogin()')+'">'+(isSignup?esc(_at('signupBtn')):esc(_at('loginBtn')))+'</button>'
     +'</div>'
     +(isSignup?'':'<div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="doResetPw()" style="font-size:20px;color:var(--tx-second)">'+esc(_at('forgotPw'))+'</a></div>');
-  /* 브라우저(Chrome 등)가 이전에 저장해둔 로그인 정보를 이 빈 입력창에 자동으로 채워 넣는
-     경우가 있는데, 그 시점이 렌더링 직후일 수도, 페이지 로드가 다 끝난 뒤일 수도 있어
-     한두 번의 지연 실행만으로는 못 막는 경우가 있었다. 그래서 "사용자가 실제로 이 입력창을
-     건드리기 전까지"는 짧은 간격으로 계속 비워서, 자동입력이 언제 끼어들든 화면엔 항상
-     빈 칸으로 보이게 한다. 사용자가 직접 클릭/입력한 순간부터는 더 이상 건드리지 않는다. */
-  var _e=document.getElementById('auth_email'), _p=document.getElementById('auth_pw');
-  var _touched=false;
-  function _markTouched(){_touched=true;}
-  if(_e){_e.addEventListener('focus',_markTouched);_e.addEventListener('keydown',_markTouched);}
-  if(_p){_p.addEventListener('focus',_markTouched);_p.addEventListener('keydown',_markTouched);}
-  var _clears=0;
-  var _clearTimer=setInterval(function(){
-    _clears++;
-    if(_touched||_clears>20){clearInterval(_clearTimer);return;}
-    var e=document.getElementById('auth_email'), p=document.getElementById('auth_pw');
-    if(e&&document.activeElement!==e)e.value='';
-    if(p&&document.activeElement!==p)p.value='';
-  },100);
+  /* 브라우저(Chrome 등)가 이전에 저장해둔 로그인 정보를 자동으로 채워 넣는 시점은
+     페이지마다 제각각이라 setTimeout/setInterval로는 정확히 못 맞춘다. 대신 CSS의
+     :-webkit-autofill 의사 클래스가 켜지는 순간 빈 애니메이션이 시작되도록 만들어두고
+     (style.css의 onAutoFillStart), 그 animationstart 이벤트를 감지해서 자동입력되는
+     바로 그 순간 값을 비운다 — 타이밍에 의존하지 않아 항상 정확히 동작한다. */
+  ['auth_email','auth_pw'].forEach(function(id){
+    var inp=document.getElementById(id);
+    if(!inp)return;
+    inp.addEventListener('animationstart',function(ev){
+      if(ev.animationName==='onAutoFillStart')inp.value='';
+    });
+  });
 }
 
 function doSignup(){
