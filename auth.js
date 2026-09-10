@@ -8,38 +8,98 @@
 ═══════════════════════════════════════════ */
 firebase.initializeApp(FIREBASE_CONFIG);
 
+/* 로그인 화면 5개국어(한국어/영어/중국어 간체·번체/일본어) — i18n.js의 LANGS/getLang·setLang을
+   그대로 재사용해 언어 선택이 앱 전체와 일관되게 저장된다. apply.js용 I18N 객체와는
+   무관한 로그인 전용 문구라 별도 딕셔너리(AUTH_I18N)로 둔다. */
+var AUTH_I18N = {
+  ko: { appName:'BU2 교육 관리', login:'로그인', signup:'회원가입', emailLabel:'이메일', pwLabel:'비밀번호',
+    toSignup:'처음이신가요? 회원가입', toLogin:'이미 계정이 있으신가요? 로그인',
+    loginBtn:'로그인', signupBtn:'가입하기', forgotPw:'비밀번호를 잊으셨나요?',
+    domainSignupErr:'{domain} 이메일만 가입할 수 있습니다.', pwLenErr:'비밀번호는 6자 이상이어야 합니다.',
+    domainOnlyErr:'{domain} 계정만 사용할 수 있습니다.', resetPwNeedEmail:'먼저 이메일을 입력해주세요.',
+    resetPwSent:'비밀번호 재설정 메일을 발송했습니다.', resetPwFailPrefix:'실패: ' },
+  en: { appName:'BU2 Training Management', login:'Login', signup:'Sign Up', emailLabel:'Email', pwLabel:'Password',
+    toSignup:'New here? Sign up', toLogin:'Already have an account? Log in',
+    loginBtn:'Log In', signupBtn:'Sign Up', forgotPw:'Forgot your password?',
+    domainSignupErr:'Only {domain} email addresses can sign up.', pwLenErr:'Password must be at least 6 characters.',
+    domainOnlyErr:'Only {domain} accounts can be used.', resetPwNeedEmail:'Please enter your email first.',
+    resetPwSent:'Password reset email sent.', resetPwFailPrefix:'Failed: ' },
+  'zh-CN': { appName:'BU2 培训管理', login:'登录', signup:'注册', emailLabel:'邮箱', pwLabel:'密码',
+    toSignup:'初次使用？注册', toLogin:'已有账号？登录',
+    loginBtn:'登录', signupBtn:'注册', forgotPw:'忘记密码了吗？',
+    domainSignupErr:'仅限 {domain} 邮箱注册。', pwLenErr:'密码必须至少6位。',
+    domainOnlyErr:'仅限使用 {domain} 账号。', resetPwNeedEmail:'请先输入邮箱。',
+    resetPwSent:'密码重置邮件已发送。', resetPwFailPrefix:'失败：' },
+  'zh-TW': { appName:'BU2 培訓管理', login:'登入', signup:'註冊', emailLabel:'電子郵件', pwLabel:'密碼',
+    toSignup:'初次使用？註冊', toLogin:'已有帳號？登入',
+    loginBtn:'登入', signupBtn:'註冊', forgotPw:'忘記密碼了嗎？',
+    domainSignupErr:'僅限 {domain} 電子郵件註冊。', pwLenErr:'密碼必須至少6位。',
+    domainOnlyErr:'僅限使用 {domain} 帳號。', resetPwNeedEmail:'請先輸入電子郵件。',
+    resetPwSent:'密碼重設郵件已發送。', resetPwFailPrefix:'失敗：' },
+  ja: { appName:'BU2 研修管理', login:'ログイン', signup:'新規登録', emailLabel:'メールアドレス', pwLabel:'パスワード',
+    toSignup:'初めてですか？新規登録', toLogin:'アカウントをお持ちですか？ログイン',
+    loginBtn:'ログイン', signupBtn:'登録する', forgotPw:'パスワードをお忘れですか？',
+    domainSignupErr:'{domain} のメールアドレスのみ登録できます。', pwLenErr:'パスワードは6文字以上で入力してください。',
+    domainOnlyErr:'{domain} アカウントのみ使用できます。', resetPwNeedEmail:'先にメールアドレスを入力してください。',
+    resetPwSent:'パスワード再設定メールを送信しました。', resetPwFailPrefix:'失敗：' }
+};
+function _at(key){
+  var lang=getLang();
+  var d=(AUTH_I18N[lang]&&AUTH_I18N[lang][key]!==undefined)?AUTH_I18N[lang][key]:AUTH_I18N.ko[key];
+  return String(d||'').split('{domain}').join(ALLOWED_EMAIL_DOMAIN);
+}
+function _authSetLang(l){
+  setLang(l);
+  try{firebase.auth().languageCode=l;}catch(e){}
+  renderAuthGate(_authMode);
+}
+
 function _domainOk(email){
   return !!email && String(email).toLowerCase().endsWith(ALLOWED_EMAIL_DOMAIN);
 }
 
+var _authMode='login';
 function renderAuthGate(mode, errMsg){
+  _authMode=mode;
   var overlay=document.getElementById('authOverlay');
   if(!overlay)return;
   overlay.style.display='flex';
   var appEl=document.querySelector('.app');
   if(appEl)appEl.style.display='none';
   var isSignup=mode==='signup';
+  var langOpts=LANGS.map(function(l){return '<option value="'+l.id+'"'+(l.id===getLang()?' selected':'')+'>'+esc(l.label)+'</option>';}).join('');
   overlay.innerHTML='<div class="auth-box">'
-    +'<div class="mtit">🎓 BU2 교육 관리 — '+(isSignup?'회원가입':'로그인')+'</div>'
+    +'<div class="auth-langbar"><select onchange="_authSetLang(this.value)">'+langOpts+'</select></div>'
+    +'<div class="mtit">🎓 '+esc(_at('appName'))+' — '+(isSignup?esc(_at('signup')):esc(_at('login')))+'</div>'
     +(errMsg?'<div class="auth-err">'+esc(errMsg)+'</div>':'')
-    +'<div class="fg"><label class="fl">이메일 ('+esc(ALLOWED_EMAIL_DOMAIN)+')</label>'
-      +'<input type="email" id="auth_email" placeholder="name'+esc(ALLOWED_EMAIL_DOMAIN)+'" autocomplete="username"></div>'
-    +'<div class="fg"><label class="fl">비밀번호</label>'
-      +'<input type="password" id="auth_pw" autocomplete="'+(isSignup?'new-password':'current-password')+'" onkeydown="if(event.key===\'Enter\')'+(isSignup?'doSignup()':'doLogin()')+'"></div>'
+    +'<div class="fg"><label class="fl">'+esc(_at('emailLabel'))+' ('+esc(ALLOWED_EMAIL_DOMAIN)+')</label>'
+      +'<input type="email" id="auth_email" placeholder="name'+esc(ALLOWED_EMAIL_DOMAIN)+'" autocomplete="off"></div>'
+    +'<div class="fg"><label class="fl">'+esc(_at('pwLabel'))+'</label>'
+      +'<input type="password" id="auth_pw" autocomplete="off" onkeydown="if(event.key===\'Enter\')'+(isSignup?'doSignup()':'doLogin()')+'"></div>'
     +'<div class="mfoot" style="justify-content:space-between;align-items:center">'
-      +'<a href="javascript:void(0)" onclick="renderAuthGate(\''+(isSignup?'login':'signup')+'\')" style="font-size:12px;color:var(--tx-second)">'
-        +(isSignup?'이미 계정이 있으신가요? 로그인':'처음이신가요? 회원가입')
+      +'<a href="javascript:void(0)" onclick="renderAuthGate(\''+(isSignup?'login':'signup')+'\')" style="color:var(--tx-second)">'
+        +(isSignup?esc(_at('toLogin')):esc(_at('toSignup')))
       +'</a>'
-      +'<button class="btn sm pri" onclick="'+(isSignup?'doSignup()':'doLogin()')+'">'+(isSignup?'가입하기':'로그인')+'</button>'
+      +'<button class="btn sm pri" onclick="'+(isSignup?'doSignup()':'doLogin()')+'">'+(isSignup?esc(_at('signupBtn')):esc(_at('loginBtn')))+'</button>'
     +'</div>'
-    +(isSignup?'':'<div style="text-align:center;margin-top:10px"><a href="javascript:void(0)" onclick="doResetPw()" style="font-size:11px;color:var(--tx-second)">비밀번호를 잊으셨나요?</a></div>');
+    +(isSignup?'':'<div style="text-align:center;margin-top:20px"><a href="javascript:void(0)" onclick="doResetPw()" style="font-size:20px;color:var(--tx-second)">'+esc(_at('forgotPw'))+'</a></div>');
+  /* 브라우저(Chrome 등)가 이전에 저장해둔 로그인 정보를 이 빈 입력창에 자동으로 채워 넣는
+     경우가 있어, 매번 완전히 빈 상태로 시작하도록 렌더링 직후 강제로 한 번 더 비운다. */
+  setTimeout(function(){
+    var e=document.getElementById('auth_email'), p=document.getElementById('auth_pw');
+    if(e)e.value=''; if(p)p.value='';
+  },0);
+  setTimeout(function(){
+    var e=document.getElementById('auth_email'), p=document.getElementById('auth_pw');
+    if(e)e.value=''; if(p)p.value='';
+  },150);
 }
 
 function doSignup(){
   var email=(document.getElementById('auth_email').value||'').trim();
   var pw=document.getElementById('auth_pw').value||'';
-  if(!_domainOk(email)){renderAuthGate('signup',ALLOWED_EMAIL_DOMAIN+' 이메일만 가입할 수 있습니다.');return;}
-  if(pw.length<6){renderAuthGate('signup','비밀번호는 6자 이상이어야 합니다.');return;}
+  if(!_domainOk(email)){renderAuthGate('signup',_at('domainSignupErr'));return;}
+  if(pw.length<6){renderAuthGate('signup',_at('pwLenErr'));return;}
   firebase.auth().createUserWithEmailAndPassword(email,pw)
     .catch(function(err){renderAuthGate('signup',err.message);});
 }
@@ -51,12 +111,14 @@ function doLogin(){
 }
 function doResetPw(){
   var email=((document.getElementById('auth_email')||{}).value||'').trim();
-  if(!email){alert('먼저 이메일을 입력해주세요.');return;}
+  if(!email){alert(_at('resetPwNeedEmail'));return;}
   firebase.auth().sendPasswordResetEmail(email)
-    .then(function(){alert('비밀번호 재설정 메일을 발송했습니다.');})
-    .catch(function(err){alert('실패: '+err.message);});
+    .then(function(){alert(_at('resetPwSent'));})
+    .catch(function(err){alert(_at('resetPwFailPrefix')+err.message);});
 }
 function doLogout(){firebase.auth().signOut();}
+
+try{firebase.auth().languageCode=getLang();}catch(e){}
 
 firebase.auth().onAuthStateChanged(function(user){
   if(user&&_domainOk(user.email)){
@@ -70,7 +132,7 @@ firebase.auth().onAuthStateChanged(function(user){
        로그인 후에도 다시 한번 확인해 잘못된 도메인 세션은 즉시 로그아웃시킨다.
        실제 데이터 보호는 각 .gs 백엔드의 서버측 재검사가 담당한다. */
     firebase.auth().signOut();
-    renderAuthGate('login',ALLOWED_EMAIL_DOMAIN+' 계정만 사용할 수 있습니다.');
+    renderAuthGate('login',_at('domainOnlyErr'));
   }else{
     renderAuthGate('login');
   }
