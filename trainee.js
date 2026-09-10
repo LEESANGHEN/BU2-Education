@@ -245,9 +245,9 @@ function sendExamEmailFor(traineeId){
   var url=(typeof getApplySheetsUrl==='function')?getApplySheetsUrl():'';
   if(!url){alert('신청서 Sheets가 연결되어 있지 않아 이메일을 보낼 수 없습니다. 상단 "⚙ 신청서 Sheets 설정"을 먼저 확인해주세요.');return;}
   var link=location.origin+location.pathname.replace(/index\.html$/,'').replace(/\/$/,'')+'/exam.html?eq='+encodeURIComponent(t.equipment);
-  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({
+  authedPost(url,{
     action:'sendExamEmail',to:t.email,traineeName:t.name,equipmentName:equipmentName(t.equipment,'ko'),link:link
-  })})
+  })
     .then(function(r){return r.text();})
     .then(function(text){
       var data;try{data=JSON.parse(text);}catch(e){data={error:'invalid response'};}

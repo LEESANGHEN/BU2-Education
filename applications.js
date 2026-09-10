@@ -36,7 +36,7 @@ function saveApplySheetsUrl(){
 function loadApplications(callback){
   var url=getApplySheetsUrl();
   if(!url){if(callback)callback();return;}
-  fetch(url+'?action=load')
+  authedGet(url+'?action=load')
     .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
     .then(function(data){
       if(data.error)throw new Error(data.error);
@@ -51,7 +51,7 @@ function loadApplications(callback){
 function saveApplications(){
   var url=getApplySheetsUrl();
   if(!url)return;
-  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'save',applications:APPS.list})})
+  authedPost(url,{action:'save',applications:APPS.list})
     .catch(function(err){console.warn('신청서 저장 실패:',err.message);});
 }
 
@@ -242,10 +242,10 @@ function sendPrelearnEmailFor(a,cb){
   if(!url||!a.traineeEmail){if(cb)cb(false,'이메일 주소 없음');return;}
   var eqIds=appEquipList(a);
   var link=location.origin+location.pathname.replace(/index\.html$/,'').replace(/\/$/,'')+'/prelearn.html?eq='+encodeURIComponent(eqIds.join(','));
-  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({
+  authedPost(url,{
     action:'sendPrelearnEmail',to:a.traineeEmail,traineeName:a.traineeName,
     equipment:eqIds.join(','),equipmentName:appEquipNames(a),link:link
-  })})
+  })
     .then(function(r){return r.text();})
     .then(function(text){
       var data;try{data=JSON.parse(text);}catch(e){data={error:'invalid response'};}
@@ -299,10 +299,10 @@ function confirmRejectApplication(id){
   var to=a.applicantEmail||a.traineeEmail;
   if(!to){alert('반려 처리되었습니다. (신청자 이메일이 없어 안내 메일은 발송하지 못했습니다.)');return;}
   var url=getApplySheetsUrl();
-  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({
+  authedPost(url,{
     action:'sendRejectionEmail',to:to,traineeName:a.traineeName,applicantName:a.applicantName,
     reviewerName:name,reviewerOrg:org,reviewerEmail:email,reason:reason
-  })})
+  })
     .then(function(r){return r.text();})
     .then(function(text){
       var data;try{data=JSON.parse(text);}catch(e){data={error:'invalid response'};}

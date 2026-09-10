@@ -103,7 +103,7 @@ function sendCertificateEmailFor(traineeId,level){
   };
   var btn=document.getElementById('cert_email_btn');
   if(btn){btn.disabled=true;btn.textContent='전송 중...';}
-  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({
+  authedPost(url,{
     action:'sendCertificateEmail',to:t.email,
     traineeName:t.name,org:ot.label+' · '+(t.org||''),position:t.position||'',country:t.country||'',
     level:level,levelTitle:ctLevel(level,'title')||lv.title||'',competency:ctLevel(level,'competency')||lv.competency||'',
@@ -112,7 +112,7 @@ function sendCertificateEmailFor(traineeId,level){
     certNo:appr.id||('CERT-'+traineeId+'-L'+level),
     signatures:signatures,items:items,labels:labels,
     followUp:(level===3&&appr.followUpDone)?true:false,followUpDate:appr.followUpDate||''
-  })})
+  })
     .then(function(r){return r.text();})
     .then(function(text){
       var data;try{data=JSON.parse(text);}catch(e){data={error:'invalid response'};}

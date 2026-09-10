@@ -150,7 +150,7 @@ function saveData(){
   var url=getSheetsUrl();
   if(!url||location.protocol==='file:')return;
   var body={action:'save'};FIELDS.forEach(function(f){body[f]=S[f];});
-  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(body)})
+  authedPost(url,body)
     .then(function(r){return r.json();})
     .then(function(data){
       if(data.error){console.warn('저장 실패:',data.error);updateConnStatus('err');}
@@ -163,7 +163,7 @@ function loadFromSheets(callback){
   if(!url||location.protocol==='file:'){if(callback)callback();return;}
   var led=document.getElementById('connLed'),txt=document.getElementById('connTxt');
   if(led){led.className='conn-led chk';txt.textContent='동기화 중...';}
-  fetch(url+'?action=load')
+  authedGet(url+'?action=load')
     .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
     .then(function(data){
       if(data.error)throw new Error(data.error);
@@ -284,6 +284,13 @@ function renderAll(){
 document.addEventListener('DOMContentLoaded',function(){
   initTheme();
   applyAdminModeUI();
+});
+
+/* 로그인(auth.js의 onAuthStateChanged)이 @intekplus.com 계정을 확인한 뒤에만 호출된다.
+   인증 확인 전에 데이터를 불러오면 아직 게이트되지 않은 화면에 잠깐이라도 데이터가
+   그려지거나, 백엔드가 idToken 없는 요청을 거부하는 시점에 빈 화면이 뜰 수 있어서
+   기존 DOMContentLoaded 핸들러에서 이 부분만 분리했다. */
+function startApp(){
   loadData();
   switchTab('apply');
   loadFromSheets(function(){renderAll();});
@@ -300,4 +307,4 @@ document.addEventListener('DOMContentLoaded',function(){
       loadApplications(function(){renderAll();});
     },5*60*1000);
   })();
-});
+}

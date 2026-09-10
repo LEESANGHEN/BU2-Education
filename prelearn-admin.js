@@ -108,7 +108,7 @@ function refreshPrelearn(){
 function savePrelearnRecords(){
   var url=getPrelearnSheetsUrl();
   if(!url)return;
-  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'save',records:PLA.list})})
+  authedPost(url,{action:'save',records:PLA.list})
     .catch(function(err){console.warn('사전학습 저장 실패:',err.message);});
 }
 
@@ -262,7 +262,7 @@ function qaTranslateAll(qi){
   var btn=document.getElementById('qa_translate_btn_'+qi);
   if(btn){btn.disabled=true;btn.textContent='번역 중...';}
   var realKeys={en:'en',zhCN:'zh-CN',zhTW:'zh-TW',ja:'ja'};
-  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'translate',texts:texts,source:'ko',targets:['en','zh-CN','zh-TW','ja']})})
+  authedPost(url,{action:'translate',texts:texts,source:'ko',targets:['en','zh-CN','zh-TW','ja']})
     .then(function(r){return r.json();})
     .then(function(data){
       if(!data.ok){alert('번역 실패: '+(data.error||''));return;}
@@ -319,7 +319,7 @@ function saveQuizOverridesForSection(){
   QA.overrides[QA.equip]=QA.overrides[QA.equip]||{};
   QA.overrides[QA.equip][QA.code]=QA.pool;
   var url=getPrelearnSheetsUrl();
-  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'saveQuizOverrides',quizOverrides:QA.overrides})})
+  authedPost(url,{action:'saveQuizOverrides',quizOverrides:QA.overrides})
     .then(function(r){return r.json();})
     .then(function(data){
       if(data.ok){alert('저장되었습니다.');renderQuizAdminView();}
@@ -331,7 +331,7 @@ function resetQuizSection(){
   if(!confirm('이 섹션의 문제를 기본값으로 되돌릴까요? (관리자가 수정한 내용이 사라집니다)'))return;
   if(QA.overrides[QA.equip])delete QA.overrides[QA.equip][QA.code];
   var url=getPrelearnSheetsUrl();
-  fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'saveQuizOverrides',quizOverrides:QA.overrides})})
+  authedPost(url,{action:'saveQuizOverrides',quizOverrides:QA.overrides})
     .then(function(r){return r.json();})
     .then(function(){qaLoadPool();renderQuizAdminView();})
     .catch(function(err){alert('실패: '+err.message);});
