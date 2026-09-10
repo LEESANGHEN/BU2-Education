@@ -211,21 +211,25 @@ input[type=text],input[type=date],input[type=email],input[type=password],select{
 input[type=text]:focus,input[type=date]:focus,input[type=email]:focus,input[type=password]:focus,select:focus{border-color:#1a6bbf}
 
 /* 로그인 게이트 (auth.js) — 원래 크기(width 320/padding 24 등)의 정확히 2배.
-   .mtit/.fl/input/.btn 등은 앱 전역 공용 클래스라 여기서는 .auth-box 하위로만 범위를
-   좁혀 재정의해서, 다른 모달·폼에는 영향을 주지 않는다. */
+   회사 로고가 밝은 톤이라 이 박스만은 사이트 전체 다크/라이트 테마와 무관하게 항상
+   라이트 톤으로 고정한다(변수 대신 직접 색상 지정). .mtit/.fl/input/.btn 등은 앱 전역
+   공용 클래스라 여기서는 .auth-box 하위로만 범위를 좁혀 재정의해서 다른 모달·폼에는
+   영향을 주지 않는다. */
 .auth-overlay{display:none;position:fixed;inset:0;z-index:9999;align-items:flex-start;justify-content:flex-end;padding:6vh 6vw;box-sizing:border-box;
   background:linear-gradient(rgba(10,14,22,.28),rgba(10,14,22,.28)),url('Images/login-bg.jpg') center/cover no-repeat,var(--bg-base)}
-.auth-box{width:640px;max-width:94vw;background:var(--bg-panel);border:1.5px solid var(--bd-strong);border-radius:20px;padding:48px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
-.auth-box .auth-langbar{display:flex;justify-content:flex-end;margin-bottom:12px}
-.auth-box .auth-langbar select{width:auto;padding:6px 10px;font-size:13px}
-.auth-box .mtit{font-size:28px;margin-bottom:32px}
+.auth-box{width:640px;max-width:94vw;background:#ffffff;border:1.5px solid #e2e2ec;border-radius:20px;padding:48px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.auth-box .auth-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding-bottom:20px;border-bottom:1.5px solid #e9e9f2}
+.auth-box .auth-logo{height:46px;width:auto;max-width:230px;object-fit:contain}
+.auth-box .auth-topbar select{width:auto;padding:6px 10px;font-size:13px;background:#f6f6fa;color:#16162a;border-color:#d9d9e4}
+.auth-box .mtit{font-size:28px;margin-bottom:32px;color:#16162a}
 .auth-box .fg{margin-bottom:24px}
-.auth-box .fl{font-size:22px;margin-bottom:8px}
-.auth-box input[type=email],.auth-box input[type=password]{padding:12px 18px;font-size:24px;border-radius:10px}
-.auth-box .mfoot{margin-top:32px;padding-top:24px}
-.auth-box .mfoot a{font-size:22px!important}
+.auth-box .fl{font-size:22px;margin-bottom:8px;color:#5b5b74}
+.auth-box input[type=email],.auth-box input[type=password]{padding:12px 18px;font-size:24px;border-radius:10px;background:#f6f6fa;border-color:#d9d9e4;color:#16162a}
+.auth-box .mfoot{margin-top:32px;padding-top:24px;border-top-color:#e9e9f2}
+.auth-box .mfoot a{font-size:22px!important;color:#3a5fcd!important}
 .auth-box .btn.sm{font-size:22px;padding:4px 16px}
-.auth-err{background:var(--bg-danger);border:1px solid var(--bd-danger);color:#e07070;font-size:24px;padding:16px 20px;border-radius:10px;margin-bottom:28px}
+.auth-box div[style*="text-align:center"] a{color:#3a5fcd!important}
+.auth-err{background:#ffecec;border:1px solid #e2a0a0;color:#b23a3a;font-size:24px;padding:16px 20px;border-radius:10px;margin-bottom:28px}
 /* 브라우저가 저장된 아이디/비번을 자동완성하는 "그 순간"을 감지하기 위한 트릭 —
    :-webkit-autofill 상태가 되면 이 빈 애니메이션이 시작되고, auth.js가 그 이벤트를
    감지해서 즉시 값을 비운다. setTimeout/setInterval로 타이밍을 맞추는 것보다 정확하다. */
@@ -241,9 +245,9 @@ input[type=text]:focus,input[type=date]:focus,input[type=email]:focus,input[type
 .auth-box input:-webkit-autofill:focus,
 .auth-box input:-webkit-autofill:active{
   -webkit-text-fill-color:transparent!important;
-  -webkit-box-shadow:0 0 0px 1000px var(--bg-input) inset!important;
-  box-shadow:0 0 0px 1000px var(--bg-input) inset!important;
-  caret-color:var(--tx-primary);
+  -webkit-box-shadow:0 0 0px 1000px #f6f6fa inset!important;
+  box-shadow:0 0 0px 1000px #f6f6fa inset!important;
+  caret-color:#16162a;
   transition:background-color 9999s ease-in-out 0s;
 }
 .chkrow{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--tx-primary);padding:4px 0;cursor:pointer}

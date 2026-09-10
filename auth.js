@@ -69,8 +69,11 @@ function renderAuthGate(mode, errMsg){
   var isSignup=mode==='signup';
   var langOpts=LANGS.map(function(l){return '<option value="'+l.id+'"'+(l.id===getLang()?' selected':'')+'>'+esc(l.label)+'</option>';}).join('');
   overlay.innerHTML='<div class="auth-box">'
-    +'<div class="auth-langbar"><select onchange="_authSetLang(this.value)">'+langOpts+'</select></div>'
-    +'<div class="mtit">🎓 '+esc(_at('appName'))+' — '+(isSignup?esc(_at('signup')):esc(_at('login')))+'</div>'
+    +'<div class="auth-topbar">'
+      +'<img class="auth-logo" src="Images/intekplus-logo.png" alt="INTEK PLUS">'
+      +'<select onchange="_authSetLang(this.value)">'+langOpts+'</select>'
+    +'</div>'
+    +'<div class="mtit">'+esc(_at('appName'))+' — '+(isSignup?esc(_at('signup')):esc(_at('login')))+'</div>'
     +(errMsg?'<div class="auth-err">'+esc(errMsg)+'</div>':'')
     +'<div class="fg"><label class="fl">'+esc(_at('emailLabel'))+' ('+esc(ALLOWED_EMAIL_DOMAIN)+')</label>'
       +'<input type="email" id="auth_email" placeholder="name'+esc(ALLOWED_EMAIL_DOMAIN)+'" autocomplete="off"></div>'
