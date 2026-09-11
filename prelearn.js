@@ -240,7 +240,7 @@ function renderViewer(){
       +'<div class="pl-nav">'
         +'<button class="btn" onclick="plPrev()" '+((PL.ci===0&&PL.si===0&&PL.li===0)?'disabled':'')+'>'+esc(pt('prevBtn'))+'</button>'
         +'<span style="font-size:11px;color:var(--tx-faint)">'+(PL.li+1)+' / '+sec.slides.length+'</span>'
-        +'<button class="btn pri" onclick="plNext()">'+(PL.li===sec.slides.length-1?(quizPoolFor(PL.equip,sec.code).length?esc(pt('quizBtn')):esc(pt('nextSectionBtn'))):esc(pt('nextBtn')))+'</button>'
+        +'<button class="btn pri" onclick="plNext()">'+(PL.li===sec.slides.length-1?esc(pt('quizBtn')):esc(pt('nextBtn')))+'</button>'
       +'</div>'
     +'</div>'
   +'</div>';
@@ -266,16 +266,6 @@ function plPrev(){
 function plNext(){
   var sec=curSection();
   if(PL.li<sec.slides.length-1){PL.li++;renderViewer();return;}
-  // 이 섹션에 등록된 퀴즈 문제가 없으면(설명 전용 섹션) 퀴즈 화면 없이 바로 완료 처리하고
-  // 다음 섹션으로 넘어간다 — 문제가 0개일 때 submitQuiz()의 0/0 판정이 항상 "불합격"으로
-  // 나오는 것을 피하기 위함.
-  if(!quizPoolFor(PL.equip,sec.code).length){
-    var prog=courseProgress();
-    if(!prog[sec.code])prog[sec.code]={viewed:true,quizScore:0,quizTotal:0,passed:true,attempts:1,picks:{}};
-    saveProgress();
-    advanceSection();
-    return;
-  }
   // 이미 제출한 섹션이면 renderQuiz()가 자동으로 확인용(읽기전용) 화면을 보여준다
   PL.mode='quiz';PL.quizPick={};
   renderViewer();

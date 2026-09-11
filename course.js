@@ -27,6 +27,13 @@ function renderCourseTab(){
       +'<td>Level '+m.level+'</td>'
       +'<td>'+esc(m.method)+'</td>'
       +'<td>'+m.hours+'h</td>'
+      +'<td>'+(function(){
+          var mat=(typeof COURSE_MATERIALS!=='undefined')?COURSE_MATERIALS[m.code]:null;
+          if(!mat)return '<span style="color:var(--tx-faint);font-size:11px">준비중</span>';
+          return Object.keys(mat).map(function(eq){
+            return '<button class="btn sm" onclick="openMaterialViewer(\''+m.code+'\',\''+eq+'\')">'+esc(CM_EQUIP_LABEL[eq]||eq.toUpperCase())+'</button>';
+          }).join(' ');
+        })()+'</td>'
       +'<td style="font-size:11px;color:var(--tx-second)">'+esc(m.resources||'')+'</td>'
       +'<td><button class="btn sm" onclick="openModuleModal(\''+m.id+'\')">편집</button> <button class="btn sm red" onclick="deleteModule(\''+m.id+'\')">삭제</button></td>'
     +'</tr>';
@@ -71,7 +78,7 @@ function renderCourseTab(){
         +'<button class="btn sm pri" onclick="openModuleModal(null)">+ 모듈 추가</button>'
       +'</div>'
       +'<div class="sum-row">'+hoursSummary+'</div>'
-      +'<table class="dtbl sm"><thead><tr><th style="width:36px">No</th><th style="width:160px">모듈명</th><th>세부 교육내용</th><th style="width:70px">Level</th><th style="width:90px">교육방법</th><th style="width:60px">시간</th><th style="width:140px">필요 자료/장비</th><th style="width:110px"></th></tr></thead><tbody>'+moduleRows+'</tbody></table>'
+      +'<table class="dtbl sm"><thead><tr><th style="width:36px">No</th><th style="width:160px">모듈명</th><th>세부 교육내용</th><th style="width:70px">Level</th><th style="width:90px">교육방법</th><th style="width:60px">시간</th><th style="width:120px">교육 자료</th><th style="width:140px">필요 자료/장비</th><th style="width:110px"></th></tr></thead><tbody>'+moduleRows+'</tbody></table>'
     +'</div>'
     +'<div class="td-section">'
       +'<div class="td-sectitle" style="display:flex;justify-content:space-between;align-items:center">'
