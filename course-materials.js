@@ -182,11 +182,19 @@ var CM_AUDIO_EL=null;
 function cmAudioPath(code,equip,n,lang){return '관련 자료/'+(CM_EQUIP_LABEL[equip]||equip)+'/'+code+'/audio/slide-'+String(n).padStart(3,'0')+'-'+lang+'.mp3';}
 function cmToggleSpeak(){
   if(CM_SPEAKING){cmStopSpeak();return;}
+  cmPlay(false);
+}
+/* silent=true: 슬라이드 진입 시 자동 재생용 — 파일이 없어도 alert로 방해하지 않는다.
+   silent=false: 버튼을 직접 눌러서 재생하는 경우 — 실패하면 alert로 알려준다. */
+function cmPlay(silent){
   var path=cmAudioPath(CM.code,CM.equip,CM.idx+1,langKey());
   CM_AUDIO_EL=new Audio(path);
   CM_AUDIO_EL.onended=function(){CM_SPEAKING=false;_cmUpdateSpeakBtn();};
-  CM_AUDIO_EL.onerror=function(){CM_SPEAKING=false;_cmUpdateSpeakBtn();alert('음성 파일을 찾을 수 없거나 재생할 수 없습니다.');};
-  CM_AUDIO_EL.play();
+  CM_AUDIO_EL.onerror=function(){
+    CM_SPEAKING=false;_cmUpdateSpeakBtn();
+    if(!silent)alert('음성 파일을 찾을 수 없거나 재생할 수 없습니다.');
+  };
+  CM_AUDIO_EL.play().catch(function(){CM_SPEAKING=false;_cmUpdateSpeakBtn();});
   CM_SPEAKING=true;
   _cmUpdateSpeakBtn();
 }
@@ -230,6 +238,8 @@ function renderMaterialViewer(){
     +'</div>'
     +'<div class="mfoot"><button class="btn pri" onclick="cmClose()">닫기</button></div>'
   ,true);
+  // 슬라이드에 진입/이동할 때마다 현재 언어로 자동 재생 (이전 슬라이드 음성은 위 cmStopSpeak()로 이미 정지됨)
+  if(_cmTx(slide.tx))cmPlay(true);
 }
 function cmPrev(){if(CM.idx>0){CM.idx--;renderMaterialViewer();}}
 function cmNext(){
