@@ -169,7 +169,7 @@ var COURSE_MATERIALS={
 /* ── 뷰어 상태 및 렌더링 ── mw()/cm()(app.js)와 기존 prelearn용 슬라이드 CSS(style.css의
    .pl-slidewrap/.pl-slideimg/.pl-explain/.pl-en/.pl-nav)를 그대로 재사용한다. */
 var CM={code:null,equip:null,idx:0};
-function _cmTx(obj){if(!obj)return '';var k=getLang();return obj[k]||obj.en||'';}
+function _cmTx(obj){if(!obj)return '';var k=langKey();return obj[k]||obj.en||'';}
 function openMaterialViewer(code,equip){
   CM.code=code;CM.equip=equip;CM.idx=0;
   renderMaterialViewer();
@@ -183,7 +183,7 @@ function renderMaterialViewer(){
     '<div style="display:flex;justify-content:space-between;align-items:center;gap:16px">'
       +'<div class="mtit" style="margin-bottom:0;flex:1 1 auto">'+esc(_cmTx(mat.title))+' — '+esc(CM_EQUIP_LABEL[CM.equip]||CM.equip.toUpperCase())+'</div>'
       +'<div style="display:flex;align-items:center;gap:6px;flex-shrink:0;white-space:nowrap">'
-        +'<span style="font-size:12px;color:var(--tx-second)">'+esc(CM_LANG_LABEL[getLang()]||CM_LANG_LABEL.en)+':</span>'
+        +'<span style="font-size:12px;color:var(--tx-second)">'+esc(CM_LANG_LABEL[langKey()]||CM_LANG_LABEL.en)+':</span>'
         +'<select onchange="cmSetLang(this.value)" style="width:auto">'+langOpts+'</select>'
       +'</div>'
     +'</div>'
