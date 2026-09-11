@@ -9,7 +9,10 @@
 ═══════════════════════════════════════════ */
 var CM_EQUIP_LABEL={smtv:'iSIS-SMTV',nbga:'iSIS-NBGA'};
 
-function cmImg(code,equip,n){return 'course-materials/'+code+'/'+equip+'/slide-'+String(n).padStart(3,'0')+'.jpg';}
+/* 설비군(iSIS-SMTV, iSIS-NBGA, ...)이 앞으로 계속 늘어날 예정이라, 최상위 "관련 자료" 폴더
+   바로 아래에 설비군별 폴더를 두고 그 안에 모듈별 폴더를 두는 구조로 정리한다:
+   관련 자료/<설비군명>/<모듈코드>/slide-NNN.jpg */
+function cmImg(code,equip,n){return '관련 자료/'+(CM_EQUIP_LABEL[equip]||equip)+'/'+code+'/slide-'+String(n).padStart(3,'0')+'.jpg';}
 
 var COURSE_MATERIALS={
   F:{
@@ -176,9 +179,12 @@ function renderMaterialViewer(){
   var slide=mat.slides[CM.idx];
   var langOpts=LANGS.map(function(l){return '<option value="'+l.id+'"'+(l.id===getLang()?' selected':'')+'>'+esc(l.label)+'</option>';}).join('');
   mw(
-    '<div style="display:flex;justify-content:space-between;align-items:center">'
-      +'<div class="mtit" style="margin-bottom:0">'+esc(_cmTx(mat.title))+' — '+esc(CM_EQUIP_LABEL[CM.equip]||CM.equip.toUpperCase())+'</div>'
-      +'<select onchange="cmSetLang(this.value)">'+langOpts+'</select>'
+    '<div style="display:flex;justify-content:space-between;align-items:center;gap:16px">'
+      +'<div class="mtit" style="margin-bottom:0;flex:1 1 auto">'+esc(_cmTx(mat.title))+' — '+esc(CM_EQUIP_LABEL[CM.equip]||CM.equip.toUpperCase())+'</div>'
+      +'<div style="display:flex;align-items:center;gap:6px;flex-shrink:0;white-space:nowrap">'
+        +'<span style="font-size:12px;color:var(--tx-second)">언어 변경:</span>'
+        +'<select onchange="cmSetLang(this.value)" style="width:auto">'+langOpts+'</select>'
+      +'</div>'
     +'</div>'
     +'<div class="pl-slidewrap" style="margin-top:14px"><img src="'+slide.img+'" class="pl-slideimg" alt="slide"></div>'
     +(_cmTx(slide.tx)?('<div class="pl-explain"><div class="pl-en">'+esc(_cmTx(slide.tx)).replace(/\n/g,'<br>')+'</div></div>'):'')
