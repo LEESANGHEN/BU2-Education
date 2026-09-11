@@ -170,11 +170,44 @@ var COURSE_MATERIALS={
    .pl-slidewrap/.pl-slideimg/.pl-explain/.pl-en/.pl-nav)를 그대로 재사용한다. */
 var CM={code:null,equip:null,idx:0};
 function _cmTx(obj){if(!obj)return '';var k=langKey();return obj[k]||obj.en||'';}
+
+/* ── 음성 설명(TTS) — Google Cloud Text-to-Speech로 미리 생성해둔 mp3 파일을 재생한다
+   (관련 자료/<설비군>/<모듈코드>/audio/slide-NNN-<언어>.mp3, 슬라이드 순번 NNN은 1부터
+   시작하는 slides 배열 인덱스+1과 그대로 대응). 브라우저가 그때그때 기계 합성음을 읽어주는
+   방식이 아니라, 미리 만들어둔 자연스러운 음성 파일을 재생만 하는 방식이라 품질이 좋다. */
+var CM_SPEAK_LABEL={ko:'🔊 읽어주기',en:'🔊 Read Aloud',zhCN:'🔊 朗读',zhTW:'🔊 朗讀',ja:'🔊 読み上げ'};
+var CM_STOP_LABEL={ko:'⏹ 정지',en:'⏹ Stop',zhCN:'⏹ 停止',zhTW:'⏹ 停止',ja:'⏹ 停止'};
+var CM_SPEAKING=false;
+var CM_AUDIO_EL=null;
+function cmAudioPath(code,equip,n,lang){return '관련 자료/'+(CM_EQUIP_LABEL[equip]||equip)+'/'+code+'/audio/slide-'+String(n).padStart(3,'0')+'-'+lang+'.mp3';}
+function cmToggleSpeak(){
+  if(CM_SPEAKING){cmStopSpeak();return;}
+  var path=cmAudioPath(CM.code,CM.equip,CM.idx+1,langKey());
+  CM_AUDIO_EL=new Audio(path);
+  CM_AUDIO_EL.onended=function(){CM_SPEAKING=false;_cmUpdateSpeakBtn();};
+  CM_AUDIO_EL.onerror=function(){CM_SPEAKING=false;_cmUpdateSpeakBtn();alert('음성 파일을 찾을 수 없거나 재생할 수 없습니다.');};
+  CM_AUDIO_EL.play();
+  CM_SPEAKING=true;
+  _cmUpdateSpeakBtn();
+}
+function cmStopSpeak(){
+  if(CM_AUDIO_EL){CM_AUDIO_EL.pause();CM_AUDIO_EL.currentTime=0;CM_AUDIO_EL=null;}
+  CM_SPEAKING=false;
+  _cmUpdateSpeakBtn();
+}
+function _cmUpdateSpeakBtn(){
+  var btn=document.getElementById('cmSpeakBtn');
+  if(!btn)return;
+  btn.textContent=CM_SPEAKING?(CM_STOP_LABEL[langKey()]||CM_STOP_LABEL.en):(CM_SPEAK_LABEL[langKey()]||CM_SPEAK_LABEL.en);
+}
+function cmClose(){cmStopSpeak();cm();}
+
 function openMaterialViewer(code,equip){
   CM.code=code;CM.equip=equip;CM.idx=0;
   renderMaterialViewer();
 }
 function renderMaterialViewer(){
+  cmStopSpeak(); // 슬라이드/언어가 바뀌면 재생 중이던 음성은 멈춘다
   var mat=COURSE_MATERIALS[CM.code]&&COURSE_MATERIALS[CM.code][CM.equip];
   if(!mat)return;
   var slide=mat.slides[CM.idx];
@@ -189,12 +222,13 @@ function renderMaterialViewer(){
     +'</div>'
     +'<div class="pl-slidewrap" style="margin-top:14px"><img src="'+slide.img+'" class="pl-slideimg" alt="slide"></div>'
     +(_cmTx(slide.tx)?('<div class="pl-explain"><div class="pl-en">'+esc(_cmTx(slide.tx)).replace(/\n/g,'<br>')+'</div></div>'):'')
+    +(_cmTx(slide.tx)?('<div style="margin:10px 0;text-align:center"><button class="btn sm" id="cmSpeakBtn" onclick="cmToggleSpeak()">'+esc(CM_SPEAK_LABEL[langKey()]||CM_SPEAK_LABEL.en)+'</button></div>'):'')
     +'<div class="pl-nav">'
       +'<button class="btn" onclick="cmPrev()" '+(CM.idx===0?'disabled':'')+'>← 이전</button>'
       +'<span style="font-size:11px;color:var(--tx-faint)">'+(CM.idx+1)+' / '+mat.slides.length+'</span>'
       +'<button class="btn" onclick="cmNext()" '+(CM.idx===mat.slides.length-1?'disabled':'')+'>다음 →</button>'
     +'</div>'
-    +'<div class="mfoot"><button class="btn pri" onclick="cm()">닫기</button></div>'
+    +'<div class="mfoot"><button class="btn pri" onclick="cmClose()">닫기</button></div>'
   ,true);
 }
 function cmPrev(){if(CM.idx>0){CM.idx--;renderMaterialViewer();}}
