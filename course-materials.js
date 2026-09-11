@@ -8,6 +8,7 @@
    다른 모듈(G/I/J 등) 자료가 추가되어도 이 구조 그대로 항목만 추가하면 된다.
 ═══════════════════════════════════════════ */
 var CM_EQUIP_LABEL={smtv:'iSIS-SMTV',nbga:'iSIS-NBGA'};
+var CM_LANG_LABEL={ko:'언어',en:'Language',zhCN:'语言',zhTW:'語言',ja:'言語'};
 
 /* 설비군(iSIS-SMTV, iSIS-NBGA, ...)이 앞으로 계속 늘어날 예정이라, 최상위 "관련 자료" 폴더
    바로 아래에 설비군별 폴더를 두고 그 안에 모듈별 폴더를 두는 구조로 정리한다:
@@ -182,7 +183,7 @@ function renderMaterialViewer(){
     '<div style="display:flex;justify-content:space-between;align-items:center;gap:16px">'
       +'<div class="mtit" style="margin-bottom:0;flex:1 1 auto">'+esc(_cmTx(mat.title))+' — '+esc(CM_EQUIP_LABEL[CM.equip]||CM.equip.toUpperCase())+'</div>'
       +'<div style="display:flex;align-items:center;gap:6px;flex-shrink:0;white-space:nowrap">'
-        +'<span style="font-size:12px;color:var(--tx-second)">언어 변경:</span>'
+        +'<span style="font-size:12px;color:var(--tx-second)">'+esc(CM_LANG_LABEL[getLang()]||CM_LANG_LABEL.en)+':</span>'
         +'<select onchange="cmSetLang(this.value)" style="width:auto">'+langOpts+'</select>'
       +'</div>'
     +'</div>'
