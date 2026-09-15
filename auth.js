@@ -46,7 +46,14 @@ var AUTH_I18N = {
     domainSignupErr:'{domain} のメールアドレスのみ登録できます。', pwLenErr:'パスワードは6文字以上で入力してください。',
     domainOnlyErr:'{domain} アカウントのみ使用できます。', resetPwNeedEmail:'先にメールアドレスを入力してください。',
     resetPwSent:'パスワード再設定メールを送信しました。', resetPwFailPrefix:'失敗：',
-    rememberEmail:'メールアドレスを保存', staySignedIn:'この端末でログイン状態を保持' }
+    rememberEmail:'メールアドレスを保存', staySignedIn:'この端末でログイン状態を保持' },
+  vi: { appName:'Quản lý đào tạo BU2', login:'Đăng nhập', signup:'Đăng ký', emailLabel:'Email', pwLabel:'Mật khẩu',
+    toSignup:'Lần đầu sử dụng? Đăng ký', toLogin:'Đã có tài khoản? Đăng nhập',
+    loginBtn:'Đăng nhập', signupBtn:'Đăng ký', forgotPw:'Quên mật khẩu?',
+    domainSignupErr:'Chỉ email {domain} mới có thể đăng ký.', pwLenErr:'Mật khẩu phải có ít nhất 6 ký tự.',
+    domainOnlyErr:'Chỉ có thể dùng tài khoản {domain}.', resetPwNeedEmail:'Vui lòng nhập email trước.',
+    resetPwSent:'Đã gửi email đặt lại mật khẩu.', resetPwFailPrefix:'Thất bại: ',
+    rememberEmail:'Lưu email', staySignedIn:'Duy trì đăng nhập trên thiết bị này' }
 };
 function _at(key){
   var lang=getLang();

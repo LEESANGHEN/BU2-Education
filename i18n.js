@@ -6,7 +6,8 @@ var LANGS=[
   {id:'en',label:'English'},
   {id:'zh-CN',label:'中文(简体)'},
   {id:'zh-TW',label:'中文(繁體)'},
-  {id:'ja',label:'日本語'}
+  {id:'ja',label:'日本語'},
+  {id:'vi',label:'Tiếng Việt'}
 ];
 var LANG_LS_KEY='edu_lang';
 function getLang(){try{return localStorage.getItem(LANG_LS_KEY)||'en';}catch(e){return 'en';}}
@@ -312,6 +313,64 @@ ja:{
     md_k:{name:'根本原因分析および検証レポート作成',detail:'故障履歴分析およびレポート作成、データ検証後のレポート作成方法'},
     md_l:{name:'レシピ生成/検査最適化',detail:'新規検査Recipe(Job)生成、検出率/誤検率/UPH最適化'},
     md_m:{name:'教育スキル(Train-the-Trainer)',detail:'模擬教育状況のデモンストレーション、教育資料活用法'}
+  }
+},
+vi:{
+  langLabel:'Ngôn ngữ:',
+  pageTitle:'🎓 Đơn đăng ký đào tạo BU2',
+  formTitle:'Đơn đăng ký đào tạo',
+  formSub:'Đào tạo thiết bị kiểm tra Substrate FCBGA BU2 Level 0~3 · Training Application Form',
+  sec1:'1. Thông tin đăng ký',
+  applyDate:'Ngày đăng ký',orgType:'Loại đơn vị',orgTypePh:'VD: Chi nhánh nước ngoài, Agent, Khách hàng, Nhân viên mới, v.v.',org:'Tên đơn vị',
+  applicantName:'Người đăng ký (người viết)',applicantPosition:'Chức vụ',applicantContact:'Số liên hệ',applicantEmail:'Email người đăng ký',
+  country:'Quốc gia',
+  sec2:'2. Thông tin học viên',
+  samePersonLbl:'Người đăng ký và học viên là cùng một người (tự động điền thông tin bên dưới)',
+  traineeName:'Họ và tên',traineePosition:'Chức vụ',traineeTask:'Công việc phụ trách',
+  visitCategory:'Loại chuyến thăm',priorLevel:'Level đã hoàn thành trước đó (nếu tái访)',experienceYears:'Số năm kinh nghiệm hiện tại',
+  priorLevelNone:'-',
+  traineeContact:'Số liên hệ',traineeEmail:'Email học viên',
+  sec3:'3. Lịch đào tạo & Level mong muốn',
+  equipment:'Thiết bị đào tạo',
+  desiredLevel:'Level mong muốn',desiredStart:'Ngày bắt đầu đào tạo mong muốn',desiredEnd:'Ngày kết thúc đào tạo mong muốn',
+  totalDays:'Tổng số ngày đào tạo',
+  sec4:'4. Tự đánh giá năng lực trước khóa học',
+  sec4hint:'Những kỹ năng đã có sẽ được bỏ qua trong quá trình đào tạo trực tiếp, tập trung vào các lĩnh vực còn thiếu.',
+  thCode:'Mã',thLevel:'Level',thModule:'Lĩnh vực đào tạo (Module)',thHas:'Đã có',thNote:'Ghi chú',
+  hasN:'N (Chưa có)',hasPartial:'Một phần',hasY:'Y (Đã có)',
+  assessNotePh:'Kinh nghiệm liên quan, lịch sử đào tạo trước đây, v.v.',
+  sec5:'5. Lịch sử hoàn thành học trước (Tham khảo cho lần tái访)',
+  pre0:'Đã hoàn thành học lý thuyết Level 0 (Manual)',pre1:'Đã hoàn thành học cơ bản vận hành SW Level 1 (Manual)',
+  methodPh:'Phương pháp học',
+  sec5hint:'※ Người đến lần đầu sẽ hoàn thành học trước Level 0~1 qua trang học trực tuyến được hướng dẫn sau khi đăng ký hoàn tất. Mục dưới đây chỉ dành cho người tái访 đã có lịch sử hoàn thành học trước đây, để tham khảo.',
+  sec6:'6. Ghi chú đặc biệt & Yêu cầu',sec6ph:'Ngôn ngữ · Visa · Chỗ ở · An toàn/Dị ứng, v.v.',
+  sec7:'7. Xác nhận của người đăng ký',branchApprover:'Chữ ký người đăng ký',submitDate:'Ngày nộp',
+  sec7hint:'Nên nộp đơn này ít nhất 4 tuần trước chuyến thăm. Level, Plan và lịch trình cuối cùng có thể được điều chỉnh dựa trên kết quả tự đánh giá đã nộp.',
+  submitBtn:'Gửi đơn đăng ký',submitting:'Đang gửi...',
+  doneTitle:'✅ Đơn đăng ký đã được tiếp nhận',
+  doneMsg:'Lịch trình chuyến thăm và Level xác nhận sẽ được thông báo riêng sau khi người phụ trách xem xét.<br>Nếu có thắc mắc, vui lòng liên hệ người phụ trách đào tạo tại trụ sở chính.',
+  warnMsg:'⚠ Trang đăng ký này chưa được cấu hình kết nối. Vui lòng liên hệ quản trị viên. (Chưa thiết lập APPLY_SHEETS_URL trong apply.js)',
+  errPrefix:'Đã xảy ra lỗi khi gửi: ',errSuffix:' (vui lòng thử lại sau ít phút)',
+  reqOrg:'Tên đơn vị',reqApplicant:'Người đăng ký (người viết)',reqContact:'Số liên hệ',reqTrainee:'Họ tên học viên',reqEmail:'Email học viên',emailInvalid:' không phải định dạng email hợp lệ.',reqStart:'Ngày bắt đầu đào tạo mong muốn',reqEnd:'Ngày kết thúc đào tạo mong muốn',reqEquipment:'Vui lòng chọn ít nhất một thiết bị đào tạo.',
+  reqSuffix:' là bắt buộc.',dateOrderErr:'Ngày kết thúc mong muốn không thể sớm hơn ngày bắt đầu.',
+  daysUnit:' ngày',
+  orgTypeLbl:{branch:'Chi nhánh nước ngoài',agent:'Agent (Đối tác)',customer:'Khách hàng'},
+  visitCatLbl:{new:'Mới',revisit:'Tái访'},
+  countryLbl:{'한국':'Hàn Quốc','중국':'Trung Quốc','대만':'Đài Loan','일본':'Nhật Bản','베트남':'Việt Nam','말레이시아':'Malaysia','싱가폴':'Singapore','태국':'Thái Lan','필리핀':'Philippines','인도':'Ấn Độ','미국':'Mỹ','유럽':'Châu Âu','기타':'Khác'},
+  modules:{
+    md_a:{name:'Cấu hình cơ bản thiết bị',detail:'Giới thiệu HW thiết bị và cấu hình tủ điện'},
+    md_b:{name:'Cơ bản lý thuyết kiểm tra quang học',detail:'Nguyên lý kiểm tra 2D/3D, khái niệm chiếu sáng/camera/xử lý ảnh'},
+    md_c:{name:'Vận hành Software (Main UI)',detail:'Quy trình khởi động, đăng nhập, bố cục màn hình, mô tả chức năng'},
+    md_d:{name:'Vận hành Recipe',detail:'Recipe Open/Run, kiểm tra kết quả kiểm tra, lưu/backup Data Report & Log'},
+    md_e:{name:'Xử lý cảnh báo cơ bản',detail:'Kiểm tra/reset các cảnh báo thường gặp, kiểm tra log cảnh báo'},
+    md_f:{name:'Bảo trì định kỳ (PM)',detail:'PM hàng ngày/tuần/tháng, vệ sinh, xác minh LTS'},
+    md_g:{name:'Kiểm tra/Thay thế vật tư tiêu hao',detail:'Kiểm tra và thay thế vật tư tiêu hao như Camera, đèn chiếu sáng, Controller, PC Board, Motor, Driver'},
+    md_h:{name:'Xử lý sự cố cơ bản',detail:'Phân tích nguyên nhân và xử lý ban đầu cho 3+ loại module lỗi thường gặp'},
+    md_i:{name:'Sửa đổi Recipe Vision Parameter',detail:'Gerber File, chiếu sáng/Camera/PZT, Alignment, sửa đổi tham số kiểm tra'},
+    md_j:{name:'Xử lý sự cố nâng cao / Xác minh dữ liệu',detail:'Thiết lập HW (PC, Camera, Controller), tinh chỉnh module quang học 2D/3D, xác minh dữ liệu'},
+    md_k:{name:'Phân tích nguyên nhân gốc & viết báo cáo xác minh',detail:'Phân tích lịch sử sự cố và viết báo cáo, phương pháp viết báo cáo sau khi xác minh dữ liệu'},
+    md_l:{name:'Tạo Recipe / Tối ưu hóa kiểm tra',detail:'Tạo Recipe (Job) kiểm tra mới, tối ưu hóa tỷ lệ phát hiện/tỷ lệ báo sai/UPH'},
+    md_m:{name:'Kỹ năng đào tạo (Train-the-Trainer)',detail:'Diễn tập tình huống đào tạo mô phỏng, cách sử dụng tài liệu đào tạo'}
   }
 }
 };

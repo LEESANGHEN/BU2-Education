@@ -238,5 +238,49 @@ ja:{
     os23:{module:'評価',item:'Level3総合実技+承認委員会審査合格'},
     os24:{module:'評価',item:'3ヶ月現場フォローアップ結果確認(最終承認条件)'}
   }
+},
+vi:{
+  doc:{
+    title:'Chứng chỉ hoàn thành đào tạo',certNo:'Số chứng chỉ',name:'Họ và tên',org:'Đơn vị',position:'Chức vụ',country:'Quốc gia',
+    statement1:'Xin chứng nhận người có tên trên đã hoàn thành khóa đào tạo',statement2:'trong chương trình đào tạo thiết bị kiểm tra Substrate FCBGA BU2.',
+    competencyTitle:'Năng lực cốt lõi',itemsDone:'Mục đã hoàn thành',approvalDate:'Ngày hoàn thành (phê duyệt)',
+    itemsTitle:'Mục hoàn thành chi tiết',thModule:'Module',thItem:'Mục',thDone:'Hoàn thành',thDate:'Ngày',thNote:'Ghi chú',
+    followUp:'Xác nhận Follow-Up',followUpDone:'Đã hoàn thành',issueDate:'Ngày cấp',
+    footer:'Nhóm Vận hành Kỹ thuật 1 BU2 · Người phụ trách đào tạo',
+    examAutoNote:'Tự động áp dụng từ bài thi viết trực tuyến'
+  },
+  roles:{trainerSign:'Người phụ trách đào tạo',partLeadSign:'Trưởng bộ phận',groupLeadSign:'Trưởng nhóm',committeeSign:'Thành viên hội đồng'},
+  levels:{
+    0:{title:'Hiểu biết cơ bản về thiết bị',competency:'Phân loại nhóm thiết bị, giải thích vai trò của từng nhóm · Nhận biết cấu hình HW/SW cơ bản và tên các thành phần chính (※ Không được vận hành độc lập)'},
+    1:{title:'Vận hành chức năng cơ bản (Basic Operator)',competency:'Thực hiện quy trình khởi động/dừng thiết bị · Vận hành SW (khởi động, thao tác Main UI, Recipe Open/Run) · Kiểm tra và reset các cảnh báo cơ bản liên quan đến vận hành · Lưu/backup dữ liệu kiểm tra/Log'},
+    2:{title:'Vận hành độc lập & Bảo trì cơ bản (Field Engineer)',competency:'Tự thực hiện PM định kỳ (vệ sinh/hiệu chuẩn/thay vật tư tiêu hao) · Phân tích nguyên nhân và xử lý ban đầu cho các cảnh báo thường gặp · Sửa đổi cơ bản Recipe Vision Parameter'},
+    3:{title:'Kỹ sư nâng cao / Đào tạo viên (Technical Advanced Engineer)',competency:'Xử lý sự cố nâng cao (thay thế HW, căn chỉnh hệ quang học) · Thiết lập module cấu hình HW (PC, Controller, Camera) · Tinh chỉnh và xác minh module quang học 2D/3D Vision · Phát triển recipe mới/tối ưu hóa dữ liệu · Viết báo cáo phân tích nguyên nhân gốc (RCA) · Đào tạo các kỹ sư khác'}
+  },
+  items:{
+    os1:{module:'Cấu hình cơ bản thiết bị',item:'Hiểu cấu hình và cấu trúc module HW'},
+    os2:{module:'Cấu hình cơ bản thiết bị',item:'Hiểu cấu hình và cấu trúc tủ điện'},
+    os3:{module:'Lý thuyết kiểm tra quang học',item:'Hiểu nguyên lý quang học 2D/3D'},
+    os4:{module:'Lý thuyết kiểm tra quang học',item:'Hiểu nguyên lý liên kết giữa PC, Board, Controller và Camera'},
+    os5:{module:'Khái niệm kiểm tra',item:'Khái niệm xử lý hình ảnh'},
+    os6:{module:'Đánh giá',item:'Đạt bài thi viết Level 0 (đúng từ 80% trở lên)'},
+    os7:{module:'Vận hành Software',item:'Cài đặt, khởi động, đăng nhập SW'},
+    os8:{module:'Vận hành Software',item:'Cấu trúc Main UI, hiểu chức năng, cách vận hành'},
+    os9:{module:'Vận hành Recipe (Job)',item:'Mở và chạy Recipe (Job) sản phẩm'},
+    os10:{module:'Xử lý cảnh báo cơ bản',item:'Kiểm tra và reset các cảnh báo cơ bản'},
+    os11:{module:'Vận hành Recipe (Job)',item:'Thực hiện quy trình kiểm tra và lưu/backup Log Data'},
+    os12:{module:'Đánh giá',item:'Đạt đánh giá thực hành Level 1 (Pass toàn bộ checklist)'},
+    os13:{module:'Bảo trì định kỳ',item:'Tự thực hiện quy trình PM định kỳ (vệ sinh/hiệu chuẩn)'},
+    os14:{module:'Bảo trì định kỳ',item:'Kiểm tra và thay thế vật tư tiêu hao (đèn chiếu sáng/Controller, v.v.)'},
+    os15:{module:'Xử lý sự cố cơ bản',item:'Phân tích nguyên nhân và xử lý ban đầu cho 3+ loại module lỗi thường gặp'},
+    os16:{module:'Vận hành Recipe (Kiểm tra)',item:'Sửa đổi Gerber File, chiếu sáng/Camera/PZT, Alignment, tham số kiểm tra'},
+    os17:{module:'Đánh giá',item:'Đạt bài thi thực hành Level 2 (2+ tình huống sự cố)'},
+    os18:{module:'Đánh giá',item:'Đạt đánh giá quan sát vận hành độc lập 2+ lần'},
+    os19:{module:'Xử lý sự cố nâng cao',item:'Thiết lập HW (PC, Camera, Controller), tinh chỉnh module quang học 2D/3D, xác minh dữ liệu'},
+    os20:{module:'Phát triển Recipe',item:'Tạo Recipe kiểm tra mới, tối ưu hóa tỷ lệ phát hiện/tỷ lệ báo sai/UPH'},
+    os21:{module:'Phân tích nguyên nhân gốc',item:'Phân tích lịch sử sự cố và viết báo cáo, phương pháp viết báo cáo sau xác minh dữ liệu'},
+    os22:{module:'Kỹ năng đào tạo',item:'Diễn tập tình huống đào tạo mô phỏng, cách sử dụng tài liệu đào tạo'},
+    os23:{module:'Đánh giá',item:'Đạt kỳ thi thực hành tổng hợp Level 3 + hội đồng phê duyệt'},
+    os24:{module:'Đánh giá',item:'Xác nhận kết quả Follow-Up hiện trường 3 tháng (điều kiện phê duyệt cuối cùng)'}
+  }
 }
 };
