@@ -16,9 +16,9 @@ var CM_LANG_LABEL={ko:'언어',en:'Language',zhCN:'语言',zhTW:'語言',ja:'言
 function cmImg(code,equip,n){return '관련 자료/'+(CM_EQUIP_LABEL[equip]||equip)+'/'+code+'/slide-'+String(n).padStart(3,'0')+'.jpg';}
 
 var COURSE_MATERIALS={
-  F:{
+  G:{
     smtv:{
-      title:{ko:'F. Handle Teaching',en:'F. Handle Teaching',zhCN:'F. Handle Teaching',zhTW:'F. Handle Teaching',ja:'F. Handle Teaching'},
+      title:{ko:'G. Handle Teaching',en:'G. Handle Teaching',zhCN:'G. Handle Teaching',zhTW:'G. Handle Teaching',ja:'G. Handle Teaching'},
       slides:[
         {img:cmImg('F','smtv',1),tx:{
           ko:'각 Module 축의 이동 위치(Position) Teaching 방법을 다룹니다.',
@@ -163,7 +163,7 @@ var COURSE_MATERIALS={
       ]
     },
     nbga:{
-      title:{ko:'F. Handler Teaching',en:'F. Handler Teaching',zhCN:'F. Handler Teaching',zhTW:'F. Handler Teaching',ja:'F. Handler Teaching'},
+      title:{ko:'G. Handler Teaching',en:'G. Handler Teaching',zhCN:'G. Handler Teaching',zhTW:'G. Handler Teaching',ja:'G. Handler Teaching'},
       slides:[
         {img:cmImg('F','nbga',1),tx:{
           en:'This chapter covers Handler Teaching — the position-teaching sequence for the Elevator, Tray Sorter Module (TSM), Tray Transfer Module (TTM), Multi Sorter, 3D Inspector, and 2D Inspector.',
@@ -1092,9 +1092,9 @@ var COURSE_MATERIALS={
       ]
     }
   },
-  G:{
+  F:{
     smtv:{
-      title:{ko:'G. Consumables Inspection/Replacement',en:'G. Consumables Inspection/Replacement',zhCN:'G. Consumables Inspection/Replacement',zhTW:'G. Consumables Inspection/Replacement',ja:'G. Consumables Inspection/Replacement'},
+      title:{ko:'F. Consumables Inspection/Replacement',en:'F. Consumables Inspection/Replacement',zhCN:'F. Consumables Inspection/Replacement',zhTW:'F. Consumables Inspection/Replacement',ja:'F. Consumables Inspection/Replacement'},
       slides:[
         {img:cmImg('G','smtv',1),tx:{
           ko:'Camera, 조명, Controller, PC Board, Motor, Driver 등 소모품 점검 및 교체를 다룹니다.',
@@ -1155,7 +1155,7 @@ var COURSE_MATERIALS={
       ]
     },
     nbga:{
-      title:{ko:'G. Preventive Maintenance',en:'G. Preventive Maintenance',zhCN:'G. Preventive Maintenance',zhTW:'G. Preventive Maintenance',ja:'G. Preventive Maintenance'},
+      title:{ko:'F. Preventive Maintenance',en:'F. Preventive Maintenance',zhCN:'F. Preventive Maintenance',zhTW:'F. Preventive Maintenance',ja:'F. Preventive Maintenance'},
       slides:[
         {img:cmImg('G','nbga',1),tx:{
           en:'Preventive Maintenance Schedule #1 — before/during/after operation checklist. Before operation: check air pressure (0.49MPa) and leaks, check for foreign substances on the Vision Stage Motor Part, check cables for twisting, and check for abnormal noise or vibration during warm-up. During operation: watch for abnormal noise, vibration, heat, or smell. After operation: check for frequent jamming, clean dust from the X&Y Table and Robot Motor, and clean the Jig top surface.',
@@ -1181,9 +1181,9 @@ var COURSE_MATERIALS={
       ]
     }
   },
-  I:{
+  H:{
     smtv:{
-      title:{ko:'I. Recipe Vision Parameter',en:'I. Recipe Vision Parameter',zhCN:'I. Recipe Vision Parameter',zhTW:'I. Recipe Vision Parameter',ja:'I. Recipe Vision Parameter'},
+      title:{ko:'H. Recipe Vision Parameter',en:'H. Recipe Vision Parameter',zhCN:'H. Recipe Vision Parameter',zhTW:'H. Recipe Vision Parameter',ja:'H. Recipe Vision Parameter'},
       slides:[
         {img:cmImg('I','smtv',1),tx:{
           ko:'Gerber File, 조명/Camera/PZT, Alignment, 검사 Parameter 수정을 다룹니다.',
@@ -1286,7 +1286,7 @@ var COURSE_MATERIALS={
       ]
     },
     nbga:{
-      title:{ko:'I. Recipe Vision Parameter',en:'I. Recipe Vision Parameter',zhCN:'I. Recipe Vision Parameter',zhTW:'I. Recipe Vision Parameter',ja:'I. Recipe Vision Parameter'},
+      title:{ko:'H. Recipe Vision Parameter',en:'H. Recipe Vision Parameter',zhCN:'H. Recipe Vision Parameter',zhTW:'H. Recipe Vision Parameter',ja:'H. Recipe Vision Parameter'},
       slides:[
         {img:cmImg('I','nbga',1),tx:{
           en:'Software Inspection Parameter — this section covers Illum Control, Align, 2D Barcode & OCR, 2D Inspection, 3D Inspection, and LTS Target.',
@@ -2124,9 +2124,9 @@ var COURSE_MATERIALS={
       ]
     }
   },
-  J:{
+  I:{
     smtv:{
-      title:{ko:'J. Advanced Troubleshooting / Data Verification',en:'J. Advanced Troubleshooting / Data Verification',zhCN:'J. Advanced Troubleshooting / Data Verification',zhTW:'J. Advanced Troubleshooting / Data Verification',ja:'J. Advanced Troubleshooting / Data Verification'},
+      title:{ko:'I. Advanced Troubleshooting / Data Verification',en:'I. Advanced Troubleshooting / Data Verification',zhCN:'I. Advanced Troubleshooting / Data Verification',zhTW:'I. Advanced Troubleshooting / Data Verification',ja:'I. Advanced Troubleshooting / Data Verification'},
       slides:[
         {img:cmImg('J','smtv',1),tx:{
           ko:'HW(PC, Camera, Controller) 설정, 2D/3D 광학 Module Tuning, Data 검증을 다룹니다.',
@@ -2292,7 +2292,7 @@ var COURSE_MATERIALS={
       ]
     },
     nbga:{
-      title:{ko:'J. Advanced Troubleshooting / Data Verification',en:'J. Advanced Troubleshooting / Data Verification',zhCN:'J. Advanced Troubleshooting / Data Verification',zhTW:'J. Advanced Troubleshooting / Data Verification',ja:'J. Advanced Troubleshooting / Data Verification'},
+      title:{ko:'I. Advanced Troubleshooting / Data Verification',en:'I. Advanced Troubleshooting / Data Verification',zhCN:'I. Advanced Troubleshooting / Data Verification',zhTW:'I. Advanced Troubleshooting / Data Verification',ja:'I. Advanced Troubleshooting / Data Verification'},
       slides:[
         {img:cmImg('J','nbga',1),tx:{
           en:'H/W Troubleshooting Manual, Version 1.0.1 (last updated 2024-06-26).',
@@ -3490,6 +3490,366 @@ var COURSE_MATERIALS={
           zhCN:'3.1. Outgoing Report——出货前验证设备状态与品质的流程。Outgoing Report的内容(检测方法·基准)可能因客户而异,并记录前述Product Verification Progress流程中所获得的各项数据。',
           zhTW:'3.1. Outgoing Report——出貨前驗證設備狀態與品質的流程。Outgoing Report的內容(檢測方法·基準)可能因客戶而異,並記錄前述Product Verification Progress流程中所獲得的各項資料。',
           ja:'3.1. Outgoing Report——出荷前に設備の状態と品質を検証する工程です。Outgoing Reportの内容(検査方法・基準)は顧客により異なる場合があり、前述のProduct Verification Progress工程で得られた各種データを記録します。'
+        }}
+      ]
+    }
+  },
+  C:{
+    smtv:{
+      title:{ko:'C. Software 조작(Main UI)',en:'C. Software Operation (Main UI)',zhCN:'C. Software操作(Main UI)',zhTW:'C. Software操作(Main UI)',ja:'C. Software操作(Main UI)'},
+      slides:[
+        {img:cmImg('C','smtv',1),tx:{
+          en:'Operation — this section covers the Main Program: Host & Vision Main Software, Host System Status, Host Operation UI, and Handler Initialize.',
+          ko:'Operation — Main Program: Host & Vision Main Software, Host System Status, Host Operation UI, Handler Initialize를 다룹니다.',
+          zhCN:'Operation——本节介绍Main Program:Host & Vision Main Software、Host System Status、Host Operation UI、Handler Initialize。',
+          zhTW:'Operation——本節介紹Main Program:Host & Vision Main Software、Host System Status、Host Operation UI、Handler Initialize。',
+          ja:'Operation——本節ではMain Program:Host & Vision Main Software、Host System Status、Host Operation UI、Handler Initializeを扱います。'
+        }},
+        {img:cmImg('C','smtv',2),tx:{
+          en:'2.2.1. Host & Vision Main Software — switch screens with Ctrl+Ctrl+1~4 (1: HOST, 2: 3D Vision 1, 3: 3D Vision 2, 4: 2D Vision). Switch to HOST and run the iSMTV_Host program.',
+          ko:'2.2.1. Host & Vision Main Software — Ctrl+Ctrl+1~4 입력으로 화면을 전환합니다(1: HOST, 2: 3D Vision 1, 3: 3D Vision 2, 4: 2D Vision). HOST로 전환해 iSMTV_Host 프로그램을 실행합니다.',
+          zhCN:'2.2.1. Host & Vision Main Software——通过输入Ctrl+Ctrl+1~4切换画面(1:HOST,2:3D Vision 1,3:3D Vision 2,4:2D Vision)。切换到HOST并运行iSMTV_Host程序。',
+          zhTW:'2.2.1. Host & Vision Main Software——透過輸入Ctrl+Ctrl+1~4切換畫面(1:HOST,2:3D Vision 1,3:3D Vision 2,4:2D Vision)。切換到HOST並執行iSMTV_Host程式。',
+          ja:'2.2.1. Host & Vision Main Software——Ctrl+Ctrl+1~4を入力して画面を切り替えます(1:HOST、2:3D Vision 1、3:3D Vision 2、4:2D Vision)。HOSTに切り替えiSMTV_Hostプログラムを実行します。'
+        }},
+        {img:cmImg('C','smtv',3),tx:{
+          en:'Switch to 3D Vision 1 (or Vision 2, 2D Vision) and run the VisionTray program.',
+          ko:'3D Vision 1(또는 Vision 2, 2D Vision)로 전환해 VisionTray 프로그램을 실행합니다.',
+          zhCN:'切换到3D Vision 1(或Vision 2、2D Vision)并运行VisionTray程序。',
+          zhTW:'切換到3D Vision 1(或Vision 2、2D Vision)並執行VisionTray程式。',
+          ja:'3D Vision 1(またはVision 2、2D Vision)に切り替えVisionTrayプログラムを実行します。'
+        }},
+        {img:cmImg('C','smtv',4),tx:{
+          en:'Operation — this section covers the Main Program: Host & Vision Main Software, Host System Status, Host Operation UI, and Handler Initialize.',
+          ko:'Operation — Main Program: Host & Vision Main Software, Host System Status, Host Operation UI, Handler Initialize를 다룹니다.',
+          zhCN:'Operation——本节介绍Main Program:Host & Vision Main Software、Host System Status、Host Operation UI、Handler Initialize。',
+          zhTW:'Operation——本節介紹Main Program:Host & Vision Main Software、Host System Status、Host Operation UI、Handler Initialize。',
+          ja:'Operation——本節ではMain Program:Host & Vision Main Software、Host System Status、Host Operation UI、Handler Initializeを扱います。'
+        }},
+        {img:cmImg('C','smtv',5),tx:{
+          en:'2.2.2. Host System Status — check the system status shown at the top of the HOST program. Inspection can proceed only once all statuses show ready (displayed in green).',
+          ko:'2.2.2. Host System Status — HOST 프로그램 상단의 System Status를 확인합니다. 모든 상태가 Ready(녹색 표시)일 때만 검사를 진행할 수 있습니다.',
+          zhCN:'2.2.2. Host System Status——确认HOST程序上方的System Status。只有所有状态均为Ready(显示绿色)时才能进行检测。',
+          zhTW:'2.2.2. Host System Status——確認HOST程式上方的System Status。只有所有狀態均為Ready(顯示綠色)時才能進行檢測。',
+          ja:'2.2.2. Host System Status——HOSTプログラム上部のSystem Statusを確認します。すべての状態がReady(緑色表示)のときのみ検査を進めることができます。'
+        }},
+        {img:cmImg('C','smtv',6),tx:{
+          en:'If the system isn\'t ready, check: Handler (run initialization); Vision (click Connect Vision — if it won\'t connect, check ① Vision PC IP, ② Host P/G / Vision Manager P/G / Vision P/G version match, ③ Vision P/G status); AF1/AF2 (check the LAN connection to AF); Motor (confirm the OP panel is powered, or that the EMS switch is in a normal state); Interlock (close all doors in the facility, then click Interlock to lock the doors).',
+          ko:'System이 Ready 상태가 아니면 다음을 확인합니다: Handler(초기화 진행), Vision(Connect Vision 클릭 — 연결 안 되면 ① Vision PC IP 확인, ② Host P/G·Vision Manager P/G·Vision P/G 버전 확인, ③ Vision P/G 상태 확인), AF1·AF2(AF와의 LAN 연결 상태 확인), Motor(OP Panel 전원 확인 또는 EMS Switch 정상 상태 확인), Interlock(설비 내 모든 Door를 닫고 Interlock 버튼 클릭해 Door Lock).',
+          zhCN:'若System未处于Ready状态,请确认以下项目:Handler(进行初始化)、Vision(点击Connect Vision——若无法连接,确认①Vision PC IP、②Host P/G·Vision Manager P/G·Vision P/G版本、③Vision P/G状态)、AF1·AF2(确认与AF的LAN连接状态)、Motor(确认OP Panel电源或EMS Switch是否正常)、Interlock(关闭设备内所有Door后点击Interlock按钮上锁)。',
+          zhTW:'若System未處於Ready狀態,請確認以下項目:Handler(進行初始化)、Vision(點擊Connect Vision——若無法連接,確認①Vision PC IP、②Host P/G·Vision Manager P/G·Vision P/G版本、③Vision P/G狀態)、AF1·AF2(確認與AF的LAN連接狀態)、Motor(確認OP Panel電源或EMS Switch是否正常)、Interlock(關閉設備內所有Door後點擊Interlock按鈕上鎖)。',
+          ja:'Systemがready状態でない場合、以下を確認します:Handler(初期化実行)、Vision(Connect Visionをクリック——接続できない場合は①Vision PC IP確認、②Host P/G・Vision Manager P/G・Vision P/Gバージョン確認、③Vision P/G状態確認)、AF1・AF2(AFとのLAN接続状態確認)、Motor(OP Panel電源確認、またはEMS Switchが正常状態か確認)、Interlock(設備内すべてのDoorを閉じ、Interlockボタンをクリックしてロック)。'
+        }},
+        {img:cmImg('C','smtv',7),tx:{
+          en:'Operation — this section covers the Main Program: Host & Vision Main Software, Host System Status, Host Operation UI, and Handler Initialize.',
+          ko:'Operation — Main Program: Host & Vision Main Software, Host System Status, Host Operation UI, Handler Initialize를 다룹니다.',
+          zhCN:'Operation——本节介绍Main Program:Host & Vision Main Software、Host System Status、Host Operation UI、Handler Initialize。',
+          zhTW:'Operation——本節介紹Main Program:Host & Vision Main Software、Host System Status、Host Operation UI、Handler Initialize。',
+          ja:'Operation——本節ではMain Program:Host & Vision Main Software、Host System Status、Host Operation UI、Handler Initializeを扱います。'
+        }},
+        {img:cmImg('C','smtv',8),tx:{
+          en:'Host main program window overview — Log In & Save, Run Menu, System Status, Unit Status, Lot Info, Inspection Results, Safety Status, Sorting Information, and Log.',
+          ko:'Host 메인 프로그램 화면 구성 — Log In & Save, Run Menu, System Status, Unit Status, Lot Info, Inspection Results, Safety Status, Sorting Information, Log.',
+          zhCN:'Host主程序画面构成——Log In & Save、Run Menu、System Status、Unit Status、Lot Info、Inspection Results、Safety Status、Sorting Information、Log。',
+          zhTW:'Host主程式畫面構成——Log In & Save、Run Menu、System Status、Unit Status、Lot Info、Inspection Results、Safety Status、Sorting Information、Log。',
+          ja:'Hostメインプログラム画面構成——Log In & Save、Run Menu、System Status、Unit Status、Lot Info、Inspection Results、Safety Status、Sorting Information、Log。'
+        }},
+        {img:cmImg('C','smtv',9),tx:{
+          en:'Host Operation UI buttons — Log In (device access rights), Job Open (select a saved Recipe), Job Save (save the current job), Process (check equipment status), Save Log (save the current device status), Start (open the input window for product inspection), Resume (continue inspection), Pause (pause inspection), Lot Cancel (cancel all lot operations), LTS V1 / LTS V2 (LTS check buttons), Tray LTS (check button), Empty Handler (automatically remove trays inside the equipment), Init Handler (initialize the equipment).',
+          ko:'Host Operation UI 버튼 — Log In(장비 접근 권한 설정), Job Open(저장된 Recipe 선택), Job Save(현재 작업 저장), Process(설비 현재 상태 확인), Save Log(장비 현재 상태 저장), Start(제품 검사용 정보 입력창 생성), Resume(제품 검사 재개), Pause(제품 검사 일시정지), Lot Cancel(진행 중인 Lot 모두 취소), LTS V1·LTS V2(LTS 확인 버튼), Tray LTS(Tray LTS 확인 버튼), Empty Handler(설비 내 Tray 자동 제거), Init Handler(설비 초기화 버튼).',
+          zhCN:'Host Operation UI按钮——Log In(设备访问权限设置)、Job Open(选择已保存的Recipe)、Job Save(保存当前作业)、Process(确认设备当前状态)、Save Log(保存设备当前状态)、Start(生成产品检测信息输入窗口)、Resume(继续产品检测)、Pause(暂停产品检测)、Lot Cancel(取消所有进行中的Lot)、LTS V1·LTS V2(LTS确认按钮)、Tray LTS(Tray LTS确认按钮)、Empty Handler(自动清除设备内Tray)、Init Handler(设备初始化按钮)。',
+          zhTW:'Host Operation UI按鈕——Log In(設備存取權限設定)、Job Open(選擇已儲存的Recipe)、Job Save(儲存目前作業)、Process(確認設備目前狀態)、Save Log(儲存設備目前狀態)、Start(產生產品檢測資訊輸入視窗)、Resume(繼續產品檢測)、Pause(暫停產品檢測)、Lot Cancel(取消所有進行中的Lot)、LTS V1·LTS V2(LTS確認按鈕)、Tray LTS(Tray LTS確認按鈕)、Empty Handler(自動清除設備內Tray)、Init Handler(設備初始化按鈕)。',
+          ja:'Host Operation UIボタン——Log In(機器アクセス権限設定)、Job Open(保存済みRecipeの選択)、Job Save(現在の作業を保存)、Process(設備の現在状態を確認)、Save Log(機器の現在状態を保存)、Start(製品検査用の情報入力ウィンドウを生成)、Resume(製品検査を再開)、Pause(製品検査を一時停止)、Lot Cancel(進行中のLotをすべてキャンセル)、LTS V1・LTS V2(LTS確認ボタン)、Tray LTS(Tray LTS確認ボタン)、Empty Handler(設備内のTrayを自動除去)、Init Handler(設備初期化ボタン)。'
+        }},
+        {img:cmImg('C','smtv',10),tx:{
+          en:'Unit Status (current unit position), Inspection Status (per-vision inspection result), Safety Status (current door open/lock state), Vision area (switch the vision PC screen / monitor the inspection image / check the vision program connection), Yield (per-vision inspection yield), Log (detailed equipment log).',
+          ko:'Unit Status(현재 Unit 위치), Inspection Status(각 Vision별 검사 결과), Safety Status(현재 Door Open/Lock 상태), Vision 영역(Vision PC 화면 전환·검사 이미지 모니터링·Vision Program 연결 상태 확인), Yield(각 Vision별 검사 수율), Log(설비 상세 Log).',
+          zhCN:'Unit Status(当前Unit位置)、Inspection Status(各Vision的检测结果)、Safety Status(目前Door Open/Lock状态)、Vision区域(切换Vision PC画面·监控检测影像·确认Vision Program连接状态)、Yield(各Vision的检测良率)、Log(设备详细Log)。',
+          zhTW:'Unit Status(目前Unit位置)、Inspection Status(各Vision的檢測結果)、Safety Status(目前Door Open/Lock狀態)、Vision區域(切換Vision PC畫面·監控檢測影像·確認Vision Program連接狀態)、Yield(各Vision的檢測良率)、Log(設備詳細Log)。',
+          ja:'Unit Status(現在のUnit位置)、Inspection Status(各Visionの検査結果)、Safety Status(現在のDoor Open/Lock状態)、Vision領域(Vision PC画面切替・検査画像モニタリング・Vision Program接続状態確認)、Yield(各Visionの検査歩留まり)、Log(設備詳細Log)。'
+        }},
+        {img:cmImg('C','smtv',11),tx:{
+          en:'Lot ID, Part Number (customer management number), Recipe Name (currently applied job), Operator, Cycle Time 1/2 (per-vision inspection time per Pedestal), Start Time, Run Time, Yield, UPH, Total/Pass/Fail counts, and Sorting Tray (status per rail).',
+          ko:'Lot ID, Part Number(고객사 관리 번호), Recipe Name(현재 적용 중인 Job), Operator, Cycle Time 1·2(Pedestal 1개 기준 각 Vision 검사 시간), Start Time, Run Time, Yield, UPH, Total·Pass·Fail 수량, Sorting Tray(Rail별 상태).',
+          zhCN:'Lot ID、Part Number(客户管理编号)、Recipe Name(目前套用的Job)、Operator、Cycle Time 1·2(以1个Pedestal为基准的各Vision检测时间)、Start Time、Run Time、Yield、UPH、Total·Pass·Fail数量、Sorting Tray(各Rail状态)。',
+          zhTW:'Lot ID、Part Number(客戶管理編號)、Recipe Name(目前套用的Job)、Operator、Cycle Time 1·2(以1個Pedestal為基準的各Vision檢測時間)、Start Time、Run Time、Yield、UPH、Total·Pass·Fail數量、Sorting Tray(各Rail狀態)。',
+          ja:'Lot ID、Part Number(顧客管理番号)、Recipe Name(現在適用中のJob)、Operator、Cycle Time 1・2(Pedestal1個基準の各Vision検査時間)、Start Time、Run Time、Yield、UPH、Total・Pass・Fail数、Sorting Tray(Rail別状態)。'
+        }},
+        {img:cmImg('C','smtv',12),tx:{
+          en:'Operation — this section covers the Main Program: Host & Vision Main Software, Host System Status, Host Operation UI, and Handler Initialize.',
+          ko:'Operation — Main Program: Host & Vision Main Software, Host System Status, Host Operation UI, Handler Initialize를 다룹니다.',
+          zhCN:'Operation——本节介绍Main Program:Host & Vision Main Software、Host System Status、Host Operation UI、Handler Initialize。',
+          zhTW:'Operation——本節介紹Main Program:Host & Vision Main Software、Host System Status、Host Operation UI、Handler Initialize。',
+          ja:'Operation——本節ではMain Program:Host & Vision Main Software、Host System Status、Host Operation UI、Handler Initializeを扱います。'
+        }},
+        {img:cmImg('C','smtv',13),tx:{
+          en:'2.2.4. Handler Initialize — click Init Handler.',
+          ko:'2.2.4. Handler Initialize — Init Handler를 클릭합니다.',
+          zhCN:'2.2.4. Handler Initialize——点击Init Handler。',
+          zhTW:'2.2.4. Handler Initialize——點擊Init Handler。',
+          ja:'2.2.4. Handler Initialize——Init Handlerをクリックします。'
+        }},
+        {img:cmImg('C','smtv',14),tx:{
+          en:'Once equipment initialization is complete, the Handler icon changes from red to green.',
+          ko:'설비 초기화가 완료되면 Handler 아이콘이 빨간색에서 초록색으로 바뀝니다.',
+          zhCN:'设备初始化完成后,Handler图标会从红色变为绿色。',
+          zhTW:'設備初始化完成後,Handler圖示會從紅色變為綠色。',
+          ja:'設備の初期化が完了すると、Handlerアイコンが赤から緑に変わります。'
+        }}
+      ]
+    },
+    nbga:{
+      title:{ko:'C. Software 조작(Main UI)',en:'C. Software Operation (Main UI)',zhCN:'C. Software操作(Main UI)',zhTW:'C. Software操作(Main UI)',ja:'C. Software操作(Main UI)'},
+      slides:[
+        {img:cmImg('C','nbga',1),tx:{
+          en:'Operation — this section covers the Main Program: Host & Vision Main Software, Host & Vision Check Items, Host Operation UI, and Handler Initialize.',
+          ko:'Operation — Main Program: Host & Vision Main Software, Host & Vision Check Items, Host Operation UI, Handler Initialize를 다룹니다.',
+          zhCN:'Operation——本节介绍Main Program:Host & Vision Main Software、Host & Vision Check Items、Host Operation UI、Handler Initialize。',
+          zhTW:'Operation——本節介紹Main Program:Host & Vision Main Software、Host & Vision Check Items、Host Operation UI、Handler Initialize。',
+          ja:'Operation——本節ではMain Program:Host & Vision Main Software、Host & Vision Check Items、Host Operation UI、Handler Initializeを扱います。'
+        }},
+        {img:cmImg('C','nbga',2),tx:{
+          en:'2.2.1. Host & Vision Main Software — switch screens with Ctrl+Ctrl+1~4 (1: HOST, 2: 3D Vision 1, 3: 3D Vision 2, 4: 2D Vision). Switch to HOST and run the BAOI program.',
+          ko:'2.2.1. Host & Vision Main Software — Ctrl+Ctrl+1~4 입력으로 화면을 전환합니다(1: HOST, 2: 3D Vision 1, 3: 3D Vision 2, 4: 2D Vision). HOST로 전환해 BAOI 프로그램을 실행합니다.',
+          zhCN:'2.2.1. Host & Vision Main Software——通过输入Ctrl+Ctrl+1~4切换画面(1:HOST,2:3D Vision 1,3:3D Vision 2,4:2D Vision)。切换到HOST并运行BAOI程序。',
+          zhTW:'2.2.1. Host & Vision Main Software——透過輸入Ctrl+Ctrl+1~4切換畫面(1:HOST,2:3D Vision 1,3:3D Vision 2,4:2D Vision)。切換到HOST並執行BAOI程式。',
+          ja:'2.2.1. Host & Vision Main Software——Ctrl+Ctrl+1~4を入力して画面を切り替えます(1:HOST、2:3D Vision 1、3:3D Vision 2、4:2D Vision)。HOSTに切り替えBAOIプログラムを実行します。'
+        }},
+        {img:cmImg('C','nbga',3),tx:{
+          en:'Switch to 3D Vision 1 (or Vision 2, 2D Vision) and run the VisionTray program.',
+          ko:'3D Vision 1(또는 Vision 2, 2D Vision)로 전환해 VisionTray 프로그램을 실행합니다.',
+          zhCN:'切换到3D Vision 1(或Vision 2、2D Vision)并运行VisionTray程序。',
+          zhTW:'切換到3D Vision 1(或Vision 2、2D Vision)並執行VisionTray程式。',
+          ja:'3D Vision 1(またはVision 2、2D Vision)に切り替えVisionTrayプログラムを実行します。'
+        }},
+        {img:cmImg('C','nbga',4),tx:{
+          en:'Operation — this section covers the Main Program: Host & Vision Main Software, Host & Vision Check Items, Host Operation UI, and Handler Initialize.',
+          ko:'Operation — Main Program: Host & Vision Main Software, Host & Vision Check Items, Host Operation UI, Handler Initialize를 다룹니다.',
+          zhCN:'Operation——本节介绍Main Program:Host & Vision Main Software、Host & Vision Check Items、Host Operation UI、Handler Initialize。',
+          zhTW:'Operation——本節介紹Main Program:Host & Vision Main Software、Host & Vision Check Items、Host Operation UI、Handler Initialize。',
+          ja:'Operation——本節ではMain Program:Host & Vision Main Software、Host & Vision Check Items、Host Operation UI、Handler Initializeを扱います。'
+        }},
+        {img:cmImg('C','nbga',5),tx:{
+          en:'2.2.2. Host & Vision Check Items — check the system status shown at the top of the HOST program. Inspection can proceed only once all statuses show ready (displayed in green).',
+          ko:'2.2.2. Host & Vision Check Items — HOST 프로그램 상단의 System Status를 확인합니다. 모든 상태가 Ready(녹색 표시)일 때만 검사를 진행할 수 있습니다.',
+          zhCN:'2.2.2. Host & Vision Check Items——确认HOST程序上方的System Status。只有所有状态均为Ready(显示绿色)时才能进行检测。',
+          zhTW:'2.2.2. Host & Vision Check Items——確認HOST程式上方的System Status。只有所有狀態均為Ready(顯示綠色)時才能進行檢測。',
+          ja:'2.2.2. Host & Vision Check Items——HOSTプログラム上部のSystem Statusを確認します。すべての状態がReady(緑色表示)のときのみ検査を進めることができます。'
+        }},
+        {img:cmImg('C','nbga',6),tx:{
+          en:'If not ready, check: Handler (run initialization); Vision (click Connect Vision — if it won\'t connect, check 1) Vision PC IP, 2) Host P/G vs. Vision P/G version match, 3) Vision P/G status); AF1/AF2 (check the LAN connection to AF); Motor (confirm the OP panel is powered, or that the EMS switch is in a normal state); Interlock (close all doors in the facility, then click Interlock to lock the doors).',
+          ko:'Ready 상태가 아니면 다음을 확인합니다: Handler(초기화 진행), Vision(Connect Vision 클릭 — 연결 안 되면 1) Vision PC IP 확인, 2) Host P/G·Vision P/G 버전 확인, 3) Vision P/G 상태 확인), AF1·AF2(AF와의 LAN 연결 상태 확인), Motor(OP Panel 전원 확인 또는 EMS Switch 정상 상태 확인), Interlock(설비 내 모든 Door를 닫고 Interlock 버튼 클릭해 Door Lock).',
+          zhCN:'若未处于Ready状态,请确认以下项目:Handler(进行初始化)、Vision(点击Connect Vision——若无法连接,确认1)Vision PC IP、2)Host P/G·Vision P/G版本、3)Vision P/G状态)、AF1·AF2(确认与AF的LAN连接状态)、Motor(确认OP Panel电源或EMS Switch是否正常)、Interlock(关闭设备内所有Door后点击Interlock按钮上锁)。',
+          zhTW:'若未處於Ready狀態,請確認以下項目:Handler(進行初始化)、Vision(點擊Connect Vision——若無法連接,確認1)Vision PC IP、2)Host P/G·Vision P/G版本、3)Vision P/G狀態)、AF1·AF2(確認與AF的LAN連接狀態)、Motor(確認OP Panel電源或EMS Switch是否正常)、Interlock(關閉設備內所有Door後點擊Interlock按鈕上鎖)。',
+          ja:'Ready状態でない場合、以下を確認します:Handler(初期化実行)、Vision(Connect Visionをクリック——接続できない場合は1)Vision PC IP確認、2)Host P/G・Vision P/Gバージョン確認、3)Vision P/G状態確認)、AF1・AF2(AFとのLAN接続状態確認)、Motor(OP Panel電源確認、またはEMS Switchが正常状態か確認)、Interlock(設備内すべてのDoorを閉じ、Interlockボタンをクリックしてロック)。'
+        }},
+        {img:cmImg('C','nbga',7),tx:{
+          en:'Operation — this section covers the Main Program: Host & Vision Main Software, Host & Vision Check Items, Host Operation UI, and Handler Initialize.',
+          ko:'Operation — Main Program: Host & Vision Main Software, Host & Vision Check Items, Host Operation UI, Handler Initialize를 다룹니다.',
+          zhCN:'Operation——本节介绍Main Program:Host & Vision Main Software、Host & Vision Check Items、Host Operation UI、Handler Initialize。',
+          zhTW:'Operation——本節介紹Main Program:Host & Vision Main Software、Host & Vision Check Items、Host Operation UI、Handler Initialize。',
+          ja:'Operation——本節ではMain Program:Host & Vision Main Software、Host & Vision Check Items、Host Operation UI、Handler Initializeを扱います。'
+        }},
+        {img:cmImg('C','nbga',8),tx:{
+          en:'Host main program window overview — Log In & Save, Run Menu, System State, Lot Information, Inspection State, Sorting Information & Door Status, Inspection Yield, Log.',
+          ko:'Host 메인 프로그램 화면 구성 — Log In & Save, Run Menu, System State, Lot Information, Inspection State, Sorting Information & Door status, Inspection Yield, Log.',
+          zhCN:'Host主程序画面构成——Log In & Save、Run Menu、System State、Lot Information、Inspection State、Sorting Information & Door status、Inspection Yield、Log。',
+          zhTW:'Host主程式畫面構成——Log In & Save、Run Menu、System State、Lot Information、Inspection State、Sorting Information & Door status、Inspection Yield、Log。',
+          ja:'Hostメインプログラム画面構成——Log In & Save、Run Menu、System State、Lot Information、Inspection State、Sorting Information & Door status、Inspection Yield、Log。'
+        }},
+        {img:cmImg('C','nbga',9),tx:{
+          en:'Host Operation UI buttons — Log In (device access rights), Job Save (save the current job), Process (check equipment status), Save Log (save the current device status), Lot Start (open the input window for product inspection), Lot Cancel (cancel all lot operations), Start (resume from stop), Stop (stop the running equipment), Job Open (select a saved Recipe), LTS / Tray LTS (check buttons), Picker Change Pos (move to the picker-change position), Empty Handler (automatically remove trays inside the equipment), Init Handler (initialize the equipment).',
+          ko:'Host Operation UI 버튼 — Log In(장비 접근 권한 설정), Job Save(현재 작업 저장), Process(설비 현재 상태 확인), Save Log(장비 현재 상태 저장), Lot Start(제품 검사용 정보 입력창 생성), Lot Cancel(진행 중인 Lot 모두 취소), Start(정지 상태에서 재시작), Stop(가동 중인 설비 정지), Job Open(저장된 Recipe 선택), LTS·Tray LTS(확인 버튼), Picker Change Pos(Picker Change 위치로 이동), Empty Handler(설비 내 Tray 자동 제거), Init Handler(설비 초기화 버튼).',
+          zhCN:'Host Operation UI按钮——Log In(设备访问权限设置)、Job Save(保存当前作业)、Process(确认设备当前状态)、Save Log(保存设备当前状态)、Lot Start(生成产品检测信息输入窗口)、Lot Cancel(取消所有进行中的Lot)、Start(从停止状态重新启动)、Stop(停止运行中的设备)、Job Open(选择已保存的Recipe)、LTS·Tray LTS(确认按钮)、Picker Change Pos(移动到Picker Change位置)、Empty Handler(自动清除设备内Tray)、Init Handler(设备初始化按钮)。',
+          zhTW:'Host Operation UI按鈕——Log In(設備存取權限設定)、Job Save(儲存目前作業)、Process(確認設備目前狀態)、Save Log(儲存設備目前狀態)、Lot Start(產生產品檢測資訊輸入視窗)、Lot Cancel(取消所有進行中的Lot)、Start(從停止狀態重新啟動)、Stop(停止運行中的設備)、Job Open(選擇已儲存的Recipe)、LTS·Tray LTS(確認按鈕)、Picker Change Pos(移動到Picker Change位置)、Empty Handler(自動清除設備內Tray)、Init Handler(設備初始化按鈕)。',
+          ja:'Host Operation UIボタン——Log In(機器アクセス権限設定)、Job Save(現在の作業を保存)、Process(設備の現在状態を確認)、Save Log(機器の現在状態を保存)、Lot Start(製品検査用の情報入力ウィンドウを生成)、Lot Cancel(進行中のLotをすべてキャンセル)、Start(停止状態から再開)、Stop(稼働中の設備を停止)、Job Open(保存済みRecipeの選択)、LTS・Tray LTS(確認ボタン)、Picker Change Pos(Picker Change位置へ移動)、Empty Handler(設備内のTrayを自動除去)、Init Handler(設備初期化ボタン)。'
+        }},
+        {img:cmImg('C','nbga',10),tx:{
+          en:'Job Name (selected job name), Lot ID, Operator ID, Cycle Time (3D Vision 1 tray inspection time), Start Time, Running Time, Yield, UPH, and Total/Pass/Fail counts.',
+          ko:'Job Name(선택된 Job 이름), Lot ID, Operator ID, Cycle Time(3D Vision 1 Tray 검사 시간), Start Time, Running Time, Yield, UPH, Total·Pass·Fail 수량.',
+          zhCN:'Job Name(所选Job名称)、Lot ID、Operator ID、Cycle Time(3D Vision 1 Tray检测时间)、Start Time、Running Time、Yield、UPH、Total·Pass·Fail数量。',
+          zhTW:'Job Name(所選Job名稱)、Lot ID、Operator ID、Cycle Time(3D Vision 1 Tray檢測時間)、Start Time、Running Time、Yield、UPH、Total·Pass·Fail數量。',
+          ja:'Job Name(選択されたJob名)、Lot ID、Operator ID、Cycle Time(3D Vision 1 Tray検査時間)、Start Time、Running Time、Yield、UPH、Total・Pass・Fail数。'
+        }},
+        {img:cmImg('C','nbga',11),tx:{
+          en:'Tray (real-time sorting progress), Door Status (current door state), Log (equipment log details).',
+          ko:'Tray(실시간 Sorting 진행 상태), Door Status(현재 Door 상태), Log(설비 Log 상세).',
+          zhCN:'Tray(实时Sorting进度)、Door Status(目前Door状态)、Log(设备Log详情)。',
+          zhTW:'Tray(即時Sorting進度)、Door Status(目前Door狀態)、Log(設備Log詳情)。',
+          ja:'Tray(リアルタイムSorting進捗)、Door Status(現在のDoor状態)、Log(設備Log詳細)。'
+        }},
+        {img:cmImg('C','nbga',12),tx:{
+          en:'Vision area — switch the PC screen per vision, check the vision program connection status, and monitor the inspection image; each pocket\'s inspection result on the tray; Vision Summary Yield (combined result of 3D Vision 1, 3D Vision 2, and 2D Vision); and individual 3D Vision 1 / 3D Vision 2 / 2D Vision Yield.',
+          ko:'Vision 영역 — Vision별 PC 화면 전환, Vision Program 연결 상태 확인, 검사 이미지 모니터링; Tray의 Pocket별 검사 결과; Vision Summary Yield(3D Vision 1·3D Vision 2·2D Vision 결과 통합 표시); 3D Vision 1·3D Vision 2·2D Vision 개별 Yield.',
+          zhCN:'Vision区域——切换各Vision的PC画面、确认Vision Program连接状态、监控检测影像;Tray各Pocket的检测结果;Vision Summary Yield(整合显示3D Vision 1、3D Vision 2、2D Vision的结果);3D Vision 1、3D Vision 2、2D Vision各自的Yield。',
+          zhTW:'Vision區域——切換各Vision的PC畫面、確認Vision Program連接狀態、監控檢測影像;Tray各Pocket的檢測結果;Vision Summary Yield(整合顯示3D Vision 1、3D Vision 2、2D Vision的結果);3D Vision 1、3D Vision 2、2D Vision各自的Yield。',
+          ja:'Vision領域——各VisionのPC画面切替、Vision Program接続状態確認、検査画像モニタリング;Tray各PocketのInspection結果;Vision Summary Yield(3D Vision 1・3D Vision 2・2D Visionの結果を統合表示);3D Vision 1・3D Vision 2・2D Visionそれぞれの個別Yield。'
+        }},
+        {img:cmImg('C','nbga',13),tx:{
+          en:'Operation — this section covers the Main Program: Host & Vision Main Software, Host & Vision Check Items, Host Operation UI, and Handler Initialize.',
+          ko:'Operation — Main Program: Host & Vision Main Software, Host & Vision Check Items, Host Operation UI, Handler Initialize를 다룹니다.',
+          zhCN:'Operation——本节介绍Main Program:Host & Vision Main Software、Host & Vision Check Items、Host Operation UI、Handler Initialize。',
+          zhTW:'Operation——本節介紹Main Program:Host & Vision Main Software、Host & Vision Check Items、Host Operation UI、Handler Initialize。',
+          ja:'Operation——本節ではMain Program:Host & Vision Main Software、Host & Vision Check Items、Host Operation UI、Handler Initializeを扱います。'
+        }},
+        {img:cmImg('C','nbga',14),tx:{
+          en:'Click [Init Handler], then click [OK] to initialize the equipment.',
+          ko:'[Init Handler]를 클릭하고 [OK]를 클릭해 설비를 초기화합니다.',
+          zhCN:'点击[Init Handler],再点击[OK]以初始化设备。',
+          zhTW:'點擊[Init Handler],再點擊[OK]以初始化設備。',
+          ja:'[Init Handler]をクリックし、[OK]をクリックして設備を初期化します。'
+        }},
+        {img:cmImg('C','nbga',15),tx:{
+          en:'This is the initialization-complete screen.',
+          ko:'초기화 완료 화면입니다.',
+          zhCN:'这是初始化完成画面。',
+          zhTW:'這是初始化完成畫面。',
+          ja:'初期化完了画面です。'
+        }},
+        {img:cmImg('C','nbga',16),tx:{
+          en:'Before proceeding, make sure the tray is secured to the TTM and TSM — there is a risk it could fall during a TTM/TSM unclamp. An alarm occurs when the TSM or TTM Picker is clamped; click Yes to unclamp.',
+          ko:'진행 전 Tray가 TTM·TSM에 고정되어 있는지 확인합니다 — TTM·TSM Unclamp 시 Tray가 떨어질 위험이 있습니다. TSM 또는 TTM Picker가 Clamp된 상태에서 Alarm이 발생하면 Yes를 클릭해 Unclamp합니다.',
+          zhCN:'进行前请确认Tray是否固定于TTM、TSM——TTM、TSM Unclamp时Tray有掉落风险。若TSM或TTM Picker处于Clamp状态而发生Alarm,请点击Yes进行Unclamp。',
+          zhTW:'進行前請確認Tray是否固定於TTM、TSM——TTM、TSM Unclamp時Tray有掉落風險。若TSM或TTM Picker處於Clamp狀態而發生Alarm,請點擊Yes進行Unclamp。',
+          ja:'進める前にTrayがTTM・TSMに固定されているか確認します——TTM・TSMのUnclamp時にTrayが落下する恐れがあります。TSMまたはTTM PickerがClamp状態でAlarmが発生した場合はYesをクリックしUnclampします。'
+        }}
+      ]
+    }
+  },
+  D:{
+    smtv:{
+      title:{ko:'D. Recipe 운용',en:'D. Recipe Operation',zhCN:'D. Recipe運用',zhTW:'D. Recipe運用',ja:'D. Recipe運用'},
+      slides:[
+        {img:cmImg('D','smtv',1),tx:{
+          en:'Operation — this section covers Run Inspection.',
+          ko:'Operation — Run Inspection을 다룹니다.',
+          zhCN:'Operation——本节介绍Run Inspection。',
+          zhTW:'Operation——本節介紹Run Inspection。',
+          ja:'Operation——本節ではRun Inspectionを扱います。'
+        }},
+        {img:cmImg('D','smtv',2),tx:{
+          en:'2.3.1. Run Inspection — click Log In, select the access level Operator, fill in the User ID and Password, then click OK.',
+          ko:'2.3.1. Run Inspection — Log In을 클릭하고, Access Level을 Operator로 선택한 뒤 User ID·Password를 입력하고 OK를 클릭합니다.',
+          zhCN:'2.3.1. Run Inspection——点击Log In,将Access Level选择为Operator,输入User ID、Password后点击OK。',
+          zhTW:'2.3.1. Run Inspection——點擊Log In,將Access Level選擇為Operator,輸入User ID、Password後點擊OK。',
+          ja:'2.3.1. Run Inspection——Log Inをクリックし、Access LevelをOperatorに選択、User ID・Passwordを入力してOKをクリックします。'
+        }},
+        {img:cmImg('D','smtv',3),tx:{
+          en:'Place the unit tray to be inspected on the first (leftmost) Loader Stacker as shown, and place empty trays on the 2nd and 3rd Empty Stackers and the Reject Empty Stacker from the left. Due to the Handler sequence, Lot Start cannot be clicked with nothing loaded — place product on the Loader/Empty Stacker first (at least 6 Empty Trays must be placed in the Empty Stacker).',
+          ko:'그림처럼 검사할 Unit Tray를 맨 왼쪽 첫 번째 Loader Stacker에 놓고, Empty Tray는 왼쪽에서 2·3번째 Empty Stacker와 Reject Empty Stacker에 놓습니다. Handler Sequence 특성상 아무것도 없으면 Lot Start를 클릭할 수 없으므로, Loader·Empty Stacker에 제품을 올린 뒤 Lot Start를 클릭해야 합니다(Empty Stacker에 최소 6장의 Empty Tray 필요).',
+          zhCN:'如图将待检测的Unit Tray放在最左侧第一个Loader Stacker上,Empty Tray则放在左侧第2、3个Empty Stacker及Reject Empty Stacker上。由于Handler Sequence的特性,若无任何物品则无法点击Lot Start——须先将产品放上Loader、Empty Stacker后才能点击Lot Start(Empty Stacker须放置至少6张Empty Tray)。',
+          zhTW:'如圖將待檢測的Unit Tray放在最左側第一個Loader Stacker上,Empty Tray則放在左側第2、3個Empty Stacker及Reject Empty Stacker上。由於Handler Sequence的特性,若無任何物品則無法點擊Lot Start——須先將產品放上Loader、Empty Stacker後才能點擊Lot Start(Empty Stacker須放置至少6張Empty Tray)。',
+          ja:'図のように検査対象のUnit Trayを一番左の最初のLoader Stackerに置き、Empty Trayは左から2・3番目のEmpty StackerとReject Empty Stackerに置きます。Handler Sequenceの特性上、何もない状態ではLot Startをクリックできません——Loader・Empty Stackerに製品を載せてからLot Startをクリックする必要があります(Empty Stackerには最低6枚のEmpty Trayが必要)。'
+        }},
+        {img:cmImg('D','smtv',4),tx:{
+          en:'Click the Job Open button, select the Job file, then click OK.',
+          ko:'Job Open 버튼을 클릭해 Job File을 선택하고 OK를 클릭합니다.',
+          zhCN:'点击Job Open按钮,选择Job File后点击OK。',
+          zhTW:'點擊Job Open按鈕,選擇Job File後點擊OK。',
+          ja:'Job Openボタンをクリックし、Job Fileを選択してOKをクリックします。'
+        }},
+        {img:cmImg('D','smtv',5),tx:{
+          en:'After clicking Start, enter the Lot ID. Options include: inspecting units already loaded and ending the Lot vs. allowing more trays to be inserted / continuing; sorting units by inspection result vs. not; and storing 3D debug data vs. not.',
+          ko:'Start 클릭 후 Lot ID를 입력합니다. 옵션: Loader에 투입된 Unit만 검사하고 Lot 종료 vs. Tray 추가 투입 가능, 검사 결과에 따른 Unit Sorting 사용 vs. 미사용, 3D Debug Data 저장 vs. 미저장.',
+          zhCN:'点击Start后输入Lot ID。选项包括:仅检测已投入Loader的Unit并结束Lot,或允许追加投入Tray;依检测结果进行Unit Sorting或不使用;保存3D Debug Data或不保存。',
+          zhTW:'點擊Start後輸入Lot ID。選項包括:僅檢測已投入Loader的Unit並結束Lot,或允許追加投入Tray;依檢測結果進行Unit Sorting或不使用;儲存3D Debug Data或不儲存。',
+          ja:'Startクリック後、Lot IDを入力します。オプション:Loaderに投入済みのUnitのみ検査してLotを終了 vs. Trayの追加投入を可能にする、検査結果によるUnit Sortingを使用 vs. 不使用、3D Debug Dataを保存 vs. 保存しない。'
+        }},
+        {img:cmImg('D','smtv',6),tx:{
+          en:'When the Loader Stacker\'s tray-sensing sensor triggers, this pop-up appears: Yes = end the Lot without inserting more trays; No = insert more trays into the Loader Stacker, then click No to keep the Lot running.',
+          ko:'Loader Stacker의 Tray 감지 센서가 On되면 위 팝업이 나타납니다. [Yes]: 더 이상 Tray를 넣지 않고 Lot 종료. [No]: Loader Stacker에 Tray를 추가로 넣은 뒤 No를 클릭해 Lot을 유지.',
+          zhCN:'当Loader Stacker的Tray感应传感器触发时,会出现此弹窗。[Yes]:不再放入Tray并结束Lot。[No]:向Loader Stacker追加放入Tray后点击No以维持Lot。',
+          zhTW:'當Loader Stacker的Tray感應感測器觸發時,會出現此彈窗。[Yes]:不再放入Tray並結束Lot。[No]:向Loader Stacker追加放入Tray後點擊No以維持Lot。',
+          ja:'Loader StackerのTray検知センサーがONになるとこのポップアップが表示されます。[Yes]:これ以上Trayを入れずLotを終了。[No]:Loader StackerにTrayを追加投入した後Noをクリックしてlotを継続。'
+        }},
+        {img:cmImg('D','smtv',7),tx:{
+          en:'Click Lot Cancel to end the Lot; confirm by clicking Yes in the pop-up if you really want to end it.',
+          ko:'Lot을 종료하려면 Lot Cancel 버튼을 클릭합니다. 정말 종료하려면 팝업에서 Yes를 클릭합니다.',
+          zhCN:'若要结束Lot,请点击Lot Cancel按钮。若确定要结束,请在弹窗中点击Yes。',
+          zhTW:'若要結束Lot,請點擊Lot Cancel按鈕。若確定要結束,請在彈窗中點擊Yes。',
+          ja:'Lotを終了するにはLot Cancelボタンをクリックします。本当に終了する場合はポップアップでYesをクリックします。'
+        }},
+        {img:cmImg('D','smtv',8),tx:{
+          en:'Empty Handler Start automatically removes trays remaining in the equipment. Unclamp is used to remove a tray from a module via the unclamp function — modules shown in green have a tray detected by the sensor.',
+          ko:'Empty Handler Start는 설비 내 남아있는 Tray를 자동으로 제거하는 기능입니다. Unclamp는 Unclamp 기능으로 특정 Module의 Tray를 제거할 때 사용하며, 녹색으로 표시된 Module은 센서에 Tray가 감지된 상태입니다.',
+          zhCN:'Empty Handler Start是自动清除设备内残留Tray的功能。Unclamp用于以Unclamp功能移除特定Module上的Tray,绿色标示的Module表示传感器已侦测到Tray。',
+          zhTW:'Empty Handler Start是自動清除設備內殘留Tray的功能。Unclamp用於以Unclamp功能移除特定Module上的Tray,綠色標示的Module表示感測器已偵測到Tray。',
+          ja:'Empty Handler Startは設備内に残っているTrayを自動的に除去する機能です。Unclampは特定のModuleのTrayをUnclamp機能で取り除く際に使用し、緑色で表示されたModuleはセンサーがTrayを検知している状態です。'
+        }}
+      ]
+    },
+    nbga:{
+      title:{ko:'D. Recipe 운용',en:'D. Recipe Operation',zhCN:'D. Recipe運用',zhTW:'D. Recipe運用',ja:'D. Recipe運用'},
+      slides:[
+        {img:cmImg('D','nbga',1),tx:{
+          en:'Operation — this section covers Run Inspection.',
+          ko:'Operation — Run Inspection을 다룹니다.',
+          zhCN:'Operation——本节介绍Run Inspection。',
+          zhTW:'Operation——本節介紹Run Inspection。',
+          ja:'Operation——本節ではRun Inspectionを扱います。'
+        }},
+        {img:cmImg('D','nbga',2),tx:{
+          en:'Click [Log In], select the access level [operator], fill in the User ID and Password, then click OK.',
+          ko:'[Log In]을 클릭하고, Access Level을 [operator]로 선택한 뒤 User ID·Password를 입력하고 OK를 클릭합니다.',
+          zhCN:'点击[Log In],将Access Level选择为[operator],输入User ID、Password后点击OK。',
+          zhTW:'點擊[Log In],將Access Level選擇為[operator],輸入User ID、Password後點擊OK。',
+          ja:'[Log In]をクリックし、Access Levelを[operator]に選択、User ID・Passwordを入力してOKをクリックします。'
+        }},
+        {img:cmImg('D','nbga',3),tx:{
+          en:'Click [Init Handler], then click [OK] to initialize the equipment.',
+          ko:'[Init Handler]를 클릭하고 [OK]를 클릭해 설비를 초기화합니다.',
+          zhCN:'点击[Init Handler],再点击[OK]以初始化设备。',
+          zhTW:'點擊[Init Handler],再點擊[OK]以初始化設備。',
+          ja:'[Init Handler]をクリックし、[OK]をクリックして設備を初期化します。'
+        }},
+        {img:cmImg('D','nbga',4),tx:{
+          en:'Once initialization is complete, check the Handler\'s initialization status. Close all doors on the equipment and click [Inter Lock] to confirm the doors are locked.',
+          ko:'초기화가 완료되면 Handler의 초기화 상태를 확인합니다. 설비의 모든 Door를 닫고 [Inter Lock]을 클릭해 Door가 Lock되었는지 확인합니다.',
+          zhCN:'初始化完成后,确认Handler的初始化状态。关闭设备所有Door后点击[Inter Lock],确认Door已锁定。',
+          zhTW:'初始化完成後,確認Handler的初始化狀態。關閉設備所有Door後點擊[Inter Lock],確認Door已鎖定。',
+          ja:'初期化が完了したら、Handlerの初期化状態を確認します。設備のすべてのDoorを閉め[Inter Lock]をクリックし、Doorがロックされているか確認します。'
+        }},
+        {img:cmImg('D','nbga',5),tx:{
+          en:'Place the unit tray to be inspected on the first (leftmost) Loader Stacker as shown, and the empty tray on the second Empty Stacker from the left. Due to the Handler sequence, Lot Start cannot be clicked with nothing loaded — at least 6 Empty Trays must be placed in the Empty Stacker.',
+          ko:'그림처럼 검사할 Unit Tray를 맨 왼쪽 첫 번째 Loader Stacker에 놓고, Empty Tray는 왼쪽에서 두 번째 Empty Stacker에 놓습니다. Handler Sequence 특성상 아무것도 없으면 Lot Start를 클릭할 수 없으며, Empty Stacker에 최소 6장의 Empty Tray가 필요합니다.',
+          zhCN:'如图将待检测的Unit Tray放在最左侧第一个Loader Stacker上,Empty Tray则放在左侧第二个Empty Stacker上。由于Handler Sequence的特性,若无任何物品则无法点击Lot Start,且Empty Stacker须放置至少6张Empty Tray。',
+          zhTW:'如圖將待檢測的Unit Tray放在最左側第一個Loader Stacker上,Empty Tray則放在左側第二個Empty Stacker上。由於Handler Sequence的特性,若無任何物品則無法點擊Lot Start,且Empty Stacker須放置至少6張Empty Tray。',
+          ja:'図のように検査対象のUnit Trayを一番左の最初のLoader Stackerに置き、Empty Trayは左から2番目のEmpty Stackerに置きます。Handler Sequenceの特性上、何もない状態ではLot Startをクリックできず、Empty Stackerには最低6枚のEmpty Trayが必要です。'
+        }},
+        {img:cmImg('D','nbga',6),tx:{
+          en:'Click the Job Open button, select the Job File, then click OK.',
+          ko:'Job Open 버튼을 클릭해 Job File을 선택하고 OK를 클릭합니다.',
+          zhCN:'点击Job Open按钮,选择Job File后点击OK。',
+          zhTW:'點擊Job Open按鈕,選擇Job File後點擊OK。',
+          ja:'Job Openボタンをクリックし、Job Fileを選択してOKをクリックします。'
+        }},
+        {img:cmImg('D','nbga',7),tx:{
+          en:'After clicking Lot Start, enter the Lot ID. Options include: inspecting units already loaded and ending the Lot vs. allowing more trays to be inserted / continuing.',
+          ko:'Lot Start 클릭 후 Lot ID를 입력합니다. 옵션: Loader에 투입된 Unit만 검사하고 Lot 종료 vs. Tray 추가 투입 가능.',
+          zhCN:'点击Lot Start后输入Lot ID。选项包括:仅检测已投入Loader的Unit并结束Lot,或允许追加投入Tray。',
+          zhTW:'點擊Lot Start後輸入Lot ID。選項包括:僅檢測已投入Loader的Unit並結束Lot,或允許追加投入Tray。',
+          ja:'Lot Startクリック後、Lot IDを入力します。オプション:Loaderに投入済みのUnitのみ検査してLotを終了 vs. Trayの追加投入を可能にする。'
+        }},
+        {img:cmImg('D','nbga',8),tx:{
+          en:'When the Loader Stacker\'s tray-sensing sensor triggers, this pop-up appears: Yes = end the Lot without inserting more trays; No = insert more trays into the Loader Stacker, then click No to keep the Lot running.',
+          ko:'Loader Stacker의 Tray 감지 센서가 On되면 위 팝업이 나타납니다. [Yes]: 더 이상 Tray를 넣지 않고 Lot 종료. [No]: Loader Stacker에 Tray를 추가로 넣은 뒤 No를 클릭해 Lot을 유지.',
+          zhCN:'当Loader Stacker的Tray感应传感器触发时,会出现此弹窗。[Yes]:不再放入Tray并结束Lot。[No]:向Loader Stacker追加放入Tray后点击No以维持Lot。',
+          zhTW:'當Loader Stacker的Tray感應感測器觸發時,會出現此彈窗。[Yes]:不再放入Tray並結束Lot。[No]:向Loader Stacker追加放入Tray後點擊No以維持Lot。',
+          ja:'Loader StackerのTray検知センサーがONになるとこのポップアップが表示されます。[Yes]:これ以上Trayを入れずLotを終了。[No]:Loader StackerにTrayを追加投入した後Noをクリックしてlotを継続。'
+        }},
+        {img:cmImg('D','nbga',9),tx:{
+          en:'Click the Lot Cancel button above when the Lot must be terminated; confirm by clicking Yes in the pop-up if you really want to quit.',
+          ko:'Lot을 종료해야 하는 상황이면 위의 Lot Cancel 버튼을 클릭합니다. 정말 종료하려면 팝업에서 Yes를 클릭합니다.',
+          zhCN:'若须结束Lot,请点击上方的Lot Cancel按钮。若确定要结束,请在弹窗中点击Yes。',
+          zhTW:'若須結束Lot,請點擊上方的Lot Cancel按鈕。若確定要結束,請在彈窗中點擊Yes。',
+          ja:'Lotを終了しなければならない場合は上のLot Cancelボタンをクリックします。本当に終了する場合はポップアップでYesをクリックします。'
+        }},
+        {img:cmImg('D','nbga',10),tx:{
+          en:'Empty Handler automatically removes trays remaining in the equipment. Unclamp is used to remove a tray from a module via the unclamp function (applies to Tray Sorter and Tray Transfer) — modules shown in green have a tray detected.',
+          ko:'Empty Handler는 설비 내 남아있는 Tray를 자동으로 제거합니다. Unclamp는 Unclamp 기능으로 Module의 Tray를 제거할 때 사용하며(Tray Sorter·Tray Transfer 해당), 녹색으로 표시된 Module은 Tray가 감지된 상태입니다.',
+          zhCN:'Empty Handler会自动清除设备内残留的Tray。Unclamp用于以Unclamp功能移除Module上的Tray(适用于Tray Sorter、Tray Transfer),绿色标示的Module表示已侦测到Tray。',
+          zhTW:'Empty Handler會自動清除設備內殘留的Tray。Unclamp用於以Unclamp功能移除Module上的Tray(適用於Tray Sorter、Tray Transfer),綠色標示的Module表示已偵測到Tray。',
+          ja:'Empty Handlerは設備内に残っているTrayを自動的に除去します。UnclampはUnclamp機能でModuleのTrayを取り除く際に使用し(Tray Sorter・Tray Transferが該当)、緑色で表示されたModuleはTrayが検知されている状態です。'
         }}
       ]
     }
