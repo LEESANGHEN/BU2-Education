@@ -17,31 +17,36 @@ var AUTH_I18N = {
     loginBtn:'로그인', signupBtn:'가입하기', forgotPw:'비밀번호를 잊으셨나요?',
     domainSignupErr:'{domain} 이메일만 가입할 수 있습니다.', pwLenErr:'비밀번호는 6자 이상이어야 합니다.',
     domainOnlyErr:'{domain} 계정만 사용할 수 있습니다.', resetPwNeedEmail:'먼저 이메일을 입력해주세요.',
-    resetPwSent:'비밀번호 재설정 메일을 발송했습니다.', resetPwFailPrefix:'실패: ' },
+    resetPwSent:'비밀번호 재설정 메일을 발송했습니다.', resetPwFailPrefix:'실패: ',
+    rememberEmail:'이메일 저장', staySignedIn:'이 기기에서 로그인 상태 유지' },
   en: { appName:'BU2 Training Management', login:'Login', signup:'Sign Up', emailLabel:'Email', pwLabel:'Password',
     toSignup:'New here? Sign up', toLogin:'Already have an account? Log in',
     loginBtn:'Log In', signupBtn:'Sign Up', forgotPw:'Forgot your password?',
     domainSignupErr:'Only {domain} email addresses can sign up.', pwLenErr:'Password must be at least 6 characters.',
     domainOnlyErr:'Only {domain} accounts can be used.', resetPwNeedEmail:'Please enter your email first.',
-    resetPwSent:'Password reset email sent.', resetPwFailPrefix:'Failed: ' },
+    resetPwSent:'Password reset email sent.', resetPwFailPrefix:'Failed: ',
+    rememberEmail:'Remember email', staySignedIn:'Stay signed in on this device' },
   'zh-CN': { appName:'BU2 培训管理', login:'登录', signup:'注册', emailLabel:'邮箱', pwLabel:'密码',
     toSignup:'初次使用？注册', toLogin:'已有账号？登录',
     loginBtn:'登录', signupBtn:'注册', forgotPw:'忘记密码了吗？',
     domainSignupErr:'仅限 {domain} 邮箱注册。', pwLenErr:'密码必须至少6位。',
     domainOnlyErr:'仅限使用 {domain} 账号。', resetPwNeedEmail:'请先输入邮箱。',
-    resetPwSent:'密码重置邮件已发送。', resetPwFailPrefix:'失败：' },
+    resetPwSent:'密码重置邮件已发送。', resetPwFailPrefix:'失败：',
+    rememberEmail:'记住邮箱', staySignedIn:'在此设备保持登录状态' },
   'zh-TW': { appName:'BU2 培訓管理', login:'登入', signup:'註冊', emailLabel:'電子郵件', pwLabel:'密碼',
     toSignup:'初次使用？註冊', toLogin:'已有帳號？登入',
     loginBtn:'登入', signupBtn:'註冊', forgotPw:'忘記密碼了嗎？',
     domainSignupErr:'僅限 {domain} 電子郵件註冊。', pwLenErr:'密碼必須至少6位。',
     domainOnlyErr:'僅限使用 {domain} 帳號。', resetPwNeedEmail:'請先輸入電子郵件。',
-    resetPwSent:'密碼重設郵件已發送。', resetPwFailPrefix:'失敗：' },
+    resetPwSent:'密碼重設郵件已發送。', resetPwFailPrefix:'失敗：',
+    rememberEmail:'記住電子郵件', staySignedIn:'在此裝置保持登入狀態' },
   ja: { appName:'BU2 研修管理', login:'ログイン', signup:'新規登録', emailLabel:'メールアドレス', pwLabel:'パスワード',
     toSignup:'初めてですか？新規登録', toLogin:'アカウントをお持ちですか？ログイン',
     loginBtn:'ログイン', signupBtn:'登録する', forgotPw:'パスワードをお忘れですか？',
     domainSignupErr:'{domain} のメールアドレスのみ登録できます。', pwLenErr:'パスワードは6文字以上で入力してください。',
     domainOnlyErr:'{domain} アカウントのみ使用できます。', resetPwNeedEmail:'先にメールアドレスを入力してください。',
-    resetPwSent:'パスワード再設定メールを送信しました。', resetPwFailPrefix:'失敗：' }
+    resetPwSent:'パスワード再設定メールを送信しました。', resetPwFailPrefix:'失敗：',
+    rememberEmail:'メールアドレスを保存', staySignedIn:'この端末でログイン状態を保持' }
 };
 function _at(key){
   var lang=getLang();
@@ -79,6 +84,10 @@ function renderAuthGate(mode, errMsg){
       +'<input type="email" id="auth_email" placeholder="name'+esc(ALLOWED_EMAIL_DOMAIN)+'" autocomplete="off" readonly onfocus="this.removeAttribute(\'readonly\')"></div>'
     +'<div class="fg"><label class="fl">'+esc(_at('pwLabel'))+'</label>'
       +'<input type="password" id="auth_pw" autocomplete="off" readonly onfocus="this.removeAttribute(\'readonly\')" onkeydown="if(event.key===\'Enter\')'+(isSignup?'doSignup()':'doLogin()')+'"></div>'
+    +(isSignup?'':'<div style="display:flex;flex-direction:column;gap:6px;margin:-4px 0 4px">'
+      +'<label class="chkrow" style="font-size:12px"><input type="checkbox" id="auth_remember_email"> '+esc(_at('rememberEmail'))+'</label>'
+      +'<label class="chkrow" style="font-size:12px"><input type="checkbox" id="auth_stay_signed_in"> '+esc(_at('staySignedIn'))+'</label>'
+    +'</div>')
     +'<div class="mfoot" style="justify-content:space-between;align-items:center">'
       +'<a href="javascript:void(0)" onclick="renderAuthGate(\''+(isSignup?'login':'signup')+'\')" style="color:var(--tx-second)">'
         +(isSignup?esc(_at('toLogin')):esc(_at('toSignup')))
@@ -98,6 +107,20 @@ function renderAuthGate(mode, errMsg){
       if(ev.animationName==='onAutoFillStart')inp.value='';
     });
   });
+  /* "이메일 저장"을 체크했던 적이 있으면 이메일 칸을 미리 채우고 체크박스도 켜둔다.
+     비밀번호는 저장하지 않는다 — 평문으로 브라우저에 남기는 것 자체가 보안 위험이라,
+     "로그인 상태 유지"는 아래 doLogin()에서 Firebase의 Persistence(LOCAL)로 처리한다. */
+  if(!isSignup){
+    try{
+      var savedEmail=localStorage.getItem('edu_auth_remember_email');
+      if(savedEmail){
+        var emailInp=document.getElementById('auth_email');
+        if(emailInp)emailInp.value=savedEmail;
+        var rememberChk=document.getElementById('auth_remember_email');
+        if(rememberChk)rememberChk.checked=true;
+      }
+    }catch(e){}
+  }
 }
 
 function doSignup(){
@@ -111,7 +134,18 @@ function doSignup(){
 function doLogin(){
   var email=(document.getElementById('auth_email').value||'').trim();
   var pw=document.getElementById('auth_pw').value||'';
-  firebase.auth().signInWithEmailAndPassword(email,pw)
+  var rememberEmail=!!(document.getElementById('auth_remember_email')||{}).checked;
+  var staySignedIn=!!(document.getElementById('auth_stay_signed_in')||{}).checked;
+  try{
+    if(rememberEmail)localStorage.setItem('edu_auth_remember_email',email);
+    else localStorage.removeItem('edu_auth_remember_email');
+  }catch(e){}
+  /* "로그인 상태 유지"를 체크하면 Firebase Persistence를 LOCAL로 설정해 브라우저를 껐다 켜도
+     로그인이 유지되게 하고(재방문 시 로그인 화면 자체를 건너뜀), 체크 안 하면 SESSION으로
+     설정해 탭/브라우저를 닫으면 로그아웃되게 한다. 비밀번호 자체는 어떤 경우에도 저장하지 않는다. */
+  var persistence=staySignedIn?firebase.auth.Auth.Persistence.LOCAL:firebase.auth.Auth.Persistence.SESSION;
+  firebase.auth().setPersistence(persistence)
+    .then(function(){return firebase.auth().signInWithEmailAndPassword(email,pw);})
     .catch(function(err){renderAuthGate('login',err.message);});
 }
 function doResetPw(){
