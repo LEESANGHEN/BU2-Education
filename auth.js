@@ -76,9 +76,9 @@ function renderAuthGate(mode, errMsg){
     +'<div class="mtit">'+esc(_at('appName'))+' — '+(isSignup?esc(_at('signup')):esc(_at('login')))+'</div>'
     +(errMsg?'<div class="auth-err">'+esc(errMsg)+'</div>':'')
     +'<div class="fg"><label class="fl">'+esc(_at('emailLabel'))+' ('+esc(ALLOWED_EMAIL_DOMAIN)+')</label>'
-      +'<input type="email" id="auth_email" placeholder="name'+esc(ALLOWED_EMAIL_DOMAIN)+'" autocomplete="off"></div>'
+      +'<input type="email" id="auth_email" placeholder="name'+esc(ALLOWED_EMAIL_DOMAIN)+'" autocomplete="off" readonly onfocus="this.removeAttribute(\'readonly\')"></div>'
     +'<div class="fg"><label class="fl">'+esc(_at('pwLabel'))+'</label>'
-      +'<input type="password" id="auth_pw" autocomplete="off" onkeydown="if(event.key===\'Enter\')'+(isSignup?'doSignup()':'doLogin()')+'"></div>'
+      +'<input type="password" id="auth_pw" autocomplete="off" readonly onfocus="this.removeAttribute(\'readonly\')" onkeydown="if(event.key===\'Enter\')'+(isSignup?'doSignup()':'doLogin()')+'"></div>'
     +'<div class="mfoot" style="justify-content:space-between;align-items:center">'
       +'<a href="javascript:void(0)" onclick="renderAuthGate(\''+(isSignup?'login':'signup')+'\')" style="color:var(--tx-second)">'
         +(isSignup?esc(_at('toLogin')):esc(_at('toSignup')))
