@@ -16,6 +16,1622 @@ var CM_LANG_LABEL={ko:'언어',en:'Language',zhCN:'语言',zhTW:'語言',ja:'言
 function cmImg(code,equip,n){return '관련 자료/'+(CM_EQUIP_LABEL[equip]||equip)+'/'+code+'/slide-'+String(n).padStart(3,'0')+'.jpg';}
 
 var COURSE_MATERIALS={
+  B:{
+    smtv:{
+      title:{ko:'B. 광학 검사 이론 기초',en:'B. Optical Inspection Theory Basics',zhCN:'B. 光学检测理论基础',zhTW:'B. 光學檢測理論基礎',ja:'B. 光学検査理論基礎',vi:'B. Cơ bản lý thuyết kiểm tra quang học'},
+      slides:[
+        {img:cmImg('B','smtv',1),tx:{
+          en:'Level 01 Contents\n\nOverview of this training course: Introduce (iSIS-SMTV, Introduction & Inspection Items, Inspection Principle) ▸ Dimension & Specification (Machine Spec, Camera Spec, Safety Stickers) ▸ Hardware Configuration & System (Layout & Component, Interlock System, Equipment Automatic Sequence) ▸ Operation (Power On & Off, Program Execute & Quit, Run Inspection).',
+          ko:'Level 01 Contents\n\n본 교육과정 개요: Introduce(iSIS-SMTV, Introduction & Inspection Items, Inspection Principle) ▸ Dimension & Specification(Machine Spec, Camera Spec, Safety Stickers) ▸ Hardware Configuration & System(Layout & Component, Interlock System, Equipment Automatic Sequence) ▸ Operation(Power On & Off, Program Execute & Quit, Run Inspection).',
+          zhCN:'Level 01 Contents\n\n本培训课程概览:Introduce(iSIS-SMTV、Introduction & Inspection Items、Inspection Principle)▸ Dimension & Specification(Machine Spec、Camera Spec、Safety Stickers)▸ Hardware Configuration & System(Layout & Component、Interlock System、Equipment Automatic Sequence)▸ Operation(Power On & Off、Program Execute & Quit、Run Inspection)。',
+          zhTW:'Level 01 Contents\n\n本培訓課程概覽:Introduce(iSIS-SMTV、Introduction & Inspection Items、Inspection Principle)▸ Dimension & Specification(Machine Spec、Camera Spec、Safety Stickers)▸ Hardware Configuration & System(Layout & Component、Interlock System、Equipment Automatic Sequence)▸ Operation(Power On & Off、Program Execute & Quit、Run Inspection)。',
+          ja:'Level 01 Contents\n\n本教育課程の概要:Introduce(iSIS-SMTV、Introduction & Inspection Items、Inspection Principle)▸ Dimension & Specification(Machine Spec、Camera Spec、Safety Stickers)▸ Hardware Configuration & System(Layout & Component、Interlock System、Equipment Automatic Sequence)▸ Operation(Power On & Off、Program Execute & Quit、Run Inspection)。',
+          vi:'Level 01 Contents\n\nTổng quan khóa đào tạo này: Introduce (iSIS-SMTV, Introduction & Inspection Items, Inspection Principle) ▸ Dimension & Specification (Machine Spec, Camera Spec, Safety Stickers) ▸ Hardware Configuration & System (Layout & Component, Interlock System, Equipment Automatic Sequence) ▸ Operation (Power On & Off, Program Execute & Quit, Run Inspection).'
+        }},
+        {img:cmImg('B','smtv',2),tx:{
+          en:'Introduce iSIS-SMTV — this section covers Introduction & Inspection Items and Inspection Principle.',
+          ko:'Introduce iSIS-SMTV — Introduction & Inspection Items, Inspection Principle을 다룹니다.',
+          zhCN:'Introduce iSIS-SMTV——本节介绍Introduction & Inspection Items、Inspection Principle。',
+          zhTW:'Introduce iSIS-SMTV——本節介紹Introduction & Inspection Items、Inspection Principle。',
+          ja:'Introduce iSIS-SMTV——本節ではIntroduction & Inspection Items、Inspection Principleを扱います。',
+          vi:'Introduce iSIS-SMTV — phần này đề cập đến Introduction & Inspection Items và Inspection Principle.'
+        }},
+        {img:cmImg('B','smtv',3),tx:{
+          en:'1.1.1. Introduction & Inspection Item\n\niSIS-SMTV is a Bump-AOI (Automated Optical Inspection) machine. For thickness (height) inspection, 3D measurement is performed on a suction jig with precise flatness.',
+          ko:'1.1.1. Introduction & Inspection Item\n\niSIS-SMTV는 Bump-AOI(자동 광학 검사) 장비입니다. 두께(높이) 검사를 위해, 정밀한 평탄도를 가진 흡착 Jig 위에서 3D 측정을 수행합니다.',
+          zhCN:'1.1.1. Introduction & Inspection Item\n\niSIS-SMTV是Bump-AOI(自动光学检测)设备。为进行厚度(高度)检测,在具有精密平面度的吸附Jig上进行3D测量。',
+          zhTW:'1.1.1. Introduction & Inspection Item\n\niSIS-SMTV是Bump-AOI(自動光學檢測)設備。為進行厚度(高度)檢測,在具有精密平面度的吸附Jig上進行3D測量。',
+          ja:'1.1.1. Introduction & Inspection Item\n\niSIS-SMTVはBump-AOI(自動光学検査)装置です。厚さ(高さ)検査のため、精密な平面度を持つ吸着Jig上で3D測定を行います。',
+          vi:'1.1.1. Introduction & Inspection Item\n\niSIS-SMTV là thiết bị Bump-AOI (kiểm tra quang học tự động). Để kiểm tra độ dày (chiều cao), phép đo 3D được thực hiện trên Jig hút chân không có độ phẳng chính xác cao.'
+        }},
+        {img:cmImg('B','smtv',4),tx:{
+          en:'Introduce iSIS-SMTV — this section covers Introduction & Inspection Items and Inspection Principle.',
+          ko:'Introduce iSIS-SMTV — Introduction & Inspection Items, Inspection Principle을 다룹니다.',
+          zhCN:'Introduce iSIS-SMTV——本节介绍Introduction & Inspection Items、Inspection Principle。',
+          zhTW:'Introduce iSIS-SMTV——本節介紹Introduction & Inspection Items、Inspection Principle。',
+          ja:'Introduce iSIS-SMTV——本節ではIntroduction & Inspection Items、Inspection Principleを扱います。',
+          vi:'Introduce iSIS-SMTV — phần này đề cập đến Introduction & Inspection Items và Inspection Principle.'
+        }},
+        {img:cmImg('B','smtv',5),tx:{
+          en:'1.1.2. Inspection Principle\n\nA light source used for WSI (White-light Scanning Interferometry) inspection must have a single frequency and be coherent. With inconsistent (non-coherent) light, interference cannot be observed.',
+          ko:'1.1.2. Inspection Principle\n\nWSI(백색광 주사 간섭계) 검사에 사용하는 광원은 단일 주파수이면서 결맞음(Coherent)이어야 합니다. 일관되지 않은(비결맞음) 광을 사용하면 간섭 현상을 볼 수 없습니다.',
+          zhCN:'1.1.2. Inspection Principle\n\nWSI(白光扫描干涉法)检测所用光源必须是单一频率且相干(Coherent)的。若使用不一致(非相干)的光,则无法观察到干涉现象。',
+          zhTW:'1.1.2. Inspection Principle\n\nWSI(白光掃描干涉法)檢測所用光源必須是單一頻率且相干(Coherent)的。若使用不一致(非相干)的光,則無法觀察到干涉現象。',
+          ja:'1.1.2. Inspection Principle\n\nWSI(白色光走査干渉法)検査に用いる光源は単一周波数かつコヒーレント(Coherent)である必要があります。一貫性のない(非コヒーレントな)光を使うと干渉現象を見ることができません。',
+          vi:'1.1.2. Inspection Principle\n\nNguồn sáng dùng cho kiểm tra WSI (giao thoa quét ánh sáng trắng) phải có tần số đơn và kết hợp (Coherent). Nếu dùng ánh sáng không nhất quán (không kết hợp), sẽ không quan sát được hiện tượng giao thoa.'
+        }},
+        {img:cmImg('B','smtv',6),tx:{
+          en:'1.1.2. Inspection Principle\n\n< Constructive Interference > / < Destructive Interference >\n\nIn an interference experiment using monochromatic light, the light becomes stronger where wave crests overlap (constructive) and weaker where a crest overlaps a trough (destructive). This produces alternating bright and dark regions — an interference pattern.',
+          ko:'1.1.2. Inspection Principle\n\n< Constructive Interference(보강 간섭) > / < Destructive Interference(상쇄 간섭) >\n\n단색광을 광원으로 한 간섭 실험에서, 마루와 마루가 겹치는 곳은 빛이 강해지고(보강 간섭), 마루와 골이 겹치는 곳은 빛이 약해집니다(상쇄 간섭). 그 결과 밝은 부분과 어두운 부분이 번갈아 나타나는 간섭무늬(Interference Pattern)가 생성됩니다.',
+          zhCN:'1.1.2. Inspection Principle\n\n< Constructive Interference(相长干涉) > / < Destructive Interference(相消干涉) >\n\n在以单色光为光源的干涉实验中,波峰与波峰重叠处光变强(相长干涉),波峰与波谷重叠处光变弱(相消干涉)。结果产生明暗交替的干涉图案(Interference Pattern)。',
+          zhTW:'1.1.2. Inspection Principle\n\n< Constructive Interference(相長干涉) > / < Destructive Interference(相消干涉) >\n\n在以單色光為光源的干涉實驗中,波峰與波峰重疊處光變強(相長干涉),波峰與波谷重疊處光變弱(相消干涉)。結果產生明暗交替的干涉圖案(Interference Pattern)。',
+          ja:'1.1.2. Inspection Principle\n\n< Constructive Interference(強め合う干渉) > / < Destructive Interference(弱め合う干渉) >\n\n単色光を光源とした干渉実験では、山と山が重なる場所で光が強まり(強め合う干渉)、山と谷が重なる場所で光が弱まります(弱め合う干渉)。その結果、明部と暗部が交互に現れる干渉縞(Interference Pattern)が生じます。',
+          vi:'1.1.2. Inspection Principle\n\n< Constructive Interference (giao thoa tăng cường) > / < Destructive Interference (giao thoa triệt tiêu) >\n\nTrong thí nghiệm giao thoa dùng ánh sáng đơn sắc, nơi đỉnh sóng chồng lên đỉnh sóng ánh sáng mạnh lên (giao thoa tăng cường), nơi đỉnh chồng lên đáy ánh sáng yếu đi (giao thoa triệt tiêu). Kết quả tạo ra vùng sáng và tối xen kẽ — vân giao thoa (Interference Pattern).'
+        }},
+        {img:cmImg('B','smtv',7),tx:{
+          en:'1.1.2. Inspection Principle\n\nA single light source (LED or Laser) generates a beam, which is split into two beams by a beam splitter. When the beams reflected at equal distances (d1 = d2) — one from the Sample, one from the Reference Mirror — recombine into one beam, an interference pattern from constructive/destructive interference can be observed. This method enables contactless measurement of the sample surface.',
+          ko:'1.1.2. Inspection Principle\n\n단일 광원(LED, Laser)으로 빔을 생성하고, Beam Splitter를 통해 두 개의 빔으로 분리합니다. Sample과 Reference Mirror에서 각각 반사되어 동일한 거리(d1=d2)를 이동한 두 빔이 하나로 합쳐질 때, 보강·상쇄 간섭에 의한 간섭무늬를 확인할 수 있습니다. 이 방식으로 Sample 표면을 비접촉으로 측정할 수 있습니다.',
+          zhCN:'1.1.2. Inspection Principle\n\n用单一光源(LED、Laser)产生光束,通过Beam Splitter分成两束光。当分别在Sample与Reference Mirror反射、行进相同距离(d1=d2)的两束光重新合成一束时,可观察到相长·相消干涉产生的干涉图案。通过此方法可对Sample表面进行非接触式测量。',
+          zhTW:'1.1.2. Inspection Principle\n\n用單一光源(LED、Laser)產生光束,透過Beam Splitter分成兩束光。當分別在Sample與Reference Mirror反射、行進相同距離(d1=d2)的兩束光重新合成一束時,可觀察到相長·相消干涉產生的干涉圖案。透過此方法可對Sample表面進行非接觸式測量。',
+          ja:'1.1.2. Inspection Principle\n\n単一の光源(LED、Laser)でビームを生成し、Beam Splitterで2つのビームに分割します。SampleとReference Mirrorでそれぞれ反射し同じ距離(d1=d2)を進んだビームが1つに合成されると、強め合う・弱め合う干渉による干渉縞を確認できます。この方式によりSample表面を非接触で測定できます。',
+          vi:'1.1.2. Inspection Principle\n\nMột nguồn sáng đơn (LED, Laser) tạo ra chùm tia, được tách thành hai chùm qua Beam Splitter. Khi hai chùm phản xạ từ Sample và Reference Mirror ở cùng khoảng cách (d1=d2) hợp lại thành một, có thể quan sát được vân giao thoa tăng cường/triệt tiêu. Phương pháp này cho phép đo không tiếp xúc bề mặt Sample.'
+        }},
+        {img:cmImg('B','smtv',8),tx:{
+          en:'1.1.2. Inspection Principle\n\n< Inspection Method >\n\nThe method produces an interference pattern; the 3D Z-Map is built from the signal strength of that pattern. As the PZT Stage scans (Scan Start → Scan End), each pixel\'s intensity peaks at its point of best focus/interference — this peak position is converted into a height (Bump Top vs. Substrate) to build the 3D Z-Map image.',
+          ko:'1.1.2. Inspection Principle\n\n< Inspection Method >\n\n이 방식은 간섭무늬(Interference Pattern)를 만들어내며, 그 무늬의 신호 세기로부터 3D Z-Map을 생성합니다. PZT Stage가 Scan Start→Scan End로 스캔하는 동안, 각 Pixel의 밝기(Intensity)는 초점·간섭이 가장 잘 맞는 지점에서 최대가 되며 — 이 최대 지점의 위치를 높이(Bump Top vs. Substrate)로 환산해 3D Z-Map 이미지를 만듭니다.',
+          zhCN:'1.1.2. Inspection Principle\n\n< Inspection Method >\n\n该方法产生干涉图案(Interference Pattern),并根据该图案的信号强度生成3D Z-Map。PZT Stage从Scan Start扫描到Scan End的过程中,每个Pixel的亮度(Intensity)在对焦·干涉最佳的位置达到最大——将该峰值位置换算为高度(Bump Top vs. Substrate),从而生成3D Z-Map图像。',
+          zhTW:'1.1.2. Inspection Principle\n\n< Inspection Method >\n\n該方法產生干涉圖案(Interference Pattern),並根據該圖案的訊號強度生成3D Z-Map。PZT Stage從Scan Start掃描到Scan End的過程中,每個Pixel的亮度(Intensity)在對焦·干涉最佳的位置達到最大——將該峰值位置換算為高度(Bump Top vs. Substrate),從而生成3D Z-Map影像。',
+          ja:'1.1.2. Inspection Principle\n\n< Inspection Method >\n\nこの方式は干渉縞(Interference Pattern)を作り出し、その模様の信号強度から3D Z-Mapを生成します。PZT StageがScan StartからScan Endへスキャンする間、各Pixelの明るさ(Intensity)は焦点・干渉が最も合う地点で最大となり——この最大点の位置を高さ(Bump Top vs. Substrate)に換算して3D Z-Map画像を作成します。',
+          vi:'1.1.2. Inspection Principle\n\n< Inspection Method >\n\nPhương pháp này tạo ra vân giao thoa (Interference Pattern), và 3D Z-Map được dựng từ cường độ tín hiệu của vân đó. Trong khi PZT Stage quét từ Scan Start đến Scan End, độ sáng (Intensity) của mỗi Pixel đạt đỉnh tại điểm hội tụ/giao thoa tốt nhất — vị trí đỉnh này được quy đổi thành chiều cao (Bump Top so với Substrate) để dựng ảnh 3D Z-Map.'
+        }}
+      ]
+    },
+    nbga:{
+      title:{ko:'B. 광학 검사 이론 기초',en:'B. Optical Inspection Theory Basics',zhCN:'B. 光学检测理论基础',zhTW:'B. 光學檢測理論基礎',ja:'B. 光学検査理論基礎',vi:'B. Cơ bản lý thuyết kiểm tra quang học'},
+      slides:[
+        {img:cmImg('B','nbga',1),tx:{
+          en:'Level 01 Contents\n\nOverview of this training course: Introduce (iSIS-NBGA, Introduction & Inspection Items, Inspection Principle) ▸ Dimension & Specification (by customer: SEMCO/Kyocera, SEMV, AT&S/Intel/Nanya) ▸ Hardware Configuration & System (Layout & Component, Safety Sticker, Power Supply & Interlock, Equipment Automatic Sequence) ▸ Operation (Power On & Off, Program Execute & Quit, Run Inspection).',
+          ko:'Level 01 Contents\n\n본 교육과정 개요: Introduce(iSIS-NBGA, Introduction & Inspection Items, Inspection Principle) ▸ Dimension & Specification(고객사별: SEMCO/Kyocera, SEMV, AT&S/Intel/Nanya) ▸ Hardware Configuration & System(Layout & Component, Safety Sticker, Power Supply & Interlock, Equipment Automatic Sequence) ▸ Operation(Power On & Off, Program Execute & Quit, Run Inspection).',
+          zhCN:'Level 01 Contents\n\n本培训课程概览:Introduce(iSIS-NBGA、Introduction & Inspection Items、Inspection Principle)▸ Dimension & Specification(按客户:SEMCO/Kyocera、SEMV、AT&S/Intel/Nanya)▸ Hardware Configuration & System(Layout & Component、Safety Sticker、Power Supply & Interlock、Equipment Automatic Sequence)▸ Operation(Power On & Off、Program Execute & Quit、Run Inspection)。',
+          zhTW:'Level 01 Contents\n\n本培訓課程概覽:Introduce(iSIS-NBGA、Introduction & Inspection Items、Inspection Principle)▸ Dimension & Specification(按客戶:SEMCO/Kyocera、SEMV、AT&S/Intel/Nanya)▸ Hardware Configuration & System(Layout & Component、Safety Sticker、Power Supply & Interlock、Equipment Automatic Sequence)▸ Operation(Power On & Off、Program Execute & Quit、Run Inspection)。',
+          ja:'Level 01 Contents\n\n本教育課程の概要:Introduce(iSIS-NBGA、Introduction & Inspection Items、Inspection Principle)▸ Dimension & Specification(顧客別:SEMCO/Kyocera、SEMV、AT&S/Intel/Nanya)▸ Hardware Configuration & System(Layout & Component、Safety Sticker、Power Supply & Interlock、Equipment Automatic Sequence)▸ Operation(Power On & Off、Program Execute & Quit、Run Inspection)。',
+          vi:'Level 01 Contents\n\nTổng quan khóa đào tạo này: Introduce (iSIS-NBGA, Introduction & Inspection Items, Inspection Principle) ▸ Dimension & Specification (theo khách hàng: SEMCO/Kyocera, SEMV, AT&S/Intel/Nanya) ▸ Hardware Configuration & System (Layout & Component, Safety Sticker, Power Supply & Interlock, Equipment Automatic Sequence) ▸ Operation (Power On & Off, Program Execute & Quit, Run Inspection).'
+        }},
+        {img:cmImg('B','nbga',2),tx:{
+          en:'Introduce iSIS-NBGA — this section covers Introduction & Inspection Items and Inspection Principle.',
+          ko:'Introduce iSIS-NBGA — Introduction & Inspection Items, Inspection Principle을 다룹니다.',
+          zhCN:'Introduce iSIS-NBGA——本节介绍Introduction & Inspection Items、Inspection Principle。',
+          zhTW:'Introduce iSIS-NBGA——本節介紹Introduction & Inspection Items、Inspection Principle。',
+          ja:'Introduce iSIS-NBGA——本節ではIntroduction & Inspection Items、Inspection Principleを扱います。',
+          vi:'Introduce iSIS-NBGA — phần này đề cập đến Introduction & Inspection Items và Inspection Principle.'
+        }},
+        {img:cmImg('B','nbga',3),tx:{
+          en:'1.1.1. Introduction & Inspection Item\n\niSIS-NBGA is a Bump-AOI (Automated Optical Inspection) machine. The tray containing the unit is loaded into the Loader, automatically sorted after inspection, and ejected into the Unloader.',
+          ko:'1.1.1. Introduction & Inspection Item\n\niSIS-NBGA는 Bump-AOI(자동 광학 검사) 장비입니다. Unit이 담긴 Tray가 Loader에 투입되면, 검사 후 자동으로 Sorting되어 Unloader로 배출됩니다.',
+          zhCN:'1.1.1. Introduction & Inspection Item\n\niSIS-NBGA是Bump-AOI(自动光学检测)设备。装有Unit的Tray投入Loader后,检测完成会自动Sorting并从Unloader排出。',
+          zhTW:'1.1.1. Introduction & Inspection Item\n\niSIS-NBGA是Bump-AOI(自動光學檢測)設備。裝有Unit的Tray投入Loader後,檢測完成會自動Sorting並從Unloader排出。',
+          ja:'1.1.1. Introduction & Inspection Item\n\niSIS-NBGAはBump-AOI(自動光学検査)装置です。Unitが入ったTrayがLoaderに投入されると、検査後に自動でSortingされUnloaderへ排出されます。',
+          vi:'1.1.1. Introduction & Inspection Item\n\niSIS-NBGA là thiết bị Bump-AOI (kiểm tra quang học tự động). Tray chứa Unit được nạp vào Loader, sau khi kiểm tra sẽ tự động Sorting và đẩy ra Unloader.'
+        }},
+        {img:cmImg('B','nbga',4),tx:{
+          en:'Introduce iSIS-NBGA — this section covers Introduction & Inspection Items and Inspection Principle.',
+          ko:'Introduce iSIS-NBGA — Introduction & Inspection Items, Inspection Principle을 다룹니다.',
+          zhCN:'Introduce iSIS-NBGA——本节介绍Introduction & Inspection Items、Inspection Principle。',
+          zhTW:'Introduce iSIS-NBGA——本節介紹Introduction & Inspection Items、Inspection Principle。',
+          ja:'Introduce iSIS-NBGA——本節ではIntroduction & Inspection Items、Inspection Principleを扱います。',
+          vi:'Introduce iSIS-NBGA — phần này đề cập đến Introduction & Inspection Items và Inspection Principle.'
+        }},
+        {img:cmImg('B','nbga',5),tx:{
+          en:'1.1.2. Inspection Principle\n\nA light source used for WSI (White-light Scanning Interferometry) inspection must have a single frequency and be coherent. With inconsistent (non-coherent) light, interference cannot be observed.',
+          ko:'1.1.2. Inspection Principle\n\nWSI(백색광 주사 간섭계) 검사에 사용하는 광원은 단일 주파수이면서 결맞음(Coherent)이어야 합니다. 일관되지 않은(비결맞음) 광을 사용하면 간섭 현상을 볼 수 없습니다.',
+          zhCN:'1.1.2. Inspection Principle\n\nWSI(白光扫描干涉法)检测所用光源必须是单一频率且相干(Coherent)的。若使用不一致(非相干)的光,则无法观察到干涉现象。',
+          zhTW:'1.1.2. Inspection Principle\n\nWSI(白光掃描干涉法)檢測所用光源必須是單一頻率且相干(Coherent)的。若使用不一致(非相干)的光,則無法觀察到干涉現象。',
+          ja:'1.1.2. Inspection Principle\n\nWSI(白色光走査干渉法)検査に用いる光源は単一周波数かつコヒーレント(Coherent)である必要があります。一貫性のない(非コヒーレントな)光を使うと干渉現象を見ることができません。',
+          vi:'1.1.2. Inspection Principle\n\nNguồn sáng dùng cho kiểm tra WSI (giao thoa quét ánh sáng trắng) phải có tần số đơn và kết hợp (Coherent). Nếu dùng ánh sáng không nhất quán (không kết hợp), sẽ không quan sát được hiện tượng giao thoa.'
+        }},
+        {img:cmImg('B','nbga',6),tx:{
+          en:'1.1.2. Inspection Principle\n\n< Constructive Interference > / < Destructive Interference >\n\nIn an interference experiment using monochromatic light, the light becomes stronger where wave crests overlap (constructive) and weaker where a crest overlaps a trough (destructive). This produces alternating bright and dark regions — an interference pattern.',
+          ko:'1.1.2. Inspection Principle\n\n< Constructive Interference(보강 간섭) > / < Destructive Interference(상쇄 간섭) >\n\n단색광을 광원으로 한 간섭 실험에서, 마루와 마루가 겹치는 곳은 빛이 강해지고(보강 간섭), 마루와 골이 겹치는 곳은 빛이 약해집니다(상쇄 간섭). 그 결과 밝은 부분과 어두운 부분이 번갈아 나타나는 간섭무늬(Interference Pattern)가 생성됩니다.',
+          zhCN:'1.1.2. Inspection Principle\n\n< Constructive Interference(相长干涉) > / < Destructive Interference(相消干涉) >\n\n在以单色光为光源的干涉实验中,波峰与波峰重叠处光变强(相长干涉),波峰与波谷重叠处光变弱(相消干涉)。结果产生明暗交替的干涉图案(Interference Pattern)。',
+          zhTW:'1.1.2. Inspection Principle\n\n< Constructive Interference(相長干涉) > / < Destructive Interference(相消干涉) >\n\n在以單色光為光源的干涉實驗中,波峰與波峰重疊處光變強(相長干涉),波峰與波谷重疊處光變弱(相消干涉)。結果產生明暗交替的干涉圖案(Interference Pattern)。',
+          ja:'1.1.2. Inspection Principle\n\n< Constructive Interference(強め合う干渉) > / < Destructive Interference(弱め合う干渉) >\n\n単色光を光源とした干渉実験では、山と山が重なる場所で光が強まり(強め合う干渉)、山と谷が重なる場所で光が弱まります(弱め合う干渉)。その結果、明部と暗部が交互に現れる干渉縞(Interference Pattern)が生じます。',
+          vi:'1.1.2. Inspection Principle\n\n< Constructive Interference (giao thoa tăng cường) > / < Destructive Interference (giao thoa triệt tiêu) >\n\nTrong thí nghiệm giao thoa dùng ánh sáng đơn sắc, nơi đỉnh sóng chồng lên đỉnh sóng ánh sáng mạnh lên (giao thoa tăng cường), nơi đỉnh chồng lên đáy ánh sáng yếu đi (giao thoa triệt tiêu). Kết quả tạo ra vùng sáng và tối xen kẽ — vân giao thoa (Interference Pattern).'
+        }},
+        {img:cmImg('B','nbga',7),tx:{
+          en:'1.1.2. Inspection Principle\n\nA single light source (LED or Laser) generates a beam, which is split into two beams by a beam splitter. When the beams reflected at equal distances (d1 = d2) — one from the Sample, one from the Reference Mirror — recombine into one beam, an interference pattern from constructive/destructive interference can be observed. This method enables contactless measurement of the sample surface.',
+          ko:'1.1.2. Inspection Principle\n\n단일 광원(LED, Laser)으로 빔을 생성하고, Beam Splitter를 통해 두 개의 빔으로 분리합니다. Sample과 Reference Mirror에서 각각 반사되어 동일한 거리(d1=d2)를 이동한 두 빔이 하나로 합쳐질 때, 보강·상쇄 간섭에 의한 간섭무늬를 확인할 수 있습니다. 이 방식으로 Sample 표면을 비접촉으로 측정할 수 있습니다.',
+          zhCN:'1.1.2. Inspection Principle\n\n用单一光源(LED、Laser)产生光束,通过Beam Splitter分成两束光。当分别在Sample与Reference Mirror反射、行进相同距离(d1=d2)的两束光重新合成一束时,可观察到相长·相消干涉产生的干涉图案。通过此方法可对Sample表面进行非接触式测量。',
+          zhTW:'1.1.2. Inspection Principle\n\n用單一光源(LED、Laser)產生光束,透過Beam Splitter分成兩束光。當分別在Sample與Reference Mirror反射、行進相同距離(d1=d2)的兩束光重新合成一束時,可觀察到相長·相消干涉產生的干涉圖案。透過此方法可對Sample表面進行非接觸式測量。',
+          ja:'1.1.2. Inspection Principle\n\n単一の光源(LED、Laser)でビームを生成し、Beam Splitterで2つのビームに分割します。SampleとReference Mirrorでそれぞれ反射し同じ距離(d1=d2)を進んだビームが1つに合成されると、強め合う・弱め合う干渉による干渉縞を確認できます。この方式によりSample表面を非接触で測定できます。',
+          vi:'1.1.2. Inspection Principle\n\nMột nguồn sáng đơn (LED, Laser) tạo ra chùm tia, được tách thành hai chùm qua Beam Splitter. Khi hai chùm phản xạ từ Sample và Reference Mirror ở cùng khoảng cách (d1=d2) hợp lại thành một, có thể quan sát được vân giao thoa tăng cường/triệt tiêu. Phương pháp này cho phép đo không tiếp xúc bề mặt Sample.'
+        }},
+        {img:cmImg('B','nbga',8),tx:{
+          en:'1.1.2. Inspection Principle\n\n< Inspection Method >\n\nThe method produces an interference pattern; the 3D Z-Map is built from the signal strength of that pattern. As the PZT Stage scans (Scan Start → Scan End), each pixel\'s intensity peaks at its point of best focus/interference — this peak position is converted into a height (Bump Top vs. Substrate) to build the 3D Z-Map image.',
+          ko:'1.1.2. Inspection Principle\n\n< Inspection Method >\n\n이 방식은 간섭무늬(Interference Pattern)를 만들어내며, 그 무늬의 신호 세기로부터 3D Z-Map을 생성합니다. PZT Stage가 Scan Start→Scan End로 스캔하는 동안, 각 Pixel의 밝기(Intensity)는 초점·간섭이 가장 잘 맞는 지점에서 최대가 되며 — 이 최대 지점의 위치를 높이(Bump Top vs. Substrate)로 환산해 3D Z-Map 이미지를 만듭니다.',
+          zhCN:'1.1.2. Inspection Principle\n\n< Inspection Method >\n\n该方法产生干涉图案(Interference Pattern),并根据该图案的信号强度生成3D Z-Map。PZT Stage从Scan Start扫描到Scan End的过程中,每个Pixel的亮度(Intensity)在对焦·干涉最佳的位置达到最大——将该峰值位置换算为高度(Bump Top vs. Substrate),从而生成3D Z-Map图像。',
+          zhTW:'1.1.2. Inspection Principle\n\n< Inspection Method >\n\n該方法產生干涉圖案(Interference Pattern),並根據該圖案的訊號強度生成3D Z-Map。PZT Stage從Scan Start掃描到Scan End的過程中,每個Pixel的亮度(Intensity)在對焦·干涉最佳的位置達到最大——將該峰值位置換算為高度(Bump Top vs. Substrate),從而生成3D Z-Map影像。',
+          ja:'1.1.2. Inspection Principle\n\n< Inspection Method >\n\nこの方式は干渉縞(Interference Pattern)を作り出し、その模様の信号強度から3D Z-Mapを生成します。PZT StageがScan StartからScan Endへスキャンする間、各Pixelの明るさ(Intensity)は焦点・干渉が最も合う地点で最大となり——この最大点の位置を高さ(Bump Top vs. Substrate)に換算して3D Z-Map画像を作成します。',
+          vi:'1.1.2. Inspection Principle\n\n< Inspection Method >\n\nPhương pháp này tạo ra vân giao thoa (Interference Pattern), và 3D Z-Map được dựng từ cường độ tín hiệu của vân đó. Trong khi PZT Stage quét từ Scan Start đến Scan End, độ sáng (Intensity) của mỗi Pixel đạt đỉnh tại điểm hội tụ/giao thoa tốt nhất — vị trí đỉnh này được quy đổi thành chiều cao (Bump Top so với Substrate) để dựng ảnh 3D Z-Map.'
+        }}
+      ]
+    }
+  },
+  A:{
+    smtv:{
+      title:{ko:'A. 설비 기본 구성',en:'A. Basic Equipment Configuration',zhCN:'A. 设备基本构成',zhTW:'A. 設備基本構成',ja:'A. 設備基本構成',vi:'A. Cấu hình cơ bản thiết bị'},
+      chapters:[
+        {from:1,title:{ko:'A. Dimension & Specification',en:'A. Dimension & Specification',zhCN:'A. Dimension & Specification',zhTW:'A. Dimension & Specification',ja:'A. Dimension & Specification',vi:'A. Dimension & Specification'}},
+        {from:13,title:{ko:'B. Layout & Component',en:'B. Layout & Component',zhCN:'B. Layout & Component',zhTW:'B. Layout & Component',ja:'B. Layout & Component',vi:'B. Layout & Component'}},
+        {from:52,title:{ko:'C. Interlock System',en:'C. Interlock System',zhCN:'C. Interlock System',zhTW:'C. Interlock System',ja:'C. Interlock System',vi:'C. Interlock System'}},
+        {from:57,title:{ko:'D. Equipment Automatic Sequence',en:'D. Equipment Automatic Sequence',zhCN:'D. Equipment Automatic Sequence',zhTW:'D. Equipment Automatic Sequence',ja:'D. Equipment Automatic Sequence',vi:'D. Equipment Automatic Sequence'}},
+        {from:70,title:{ko:'E. Power On & Off',en:'E. Power On & Off',zhCN:'E. Power On & Off',zhTW:'E. Power On & Off',ja:'E. Power On & Off',vi:'E. Power On & Off'}}
+      ],
+      slides:[
+        {img:cmImg('A','smtv',1),tx:{
+          en:'Introduce — this section covers Dimension & Specification: Machine Spec, Camera Spec, and Safety Stickers.',
+          ko:'Introduce — Dimension & Specification: Machine Spec, Camera Spec, Safety Stickers를 다룹니다.',
+          zhCN:'Introduce——本节介绍Dimension & Specification:Machine Spec、Camera Spec、Safety Stickers。',
+          zhTW:'Introduce——本節介紹Dimension & Specification:Machine Spec、Camera Spec、Safety Stickers。',
+          ja:'Introduce——本節ではDimension & Specification:Machine Spec、Camera Spec、Safety Stickersを扱います。',
+          vi:'Introduce — phần này đề cập đến Dimension & Specification: Machine Spec, Camera Spec, Safety Stickers.'
+        }},
+        {img:cmImg('A','smtv',2),tx:{
+          en:'1.2.1. Machine Spec — Specification #1\n\nOverall equipment footprint shown from the Front, Left, and Right views.',
+          ko:'1.2.1. Machine Spec — Specification #1\n\nFront·Left·Right View 기준 설비 전체 외형 치수입니다.',
+          zhCN:'1.2.1. Machine Spec — Specification #1\n\n以Front·Left·Right View展示设备整体外形尺寸。',
+          zhTW:'1.2.1. Machine Spec — Specification #1\n\n以Front·Left·Right View展示設備整體外形尺寸。',
+          ja:'1.2.1. Machine Spec — Specification #1\n\nFront·Left·Right View基準の設備全体外形寸法です。',
+          vi:'1.2.1. Machine Spec — Specification #1\n\nKích thước tổng thể của thiết bị theo góc nhìn Front, Left, Right.'
+        }},
+        {img:cmImg('A','smtv',3),tx:{
+          en:'1.2.1. Machine Spec — Specification #2\n\nDetailed footprint dimensions, which vary slightly by customer configuration (see following slides).',
+          ko:'1.2.1. Machine Spec — Specification #2\n\n세부 설치 치수이며, 고객사 구성에 따라 다음 슬라이드처럼 값이 약간씩 달라집니다.',
+          zhCN:'1.2.1. Machine Spec — Specification #2\n\n详细安装尺寸,依客户配置不同会有如后续幻灯片所示的差异。',
+          zhTW:'1.2.1. Machine Spec — Specification #2\n\n詳細安裝尺寸,依客戶配置不同會有如後續投影片所示的差異。',
+          ja:'1.2.1. Machine Spec — Specification #2\n\n詳細設置寸法で、顧客構成により以降のスライドのように多少異なります。',
+          vi:'1.2.1. Machine Spec — Specification #2\n\nKích thước lắp đặt chi tiết, có thể khác nhau đôi chút tùy theo cấu hình khách hàng (xem các slide tiếp theo).'
+        }},
+        {img:cmImg('A','smtv',4),tx:{
+          en:'1.2.1. Machine Spec — Specification #2 (Customer: ATNS, NANYA)\n\nFootprint dimensions for this customer configuration: width 3880mm, depth 2010mm, height 2118mm (Front View); 2390mm / 2070mm (Right View).',
+          ko:'1.2.1. Machine Spec — Specification #2 (고객사: ATNS, NANYA)\n\n해당 고객사 구성 기준 치수: 폭 3880mm, 깊이 2010mm, 높이 2118mm(Front View); 2390mm / 2070mm(Right View).',
+          zhCN:'1.2.1. Machine Spec — Specification #2(客户:ATNS、NANYA)\n\n该客户配置尺寸:宽3880mm、深2010mm、高2118mm(Front View);2390mm / 2070mm(Right View)。',
+          zhTW:'1.2.1. Machine Spec — Specification #2(客戶:ATNS、NANYA)\n\n該客戶配置尺寸:寬3880mm、深2010mm、高2118mm(Front View);2390mm / 2070mm(Right View)。',
+          ja:'1.2.1. Machine Spec — Specification #2(顧客:ATNS、NANYA)\n\n当該顧客構成の寸法:幅3880mm、奥行2010mm、高さ2118mm(Front View);2390mm / 2070mm(Right View)。',
+          vi:'1.2.1. Machine Spec — Specification #2 (Khách hàng: ATNS, NANYA)\n\nKích thước theo cấu hình khách hàng này: rộng 3880mm, sâu 2010mm, cao 2118mm (Front View); 2390mm / 2070mm (Right View).'
+        }},
+        {img:cmImg('A','smtv',5),tx:{
+          en:'1.2.1. Machine Spec — Specification #2 (Customer: SEMV, SEMCO)\n\nFootprint dimensions for this customer configuration: width 3880mm, depth 2010mm, height 2550mm (Front View); 2390mm / 2070mm (Right View).',
+          ko:'1.2.1. Machine Spec — Specification #2 (고객사: SEMV, SEMCO)\n\n해당 고객사 구성 기준 치수: 폭 3880mm, 깊이 2010mm, 높이 2550mm(Front View); 2390mm / 2070mm(Right View).',
+          zhCN:'1.2.1. Machine Spec — Specification #2(客户:SEMV、SEMCO)\n\n该客户配置尺寸:宽3880mm、深2010mm、高2550mm(Front View);2390mm / 2070mm(Right View)。',
+          zhTW:'1.2.1. Machine Spec — Specification #2(客戶:SEMV、SEMCO)\n\n該客戶配置尺寸:寬3880mm、深2010mm、高2550mm(Front View);2390mm / 2070mm(Right View)。',
+          ja:'1.2.1. Machine Spec — Specification #2(顧客:SEMV、SEMCO)\n\n当該顧客構成の寸法:幅3880mm、奥行2010mm、高さ2550mm(Front View);2390mm / 2070mm(Right View)。',
+          vi:'1.2.1. Machine Spec — Specification #2 (Khách hàng: SEMV, SEMCO)\n\nKích thước theo cấu hình khách hàng này: rộng 3880mm, sâu 2010mm, cao 2550mm (Front View); 2390mm / 2070mm (Right View).'
+        }},
+        {img:cmImg('A','smtv',6),tx:{
+          en:'Introduce — this section covers Dimension & Specification: Machine Spec, Camera Spec, and Safety Stickers.',
+          ko:'Introduce — Dimension & Specification: Machine Spec, Camera Spec, Safety Stickers를 다룹니다.',
+          zhCN:'Introduce——本节介绍Dimension & Specification:Machine Spec、Camera Spec、Safety Stickers。',
+          zhTW:'Introduce——本節介紹Dimension & Specification:Machine Spec、Camera Spec、Safety Stickers。',
+          ja:'Introduce——本節ではDimension & Specification:Machine Spec、Camera Spec、Safety Stickersを扱います。',
+          vi:'Introduce — phần này đề cập đến Dimension & Specification: Machine Spec, Camera Spec, Safety Stickers.'
+        }},
+        {img:cmImg('A','smtv',7),tx:{
+          en:'1.2.2. Camera Spec — 3D Vision Specification (12M, Cube B/S type)\n\nDetailed camera/optics specifications are customer-confidential and not shown here.',
+          ko:'1.2.2. Camera Spec — 3D Vision Specification (12M, Cube B/S type)\n\n세부 Camera·광학계 Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.2. Camera Spec — 3D Vision Specification (12M, Cube B/S type)\n\n详细Camera·光学系统Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.2. Camera Spec — 3D Vision Specification (12M, Cube B/S type)\n\n詳細Camera·光學系統Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.2. Camera Spec — 3D Vision Specification (12M, Cube B/S type)\n\n詳細なCamera・光学系Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.2. Camera Spec — 3D Vision Specification (12M, Cube B/S type)\n\nThông số chi tiết Camera·hệ quang học thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','smtv',8),tx:{
+          en:'1.2.2. Camera Spec — 3D Vision Specification (12M, Flat B/S type)\n\nDetailed camera/optics specifications are customer-confidential and not shown here.',
+          ko:'1.2.2. Camera Spec — 3D Vision Specification (12M, Flat B/S type)\n\n세부 Camera·광학계 Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.2. Camera Spec — 3D Vision Specification (12M, Flat B/S type)\n\n详细Camera·光学系统Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.2. Camera Spec — 3D Vision Specification (12M, Flat B/S type)\n\n詳細Camera·光學系統Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.2. Camera Spec — 3D Vision Specification (12M, Flat B/S type)\n\n詳細なCamera・光学系Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.2. Camera Spec — 3D Vision Specification (12M, Flat B/S type)\n\nThông số chi tiết Camera·hệ quang học thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','smtv',9),tx:{
+          en:'1.2.2. Camera Spec — 3D Vision Specification (25M, Cube B/S type)\n\nDetailed camera/optics specifications are customer-confidential and not shown here.',
+          ko:'1.2.2. Camera Spec — 3D Vision Specification (25M, Cube B/S type)\n\n세부 Camera·광학계 Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.2. Camera Spec — 3D Vision Specification (25M, Cube B/S type)\n\n详细Camera·光学系统Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.2. Camera Spec — 3D Vision Specification (25M, Cube B/S type)\n\n詳細Camera·光學系統Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.2. Camera Spec — 3D Vision Specification (25M, Cube B/S type)\n\n詳細なCamera・光学系Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.2. Camera Spec — 3D Vision Specification (25M, Cube B/S type)\n\nThông số chi tiết Camera·hệ quang học thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','smtv',10),tx:{
+          en:'1.2.2. Camera Spec — 2D Vision Specification (12M)\n\nDetailed camera specifications are customer-confidential and not shown here.',
+          ko:'1.2.2. Camera Spec — 2D Vision Specification (12M)\n\n세부 Camera Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.2. Camera Spec — 2D Vision Specification (12M)\n\n详细Camera Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.2. Camera Spec — 2D Vision Specification (12M)\n\n詳細Camera Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.2. Camera Spec — 2D Vision Specification (12M)\n\n詳細なCamera Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.2. Camera Spec — 2D Vision Specification (12M)\n\nThông số chi tiết Camera thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','smtv',11),tx:{
+          en:'Introduce — this section covers Dimension & Specification: Machine Spec, Camera Spec, and Safety Stickers.',
+          ko:'Introduce — Dimension & Specification: Machine Spec, Camera Spec, Safety Stickers를 다룹니다.',
+          zhCN:'Introduce——本节介绍Dimension & Specification:Machine Spec、Camera Spec、Safety Stickers。',
+          zhTW:'Introduce——本節介紹Dimension & Specification:Machine Spec、Camera Spec、Safety Stickers。',
+          ja:'Introduce——本節ではDimension & Specification:Machine Spec、Camera Spec、Safety Stickersを扱います。',
+          vi:'Introduce — phần này đề cập đến Dimension & Specification: Machine Spec, Camera Spec, Safety Stickers.'
+        }},
+        {img:cmImg('A','smtv',12),tx:{
+          en:'1.2.3. Safety Sticker\n\nSafety warning stickers attached to the equipment (attached per customer request — exact set/placement may vary).',
+          ko:'1.2.3. Safety Sticker\n\n설비에 부착되는 안전 경고 스티커입니다 (고객사 요청에 따라 부착 — 세부 종류·위치는 다를 수 있음).',
+          zhCN:'1.2.3. Safety Sticker\n\n设备上贴附的安全警示贴纸(依客户要求贴附——具体种类·位置可能不同)。',
+          zhTW:'1.2.3. Safety Sticker\n\n設備上貼附的安全警示貼紙(依客戶要求貼附——具體種類·位置可能不同)。',
+          ja:'1.2.3. Safety Sticker\n\n設備に貼付される安全警告ステッカーです(顧客の要請に応じて貼付——種類・位置は異なる場合があります)。',
+          vi:'1.2.3. Safety Sticker\n\nNhãn cảnh báo an toàn dán trên thiết bị (dán theo yêu cầu khách hàng — chủng loại/vị trí cụ thể có thể khác nhau).'
+        }},
+        {img:cmImg('A','smtv',13),tx:{
+          en:'Introduce — this section covers Hardware Configuration & System: Layout & Component, Interlock System, and Equipment Automatic Sequence.',
+          ko:'Introduce — Hardware Configuration & System: Layout & Component, Interlock System, Equipment Automatic Sequence를 다룹니다.',
+          zhCN:'Introduce——本节介绍Hardware Configuration & System:Layout & Component、Interlock System、Equipment Automatic Sequence。',
+          zhTW:'Introduce——本節介紹Hardware Configuration & System:Layout & Component、Interlock System、Equipment Automatic Sequence。',
+          ja:'Introduce——本節ではHardware Configuration & System:Layout & Component、Interlock System、Equipment Automatic Sequenceを扱います。',
+          vi:'Introduce — phần này đề cập đến Hardware Configuration & System: Layout & Component, Interlock System, Equipment Automatic Sequence.'
+        }},
+        {img:cmImg('A','smtv',14),tx:{
+          en:'1.3.1. Layout & Component (External, Front)\n\nFront view of the equipment: Main Machine, ISO Machine, Tower Lamp, EMS (Emergency Stop Switch), Monitor, EFU (Equipment Fan Filter Unit), Operation Panel, Keyboard & Mouse. (Exact configuration/placement varies by equipment spec.)',
+          ko:'1.3.1. Layout & Component (External, Front)\n\n설비 정면 구성: Main Machine, ISO Machine, Tower Lamp, EMS(Emergency Stop Switch), Monitor, EFU(Equipment Fan Filter Unit), Operation Panel, Keyboard & Mouse. (세부 구성·위치는 설비 사양에 따라 다를 수 있음)',
+          zhCN:'1.3.1. Layout & Component (External, Front)\n\n设备正面构成:Main Machine、ISO Machine、Tower Lamp、EMS(Emergency Stop Switch)、Monitor、EFU(Equipment Fan Filter Unit)、Operation Panel、Keyboard & Mouse。(具体構成·位置依设备规格而异)',
+          zhTW:'1.3.1. Layout & Component (External, Front)\n\n設備正面構成:Main Machine、ISO Machine、Tower Lamp、EMS(Emergency Stop Switch)、Monitor、EFU(Equipment Fan Filter Unit)、Operation Panel、Keyboard & Mouse。(具體構成·位置依設備規格而異)',
+          ja:'1.3.1. Layout & Component (External, Front)\n\n設備正面の構成:Main Machine、ISO Machine、Tower Lamp、EMS(Emergency Stop Switch)、Monitor、EFU(Equipment Fan Filter Unit)、Operation Panel、Keyboard & Mouse。(詳細構成・位置は設備仕様により異なります)',
+          vi:'1.3.1. Layout & Component (External, Front)\n\nCấu hình mặt trước thiết bị: Main Machine, ISO Machine, Tower Lamp, EMS (Emergency Stop Switch), Monitor, EFU (Equipment Fan Filter Unit), Operation Panel, Keyboard & Mouse. (Cấu hình/vị trí cụ thể tùy theo spec thiết bị)'
+        }},
+        {img:cmImg('A','smtv',15),tx:{
+          en:'1.3.1. Layout & Component (External, Rear)\n\nRear view of the equipment: Main Machine, ISO Machine, Main Power Switch, EMS (Emergency Stop Switch). (Exact configuration/placement varies by equipment spec.)',
+          ko:'1.3.1. Layout & Component (External, Rear)\n\n설비 후면 구성: Main Machine, ISO Machine, Main Power Switch, EMS(Emergency Stop Switch). (세부 구성·위치는 설비 사양에 따라 다를 수 있음)',
+          zhCN:'1.3.1. Layout & Component (External, Rear)\n\n设备背面构成:Main Machine、ISO Machine、Main Power Switch、EMS(Emergency Stop Switch)。(具体构成·位置依设备规格而异)',
+          zhTW:'1.3.1. Layout & Component (External, Rear)\n\n設備背面構成:Main Machine、ISO Machine、Main Power Switch、EMS(Emergency Stop Switch)。(具體構成·位置依設備規格而異)',
+          ja:'1.3.1. Layout & Component (External, Rear)\n\n設備背面の構成:Main Machine、ISO Machine、Main Power Switch、EMS(Emergency Stop Switch)。(詳細構成・位置は設備仕様により異なります)',
+          vi:'1.3.1. Layout & Component (External, Rear)\n\nCấu hình mặt sau thiết bị: Main Machine, ISO Machine, Main Power Switch, EMS (Emergency Stop Switch). (Cấu hình/vị trí cụ thể tùy theo spec thiết bị)'
+        }},
+        {img:cmImg('A','smtv',16),tx:{
+          en:'1.3.1. Layout & Component (Internal, Front)\n\nInternal front-side layout: 3D Vision #1/#2 PC, HOST PC, 2D Vision PC, KVM, HUB, 3D/2D LED Controllers, UPS, MSM (Multi Sorter Module). (Exact configuration/placement varies by equipment spec.)',
+          ko:'1.3.1. Layout & Component (Internal, Front)\n\n내부 정면 배치: 3D Vision #1/#2 PC, HOST PC, 2D Vision PC, KVM, HUB, 3D/2D LED Controller, UPS, MSM(Multi Sorter Module). (세부 구성·위치는 설비 사양에 따라 다를 수 있음)',
+          zhCN:'1.3.1. Layout & Component (Internal, Front)\n\n内部正面配置:3D Vision #1/#2 PC、HOST PC、2D Vision PC、KVM、HUB、3D/2D LED Controller、UPS、MSM(Multi Sorter Module)。(具体构成·位置依设备规格而异)',
+          zhTW:'1.3.1. Layout & Component (Internal, Front)\n\n內部正面配置:3D Vision #1/#2 PC、HOST PC、2D Vision PC、KVM、HUB、3D/2D LED Controller、UPS、MSM(Multi Sorter Module)。(具體構成·位置依設備規格而異)',
+          ja:'1.3.1. Layout & Component (Internal, Front)\n\n内部正面配置:3D Vision #1/#2 PC、HOST PC、2D Vision PC、KVM、HUB、3D/2D LED Controller、UPS、MSM(Multi Sorter Module)。(詳細構成・位置は設備仕様により異なります)',
+          vi:'1.3.1. Layout & Component (Internal, Front)\n\nBố trí bên trong mặt trước: 3D Vision #1/#2 PC, HOST PC, 2D Vision PC, KVM, HUB, 3D/2D LED Controller, UPS, MSM (Multi Sorter Module). (Cấu hình/vị trí cụ thể tùy theo spec thiết bị)'
+        }},
+        {img:cmImg('A','smtv',17),tx:{
+          en:'1.3.1. Layout & Component (Internal, Rear)\n\nInternal rear-side layout: 3D Vision #1/#2 AF Controller, 3D Vision #1/#2 PZT Controller, TTM (Tray Transfer Module), Air Regulator, 3D Vision #1/#2 Module. (Exact configuration/placement varies by equipment spec.)',
+          ko:'1.3.1. Layout & Component (Internal, Rear)\n\n내부 후면 배치: 3D Vision #1/#2 AF Controller, 3D Vision #1/#2 PZT Controller, TTM(Tray Transfer Module), Air Regulator, 3D Vision #1/#2 Module. (세부 구성·위치는 설비 사양에 따라 다를 수 있음)',
+          zhCN:'1.3.1. Layout & Component (Internal, Rear)\n\n内部背面配置:3D Vision #1/#2 AF Controller、3D Vision #1/#2 PZT Controller、TTM(Tray Transfer Module)、Air Regulator、3D Vision #1/#2 Module。(具体构成·位置依设备规格而异)',
+          zhTW:'1.3.1. Layout & Component (Internal, Rear)\n\n內部背面配置:3D Vision #1/#2 AF Controller、3D Vision #1/#2 PZT Controller、TTM(Tray Transfer Module)、Air Regulator、3D Vision #1/#2 Module。(具體構成·位置依設備規格而異)',
+          ja:'1.3.1. Layout & Component (Internal, Rear)\n\n内部背面配置:3D Vision #1/#2 AF Controller、3D Vision #1/#2 PZT Controller、TTM(Tray Transfer Module)、Air Regulator、3D Vision #1/#2 Module。(詳細構成・位置は設備仕様により異なります)',
+          vi:'1.3.1. Layout & Component (Internal, Rear)\n\nBố trí bên trong mặt sau: 3D Vision #1/#2 AF Controller, 3D Vision #1/#2 PZT Controller, TTM (Tray Transfer Module), Air Regulator, 3D Vision #1/#2 Module. (Cấu hình/vị trí cụ thể tùy theo spec thiết bị)'
+        }},
+        {img:cmImg('A','smtv',18),tx:{
+          en:'1.3.1. Layout & Component (Internal, Top)\n\nTop-down layout of the Main and ISO Machine: 3D Vision Module #1/#2, TTM, MSM, 2D Vision Module, Loader/Unloader Multi Picker, Jig #1/#2 Multi Picker. (Exact configuration/placement varies by equipment spec.)',
+          ko:'1.3.1. Layout & Component (Internal, Top)\n\nMain·ISO Machine 상면 배치: 3D Vision Module #1/#2, TTM, MSM, 2D Vision Module, Loader/Unloader Multi Picker, Jig #1/#2 Multi Picker. (세부 구성·위치는 설비 사양에 따라 다를 수 있음)',
+          zhCN:'1.3.1. Layout & Component (Internal, Top)\n\nMain·ISO Machine俯视配置:3D Vision Module #1/#2、TTM、MSM、2D Vision Module、Loader/Unloader Multi Picker、Jig #1/#2 Multi Picker。(具体构成·位置依设备规格而异)',
+          zhTW:'1.3.1. Layout & Component (Internal, Top)\n\nMain·ISO Machine俯視配置:3D Vision Module #1/#2、TTM、MSM、2D Vision Module、Loader/Unloader Multi Picker、Jig #1/#2 Multi Picker。(具體構成·位置依設備規格而異)',
+          ja:'1.3.1. Layout & Component (Internal, Top)\n\nMain·ISO Machine上面配置:3D Vision Module #1/#2、TTM、MSM、2D Vision Module、Loader/Unloader Multi Picker、Jig #1/#2 Multi Picker。(詳細構成・位置は設備仕様により異なります)',
+          vi:'1.3.1. Layout & Component (Internal, Top)\n\nBố trí nhìn từ trên của Main·ISO Machine: 3D Vision Module #1/#2, TTM, MSM, 2D Vision Module, Loader/Unloader Multi Picker, Jig #1/#2 Multi Picker. (Cấu hình/vị trí cụ thể tùy theo spec thiết bị)'
+        }},
+        {img:cmImg('A','smtv',19),tx:{
+          en:'1.3.1. Layout & Component (Internal, Top — Indexers)\n\nTop-down view of all Indexers: Align #1/#2, Jig #1/#2, Loader 1/2, Empty, Reject Empty, Good 1/2, Buffer, Reject 1, Reject 2. (Exact configuration/placement varies by equipment spec.)',
+          ko:'1.3.1. Layout & Component (Internal, Top — Indexers)\n\n모든 Indexer 상면 배치: Align #1/#2, Jig #1/#2, Loader 1/2, Empty, Reject Empty, Good 1/2, Buffer, Reject 1, Reject 2. (세부 구성·위치는 설비 사양에 따라 다를 수 있음)',
+          zhCN:'1.3.1. Layout & Component (Internal, Top — Indexers)\n\n所有Indexer俯视配置:Align #1/#2、Jig #1/#2、Loader 1/2、Empty、Reject Empty、Good 1/2、Buffer、Reject 1、Reject 2。(具体构成·位置依设备规格而异)',
+          zhTW:'1.3.1. Layout & Component (Internal, Top — Indexers)\n\n所有Indexer俯視配置:Align #1/#2、Jig #1/#2、Loader 1/2、Empty、Reject Empty、Good 1/2、Buffer、Reject 1、Reject 2。(具體構成·位置依設備規格而異)',
+          ja:'1.3.1. Layout & Component (Internal, Top — Indexers)\n\n全Indexerの上面配置:Align #1/#2、Jig #1/#2、Loader 1/2、Empty、Reject Empty、Good 1/2、Buffer、Reject 1、Reject 2。(詳細構成・位置は設備仕様により異なります)',
+          vi:'1.3.1. Layout & Component (Internal, Top — Indexers)\n\nBố trí nhìn từ trên của mọi Indexer: Align #1/#2, Jig #1/#2, Loader 1/2, Empty, Reject Empty, Good 1/2, Buffer, Reject 1, Reject 2. (Cấu hình/vị trí cụ thể tùy theo spec thiết bị)'
+        }},
+        {img:cmImg('A','smtv',20),tx:{
+          en:'1.3.1. Layout & Component (Motor Direction) — Elevator\n\nShows the +/− motor direction convention for the 4 Elevator Z-axes (Front view).',
+          ko:'1.3.1. Layout & Component (Motor Direction) — Elevator\n\nElevator Z-axis 4개 축의 +/− 방향 기준을 보여줍니다 (Front view).',
+          zhCN:'1.3.1. Layout & Component (Motor Direction) — Elevator\n\n显示Elevator Z-axis 4个轴的+/−方向基准(Front view)。',
+          zhTW:'1.3.1. Layout & Component (Motor Direction) — Elevator\n\n顯示Elevator Z-axis 4個軸的+/−方向基準(Front view)。',
+          ja:'1.3.1. Layout & Component (Motor Direction) — Elevator\n\nElevator Z-axis 4軸の+/−方向基準を示します(Front view)。',
+          vi:'1.3.1. Layout & Component (Motor Direction) — Elevator\n\nHiển thị chuẩn hướng +/− của 4 trục Z Elevator (Front view).'
+        }},
+        {img:cmImg('A','smtv',21),tx:{
+          en:'1.3.1. Layout & Component (Motor Direction) — Load Multi Picker\n\nShows the +/− motor direction convention for the Load Multi Picker\'s X-axis and Z-axis (Top view).',
+          ko:'1.3.1. Layout & Component (Motor Direction) — Load Multi Picker\n\nLoad Multi Picker X-axis·Z-axis의 +/− 방향 기준을 보여줍니다 (Top view).',
+          zhCN:'1.3.1. Layout & Component (Motor Direction) — Load Multi Picker\n\n显示Load Multi Picker X-axis·Z-axis的+/−方向基准(Top view)。',
+          zhTW:'1.3.1. Layout & Component (Motor Direction) — Load Multi Picker\n\n顯示Load Multi Picker X-axis·Z-axis的+/−方向基準(Top view)。',
+          ja:'1.3.1. Layout & Component (Motor Direction) — Load Multi Picker\n\nLoad Multi Picker X-axis・Z-axisの+/−方向基準を示します(Top view)。',
+          vi:'1.3.1. Layout & Component (Motor Direction) — Load Multi Picker\n\nHiển thị chuẩn hướng +/− của trục X, Z Load Multi Picker (Top view).'
+        }},
+        {img:cmImg('A','smtv',22),tx:{
+          en:'1.3.1. Layout & Component (Motor Direction) — Jig Multi Picker\n\nShows the +/− motor direction convention for Jig Multi Picker #1/#2\'s X-axis and Z-axis (Top view).',
+          ko:'1.3.1. Layout & Component (Motor Direction) — Jig Multi Picker\n\nJig Multi Picker #1/#2 X-axis·Z-axis의 +/− 방향 기준을 보여줍니다 (Top view).',
+          zhCN:'1.3.1. Layout & Component (Motor Direction) — Jig Multi Picker\n\n显示Jig Multi Picker #1/#2 X-axis·Z-axis的+/−方向基准(Top view)。',
+          zhTW:'1.3.1. Layout & Component (Motor Direction) — Jig Multi Picker\n\n顯示Jig Multi Picker #1/#2 X-axis·Z-axis的+/−方向基準(Top view)。',
+          ja:'1.3.1. Layout & Component (Motor Direction) — Jig Multi Picker\n\nJig Multi Picker #1/#2 X-axis・Z-axisの+/−方向基準を示します(Top view)。',
+          vi:'1.3.1. Layout & Component (Motor Direction) — Jig Multi Picker\n\nHiển thị chuẩn hướng +/− của trục X, Z Jig Multi Picker #1/#2 (Top view).'
+        }},
+        {img:cmImg('A','smtv',23),tx:{
+          en:'1.3.1. Layout & Component (Motor Direction) — Aligner\n\nShows the +/− motor direction convention for Aligner #1/#2\'s X-axis and Y-axis (Top view).',
+          ko:'1.3.1. Layout & Component (Motor Direction) — Aligner\n\nAligner #1/#2 X-axis·Y-axis의 +/− 방향 기준을 보여줍니다 (Top view).',
+          zhCN:'1.3.1. Layout & Component (Motor Direction) — Aligner\n\n显示Aligner #1/#2 X-axis·Y-axis的+/−方向基准(Top view)。',
+          zhTW:'1.3.1. Layout & Component (Motor Direction) — Aligner\n\n顯示Aligner #1/#2 X-axis·Y-axis的+/−方向基準(Top view)。',
+          ja:'1.3.1. Layout & Component (Motor Direction) — Aligner\n\nAligner #1/#2 X-axis・Y-axisの+/−方向基準を示します(Top view)。',
+          vi:'1.3.1. Layout & Component (Motor Direction) — Aligner\n\nHiển thị chuẩn hướng +/− của trục X, Y Aligner #1/#2 (Top view).'
+        }},
+        {img:cmImg('A','smtv',24),tx:{
+          en:'1.3.1. Layout & Component (Motor Direction) — 3D Vision Module\n\nShows the +/− motor direction convention for 3D Vision Module #1/#2\'s X-axis and Z-axis (Top view).',
+          ko:'1.3.1. Layout & Component (Motor Direction) — 3D Vision Module\n\n3D Vision Module #1/#2 X-axis·Z-axis의 +/− 방향 기준을 보여줍니다 (Top view).',
+          zhCN:'1.3.1. Layout & Component (Motor Direction) — 3D Vision Module\n\n显示3D Vision Module #1/#2 X-axis·Z-axis的+/−方向基准(Top view)。',
+          zhTW:'1.3.1. Layout & Component (Motor Direction) — 3D Vision Module\n\n顯示3D Vision Module #1/#2 X-axis·Z-axis的+/−方向基準(Top view)。',
+          ja:'1.3.1. Layout & Component (Motor Direction) — 3D Vision Module\n\n3D Vision Module #1/#2 X-axis・Z-axisの+/−方向基準を示します(Top view)。',
+          vi:'1.3.1. Layout & Component (Motor Direction) — 3D Vision Module\n\nHiển thị chuẩn hướng +/− của trục X, Z 3D Vision Module #1/#2 (Top view).'
+        }},
+        {img:cmImg('A','smtv',25),tx:{
+          en:'1.3.1. Layout & Component (Motor Direction) — Unload Multi Picker\n\nShows the +/− motor direction convention for the Unload Multi Picker\'s X-axis and Z-axis (Top view).',
+          ko:'1.3.1. Layout & Component (Motor Direction) — Unload Multi Picker\n\nUnload Multi Picker X-axis·Z-axis의 +/− 방향 기준을 보여줍니다 (Top view).',
+          zhCN:'1.3.1. Layout & Component (Motor Direction) — Unload Multi Picker\n\n显示Unload Multi Picker X-axis·Z-axis的+/−方向基准(Top view)。',
+          zhTW:'1.3.1. Layout & Component (Motor Direction) — Unload Multi Picker\n\n顯示Unload Multi Picker X-axis·Z-axis的+/−方向基準(Top view)。',
+          ja:'1.3.1. Layout & Component (Motor Direction) — Unload Multi Picker\n\nUnload Multi Picker X-axis・Z-axisの+/−方向基準を示します(Top view)。',
+          vi:'1.3.1. Layout & Component (Motor Direction) — Unload Multi Picker\n\nHiển thị chuẩn hướng +/− của trục X, Z Unload Multi Picker (Top view).'
+        }},
+        {img:cmImg('A','smtv',26),tx:{
+          en:'1.3.1. Layout & Component (Motor Direction) — Dual Tray Transfer Module\n\nShows the +/− motor direction convention for the Dual Tray Transfer Module\'s X-axis and Z-axis (Top view).',
+          ko:'1.3.1. Layout & Component (Motor Direction) — Dual Tray Transfer Module\n\nDual Tray Transfer Module X-axis·Z-axis의 +/− 방향 기준을 보여줍니다 (Top view).',
+          zhCN:'1.3.1. Layout & Component (Motor Direction) — Dual Tray Transfer Module\n\n显示Dual Tray Transfer Module X-axis·Z-axis的+/−方向基准(Top view)。',
+          zhTW:'1.3.1. Layout & Component (Motor Direction) — Dual Tray Transfer Module\n\n顯示Dual Tray Transfer Module X-axis·Z-axis的+/−方向基準(Top view)。',
+          ja:'1.3.1. Layout & Component (Motor Direction) — Dual Tray Transfer Module\n\nDual Tray Transfer Module X-axis・Z-axisの+/−方向基準を示します(Top view)。',
+          vi:'1.3.1. Layout & Component (Motor Direction) — Dual Tray Transfer Module\n\nHiển thị chuẩn hướng +/− của trục X, Z Dual Tray Transfer Module (Top view).'
+        }},
+        {img:cmImg('A','smtv',27),tx:{
+          en:'1.3.1. Layout & Component (Motor Direction) — 2D Vision\n\nShows the +/− motor direction convention for the 2D Vision module\'s X-axis and Z-axis (Top view).',
+          ko:'1.3.1. Layout & Component (Motor Direction) — 2D Vision\n\n2D Vision Module X-axis·Z-axis의 +/− 방향 기준을 보여줍니다 (Top view).',
+          zhCN:'1.3.1. Layout & Component (Motor Direction) — 2D Vision\n\n显示2D Vision Module X-axis·Z-axis的+/−方向基准(Top view)。',
+          zhTW:'1.3.1. Layout & Component (Motor Direction) — 2D Vision\n\n顯示2D Vision Module X-axis·Z-axis的+/−方向基準(Top view)。',
+          ja:'1.3.1. Layout & Component (Motor Direction) — 2D Vision\n\n2D Vision Module X-axis・Z-axisの+/−方向基準を示します(Top view)。',
+          vi:'1.3.1. Layout & Component (Motor Direction) — 2D Vision\n\nHiển thị chuẩn hướng +/− của trục X, Z 2D Vision Module (Top view).'
+        }},
+        {img:cmImg('A','smtv',28),tx:{
+          en:'1.3.1. Layout & Component (Motor Direction) — Multi Sorter Module\n\nShows the +/− motor direction convention for the Multi Sorter Module\'s X-axis, Z-axis, and Gap X-axis (Top view).',
+          ko:'1.3.1. Layout & Component (Motor Direction) — Multi Sorter Module\n\nMulti Sorter Module X-axis·Z-axis·Gap X-axis의 +/− 방향 기준을 보여줍니다 (Top view).',
+          zhCN:'1.3.1. Layout & Component (Motor Direction) — Multi Sorter Module\n\n显示Multi Sorter Module X-axis·Z-axis·Gap X-axis的+/−方向基准(Top view)。',
+          zhTW:'1.3.1. Layout & Component (Motor Direction) — Multi Sorter Module\n\n顯示Multi Sorter Module X-axis·Z-axis·Gap X-axis的+/−方向基準(Top view)。',
+          ja:'1.3.1. Layout & Component (Motor Direction) — Multi Sorter Module\n\nMulti Sorter Module X-axis・Z-axis・Gap X-axisの+/−方向基準を示します(Top view)。',
+          vi:'1.3.1. Layout & Component (Motor Direction) — Multi Sorter Module\n\nHiển thị chuẩn hướng +/− của trục X, Z, Gap X Multi Sorter Module (Top view).'
+        }},
+        {img:cmImg('A','smtv',29),tx:{
+          en:'1.3.1. Layout & Component (Motor Direction) — Indexer\n\nShows the +/− motor direction convention for every Indexer\'s Y-axis: Align #1/#2, Jig #1/#2, Loader 1/2, Empty, Reject Empty, Good 1/2, Buffer, Reject 1/2 (Top view).',
+          ko:'1.3.1. Layout & Component (Motor Direction) — Indexer\n\n모든 Indexer Y-axis의 +/− 방향 기준을 보여줍니다: Align #1/#2, Jig #1/#2, Loader 1/2, Empty, Reject Empty, Good 1/2, Buffer, Reject 1/2 (Top view).',
+          zhCN:'1.3.1. Layout & Component (Motor Direction) — Indexer\n\n显示所有Indexer Y-axis的+/−方向基准:Align #1/#2、Jig #1/#2、Loader 1/2、Empty、Reject Empty、Good 1/2、Buffer、Reject 1/2(Top view)。',
+          zhTW:'1.3.1. Layout & Component (Motor Direction) — Indexer\n\n顯示所有Indexer Y-axis的+/−方向基準:Align #1/#2、Jig #1/#2、Loader 1/2、Empty、Reject Empty、Good 1/2、Buffer、Reject 1/2(Top view)。',
+          ja:'1.3.1. Layout & Component (Motor Direction) — Indexer\n\n全Indexer Y-axisの+/−方向基準を示します:Align #1/#2、Jig #1/#2、Loader 1/2、Empty、Reject Empty、Good 1/2、Buffer、Reject 1/2(Top view)。',
+          vi:'1.3.1. Layout & Component (Motor Direction) — Indexer\n\nHiển thị chuẩn hướng +/− trục Y của mọi Indexer: Align #1/#2, Jig #1/#2, Loader 1/2, Empty, Reject Empty, Good 1/2, Buffer, Reject 1/2 (Top view).'
+        }},
+        {img:cmImg('A','smtv',30),tx:{
+          en:'1.3.1. Layout & Component (2D Vision Module, 25M Camera)\n\nKey components: Main Camera, Lens, Aperture, Coaxial Light, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power, CL Cable, LED Cable/Power.',
+          ko:'1.3.1. Layout & Component (2D Vision Module, 25M Camera)\n\n주요 구성: Main Camera, Lens, Aperture, Coaxial Light, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power, CL Cable, LED Cable/Power.',
+          zhCN:'1.3.1. Layout & Component (2D Vision Module, 25M Camera)\n\n主要构成:Main Camera、Lens、Aperture、Coaxial Light、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power、CL Cable、LED Cable/Power。',
+          zhTW:'1.3.1. Layout & Component (2D Vision Module, 25M Camera)\n\n主要構成:Main Camera、Lens、Aperture、Coaxial Light、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power、CL Cable、LED Cable/Power。',
+          ja:'1.3.1. Layout & Component (2D Vision Module, 25M Camera)\n\n主要構成:Main Camera、Lens、Aperture、Coaxial Light、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power、CL Cable、LED Cable/Power。',
+          vi:'1.3.1. Layout & Component (2D Vision Module, 25M Camera)\n\nThành phần chính: Main Camera, Lens, Aperture, Coaxial Light, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power, CL Cable, LED Cable/Power.'
+        }},
+        {img:cmImg('A','smtv',31),tx:{
+          en:'1.3.1. Layout & Component (3D Vision Module, B/S type) — Camera side\n\nKey components: Main Camera, Aperture, CXP Cable, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power.',
+          ko:'1.3.1. Layout & Component (3D Vision Module, B/S type) — Camera 측\n\n주요 구성: Main Camera, Aperture, CXP Cable, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power.',
+          zhCN:'1.3.1. Layout & Component (3D Vision Module, B/S type) — Camera侧\n\n主要构成:Main Camera、Aperture、CXP Cable、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power。',
+          zhTW:'1.3.1. Layout & Component (3D Vision Module, B/S type) — Camera側\n\n主要構成:Main Camera、Aperture、CXP Cable、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power。',
+          ja:'1.3.1. Layout & Component (3D Vision Module, B/S type) — Camera側\n\n主要構成:Main Camera、Aperture、CXP Cable、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power。',
+          vi:'1.3.1. Layout & Component (3D Vision Module, B/S type) — Phía Camera\n\nThành phần chính: Main Camera, Aperture, CXP Cable, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power.'
+        }},
+        {img:cmImg('A','smtv',32),tx:{
+          en:'1.3.1. Layout & Component (3D Vision Module, B/S type) — Optics side\n\nKey components: Coaxial Light, Oblique Light, B/S (Beam Splitter), Laser, Laser Mirror, Laser Camera, Reference Mirror (with angle dial), PZT Stage, Micrometer, Lens.',
+          ko:'1.3.1. Layout & Component (3D Vision Module, B/S type) — 광학계 측\n\n주요 구성: Coaxial Light, Oblique Light, B/S(Beam Splitter), Laser, Laser Mirror, Laser Camera, Reference Mirror(각도 Dial 포함), PZT Stage, Micrometer, Lens.',
+          zhCN:'1.3.1. Layout & Component (3D Vision Module, B/S type) — 光学侧\n\n主要构成:Coaxial Light、Oblique Light、B/S(Beam Splitter)、Laser、Laser Mirror、Laser Camera、Reference Mirror(含角度Dial)、PZT Stage、Micrometer、Lens。',
+          zhTW:'1.3.1. Layout & Component (3D Vision Module, B/S type) — 光學側\n\n主要構成:Coaxial Light、Oblique Light、B/S(Beam Splitter)、Laser、Laser Mirror、Laser Camera、Reference Mirror(含角度Dial)、PZT Stage、Micrometer、Lens。',
+          ja:'1.3.1. Layout & Component (3D Vision Module, B/S type) — 光学系側\n\n主要構成:Coaxial Light、Oblique Light、B/S(Beam Splitter)、Laser、Laser Mirror、Laser Camera、Reference Mirror(角度Dial付き)、PZT Stage、Micrometer、Lens。',
+          vi:'1.3.1. Layout & Component (3D Vision Module, B/S type) — Phía quang học\n\nThành phần chính: Coaxial Light, Oblique Light, B/S (Beam Splitter), Laser, Laser Mirror, Laser Camera, Reference Mirror (kèm Angle Dial), PZT Stage, Micrometer, Lens.'
+        }},
+        {img:cmImg('A','smtv',33),tx:{
+          en:'1.3.1. Layout & Component (3D Vision Module, Cube type) — Camera side\n\nKey components: Main Camera, Aperture, CXP Cable, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power.',
+          ko:'1.3.1. Layout & Component (3D Vision Module, Cube type) — Camera 측\n\n주요 구성: Main Camera, Aperture, CXP Cable, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power.',
+          zhCN:'1.3.1. Layout & Component (3D Vision Module, Cube type) — Camera侧\n\n主要构成:Main Camera、Aperture、CXP Cable、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power。',
+          zhTW:'1.3.1. Layout & Component (3D Vision Module, Cube type) — Camera側\n\n主要構成:Main Camera、Aperture、CXP Cable、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power。',
+          ja:'1.3.1. Layout & Component (3D Vision Module, Cube type) — Camera側\n\n主要構成:Main Camera、Aperture、CXP Cable、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power。',
+          vi:'1.3.1. Layout & Component (3D Vision Module, Cube type) — Phía Camera\n\nThành phần chính: Main Camera, Aperture, CXP Cable, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power.'
+        }},
+        {img:cmImg('A','smtv',34),tx:{
+          en:'1.3.1. Layout & Component (3D Vision Module, Cube type) — Optics side\n\nKey components: Coaxial Light, Oblique Light, Cube B/S (Beam Splitter), Laser, Laser Mirror, Laser Camera, Reference Mirror (with angle dial), PZT Stage, Micrometer, Lens.',
+          ko:'1.3.1. Layout & Component (3D Vision Module, Cube type) — 광학계 측\n\n주요 구성: Coaxial Light, Oblique Light, Cube B/S(Beam Splitter), Laser, Laser Mirror, Laser Camera, Reference Mirror(각도 Dial 포함), PZT Stage, Micrometer, Lens.',
+          zhCN:'1.3.1. Layout & Component (3D Vision Module, Cube type) — 光学侧\n\n主要构成:Coaxial Light、Oblique Light、Cube B/S(Beam Splitter)、Laser、Laser Mirror、Laser Camera、Reference Mirror(含角度Dial)、PZT Stage、Micrometer、Lens。',
+          zhTW:'1.3.1. Layout & Component (3D Vision Module, Cube type) — 光學側\n\n主要構成:Coaxial Light、Oblique Light、Cube B/S(Beam Splitter)、Laser、Laser Mirror、Laser Camera、Reference Mirror(含角度Dial)、PZT Stage、Micrometer、Lens。',
+          ja:'1.3.1. Layout & Component (3D Vision Module, Cube type) — 光学系側\n\n主要構成:Coaxial Light、Oblique Light、Cube B/S(Beam Splitter)、Laser、Laser Mirror、Laser Camera、Reference Mirror(角度Dial付き)、PZT Stage、Micrometer、Lens。',
+          vi:'1.3.1. Layout & Component (3D Vision Module, Cube type) — Phía quang học\n\nThành phần chính: Coaxial Light, Oblique Light, Cube B/S (Beam Splitter), Laser, Laser Mirror, Laser Camera, Reference Mirror (kèm Angle Dial), PZT Stage, Micrometer, Lens.'
+        }},
+        {img:cmImg('A','smtv',35),tx:{
+          en:'1.3.1. Layout & Component (TTM: Tray Transfer Module)\n\nKey components: Z-axis Motor, Coupler, Speed Controller, Up/Down Cylinder, Shaft & Spring, Ball Bushing, Stopper, Ejector, Gripper (with Cylinder & Auto Switch Sensor), PCB Board, Tray Check Sensor, Photo/Magnetic Sensor, Damper.',
+          ko:'1.3.1. Layout & Component (TTM: Tray Transfer Module)\n\n주요 구성: Z-axis Motor, Coupler, Speed Controller, Up/Down Cylinder, Shaft & Spring, Ball Bushing, Stopper, Ejector, Gripper(Cylinder & Auto Switch Sensor 포함), PCB Board, Tray Check Sensor, Photo/Magnetic Sensor, Damper.',
+          zhCN:'1.3.1. Layout & Component (TTM: Tray Transfer Module)\n\n主要构成:Z-axis Motor、Coupler、Speed Controller、Up/Down Cylinder、Shaft & Spring、Ball Bushing、Stopper、Ejector、Gripper(含Cylinder & Auto Switch Sensor)、PCB Board、Tray Check Sensor、Photo/Magnetic Sensor、Damper。',
+          zhTW:'1.3.1. Layout & Component (TTM: Tray Transfer Module)\n\n主要構成:Z-axis Motor、Coupler、Speed Controller、Up/Down Cylinder、Shaft & Spring、Ball Bushing、Stopper、Ejector、Gripper(含Cylinder & Auto Switch Sensor)、PCB Board、Tray Check Sensor、Photo/Magnetic Sensor、Damper。',
+          ja:'1.3.1. Layout & Component (TTM: Tray Transfer Module)\n\n主要構成:Z-axis Motor、Coupler、Speed Controller、Up/Down Cylinder、Shaft & Spring、Ball Bushing、Stopper、Ejector、Gripper(Cylinder & Auto Switch Sensor含む)、PCB Board、Tray Check Sensor、Photo/Magnetic Sensor、Damper。',
+          vi:'1.3.1. Layout & Component (TTM: Tray Transfer Module)\n\nThành phần chính: Z-axis Motor, Coupler, Speed Controller, Up/Down Cylinder, Shaft & Spring, Ball Bushing, Stopper, Ejector, Gripper (kèm Cylinder & Auto Switch Sensor), PCB Board, Tray Check Sensor, Photo/Magnetic Sensor, Damper.'
+        }},
+        {img:cmImg('A','smtv',36),tx:{
+          en:'1.3.1. Layout & Component (MSM: Multi Sorter Module)\n\nKey components: Z-axis Motor, X-axis Motor (Picker Gap Motor), Picker (with Cylinder & Auto Switch Sensor), Coupler, PCB Board, Speed Controller, Vacuum Ejector, Solenoid Valve, Air Filter, Photo/Magnetic Sensor.',
+          ko:'1.3.1. Layout & Component (MSM: Multi Sorter Module)\n\n주요 구성: Z-axis Motor, X-axis Motor(Picker Gap Motor), Picker(Cylinder & Auto Switch Sensor 포함), Coupler, PCB Board, Speed Controller, Vacuum Ejector, Solenoid Valve, Air Filter, Photo/Magnetic Sensor.',
+          zhCN:'1.3.1. Layout & Component (MSM: Multi Sorter Module)\n\n主要构成:Z-axis Motor、X-axis Motor(Picker Gap Motor)、Picker(含Cylinder & Auto Switch Sensor)、Coupler、PCB Board、Speed Controller、Vacuum Ejector、Solenoid Valve、Air Filter、Photo/Magnetic Sensor。',
+          zhTW:'1.3.1. Layout & Component (MSM: Multi Sorter Module)\n\n主要構成:Z-axis Motor、X-axis Motor(Picker Gap Motor)、Picker(含Cylinder & Auto Switch Sensor)、Coupler、PCB Board、Speed Controller、Vacuum Ejector、Solenoid Valve、Air Filter、Photo/Magnetic Sensor。',
+          ja:'1.3.1. Layout & Component (MSM: Multi Sorter Module)\n\n主要構成:Z-axis Motor、X-axis Motor(Picker Gap Motor)、Picker(Cylinder & Auto Switch Sensor含む)、Coupler、PCB Board、Speed Controller、Vacuum Ejector、Solenoid Valve、Air Filter、Photo/Magnetic Sensor。',
+          vi:'1.3.1. Layout & Component (MSM: Multi Sorter Module)\n\nThành phần chính: Z-axis Motor, X-axis Motor (Picker Gap Motor), Picker (kèm Cylinder & Auto Switch Sensor), Coupler, PCB Board, Speed Controller, Vacuum Ejector, Solenoid Valve, Air Filter, Photo/Magnetic Sensor.'
+        }},
+        {img:cmImg('A','smtv',37),tx:{
+          en:'1.3.1. Layout & Component (Loader & Unloader Multi Picker)\n\nKey components: Z-axis Motor, Picker (with Cylinder & Auto Switch Sensor), Vacuum Generator, Coupler, PCB Board, Speed Controller, Solenoid Valve, Air Filter, Photo/Magnetic Sensor.',
+          ko:'1.3.1. Layout & Component (Loader & Unloader Multi Picker)\n\n주요 구성: Z-axis Motor, Picker(Cylinder & Auto Switch Sensor 포함), Vacuum Generator, Coupler, PCB Board, Speed Controller, Solenoid Valve, Air Filter, Photo/Magnetic Sensor.',
+          zhCN:'1.3.1. Layout & Component (Loader & Unloader Multi Picker)\n\n主要构成:Z-axis Motor、Picker(含Cylinder & Auto Switch Sensor)、Vacuum Generator、Coupler、PCB Board、Speed Controller、Solenoid Valve、Air Filter、Photo/Magnetic Sensor。',
+          zhTW:'1.3.1. Layout & Component (Loader & Unloader Multi Picker)\n\n主要構成:Z-axis Motor、Picker(含Cylinder & Auto Switch Sensor)、Vacuum Generator、Coupler、PCB Board、Speed Controller、Solenoid Valve、Air Filter、Photo/Magnetic Sensor。',
+          ja:'1.3.1. Layout & Component (Loader & Unloader Multi Picker)\n\n主要構成:Z-axis Motor、Picker(Cylinder & Auto Switch Sensor含む)、Vacuum Generator、Coupler、PCB Board、Speed Controller、Solenoid Valve、Air Filter、Photo/Magnetic Sensor。',
+          vi:'1.3.1. Layout & Component (Loader & Unloader Multi Picker)\n\nThành phần chính: Z-axis Motor, Picker (kèm Cylinder & Auto Switch Sensor), Vacuum Generator, Coupler, PCB Board, Speed Controller, Solenoid Valve, Air Filter, Photo/Magnetic Sensor.'
+        }},
+        {img:cmImg('A','smtv',38),tx:{
+          en:'1.3.1. Layout & Component (Jig Multi Picker)\n\nKey components: Z-axis Motor, Picker, Vacuum Generator, Coupler, PCB Board, Speed Controller, Air Filter, Photo Sensor, Up/Down Limit Sensor, Sensor Object.',
+          ko:'1.3.1. Layout & Component (Jig Multi Picker)\n\n주요 구성: Z-axis Motor, Picker, Vacuum Generator, Coupler, PCB Board, Speed Controller, Air Filter, Photo Sensor, Up/Down Limit Sensor, Sensor Object.',
+          zhCN:'1.3.1. Layout & Component (Jig Multi Picker)\n\n主要构成:Z-axis Motor、Picker、Vacuum Generator、Coupler、PCB Board、Speed Controller、Air Filter、Photo Sensor、Up/Down Limit Sensor、Sensor Object。',
+          zhTW:'1.3.1. Layout & Component (Jig Multi Picker)\n\n主要構成:Z-axis Motor、Picker、Vacuum Generator、Coupler、PCB Board、Speed Controller、Air Filter、Photo Sensor、Up/Down Limit Sensor、Sensor Object。',
+          ja:'1.3.1. Layout & Component (Jig Multi Picker)\n\n主要構成:Z-axis Motor、Picker、Vacuum Generator、Coupler、PCB Board、Speed Controller、Air Filter、Photo Sensor、Up/Down Limit Sensor、Sensor Object。',
+          vi:'1.3.1. Layout & Component (Jig Multi Picker)\n\nThành phần chính: Z-axis Motor, Picker, Vacuum Generator, Coupler, PCB Board, Speed Controller, Air Filter, Photo Sensor, Up/Down Limit Sensor, Sensor Object.'
+        }},
+        {img:cmImg('A','smtv',39),tx:{
+          en:'1.3.1. Layout & Component (Jig Module)\n\nKey components: LTS Target (Long Term Stability), Y-axis Motor, Cableveyor, (+)/(−) Limit Sensor, Home Sensor, Photo Sensor.',
+          ko:'1.3.1. Layout & Component (Jig Module)\n\n주요 구성: LTS Target(Long Term Stability), Y-axis Motor, Cableveyor, (+)/(−) Limit Sensor, Home Sensor, Photo Sensor.',
+          zhCN:'1.3.1. Layout & Component (Jig Module)\n\n主要构成:LTS Target(Long Term Stability)、Y-axis Motor、Cableveyor、(+)/(−) Limit Sensor、Home Sensor、Photo Sensor。',
+          zhTW:'1.3.1. Layout & Component (Jig Module)\n\n主要構成:LTS Target(Long Term Stability)、Y-axis Motor、Cableveyor、(+)/(−) Limit Sensor、Home Sensor、Photo Sensor。',
+          ja:'1.3.1. Layout & Component (Jig Module)\n\n主要構成:LTS Target(Long Term Stability)、Y-axis Motor、Cableveyor、(+)/(−) Limit Sensor、Home Sensor、Photo Sensor。',
+          vi:'1.3.1. Layout & Component (Jig Module)\n\nThành phần chính: LTS Target (Long Term Stability), Y-axis Motor, Cableveyor, (+)/(−) Limit Sensor, Home Sensor, Photo Sensor.'
+        }},
+        {img:cmImg('A','smtv',40),tx:{
+          en:'1.3.1. Layout & Component (Indexer)\n\nKey components: Forward/Backward Finger Clamp, Push Cylinder, Speed Controller, Cableveyor, Finger Clamp Sensor, Auto Switch/Photo/Magnetic Sensor.',
+          ko:'1.3.1. Layout & Component (Indexer)\n\n주요 구성: Forward/Backward Finger Clamp, Push Cylinder, Speed Controller, Cableveyor, Finger Clamp Sensor, Auto Switch/Photo/Magnetic Sensor.',
+          zhCN:'1.3.1. Layout & Component (Indexer)\n\n主要构成:Forward/Backward Finger Clamp、Push Cylinder、Speed Controller、Cableveyor、Finger Clamp Sensor、Auto Switch/Photo/Magnetic Sensor。',
+          zhTW:'1.3.1. Layout & Component (Indexer)\n\n主要構成:Forward/Backward Finger Clamp、Push Cylinder、Speed Controller、Cableveyor、Finger Clamp Sensor、Auto Switch/Photo/Magnetic Sensor。',
+          ja:'1.3.1. Layout & Component (Indexer)\n\n主要構成:Forward/Backward Finger Clamp、Push Cylinder、Speed Controller、Cableveyor、Finger Clamp Sensor、Auto Switch/Photo/Magnetic Sensor。',
+          vi:'1.3.1. Layout & Component (Indexer)\n\nThành phần chính: Forward/Backward Finger Clamp, Push Cylinder, Speed Controller, Cableveyor, Finger Clamp Sensor, Auto Switch/Photo/Magnetic Sensor.'
+        }},
+        {img:cmImg('A','smtv',41),tx:{
+          en:'1.3.1. Layout & Component (Elevator)\n\nKey components (Motor-type and Cylinder-type variants shown): Z-axis Motor, Plate, Belt, Pulley, Ball Bearing, Ball Screw, (+)/(−) Limit Sensor, Speed Controller, Auto Switch/Magnetic/Photo Sensor.',
+          ko:'1.3.1. Layout & Component (Elevator)\n\n주요 구성(Motor 방식·Cylinder 방식 모두 표시): Z-axis Motor, Plate, Belt, Pulley, Ball Bearing, Ball Screw, (+)/(−) Limit Sensor, Speed Controller, Auto Switch/Magnetic/Photo Sensor.',
+          zhCN:'1.3.1. Layout & Component (Elevator)\n\n主要构成(同时展示Motor型·Cylinder型):Z-axis Motor、Plate、Belt、Pulley、Ball Bearing、Ball Screw、(+)/(−) Limit Sensor、Speed Controller、Auto Switch/Magnetic/Photo Sensor。',
+          zhTW:'1.3.1. Layout & Component (Elevator)\n\n主要構成(同時展示Motor型·Cylinder型):Z-axis Motor、Plate、Belt、Pulley、Ball Bearing、Ball Screw、(+)/(−) Limit Sensor、Speed Controller、Auto Switch/Magnetic/Photo Sensor。',
+          ja:'1.3.1. Layout & Component (Elevator)\n\n主要構成(Motorタイプ・Cylinderタイプ両方表示):Z-axis Motor、Plate、Belt、Pulley、Ball Bearing、Ball Screw、(+)/(−) Limit Sensor、Speed Controller、Auto Switch/Magnetic/Photo Sensor。',
+          vi:'1.3.1. Layout & Component (Elevator)\n\nThành phần chính (hiển thị cả loại Motor và loại Cylinder): Z-axis Motor, Plate, Belt, Pulley, Ball Bearing, Ball Screw, (+)/(−) Limit Sensor, Speed Controller, Auto Switch/Magnetic/Photo Sensor.'
+        }},
+        {img:cmImg('A','smtv',42),tx:{
+          en:'1.3.1. Layout & Component (Stacker)\n\nKey components: Stacker, Load Stacker Speed Controller, Empty Stacker Speed Controller, Tray Check Sensor, Photo/Magnetic Sensor, Stacker Clamp Sensor.',
+          ko:'1.3.1. Layout & Component (Stacker)\n\n주요 구성: Stacker, Load Stacker Speed Controller, Empty Stacker Speed Controller, Tray Check Sensor, Photo/Magnetic Sensor, Stacker Clamp Sensor.',
+          zhCN:'1.3.1. Layout & Component (Stacker)\n\n主要构成:Stacker、Load Stacker Speed Controller、Empty Stacker Speed Controller、Tray Check Sensor、Photo/Magnetic Sensor、Stacker Clamp Sensor。',
+          zhTW:'1.3.1. Layout & Component (Stacker)\n\n主要構成:Stacker、Load Stacker Speed Controller、Empty Stacker Speed Controller、Tray Check Sensor、Photo/Magnetic Sensor、Stacker Clamp Sensor。',
+          ja:'1.3.1. Layout & Component (Stacker)\n\n主要構成:Stacker、Load Stacker Speed Controller、Empty Stacker Speed Controller、Tray Check Sensor、Photo/Magnetic Sensor、Stacker Clamp Sensor。',
+          vi:'1.3.1. Layout & Component (Stacker)\n\nThành phần chính: Stacker, Load Stacker Speed Controller, Empty Stacker Speed Controller, Tray Check Sensor, Photo/Magnetic Sensor, Stacker Clamp Sensor.'
+        }},
+        {img:cmImg('A','smtv',43),tx:{
+          en:'1.3.1. Layout & Component (PC KVM — Monitor)\n\nWiring diagram for the shared PC KVM switch (8-port), connecting the Monitor across Host/2D/3D PCs. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (PC KVM — Monitor)\n\nHost/2D/3D PC 간 Monitor를 공유하는 PC KVM Switch(8포트) 배선도입니다. 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (PC KVM — Monitor)\n\n用于Host/2D/3D PC共享Monitor的PC KVM Switch(8端口)接线图。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (PC KVM — Monitor)\n\n用於Host/2D/3D PC共享Monitor的PC KVM Switch(8埠)接線圖。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (PC KVM — Monitor)\n\nHost/2D/3D PC間でMonitorを共有するPC KVM Switch(8ポート)の配線図です。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (PC KVM — Monitor)\n\nSơ đồ đấu dây PC KVM Switch (8 cổng) chia sẻ Monitor giữa Host/2D/3D PC. Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','smtv',44),tx:{
+          en:'1.3.1. Layout & Component (PC KVM — Keyboard, Mouse Connection Diagram)\n\nWiring diagram for sharing the Keyboard and Mouse across Host/2D/3D PCs via the KVM switch. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (PC KVM — Keyboard, Mouse Connection Diagram)\n\nKVM Switch를 통해 Host/2D/3D PC 간 Keyboard·Mouse를 공유하는 배선도입니다. 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (PC KVM — Keyboard, Mouse Connection Diagram)\n\n透过KVM Switch在Host/2D/3D PC间共享Keyboard·Mouse的接线图。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (PC KVM — Keyboard, Mouse Connection Diagram)\n\n透過KVM Switch在Host/2D/3D PC間共享Keyboard·Mouse的接線圖。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (PC KVM — Keyboard, Mouse Connection Diagram)\n\nKVM Switchを介してHost/2D/3D PC間でKeyboard・Mouseを共有する配線図です。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (PC KVM — Keyboard, Mouse Connection Diagram)\n\nSơ đồ đấu dây chia sẻ Keyboard·Mouse giữa Host/2D/3D PC qua KVM Switch. Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','smtv',45),tx:{
+          en:'1.3.1. Layout & Component (HUB)\n\nNetwork wiring diagram via the Netgear XS508M multi-switch hub (10G), connecting Host/3D#1/3D#2/2D PCs and the AF Controllers. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (HUB)\n\nNetgear XS508M Multi-Switch Hub(10G)를 통한 Host/3D#1/3D#2/2D PC 및 AF Controller 네트워크 배선도입니다. 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (HUB)\n\n透过Netgear XS508M Multi-Switch Hub(10G)连接Host/3D#1/3D#2/2D PC及AF Controller的网络接线图。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (HUB)\n\n透過Netgear XS508M Multi-Switch Hub(10G)連接Host/3D#1/3D#2/2D PC及AF Controller的網路接線圖。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (HUB)\n\nNetgear XS508M Multi-Switch Hub(10G)を介したHost/3D#1/3D#2/2D PC及びAF Controllerのネットワーク配線図です。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (HUB)\n\nSơ đồ đấu dây mạng qua Netgear XS508M Multi-Switch Hub (10G), kết nối Host/3D#1/3D#2/2D PC và AF Controller. Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','smtv',46),tx:{
+          en:'1.3.1. Layout & Component (PI PZT Controller, PZT E-754)\n\nWiring diagram: PZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2, via the SYNC Board and 3D TRG Cables. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (PI PZT Controller, PZT E-754)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2 배선도입니다(SYNC Board, 3D TRG Cable 경유). 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (PI PZT Controller, PZT E-754)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2的接线图(经由SYNC Board、3D TRG Cable)。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (PI PZT Controller, PZT E-754)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2的接線圖(經由SYNC Board、3D TRG Cable)。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (PI PZT Controller, PZT E-754)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2の配線図です(SYNC Board、3D TRG Cable経由)。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (PI PZT Controller, PZT E-754)\n\nSơ đồ đấu dây PZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2 (qua SYNC Board, 3D TRG Cable). Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','smtv',47),tx:{
+          en:'1.3.1. Layout & Component (nanoFaktur PZT Controller, EBD-120210)\n\nWiring diagram: PZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2, via the SYNC Board and 3D TRG Cables. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (nanoFaktur PZT Controller, EBD-120210)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2 배선도입니다(SYNC Board, 3D TRG Cable 경유). 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (nanoFaktur PZT Controller, EBD-120210)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2的接线图(经由SYNC Board、3D TRG Cable)。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (nanoFaktur PZT Controller, EBD-120210)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2的接線圖(經由SYNC Board、3D TRG Cable)。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (nanoFaktur PZT Controller, EBD-120210)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2の配線図です(SYNC Board、3D TRG Cable経由)。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (nanoFaktur PZT Controller, EBD-120210)\n\nSơ đồ đấu dây PZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2 (qua SYNC Board, 3D TRG Cable). Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','smtv',48),tx:{
+          en:'1.3.1. Layout & Component (Host PC) — AF/Power Meter Serial Wiring\n\nWiring diagram for the Host PC\'s serial/LAN connections to AF Controller #1/#2 (RS232, COM3/COM4) and the Power Meter. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (Host PC) — AF·Power Meter 직렬 배선\n\nHost PC와 AF Controller #1/#2(RS232, COM3/COM4) 및 Power Meter 간 직렬·LAN 연결 배선도입니다. 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (Host PC) — AF·Power Meter串行接线\n\nHost PC与AF Controller #1/#2(RS232、COM3/COM4)及Power Meter之间的串行·LAN连接接线图。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (Host PC) — AF·Power Meter序列接線\n\nHost PC與AF Controller #1/#2(RS232、COM3/COM4)及Power Meter之間的序列·LAN連接接線圖。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (Host PC) — AF・Power Meterシリアル配線\n\nHost PCとAF Controller #1/#2(RS232、COM3/COM4)及びPower Meter間のシリアル・LAN接続配線図です。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (Host PC) — Đấu dây nối tiếp AF·Power Meter\n\nSơ đồ đấu dây nối tiếp·LAN giữa Host PC với AF Controller #1/#2 (RS232, COM3/COM4) và Power Meter. Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','smtv',49),tx:{
+          en:'1.3.1. Layout & Component (Host PC) — Motor/IO Module Wiring\n\nWiring diagram for the Host PC\'s connections to the Motor Driver and IO Modules (via PCIe-R3205 cards), plus KVM switch. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (Host PC) — Motor/IO Module 배선\n\nHost PC와 Motor Driver·IO Module(PCIe-R3205 카드 경유) 및 KVM Switch 간 배선도입니다. 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (Host PC) — Motor/IO Module接线\n\nHost PC与Motor Driver·IO Module(经由PCIe-R3205卡)及KVM Switch之间的接线图。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (Host PC) — Motor/IO Module接線\n\nHost PC與Motor Driver·IO Module(經由PCIe-R3205卡)及KVM Switch之間的接線圖。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (Host PC) — Motor/IO Module配線\n\nHost PCとMotor Driver・IO Module(PCIe-R3205カード経由)及びKVM Switch間の配線図です。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (Host PC) — Đấu dây Motor/IO Module\n\nSơ đồ đấu dây giữa Host PC với Motor Driver·IO Module (qua card PCIe-R3205) và KVM Switch. Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','smtv',50),tx:{
+          en:'1.3.1. Layout & Component (2D Vision PC)\n\nWiring diagram for the 2D Vision PC: Vision Camera ↔ Grab Board, LED Controller ↔ Sync Board, KVM Switch. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (2D Vision PC)\n\n2D Vision PC 배선도입니다: Vision Camera ↔ Grab Board, LED Controller ↔ Sync Board, KVM Switch. 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (2D Vision PC)\n\n2D Vision PC接线图:Vision Camera ↔ Grab Board、LED Controller ↔ Sync Board、KVM Switch。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (2D Vision PC)\n\n2D Vision PC接線圖:Vision Camera ↔ Grab Board、LED Controller ↔ Sync Board、KVM Switch。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (2D Vision PC)\n\n2D Vision PC配線図です:Vision Camera ↔ Grab Board、LED Controller ↔ Sync Board、KVM Switch。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (2D Vision PC)\n\nSơ đồ đấu dây 2D Vision PC: Vision Camera ↔ Grab Board, LED Controller ↔ Sync Board, KVM Switch. Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','smtv',51),tx:{
+          en:'1.3.1. Layout & Component (3D Vision PC)\n\nWiring diagram for the 3D Vision PC: Vision Camera ↔ Grab Board, LED Controller/PZT Controller ↔ Sync Board, KVM Switch. Optical-system cables may vary by specification — refer to the image for exact routing.',
+          ko:'1.3.1. Layout & Component (3D Vision PC)\n\n3D Vision PC 배선도입니다: Vision Camera ↔ Grab Board, LED Controller/PZT Controller ↔ Sync Board, KVM Switch. 광학계 Cable은 Spec에 따라 다를 수 있으니 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (3D Vision PC)\n\n3D Vision PC接线图:Vision Camera ↔ Grab Board、LED Controller/PZT Controller ↔ Sync Board、KVM Switch。光学系统Cable可能依Spec而异,具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (3D Vision PC)\n\n3D Vision PC接線圖:Vision Camera ↔ Grab Board、LED Controller/PZT Controller ↔ Sync Board、KVM Switch。光學系統Cable可能依Spec而異,具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (3D Vision PC)\n\n3D Vision PC配線図です:Vision Camera ↔ Grab Board、LED Controller/PZT Controller ↔ Sync Board、KVM Switch。光学系Cableは仕様により異なる場合があるため、正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (3D Vision PC)\n\nSơ đồ đấu dây 3D Vision PC: Vision Camera ↔ Grab Board, LED Controller/PZT Controller ↔ Sync Board, KVM Switch. Cáp hệ quang học có thể khác nhau tùy Spec — tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','smtv',52),tx:{
+          en:'Introduce — this section covers Hardware Configuration & System: Layout & Component, Interlock System, and Equipment Automatic Sequence.',
+          ko:'Introduce — Hardware Configuration & System: Layout & Component, Interlock System, Equipment Automatic Sequence를 다룹니다.',
+          zhCN:'Introduce——本节介绍Hardware Configuration & System:Layout & Component、Interlock System、Equipment Automatic Sequence。',
+          zhTW:'Introduce——本節介紹Hardware Configuration & System:Layout & Component、Interlock System、Equipment Automatic Sequence。',
+          ja:'Introduce——本節ではHardware Configuration & System:Layout & Component、Interlock System、Equipment Automatic Sequenceを扱います。',
+          vi:'Introduce — phần này đề cập đến Hardware Configuration & System: Layout & Component, Interlock System, Equipment Automatic Sequence.'
+        }},
+        {img:cmImg('A','smtv',53),tx:{
+          en:'1.3.2. Interlock System\n\nAuto Mode: motor power is supplied only when all upper doors are closed and locked. On an alarm during automatic operation: (1) click Reset, (2) release the Door Interlock, (3) open the door and resolve the alarm, (4) close the door and switch the interlock to Lock, (5) click Start to resume. Teach Mode: motor power can be supplied even with the upper door open/unlocked. Auto/Teach mode can be switched via the Handler program\'s I/O.',
+          ko:'1.3.2. Interlock System\n\nAuto Mode: 모든 상부 도어가 닫히고 잠겼을 때만 Motor 전원이 공급됩니다. 자동 운전 중 알람 발생 시: (1) Reset 클릭, (2) Door Interlock 해제, (3) 도어를 열고 알람 지점 해결, (4) 도어를 닫고 Interlock을 Lock으로 전환, (5) Start를 눌러 재개. Teach Mode: 상부 도어가 열려 있거나 잠겨 있지 않아도 Motor 전원이 공급됩니다. Auto/Teach 모드는 Handler Program의 I/O로 전환할 수 있습니다.',
+          zhCN:'1.3.2. Interlock System\n\nAuto Mode:仅当所有上部门都关闭并锁定时才供应Motor电源。自动运行中发生报警时:(1)点击Reset,(2)解除Door Interlock,(3)打开门解决报警点,(4)关门并将Interlock切换为Lock,(5)点击Start恢复运行。Teach Mode:即使上部门打开或未锁定,也可供应Motor电源。Auto/Teach模式可通过Handler Program的I/O切换。',
+          zhTW:'1.3.2. Interlock System\n\nAuto Mode:僅當所有上部門都關閉並鎖定時才供應Motor電源。自動運行中發生警報時:(1)點擊Reset,(2)解除Door Interlock,(3)開門解決警報點,(4)關門並將Interlock切換為Lock,(5)點擊Start恢復運行。Teach Mode:即使上部門開啟或未鎖定,也可供應Motor電源。Auto/Teach模式可透過Handler Program的I/O切換。',
+          ja:'1.3.2. Interlock System\n\nAuto Mode:上部ドアがすべて閉じてロックされた時のみMotor電源が供給されます。自動運転中にアラームが発生した場合:(1)Resetをクリック、(2)Door Interlockを解除、(3)ドアを開けてアラーム箇所を解決、(4)ドアを閉めてInterlockをLockに切替、(5)Startを押して再開。Teach Mode:上部ドアが開いている・ロックされていなくてもMotor電源を供給できます。Auto/TeachモードはHandler ProgramのI/Oで切り替え可能です。',
+          vi:'1.3.2. Interlock System\n\nAuto Mode: chỉ cấp nguồn Motor khi mọi cửa trên đã đóng và khóa. Khi có cảnh báo trong lúc vận hành tự động: (1) nhấn Reset, (2) mở khóa Door Interlock, (3) mở cửa và xử lý điểm cảnh báo, (4) đóng cửa và chuyển Interlock sang Lock, (5) nhấn Start để tiếp tục. Teach Mode: vẫn cấp nguồn Motor được dù cửa trên mở/chưa khóa. Chế độ Auto/Teach có thể chuyển qua I/O của Handler Program.'
+        }},
+        {img:cmImg('A','smtv',54),tx:{
+          en:'1.3.2. Interlock System — EMS Buttons\n\nTo supply motor power, all 6 EMS (Emergency Stop Switch) buttons on the equipment must remain in the released (pulled-out) state — pushing even one cuts motor power. EMS buttons are the emergency motor-power cutoff.',
+          ko:'1.3.2. Interlock System — EMS Buttons\n\nMotor 전원을 공급하려면 설비의 EMS(Emergency Stop Switch) 버튼 6개가 모두 풀린(당겨진) 상태여야 합니다 — 하나라도 눌리면 Motor 전원이 차단됩니다. EMS 버튼은 비상 시 Motor 전원을 차단하는 용도입니다.',
+          zhCN:'1.3.2. Interlock System — EMS Buttons\n\n要供应Motor电源,设备上6个EMS(Emergency Stop Switch)按钮都必须处于释放(拉出)状态——只要有一个被按下,Motor电源就会被切断。EMS按钮用于紧急情况下切断Motor电源。',
+          zhTW:'1.3.2. Interlock System — EMS Buttons\n\n要供應Motor電源,設備上6個EMS(Emergency Stop Switch)按鈕都必須處於釋放(拉出)狀態——只要有一個被按下,Motor電源就會被切斷。EMS按鈕用於緊急情況下切斷Motor電源。',
+          ja:'1.3.2. Interlock System — EMS Buttons\n\nMotor電源を供給するには、設備の6個のEMS(Emergency Stop Switch)ボタンがすべて解放(引き出された)状態である必要があります——1つでも押されるとMotor電源が遮断されます。EMSボタンは緊急時にMotor電源を遮断するためのものです。',
+          vi:'1.3.2. Interlock System — EMS Buttons\n\nĐể cấp nguồn Motor, cả 6 nút EMS (Emergency Stop Switch) trên thiết bị phải ở trạng thái nhả (kéo ra) — chỉ cần một nút bị nhấn, nguồn Motor sẽ bị cắt. Nút EMS dùng để cắt khẩn cấp nguồn Motor.'
+        }},
+        {img:cmImg('A','smtv',55),tx:{
+          en:'1.3.2. Interlock System — Door Interlock\n\nThe Door Interlock system is installed on the upper door to prevent the operator from opening it while the equipment is running. Only engineers authorized by Intekplus may release the interlock for maintenance.',
+          ko:'1.3.2. Interlock System — Door Interlock\n\nDoor Interlock 시스템은 상부 도어에 설치되어, 설비 운전 중 작업자가 도어를 여는 것을 방지합니다. 정비를 위한 Interlock 해제는 Intekplus가 허가한 엔지니어만 가능합니다.',
+          zhCN:'1.3.2. Interlock System — Door Interlock\n\nDoor Interlock系统安装于上部门,用于防止设备运行中操作人员打开门。仅限Intekplus授权的工程师才能为维护解除Interlock。',
+          zhTW:'1.3.2. Interlock System — Door Interlock\n\nDoor Interlock系統安裝於上部門,用於防止設備運行中操作人員打開門。僅限Intekplus授權的工程師才能為維護解除Interlock。',
+          ja:'1.3.2. Interlock System — Door Interlock\n\nDoor Interlockシステムは上部ドアに設置され、設備運転中に作業者がドアを開けるのを防止します。メンテナンスのためのInterlock解除はIntekplusが許可したエンジニアのみ可能です。',
+          vi:'1.3.2. Interlock System — Door Interlock\n\nHệ thống Door Interlock được lắp trên cửa trên, ngăn người vận hành mở cửa khi thiết bị đang chạy. Chỉ kỹ sư được Intekplus cho phép mới được mở khóa Interlock để bảo trì.'
+        }},
+        {img:cmImg('A','smtv',56),tx:{
+          en:'1.3.2. Interlock System — Lower-Door Fan\n\nTo power the cooling fan installed in the lower door, all lower doors must be closed. The fan\'s power is supplied automatically (via a magnetic proximity sensor) and cannot be turned on manually.',
+          ko:'1.3.2. Interlock System — 하부 도어 Fan\n\n하부 도어에 설치된 냉각 Fan에 전원을 공급하려면 모든 하부 도어가 닫혀 있어야 합니다. Fan 전원은 자동으로 공급되며(Magnetic Proximity Sensor 이용) 수동으로 켤 수 없습니다.',
+          zhCN:'1.3.2. Interlock System — 下部門風扇\n\n要为下部門安装的散热风扇供电,所有下部門都必须关闭。风扇电源自动供应(利用Magnetic Proximity Sensor),无法手动开启。',
+          zhTW:'1.3.2. Interlock System — 下部門風扇\n\n要為下部門安裝的散熱風扇供電,所有下部門都必須關閉。風扇電源自動供應(利用Magnetic Proximity Sensor),無法手動開啟。',
+          ja:'1.3.2. Interlock System — 下部ドアFan\n\n下部ドアに設置された冷却Fanに電源を供給するには、すべての下部ドアが閉まっている必要があります。Fan電源は自動供給され(Magnetic Proximity Sensor利用)、手動でオンにはできません。',
+          vi:'1.3.2. Interlock System — Quạt cửa dưới\n\nĐể cấp nguồn cho quạt làm mát lắp ở cửa dưới, tất cả cửa dưới phải đóng. Nguồn quạt được cấp tự động (qua Magnetic Proximity Sensor) và không thể bật thủ công.'
+        }},
+        {img:cmImg('A','smtv',57),tx:{
+          en:'Introduce — this section covers Hardware Configuration & System: Layout & Component, Interlock System, and Equipment Automatic Sequence.',
+          ko:'Introduce — Hardware Configuration & System: Layout & Component, Interlock System, Equipment Automatic Sequence를 다룹니다.',
+          zhCN:'Introduce——本节介绍Hardware Configuration & System:Layout & Component、Interlock System、Equipment Automatic Sequence。',
+          zhTW:'Introduce——本節介紹Hardware Configuration & System:Layout & Component、Interlock System、Equipment Automatic Sequence。',
+          ja:'Introduce——本節ではHardware Configuration & System:Layout & Component、Interlock System、Equipment Automatic Sequenceを扱います。',
+          vi:'Introduce — phần này đề cập đến Hardware Configuration & System: Layout & Component, Interlock System, Equipment Automatic Sequence.'
+        }},
+        {img:cmImg('A','smtv',58),tx:{
+          en:'1.3.3. Equipment Automatic Sequence — Overview (Top View)\n\nThe full cycle: 1. Load tray (a. load empty tray once at run start, b. load reject-empty tray, c. transfer empty tray) → 2. Pick up unit & move to aligner → 3. Align unit → 4. Place unit on the Jig (Pedestal) → 5. 3D inspection → 6. Transfer unit onto tray → 7. Transfer tray to Good/Buffer rail → 8. 2D inspection (Good/Buffer rail) → 9. Unit sorting → 10. Unload tray.',
+          ko:'1.3.3. Equipment Automatic Sequence — 전체 개요 (Top View)\n\n전체 사이클: 1. Tray Load(a. 가동 시작 시 1회 Empty Tray Load, b. Reject Empty Tray Load, c. Empty Tray 이송) → 2. Unit Pick-up 후 Aligner로 이동 → 3. Unit Align → 4. Jig(Pedestal)에 Unit 안착 → 5. 3D Inspection → 6. Unit을 Tray로 이송 → 7. Tray를 Good/Buffer Rail로 이송 → 8. 2D Inspection(Good/Buffer Rail) → 9. Unit Sorting → 10. Tray Unload.',
+          zhCN:'1.3.3. Equipment Automatic Sequence — 整体概览(Top View)\n\n完整循环:1. Tray Load(a. 启动时1次Empty Tray Load,b. Reject Empty Tray Load,c. Empty Tray传送) → 2. Pick-up Unit后移至Aligner → 3. Unit Align → 4. 将Unit放置于Jig(Pedestal) → 5. 3D Inspection → 6. 将Unit传送至Tray → 7. 将Tray传送至Good/Buffer Rail → 8. 2D Inspection(Good/Buffer Rail) → 9. Unit Sorting → 10. Tray Unload。',
+          zhTW:'1.3.3. Equipment Automatic Sequence — 整體概覽(Top View)\n\n完整循環:1. Tray Load(a. 啟動時1次Empty Tray Load,b. Reject Empty Tray Load,c. Empty Tray傳送) → 2. Pick-up Unit後移至Aligner → 3. Unit Align → 4. 將Unit放置於Jig(Pedestal) → 5. 3D Inspection → 6. 將Unit傳送至Tray → 7. 將Tray傳送至Good/Buffer Rail → 8. 2D Inspection(Good/Buffer Rail) → 9. Unit Sorting → 10. Tray Unload。',
+          ja:'1.3.3. Equipment Automatic Sequence — 全体概要(Top View)\n\n全サイクル:1. Tray Load(a. 起動時に1回Empty Tray Load、b. Reject Empty Tray Load、c. Empty Tray移送) → 2. UnitをPick-upしAlignerへ移動 → 3. Unit Align → 4. Jig(Pedestal)にUnit配置 → 5. 3D Inspection → 6. UnitをTrayへ移送 → 7. TrayをGood/Buffer Railへ移送 → 8. 2D Inspection(Good/Buffer Rail) → 9. Unit Sorting → 10. Tray Unload。',
+          vi:'1.3.3. Equipment Automatic Sequence — Tổng quan (Top View)\n\nChu trình đầy đủ: 1. Load tray (a. Load Empty Tray 1 lần khi bắt đầu chạy, b. Load Reject Empty Tray, c. chuyển Empty Tray) → 2. Pick-up Unit và chuyển đến Aligner → 3. Align Unit → 4. Đặt Unit lên Jig (Pedestal) → 5. 3D Inspection → 6. Chuyển Unit lên Tray → 7. Chuyển Tray đến Rail Good/Buffer → 8. 2D Inspection (Rail Good/Buffer) → 9. Unit Sorting → 10. Unload Tray.'
+        }},
+        {img:cmImg('A','smtv',59),tx:{
+          en:'1.3.3. Equipment Automatic Sequence — Empty Tray\n\nPrepare the Empty Tray: the Elevator and Stacker separate each tray, the Indexer moves it to the TTM, and the TTM moves the Empty Tray to the Reject Rail.',
+          ko:'1.3.3. Equipment Automatic Sequence — Empty Tray\n\nEmpty Tray 준비: Elevator·Stacker로 Tray를 한 장씩 분리하고, Indexer가 TTM으로 이송하며, TTM이 Empty Tray를 Reject Rail로 이동시킵니다.',
+          zhCN:'1.3.3. Equipment Automatic Sequence — Empty Tray\n\n准备Empty Tray:用Elevator·Stacker逐张分离Tray,由Indexer移送至TTM,TTM将Empty Tray移至Reject Rail。',
+          zhTW:'1.3.3. Equipment Automatic Sequence — Empty Tray\n\n準備Empty Tray:用Elevator·Stacker逐張分離Tray,由Indexer移送至TTM,TTM將Empty Tray移至Reject Rail。',
+          ja:'1.3.3. Equipment Automatic Sequence — Empty Tray\n\nEmpty Trayの準備:Elevator・Stackerで1枚ずつTrayを分離し、IndexerがTTMへ移送、TTMがEmpty TrayをReject Railへ移動させます。',
+          vi:'1.3.3. Equipment Automatic Sequence — Empty Tray\n\nChuẩn bị Empty Tray: Elevator·Stacker tách từng Tray, Indexer chuyển đến TTM, TTM chuyển Empty Tray đến Reject Rail.'
+        }},
+        {img:cmImg('A','smtv',60),tx:{
+          en:'1.3.3. Equipment Automatic Sequence — Load Tray\n\nPlace the tray with units in the Loader; the Elevator and Stacker separate each tray.',
+          ko:'1.3.3. Equipment Automatic Sequence — Load Tray\n\nUnit이 담긴 Tray를 Loader에 투입하고, Elevator·Stacker로 Tray를 한 장씩 분리합니다.',
+          zhCN:'1.3.3. Equipment Automatic Sequence — Load Tray\n\n将装有Unit的Tray投入Loader,用Elevator·Stacker逐张分离Tray。',
+          zhTW:'1.3.3. Equipment Automatic Sequence — Load Tray\n\n將裝有Unit的Tray投入Loader,用Elevator·Stacker逐張分離Tray。',
+          ja:'1.3.3. Equipment Automatic Sequence — Load Tray\n\nUnitの入ったTrayをLoaderに投入し、Elevator・Stackerで1枚ずつ分離します。',
+          vi:'1.3.3. Equipment Automatic Sequence — Load Tray\n\nNạp Tray chứa Unit vào Loader, Elevator·Stacker tách từng Tray.'
+        }},
+        {img:cmImg('A','smtv',61),tx:{
+          en:'1.3.3. Equipment Automatic Sequence — Tray Unit Pick & Align Place (Loading)\n\nThe Loader Multi Picker picks up the unit from the loaded tray and places it on the Aligner.',
+          ko:'1.3.3. Equipment Automatic Sequence — Tray Unit Pick & Align Place (Loading)\n\nLoader Multi Picker가 투입된 Tray에서 Unit을 Pick하여 Aligner에 Place합니다.',
+          zhCN:'1.3.3. Equipment Automatic Sequence — Tray Unit Pick & Align Place (Loading)\n\nLoader Multi Picker从投入的Tray中Pick取Unit,并Place到Aligner上。',
+          zhTW:'1.3.3. Equipment Automatic Sequence — Tray Unit Pick & Align Place (Loading)\n\nLoader Multi Picker從投入的Tray中Pick取Unit,並Place到Aligner上。',
+          ja:'1.3.3. Equipment Automatic Sequence — Tray Unit Pick & Align Place (Loading)\n\nLoader Multi Pickerが投入されたTrayからUnitをPickし、AlignerへPlaceします。',
+          vi:'1.3.3. Equipment Automatic Sequence — Tray Unit Pick & Align Place (Loading)\n\nLoader Multi Picker Pick Unit từ Tray đã nạp và Place lên Aligner.'
+        }},
+        {img:cmImg('A','smtv',62),tx:{
+          en:'1.3.3. Equipment Automatic Sequence — Aligner Pick & Jig Place\n\nAfter alignment, the Jig Multi Picker moves the unit onto the Jig table.',
+          ko:'1.3.3. Equipment Automatic Sequence — Aligner Pick & Jig Place\n\nAlign이 끝나면 Jig Multi Picker를 이용해 Jig Table로 이동시킵니다.',
+          zhCN:'1.3.3. Equipment Automatic Sequence — Aligner Pick & Jig Place\n\nAlign完成后,利用Jig Multi Picker移动到Jig Table。',
+          zhTW:'1.3.3. Equipment Automatic Sequence — Aligner Pick & Jig Place\n\nAlign完成後,利用Jig Multi Picker移動到Jig Table。',
+          ja:'1.3.3. Equipment Automatic Sequence — Aligner Pick & Jig Place\n\nAlign完了後、Jig Multi Pickerを使ってJig Tableへ移動させます。',
+          vi:'1.3.3. Equipment Automatic Sequence — Aligner Pick & Jig Place\n\nSau khi Align xong, dùng Jig Multi Picker để chuyển đến Jig Table.'
+        }},
+        {img:cmImg('A','smtv',63),tx:{
+          en:'1.3.3. Equipment Automatic Sequence — 3D Inspection\n\nInspects the bump area of the unit; if the bump area is larger than one F.O.V. (Field of View), the inspection area is divided into two or more R.O.I. (Region of Interest) sections.',
+          ko:'1.3.3. Equipment Automatic Sequence — 3D Inspection\n\nUnit의 Bump 영역을 검사합니다. Bump 영역이 F.O.V.(Field of View) 1개보다 크면 검사 영역을 2개 이상의 R.O.I.(Region of Interest)로 나눕니다.',
+          zhCN:'1.3.3. Equipment Automatic Sequence — 3D Inspection\n\n检测Unit的Bump区域。若Bump区域大于1个F.O.V.(Field of View),则将检测区域划分为2个以上的R.O.I.(Region of Interest)。',
+          zhTW:'1.3.3. Equipment Automatic Sequence — 3D Inspection\n\n檢測Unit的Bump區域。若Bump區域大於1個F.O.V.(Field of View),則將檢測區域劃分為2個以上的R.O.I.(Region of Interest)。',
+          ja:'1.3.3. Equipment Automatic Sequence — 3D Inspection\n\nUnitのBump領域を検査します。Bump領域がF.O.V.(Field of View)1つより大きい場合、検査領域を2つ以上のR.O.I.(Region of Interest)に分割します。',
+          vi:'1.3.3. Equipment Automatic Sequence — 3D Inspection\n\nKiểm tra vùng Bump của Unit. Nếu vùng Bump lớn hơn 1 F.O.V. (Field of View), vùng kiểm tra được chia thành 2 R.O.I. (Region of Interest) trở lên.'
+        }},
+        {img:cmImg('A','smtv',64),tx:{
+          en:'1.3.3. Equipment Automatic Sequence — Jig Pick & Tray Unit Place (Unloading)\n\nTransfers the unit that has completed 3D inspection back onto a tray.',
+          ko:'1.3.3. Equipment Automatic Sequence — Jig Pick & Tray Unit Place (Unloading)\n\n3D Inspection이 끝난 Unit을 Tray로 이송하는 동작입니다.',
+          zhCN:'1.3.3. Equipment Automatic Sequence — Jig Pick & Tray Unit Place (Unloading)\n\n将完成3D Inspection的Unit传送回Tray的动作。',
+          zhTW:'1.3.3. Equipment Automatic Sequence — Jig Pick & Tray Unit Place (Unloading)\n\n將完成3D Inspection的Unit傳送回Tray的動作。',
+          ja:'1.3.3. Equipment Automatic Sequence — Jig Pick & Tray Unit Place (Unloading)\n\n3D Inspectionが完了したUnitをTrayへ移送する動作です。',
+          vi:'1.3.3. Equipment Automatic Sequence — Jig Pick & Tray Unit Place (Unloading)\n\nThao tác chuyển Unit đã hoàn tất 3D Inspection trở lại Tray.'
+        }},
+        {img:cmImg('A','smtv',65),tx:{
+          en:'1.3.3. Equipment Automatic Sequence — Tray Sorting\n\nMoves the tray to the Buffer or Good rail in the order inspection is completed.',
+          ko:'1.3.3. Equipment Automatic Sequence — Tray Sorting\n\n검사 완료 순서대로 Tray를 Buffer·Good Rail로 이동시킵니다.',
+          zhCN:'1.3.3. Equipment Automatic Sequence — Tray Sorting\n\n按检测完成顺序将Tray移至Buffer·Good Rail。',
+          zhTW:'1.3.3. Equipment Automatic Sequence — Tray Sorting\n\n按檢測完成順序將Tray移至Buffer·Good Rail。',
+          ja:'1.3.3. Equipment Automatic Sequence — Tray Sorting\n\n検査完了順にTrayをBuffer・Good Railへ移動させます。',
+          vi:'1.3.3. Equipment Automatic Sequence — Tray Sorting\n\nDi chuyển Tray đến Rail Buffer·Good theo thứ tự hoàn tất kiểm tra.'
+        }},
+        {img:cmImg('A','smtv',66),tx:{
+          en:'1.3.3. Equipment Automatic Sequence — Read Barcode of Unit\n\nMoves to the unit under inspection and reads the barcode within the R.O.I. area (supports both OCR Barcode and Matrix Barcode reading).',
+          ko:'1.3.3. Equipment Automatic Sequence — Read Barcode of Unit\n\n검사 대상 Unit으로 이동해 R.O.I. 영역의 Barcode를 읽습니다 (OCR Barcode·Matrix Barcode 모두 지원).',
+          zhCN:'1.3.3. Equipment Automatic Sequence — Read Barcode of Unit\n\n移动到检测对象Unit并读取R.O.I.区域的Barcode(支持OCR Barcode·Matrix Barcode)。',
+          zhTW:'1.3.3. Equipment Automatic Sequence — Read Barcode of Unit\n\n移動到檢測對象Unit並讀取R.O.I.區域的Barcode(支援OCR Barcode·Matrix Barcode)。',
+          ja:'1.3.3. Equipment Automatic Sequence — Read Barcode of Unit\n\n検査対象のUnitへ移動し、R.O.I.領域のBarcodeを読み取ります(OCR Barcode・Matrix Barcodeいずれも対応)。',
+          vi:'1.3.3. Equipment Automatic Sequence — Read Barcode of Unit\n\nDi chuyển đến Unit cần kiểm tra và đọc Barcode trong vùng R.O.I. (hỗ trợ cả OCR Barcode và Matrix Barcode).'
+        }},
+        {img:cmImg('A','smtv',67),tx:{
+          en:'1.3.3. Equipment Automatic Sequence — 2D Inspection\n\nInspects the bump area of the unit; if the bump area is larger than one F.O.V., the inspection area is divided into two or more R.O.I. sections.',
+          ko:'1.3.3. Equipment Automatic Sequence — 2D Inspection\n\nUnit의 Bump 영역을 검사합니다. Bump 영역이 F.O.V. 1개보다 크면 검사 영역을 2개 이상의 R.O.I.로 나눕니다.',
+          zhCN:'1.3.3. Equipment Automatic Sequence — 2D Inspection\n\n检测Unit的Bump区域。若Bump区域大于1个F.O.V.,则将检测区域划分为2个以上的R.O.I.。',
+          zhTW:'1.3.3. Equipment Automatic Sequence — 2D Inspection\n\n檢測Unit的Bump區域。若Bump區域大於1個F.O.V.,則將檢測區域劃分為2個以上的R.O.I.。',
+          ja:'1.3.3. Equipment Automatic Sequence — 2D Inspection\n\nUnitのBump領域を検査します。Bump領域がF.O.V.1つより大きい場合、検査領域を2つ以上のR.O.I.に分割します。',
+          vi:'1.3.3. Equipment Automatic Sequence — 2D Inspection\n\nKiểm tra vùng Bump của Unit. Nếu vùng Bump lớn hơn 1 F.O.V., vùng kiểm tra được chia thành 2 R.O.I. trở lên.'
+        }},
+        {img:cmImg('A','smtv',68),tx:{
+          en:'1.3.3. Equipment Automatic Sequence — Unit Sorting\n\nInspected units are classified as Good or Reject.',
+          ko:'1.3.3. Equipment Automatic Sequence — Unit Sorting\n\n검사된 Unit을 Good·Reject로 분류합니다.',
+          zhCN:'1.3.3. Equipment Automatic Sequence — Unit Sorting\n\n将已检测的Unit分类为Good·Reject。',
+          zhTW:'1.3.3. Equipment Automatic Sequence — Unit Sorting\n\n將已檢測的Unit分類為Good·Reject。',
+          ja:'1.3.3. Equipment Automatic Sequence — Unit Sorting\n\n検査済みのUnitをGood・Rejectに分類します。',
+          vi:'1.3.3. Equipment Automatic Sequence — Unit Sorting\n\nPhân loại Unit đã kiểm tra thành Good·Reject.'
+        }},
+        {img:cmImg('A','smtv',69),tx:{
+          en:'1.3.3. Equipment Automatic Sequence — Unload Tray\n\nUnloads the sorted tray from the equipment.',
+          ko:'1.3.3. Equipment Automatic Sequence — Unload Tray\n\nSorting이 끝난 Tray를 설비에서 배출합니다.',
+          zhCN:'1.3.3. Equipment Automatic Sequence — Unload Tray\n\n将Sorting完成的Tray从设备排出。',
+          zhTW:'1.3.3. Equipment Automatic Sequence — Unload Tray\n\n將Sorting完成的Tray從設備排出。',
+          ja:'1.3.3. Equipment Automatic Sequence — Unload Tray\n\nSortingが完了したTrayを設備から排出します。',
+          vi:'1.3.3. Equipment Automatic Sequence — Unload Tray\n\nĐẩy Tray đã Sorting ra khỏi thiết bị.'
+        }},
+        {img:cmImg('A','smtv',70),tx:{
+          en:'Operation — this section covers Power On & Off: Electrical Turn-on Sequence, Controller/PC/Camera Power, and Equipment Turn-off Sequence.',
+          ko:'Operation — Power on & off: Electrical Turn-on Sequence, Controller/PC/Camera, Equipment Turn-off Sequence를 다룹니다.',
+          zhCN:'Operation——本节介绍Power on & off:Electrical Turn-on Sequence、Controller/PC/Camera、Equipment Turn-off Sequence。',
+          zhTW:'Operation——本節介紹Power on & off:Electrical Turn-on Sequence、Controller/PC/Camera、Equipment Turn-off Sequence。',
+          ja:'Operation——本節ではPower on & off:Electrical Turn-on Sequence、Controller/PC/Camera、Equipment Turn-off Sequenceを扱います。',
+          vi:'Operation — phần này đề cập đến Power on & off: Electrical Turn-on Sequence, Controller/PC/Camera, Equipment Turn-off Sequence.'
+        }},
+        {img:cmImg('A','smtv',71),tx:{
+          en:'2.1.1. Electrical Turn-on Sequence\n\nRear-panel sockets: External LAN Port, Air 1–4 (Main equipment air sockets, 12Ф), Main Power Cable Socket.',
+          ko:'2.1.1. Electrical Turn-on Sequence\n\n후면 패널 소켓: External LAN Port, Air 1~4(Main 설비 Air 소켓, 12Ф), Main Power Cable Socket.',
+          zhCN:'2.1.1. Electrical Turn-on Sequence\n\n后面板插座:External LAN Port、Air 1~4(Main设备Air插座,12Ф)、Main Power Cable Socket。',
+          zhTW:'2.1.1. Electrical Turn-on Sequence\n\n後面板插座:External LAN Port、Air 1~4(Main設備Air插座,12Ф)、Main Power Cable Socket。',
+          ja:'2.1.1. Electrical Turn-on Sequence\n\n背面パネルソケット:External LAN Port、Air 1~4(Main設備Airソケット、12Ф)、Main Power Cable Socket。',
+          vi:'2.1.1. Electrical Turn-on Sequence\n\nCác ổ cắm mặt sau: External LAN Port, Air 1–4 (ổ khí nén chính, 12Ф), Main Power Cable Socket.'
+        }},
+        {img:cmImg('A','smtv',72),tx:{
+          en:'2.1.1. Electrical Turn-on Sequence — Main Air Regulator\n\nAdjust each Air Regulator so pressure is maintained at 4–6bar. The regulator on the main facility\'s utility panel is monitored via an input signal. Air 1: Indexer/Stacker/Elevator/Picker Up-Down/Air Gun/Vacuum Tweezers. Air 2: ISO Jig #1/#2 Pocket Vacuum. Air 3: Multi Sorter/ISO Picker Vacuum. Air 4: ISO Main Air.',
+          ko:'2.1.1. Electrical Turn-on Sequence — Main Air Regulator\n\n각 Air Regulator의 압력이 4~6bar로 유지되도록 조정합니다. 본 설비 Utility Panel의 Regulator는 입력 신호로 모니터링됩니다. Air 1: Indexer·Stacker·Elevator·Picker Up-Down·Air Gun·Vacuum Tweezers. Air 2: ISO Jig #1/#2 Pocket Vacuum. Air 3: Multi Sorter·ISO Picker Vacuum. Air 4: ISO Main Air.',
+          zhCN:'2.1.1. Electrical Turn-on Sequence — Main Air Regulator\n\n调整各Air Regulator使压力维持在4~6bar。主设备Utility Panel上的Regulator通过输入信号监控。Air 1:Indexer·Stacker·Elevator·Picker Up-Down·Air Gun·Vacuum Tweezers。Air 2:ISO Jig #1/#2 Pocket Vacuum。Air 3:Multi Sorter·ISO Picker Vacuum。Air 4:ISO Main Air。',
+          zhTW:'2.1.1. Electrical Turn-on Sequence — Main Air Regulator\n\n調整各Air Regulator使壓力維持在4~6bar。主設備Utility Panel上的Regulator透過輸入訊號監控。Air 1:Indexer·Stacker·Elevator·Picker Up-Down·Air Gun·Vacuum Tweezers。Air 2:ISO Jig #1/#2 Pocket Vacuum。Air 3:Multi Sorter·ISO Picker Vacuum。Air 4:ISO Main Air。',
+          ja:'2.1.1. Electrical Turn-on Sequence — Main Air Regulator\n\n各Air Regulatorの圧力が4~6barに維持されるよう調整します。主設備Utility Panel上のRegulatorは入力信号でモニタリングされます。Air 1:Indexer・Stacker・Elevator・Picker Up-Down・Air Gun・Vacuum Tweezers。Air 2:ISO Jig #1/#2 Pocket Vacuum。Air 3:Multi Sorter・ISO Picker Vacuum。Air 4:ISO Main Air。',
+          vi:'2.1.1. Electrical Turn-on Sequence — Main Air Regulator\n\nChỉnh mỗi Air Regulator giữ áp suất 4–6bar. Regulator trên Utility Panel của thiết bị chính được giám sát qua tín hiệu đầu vào. Air 1: Indexer/Stacker/Elevator/Picker Up-Down/Air Gun/Vacuum Tweezers. Air 2: ISO Jig #1/#2 Pocket Vacuum. Air 3: Multi Sorter/ISO Picker Vacuum. Air 4: ISO Main Air.'
+        }},
+        {img:cmImg('A','smtv',73),tx:{
+          en:'2.1.1. Electrical Turn-on Sequence — Power Supply Checklist\n\nBefore powering the SMTV, check: Main Breaker On/Off; circuit breakers inside the electric panel; Utility Panel lamp (not present on Intel-spec equipment); upper-door lock/unlock per Auto/Teach mode; EMS button push/pull; lower-door closed (for the lower fan); UPS On/Off for the Host PC (absent for Intel); Power Strip On/Off for PC/LED Controller (absent for Intel); Main Air supply and 4–6bar regulator pressure; Operation Panel button lamp status.',
+          ko:'2.1.1. Electrical Turn-on Sequence — Power Supply Checklist\n\nSMTV 전원 공급 전 확인 사항: Main Breaker On/Off; 전장 판넬 내부 Breaker; Utility Panel Lamp(Intel Spec은 없음); Auto/Teach 모드에 따른 상부 도어 Lock/Unlock; EMS 버튼 Push/Pull; 하부 도어 닫힘(하부 Fan용); Host PC용 UPS On/Off(Intel은 없음); PC·LED Controller용 Power Strip On/Off(Intel은 없음); Main Air 공급 및 Regulator 4~6bar 유지; Operation Panel 버튼 Lamp 상태.',
+          zhCN:'2.1.1. Electrical Turn-on Sequence — Power Supply Checklist\n\n为SMTV供电前需确认:Main Breaker On/Off;电气面板内部Breaker;Utility Panel Lamp(Intel Spec无);依Auto/Teach模式的上部門Lock/Unlock;EMS按钮Push/Pull;下部門关闭(供下部Fan用);Host PC用UPS On/Off(Intel无);PC·LED Controller用Power Strip On/Off(Intel无);Main Air供应及Regulator保持4~6bar;Operation Panel按钮Lamp状态。',
+          zhTW:'2.1.1. Electrical Turn-on Sequence — Power Supply Checklist\n\n為SMTV供電前需確認:Main Breaker On/Off;電氣面板內部Breaker;Utility Panel Lamp(Intel Spec無);依Auto/Teach模式的上部門Lock/Unlock;EMS按鈕Push/Pull;下部門關閉(供下部Fan用);Host PC用UPS On/Off(Intel無);PC·LED Controller用Power Strip On/Off(Intel無);Main Air供應及Regulator保持4~6bar;Operation Panel按鈕Lamp狀態。',
+          ja:'2.1.1. Electrical Turn-on Sequence — Power Supply Checklist\n\nSMTVへの電源供給前に確認する項目:Main Breaker On/Off;電装パネル内部のBreaker;Utility Panel Lamp(Intel仕様には無し);Auto/Teachモードによる上部ドアLock/Unlock;EMSボタンPush/Pull;下部ドアが閉じているか(下部Fan用);Host PC用UPS On/Off(Intelには無し);PC・LED Controller用Power Strip On/Off(Intelには無し);Main Air供給及びRegulatorの4~6bar維持;Operation Panelボタンランプ状態。',
+          vi:'2.1.1. Electrical Turn-on Sequence — Power Supply Checklist\n\nTrước khi cấp nguồn cho SMTV, kiểm tra: Main Breaker On/Off; Breaker bên trong tủ điện; đèn Utility Panel (không có ở bản Intel); khóa/mở cửa trên theo chế độ Auto/Teach; nút EMS Push/Pull; cửa dưới đã đóng (cho quạt dưới); UPS On/Off cho Host PC (không có ở bản Intel); Power Strip On/Off cho PC·LED Controller (không có ở bản Intel); nguồn Main Air và áp suất Regulator 4–6bar; trạng thái đèn nút Operation Panel.'
+        }},
+        {img:cmImg('A','smtv',74),tx:{
+          en:'2.1.1. Electrical Turn-on Sequence — Main Breaker\n\nTurn on the main circuit breaker (N30C-S) on the equipment\'s main panel. The Release Key is used to open the door.',
+          ko:'2.1.1. Electrical Turn-on Sequence — Main Breaker\n\n설비 Main Panel의 주 Breaker(N30C-S)를 켭니다. Release Key는 도어를 여는 데 사용됩니다.',
+          zhCN:'2.1.1. Electrical Turn-on Sequence — Main Breaker\n\n开启设备Main Panel的主Breaker(N30C-S)。Release Key用于开门。',
+          zhTW:'2.1.1. Electrical Turn-on Sequence — Main Breaker\n\n開啟設備Main Panel的主Breaker(N30C-S)。Release Key用於開門。',
+          ja:'2.1.1. Electrical Turn-on Sequence — Main Breaker\n\n設備Main Panelの主Breaker(N30C-S)をオンにします。Release Keyはドアを開けるために使用します。',
+          vi:'2.1.1. Electrical Turn-on Sequence — Main Breaker\n\nBật Breaker chính (N30C-S) trên Main Panel của thiết bị. Release Key dùng để mở cửa.'
+        }},
+        {img:cmImg('A','smtv',75),tx:{
+          en:'2.1.1. Electrical Turn-on Sequence — Circuit Protectors\n\nTurn on all circuit protectors inside the Main and Sub Electric Panels.',
+          ko:'2.1.1. Electrical Turn-on Sequence — Circuit Protectors\n\nMain·Sub Electric Panel 내부의 모든 Circuit Protector를 켭니다.',
+          zhCN:'2.1.1. Electrical Turn-on Sequence — Circuit Protectors\n\n开启Main·Sub Electric Panel内部所有Circuit Protector。',
+          zhTW:'2.1.1. Electrical Turn-on Sequence — Circuit Protectors\n\n開啟Main·Sub Electric Panel內部所有Circuit Protector。',
+          ja:'2.1.1. Electrical Turn-on Sequence — Circuit Protectors\n\nMain・Sub Electric Panel内部のすべてのCircuit Protectorをオンにします。',
+          vi:'2.1.1. Electrical Turn-on Sequence — Circuit Protectors\n\nBật tất cả Circuit Protector bên trong Main·Sub Electric Panel.'
+        }},
+        {img:cmImg('A','smtv',76),tx:{
+          en:'2.1.1. Electrical Turn-on Sequence — Utility Panel Lamp\n\nThe Power Lamp on the Utility Panel should light once the CP01 Power Lamp breaker is on. Intel-spec equipment has no power lamp.',
+          ko:'2.1.1. Electrical Turn-on Sequence — Utility Panel Lamp\n\nCP01 Power Lamp Breaker를 켜면 Utility Panel의 Power Lamp가 켜집니다. Intel Spec 설비는 Power Lamp가 없습니다.',
+          zhCN:'2.1.1. Electrical Turn-on Sequence — Utility Panel Lamp\n\n开启CP01 Power Lamp Breaker后,Utility Panel的Power Lamp应亮起。Intel Spec设备无Power Lamp。',
+          zhTW:'2.1.1. Electrical Turn-on Sequence — Utility Panel Lamp\n\n開啟CP01 Power Lamp Breaker後,Utility Panel的Power Lamp應亮起。Intel Spec設備無Power Lamp。',
+          ja:'2.1.1. Electrical Turn-on Sequence — Utility Panel Lamp\n\nCP01 Power Lamp Breakerをオンにすると、Utility PanelのPower Lampが点灯します。Intel仕様設備にはPower Lampはありません。',
+          vi:'2.1.1. Electrical Turn-on Sequence — Utility Panel Lamp\n\nĐèn Power Lamp trên Utility Panel sẽ sáng khi bật Breaker CP01 Power Lamp. Thiết bị bản Intel không có đèn Power Lamp.'
+        }},
+        {img:cmImg('A','smtv',77),tx:{
+          en:'2.1.1. Electrical Turn-on Sequence — UPS\n\nTo power the Host PC, the UPS must be on. Turn the UPS off during shipping or power-related work. Intel-spec equipment has no UPS (installation and specification vary by customer).',
+          ko:'2.1.1. Electrical Turn-on Sequence — UPS\n\nHost PC에 전원을 공급하려면 UPS가 켜져 있어야 합니다. 출하·전원 관련 작업 시에는 UPS 전원을 꺼야 합니다. Intel Spec 설비는 UPS가 없습니다(설치 유무·Spec은 고객사마다 다름).',
+          zhCN:'2.1.1. Electrical Turn-on Sequence — UPS\n\n要为Host PC供电,UPS必须开启。出货·电源相关作业时应关闭UPS电源。Intel Spec设备无UPS(是否安装及Spec因客户而异)。',
+          zhTW:'2.1.1. Electrical Turn-on Sequence — UPS\n\n要為Host PC供電,UPS必須開啟。出貨·電源相關作業時應關閉UPS電源。Intel Spec設備無UPS(是否安裝及Spec因客戶而異)。',
+          ja:'2.1.1. Electrical Turn-on Sequence — UPS\n\nHost PCに電源を供給するにはUPSがオンである必要があります。出荷・電源関連作業時はUPS電源をオフにします。Intel仕様設備にはUPSはありません(設置有無・仕様は顧客により異なります)。',
+          vi:'2.1.1. Electrical Turn-on Sequence — UPS\n\nĐể cấp nguồn cho Host PC, UPS phải bật. Khi xuất xưởng hoặc làm việc liên quan đến nguồn, phải tắt UPS. Thiết bị bản Intel không có UPS (tình trạng lắp đặt/Spec khác nhau tùy khách hàng).'
+        }},
+        {img:cmImg('A','smtv',78),tx:{
+          en:'2.1.1. Electrical Turn-on Sequence — Power Strip\n\nTo power controllers such as the PC and LED Controller, the Power Strip must be turned on.',
+          ko:'2.1.1. Electrical Turn-on Sequence — Power Strip\n\nPC·LED Controller 등 Controller에 전원을 공급하려면 Power Strip을 켜야 합니다.',
+          zhCN:'2.1.1. Electrical Turn-on Sequence — Power Strip\n\n要为PC·LED Controller等Controller供电,必须开启Power Strip。',
+          zhTW:'2.1.1. Electrical Turn-on Sequence — Power Strip\n\n要為PC·LED Controller等Controller供電,必須開啟Power Strip。',
+          ja:'2.1.1. Electrical Turn-on Sequence — Power Strip\n\nPC・LED Controller等のControllerに電源を供給するにはPower Stripをオンにする必要があります。',
+          vi:'2.1.1. Electrical Turn-on Sequence — Power Strip\n\nĐể cấp nguồn cho các Controller như PC·LED Controller, phải bật Power Strip.'
+        }},
+        {img:cmImg('A','smtv',79),tx:{
+          en:'2.1.1. Electrical Turn-on Sequence — Operation Panel\n\nWith all breakers on, the Power Off lamp lights, and the Reset lamp blinks every ~500ms. Pressing Power On lights that lamp and turns off Power Off\'s lamp. In Teach mode, pressing Reset with all EMS pulled supplies motor power; in Auto mode, this also requires all upper doors locked (unlocking cuts motor power). Buttons: POWER ON = IO/Driver power on; POWER OFF = IO/Driver power off; START = run start; STOP = run stop; RESET = motor power on (while Reset flashes).',
+          ko:'2.1.1. Electrical Turn-on Sequence — Operation Panel\n\n모든 Breaker가 켜지면 Power Off Lamp가 켜지고, Reset Lamp는 약 500ms 주기로 깜빡입니다. Power On을 누르면 해당 Lamp가 켜지고 Power Off Lamp는 꺼집니다. Teach Mode에서는 모든 EMS가 당겨진 상태에서 Reset을 누르면 Motor 전원이 공급되며, Auto Mode에서는 추가로 모든 상부 도어가 잠겨 있어야 합니다(잠금 해제 시 Motor 전원 차단). 버튼: POWER ON=IO·Driver 전원 On; POWER OFF=IO·Driver 전원 Off; START=운전 시작; STOP=운전 정지; RESET=Motor 전원 On(Reset 점멸 중).',
+          zhCN:'2.1.1. Electrical Turn-on Sequence — Operation Panel\n\n所有Breaker开启后,Power Off Lamp亮起,Reset Lamp以约500ms周期闪烁。按下Power On后该Lamp亮起,Power Off Lamp熄灭。Teach Mode下,所有EMS拉出状态按Reset供应Motor电源;Auto Mode下还需所有上部門锁定(解锁则切断Motor电源)。按钮:POWER ON=IO·Driver电源开;POWER OFF=IO·Driver电源关;START=运行开始;STOP=运行停止;RESET=Motor电源开(Reset闪烁时)。',
+          zhTW:'2.1.1. Electrical Turn-on Sequence — Operation Panel\n\n所有Breaker開啟後,Power Off Lamp亮起,Reset Lamp以約500ms週期閃爍。按下Power On後該Lamp亮起,Power Off Lamp熄滅。Teach Mode下,所有EMS拉出狀態按Reset供應Motor電源;Auto Mode下還需所有上部門鎖定(解鎖則切斷Motor電源)。按鈕:POWER ON=IO·Driver電源開;POWER OFF=IO·Driver電源關;START=運行開始;STOP=運行停止;RESET=Motor電源開(Reset閃爍時)。',
+          ja:'2.1.1. Electrical Turn-on Sequence — Operation Panel\n\nすべてのBreakerがオンになるとPower Off Lampが点灯し、Reset Lampは約500ms周期で点滅します。Power Onを押すとそのLampが点灯しPower Off Lampは消灯します。Teach Modeでは全EMSが引かれた状態でResetを押すとMotor電源が供給され、Auto Modeではさらに上部ドアがすべてロックされている必要があります(解錠するとMotor電源が遮断)。ボタン:POWER ON=IO・Driver電源On;POWER OFF=IO・Driver電源Off;START=運転開始;STOP=運転停止;RESET=Motor電源On(Reset点滅中)。',
+          vi:'2.1.1. Electrical Turn-on Sequence — Operation Panel\n\nKhi mọi Breaker đã bật, đèn Power Off sáng, đèn Reset nhấp nháy mỗi ~500ms. Nhấn Power On làm đèn đó sáng và đèn Power Off tắt. Ở Teach Mode, nhấn Reset khi mọi EMS đã kéo ra sẽ cấp nguồn Motor; ở Auto Mode còn cần mọi cửa trên đã khóa (mở khóa sẽ cắt nguồn Motor). Nút: POWER ON = bật nguồn IO·Driver; POWER OFF = tắt nguồn IO·Driver; START = bắt đầu chạy; STOP = dừng chạy; RESET = bật nguồn Motor (khi đèn Reset nhấp nháy).'
+        }},
+        {img:cmImg('A','smtv',80),tx:{
+          en:'Operation — this section covers Power On & Off: Electrical Turn-on Sequence, PC/Controller/Camera, and Equipment Turn-off Sequence.',
+          ko:'Operation — Power on & off: Electrical Turn-on Sequence, PC/Controller/Camera, Equipment Turn-off Sequence를 다룹니다.',
+          zhCN:'Operation——本节介绍Power on & off:Electrical Turn-on Sequence、PC/Controller/Camera、Equipment Turn-off Sequence。',
+          zhTW:'Operation——本節介紹Power on & off:Electrical Turn-on Sequence、PC/Controller/Camera、Equipment Turn-off Sequence。',
+          ja:'Operation——本節ではPower on & off:Electrical Turn-on Sequence、PC/Controller/Camera、Equipment Turn-off Sequenceを扱います。',
+          vi:'Operation — phần này đề cập đến Power on & off: Electrical Turn-on Sequence, PC/Controller/Camera, Equipment Turn-off Sequence.'
+        }},
+        {img:cmImg('A','smtv',81),tx:{
+          en:'2.1.2. PC, Controller, Camera\n\nTurn on the PCs (Host, 2D, 3D#1, 3D#2) and LED Controllers (2D, 3D#1, 3D#2) — the Host PC turns on after the UPS (except where there\'s no UPS). Turning on the LED Controller also turns on its camera (behavior varies by camera spec).',
+          ko:'2.1.2. PC, Controller, Camera\n\nPC(Host, 2D, 3D#1, 3D#2)와 LED Controller(2D, 3D#1, 3D#2)를 켭니다 — Host PC는 UPS가 켜진 후 켜집니다(UPS 없는 경우 제외). LED Controller를 켜면 Camera도 함께 켜집니다(Camera Spec에 따라 다름).',
+          zhCN:'2.1.2. PC, Controller, Camera\n\n开启PC(Host、2D、3D#1、3D#2)和LED Controller(2D、3D#1、3D#2)——Host PC在UPS开启后开启(无UPS时除外)。开启LED Controller也会一并开启Camera(依Camera Spec而异)。',
+          zhTW:'2.1.2. PC, Controller, Camera\n\n開啟PC(Host、2D、3D#1、3D#2)和LED Controller(2D、3D#1、3D#2)——Host PC在UPS開啟後開啟(無UPS時除外)。開啟LED Controller也會一併開啟Camera(依Camera Spec而異)。',
+          ja:'2.1.2. PC, Controller, Camera\n\nPC(Host、2D、3D#1、3D#2)とLED Controller(2D、3D#1、3D#2)をオンにします——Host PCはUPSがオンになった後にオンにします(UPSがない場合を除く)。LED Controllerをオンにすると Cameraも一緒にオンになります(Camera仕様により異なります)。',
+          vi:'2.1.2. PC, Controller, Camera\n\nBật PC (Host, 2D, 3D#1, 3D#2) và LED Controller (2D, 3D#1, 3D#2) — Host PC bật sau khi UPS đã bật (trừ trường hợp không có UPS). Bật LED Controller cũng đồng thời bật Camera (tùy theo Spec Camera).'
+        }},
+        {img:cmImg('A','smtv',82),tx:{
+          en:'2.1.2. PC, Controller, Camera — PZT, AF Controller\n\nTurn on the PZT and AF Controllers (3D#1, 3D#2). Caution: raising equipment power with the controller\'s own power button already on may damage it from overvoltage.',
+          ko:'2.1.2. PC, Controller, Camera — PZT, AF Controller\n\nPZT·AF Controller(3D#1, 3D#2)를 켭니다. 주의: Controller 전원 버튼이 이미 켜진 상태에서 설비 전원을 올리면 과전압으로 손상될 수 있습니다.',
+          zhCN:'2.1.2. PC, Controller, Camera — PZT, AF Controller\n\n开启PZT·AF Controller(3D#1、3D#2)。注意:若Controller电源按钮已开启的状态下提升设备电源,可能因过电压而损坏。',
+          zhTW:'2.1.2. PC, Controller, Camera — PZT, AF Controller\n\n開啟PZT·AF Controller(3D#1、3D#2)。注意:若Controller電源按鈕已開啟的狀態下提升設備電源,可能因過電壓而損壞。',
+          ja:'2.1.2. PC, Controller, Camera — PZT, AF Controller\n\nPZT・AF Controller(3D#1、3D#2)をオンにします。注意:Controllerの電源ボタンが既にオンの状態で設備電源を上げると、過電圧により破損する恐れがあります。',
+          vi:'2.1.2. PC, Controller, Camera — PZT, AF Controller\n\nBật PZT·AF Controller (3D#1, 3D#2). Lưu ý: nếu nút nguồn Controller đã bật sẵn khi nâng nguồn thiết bị, có thể hỏng do quá áp.'
+        }},
+        {img:cmImg('A','smtv',83),tx:{
+          en:'Operation — this section covers Power On & Off: Electrical Turn-on Sequence, Controller/PC/Camera, and Equipment Turn-off Sequence.',
+          ko:'Operation — Power on & off: Electrical Turn-on Sequence, Controller/PC/Camera, Equipment Turn-off Sequence를 다룹니다.',
+          zhCN:'Operation——本节介绍Power on & off:Electrical Turn-on Sequence、Controller/PC/Camera、Equipment Turn-off Sequence。',
+          zhTW:'Operation——本節介紹Power on & off:Electrical Turn-on Sequence、Controller/PC/Camera、Equipment Turn-off Sequence。',
+          ja:'Operation——本節ではPower on & off:Electrical Turn-on Sequence、Controller/PC/Camera、Equipment Turn-off Sequenceを扱います。',
+          vi:'Operation — phần này đề cập đến Power on & off: Electrical Turn-on Sequence, Controller/PC/Camera, Equipment Turn-off Sequence.'
+        }},
+        {img:cmImg('A','smtv',84),tx:{
+          en:'2.1.3. Equipment Turn-off Sequence\n\nTurn off in the reverse order of turn-on: Controller (AF, LED, PZT, PC) → Operation Panel power off → Power Strip off → UPS off → CP off → Main Panel off. Turning off out of order may damage electrical components.',
+          ko:'2.1.3. Equipment Turn-off Sequence\n\n켤 때의 역순으로 끕니다: Controller(AF, LED, PZT, PC) → Operation Panel 전원 Off → Power Strip Off → UPS Off → CP Off → Main Panel Off. 순서를 지키지 않으면 전장 부품이 손상될 수 있습니다.',
+          zhCN:'2.1.3. Equipment Turn-off Sequence\n\n按开启时的相反顺序关闭:Controller(AF、LED、PZT、PC) → Operation Panel电源关闭 → Power Strip关闭 → UPS关闭 → CP关闭 → Main Panel关闭。未按顺序关闭可能损坏电气元件。',
+          zhTW:'2.1.3. Equipment Turn-off Sequence\n\n按開啟時的相反順序關閉:Controller(AF、LED、PZT、PC) → Operation Panel電源關閉 → Power Strip關閉 → UPS關閉 → CP關閉 → Main Panel關閉。未按順序關閉可能損壞電氣元件。',
+          ja:'2.1.3. Equipment Turn-off Sequence\n\nオンにした時の逆順でオフにします:Controller(AF、LED、PZT、PC) → Operation Panel電源オフ → Power Stripオフ → UPSオフ → CPオフ → Main Panelオフ。順序を守らないと電装部品が故障する恐れがあります。',
+          vi:'2.1.3. Equipment Turn-off Sequence\n\nTắt theo thứ tự ngược lại lúc bật: Controller (AF, LED, PZT, PC) → tắt nguồn Operation Panel → tắt Power Strip → tắt UPS → tắt CP → tắt Main Panel. Tắt sai thứ tự có thể làm hỏng linh kiện điện.'
+        }},
+      ]
+    },
+    nbga:{
+      title:{ko:'A. 설비 기본 구성',en:'A. Basic Equipment Configuration',zhCN:'A. 设备基本构成',zhTW:'A. 設備基本構成',ja:'A. 設備基本構成',vi:'A. Cấu hình cơ bản thiết bị'},
+      chapters:[
+        {from:1,title:{ko:'A. Dimension & Specification',en:'A. Dimension & Specification',zhCN:'A. Dimension & Specification',zhTW:'A. Dimension & Specification',ja:'A. Dimension & Specification',vi:'A. Dimension & Specification'}},
+        {from:25,title:{ko:'B. Layout & Component',en:'B. Layout & Component',zhCN:'B. Layout & Component',zhTW:'B. Layout & Component',ja:'B. Layout & Component',vi:'B. Layout & Component'}},
+        {from:55,title:{ko:'C. Safety Sticker',en:'C. Safety Sticker',zhCN:'C. Safety Sticker',zhTW:'C. Safety Sticker',ja:'C. Safety Sticker',vi:'C. Safety Sticker'}},
+        {from:57,title:{ko:'D. Power Supply & Interlock',en:'D. Power Supply & Interlock',zhCN:'D. Power Supply & Interlock',zhTW:'D. Power Supply & Interlock',ja:'D. Power Supply & Interlock',vi:'D. Power Supply & Interlock'}},
+        {from:73,title:{ko:'E. Equipment Automatic Sequence',en:'E. Equipment Automatic Sequence',zhCN:'E. Equipment Automatic Sequence',zhTW:'E. Equipment Automatic Sequence',ja:'E. Equipment Automatic Sequence',vi:'E. Equipment Automatic Sequence'}},
+        {from:85,title:{ko:'F. Power On & Off',en:'F. Power On & Off',zhCN:'F. Power On & Off',zhTW:'F. Power On & Off',ja:'F. Power On & Off',vi:'F. Power On & Off'}}
+      ],
+      slides:[
+        {img:cmImg('A','nbga',1),tx:{
+          en:'Introduce — this section covers Dimension & Specification for each customer configuration: SEMCO/Kyocera, SEMV, and AT&S/Intel/Nanya.',
+          ko:'Introduce — 고객사별 Dimension & Specification: SEMCO/Kyocera, SEMV, AT&S/Intel/Nanya를 다룹니다.',
+          zhCN:'Introduce——本节介绍各客户配置的Dimension & Specification:SEMCO/Kyocera、SEMV、AT&S/Intel/Nanya。',
+          zhTW:'Introduce——本節介紹各客戶配置的Dimension & Specification:SEMCO/Kyocera、SEMV、AT&S/Intel/Nanya。',
+          ja:'Introduce——本節では顧客別Dimension & Specification:SEMCO/Kyocera、SEMV、AT&S/Intel/Nanyaを扱います。',
+          vi:'Introduce — phần này đề cập đến Dimension & Specification theo từng cấu hình khách hàng: SEMCO/Kyocera, SEMV, AT&S/Intel/Nanya.'
+        }},
+        {img:cmImg('A','nbga',2),tx:{
+          en:'1.2.1. SEMCO, Kyocera — Dimension\n\nEquipment footprint for this customer configuration (Front/Right views).',
+          ko:'1.2.1. SEMCO, Kyocera — Dimension\n\n해당 고객사 구성의 설비 외형 치수입니다 (Front/Right View).',
+          zhCN:'1.2.1. SEMCO, Kyocera — Dimension\n\n该客户配置的设备外形尺寸(Front/Right View)。',
+          zhTW:'1.2.1. SEMCO, Kyocera — Dimension\n\n該客戶配置的設備外形尺寸(Front/Right View)。',
+          ja:'1.2.1. SEMCO, Kyocera — Dimension\n\n当該顧客構成の設備外形寸法です(Front/Right View)。',
+          vi:'1.2.1. SEMCO, Kyocera — Dimension\n\nKích thước tổng thể thiết bị theo cấu hình khách hàng này (Front/Right View).'
+        }},
+        {img:cmImg('A','nbga',3),tx:{
+          en:'1.2.1. SEMCO, Kyocera — Utility & Electric Spec\n\nDetailed utility/electrical specifications are customer-confidential and not shown here.',
+          ko:'1.2.1. SEMCO, Kyocera — Utility & Electric Spec\n\n세부 Utility·전기 Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.1. SEMCO, Kyocera — Utility & Electric Spec\n\n详细Utility·电气Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.1. SEMCO, Kyocera — Utility & Electric Spec\n\n詳細Utility·電氣Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.1. SEMCO, Kyocera — Utility & Electric Spec\n\n詳細なUtility・電気Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.1. SEMCO, Kyocera — Utility & Electric Spec\n\nThông số chi tiết Utility·điện thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',4),tx:{
+          en:'1.2.1. SEMCO, Kyocera — Handler Spec\n\nDetailed handler specifications are customer-confidential and not shown here.',
+          ko:'1.2.1. SEMCO, Kyocera — Handler Spec\n\n세부 Handler Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.1. SEMCO, Kyocera — Handler Spec\n\n详细Handler Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.1. SEMCO, Kyocera — Handler Spec\n\n詳細Handler Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.1. SEMCO, Kyocera — Handler Spec\n\n詳細なHandler Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.1. SEMCO, Kyocera — Handler Spec\n\nThông số chi tiết Handler thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',5),tx:{
+          en:'1.2.1. SEMCO, Kyocera — 2D Vision Module Spec (25M Camera)\n\nDetailed camera specifications are customer-confidential and not shown here.',
+          ko:'1.2.1. SEMCO, Kyocera — 2D Vision Module Spec (25M Camera)\n\n세부 Camera Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.1. SEMCO, Kyocera — 2D Vision Module Spec (25M Camera)\n\n详细Camera Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.1. SEMCO, Kyocera — 2D Vision Module Spec (25M Camera)\n\n詳細Camera Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.1. SEMCO, Kyocera — 2D Vision Module Spec (25M Camera)\n\n詳細なCamera Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.1. SEMCO, Kyocera — 2D Vision Module Spec (25M Camera)\n\nThông số chi tiết Camera thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',6),tx:{
+          en:'1.2.1. SEMCO, Kyocera — 2D Vision Module Spec (67M Camera)\n\nDetailed camera specifications are customer-confidential and not shown here.',
+          ko:'1.2.1. SEMCO, Kyocera — 2D Vision Module Spec (67M Camera)\n\n세부 Camera Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.1. SEMCO, Kyocera — 2D Vision Module Spec (67M Camera)\n\n详细Camera Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.1. SEMCO, Kyocera — 2D Vision Module Spec (67M Camera)\n\n詳細Camera Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.1. SEMCO, Kyocera — 2D Vision Module Spec (67M Camera)\n\n詳細なCamera Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.1. SEMCO, Kyocera — 2D Vision Module Spec (67M Camera)\n\nThông số chi tiết Camera thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',7),tx:{
+          en:'1.2.1. SEMCO, Kyocera — 3D Vision Module Spec (Single Optics)\n\nDetailed optics specifications are customer-confidential and not shown here.',
+          ko:'1.2.1. SEMCO, Kyocera — 3D Vision Module Spec (Single Optics)\n\n세부 광학계 Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.1. SEMCO, Kyocera — 3D Vision Module Spec (Single Optics)\n\n详细光学系统Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.1. SEMCO, Kyocera — 3D Vision Module Spec (Single Optics)\n\n詳細光學系統Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.1. SEMCO, Kyocera — 3D Vision Module Spec (Single Optics)\n\n詳細な光学系Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.1. SEMCO, Kyocera — 3D Vision Module Spec (Single Optics)\n\nThông số chi tiết hệ quang học thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',8),tx:{
+          en:'1.2.1. SEMCO, Kyocera — 3D Vision Module Spec (Turret Optics)\n\nDetailed optics specifications are customer-confidential and not shown here.',
+          ko:'1.2.1. SEMCO, Kyocera — 3D Vision Module Spec (Turret Optics)\n\n세부 광학계 Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.1. SEMCO, Kyocera — 3D Vision Module Spec (Turret Optics)\n\n详细光学系统Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.1. SEMCO, Kyocera — 3D Vision Module Spec (Turret Optics)\n\n詳細光學系統Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.1. SEMCO, Kyocera — 3D Vision Module Spec (Turret Optics)\n\n詳細な光学系Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.1. SEMCO, Kyocera — 3D Vision Module Spec (Turret Optics)\n\nThông số chi tiết hệ quang học thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',9),tx:{
+          en:'Introduce — this section covers Dimension & Specification for each customer configuration: SEMCO/Kyocera, SEMV, and AT&S/Intel/Nanya.',
+          ko:'Introduce — 고객사별 Dimension & Specification: SEMCO/Kyocera, SEMV, AT&S/Intel/Nanya를 다룹니다.',
+          zhCN:'Introduce——本节介绍各客户配置的Dimension & Specification:SEMCO/Kyocera、SEMV、AT&S/Intel/Nanya。',
+          zhTW:'Introduce——本節介紹各客戶配置的Dimension & Specification:SEMCO/Kyocera、SEMV、AT&S/Intel/Nanya。',
+          ja:'Introduce——本節では顧客別Dimension & Specification:SEMCO/Kyocera、SEMV、AT&S/Intel/Nanyaを扱います。',
+          vi:'Introduce — phần này đề cập đến Dimension & Specification theo từng cấu hình khách hàng: SEMCO/Kyocera, SEMV, AT&S/Intel/Nanya.'
+        }},
+        {img:cmImg('A','nbga',10),tx:{
+          en:'1.2.2. SEMV — Dimension\n\nEquipment footprint for this customer configuration (Front/Right views).',
+          ko:'1.2.2. SEMV — Dimension\n\n해당 고객사 구성의 설비 외형 치수입니다 (Front/Right View).',
+          zhCN:'1.2.2. SEMV — Dimension\n\n该客户配置的设备外形尺寸(Front/Right View)。',
+          zhTW:'1.2.2. SEMV — Dimension\n\n該客戶配置的設備外形尺寸(Front/Right View)。',
+          ja:'1.2.2. SEMV — Dimension\n\n当該顧客構成の設備外形寸法です(Front/Right View)。',
+          vi:'1.2.2. SEMV — Dimension\n\nKích thước tổng thể thiết bị theo cấu hình khách hàng này (Front/Right View).'
+        }},
+        {img:cmImg('A','nbga',11),tx:{
+          en:'1.2.2. SEMV — Utility & Electric Spec\n\nDetailed utility/electrical specifications are customer-confidential and not shown here.',
+          ko:'1.2.2. SEMV — Utility & Electric Spec\n\n세부 Utility·전기 Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.2. SEMV — Utility & Electric Spec\n\n详细Utility·电气Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.2. SEMV — Utility & Electric Spec\n\n詳細Utility·電氣Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.2. SEMV — Utility & Electric Spec\n\n詳細なUtility・電気Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.2. SEMV — Utility & Electric Spec\n\nThông số chi tiết Utility·điện thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',12),tx:{
+          en:'1.2.2. SEMV — Handler Spec\n\nDetailed handler specifications are customer-confidential and not shown here.',
+          ko:'1.2.2. SEMV — Handler Spec\n\n세부 Handler Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.2. SEMV — Handler Spec\n\n详细Handler Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.2. SEMV — Handler Spec\n\n詳細Handler Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.2. SEMV — Handler Spec\n\n詳細なHandler Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.2. SEMV — Handler Spec\n\nThông số chi tiết Handler thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',13),tx:{
+          en:'1.2.2. SEMV — 2D Vision Module Spec (25M Camera)\n\nDetailed camera specifications are customer-confidential and not shown here.',
+          ko:'1.2.2. SEMV — 2D Vision Module Spec (25M Camera)\n\n세부 Camera Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.2. SEMV — 2D Vision Module Spec (25M Camera)\n\n详细Camera Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.2. SEMV — 2D Vision Module Spec (25M Camera)\n\n詳細Camera Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.2. SEMV — 2D Vision Module Spec (25M Camera)\n\n詳細なCamera Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.2. SEMV — 2D Vision Module Spec (25M Camera)\n\nThông số chi tiết Camera thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',14),tx:{
+          en:'1.2.2. SEMV — 2D Vision Module Spec (67M Camera)\n\nDetailed camera specifications are customer-confidential and not shown here.',
+          ko:'1.2.2. SEMV — 2D Vision Module Spec (67M Camera)\n\n세부 Camera Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.2. SEMV — 2D Vision Module Spec (67M Camera)\n\n详细Camera Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.2. SEMV — 2D Vision Module Spec (67M Camera)\n\n詳細Camera Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.2. SEMV — 2D Vision Module Spec (67M Camera)\n\n詳細なCamera Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.2. SEMV — 2D Vision Module Spec (67M Camera)\n\nThông số chi tiết Camera thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',15),tx:{
+          en:'1.2.2. SEMV — 3D Vision Module Spec (Single Optics)\n\nDetailed optics specifications are customer-confidential and not shown here.',
+          ko:'1.2.2. SEMV — 3D Vision Module Spec (Single Optics)\n\n세부 광학계 Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.2. SEMV — 3D Vision Module Spec (Single Optics)\n\n详细光学系统Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.2. SEMV — 3D Vision Module Spec (Single Optics)\n\n詳細光學系統Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.2. SEMV — 3D Vision Module Spec (Single Optics)\n\n詳細な光学系Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.2. SEMV — 3D Vision Module Spec (Single Optics)\n\nThông số chi tiết hệ quang học thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',16),tx:{
+          en:'1.2.2. SEMV — 3D Vision Module Spec (Turret Optics)\n\nDetailed optics specifications are customer-confidential and not shown here.',
+          ko:'1.2.2. SEMV — 3D Vision Module Spec (Turret Optics)\n\n세부 광학계 Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.2. SEMV — 3D Vision Module Spec (Turret Optics)\n\n详细光学系统Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.2. SEMV — 3D Vision Module Spec (Turret Optics)\n\n詳細光學系統Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.2. SEMV — 3D Vision Module Spec (Turret Optics)\n\n詳細な光学系Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.2. SEMV — 3D Vision Module Spec (Turret Optics)\n\nThông số chi tiết hệ quang học thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',17),tx:{
+          en:'Introduce — this section covers Dimension & Specification for each customer configuration: SEMCO/Kyocera, SEMV, and AT&S/Intel/Nanya.',
+          ko:'Introduce — 고객사별 Dimension & Specification: SEMCO/Kyocera, SEMV, AT&S/Intel/Nanya를 다룹니다.',
+          zhCN:'Introduce——本节介绍各客户配置的Dimension & Specification:SEMCO/Kyocera、SEMV、AT&S/Intel/Nanya。',
+          zhTW:'Introduce——本節介紹各客戶配置的Dimension & Specification:SEMCO/Kyocera、SEMV、AT&S/Intel/Nanya。',
+          ja:'Introduce——本節では顧客別Dimension & Specification:SEMCO/Kyocera、SEMV、AT&S/Intel/Nanyaを扱います。',
+          vi:'Introduce — phần này đề cập đến Dimension & Specification theo từng cấu hình khách hàng: SEMCO/Kyocera, SEMV, AT&S/Intel/Nanya.'
+        }},
+        {img:cmImg('A','nbga',18),tx:{
+          en:'1.2.3. AT&S, Intel, Nanya — Dimension\n\nEquipment footprint for this customer configuration (Front/Right views).',
+          ko:'1.2.3. AT&S, Intel, Nanya — Dimension\n\n해당 고객사 구성의 설비 외형 치수입니다 (Front/Right View).',
+          zhCN:'1.2.3. AT&S, Intel, Nanya — Dimension\n\n该客户配置的设备外形尺寸(Front/Right View)。',
+          zhTW:'1.2.3. AT&S, Intel, Nanya — Dimension\n\n該客戶配置的設備外形尺寸(Front/Right View)。',
+          ja:'1.2.3. AT&S, Intel, Nanya — Dimension\n\n当該顧客構成の設備外形寸法です(Front/Right View)。',
+          vi:'1.2.3. AT&S, Intel, Nanya — Dimension\n\nKích thước tổng thể thiết bị theo cấu hình khách hàng này (Front/Right View).'
+        }},
+        {img:cmImg('A','nbga',19),tx:{
+          en:'1.2.3. AT&S, Intel, Nanya — Utility & Electric Spec\n\nDetailed utility/electrical specifications are customer-confidential and not shown here.',
+          ko:'1.2.3. AT&S, Intel, Nanya — Utility & Electric Spec\n\n세부 Utility·전기 Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.3. AT&S, Intel, Nanya — Utility & Electric Spec\n\n详细Utility·电气Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.3. AT&S, Intel, Nanya — Utility & Electric Spec\n\n詳細Utility·電氣Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.3. AT&S, Intel, Nanya — Utility & Electric Spec\n\n詳細なUtility・電気Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.3. AT&S, Intel, Nanya — Utility & Electric Spec\n\nThông số chi tiết Utility·điện thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',20),tx:{
+          en:'1.2.3. AT&S, Intel, Nanya — Handler Spec\n\nDetailed handler specifications are customer-confidential and not shown here.',
+          ko:'1.2.3. AT&S, Intel, Nanya — Handler Spec\n\n세부 Handler Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.3. AT&S, Intel, Nanya — Handler Spec\n\n详细Handler Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.3. AT&S, Intel, Nanya — Handler Spec\n\n詳細Handler Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.3. AT&S, Intel, Nanya — Handler Spec\n\n詳細なHandler Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.3. AT&S, Intel, Nanya — Handler Spec\n\nThông số chi tiết Handler thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',21),tx:{
+          en:'1.2.3. AT&S, Intel, Nanya — 2D Vision Module Spec (25M Camera)\n\nDetailed camera specifications are customer-confidential and not shown here.',
+          ko:'1.2.3. AT&S, Intel, Nanya — 2D Vision Module Spec (25M Camera)\n\n세부 Camera Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.3. AT&S, Intel, Nanya — 2D Vision Module Spec (25M Camera)\n\n详细Camera Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.3. AT&S, Intel, Nanya — 2D Vision Module Spec (25M Camera)\n\n詳細Camera Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.3. AT&S, Intel, Nanya — 2D Vision Module Spec (25M Camera)\n\n詳細なCamera Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.3. AT&S, Intel, Nanya — 2D Vision Module Spec (25M Camera)\n\nThông số chi tiết Camera thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',22),tx:{
+          en:'1.2.3. AT&S, Intel, Nanya — 2D Vision Module Spec (67M Camera)\n\nDetailed camera specifications are customer-confidential and not shown here.',
+          ko:'1.2.3. AT&S, Intel, Nanya — 2D Vision Module Spec (67M Camera)\n\n세부 Camera Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.3. AT&S, Intel, Nanya — 2D Vision Module Spec (67M Camera)\n\n详细Camera Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.3. AT&S, Intel, Nanya — 2D Vision Module Spec (67M Camera)\n\n詳細Camera Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.3. AT&S, Intel, Nanya — 2D Vision Module Spec (67M Camera)\n\n詳細なCamera Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.3. AT&S, Intel, Nanya — 2D Vision Module Spec (67M Camera)\n\nThông số chi tiết Camera thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',23),tx:{
+          en:'1.2.3. AT&S, Intel, Nanya — 3D Vision Module Spec (Single Optics)\n\nDetailed optics specifications are customer-confidential and not shown here.',
+          ko:'1.2.3. AT&S, Intel, Nanya — 3D Vision Module Spec (Single Optics)\n\n세부 광학계 Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.3. AT&S, Intel, Nanya — 3D Vision Module Spec (Single Optics)\n\n详细光学系统Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.3. AT&S, Intel, Nanya — 3D Vision Module Spec (Single Optics)\n\n詳細光學系統Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.3. AT&S, Intel, Nanya — 3D Vision Module Spec (Single Optics)\n\n詳細な光学系Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.3. AT&S, Intel, Nanya — 3D Vision Module Spec (Single Optics)\n\nThông số chi tiết hệ quang học thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',24),tx:{
+          en:'1.2.3. AT&S, Intel, Nanya — 3D Vision Module Spec (Turret Optics)\n\nDetailed optics specifications are customer-confidential and not shown here.',
+          ko:'1.2.3. AT&S, Intel, Nanya — 3D Vision Module Spec (Turret Optics)\n\n세부 광학계 Spec은 고객사 기밀 사항으로 본 자료에는 표기하지 않습니다.',
+          zhCN:'1.2.3. AT&S, Intel, Nanya — 3D Vision Module Spec (Turret Optics)\n\n详细光学系统Spec属客户保密事项,本资料不列出。',
+          zhTW:'1.2.3. AT&S, Intel, Nanya — 3D Vision Module Spec (Turret Optics)\n\n詳細光學系統Spec屬客戶保密事項,本資料不列出。',
+          ja:'1.2.3. AT&S, Intel, Nanya — 3D Vision Module Spec (Turret Optics)\n\n詳細な光学系Specは顧客機密事項のため、本資料には記載しません。',
+          vi:'1.2.3. AT&S, Intel, Nanya — 3D Vision Module Spec (Turret Optics)\n\nThông số chi tiết hệ quang học thuộc bảo mật khách hàng nên không nêu trong tài liệu này.'
+        }},
+        {img:cmImg('A','nbga',25),tx:{
+          en:'Introduce — this section covers Hardware Configuration & System: Layout & Component, Safety Sticker, Power Supply & Interlock System, and Equipment Automatic Sequence.',
+          ko:'Introduce — Hardware Configuration & System: Layout & Component, Safety Sticker, Power Supply & Interlock System, Equipment Automatic Sequence를 다룹니다.',
+          zhCN:'Introduce——本节介绍Hardware Configuration & System:Layout & Component、Safety Sticker、Power Supply & Interlock System、Equipment Automatic Sequence。',
+          zhTW:'Introduce——本節介紹Hardware Configuration & System:Layout & Component、Safety Sticker、Power Supply & Interlock System、Equipment Automatic Sequence。',
+          ja:'Introduce——本節ではHardware Configuration & System:Layout & Component、Safety Sticker、Power Supply & Interlock System、Equipment Automatic Sequenceを扱います。',
+          vi:'Introduce — phần này đề cập đến Hardware Configuration & System: Layout & Component, Safety Sticker, Power Supply & Interlock System, Equipment Automatic Sequence.'
+        }},
+        {img:cmImg('A','nbga',26),tx:{
+          en:'1.3.1. Layout & Component (External, Front)\n\nFront view of the equipment: Main Machine, ISO Machine, Monitor, Keyboard & Mouse, EFU (Equipment Fan Filter Unit), Tower Lamp, EMS (Emergency Stop Switch), Area Curtain, Operation Panel. (Exact configuration/placement varies by equipment spec.)',
+          ko:'1.3.1. Layout & Component (External, Front)\n\n설비 정면 구성: Main Machine, ISO Machine, Monitor, Keyboard & Mouse, EFU(Equipment Fan Filter Unit), Tower Lamp, EMS(Emergency Stop Switch), Area Curtain, Operation Panel. (세부 구성·위치는 설비 사양에 따라 다를 수 있음)',
+          zhCN:'1.3.1. Layout & Component (External, Front)\n\n设备正面构成:Main Machine、ISO Machine、Monitor、Keyboard & Mouse、EFU(Equipment Fan Filter Unit)、Tower Lamp、EMS(Emergency Stop Switch)、Area Curtain、Operation Panel。(具体构成·位置依设备规格而异)',
+          zhTW:'1.3.1. Layout & Component (External, Front)\n\n設備正面構成:Main Machine、ISO Machine、Monitor、Keyboard & Mouse、EFU(Equipment Fan Filter Unit)、Tower Lamp、EMS(Emergency Stop Switch)、Area Curtain、Operation Panel。(具體構成·位置依設備規格而異)',
+          ja:'1.3.1. Layout & Component (External, Front)\n\n設備正面の構成:Main Machine、ISO Machine、Monitor、Keyboard & Mouse、EFU(Equipment Fan Filter Unit)、Tower Lamp、EMS(Emergency Stop Switch)、Area Curtain、Operation Panel。(詳細構成・位置は設備仕様により異なります)',
+          vi:'1.3.1. Layout & Component (External, Front)\n\nCấu hình mặt trước thiết bị: Main Machine, ISO Machine, Monitor, Keyboard & Mouse, EFU (Equipment Fan Filter Unit), Tower Lamp, EMS (Emergency Stop Switch), Area Curtain, Operation Panel. (Cấu hình/vị trí cụ thể tùy theo spec thiết bị)'
+        }},
+        {img:cmImg('A','nbga',27),tx:{
+          en:'1.3.1. Layout & Component (External, Rear)\n\nRear view of the equipment: Main Machine, ISO Machine, EMS (Emergency Stop Switch), Main Power Switch, Pressure Gauge. (Exact configuration/placement varies by equipment spec.)',
+          ko:'1.3.1. Layout & Component (External, Rear)\n\n설비 후면 구성: Main Machine, ISO Machine, EMS(Emergency Stop Switch), Main Power Switch, Pressure Gauge. (세부 구성·위치는 설비 사양에 따라 다를 수 있음)',
+          zhCN:'1.3.1. Layout & Component (External, Rear)\n\n设备背面构成:Main Machine、ISO Machine、EMS(Emergency Stop Switch)、Main Power Switch、Pressure Gauge。(具体构成·位置依设备规格而异)',
+          zhTW:'1.3.1. Layout & Component (External, Rear)\n\n設備背面構成:Main Machine、ISO Machine、EMS(Emergency Stop Switch)、Main Power Switch、Pressure Gauge。(具體構成·位置依設備規格而異)',
+          ja:'1.3.1. Layout & Component (External, Rear)\n\n設備背面の構成:Main Machine、ISO Machine、EMS(Emergency Stop Switch)、Main Power Switch、Pressure Gauge。(詳細構成・位置は設備仕様により異なります)',
+          vi:'1.3.1. Layout & Component (External, Rear)\n\nCấu hình mặt sau thiết bị: Main Machine, ISO Machine, EMS (Emergency Stop Switch), Main Power Switch, Pressure Gauge. (Cấu hình/vị trí cụ thể tùy theo spec thiết bị)'
+        }},
+        {img:cmImg('A','nbga',28),tx:{
+          en:'1.3.1. Layout & Component (Internal, Front)\n\nInternal front-side layout: MSM (Multi Sorter Module), 2D Vision Module, UPS (excluded for Intel), HUB & KVM, 2D LED Controller, 2D Vision PC, HOST PC, AF/PZT Controller #2/#3, 3D LED Controller #2, 3D Vision PC #2, 3D Vision #2 Module. (Exact configuration/placement varies by equipment spec.)',
+          ko:'1.3.1. Layout & Component (Internal, Front)\n\n내부 정면 배치: MSM(Multi Sorter Module), 2D Vision Module, UPS(Intel 제외), HUB & KVM, 2D LED Controller, 2D Vision PC, HOST PC, AF/PZT Controller #2/#3, 3D LED Controller #2, 3D Vision PC #2, 3D Vision #2 Module. (세부 구성·위치는 설비 사양에 따라 다를 수 있음)',
+          zhCN:'1.3.1. Layout & Component (Internal, Front)\n\n内部正面配置:MSM(Multi Sorter Module)、2D Vision Module、UPS(Intel除外)、HUB & KVM、2D LED Controller、2D Vision PC、HOST PC、AF/PZT Controller #2/#3、3D LED Controller #2、3D Vision PC #2、3D Vision #2 Module。(具体构成·位置依设备规格而异)',
+          zhTW:'1.3.1. Layout & Component (Internal, Front)\n\n內部正面配置:MSM(Multi Sorter Module)、2D Vision Module、UPS(Intel除外)、HUB & KVM、2D LED Controller、2D Vision PC、HOST PC、AF/PZT Controller #2/#3、3D LED Controller #2、3D Vision PC #2、3D Vision #2 Module。(具體構成·位置依設備規格而異)',
+          ja:'1.3.1. Layout & Component (Internal, Front)\n\n内部正面配置:MSM(Multi Sorter Module)、2D Vision Module、UPS(Intelは除く)、HUB & KVM、2D LED Controller、2D Vision PC、HOST PC、AF/PZT Controller #2/#3、3D LED Controller #2、3D Vision PC #2、3D Vision #2 Module。(詳細構成・位置は設備仕様により異なります)',
+          vi:'1.3.1. Layout & Component (Internal, Front)\n\nBố trí bên trong mặt trước: MSM (Multi Sorter Module), 2D Vision Module, UPS (không có ở bản Intel), HUB & KVM, 2D LED Controller, 2D Vision PC, HOST PC, AF/PZT Controller #2/#3, 3D LED Controller #2, 3D Vision PC #2, 3D Vision #2 Module. (Cấu hình/vị trí cụ thể tùy theo spec thiết bị)'
+        }},
+        {img:cmImg('A','nbga',29),tx:{
+          en:'1.3.1. Layout & Component (Internal, Rear)\n\nInternal rear-side layout: 3D LED Controller #1, 3D Vision #1 PC, AF Controller #1, PZT Controller #1, TTM (Tray Transfer Module), Air Regulator. (Exact configuration/placement varies by equipment spec.)',
+          ko:'1.3.1. Layout & Component (Internal, Rear)\n\n내부 후면 배치: 3D LED Controller #1, 3D Vision #1 PC, AF Controller #1, PZT Controller #1, TTM(Tray Transfer Module), Air Regulator. (세부 구성·위치는 설비 사양에 따라 다를 수 있음)',
+          zhCN:'1.3.1. Layout & Component (Internal, Rear)\n\n内部背面配置:3D LED Controller #1、3D Vision #1 PC、AF Controller #1、PZT Controller #1、TTM(Tray Transfer Module)、Air Regulator。(具体构成·位置依设备规格而异)',
+          zhTW:'1.3.1. Layout & Component (Internal, Rear)\n\n內部背面配置:3D LED Controller #1、3D Vision #1 PC、AF Controller #1、PZT Controller #1、TTM(Tray Transfer Module)、Air Regulator。(具體構成·位置依設備規格而異)',
+          ja:'1.3.1. Layout & Component (Internal, Rear)\n\n内部背面配置:3D LED Controller #1、3D Vision #1 PC、AF Controller #1、PZT Controller #1、TTM(Tray Transfer Module)、Air Regulator。(詳細構成・位置は設備仕様により異なります)',
+          vi:'1.3.1. Layout & Component (Internal, Rear)\n\nBố trí bên trong mặt sau: 3D LED Controller #1, 3D Vision #1 PC, AF Controller #1, PZT Controller #1, TTM (Tray Transfer Module), Air Regulator. (Cấu hình/vị trí cụ thể tùy theo spec thiết bị)'
+        }},
+        {img:cmImg('A','nbga',30),tx:{
+          en:'1.3.1. Layout & Component (Internal, Top)\n\nTop-down layout of the Main and ISO Machine: JIG #1/#2, TSM (Tray Sorter Module), TTM, MSM, 3D Vision Module #1/#2, 2D Vision Module, PZT Controller #2. (Exact configuration/placement varies by equipment spec.)',
+          ko:'1.3.1. Layout & Component (Internal, Top)\n\nMain·ISO Machine 상면 배치: JIG #1/#2, TSM(Tray Sorter Module), TTM, MSM, 3D Vision Module #1/#2, 2D Vision Module, PZT Controller #2. (세부 구성·위치는 설비 사양에 따라 다를 수 있음)',
+          zhCN:'1.3.1. Layout & Component (Internal, Top)\n\nMain·ISO Machine俯视配置:JIG #1/#2、TSM(Tray Sorter Module)、TTM、MSM、3D Vision Module #1/#2、2D Vision Module、PZT Controller #2。(具体构成·位置依设备规格而异)',
+          zhTW:'1.3.1. Layout & Component (Internal, Top)\n\nMain·ISO Machine俯視配置:JIG #1/#2、TSM(Tray Sorter Module)、TTM、MSM、3D Vision Module #1/#2、2D Vision Module、PZT Controller #2。(具體構成·位置依設備規格而異)',
+          ja:'1.3.1. Layout & Component (Internal, Top)\n\nMain·ISO Machine上面配置:JIG #1/#2、TSM(Tray Sorter Module)、TTM、MSM、3D Vision Module #1/#2、2D Vision Module、PZT Controller #2。(詳細構成・位置は設備仕様により異なります)',
+          vi:'1.3.1. Layout & Component (Internal, Top)\n\nBố trí nhìn từ trên của Main·ISO Machine: JIG #1/#2, TSM (Tray Sorter Module), TTM, MSM, 3D Vision Module #1/#2, 2D Vision Module, PZT Controller #2. (Cấu hình/vị trí cụ thể tùy theo spec thiết bị)'
+        }},
+        {img:cmImg('A','nbga',31),tx:{
+          en:'1.3.1. Layout & Component (Motor Direction) — X-axis Overview\n\nShows the +/− motor direction convention for every X/Y-axis: TTM, Multi Sorter, 2D Vision Module, TSM, 3D Vision Module #1/#2, Turret #1/#2, and each Indexer (Load/Empty/Good/Buffer/Reject/Jig) Y-axis (Top view).',
+          ko:'1.3.1. Layout & Component (Motor Direction) — X-axis 개요\n\n모든 X/Y-axis의 +/− 방향 기준을 보여줍니다: TTM, Multi Sorter, 2D Vision Module, TSM, 3D Vision Module #1/#2, Turret #1/#2, 각 Indexer(Load/Empty/Good/Buffer/Reject/Jig) Y-axis (Top view).',
+          zhCN:'1.3.1. Layout & Component (Motor Direction) — X-axis概览\n\n显示所有X/Y-axis的+/−方向基准:TTM、Multi Sorter、2D Vision Module、TSM、3D Vision Module #1/#2、Turret #1/#2、各Indexer(Load/Empty/Good/Buffer/Reject/Jig)Y-axis(Top view)。',
+          zhTW:'1.3.1. Layout & Component (Motor Direction) — X-axis概覽\n\n顯示所有X/Y-axis的+/−方向基準:TTM、Multi Sorter、2D Vision Module、TSM、3D Vision Module #1/#2、Turret #1/#2、各Indexer(Load/Empty/Good/Buffer/Reject/Jig)Y-axis(Top view)。',
+          ja:'1.3.1. Layout & Component (Motor Direction) — X-axis概要\n\n全X/Y-axisの+/−方向基準を示します:TTM、Multi Sorter、2D Vision Module、TSM、3D Vision Module #1/#2、Turret #1/#2、各Indexer(Load/Empty/Good/Buffer/Reject/Jig)Y-axis(Top view)。',
+          vi:'1.3.1. Layout & Component (Motor Direction) — Tổng quan trục X\n\nHiển thị chuẩn hướng +/− của mọi trục X/Y: TTM, Multi Sorter, 2D Vision Module, TSM, 3D Vision Module #1/#2, Turret #1/#2, và trục Y của mỗi Indexer (Load/Empty/Good/Buffer/Reject/Jig) (Top view).'
+        }},
+        {img:cmImg('A','nbga',32),tx:{
+          en:'1.3.1. Layout & Component (Motor Direction) — Z-axis Overview\n\nShows the Up/Down motor direction convention for each Z-axis: Elevator, MSM, 2D Vision Module, TTM, 3D Vision Module #1/#2, TSM (Top view).',
+          ko:'1.3.1. Layout & Component (Motor Direction) — Z-axis 개요\n\n각 Z-axis의 Up/Down 방향 기준을 보여줍니다: Elevator, MSM, 2D Vision Module, TTM, 3D Vision Module #1/#2, TSM (Top view).',
+          zhCN:'1.3.1. Layout & Component (Motor Direction) — Z-axis概览\n\n显示各Z-axis的Up/Down方向基准:Elevator、MSM、2D Vision Module、TTM、3D Vision Module #1/#2、TSM(Top view)。',
+          zhTW:'1.3.1. Layout & Component (Motor Direction) — Z-axis概覽\n\n顯示各Z-axis的Up/Down方向基準:Elevator、MSM、2D Vision Module、TTM、3D Vision Module #1/#2、TSM(Top view)。',
+          ja:'1.3.1. Layout & Component (Motor Direction) — Z-axis概要\n\n各Z-axisのUp/Down方向基準を示します:Elevator、MSM、2D Vision Module、TTM、3D Vision Module #1/#2、TSM(Top view)。',
+          vi:'1.3.1. Layout & Component (Motor Direction) — Tổng quan trục Z\n\nHiển thị chuẩn hướng Up/Down của mỗi trục Z: Elevator, MSM, 2D Vision Module, TTM, 3D Vision Module #1/#2, TSM (Top view).'
+        }},
+        {img:cmImg('A','nbga',33),tx:{
+          en:'1.3.1. Layout & Component (2D Vision Module, 25M Camera)\n\nKey components: Main Camera, Lens, Aperture, Coaxial/Oblique Light, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power, CL/LED Cable.',
+          ko:'1.3.1. Layout & Component (2D Vision Module, 25M Camera)\n\n주요 구성: Main Camera, Lens, Aperture, Coaxial/Oblique Light, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power, CL/LED Cable.',
+          zhCN:'1.3.1. Layout & Component (2D Vision Module, 25M Camera)\n\n主要构成:Main Camera、Lens、Aperture、Coaxial/Oblique Light、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power、CL/LED Cable。',
+          zhTW:'1.3.1. Layout & Component (2D Vision Module, 25M Camera)\n\n主要構成:Main Camera、Lens、Aperture、Coaxial/Oblique Light、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power、CL/LED Cable。',
+          ja:'1.3.1. Layout & Component (2D Vision Module, 25M Camera)\n\n主要構成:Main Camera、Lens、Aperture、Coaxial/Oblique Light、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power、CL/LED Cable。',
+          vi:'1.3.1. Layout & Component (2D Vision Module, 25M Camera)\n\nThành phần chính: Main Camera, Lens, Aperture, Coaxial/Oblique Light, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power, CL/LED Cable.'
+        }},
+        {img:cmImg('A','nbga',34),tx:{
+          en:'1.3.1. Layout & Component (2D Vision Module, 67M Camera)\n\nKey components: Main Camera, Laser, Laser Camera, Laser Mirror, Aperture, Coaxial/Oblique Light, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power, CXPin/LED Cable.',
+          ko:'1.3.1. Layout & Component (2D Vision Module, 67M Camera)\n\n주요 구성: Main Camera, Laser, Laser Camera, Laser Mirror, Aperture, Coaxial/Oblique Light, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power, CXPin/LED Cable.',
+          zhCN:'1.3.1. Layout & Component (2D Vision Module, 67M Camera)\n\n主要构成:Main Camera、Laser、Laser Camera、Laser Mirror、Aperture、Coaxial/Oblique Light、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power、CXPin/LED Cable。',
+          zhTW:'1.3.1. Layout & Component (2D Vision Module, 67M Camera)\n\n主要構成:Main Camera、Laser、Laser Camera、Laser Mirror、Aperture、Coaxial/Oblique Light、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power、CXPin/LED Cable。',
+          ja:'1.3.1. Layout & Component (2D Vision Module, 67M Camera)\n\n主要構成:Main Camera、Laser、Laser Camera、Laser Mirror、Aperture、Coaxial/Oblique Light、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power、CXPin/LED Cable。',
+          vi:'1.3.1. Layout & Component (2D Vision Module, 67M Camera)\n\nThành phần chính: Main Camera, Laser, Laser Camera, Laser Mirror, Aperture, Coaxial/Oblique Light, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power, CXPin/LED Cable.'
+        }},
+        {img:cmImg('A','nbga',35),tx:{
+          en:'1.3.1. Layout & Component (3D Vision Module, Single Optics) — Camera side\n\nKey components: Main Camera, Aperture, CXPin Cable, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power.',
+          ko:'1.3.1. Layout & Component (3D Vision Module, Single Optics) — Camera 측\n\n주요 구성: Main Camera, Aperture, CXPin Cable, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power.',
+          zhCN:'1.3.1. Layout & Component (3D Vision Module, Single Optics) — Camera侧\n\n主要构成:Main Camera、Aperture、CXPin Cable、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power。',
+          zhTW:'1.3.1. Layout & Component (3D Vision Module, Single Optics) — Camera側\n\n主要構成:Main Camera、Aperture、CXPin Cable、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power。',
+          ja:'1.3.1. Layout & Component (3D Vision Module, Single Optics) — Camera側\n\n主要構成:Main Camera、Aperture、CXPin Cable、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power。',
+          vi:'1.3.1. Layout & Component (3D Vision Module, Single Optics) — Phía Camera\n\nThành phần chính: Main Camera, Aperture, CXPin Cable, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power.'
+        }},
+        {img:cmImg('A','nbga',36),tx:{
+          en:'1.3.1. Layout & Component (3D Vision Module, Single Optics) — Optics side\n\nKey components: Coaxial/Oblique Light, B/S (Beam Splitter), Laser, Laser Mirror, Laser Camera, Reference Mirror (with angle dial), PZT Stage, Micrometer, Lens.',
+          ko:'1.3.1. Layout & Component (3D Vision Module, Single Optics) — 광학계 측\n\n주요 구성: Coaxial/Oblique Light, B/S(Beam Splitter), Laser, Laser Mirror, Laser Camera, Reference Mirror(각도 Dial 포함), PZT Stage, Micrometer, Lens.',
+          zhCN:'1.3.1. Layout & Component (3D Vision Module, Single Optics) — 光学侧\n\n主要构成:Coaxial/Oblique Light、B/S(Beam Splitter)、Laser、Laser Mirror、Laser Camera、Reference Mirror(含角度Dial)、PZT Stage、Micrometer、Lens。',
+          zhTW:'1.3.1. Layout & Component (3D Vision Module, Single Optics) — 光學側\n\n主要構成:Coaxial/Oblique Light、B/S(Beam Splitter)、Laser、Laser Mirror、Laser Camera、Reference Mirror(含角度Dial)、PZT Stage、Micrometer、Lens。',
+          ja:'1.3.1. Layout & Component (3D Vision Module, Single Optics) — 光学系側\n\n主要構成:Coaxial/Oblique Light、B/S(Beam Splitter)、Laser、Laser Mirror、Laser Camera、Reference Mirror(角度Dial付き)、PZT Stage、Micrometer、Lens。',
+          vi:'1.3.1. Layout & Component (3D Vision Module, Single Optics) — Phía quang học\n\nThành phần chính: Coaxial/Oblique Light, B/S (Beam Splitter), Laser, Laser Mirror, Laser Camera, Reference Mirror (kèm Angle Dial), PZT Stage, Micrometer, Lens.'
+        }},
+        {img:cmImg('A','nbga',37),tx:{
+          en:'1.3.1. Layout & Component (3D Vision Module, Turret Optics) — Camera side\n\nKey components: Main Camera, Aperture, CXPin Cable, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power.',
+          ko:'1.3.1. Layout & Component (3D Vision Module, Turret Optics) — Camera 측\n\n주요 구성: Main Camera, Aperture, CXPin Cable, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power.',
+          zhCN:'1.3.1. Layout & Component (3D Vision Module, Turret Optics) — Camera侧\n\n主要构成:Main Camera、Aperture、CXPin Cable、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power。',
+          zhTW:'1.3.1. Layout & Component (3D Vision Module, Turret Optics) — Camera側\n\n主要構成:Main Camera、Aperture、CXPin Cable、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power。',
+          ja:'1.3.1. Layout & Component (3D Vision Module, Turret Optics) — Camera側\n\n主要構成:Main Camera、Aperture、CXPin Cable、Z-axis Motor、Up/Down Limit Sensor、Sensor Object、Photo Sensor、Camera Power。',
+          vi:'1.3.1. Layout & Component (3D Vision Module, Turret Optics) — Phía Camera\n\nThành phần chính: Main Camera, Aperture, CXPin Cable, Z-axis Motor, Up/Down Limit Sensor, Sensor Object, Photo Sensor, Camera Power.'
+        }},
+        {img:cmImg('A','nbga',38),tx:{
+          en:'1.3.1. Layout & Component (3D Vision Module, Turret Optics) — Optics side\n\nKey components: Coaxial/Oblique Light, B/S (Beam Splitter), Laser, Laser Mirror, Laser Camera, Reference Mirror (with angle dial), Turret Motor, Objective Lens, PZT Stage, Micrometer, Lens (multiple magnifications: X5.5, X4.8/X6.7).',
+          ko:'1.3.1. Layout & Component (3D Vision Module, Turret Optics) — 광학계 측\n\n주요 구성: Coaxial/Oblique Light, B/S(Beam Splitter), Laser, Laser Mirror, Laser Camera, Reference Mirror(각도 Dial 포함), Turret Motor, Objective Lens, PZT Stage, Micrometer, Lens(X5.5, X4.8/X6.7 등 배율별).',
+          zhCN:'1.3.1. Layout & Component (3D Vision Module, Turret Optics) — 光学侧\n\n主要构成:Coaxial/Oblique Light、B/S(Beam Splitter)、Laser、Laser Mirror、Laser Camera、Reference Mirror(含角度Dial)、Turret Motor、Objective Lens、PZT Stage、Micrometer、Lens(X5.5、X4.8/X6.7等倍率)。',
+          zhTW:'1.3.1. Layout & Component (3D Vision Module, Turret Optics) — 光學側\n\n主要構成:Coaxial/Oblique Light、B/S(Beam Splitter)、Laser、Laser Mirror、Laser Camera、Reference Mirror(含角度Dial)、Turret Motor、Objective Lens、PZT Stage、Micrometer、Lens(X5.5、X4.8/X6.7等倍率)。',
+          ja:'1.3.1. Layout & Component (3D Vision Module, Turret Optics) — 光学系側\n\n主要構成:Coaxial/Oblique Light、B/S(Beam Splitter)、Laser、Laser Mirror、Laser Camera、Reference Mirror(角度Dial付き)、Turret Motor、Objective Lens、PZT Stage、Micrometer、Lens(X5.5、X4.8/X6.7等倍率)。',
+          vi:'1.3.1. Layout & Component (3D Vision Module, Turret Optics) — Phía quang học\n\nThành phần chính: Coaxial/Oblique Light, B/S (Beam Splitter), Laser, Laser Mirror, Laser Camera, Reference Mirror (kèm Angle Dial), Turret Motor, Objective Lens, PZT Stage, Micrometer, Lens (nhiều độ phóng đại: X5.5, X4.8/X6.7).'
+        }},
+        {img:cmImg('A','nbga',39),tx:{
+          en:'1.3.1. Layout & Component (TSM: Tray Sorter Module)\n\nKey components: Z-axis Motor, Coupler, Speed Controller, Up/Down Cylinder, Shaft & Spring, Ball Bushing, Stopper, Ejector, Gripper (with Cylinder & Auto Switch Sensor), PCB Board, Tray Check Sensor, Photo/Magnetic Sensor, Damper.',
+          ko:'1.3.1. Layout & Component (TSM: Tray Sorter Module)\n\n주요 구성: Z-axis Motor, Coupler, Speed Controller, Up/Down Cylinder, Shaft & Spring, Ball Bushing, Stopper, Ejector, Gripper(Cylinder & Auto Switch Sensor 포함), PCB Board, Tray Check Sensor, Photo/Magnetic Sensor, Damper.',
+          zhCN:'1.3.1. Layout & Component (TSM: Tray Sorter Module)\n\n主要构成:Z-axis Motor、Coupler、Speed Controller、Up/Down Cylinder、Shaft & Spring、Ball Bushing、Stopper、Ejector、Gripper(含Cylinder & Auto Switch Sensor)、PCB Board、Tray Check Sensor、Photo/Magnetic Sensor、Damper。',
+          zhTW:'1.3.1. Layout & Component (TSM: Tray Sorter Module)\n\n主要構成:Z-axis Motor、Coupler、Speed Controller、Up/Down Cylinder、Shaft & Spring、Ball Bushing、Stopper、Ejector、Gripper(含Cylinder & Auto Switch Sensor)、PCB Board、Tray Check Sensor、Photo/Magnetic Sensor、Damper。',
+          ja:'1.3.1. Layout & Component (TSM: Tray Sorter Module)\n\n主要構成:Z-axis Motor、Coupler、Speed Controller、Up/Down Cylinder、Shaft & Spring、Ball Bushing、Stopper、Ejector、Gripper(Cylinder & Auto Switch Sensor含む)、PCB Board、Tray Check Sensor、Photo/Magnetic Sensor、Damper。',
+          vi:'1.3.1. Layout & Component (TSM: Tray Sorter Module)\n\nThành phần chính: Z-axis Motor, Coupler, Speed Controller, Up/Down Cylinder, Shaft & Spring, Ball Bushing, Stopper, Ejector, Gripper (kèm Cylinder & Auto Switch Sensor), PCB Board, Tray Check Sensor, Photo/Magnetic Sensor, Damper.'
+        }},
+        {img:cmImg('A','nbga',40),tx:{
+          en:'1.3.1. Layout & Component (TTM: Tray Transfer Module)\n\nKey components: Z-axis Motor, Gripper (with Cylinder & Auto Switch Sensor), Speed Controller, Plate, Coupler, Cross Roller Guide, Ball Bushing, Shaft & Spring, Stopper, Tray Check Sensor, Photo/Magnetic Sensor.',
+          ko:'1.3.1. Layout & Component (TTM: Tray Transfer Module)\n\n주요 구성: Z-axis Motor, Gripper(Cylinder & Auto Switch Sensor 포함), Speed Controller, Plate, Coupler, Cross Roller Guide, Ball Bushing, Shaft & Spring, Stopper, Tray Check Sensor, Photo/Magnetic Sensor.',
+          zhCN:'1.3.1. Layout & Component (TTM: Tray Transfer Module)\n\n主要构成:Z-axis Motor、Gripper(含Cylinder & Auto Switch Sensor)、Speed Controller、Plate、Coupler、Cross Roller Guide、Ball Bushing、Shaft & Spring、Stopper、Tray Check Sensor、Photo/Magnetic Sensor。',
+          zhTW:'1.3.1. Layout & Component (TTM: Tray Transfer Module)\n\n主要構成:Z-axis Motor、Gripper(含Cylinder & Auto Switch Sensor)、Speed Controller、Plate、Coupler、Cross Roller Guide、Ball Bushing、Shaft & Spring、Stopper、Tray Check Sensor、Photo/Magnetic Sensor。',
+          ja:'1.3.1. Layout & Component (TTM: Tray Transfer Module)\n\n主要構成:Z-axis Motor、Gripper(Cylinder & Auto Switch Sensor含む)、Speed Controller、Plate、Coupler、Cross Roller Guide、Ball Bushing、Shaft & Spring、Stopper、Tray Check Sensor、Photo/Magnetic Sensor。',
+          vi:'1.3.1. Layout & Component (TTM: Tray Transfer Module)\n\nThành phần chính: Z-axis Motor, Gripper (kèm Cylinder & Auto Switch Sensor), Speed Controller, Plate, Coupler, Cross Roller Guide, Ball Bushing, Shaft & Spring, Stopper, Tray Check Sensor, Photo/Magnetic Sensor.'
+        }},
+        {img:cmImg('A','nbga',41),tx:{
+          en:'1.3.1. Layout & Component (MSM: Multi Sorter Module)\n\nKey components: Z-axis Motor, X-axis Motor (Picker Gap Motor), Picker (with Cylinder & Auto Switch Sensor), Coupler, PCB Board, Speed Controller, Vacuum Ejector, Solenoid Valve, Air Filter, Photo/Magnetic Sensor.',
+          ko:'1.3.1. Layout & Component (MSM: Multi Sorter Module)\n\n주요 구성: Z-axis Motor, X-axis Motor(Picker Gap Motor), Picker(Cylinder & Auto Switch Sensor 포함), Coupler, PCB Board, Speed Controller, Vacuum Ejector, Solenoid Valve, Air Filter, Photo/Magnetic Sensor.',
+          zhCN:'1.3.1. Layout & Component (MSM: Multi Sorter Module)\n\n主要构成:Z-axis Motor、X-axis Motor(Picker Gap Motor)、Picker(含Cylinder & Auto Switch Sensor)、Coupler、PCB Board、Speed Controller、Vacuum Ejector、Solenoid Valve、Air Filter、Photo/Magnetic Sensor。',
+          zhTW:'1.3.1. Layout & Component (MSM: Multi Sorter Module)\n\n主要構成:Z-axis Motor、X-axis Motor(Picker Gap Motor)、Picker(含Cylinder & Auto Switch Sensor)、Coupler、PCB Board、Speed Controller、Vacuum Ejector、Solenoid Valve、Air Filter、Photo/Magnetic Sensor。',
+          ja:'1.3.1. Layout & Component (MSM: Multi Sorter Module)\n\n主要構成:Z-axis Motor、X-axis Motor(Picker Gap Motor)、Picker(Cylinder & Auto Switch Sensor含む)、Coupler、PCB Board、Speed Controller、Vacuum Ejector、Solenoid Valve、Air Filter、Photo/Magnetic Sensor。',
+          vi:'1.3.1. Layout & Component (MSM: Multi Sorter Module)\n\nThành phần chính: Z-axis Motor, X-axis Motor (Picker Gap Motor), Picker (kèm Cylinder & Auto Switch Sensor), Coupler, PCB Board, Speed Controller, Vacuum Ejector, Solenoid Valve, Air Filter, Photo/Magnetic Sensor.'
+        }},
+        {img:cmImg('A','nbga',42),tx:{
+          en:'1.3.1. Layout & Component (Jig Module)\n\nKey components: LTS Target (Long Term Stability), Y-axis Motor, JIG Back Side, PCB Board, Inner Clamp, Tray Check Sensor, Push Cylinder & Auto Switch Sensor, Cableveyor, (+)/(−) Limit Sensor, Home Sensor, Photo/Magnetic Sensor.',
+          ko:'1.3.1. Layout & Component (Jig Module)\n\n주요 구성: LTS Target(Long Term Stability), Y-axis Motor, JIG Back Side, PCB Board, Inner Clamp, Tray Check Sensor, Push Cylinder & Auto Switch Sensor, Cableveyor, (+)/(−) Limit Sensor, Home Sensor, Photo/Magnetic Sensor.',
+          zhCN:'1.3.1. Layout & Component (Jig Module)\n\n主要构成:LTS Target(Long Term Stability)、Y-axis Motor、JIG Back Side、PCB Board、Inner Clamp、Tray Check Sensor、Push Cylinder & Auto Switch Sensor、Cableveyor、(+)/(−) Limit Sensor、Home Sensor、Photo/Magnetic Sensor。',
+          zhTW:'1.3.1. Layout & Component (Jig Module)\n\n主要構成:LTS Target(Long Term Stability)、Y-axis Motor、JIG Back Side、PCB Board、Inner Clamp、Tray Check Sensor、Push Cylinder & Auto Switch Sensor、Cableveyor、(+)/(−) Limit Sensor、Home Sensor、Photo/Magnetic Sensor。',
+          ja:'1.3.1. Layout & Component (Jig Module)\n\n主要構成:LTS Target(Long Term Stability)、Y-axis Motor、JIG Back Side、PCB Board、Inner Clamp、Tray Check Sensor、Push Cylinder & Auto Switch Sensor、Cableveyor、(+)/(−) Limit Sensor、Home Sensor、Photo/Magnetic Sensor。',
+          vi:'1.3.1. Layout & Component (Jig Module)\n\nThành phần chính: LTS Target (Long Term Stability), Y-axis Motor, JIG Back Side, PCB Board, Inner Clamp, Tray Check Sensor, Push Cylinder & Auto Switch Sensor, Cableveyor, (+)/(−) Limit Sensor, Home Sensor, Photo/Magnetic Sensor.'
+        }},
+        {img:cmImg('A','nbga',43),tx:{
+          en:'1.3.1. Layout & Component (Indexer)\n\nKey components: Forward/Backward Finger Clamp, Push Cylinder, Speed Controller, Cableveyor, Finger Clamp Sensor, Auto Switch/Photo/Magnetic Sensor.',
+          ko:'1.3.1. Layout & Component (Indexer)\n\n주요 구성: Forward/Backward Finger Clamp, Push Cylinder, Speed Controller, Cableveyor, Finger Clamp Sensor, Auto Switch/Photo/Magnetic Sensor.',
+          zhCN:'1.3.1. Layout & Component (Indexer)\n\n主要构成:Forward/Backward Finger Clamp、Push Cylinder、Speed Controller、Cableveyor、Finger Clamp Sensor、Auto Switch/Photo/Magnetic Sensor。',
+          zhTW:'1.3.1. Layout & Component (Indexer)\n\n主要構成:Forward/Backward Finger Clamp、Push Cylinder、Speed Controller、Cableveyor、Finger Clamp Sensor、Auto Switch/Photo/Magnetic Sensor。',
+          ja:'1.3.1. Layout & Component (Indexer)\n\n主要構成:Forward/Backward Finger Clamp、Push Cylinder、Speed Controller、Cableveyor、Finger Clamp Sensor、Auto Switch/Photo/Magnetic Sensor。',
+          vi:'1.3.1. Layout & Component (Indexer)\n\nThành phần chính: Forward/Backward Finger Clamp, Push Cylinder, Speed Controller, Cableveyor, Finger Clamp Sensor, Auto Switch/Photo/Magnetic Sensor.'
+        }},
+        {img:cmImg('A','nbga',44),tx:{
+          en:'1.3.1. Layout & Component (Elevator)\n\nKey components (Motor-type and Cylinder-type variants shown): Z-axis Motor, Plate, Belt, Pulley, Ball Bearing, Ball Screw, (+)/(−) Limit Sensor, Speed Controller, Auto Switch/Magnetic/Photo Sensor.',
+          ko:'1.3.1. Layout & Component (Elevator)\n\n주요 구성(Motor 방식·Cylinder 방식 모두 표시): Z-axis Motor, Plate, Belt, Pulley, Ball Bearing, Ball Screw, (+)/(−) Limit Sensor, Speed Controller, Auto Switch/Magnetic/Photo Sensor.',
+          zhCN:'1.3.1. Layout & Component (Elevator)\n\n主要构成(同时展示Motor型·Cylinder型):Z-axis Motor、Plate、Belt、Pulley、Ball Bearing、Ball Screw、(+)/(−) Limit Sensor、Speed Controller、Auto Switch/Magnetic/Photo Sensor。',
+          zhTW:'1.3.1. Layout & Component (Elevator)\n\n主要構成(同時展示Motor型·Cylinder型):Z-axis Motor、Plate、Belt、Pulley、Ball Bearing、Ball Screw、(+)/(−) Limit Sensor、Speed Controller、Auto Switch/Magnetic/Photo Sensor。',
+          ja:'1.3.1. Layout & Component (Elevator)\n\n主要構成(Motorタイプ・Cylinderタイプ両方表示):Z-axis Motor、Plate、Belt、Pulley、Ball Bearing、Ball Screw、(+)/(−) Limit Sensor、Speed Controller、Auto Switch/Magnetic/Photo Sensor。',
+          vi:'1.3.1. Layout & Component (Elevator)\n\nThành phần chính (hiển thị cả loại Motor và loại Cylinder): Z-axis Motor, Plate, Belt, Pulley, Ball Bearing, Ball Screw, (+)/(−) Limit Sensor, Speed Controller, Auto Switch/Magnetic/Photo Sensor.'
+        }},
+        {img:cmImg('A','nbga',45),tx:{
+          en:'1.3.1. Layout & Component (Stacker)\n\nKey components: Stacker, Load Stacker Speed Controller, Empty Stacker Speed Controller, Tray Check Sensor, Photo/Magnetic Sensor, Stacker Clamp Sensor.',
+          ko:'1.3.1. Layout & Component (Stacker)\n\n주요 구성: Stacker, Load Stacker Speed Controller, Empty Stacker Speed Controller, Tray Check Sensor, Photo/Magnetic Sensor, Stacker Clamp Sensor.',
+          zhCN:'1.3.1. Layout & Component (Stacker)\n\n主要构成:Stacker、Load Stacker Speed Controller、Empty Stacker Speed Controller、Tray Check Sensor、Photo/Magnetic Sensor、Stacker Clamp Sensor。',
+          zhTW:'1.3.1. Layout & Component (Stacker)\n\n主要構成:Stacker、Load Stacker Speed Controller、Empty Stacker Speed Controller、Tray Check Sensor、Photo/Magnetic Sensor、Stacker Clamp Sensor。',
+          ja:'1.3.1. Layout & Component (Stacker)\n\n主要構成:Stacker、Load Stacker Speed Controller、Empty Stacker Speed Controller、Tray Check Sensor、Photo/Magnetic Sensor、Stacker Clamp Sensor。',
+          vi:'1.3.1. Layout & Component (Stacker)\n\nThành phần chính: Stacker, Load Stacker Speed Controller, Empty Stacker Speed Controller, Tray Check Sensor, Photo/Magnetic Sensor, Stacker Clamp Sensor.'
+        }},
+        {img:cmImg('A','nbga',46),tx:{
+          en:'1.3.1. Layout & Component (KVM, TN-UCNV-104D-PES)\n\nWiring diagram for the shared KVM unit connecting the Front Monitor/Keyboard/Mouse across Host/2D/3D#1/3D#2 PCs via the Docking Panel. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (KVM, TN-UCNV-104D-PES)\n\nDocking Panel을 통해 Host/2D/3D#1/3D#2 PC 간 Front Monitor·Keyboard·Mouse를 공유하는 KVM 배선도입니다. 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (KVM, TN-UCNV-104D-PES)\n\n透过Docking Panel在Host/2D/3D#1/3D#2 PC间共享Front Monitor·Keyboard·Mouse的KVM接线图。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (KVM, TN-UCNV-104D-PES)\n\n透過Docking Panel在Host/2D/3D#1/3D#2 PC間共享Front Monitor·Keyboard·Mouse的KVM接線圖。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (KVM, TN-UCNV-104D-PES)\n\nDocking Panelを介してHost/2D/3D#1/3D#2 PC間でFront Monitor・Keyboard・Mouseを共有するKVM配線図です。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (KVM, TN-UCNV-104D-PES)\n\nSơ đồ đấu dây KVM chia sẻ Front Monitor·Keyboard·Mouse giữa Host/2D/3D#1/3D#2 PC qua Docking Panel. Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','nbga',47),tx:{
+          en:'1.3.1. Layout & Component (KVM, MAAG-Z114-4CH-DIO)\n\nWiring diagram for the KVM-to-Monitor direct connections across Host/2D/3D#1/3D#2 PCs, including HDMI and USB cabling. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (KVM, MAAG-Z114-4CH-DIO)\n\nHost/2D/3D#1/3D#2 PC 간 KVM-Monitor 직결 배선도입니다(HDMI, USB Cable 포함). 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (KVM, MAAG-Z114-4CH-DIO)\n\nHost/2D/3D#1/3D#2 PC间KVM-Monitor直连接线图(含HDMI、USB Cable)。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (KVM, MAAG-Z114-4CH-DIO)\n\nHost/2D/3D#1/3D#2 PC間KVM-Monitor直連接線圖(含HDMI、USB Cable)。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (KVM, MAAG-Z114-4CH-DIO)\n\nHost/2D/3D#1/3D#2 PC間のKVM-Monitor直結配線図です(HDMI、USB Cable含む)。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (KVM, MAAG-Z114-4CH-DIO)\n\nSơ đồ đấu dây kết nối trực tiếp KVM-Monitor giữa Host/2D/3D#1/3D#2 PC (gồm cáp HDMI, USB). Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','nbga',48),tx:{
+          en:'1.3.1. Layout & Component (HUB)\n\nNetwork wiring diagram via the HP 1408-8G switch (8-port), connecting Host/3D#1/3D#2/2D PCs and AF Controllers #1/#2. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (HUB)\n\nHP 1408-8G Switch(8포트)를 통한 Host/3D#1/3D#2/2D PC 및 AF Controller #1/#2 네트워크 배선도입니다. 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (HUB)\n\n透过HP 1408-8G Switch(8端口)连接Host/3D#1/3D#2/2D PC及AF Controller #1/#2的网络接线图。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (HUB)\n\n透過HP 1408-8G Switch(8埠)連接Host/3D#1/3D#2/2D PC及AF Controller #1/#2的網路接線圖。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (HUB)\n\nHP 1408-8G Switch(8ポート)を介したHost/3D#1/3D#2/2D PC及びAF Controller #1/#2のネットワーク配線図です。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (HUB)\n\nSơ đồ đấu dây mạng qua HP 1408-8G Switch (8 cổng), kết nối Host/3D#1/3D#2/2D PC và AF Controller #1/#2. Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','nbga',49),tx:{
+          en:'1.3.1. Layout & Component (PI PZT Controller, PZT E-754)\n\nWiring diagram: PZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2, via the SYNC Board and 3D TRG Cables. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (PI PZT Controller, PZT E-754)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2 배선도입니다(SYNC Board, 3D TRG Cable 경유). 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (PI PZT Controller, PZT E-754)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2的接线图(经由SYNC Board、3D TRG Cable)。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (PI PZT Controller, PZT E-754)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2的接線圖(經由SYNC Board、3D TRG Cable)。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (PI PZT Controller, PZT E-754)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2の配線図です(SYNC Board、3D TRG Cable経由)。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (PI PZT Controller, PZT E-754)\n\nSơ đồ đấu dây PZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2 (qua SYNC Board, 3D TRG Cable). Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','nbga',50),tx:{
+          en:'1.3.1. Layout & Component (Nanofaktur PZT Controller, EBD-120210)\n\nWiring diagram: PZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2, via the SYNC Board and 3D TRG Cables. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (Nanofaktur PZT Controller, EBD-120210)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2 배선도입니다(SYNC Board, 3D TRG Cable 경유). 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (Nanofaktur PZT Controller, EBD-120210)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2的接线图(经由SYNC Board、3D TRG Cable)。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (Nanofaktur PZT Controller, EBD-120210)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2的接線圖(經由SYNC Board、3D TRG Cable)。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (Nanofaktur PZT Controller, EBD-120210)\n\nPZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2の配線図です(SYNC Board、3D TRG Cable経由)。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (Nanofaktur PZT Controller, EBD-120210)\n\nSơ đồ đấu dây PZT Stage ↔ 3D LED Controller #1/#2 ↔ 3D Vision PC #1/#2 (qua SYNC Board, 3D TRG Cable). Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','nbga',51),tx:{
+          en:'1.3.1. Layout & Component (Host PC) — AF/Barcode/KVM Wiring\n\nWiring diagram for the Host PC\'s serial connections to AF Controller #1/#2 (RS232, COM1/COM2), Barcode reader, and KVM Switch. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (Host PC) — AF·Barcode·KVM 배선\n\nHost PC와 AF Controller #1/#2(RS232, COM1/COM2), Barcode 리더, KVM Switch 간 직렬 배선도입니다. 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (Host PC) — AF·Barcode·KVM接线\n\nHost PC与AF Controller #1/#2(RS232、COM1/COM2)、Barcode读取器、KVM Switch之间的串行接线图。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (Host PC) — AF·Barcode·KVM接線\n\nHost PC與AF Controller #1/#2(RS232、COM1/COM2)、Barcode讀取器、KVM Switch之間的序列接線圖。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (Host PC) — AF・Barcode・KVM配線\n\nHost PCとAF Controller #1/#2(RS232、COM1/COM2)、Barcodeリーダー、KVM Switch間のシリアル配線図です。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (Host PC) — Đấu dây AF·Barcode·KVM\n\nSơ đồ đấu dây nối tiếp giữa Host PC với AF Controller #1/#2 (RS232, COM1/COM2), đầu đọc Barcode, KVM Switch. Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','nbga',52),tx:{
+          en:'1.3.1. Layout & Component (Host PC) — IO Module/Motor Driver Wiring\n\nWiring diagram for the Host PC\'s connections to IO Modules and Motor Drivers (via PCIRTEXIO/PCI-R3204 cards), plus LAN to AF Controller #1/#2 and VRS. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (Host PC) — IO Module·Motor Driver 배선\n\nHost PC와 IO Module·Motor Driver(PCIRTEXIO/PCI-R3204 카드 경유) 및 AF Controller #1/#2·VRS로의 LAN 배선도입니다. 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (Host PC) — IO Module·Motor Driver接线\n\nHost PC与IO Module·Motor Driver(经由PCIRTEXIO/PCI-R3204卡)及至AF Controller #1/#2·VRS的LAN接线图。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (Host PC) — IO Module·Motor Driver接線\n\nHost PC與IO Module·Motor Driver(經由PCIRTEXIO/PCI-R3204卡)及至AF Controller #1/#2·VRS的LAN接線圖。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (Host PC) — IO Module・Motor Driver配線\n\nHost PCとIO Module・Motor Driver(PCIRTEXIO/PCI-R3204カード経由)及びAF Controller #1/#2・VRSへのLAN配線図です。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (Host PC) — Đấu dây IO Module·Motor Driver\n\nSơ đồ đấu dây giữa Host PC với IO Module·Motor Driver (qua card PCIRTEXIO/PCI-R3204) và LAN đến AF Controller #1/#2·VRS. Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','nbga',53),tx:{
+          en:'1.3.1. Layout & Component (2D Vision PC)\n\nWiring diagram for the 2D Vision PC: Vision Camera ↔ Grab Board, LED Controller ↔ Sync Board, IO Module, KVM Switch. Refer to the image for exact cable routing.',
+          ko:'1.3.1. Layout & Component (2D Vision PC)\n\n2D Vision PC 배선도입니다: Vision Camera ↔ Grab Board, LED Controller ↔ Sync Board, IO Module, KVM Switch. 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (2D Vision PC)\n\n2D Vision PC接线图:Vision Camera ↔ Grab Board、LED Controller ↔ Sync Board、IO Module、KVM Switch。具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (2D Vision PC)\n\n2D Vision PC接線圖:Vision Camera ↔ Grab Board、LED Controller ↔ Sync Board、IO Module、KVM Switch。具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (2D Vision PC)\n\n2D Vision PC配線図です:Vision Camera ↔ Grab Board、LED Controller ↔ Sync Board、IO Module、KVM Switch。正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (2D Vision PC)\n\nSơ đồ đấu dây 2D Vision PC: Vision Camera ↔ Grab Board, LED Controller ↔ Sync Board, IO Module, KVM Switch. Tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','nbga',54),tx:{
+          en:'1.3.1. Layout & Component (3D Vision PC)\n\nWiring diagram for the 3D Vision PC: Vision Camera ↔ Grab Board, LED Controller/PZT Controller ↔ Sync Board, IO Module, KVM Switch. The number/type of cables depends on the Grab Board or Camera used — refer to the image for exact routing.',
+          ko:'1.3.1. Layout & Component (3D Vision PC)\n\n3D Vision PC 배선도입니다: Vision Camera ↔ Grab Board, LED Controller/PZT Controller ↔ Sync Board, IO Module, KVM Switch. Cable 수량·방식은 사용하는 Grab Board·Camera에 따라 다르니 정확한 배선 경로는 그림을 참고하세요.',
+          zhCN:'1.3.1. Layout & Component (3D Vision PC)\n\n3D Vision PC接线图:Vision Camera ↔ Grab Board、LED Controller/PZT Controller ↔ Sync Board、IO Module、KVM Switch。Cable数量·方式依所用Grab Board·Camera而异,具体走线请参考图示。',
+          zhTW:'1.3.1. Layout & Component (3D Vision PC)\n\n3D Vision PC接線圖:Vision Camera ↔ Grab Board、LED Controller/PZT Controller ↔ Sync Board、IO Module、KVM Switch。Cable數量·方式依所用Grab Board·Camera而異,具體走線請參考圖示。',
+          ja:'1.3.1. Layout & Component (3D Vision PC)\n\n3D Vision PC配線図です:Vision Camera ↔ Grab Board、LED Controller/PZT Controller ↔ Sync Board、IO Module、KVM Switch。Cableの本数・方式は使用するGrab Board・Cameraにより異なるため、正確な配線経路は図を参照してください。',
+          vi:'1.3.1. Layout & Component (3D Vision PC)\n\nSơ đồ đấu dây 3D Vision PC: Vision Camera ↔ Grab Board, LED Controller/PZT Controller ↔ Sync Board, IO Module, KVM Switch. Số lượng/loại cáp tùy theo Grab Board·Camera sử dụng — tham khảo hình để biết đường dây chính xác.'
+        }},
+        {img:cmImg('A','nbga',55),tx:{
+          en:'Introduce — this section covers Hardware Configuration & System: Layout & Component, Safety Sticker, Power Supply & Interlock System, and Equipment Automatic Sequence.',
+          ko:'Introduce — Hardware Configuration & System: Layout & Component, Safety Sticker, Power Supply & Interlock System, Equipment Automatic Sequence를 다룹니다.',
+          zhCN:'Introduce——本节介绍Hardware Configuration & System:Layout & Component、Safety Sticker、Power Supply & Interlock System、Equipment Automatic Sequence。',
+          zhTW:'Introduce——本節介紹Hardware Configuration & System:Layout & Component、Safety Sticker、Power Supply & Interlock System、Equipment Automatic Sequence。',
+          ja:'Introduce——本節ではHardware Configuration & System:Layout & Component、Safety Sticker、Power Supply & Interlock System、Equipment Automatic Sequenceを扱います。',
+          vi:'Introduce — phần này đề cập đến Hardware Configuration & System: Layout & Component, Safety Sticker, Power Supply & Interlock System, Equipment Automatic Sequence.'
+        }},
+        {img:cmImg('A','nbga',56),tx:{
+          en:'1.3.2. Safety Sticker\n\nSafety warning stickers attached to the equipment (attached per customer request — exact set/placement may vary).',
+          ko:'1.3.2. Safety Sticker\n\n설비에 부착되는 안전 경고 스티커입니다 (고객사 요청에 따라 부착 — 세부 종류·위치는 다를 수 있음).',
+          zhCN:'1.3.2. Safety Sticker\n\n设备上贴附的安全警示贴纸(依客户要求贴附——具体种类·位置可能不同)。',
+          zhTW:'1.3.2. Safety Sticker\n\n設備上貼附的安全警示貼紙(依客戶要求貼附——具體種類·位置可能不同)。',
+          ja:'1.3.2. Safety Sticker\n\n設備に貼付される安全警告ステッカーです(顧客の要請に応じて貼付——種類・位置は異なる場合があります)。',
+          vi:'1.3.2. Safety Sticker\n\nNhãn cảnh báo an toàn dán trên thiết bị (dán theo yêu cầu khách hàng — chủng loại/vị trí cụ thể có thể khác nhau).'
+        }},
+        {img:cmImg('A','nbga',57),tx:{
+          en:'Introduce — this section covers Hardware Configuration & System: Layout & Component, Safety Sticker, Power Supply & Interlock System, and Equipment Automatic Sequence.',
+          ko:'Introduce — Hardware Configuration & System: Layout & Component, Safety Sticker, Power Supply & Interlock System, Equipment Automatic Sequence를 다룹니다.',
+          zhCN:'Introduce——本节介绍Hardware Configuration & System:Layout & Component、Safety Sticker、Power Supply & Interlock System、Equipment Automatic Sequence。',
+          zhTW:'Introduce——本節介紹Hardware Configuration & System:Layout & Component、Safety Sticker、Power Supply & Interlock System、Equipment Automatic Sequence。',
+          ja:'Introduce——本節ではHardware Configuration & System:Layout & Component、Safety Sticker、Power Supply & Interlock System、Equipment Automatic Sequenceを扱います。',
+          vi:'Introduce — phần này đề cập đến Hardware Configuration & System: Layout & Component, Safety Sticker, Power Supply & Interlock System, Equipment Automatic Sequence.'
+        }},
+        {img:cmImg('A','nbga',58),tx:{
+          en:'1.3.3. Power Supply & Interlock — Rear Sockets\n\nRear-panel sockets: External LAN Port, Air 1/2 (Main equipment air sockets, 10Ф), Main Power Cable Socket.',
+          ko:'1.3.3. Power Supply & Interlock — 후면 소켓\n\n후면 패널 소켓: External LAN Port, Air 1/2(Main 설비 Air 소켓, 10Ф), Main Power Cable Socket.',
+          zhCN:'1.3.3. Power Supply & Interlock — 后面板插座\n\n后面板插座:External LAN Port、Air 1/2(Main设备Air插座,10Ф)、Main Power Cable Socket。',
+          zhTW:'1.3.3. Power Supply & Interlock — 後面板插座\n\n後面板插座:External LAN Port、Air 1/2(Main設備Air插座,10Ф)、Main Power Cable Socket。',
+          ja:'1.3.3. Power Supply & Interlock — 背面パネルソケット\n\n背面パネルソケット:External LAN Port、Air 1/2(Main設備Airソケット、10Ф)、Main Power Cable Socket。',
+          vi:'1.3.3. Power Supply & Interlock — Ổ cắm mặt sau\n\nCác ổ cắm mặt sau: External LAN Port, Air 1/2 (ổ khí nén chính, 10Ф), Main Power Cable Socket.'
+        }},
+        {img:cmImg('A','nbga',59),tx:{
+          en:'1.3.3. Power Supply & Interlock — Checklist\n\nBefore powering the NBGA, check: Main Breaker On/Off; circuit protector inside the electric panel; Utility Panel lamp (absent on Intel); upper-door lock/unlock per Auto/Teach mode; EMS button push/pull; lower-door closed (for the lower fan); UPS On/Off for the Host PC (absent on Intel); Power Strip On/Off for PC/LED Controller (absent on Intel); Main Air supply and 4–6bar regulator pressure; Operation Panel button lamp status.',
+          ko:'1.3.3. Power Supply & Interlock — Checklist\n\nNBGA 전원 공급 전 확인 사항: Main Breaker On/Off; 전장 판넬 내부 Circuit Protector; Utility Panel Lamp(Intel은 없음); Auto/Teach 모드에 따른 상부 도어 Lock/Unlock; EMS 버튼 Push/Pull; 하부 도어 닫힘(하부 Fan용); Host PC용 UPS On/Off(Intel은 없음); PC·LED Controller용 Power Strip On/Off(Intel은 없음); Main Air 공급 및 Regulator 4~6bar 유지; Operation Panel 버튼 Lamp 상태.',
+          zhCN:'1.3.3. Power Supply & Interlock — Checklist\n\n为NBGA供电前需确认:Main Breaker On/Off;电气面板内部Circuit Protector;Utility Panel Lamp(Intel无);依Auto/Teach模式的上部門Lock/Unlock;EMS按钮Push/Pull;下部門关闭(供下部Fan用);Host PC用UPS On/Off(Intel无);PC·LED Controller用Power Strip On/Off(Intel无);Main Air供应及Regulator保持4~6bar;Operation Panel按钮Lamp状态。',
+          zhTW:'1.3.3. Power Supply & Interlock — Checklist\n\n為NBGA供電前需確認:Main Breaker On/Off;電氣面板內部Circuit Protector;Utility Panel Lamp(Intel無);依Auto/Teach模式的上部門Lock/Unlock;EMS按鈕Push/Pull;下部門關閉(供下部Fan用);Host PC用UPS On/Off(Intel無);PC·LED Controller用Power Strip On/Off(Intel無);Main Air供應及Regulator保持4~6bar;Operation Panel按鈕Lamp狀態。',
+          ja:'1.3.3. Power Supply & Interlock — Checklist\n\nNBGAへの電源供給前に確認する項目:Main Breaker On/Off;電装パネル内部のCircuit Protector;Utility Panel Lamp(Intelには無し);Auto/Teachモードによる上部ドアLock/Unlock;EMSボタンPush/Pull;下部ドアが閉じているか(下部Fan用);Host PC用UPS On/Off(Intelには無し);PC・LED Controller用Power Strip On/Off(Intelには無し);Main Air供給及びRegulatorの4~6bar維持;Operation Panelボタンランプ状態。',
+          vi:'1.3.3. Power Supply & Interlock — Checklist\n\nTrước khi cấp nguồn cho NBGA, kiểm tra: Main Breaker On/Off; Circuit Protector bên trong tủ điện; đèn Utility Panel (không có ở bản Intel); khóa/mở cửa trên theo chế độ Auto/Teach; nút EMS Push/Pull; cửa dưới đã đóng (cho quạt dưới); UPS On/Off cho Host PC (không có ở bản Intel); Power Strip On/Off cho PC·LED Controller (không có ở bản Intel); nguồn Main Air và áp suất Regulator 4–6bar; trạng thái đèn nút Operation Panel.'
+        }},
+        {img:cmImg('A','nbga',60),tx:{
+          en:'1.3.3. Power Supply & Interlock — Main Sub Electric Panel\n\nTurn on the main circuit breaker on the equipment\'s main panel, then turn on all circuit breakers inside the electric panel (example: Motor Driver, Terminal Block, IO Module).',
+          ko:'1.3.3. Power Supply & Interlock — Main Sub Electric Panel\n\n설비 Main Panel의 주 Breaker를 켠 뒤, 전장 판넬 내부의 모든 Breaker를 켭니다 (예: Motor Driver, Terminal Block, IO Module).',
+          zhCN:'1.3.3. Power Supply & Interlock — Main Sub Electric Panel\n\n开启设备Main Panel的主Breaker后,再开启电气面板内部所有Breaker(例:Motor Driver、Terminal Block、IO Module)。',
+          zhTW:'1.3.3. Power Supply & Interlock — Main Sub Electric Panel\n\n開啟設備Main Panel的主Breaker後,再開啟電氣面板內部所有Breaker(例:Motor Driver、Terminal Block、IO Module)。',
+          ja:'1.3.3. Power Supply & Interlock — Main Sub Electric Panel\n\n設備Main Panelの主Breakerをオンにした後、電装パネル内部のすべてのBreakerをオンにします(例:Motor Driver、Terminal Block、IO Module)。',
+          vi:'1.3.3. Power Supply & Interlock — Main Sub Electric Panel\n\nBật Breaker chính trên Main Panel của thiết bị, sau đó bật tất cả Breaker bên trong tủ điện (VD: Motor Driver, Terminal Block, IO Module).'
+        }},
+        {img:cmImg('A','nbga',61),tx:{
+          en:'1.3.3. Power Supply & Interlock — Main Electric Panel (Rear)\n\nSame breaker turn-on procedure at the Main Electric Panel (rear): CP, MC, Noise Filter, Terminal Block, Earth Bar, SMPS/PLC.',
+          ko:'1.3.3. Power Supply & Interlock — Main Electric Panel (Rear)\n\nMain Electric Panel(후면)에서도 동일하게 Breaker를 켭니다: CP, MC, Noise Filter, Terminal Block, Earth Bar, SMPS/PLC.',
+          zhCN:'1.3.3. Power Supply & Interlock — Main Electric Panel (Rear)\n\n在Main Electric Panel(背面)以相同方式开启Breaker:CP、MC、Noise Filter、Terminal Block、Earth Bar、SMPS/PLC。',
+          zhTW:'1.3.3. Power Supply & Interlock — Main Electric Panel (Rear)\n\n在Main Electric Panel(背面)以相同方式開啟Breaker:CP、MC、Noise Filter、Terminal Block、Earth Bar、SMPS/PLC。',
+          ja:'1.3.3. Power Supply & Interlock — Main Electric Panel (Rear)\n\nMain Electric Panel(背面)でも同様にBreakerをオンにします:CP、MC、Noise Filter、Terminal Block、Earth Bar、SMPS/PLC。',
+          vi:'1.3.3. Power Supply & Interlock — Main Electric Panel (Rear)\n\nBật Breaker theo cùng cách tại Main Electric Panel (phía sau): CP, MC, Noise Filter, Terminal Block, Earth Bar, SMPS/PLC.'
+        }},
+        {img:cmImg('A','nbga',62),tx:{
+          en:'1.3.3. Power Supply & Interlock — ISO Sub Electric Panel\n\nSame breaker turn-on procedure at the ISO Sub Electric Panel (left): Motor Driver, IO/PM Module.',
+          ko:'1.3.3. Power Supply & Interlock — ISO Sub Electric Panel\n\nISO Sub Electric Panel(좌측)에서도 동일하게 Breaker를 켭니다: Motor Driver, IO/PM Module.',
+          zhCN:'1.3.3. Power Supply & Interlock — ISO Sub Electric Panel\n\n在ISO Sub Electric Panel(左侧)以相同方式开启Breaker:Motor Driver、IO/PM Module。',
+          zhTW:'1.3.3. Power Supply & Interlock — ISO Sub Electric Panel\n\n在ISO Sub Electric Panel(左側)以相同方式開啟Breaker:Motor Driver、IO/PM Module。',
+          ja:'1.3.3. Power Supply & Interlock — ISO Sub Electric Panel\n\nISO Sub Electric Panel(左側)でも同様にBreakerをオンにします:Motor Driver、IO/PM Module。',
+          vi:'1.3.3. Power Supply & Interlock — ISO Sub Electric Panel\n\nBật Breaker theo cùng cách tại ISO Sub Electric Panel (bên trái): Motor Driver, IO/PM Module.'
+        }},
+        {img:cmImg('A','nbga',63),tx:{
+          en:'1.3.3. Power Supply & Interlock — Utility Panel Lamp\n\nThe Utility Panel lamp lights only when the CP01 Power Lamp breaker is on. Not included for Intel-spec equipment.',
+          ko:'1.3.3. Power Supply & Interlock — Utility Panel Lamp\n\nCP01 Power Lamp Breaker를 켜야만 Utility Panel Lamp가 켜집니다. Intel Spec 설비는 포함되지 않습니다.',
+          zhCN:'1.3.3. Power Supply & Interlock — Utility Panel Lamp\n\n只有开启CP01 Power Lamp Breaker,Utility Panel Lamp才会亮起。Intel Spec设备不包含此项。',
+          zhTW:'1.3.3. Power Supply & Interlock — Utility Panel Lamp\n\n只有開啟CP01 Power Lamp Breaker,Utility Panel Lamp才會亮起。Intel Spec設備不包含此項。',
+          ja:'1.3.3. Power Supply & Interlock — Utility Panel Lamp\n\nCP01 Power Lamp Breakerをオンにした場合のみUtility Panel Lampが点灯します。Intel仕様設備には含まれません。',
+          vi:'1.3.3. Power Supply & Interlock — Utility Panel Lamp\n\nĐèn Utility Panel chỉ sáng khi bật Breaker CP01 Power Lamp. Không có ở thiết bị bản Intel.'
+        }},
+        {img:cmImg('A','nbga',64),tx:{
+          en:'1.3.3. Power Supply & Interlock — Auto/Teach Mode\n\nAuto Mode: motor power is supplied only when all upper doors are closed and locked. On an alarm during automatic operation: (1) click Reset, (2) release the Door Interlock, (3) open the door and resolve the alarm, (4) close the door and switch the interlock to Lock, (5) click Lot Start to resume. Teach Mode: motor power can be supplied even with the upper door open/unlocked. Auto/Teach mode can be switched via the Handler program\'s output.',
+          ko:'1.3.3. Power Supply & Interlock — Auto/Teach Mode\n\nAuto Mode: 모든 상부 도어가 닫히고 잠겼을 때만 Motor 전원이 공급됩니다. 자동 운전 중 알람 발생 시: (1) Reset 클릭, (2) Door Interlock 해제, (3) 도어를 열고 알람 지점 해결, (4) 도어를 닫고 Interlock을 Lock으로 전환, (5) Lot Start를 눌러 재개. Teach Mode: 상부 도어가 열려 있거나 잠겨 있지 않아도 Motor 전원이 공급됩니다. Auto/Teach 모드는 Handler Program의 출력으로 전환할 수 있습니다.',
+          zhCN:'1.3.3. Power Supply & Interlock — Auto/Teach Mode\n\nAuto Mode:仅当所有上部門都关闭并锁定时才供应Motor电源。自动运行中发生报警时:(1)点击Reset,(2)解除Door Interlock,(3)打开门解决报警点,(4)关门并将Interlock切换为Lock,(5)点击Lot Start恢复运行。Teach Mode:即使上部門打开或未锁定,也可供应Motor电源。Auto/Teach模式可通过Handler Program的输出切换。',
+          zhTW:'1.3.3. Power Supply & Interlock — Auto/Teach Mode\n\nAuto Mode:僅當所有上部門都關閉並鎖定時才供應Motor電源。自動運行中發生警報時:(1)點擊Reset,(2)解除Door Interlock,(3)開門解決警報點,(4)關門並將Interlock切換為Lock,(5)點擊Lot Start恢復運行。Teach Mode:即使上部門開啟或未鎖定,也可供應Motor電源。Auto/Teach模式可透過Handler Program的輸出切換。',
+          ja:'1.3.3. Power Supply & Interlock — Auto/Teach Mode\n\nAuto Mode:上部ドアがすべて閉じてロックされた時のみMotor電源が供給されます。自動運転中にアラームが発生した場合:(1)Resetをクリック、(2)Door Interlockを解除、(3)ドアを開けてアラーム箇所を解決、(4)ドアを閉めてInterlockをLockに切替、(5)Lot Startを押して再開。Teach Mode:上部ドアが開いている・ロックされていなくてもMotor電源を供給できます。Auto/TeachモードはHandler Programの出力で切り替え可能です。',
+          vi:'1.3.3. Power Supply & Interlock — Auto/Teach Mode\n\nAuto Mode: chỉ cấp nguồn Motor khi mọi cửa trên đã đóng và khóa. Khi có cảnh báo trong lúc vận hành tự động: (1) nhấn Reset, (2) mở khóa Door Interlock, (3) mở cửa và xử lý điểm cảnh báo, (4) đóng cửa và chuyển Interlock sang Lock, (5) nhấn Lot Start để tiếp tục. Teach Mode: vẫn cấp nguồn Motor được dù cửa trên mở/chưa khóa. Chế độ Auto/Teach có thể chuyển qua đầu ra của Handler Program.'
+        }},
+        {img:cmImg('A','nbga',65),tx:{
+          en:'1.3.3. Power Supply & Interlock — EMS Buttons (SEMCO, SEMV, Kyocera)\n\nTo supply motor power, all 4 EMS (Emergency Stop Switch) buttons on the equipment must remain in the pulled (released) state — pushing even one cuts motor power. EMS buttons are the emergency motor-power cutoff.',
+          ko:'1.3.3. Power Supply & Interlock — EMS Buttons (SEMCO, SEMV, Kyocera)\n\nMotor 전원을 공급하려면 설비의 EMS(Emergency Stop Switch) 버튼 4개가 모두 당겨진(풀린) 상태여야 합니다 — 하나라도 눌리면 Motor 전원이 차단됩니다. EMS 버튼은 비상 시 Motor 전원을 차단하는 용도입니다.',
+          zhCN:'1.3.3. Power Supply & Interlock — EMS Buttons (SEMCO, SEMV, Kyocera)\n\n要供应Motor电源,设备上4个EMS(Emergency Stop Switch)按钮都必须处于拉出(释放)状态——只要有一个被按下,Motor电源就会被切断。EMS按钮用于紧急情况下切断Motor电源。',
+          zhTW:'1.3.3. Power Supply & Interlock — EMS Buttons (SEMCO, SEMV, Kyocera)\n\n要供應Motor電源,設備上4個EMS(Emergency Stop Switch)按鈕都必須處於拉出(釋放)狀態——只要有一個被按下,Motor電源就會被切斷。EMS按鈕用於緊急情況下切斷Motor電源。',
+          ja:'1.3.3. Power Supply & Interlock — EMS Buttons (SEMCO, SEMV, Kyocera)\n\nMotor電源を供給するには、設備の4個のEMS(Emergency Stop Switch)ボタンがすべて引かれた(解放された)状態である必要があります——1つでも押されるとMotor電源が遮断されます。EMSボタンは緊急時にMotor電源を遮断するためのものです。',
+          vi:'1.3.3. Power Supply & Interlock — EMS Buttons (SEMCO, SEMV, Kyocera)\n\nĐể cấp nguồn Motor, cả 4 nút EMS (Emergency Stop Switch) trên thiết bị phải ở trạng thái kéo ra (nhả) — chỉ cần một nút bị nhấn, nguồn Motor sẽ bị cắt. Nút EMS dùng để cắt khẩn cấp nguồn Motor.'
+        }},
+        {img:cmImg('A','nbga',66),tx:{
+          en:'1.3.3. Power Supply & Interlock — EMS Buttons (AT&S, Intel, Nanya)\n\nSame as above: all 4 EMS buttons must remain pulled to supply motor power — pushing even one cuts motor power.',
+          ko:'1.3.3. Power Supply & Interlock — EMS Buttons (AT&S, Intel, Nanya)\n\n위와 동일: Motor 전원 공급을 위해 EMS 버튼 4개가 모두 당겨져 있어야 하며, 하나라도 눌리면 Motor 전원이 차단됩니다.',
+          zhCN:'1.3.3. Power Supply & Interlock — EMS Buttons (AT&S, Intel, Nanya)\n\n与上述相同:要供应Motor电源,4个EMS按钮都必须保持拉出状态,只要有一个被按下,Motor电源就会被切断。',
+          zhTW:'1.3.3. Power Supply & Interlock — EMS Buttons (AT&S, Intel, Nanya)\n\n與上述相同:要供應Motor電源,4個EMS按鈕都必須保持拉出狀態,只要有一個被按下,Motor電源就會被切斷。',
+          ja:'1.3.3. Power Supply & Interlock — EMS Buttons (AT&S, Intel, Nanya)\n\n上記と同様:Motor電源を供給するには4個のEMSボタンがすべて引かれた状態を保つ必要があり、1つでも押されるとMotor電源が遮断されます。',
+          vi:'1.3.3. Power Supply & Interlock — EMS Buttons (AT&S, Intel, Nanya)\n\nGiống như trên: để cấp nguồn Motor, cả 4 nút EMS phải giữ trạng thái kéo ra — chỉ cần một nút bị nhấn, nguồn Motor sẽ bị cắt.'
+        }},
+        {img:cmImg('A','nbga',67),tx:{
+          en:'1.3.3. Power Supply & Interlock — Lower-Door Fan\n\nTo power the fan in the lower door, all lower doors must be closed. The main-equipment fan and dust-suppression-equipment fan switch independently, and power is supplied automatically via a magnetic proximity sensor (cannot be turned on manually).',
+          ko:'1.3.3. Power Supply & Interlock — 하부 도어 Fan\n\n하부 도어의 Fan에 전원을 공급하려면 모든 하부 도어가 닫혀 있어야 합니다. Main 설비 Fan과 제진 설비 Fan은 독립적으로 On/Off되며, 전원은 Magnetic Proximity Sensor를 통해 자동으로 공급됩니다(수동 On 불가).',
+          zhCN:'1.3.3. Power Supply & Interlock — 下部門風扇\n\n要为下部門的风扇供电,所有下部門都必须关闭。Main设备风扇与防振设备风扇各自独立开关,电源通过Magnetic Proximity Sensor自动供应(无法手动开启)。',
+          zhTW:'1.3.3. Power Supply & Interlock — 下部門風扇\n\n要為下部門的風扇供電,所有下部門都必須關閉。Main設備風扇與防震設備風扇各自獨立開關,電源透過Magnetic Proximity Sensor自動供應(無法手動開啟)。',
+          ja:'1.3.3. Power Supply & Interlock — 下部ドアFan\n\n下部ドアのFanに電源を供給するには、すべての下部ドアが閉まっている必要があります。Main設備FanとDust Suppression設備Fanは独立してオン/オフし、電源はMagnetic Proximity Sensorを介して自動供給されます(手動オン不可)。',
+          vi:'1.3.3. Power Supply & Interlock — Quạt cửa dưới\n\nĐể cấp nguồn cho quạt ở cửa dưới, tất cả cửa dưới phải đóng. Quạt thiết bị chính và quạt thiết bị chống rung bật/tắt độc lập, nguồn được cấp tự động qua Magnetic Proximity Sensor (không thể bật thủ công).'
+        }},
+        {img:cmImg('A','nbga',68),tx:{
+          en:'1.3.3. Power Supply & Interlock — UPS\n\nTo power the Host PC, the UPS must be on. Turn the UPS off during shipping or power-related work. No UPS for Intel-spec equipment (installation status and specification vary by customer).',
+          ko:'1.3.3. Power Supply & Interlock — UPS\n\nHost PC에 전원을 공급하려면 UPS가 켜져 있어야 합니다. 출하·전원 관련 작업 시에는 UPS 전원을 꺼야 합니다. Intel Spec 설비는 UPS가 없습니다(설치 유무·Spec은 고객사마다 다름).',
+          zhCN:'1.3.3. Power Supply & Interlock — UPS\n\n要为Host PC供电,UPS必须开启。出货·电源相关作业时应关闭UPS电源。Intel Spec设备无UPS(是否安装及Spec因客户而异)。',
+          zhTW:'1.3.3. Power Supply & Interlock — UPS\n\n要為Host PC供電,UPS必須開啟。出貨·電源相關作業時應關閉UPS電源。Intel Spec設備無UPS(是否安裝及Spec因客戶而異)。',
+          ja:'1.3.3. Power Supply & Interlock — UPS\n\nHost PCに電源を供給するにはUPSがオンである必要があります。出荷・電源関連作業時はUPS電源をオフにします。Intel仕様設備にはUPSはありません(設置有無・仕様は顧客により異なります)。',
+          vi:'1.3.3. Power Supply & Interlock — UPS\n\nĐể cấp nguồn cho Host PC, UPS phải bật. Khi xuất xưởng hoặc làm việc liên quan đến nguồn, phải tắt UPS. Thiết bị bản Intel không có UPS (tình trạng lắp đặt/Spec khác nhau tùy khách hàng).'
+        }},
+        {img:cmImg('A','nbga',69),tx:{
+          en:'1.3.3. Power Supply & Interlock — Power Strip\n\nTo power controllers such as the PC and LED Controller, the Power Strip must be turned on.',
+          ko:'1.3.3. Power Supply & Interlock — Power Strip\n\nPC·LED Controller 등 Controller에 전원을 공급하려면 Power Strip을 켜야 합니다.',
+          zhCN:'1.3.3. Power Supply & Interlock — Power Strip\n\n要为PC·LED Controller等Controller供电,必须开启Power Strip。',
+          zhTW:'1.3.3. Power Supply & Interlock — Power Strip\n\n要為PC·LED Controller等Controller供電,必須開啟Power Strip。',
+          ja:'1.3.3. Power Supply & Interlock — Power Strip\n\nPC・LED Controller等のControllerに電源を供給するにはPower Stripをオンにする必要があります。',
+          vi:'1.3.3. Power Supply & Interlock — Power Strip\n\nĐể cấp nguồn cho các Controller như PC·LED Controller, phải bật Power Strip.'
+        }},
+        {img:cmImg('A','nbga',70),tx:{
+          en:'1.3.3. Power Supply & Interlock — Main Air Regulator #1\n\nAdjust the regulator so each air regulator\'s pressure stays at 4–6bar (monitored via input signal). Supplies: Indexer Finger, Stacker, Elevator, Multi Sorter, Air Gun, TTM.',
+          ko:'1.3.3. Power Supply & Interlock — Main Air Regulator #1\n\n각 Air Regulator 압력이 4~6bar로 유지되도록 조정합니다(입력 신호로 모니터링). 공급 대상: Indexer Finger, Stacker, Elevator, Multi Sorter, Air Gun, TTM.',
+          zhCN:'1.3.3. Power Supply & Interlock — Main Air Regulator #1\n\n调整使各Air Regulator压力维持在4~6bar(以输入信号监控)。供应对象:Indexer Finger、Stacker、Elevator、Multi Sorter、Air Gun、TTM。',
+          zhTW:'1.3.3. Power Supply & Interlock — Main Air Regulator #1\n\n調整使各Air Regulator壓力維持在4~6bar(以輸入訊號監控)。供應對象:Indexer Finger、Stacker、Elevator、Multi Sorter、Air Gun、TTM。',
+          ja:'1.3.3. Power Supply & Interlock — Main Air Regulator #1\n\n各Air Regulatorの圧力が4~6barに維持されるよう調整します(入力信号でモニタリング)。供給先:Indexer Finger、Stacker、Elevator、Multi Sorter、Air Gun、TTM。',
+          vi:'1.3.3. Power Supply & Interlock — Main Air Regulator #1\n\nChỉnh để mỗi Air Regulator giữ áp suất 4–6bar (giám sát qua tín hiệu đầu vào). Cấp cho: Indexer Finger, Stacker, Elevator, Multi Sorter, Air Gun, TTM.'
+        }},
+        {img:cmImg('A','nbga',71),tx:{
+          en:'1.3.3. Power Supply & Interlock — Main Air Regulator #2\n\nAdjust the regulator so each air regulator\'s pressure stays at 4–6bar (monitored via input signal). Supplies: JIG Align/Clamp, TSM, ISOlator.',
+          ko:'1.3.3. Power Supply & Interlock — Main Air Regulator #2\n\n각 Air Regulator 압력이 4~6bar로 유지되도록 조정합니다(입력 신호로 모니터링). 공급 대상: JIG Align·Clamp, TSM, ISOlator.',
+          zhCN:'1.3.3. Power Supply & Interlock — Main Air Regulator #2\n\n调整使各Air Regulator压力维持在4~6bar(以输入信号监控)。供应对象:JIG Align·Clamp、TSM、ISOlator。',
+          zhTW:'1.3.3. Power Supply & Interlock — Main Air Regulator #2\n\n調整使各Air Regulator壓力維持在4~6bar(以輸入訊號監控)。供應對象:JIG Align·Clamp、TSM、ISOlator。',
+          ja:'1.3.3. Power Supply & Interlock — Main Air Regulator #2\n\n各Air Regulatorの圧力が4~6barに維持されるよう調整します(入力信号でモニタリング)。供給先:JIG Align・Clamp、TSM、ISOlator。',
+          vi:'1.3.3. Power Supply & Interlock — Main Air Regulator #2\n\nChỉnh để mỗi Air Regulator giữ áp suất 4–6bar (giám sát qua tín hiệu đầu vào). Cấp cho: JIG Align·Clamp, TSM, ISOlator.'
+        }},
+        {img:cmImg('A','nbga',72),tx:{
+          en:'1.3.3. Power Supply & Interlock — Operation Panel\n\nWith all breakers on, the Power Off lamp lights, and the Reset lamp blinks every ~500ms. Pressing Power On lights that lamp and turns off Power Off\'s lamp. In Teach mode, pressing Reset with all EMS pulled supplies motor power; in Auto mode, this also requires all upper doors locked (unlocking cuts motor power). Buttons: POWER ON = IO/Driver power on; POWER OFF = IO/Driver power off; START = run start; STOP = run stop; RESET = motor power on (while Reset flashes).',
+          ko:'1.3.3. Power Supply & Interlock — Operation Panel\n\n모든 Breaker가 켜지면 Power Off Lamp가 켜지고, Reset Lamp는 약 500ms 주기로 깜빡입니다. Power On을 누르면 해당 Lamp가 켜지고 Power Off Lamp는 꺼집니다. Teach Mode에서는 모든 EMS가 당겨진 상태에서 Reset을 누르면 Motor 전원이 공급되며, Auto Mode에서는 추가로 모든 상부 도어가 잠겨 있어야 합니다(잠금 해제 시 Motor 전원 차단). 버튼: POWER ON=IO·Driver 전원 On; POWER OFF=IO·Driver 전원 Off; START=운전 시작; STOP=운전 정지; RESET=Motor 전원 On(Reset 점멸 중).',
+          zhCN:'1.3.3. Power Supply & Interlock — Operation Panel\n\n所有Breaker开启后,Power Off Lamp亮起,Reset Lamp以约500ms周期闪烁。按下Power On后该Lamp亮起,Power Off Lamp熄灭。Teach Mode下,所有EMS拉出状态按Reset供应Motor电源;Auto Mode下还需所有上部門锁定(解锁则切断Motor电源)。按钮:POWER ON=IO·Driver电源开;POWER OFF=IO·Driver电源关;START=运行开始;STOP=运行停止;RESET=Motor电源开(Reset闪烁时)。',
+          zhTW:'1.3.3. Power Supply & Interlock — Operation Panel\n\n所有Breaker開啟後,Power Off Lamp亮起,Reset Lamp以約500ms週期閃爍。按下Power On後該Lamp亮起,Power Off Lamp熄滅。Teach Mode下,所有EMS拉出狀態按Reset供應Motor電源;Auto Mode下還需所有上部門鎖定(解鎖則切斷Motor電源)。按鈕:POWER ON=IO·Driver電源開;POWER OFF=IO·Driver電源關;START=運行開始;STOP=運行停止;RESET=Motor電源開(Reset閃爍時)。',
+          ja:'1.3.3. Power Supply & Interlock — Operation Panel\n\nすべてのBreakerがオンになるとPower Off Lampが点灯し、Reset Lampは約500ms周期で点滅します。Power Onを押すとそのLampが点灯しPower Off Lampは消灯します。Teach Modeでは全EMSが引かれた状態でResetを押すとMotor電源が供給され、Auto Modeではさらに上部ドアがすべてロックされている必要があります(解錠するとMotor電源が遮断)。ボタン:POWER ON=IO・Driver電源On;POWER OFF=IO・Driver電源Off;START=運転開始;STOP=運転停止;RESET=Motor電源On(Reset点滅中)。',
+          vi:'1.3.3. Power Supply & Interlock — Operation Panel\n\nKhi mọi Breaker đã bật, đèn Power Off sáng, đèn Reset nhấp nháy mỗi ~500ms. Nhấn Power On làm đèn đó sáng và đèn Power Off tắt. Ở Teach Mode, nhấn Reset khi mọi EMS đã kéo ra sẽ cấp nguồn Motor; ở Auto Mode còn cần mọi cửa trên đã khóa (mở khóa sẽ cắt nguồn Motor). Nút: POWER ON = bật nguồn IO·Driver; POWER OFF = tắt nguồn IO·Driver; START = bắt đầu chạy; STOP = dừng chạy; RESET = bật nguồn Motor (khi đèn Reset nhấp nháy).'
+        }},
+        {img:cmImg('A','nbga',73),tx:{
+          en:'Introduce — this section covers Hardware Configuration & System: Layout & Component, Safety Sticker, Power Supply & Interlock System, and Equipment Automatic Sequence.',
+          ko:'Introduce — Hardware Configuration & System: Layout & Component, Safety Sticker, Power Supply & Interlock System, Equipment Automatic Sequence를 다룹니다.',
+          zhCN:'Introduce——本节介绍Hardware Configuration & System:Layout & Component、Safety Sticker、Power Supply & Interlock System、Equipment Automatic Sequence。',
+          zhTW:'Introduce——本節介紹Hardware Configuration & System:Layout & Component、Safety Sticker、Power Supply & Interlock System、Equipment Automatic Sequence。',
+          ja:'Introduce——本節ではHardware Configuration & System:Layout & Component、Safety Sticker、Power Supply & Interlock System、Equipment Automatic Sequenceを扱います。',
+          vi:'Introduce — phần này đề cập đến Hardware Configuration & System: Layout & Component, Safety Sticker, Power Supply & Interlock System, Equipment Automatic Sequence.'
+        }},
+        {img:cmImg('A','nbga',74),tx:{
+          en:'1.3.4. Equipment Automatic Sequence — Overview\n\nThe full cycle: 1. Load tray → 2. Read the barcode of the unit → 3. 2D inspection → 4. Place & Pick tray → 5. 3D inspection → 6. Tray sorting → 7. Unit sorting → 8. Unload tray.',
+          ko:'1.3.4. Equipment Automatic Sequence — 전체 개요\n\n전체 사이클: 1. Tray Load → 2. Unit Barcode 읽기 → 3. 2D Inspection → 4. Tray Place & Pick → 5. 3D Inspection → 6. Tray Sorting → 7. Unit Sorting → 8. Tray Unload.',
+          zhCN:'1.3.4. Equipment Automatic Sequence — 整体概览\n\n完整循环:1. Tray Load → 2. 读取Unit Barcode → 3. 2D Inspection → 4. Tray Place & Pick → 5. 3D Inspection → 6. Tray Sorting → 7. Unit Sorting → 8. Tray Unload。',
+          zhTW:'1.3.4. Equipment Automatic Sequence — 整體概覽\n\n完整循環:1. Tray Load → 2. 讀取Unit Barcode → 3. 2D Inspection → 4. Tray Place & Pick → 5. 3D Inspection → 6. Tray Sorting → 7. Unit Sorting → 8. Tray Unload。',
+          ja:'1.3.4. Equipment Automatic Sequence — 全体概要\n\n全サイクル:1. Tray Load → 2. UnitのBarcode読み取り → 3. 2D Inspection → 4. Tray Place & Pick → 5. 3D Inspection → 6. Tray Sorting → 7. Unit Sorting → 8. Tray Unload。',
+          vi:'1.3.4. Equipment Automatic Sequence — Tổng quan\n\nChu trình đầy đủ: 1. Load tray → 2. Đọc Barcode của Unit → 3. 2D Inspection → 4. Place & Pick tray → 5. 3D Inspection → 6. Tray Sorting → 7. Unit Sorting → 8. Unload Tray.'
+        }},
+        {img:cmImg('A','nbga',75),tx:{
+          en:'1.3.4. Equipment Automatic Sequence — Empty Tray\n\nPrepare the Empty Tray: the Elevator and Stacker separate each tray, the Indexer moves it to the TSM, and the TSM moves the Empty Tray to the Reject Rail.',
+          ko:'1.3.4. Equipment Automatic Sequence — Empty Tray\n\nEmpty Tray 준비: Elevator·Stacker로 Tray를 한 장씩 분리하고, Indexer가 TSM으로 이송하며, TSM이 Empty Tray를 Reject Rail로 이동시킵니다.',
+          zhCN:'1.3.4. Equipment Automatic Sequence — Empty Tray\n\n准备Empty Tray:用Elevator·Stacker逐张分离Tray,由Indexer移送至TSM,TSM将Empty Tray移至Reject Rail。',
+          zhTW:'1.3.4. Equipment Automatic Sequence — Empty Tray\n\n準備Empty Tray:用Elevator·Stacker逐張分離Tray,由Indexer移送至TSM,TSM將Empty Tray移至Reject Rail。',
+          ja:'1.3.4. Equipment Automatic Sequence — Empty Tray\n\nEmpty Trayの準備:Elevator・Stackerで1枚ずつTrayを分離し、IndexerがTSMへ移送、TSMがEmpty TrayをReject Railへ移動させます。',
+          vi:'1.3.4. Equipment Automatic Sequence — Empty Tray\n\nChuẩn bị Empty Tray: Elevator·Stacker tách từng Tray, Indexer chuyển đến TSM, TSM chuyển Empty Tray đến Reject Rail.'
+        }},
+        {img:cmImg('A','nbga',76),tx:{
+          en:'1.3.4. Equipment Automatic Sequence — Load Tray\n\nPlace the tray with units in the Loader; the Elevator and Stacker separate each tray, then move the separated tray to the 2D inspection position.',
+          ko:'1.3.4. Equipment Automatic Sequence — Load Tray\n\nUnit이 담긴 Tray를 Loader에 투입하고, Elevator·Stacker로 Tray를 한 장씩 분리한 뒤 2D Inspection 위치로 이동시킵니다.',
+          zhCN:'1.3.4. Equipment Automatic Sequence — Load Tray\n\n将装有Unit的Tray投入Loader,用Elevator·Stacker逐张分离Tray,再移至2D Inspection位置。',
+          zhTW:'1.3.4. Equipment Automatic Sequence — Load Tray\n\n將裝有Unit的Tray投入Loader,用Elevator·Stacker逐張分離Tray,再移至2D Inspection位置。',
+          ja:'1.3.4. Equipment Automatic Sequence — Load Tray\n\nUnitの入ったTrayをLoaderに投入し、Elevator・Stackerで1枚ずつ分離した後、2D Inspection位置へ移動させます。',
+          vi:'1.3.4. Equipment Automatic Sequence — Load Tray\n\nNạp Tray chứa Unit vào Loader, Elevator·Stacker tách từng Tray, sau đó chuyển đến vị trí 2D Inspection.'
+        }},
+        {img:cmImg('A','nbga',77),tx:{
+          en:'1.3.4. Equipment Automatic Sequence — Read Barcode of Unit\n\nMoves to the unit under inspection and reads the barcode within the R.O.I. area (supports both OCR Barcode and Matrix Barcode reading).',
+          ko:'1.3.4. Equipment Automatic Sequence — Read Barcode of Unit\n\n검사 대상 Unit으로 이동해 R.O.I. 영역의 Barcode를 읽습니다 (OCR Barcode·Matrix Barcode 모두 지원).',
+          zhCN:'1.3.4. Equipment Automatic Sequence — Read Barcode of Unit\n\n移动到检测对象Unit并读取R.O.I.区域的Barcode(支持OCR Barcode·Matrix Barcode)。',
+          zhTW:'1.3.4. Equipment Automatic Sequence — Read Barcode of Unit\n\n移動到檢測對象Unit並讀取R.O.I.區域的Barcode(支援OCR Barcode·Matrix Barcode)。',
+          ja:'1.3.4. Equipment Automatic Sequence — Read Barcode of Unit\n\n検査対象のUnitへ移動し、R.O.I.領域のBarcodeを読み取ります(OCR Barcode・Matrix Barcodeいずれも対応)。',
+          vi:'1.3.4. Equipment Automatic Sequence — Read Barcode of Unit\n\nDi chuyển đến Unit cần kiểm tra và đọc Barcode trong vùng R.O.I. (hỗ trợ cả OCR Barcode và Matrix Barcode).'
+        }},
+        {img:cmImg('A','nbga',78),tx:{
+          en:'1.3.4. Equipment Automatic Sequence — 2D Inspection\n\nInspects the bump area of the unit; if the bump area is larger than one F.O.V., the inspection area is divided into two or more R.O.I. sections.',
+          ko:'1.3.4. Equipment Automatic Sequence — 2D Inspection\n\nUnit의 Bump 영역을 검사합니다. Bump 영역이 F.O.V. 1개보다 크면 검사 영역을 2개 이상의 R.O.I.로 나눕니다.',
+          zhCN:'1.3.4. Equipment Automatic Sequence — 2D Inspection\n\n检测Unit的Bump区域。若Bump区域大于1个F.O.V.,则将检测区域划分为2个以上的R.O.I.。',
+          zhTW:'1.3.4. Equipment Automatic Sequence — 2D Inspection\n\n檢測Unit的Bump區域。若Bump區域大於1個F.O.V.,則將檢測區域劃分為2個以上的R.O.I.。',
+          ja:'1.3.4. Equipment Automatic Sequence — 2D Inspection\n\nUnitのBump領域を検査します。Bump領域がF.O.V.1つより大きい場合、検査領域を2つ以上のR.O.I.に分割します。',
+          vi:'1.3.4. Equipment Automatic Sequence — 2D Inspection\n\nKiểm tra vùng Bump của Unit. Nếu vùng Bump lớn hơn 1 F.O.V., vùng kiểm tra được chia thành 2 R.O.I. trở lên.'
+        }},
+        {img:cmImg('A','nbga',79),tx:{
+          en:'1.3.4. Equipment Automatic Sequence — Place & Pick Tray (Loading)\n\nAfter 2D inspection completes, transfers the tray to the 3D inspection position (moved to Jig1 or Jig2).',
+          ko:'1.3.4. Equipment Automatic Sequence — Place & Pick Tray (Loading)\n\n2D Inspection이 끝나면 Tray를 3D Inspection 위치로 이송합니다 (Jig1 또는 Jig2로 이동).',
+          zhCN:'1.3.4. Equipment Automatic Sequence — Place & Pick Tray (Loading)\n\n2D Inspection完成后,将Tray传送至3D Inspection位置(移至Jig1或Jig2)。',
+          zhTW:'1.3.4. Equipment Automatic Sequence — Place & Pick Tray (Loading)\n\n2D Inspection完成後,將Tray傳送至3D Inspection位置(移至Jig1或Jig2)。',
+          ja:'1.3.4. Equipment Automatic Sequence — Place & Pick Tray (Loading)\n\n2D Inspection完了後、Trayを3D Inspection位置へ移送します(Jig1またはJig2へ移動)。',
+          vi:'1.3.4. Equipment Automatic Sequence — Place & Pick Tray (Loading)\n\nSau khi hoàn tất 2D Inspection, chuyển Tray đến vị trí 3D Inspection (chuyển đến Jig1 hoặc Jig2).'
+        }},
+        {img:cmImg('A','nbga',80),tx:{
+          en:'1.3.4. Equipment Automatic Sequence — 3D Inspection\n\nInspects the bump area of the unit; if the bump area is larger than one F.O.V., the inspection area is divided into two or more R.O.I. sections.',
+          ko:'1.3.4. Equipment Automatic Sequence — 3D Inspection\n\nUnit의 Bump 영역을 검사합니다. Bump 영역이 F.O.V. 1개보다 크면 검사 영역을 2개 이상의 R.O.I.로 나눕니다.',
+          zhCN:'1.3.4. Equipment Automatic Sequence — 3D Inspection\n\n检测Unit的Bump区域。若Bump区域大于1个F.O.V.,则将检测区域划分为2个以上的R.O.I.。',
+          zhTW:'1.3.4. Equipment Automatic Sequence — 3D Inspection\n\n檢測Unit的Bump區域。若Bump區域大於1個F.O.V.,則將檢測區域劃分為2個以上的R.O.I.。',
+          ja:'1.3.4. Equipment Automatic Sequence — 3D Inspection\n\nUnitのBump領域を検査します。Bump領域がF.O.V.1つより大きい場合、検査領域を2つ以上のR.O.I.に分割します。',
+          vi:'1.3.4. Equipment Automatic Sequence — 3D Inspection\n\nKiểm tra vùng Bump của Unit. Nếu vùng Bump lớn hơn 1 F.O.V., vùng kiểm tra được chia thành 2 R.O.I. trở lên.'
+        }},
+        {img:cmImg('A','nbga',81),tx:{
+          en:'1.3.4. Equipment Automatic Sequence — Place & Pick Tray (Unloading)\n\nTransfers the tray that has completed 3D inspection to the TTM.',
+          ko:'1.3.4. Equipment Automatic Sequence — Place & Pick Tray (Unloading)\n\n3D Inspection이 끝난 Tray를 TTM 위치로 이송하는 동작입니다.',
+          zhCN:'1.3.4. Equipment Automatic Sequence — Place & Pick Tray (Unloading)\n\n将完成3D Inspection的Tray传送至TTM位置的动作。',
+          zhTW:'1.3.4. Equipment Automatic Sequence — Place & Pick Tray (Unloading)\n\n將完成3D Inspection的Tray傳送至TTM位置的動作。',
+          ja:'1.3.4. Equipment Automatic Sequence — Place & Pick Tray (Unloading)\n\n3D Inspectionが完了したTrayをTTM位置へ移送する動作です。',
+          vi:'1.3.4. Equipment Automatic Sequence — Place & Pick Tray (Unloading)\n\nThao tác chuyển Tray đã hoàn tất 3D Inspection đến vị trí TTM.'
+        }},
+        {img:cmImg('A','nbga',82),tx:{
+          en:'1.3.4. Equipment Automatic Sequence — Tray Sorting\n\nMoves the tray to the Buffer or Good rail in the order inspection is completed.',
+          ko:'1.3.4. Equipment Automatic Sequence — Tray Sorting\n\n검사 완료 순서대로 Tray를 Buffer·Good Rail로 이동시킵니다.',
+          zhCN:'1.3.4. Equipment Automatic Sequence — Tray Sorting\n\n按检测完成顺序将Tray移至Buffer·Good Rail。',
+          zhTW:'1.3.4. Equipment Automatic Sequence — Tray Sorting\n\n按檢測完成順序將Tray移至Buffer·Good Rail。',
+          ja:'1.3.4. Equipment Automatic Sequence — Tray Sorting\n\n検査完了順にTrayをBuffer・Good Railへ移動させます。',
+          vi:'1.3.4. Equipment Automatic Sequence — Tray Sorting\n\nDi chuyển Tray đến Rail Buffer·Good theo thứ tự hoàn tất kiểm tra.'
+        }},
+        {img:cmImg('A','nbga',83),tx:{
+          en:'1.3.4. Equipment Automatic Sequence — Unit Sorting\n\nInspected units are classified as Good or Reject.',
+          ko:'1.3.4. Equipment Automatic Sequence — Unit Sorting\n\n검사된 Unit을 Good·Reject로 분류합니다.',
+          zhCN:'1.3.4. Equipment Automatic Sequence — Unit Sorting\n\n将已检测的Unit分类为Good·Reject。',
+          zhTW:'1.3.4. Equipment Automatic Sequence — Unit Sorting\n\n將已檢測的Unit分類為Good·Reject。',
+          ja:'1.3.4. Equipment Automatic Sequence — Unit Sorting\n\n検査済みのUnitをGood・Rejectに分類します。',
+          vi:'1.3.4. Equipment Automatic Sequence — Unit Sorting\n\nPhân loại Unit đã kiểm tra thành Good·Reject.'
+        }},
+        {img:cmImg('A','nbga',84),tx:{
+          en:'1.3.4. Equipment Automatic Sequence — Unload Tray\n\nUnloads the sorted tray from the equipment.',
+          ko:'1.3.4. Equipment Automatic Sequence — Unload Tray\n\nSorting이 끝난 Tray를 설비에서 배출합니다.',
+          zhCN:'1.3.4. Equipment Automatic Sequence — Unload Tray\n\n将Sorting完成的Tray从设备排出。',
+          zhTW:'1.3.4. Equipment Automatic Sequence — Unload Tray\n\n將Sorting完成的Tray從設備排出。',
+          ja:'1.3.4. Equipment Automatic Sequence — Unload Tray\n\nSortingが完了したTrayを設備から排出します。',
+          vi:'1.3.4. Equipment Automatic Sequence — Unload Tray\n\nĐẩy Tray đã Sorting ra khỏi thiết bị.'
+        }},
+        {img:cmImg('A','nbga',85),tx:{
+          en:'Operation — this section covers Power On & Off: Electric Power On Sequence, Controller/PC/Camera Power, and Turn Off Sequence.',
+          ko:'Operation — Power On & Off: Electric Power On Sequence, Controller/PC/Camera Power, Turn Off Sequence를 다룹니다.',
+          zhCN:'Operation——本节介绍Power On & Off:Electric Power On Sequence、Controller/PC/Camera Power、Turn Off Sequence。',
+          zhTW:'Operation——本節介紹Power On & Off:Electric Power On Sequence、Controller/PC/Camera Power、Turn Off Sequence。',
+          ja:'Operation——本節ではPower On & Off:Electric Power On Sequence、Controller/PC/Camera Power、Turn Off Sequenceを扱います。',
+          vi:'Operation — phần này đề cập đến Power On & Off: Electric Power On Sequence, Controller/PC/Camera Power, Turn Off Sequence.'
+        }},
+        {img:cmImg('A','nbga',86),tx:{
+          en:'2.1.1. Electric Power On & Off Sequence — Main Breaker\n\nTurn on the main circuit breaker on the equipment\'s main panel. Failure to follow the On sequence may damage electrical components. The Release Key opens the door without powering off (Intel-oriented breakers use a different model, so the key location differs).',
+          ko:'2.1.1. Electric Power On & Off Sequence — Main Breaker\n\n설비 Main Panel의 주 Breaker를 켭니다. On Sequence를 따르지 않으면 전장 부품이 손상될 수 있습니다. Release Key는 전원을 끄지 않고 도어를 여는 데 사용됩니다(Intel향 주 Breaker는 모델이 달라 Release Key 위치가 다름).',
+          zhCN:'2.1.1. Electric Power On & Off Sequence — Main Breaker\n\n開啟設備Main Panel的主Breaker。若不遵循On Sequence,可能損壞電氣元件。Release Key用於在不斷電的情況下開門(Intel向主Breaker型號不同,Release Key位置也不同)。',
+          zhTW:'2.1.1. Electric Power On & Off Sequence — Main Breaker\n\n開啟設備Main Panel的主Breaker。若不遵循On Sequence,可能損壞電氣元件。Release Key用於在不斷電的情況下開門(Intel向主Breaker型號不同,Release Key位置也不同)。',
+          ja:'2.1.1. Electric Power On & Off Sequence — Main Breaker\n\n設備Main Panelの主Breakerをオンにします。On Sequenceに従わないと電装部品が故障する恐れがあります。Release Keyは電源を切らずにドアを開けるために使用します(Intel向け主Breakerは型番が異なるためRelease Keyの位置も異なります)。',
+          vi:'2.1.1. Electric Power On & Off Sequence — Main Breaker\n\nBật Breaker chính trên Main Panel của thiết bị. Không tuân theo On Sequence có thể làm hỏng linh kiện điện. Release Key dùng để mở cửa mà không cần tắt nguồn (Breaker chính bản Intel dùng model khác nên vị trí Release Key cũng khác).'
+        }},
+        {img:cmImg('A','nbga',87),tx:{
+          en:'2.1.1. Electric Power On & Off Sequence — Circuit Breakers\n\nTurn on all breakers inside the facility: Main Sub Electric Panel, Main Electric Panel, ISO Sub Electric Panel.',
+          ko:'2.1.1. Electric Power On & Off Sequence — Circuit Breakers\n\n설비 내부의 모든 Breaker를 켭니다: Main Sub Electric Panel, Main Electric Panel, ISO Sub Electric Panel.',
+          zhCN:'2.1.1. Electric Power On & Off Sequence — Circuit Breakers\n\n开启设备内部所有Breaker:Main Sub Electric Panel、Main Electric Panel、ISO Sub Electric Panel。',
+          zhTW:'2.1.1. Electric Power On & Off Sequence — Circuit Breakers\n\n開啟設備內部所有Breaker:Main Sub Electric Panel、Main Electric Panel、ISO Sub Electric Panel。',
+          ja:'2.1.1. Electric Power On & Off Sequence — Circuit Breakers\n\n設備内部のすべてのBreakerをオンにします:Main Sub Electric Panel、Main Electric Panel、ISO Sub Electric Panel。',
+          vi:'2.1.1. Electric Power On & Off Sequence — Circuit Breakers\n\nBật tất cả Breaker bên trong thiết bị: Main Sub Electric Panel, Main Electric Panel, ISO Sub Electric Panel.'
+        }},
+        {img:cmImg('A','nbga',88),tx:{
+          en:'2.1.1. Electric Power On & Off Sequence — UPS\n\nTurn on the UPS: (1) press the power button and select the power-on option, (2) pressing the Power button for 2–3 seconds turns it on or off. Installation status and specifications vary by customer.',
+          ko:'2.1.1. Electric Power On & Off Sequence — UPS\n\nUPS를 켭니다: (1) 전원 버튼을 눌러 Power On 옵션 선택, (2) Power 버튼을 2~3초간 누르면 On/Off 전환됩니다. 설치 유무·Spec은 고객사마다 다릅니다.',
+          zhCN:'2.1.1. Electric Power On & Off Sequence — UPS\n\n开启UPS:(1)按电源按钮并选择开机选项,(2)按住Power按钮2~3秒即可开/关。是否安装及Spec因客户而异。',
+          zhTW:'2.1.1. Electric Power On & Off Sequence — UPS\n\n開啟UPS:(1)按電源按鈕並選擇開機選項,(2)按住Power按鈕2~3秒即可開/關。是否安裝及Spec因客戶而異。',
+          ja:'2.1.1. Electric Power On & Off Sequence — UPS\n\nUPSをオンにします:(1)電源ボタンを押しPower On オプションを選択、(2)Powerボタンを2~3秒押すとOn/Offが切り替わります。設置有無・仕様は顧客により異なります。',
+          vi:'2.1.1. Electric Power On & Off Sequence — UPS\n\nBật UPS: (1) nhấn nút nguồn và chọn tùy chọn bật nguồn, (2) nhấn giữ nút Power 2–3 giây để bật/tắt. Tình trạng lắp đặt/Spec khác nhau tùy khách hàng.'
+        }},
+        {img:cmImg('A','nbga',89),tx:{
+          en:'2.1.1. Electric Power On & Off Sequence — Power Strip\n\nTurn on the power strip. No power strip on NBGA facilities for Intel.',
+          ko:'2.1.1. Electric Power On & Off Sequence — Power Strip\n\nPower Strip을 켭니다. Intel향 NBGA 설비는 Power Strip이 없습니다.',
+          zhCN:'2.1.1. Electric Power On & Off Sequence — Power Strip\n\n开启Power Strip。Intel向NBGA设备无Power Strip。',
+          zhTW:'2.1.1. Electric Power On & Off Sequence — Power Strip\n\n開啟Power Strip。Intel向NBGA設備無Power Strip。',
+          ja:'2.1.1. Electric Power On & Off Sequence — Power Strip\n\nPower Stripをオンにします。Intel向けNBGA設備にはPower Stripはありません。',
+          vi:'2.1.1. Electric Power On & Off Sequence — Power Strip\n\nBật Power Strip. Thiết bị NBGA bản Intel không có Power Strip.'
+        }},
+        {img:cmImg('A','nbga',90),tx:{
+          en:'2.1.1. Electric Power On & Off Sequence — Operation Panel\n\nTurn on the power of the Operation Panel.',
+          ko:'2.1.1. Electric Power On & Off Sequence — Operation Panel\n\nOperation Panel의 전원을 켭니다.',
+          zhCN:'2.1.1. Electric Power On & Off Sequence — Operation Panel\n\n開啟Operation Panel的电源。',
+          zhTW:'2.1.1. Electric Power On & Off Sequence — Operation Panel\n\n開啟Operation Panel的電源。',
+          ja:'2.1.1. Electric Power On & Off Sequence — Operation Panel\n\nOperation Panelの電源をオンにします。',
+          vi:'2.1.1. Electric Power On & Off Sequence — Operation Panel\n\nBật nguồn Operation Panel.'
+        }},
+        {img:cmImg('A','nbga',91),tx:{
+          en:'Operation — this section covers Power On & Off: Electric Power On Sequence, Controller/PC/Camera Power, and Turn Off Sequence.',
+          ko:'Operation — Power On & Off: Electric Power On Sequence, Controller/PC/Camera Power, Turn Off Sequence를 다룹니다.',
+          zhCN:'Operation——本节介绍Power On & Off:Electric Power On Sequence、Controller/PC/Camera Power、Turn Off Sequence。',
+          zhTW:'Operation——本節介紹Power On & Off:Electric Power On Sequence、Controller/PC/Camera Power、Turn Off Sequence。',
+          ja:'Operation——本節ではPower On & Off:Electric Power On Sequence、Controller/PC/Camera Power、Turn Off Sequenceを扱います。',
+          vi:'Operation — phần này đề cập đến Power On & Off: Electric Power On Sequence, Controller/PC/Camera Power, Turn Off Sequence.'
+        }},
+        {img:cmImg('A','nbga',92),tx:{
+          en:'2.1.2. PC Power\n\nTurn on the Host, 2D, 3D#1, and 3D#2 PCs.',
+          ko:'2.1.2. PC Power\n\nHost, 2D, 3D#1, 3D#2 PC를 켭니다.',
+          zhCN:'2.1.2. PC Power\n\n开启Host、2D、3D#1、3D#2 PC。',
+          zhTW:'2.1.2. PC Power\n\n開啟Host、2D、3D#1、3D#2 PC。',
+          ja:'2.1.2. PC Power\n\nHost、2D、3D#1、3D#2 PCをオンにします。',
+          vi:'2.1.2. PC Power\n\nBật PC Host, 2D, 3D#1, 3D#2.'
+        }},
+        {img:cmImg('A','nbga',93),tx:{
+          en:'2.1.2. LED Controller Power\n\nTurn on the 2D, 3D#1, and 3D#2 LED Controllers.',
+          ko:'2.1.2. LED Controller Power\n\n2D, 3D#1, 3D#2 LED Controller를 켭니다.',
+          zhCN:'2.1.2. LED Controller Power\n\n开启2D、3D#1、3D#2 LED Controller。',
+          zhTW:'2.1.2. LED Controller Power\n\n開啟2D、3D#1、3D#2 LED Controller。',
+          ja:'2.1.2. LED Controller Power\n\n2D、3D#1、3D#2 LED Controllerをオンにします。',
+          vi:'2.1.2. LED Controller Power\n\nBật LED Controller 2D, 3D#1, 3D#2.'
+        }},
+        {img:cmImg('A','nbga',94),tx:{
+          en:'2.1.2. PZT Controller Power\n\nTurn on the 3D#1 and 3D#2 PZT Controllers (PI PZT Controller and Nanofaktur PZT Controller variants shown).',
+          ko:'2.1.2. PZT Controller Power\n\n3D#1, 3D#2 PZT Controller를 켭니다 (PI PZT Controller·Nanofaktur PZT Controller 모두 표시).',
+          zhCN:'2.1.2. PZT Controller Power\n\n开启3D#1、3D#2 PZT Controller(同时展示PI PZT Controller·Nanofaktur PZT Controller)。',
+          zhTW:'2.1.2. PZT Controller Power\n\n開啟3D#1、3D#2 PZT Controller(同時展示PI PZT Controller·Nanofaktur PZT Controller)。',
+          ja:'2.1.2. PZT Controller Power\n\n3D#1、3D#2 PZT Controllerをオンにします(PI PZT Controller・Nanofaktur PZT Controller両方表示)。',
+          vi:'2.1.2. PZT Controller Power\n\nBật PZT Controller 3D#1, 3D#2 (hiển thị cả PI PZT Controller và Nanofaktur PZT Controller).'
+        }},
+        {img:cmImg('A','nbga',95),tx:{
+          en:'2.1.2. AF Controller Power\n\nTurn on the 3D#1 and 3D#2 AF Controllers (Old-version and New-version AF Controller variants shown).',
+          ko:'2.1.2. AF Controller Power\n\n3D#1, 3D#2 AF Controller를 켭니다 (구버전·신버전 AF Controller 모두 표시).',
+          zhCN:'2.1.2. AF Controller Power\n\n开启3D#1、3D#2 AF Controller(同时展示旧版·新版AF Controller)。',
+          zhTW:'2.1.2. AF Controller Power\n\n開啟3D#1、3D#2 AF Controller(同時展示舊版·新版AF Controller)。',
+          ja:'2.1.2. AF Controller Power\n\n3D#1、3D#2 AF Controllerをオンにします(旧バージョン・新バージョンAF Controller両方表示)。',
+          vi:'2.1.2. AF Controller Power\n\nBật AF Controller 3D#1, 3D#2 (hiển thị cả phiên bản cũ và mới của AF Controller).'
+        }},
+        {img:cmImg('A','nbga',96),tx:{
+          en:'Operation — this section covers Power On & Off: Electric Power On Sequence, Controller/PC/Camera Power, and Turn Off Sequence.',
+          ko:'Operation — Power On & Off: Electric Power On Sequence, Controller/PC/Camera Power, Turn Off Sequence를 다룹니다.',
+          zhCN:'Operation——本节介绍Power On & Off:Electric Power On Sequence、Controller/PC/Camera Power、Turn Off Sequence。',
+          zhTW:'Operation——本節介紹Power On & Off:Electric Power On Sequence、Controller/PC/Camera Power、Turn Off Sequence。',
+          ja:'Operation——本節ではPower On & Off:Electric Power On Sequence、Controller/PC/Camera Power、Turn Off Sequenceを扱います。',
+          vi:'Operation — phần này đề cập đến Power On & Off: Electric Power On Sequence, Controller/PC/Camera Power, Turn Off Sequence.'
+        }},
+        {img:cmImg('A','nbga',97),tx:{
+          en:'2.1.3. Turn Off Sequence\n\nTurn off in the reverse order of turn-on: Controller (AF, LED, PZT, PC) → Operation Panel power off → Power Strip off → UPS off → CP off → Main Panel off. Turning off out of order may damage electrical components.',
+          ko:'2.1.3. Turn Off Sequence\n\n켤 때의 역순으로 끕니다: Controller(AF, LED, PZT, PC) → Operation Panel 전원 Off → Power Strip Off → UPS Off → CP Off → Main Panel Off. 순서를 지키지 않으면 전장 부품이 손상될 수 있습니다.',
+          zhCN:'2.1.3. Turn Off Sequence\n\n按开启时的相反顺序关闭:Controller(AF、LED、PZT、PC) → Operation Panel电源关闭 → Power Strip关闭 → UPS关闭 → CP关闭 → Main Panel关闭。未按顺序关闭可能损坏电气元件。',
+          zhTW:'2.1.3. Turn Off Sequence\n\n按開啟時的相反順序關閉:Controller(AF、LED、PZT、PC) → Operation Panel電源關閉 → Power Strip關閉 → UPS關閉 → CP關閉 → Main Panel關閉。未按順序關閉可能損壞電氣元件。',
+          ja:'2.1.3. Turn Off Sequence\n\nオンにした時の逆順でオフにします:Controller(AF、LED、PZT、PC) → Operation Panel電源オフ → Power Stripオフ → UPSオフ → CPオフ → Main Panelオフ。順序を守らないと電装部品が故障する恐れがあります。',
+          vi:'2.1.3. Turn Off Sequence\n\nTắt theo thứ tự ngược lại lúc bật: Controller (AF, LED, PZT, PC) → tắt nguồn Operation Panel → tắt Power Strip → tắt UPS → tắt CP → tắt Main Panel. Tắt sai thứ tự có thể làm hỏng linh kiện điện.'
+        }}
+      ]
+    }
+  },
+
   G:{
     smtv:{
       title:{ko:'G. Handler Teaching',en:'G. Handler Teaching',zhCN:'G. Handler Teaching',zhTW:'G. Handler Teaching',ja:'G. Handler Teaching'},

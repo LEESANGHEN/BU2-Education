@@ -225,6 +225,8 @@ input[type=text]:focus,input[type=date]:focus,input[type=email]:focus,input[type
 .auth-box .fg{margin-bottom:24px}
 .auth-box .fl{font-size:22px;margin-bottom:8px;color:#5b5b74}
 .auth-box input[type=email],.auth-box input[type=password]{padding:12px 18px;font-size:24px;border-radius:10px;background:#f6f6fa;border-color:#d9d9e4;color:#16162a}
+.auth-box .chkrow{font-size:16px!important;color:#3a3a4a!important}
+.auth-box .chkrow input[type=checkbox]{width:18px;height:18px}
 .auth-box .mfoot{margin-top:32px;padding-top:24px;border-top-color:#e9e9f2}
 .auth-box .mfoot a{font-size:22px!important;color:#3a5fcd!important}
 .auth-box .btn.sm{font-size:22px;padding:4px 16px}
