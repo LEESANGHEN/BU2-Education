@@ -7,7 +7,7 @@
    폴더 구조: course-materials/<모듈코드>/<설비id>/slide-NNN.jpg — 설비군이 늘어나거나
    다른 모듈(G/I/J 등) 자료가 추가되어도 이 구조 그대로 항목만 추가하면 된다.
 ═══════════════════════════════════════════ */
-var CM_EQUIP_LABEL={smtv:'iSIS-SMTV',nbga:'iSIS-NBGA'};
+var CM_EQUIP_LABEL={smtv:'iSIS-SMTV',nbga:'iSIS-NBGA',qpm:'iSIS-QPM'};
 var CM_LANG_LABEL={ko:'언어',en:'Language',zhCN:'语言',zhTW:'語言',ja:'言語',vi:'Ngôn ngữ'};
 
 /* 설비군(iSIS-SMTV, iSIS-NBGA, ...)이 앞으로 계속 늘어날 예정이라, 최상위 "관련 자료" 폴더
@@ -1629,12 +1629,368 @@ var COURSE_MATERIALS={
           vi:'2.1.3. Turn Off Sequence\n\nTắt theo thứ tự ngược lại lúc bật: Controller (AF, LED, PZT, PC) → tắt nguồn Operation Panel → tắt Power Strip → tắt UPS → tắt CP → tắt Main Panel. Tắt sai thứ tự có thể làm hỏng linh kiện điện.'
         }}
       ]
+    },
+    qpm:{
+      title:{ko:'A. 설비 기본 구성',en:'A. Basic Equipment Configuration',zhCN:'A. 设备基本构成',zhTW:'A. 設備基本構成',ja:'A. 設備基本構成',vi:'A. Cấu hình cơ bản thiết bị'},
+      chapters:[
+        {from:1,title:{ko:'A. Machine Specification',en:'A. Machine Specification',zhCN:'A. Machine Specification',zhTW:'A. Machine Specification',ja:'A. Machine Specification'}},
+        {from:5,title:{ko:'B. Modules Layout & Component',en:'B. Modules Layout & Component',zhCN:'B. Modules Layout & Component',zhTW:'B. Modules Layout & Component',ja:'B. Modules Layout & Component'}},
+        {from:18,title:{ko:'C. Power Supply & Interlock System',en:'C. Power Supply & Interlock System',zhCN:'C. Power Supply & Interlock System',zhTW:'C. Power Supply & Interlock System',ja:'C. Power Supply & Interlock System'}},
+        {from:32,title:{ko:'D. Safety Stickers',en:'D. Safety Stickers',zhCN:'D. Safety Stickers',zhTW:'D. Safety Stickers',ja:'D. Safety Stickers'}},
+        {from:40,title:{ko:'E. Isolator Tuning',en:'E. Isolator Tuning',zhCN:'E. Isolator Tuning',zhTW:'E. Isolator Tuning',ja:'E. Isolator Tuning'}}
+      ],
+      slides:[
+        {img:cmImg('A','qpm',1),tx:{
+          ko:'1. Machine Specification\n\n■ Utility & Electric Spec — iSIS-QPM 설비의 유틸리티(전원/에어) 및 전장 사양입니다.',
+          en:'1. Machine Specification\n\n■ Utility & Electric Spec — the utility (power/air) and electrical specifications of the iSIS-QPM.',
+          zhCN:'1. Machine Specification\n\n■ Utility & Electric Spec——iSIS-QPM设备的公用设施(电源/空气)及电气规格。',
+          zhTW:'1. Machine Specification\n\n■ Utility & Electric Spec——iSIS-QPM設備的公用設施(電源/空氣)及電氣規格。',
+          ja:'1. Machine Specification\n\n■ Utility & Electric Spec——iSIS-QPM設備のユーティリティ(電源/エア)及び電装仕様です。',
+          vi:'1. Machine Specification\n\n■ Utility & Electric Spec — thông số tiện ích (nguồn/khí nén) và điện của thiết bị iSIS-QPM.'
+        }},
+        {img:cmImg('A','qpm',2),tx:{
+          ko:'1. Machine Dimension — ■ NANYA, AT&S Dimension\n\nNANYA·AT&S 사양 기준 외형 치수: 1720 × 1902(mm), 1902 × 1520(mm).',
+          en:'1. Machine Dimension — ■ NANYA, AT&S Dimension\n\nOverall dimensions for the NANYA/AT&S specification: 1720 × 1902 (mm), 1902 × 1520 (mm).',
+          zhCN:'1. Machine Dimension——■ NANYA, AT&S Dimension\n\nNANYA·AT&S规格的外形尺寸:1720×1902(mm)、1902×1520(mm)。',
+          zhTW:'1. Machine Dimension——■ NANYA, AT&S Dimension\n\nNANYA·AT&S規格的外形尺寸:1720×1902(mm)、1902×1520(mm)。',
+          ja:'1. Machine Dimension——■ NANYA, AT&S Dimension\n\nNANYA・AT&S仕様の外形寸法:1720×1902(mm)、1902×1520(mm)。',
+          vi:'1. Machine Dimension — ■ NANYA, AT&S Dimension\n\nKích thước tổng thể theo tiêu chuẩn NANYA/AT&S: 1720 × 1902(mm), 1902 × 1520(mm).'
+        }},
+        {img:cmImg('A','qpm',3),tx:{
+          ko:'1. Machine Dimension — ■ SEMV, SEMCO Dimension\n\nSEMV·SEMCO 사양 기준 외형 치수: 1720 × 2328(mm), 2328 × 1520(mm).',
+          en:'1. Machine Dimension — ■ SEMV, SEMCO Dimension\n\nOverall dimensions for the SEMV/SEMCO specification: 1720 × 2328 (mm), 2328 × 1520 (mm).',
+          zhCN:'1. Machine Dimension——■ SEMV, SEMCO Dimension\n\nSEMV·SEMCO规格的外形尺寸:1720×2328(mm)、2328×1520(mm)。',
+          zhTW:'1. Machine Dimension——■ SEMV, SEMCO Dimension\n\nSEMV·SEMCO規格的外形尺寸:1720×2328(mm)、2328×1520(mm)。',
+          ja:'1. Machine Dimension——■ SEMV, SEMCO Dimension\n\nSEMV・SEMCO仕様の外形寸法:1720×2328(mm)、2328×1520(mm)。',
+          vi:'1. Machine Dimension — ■ SEMV, SEMCO Dimension\n\nKích thước tổng thể theo tiêu chuẩn SEMV/SEMCO: 1720 × 2328(mm), 2328 × 1520(mm).'
+        }},
+        {img:cmImg('A','qpm',4),tx:{
+          ko:'1. Machine Specification\n\n■ 3D Vision Spec (공통 사양: 25M Camera)',
+          en:'1. Machine Specification\n\n■ 3D Vision Spec (common specification: 25M Camera)',
+          zhCN:'1. Machine Specification\n\n■ 3D Vision Spec(共同规格:25M Camera)',
+          zhTW:'1. Machine Specification\n\n■ 3D Vision Spec(共同規格:25M Camera)',
+          ja:'1. Machine Specification\n\n■ 3D Vision Spec(共通仕様:25M Camera)',
+          vi:'1. Machine Specification\n\n■ 3D Vision Spec (thông số chung: Camera 25M)'
+        }},
+        {img:cmImg('A','qpm',5),tx:{
+          ko:'2. Modules Layout & Component — ■ Modules Layout #1\n\nⓐ 3D Vision Modules(Z-Axis) — FRONT View',
+          en:'2. Modules Layout & Component — ■ Modules Layout #1\n\n(a) 3D Vision Modules (Z-Axis) — FRONT View',
+          zhCN:'2. Modules Layout & Component——■ Modules Layout #1\n\nⓐ 3D Vision Modules(Z-Axis)——FRONT View',
+          zhTW:'2. Modules Layout & Component——■ Modules Layout #1\n\nⓐ 3D Vision Modules(Z-Axis)——FRONT View',
+          ja:'2. Modules Layout & Component——■ Modules Layout #1\n\nⓐ 3D Vision Modules(Z-Axis)——FRONT View',
+          vi:'2. Modules Layout & Component — ■ Modules Layout #1\n\nⓐ 3D Vision Modules (Z-Axis) — FRONT View'
+        }},
+        {img:cmImg('A','qpm',6),tx:{
+          ko:'2. Modules Layout & Component — ■ Modules Layout #2\n\nⓑ Stage Modules(X-Axis), ⓒ Stage Modules(Y-Axis) — TOP View',
+          en:'2. Modules Layout & Component — ■ Modules Layout #2\n\n(b) Stage Modules (X-Axis), (c) Stage Modules (Y-Axis) — TOP View',
+          zhCN:'2. Modules Layout & Component——■ Modules Layout #2\n\nⓑ Stage Modules(X-Axis)、ⓒ Stage Modules(Y-Axis)——TOP View',
+          zhTW:'2. Modules Layout & Component——■ Modules Layout #2\n\nⓑ Stage Modules(X-Axis)、ⓒ Stage Modules(Y-Axis)——TOP View',
+          ja:'2. Modules Layout & Component——■ Modules Layout #2\n\nⓑ Stage Modules(X-Axis)、ⓒ Stage Modules(Y-Axis)——TOP View',
+          vi:'2. Modules Layout & Component — ■ Modules Layout #2\n\nⓑ Stage Modules (X-Axis), ⓒ Stage Modules (Y-Axis) — TOP View'
+        }},
+        {img:cmImg('A','qpm',7),tx:{
+          ko:'2. Modules Layout & Component — ■ Controller Install Position #1\n\nFRONT View',
+          en:'2. Modules Layout & Component — ■ Controller Install Position #1\n\nFRONT View',
+          zhCN:'2. Modules Layout & Component——■ Controller Install Position #1\n\nFRONT View',
+          zhTW:'2. Modules Layout & Component——■ Controller Install Position #1\n\nFRONT View',
+          ja:'2. Modules Layout & Component——■ Controller Install Position #1\n\nFRONT View',
+          vi:'2. Modules Layout & Component — ■ Controller Install Position #1\n\nFRONT View'
+        }},
+        {img:cmImg('A','qpm',8),tx:{
+          ko:'2. Modules Layout & Component — ■ Controller Install Position #2\n\nLED Controller, HOST PC, AF Controller, PZT Controller, Vision PC의 설치 위치 — RIGHT View',
+          en:'2. Modules Layout & Component — ■ Controller Install Position #2\n\nInstall positions of the LED Controller, HOST PC, AF Controller, PZT Controller, and Vision PC — RIGHT View',
+          zhCN:'2. Modules Layout & Component——■ Controller Install Position #2\n\nLED Controller、HOST PC、AF Controller、PZT Controller、Vision PC的安装位置——RIGHT View',
+          zhTW:'2. Modules Layout & Component——■ Controller Install Position #2\n\nLED Controller、HOST PC、AF Controller、PZT Controller、Vision PC的安裝位置——RIGHT View',
+          ja:'2. Modules Layout & Component——■ Controller Install Position #2\n\nLED Controller、HOST PC、AF Controller、PZT Controller、Vision PCの設置位置——RIGHT View',
+          vi:'2. Modules Layout & Component — ■ Controller Install Position #2\n\nVị trí lắp đặt của LED Controller, HOST PC, AF Controller, PZT Controller, Vision PC — RIGHT View'
+        }},
+        {img:cmImg('A','qpm',9),tx:{
+          ko:'2. Modules Layout & Component\n\n■ Connection Chart — 전체 Controller/PC 간 연결 구성도입니다.',
+          en:'2. Modules Layout & Component\n\n■ Connection Chart — the overall connection diagram between the Controllers and PCs.',
+          zhCN:'2. Modules Layout & Component\n\n■ Connection Chart——各Controller/PC之间的整体连接构成图。',
+          zhTW:'2. Modules Layout & Component\n\n■ Connection Chart——各Controller/PC之間的整體連接構成圖。',
+          ja:'2. Modules Layout & Component\n\n■ Connection Chart——各Controller/PC間の全体接続構成図です。',
+          vi:'2. Modules Layout & Component\n\n■ Connection Chart — sơ đồ kết nối tổng thể giữa các Controller/PC.'
+        }},
+        {img:cmImg('A','qpm',10),tx:{
+          ko:'■ PI(PZT) Connection Diagram (PZT E-754)\n\nPZT Stage ↔ E-710.1X5(5M) ↔ 3D LED Controller ↔ CAT6-CROSS(5M) LAN Cable ↔ 3D Vision PC ↔ SYNC Board ↔ 3D TRG Cable #1/#2로 연결됩니다.',
+          en:'■ PI(PZT) Connection Diagram (PZT E-754)\n\nWiring: PZT Stage ↔ E-710.1X5 (5M) ↔ 3D LED Controller ↔ CAT6-CROSS (5M) LAN Cable ↔ 3D Vision PC ↔ SYNC Board ↔ 3D TRG Cable #1/#2.',
+          zhCN:'■ PI(PZT) Connection Diagram(PZT E-754)\n\n接线:PZT Stage ↔ E-710.1X5(5M) ↔ 3D LED Controller ↔ CAT6-CROSS(5M) LAN Cable ↔ 3D Vision PC ↔ SYNC Board ↔ 3D TRG Cable #1/#2。',
+          zhTW:'■ PI(PZT) Connection Diagram(PZT E-754)\n\n接線:PZT Stage ↔ E-710.1X5(5M) ↔ 3D LED Controller ↔ CAT6-CROSS(5M) LAN Cable ↔ 3D Vision PC ↔ SYNC Board ↔ 3D TRG Cable #1/#2。',
+          ja:'■ PI(PZT) Connection Diagram(PZT E-754)\n\n配線:PZT Stage ↔ E-710.1X5(5M) ↔ 3D LED Controller ↔ CAT6-CROSS(5M) LAN Cable ↔ 3D Vision PC ↔ SYNC Board ↔ 3D TRG Cable #1/#2。',
+          vi:'■ PI(PZT) Connection Diagram (PZT E-754)\n\nĐấu nối: PZT Stage ↔ E-710.1X5(5M) ↔ 3D LED Controller ↔ CAT6-CROSS(5M) LAN Cable ↔ 3D Vision PC ↔ SYNC Board ↔ 3D TRG Cable #1/#2.'
+        }},
+        {img:cmImg('A','qpm',11),tx:{
+          ko:'■ NanoFaktur(PZT) Connection Diagram (EBD-120210)\n\nPZT Stage ↔ E-710.1X5(5M) ↔ 3D LED Controller ↔ CAT6-CROSS(5M) LAN Cable ↔ 3D Vision PC ↔ SYNC Board ↔ 3D TRG Cable #1/#2로 연결됩니다.',
+          en:'■ NanoFaktur(PZT) Connection Diagram (EBD-120210)\n\nWiring: PZT Stage ↔ E-710.1X5 (5M) ↔ 3D LED Controller ↔ CAT6-CROSS (5M) LAN Cable ↔ 3D Vision PC ↔ SYNC Board ↔ 3D TRG Cable #1/#2.',
+          zhCN:'■ NanoFaktur(PZT) Connection Diagram(EBD-120210)\n\n接线:PZT Stage ↔ E-710.1X5(5M) ↔ 3D LED Controller ↔ CAT6-CROSS(5M) LAN Cable ↔ 3D Vision PC ↔ SYNC Board ↔ 3D TRG Cable #1/#2。',
+          zhTW:'■ NanoFaktur(PZT) Connection Diagram(EBD-120210)\n\n接線:PZT Stage ↔ E-710.1X5(5M) ↔ 3D LED Controller ↔ CAT6-CROSS(5M) LAN Cable ↔ 3D Vision PC ↔ SYNC Board ↔ 3D TRG Cable #1/#2。',
+          ja:'■ NanoFaktur(PZT) Connection Diagram(EBD-120210)\n\n配線:PZT Stage ↔ E-710.1X5(5M) ↔ 3D LED Controller ↔ CAT6-CROSS(5M) LAN Cable ↔ 3D Vision PC ↔ SYNC Board ↔ 3D TRG Cable #1/#2。',
+          vi:'■ NanoFaktur(PZT) Connection Diagram (EBD-120210)\n\nĐấu nối: PZT Stage ↔ E-710.1X5(5M) ↔ 3D LED Controller ↔ CAT6-CROSS(5M) LAN Cable ↔ 3D Vision PC ↔ SYNC Board ↔ 3D TRG Cable #1/#2.'
+        }},
+        {img:cmImg('A','qpm',12),tx:{
+          ko:'■ 3D Optical System Connection Diagram\n\nHost PC, AF Controller, Motor Driver, 3D Vision Module, 3D Vision PC, LED Controller, PZT Controller, PZT Stage 간 LAN/RS-232/CW·CCW/Trigger/전원 배선을 나타낸 전체 연결도입니다.',
+          en:'■ 3D Optical System Connection Diagram\n\nThe overall connection diagram showing LAN/RS-232/CW·CCW/Trigger/power wiring between the Host PC, AF Controller, Motor Driver, 3D Vision Module, 3D Vision PC, LED Controller, PZT Controller, and PZT Stage.',
+          zhCN:'■ 3D Optical System Connection Diagram\n\n展示Host PC、AF Controller、Motor Driver、3D Vision Module、3D Vision PC、LED Controller、PZT Controller、PZT Stage之间LAN/RS-232/CW·CCW/Trigger/电源接线的整体连接图。',
+          zhTW:'■ 3D Optical System Connection Diagram\n\n展示Host PC、AF Controller、Motor Driver、3D Vision Module、3D Vision PC、LED Controller、PZT Controller、PZT Stage之間LAN/RS-232/CW·CCW/Trigger/電源接線的整體連接圖。',
+          ja:'■ 3D Optical System Connection Diagram\n\nHost PC、AF Controller、Motor Driver、3D Vision Module、3D Vision PC、LED Controller、PZT Controller、PZT Stage間のLAN/RS-232/CW・CCW/Trigger/電源配線を示す全体接続図です。',
+          vi:'■ 3D Optical System Connection Diagram\n\nSơ đồ kết nối tổng thể thể hiện đấu dây LAN/RS-232/CW·CCW/Trigger/nguồn giữa Host PC, AF Controller, Motor Driver, 3D Vision Module, 3D Vision PC, LED Controller, PZT Controller, PZT Stage.'
+        }},
+        {img:cmImg('A','qpm',13),tx:{
+          ko:'■ Host PC 내부 구성\n\nLan Card, PCIe-R1605, Graphic Card, Lan Card, RAM 등 HOST PC 내부 카드 구성입니다.',
+          en:'■ Host PC internal configuration\n\nThe HOST PC\'s internal card configuration: Lan Card, PCIe-R1605, Graphic Card, Lan Card, RAM.',
+          zhCN:'■ Host PC内部构成\n\nHOST PC内部板卡构成:Lan Card、PCIe-R1605、Graphic Card、Lan Card、RAM。',
+          zhTW:'■ Host PC內部構成\n\nHOST PC內部板卡構成:Lan Card、PCIe-R1605、Graphic Card、Lan Card、RAM。',
+          ja:'■ Host PC内部構成\n\nHOST PC内部のカード構成:Lan Card、PCIe-R1605、Graphic Card、Lan Card、RAM。',
+          vi:'■ Cấu hình bên trong Host PC\n\nCấu hình card bên trong HOST PC: Lan Card, PCIe-R1605, Graphic Card, Lan Card, RAM.'
+        }},
+        {img:cmImg('A','qpm',14),tx:{
+          ko:'■ Host PC 주변기기 배선\n\nHOST PC의 Keyboard·Mouse(USB)·Monitor(RS232/HDMI)·Auto Focus(232, COM1) 연결과, Motor/IO Module(PCIe-R1604)용 Ajin 또는 ACS Board 배선(고객 사양에 따라 선택)을 나타냅니다.',
+          en:'■ Host PC peripheral wiring\n\nShows the HOST PC\'s Keyboard·Mouse (USB)·Monitor (RS232/HDMI)·Auto Focus (232, COM1) connections, and the Ajin or ACS Board wiring for the Motor/IO Module (PCIe-R1604), selected per customer specification.',
+          zhCN:'■ Host PC外围设备接线\n\n展示HOST PC的Keyboard·Mouse(USB)·Monitor(RS232/HDMI)·Auto Focus(232、COM1)连接,以及用于Motor/IO Module(PCIe-R1604)的Ajin或ACS Board接线(依客户规格选择)。',
+          zhTW:'■ Host PC周邊設備接線\n\n展示HOST PC的Keyboard·Mouse(USB)·Monitor(RS232/HDMI)·Auto Focus(232、COM1)連接,以及用於Motor/IO Module(PCIe-R1604)的Ajin或ACS Board接線(依客戶規格選擇)。',
+          ja:'■ Host PC周辺機器配線\n\nHOST PCのKeyboard・Mouse(USB)・Monitor(RS232/HDMI)・Auto Focus(232、COM1)接続と、Motor/IO Module(PCIe-R1604)用のAjinまたはACS Board配線(顧客仕様により選択)を示します。',
+          vi:'■ Đấu dây thiết bị ngoại vi của Host PC\n\nThể hiện kết nối Keyboard·Mouse(USB)·Monitor(RS232/HDMI)·Auto Focus(232, COM1) của HOST PC, và đấu dây Board Ajin hoặc ACS cho Motor/IO Module(PCIe-R1604) (chọn theo thông số khách hàng).'
+        }},
+        {img:cmImg('A','qpm',15),tx:{
+          ko:'■ Host PC 네트워크 배선\n\nHOST PC ↔ Vision PC(CAT6-STP Cross), LAN METER, OUT#1 EFEM, LAN For Developer, Auto Focus LAN 등 각 LAN 포트 연결을 나타냅니다.',
+          en:'■ Host PC network wiring\n\nShows the LAN port connections between the HOST PC ↔ Vision PC (CAT6-STP Cross), LAN METER, OUT#1 EFEM, LAN For Developer, and Auto Focus LAN.',
+          zhCN:'■ Host PC网络接线\n\n展示HOST PC ↔ Vision PC(CAT6-STP Cross)、LAN METER、OUT#1 EFEM、LAN For Developer、Auto Focus LAN等各LAN端口连接。',
+          zhTW:'■ Host PC網路接線\n\n展示HOST PC ↔ Vision PC(CAT6-STP Cross)、LAN METER、OUT#1 EFEM、LAN For Developer、Auto Focus LAN等各LAN埠連接。',
+          ja:'■ Host PCネットワーク配線\n\nHOST PC ↔ Vision PC(CAT6-STP Cross)、LAN METER、OUT#1 EFEM、LAN For Developer、Auto Focus LANなど各LANポートの接続を示します。',
+          vi:'■ Đấu dây mạng của Host PC\n\nThể hiện kết nối các cổng LAN giữa HOST PC ↔ Vision PC(CAT6-STP Cross), LAN METER, OUT#1 EFEM, LAN For Developer, Auto Focus LAN.'
+        }},
+        {img:cmImg('A','qpm',16),tx:{
+          ko:'■ Vision PC 내부 구성\n\nRAM, SYNC Board, IGRAB Board, Lan Card, Graphic Card로 구성됩니다.',
+          en:'■ Vision PC internal configuration\n\nConsists of RAM, SYNC Board, IGRAB Board, Lan Card, and Graphic Card.',
+          zhCN:'■ Vision PC内部构成\n\n由RAM、SYNC Board、IGRAB Board、Lan Card、Graphic Card构成。',
+          zhTW:'■ Vision PC內部構成\n\n由RAM、SYNC Board、IGRAB Board、Lan Card、Graphic Card構成。',
+          ja:'■ Vision PC内部構成\n\nRAM、SYNC Board、IGRAB Board、Lan Card、Graphic Cardで構成されます。',
+          vi:'■ Cấu hình bên trong Vision PC\n\nBao gồm RAM, SYNC Board, IGRAB Board, Lan Card, Graphic Card.'
+        }},
+        {img:cmImg('A','qpm',17),tx:{
+          ko:'■ Vision PC 배선\n\nHOST PC ↔ Vision PC ↔ PZT Controller/VISION Camera(Grab Board)/LED Controller(3D TRG, SYNC Board)/IO Module 간 연결을 CAT6-STP·CXP·DSUB·LEMO 등 케이블 규격별로 나타냅니다.',
+          en:'■ Vision PC wiring\n\nShows the HOST PC ↔ Vision PC ↔ PZT Controller / VISION Camera (Grab Board) / LED Controller (3D TRG, SYNC Board) / IO Module connections, by cable type — CAT6-STP, CXP, DSUB, LEMO, etc.',
+          zhCN:'■ Vision PC接线\n\n展示HOST PC ↔ Vision PC ↔ PZT Controller/VISION Camera(Grab Board)/LED Controller(3D TRG、SYNC Board)/IO Module之间的连接,按CAT6-STP、CXP、DSUB、LEMO等线材规格分类。',
+          zhTW:'■ Vision PC接線\n\n展示HOST PC ↔ Vision PC ↔ PZT Controller/VISION Camera(Grab Board)/LED Controller(3D TRG、SYNC Board)/IO Module之間的連接,按CAT6-STP、CXP、DSUB、LEMO等線材規格分類。',
+          ja:'■ Vision PC配線\n\nHOST PC ↔ Vision PC ↔ PZT Controller/VISION Camera(Grab Board)/LED Controller(3D TRG、SYNC Board)/IO Module間の接続を、CAT6-STP・CXP・DSUB・LEMOなどケーブル規格別に示します。',
+          vi:'■ Đấu dây Vision PC\n\nThể hiện kết nối giữa HOST PC ↔ Vision PC ↔ PZT Controller/VISION Camera(Grab Board)/LED Controller(3D TRG, SYNC Board)/IO Module theo từng loại cáp CAT6-STP, CXP, DSUB, LEMO, v.v.'
+        }},
+        {img:cmImg('A','qpm',18),tx:{
+          ko:'3. Machine Power Supply & Interlock System\n\n■ Machine Utility Connect — 설비 유틸리티 연결 구성입니다.',
+          en:'3. Machine Power Supply & Interlock System\n\n■ Machine Utility Connect — the machine\'s utility connection configuration.',
+          zhCN:'3. Machine Power Supply & Interlock System\n\n■ Machine Utility Connect——设备公用设施连接构成。',
+          zhTW:'3. Machine Power Supply & Interlock System\n\n■ Machine Utility Connect——設備公用設施連接構成。',
+          ja:'3. Machine Power Supply & Interlock System\n\n■ Machine Utility Connect——設備ユーティリティ接続構成です。',
+          vi:'3. Machine Power Supply & Interlock System\n\n■ Machine Utility Connect — cấu hình kết nối tiện ích của thiết bị.'
+        }},
+        {img:cmImg('A','qpm',19),tx:{
+          ko:'QPM 설비에 전원을 공급하기 위해 확인해야 할 항목들:\n\nMain Breaker On/Off 상태, 전기 패널 내부 Circuit Breaker On/Off 상태, Utility Panel 램프 점등 여부, Auto/Teach 모드에 따른 상부 Door Lock/Unlock 상태, EMS 버튼 상태, 하부 Door 닫힘 상태(Fan 동작용), Host PC용 UPS 전원 On/Off 상태, PC·LED Controller용 콘센트 On/Off 상태, 메인 Air 공급 여부, Air Regulator 압력(4~6bar) 유지 여부, Operation Panel 버튼 램프 상태.',
+          en:'Items to check in order to supply power to the QPM facility:\n\nMain Breaker On/Off status, the On/Off status of the circuit breaker inside the electric panel, whether the Utility panel lamp is on/off, the upper door lock/unlock status per Auto/Teach mode, the EMS button status, the lower door closed state (for fan operation), the UPS power On/Off status for the Host PC, the outlet On/Off status for the PC and LED controller, whether the main air is supplied, whether each air regulator maintains 4–6bar, and the Operation Panel button lamp status.',
+          zhCN:'为向QPM设备供电需确认的项目:\n\nMain Breaker On/Off状态、电气面板内部Circuit Breaker的On/Off状态、Utility panel指示灯是否点亮、依Auto/Teach模式的上部门锁定/解锁状态、EMS按钮状态、下部门关闭状态(供风扇用)、Host PC用UPS电源On/Off状态、PC·LED controller用插座On/Off状态、主Air是否供应、各Air Regulator压力(4~6bar)是否维持、Operation Panel按钮指示灯状态。',
+          zhTW:'為向QPM設備供電需確認的項目:\n\nMain Breaker On/Off狀態、電氣面板內部Circuit Breaker的On/Off狀態、Utility panel指示燈是否點亮、依Auto/Teach模式的上部門鎖定/解鎖狀態、EMS按鈕狀態、下部門關閉狀態(供風扇用)、Host PC用UPS電源On/Off狀態、PC·LED controller用插座On/Off狀態、主Air是否供應、各Air Regulator壓力(4~6bar)是否維持、Operation Panel按鈕指示燈狀態。',
+          ja:'QPM設備に電源を供給するために確認すべき項目:\n\nMain Breaker On/Off状態、電気パネル内部のCircuit Breaker On/Off状態、Utility panelランプ点灯有無、Auto/Teachモードによる上部ドアロック/アンロック状態、EMSボタン状態、下部ドア閉状態(Fan動作用)、Host PC用UPS電源On/Off状態、PC・LED controller用コンセントOn/Off状態、メインAir供給有無、各Air Regulator圧力(4~6bar)維持有無、Operation Panelボタンランプ状態。',
+          vi:'Các hạng mục cần kiểm tra để cấp nguồn cho thiết bị QPM:\n\nTrạng thái On/Off của Main Breaker, trạng thái On/Off của Circuit Breaker bên trong bảng điện, đèn Utility panel có sáng hay không, trạng thái khóa/mở cửa trên theo chế độ Auto/Teach, trạng thái nút EMS, trạng thái đóng cửa dưới (để quạt hoạt động), trạng thái On/Off nguồn UPS cho Host PC, trạng thái On/Off ổ cắm cho PC·LED controller, khí chính có được cấp hay không, áp suất mỗi Air Regulator (4~6bar) có được duy trì hay không, trạng thái đèn nút Operation Panel.'
+        }},
+        {img:cmImg('A','qpm',20),tx:{
+          ko:'■ Main Breaker On/Off 상태 확인\n\n설비 Main Panel의 Main Circuit Breaker를 켜고, 전기 패널 내부의 모든 Circuit Breaker를 켭니다.',
+          en:'■ Check Main Breaker On/Off status\n\nTurn on the main circuit breaker installed on the equipment main panel, then turn on all circuit breakers inside the electric panel.',
+          zhCN:'■ 确认Main Breaker On/Off状态\n\n打开设备主面板上安装的Main Circuit Breaker,再打开电气面板内部的所有Circuit Breaker。',
+          zhTW:'■ 確認Main Breaker On/Off狀態\n\n打開設備主面板上安裝的Main Circuit Breaker,再打開電氣面板內部的所有Circuit Breaker。',
+          ja:'■ Main Breaker On/Off状態確認\n\n設備メインパネルに設置されたMain Circuit Breakerをオンにし、電気パネル内部の全Circuit Breakerをオンにします。',
+          vi:'■ Kiểm tra trạng thái On/Off của Main Breaker\n\nBật Main Circuit Breaker được lắp trên bảng chính của thiết bị, sau đó bật tất cả Circuit Breaker bên trong bảng điện.'
+        }},
+        {img:cmImg('A','qpm',21),tx:{
+          ko:'■ Main Breaker On/Off 상태 확인 — Main Padlock(N30C-S)\n\n설비 Main Panel의 Main Padlock Breaker를 켭니다. Release Key는 전원을 끄지 않고 Door를 열 때 사용합니다.',
+          en:'■ Check Main Breaker On/Off status — Main Padlock (N30C-S)\n\nTurn on the main padlock breaker installed on the equipment main panel. The Release Key is used to open the door without turning off power.',
+          zhCN:'■ 确认Main Breaker On/Off状态——Main Padlock(N30C-S)\n\n打开设备主面板上安装的Main Padlock Breaker。Release Key用于不关闭电源即可打开门时使用。',
+          zhTW:'■ 確認Main Breaker On/Off狀態——Main Padlock(N30C-S)\n\n打開設備主面板上安裝的Main Padlock Breaker。Release Key用於不關閉電源即可打開門時使用。',
+          ja:'■ Main Breaker On/Off状態確認——Main Padlock(N30C-S)\n\n設備メインパネルに設置されたMain Padlock Breakerをオンにします。Release Keyは電源を切らずにドアを開ける際に使用します。',
+          vi:'■ Kiểm tra trạng thái On/Off của Main Breaker — Main Padlock (N30C-S)\n\nBật Main Padlock Breaker được lắp trên bảng chính của thiết bị. Release Key được dùng để mở cửa mà không cần tắt nguồn.'
+        }},
+        {img:cmImg('A','qpm',22),tx:{
+          ko:'■ Utility Panel 램프 On/Off 확인\n\nUtility Panel의 램프는 켜져 있어야 하며, \'CP01 Power\' Lamp Breaker가 켜졌을 때만 점등됩니다.',
+          en:'■ Check if the lamp on the Utility panel is On/Off\n\nThe lamp on the Utility panel should be on — it lights up only when the \'CP01 Power\' Lamp breaker is turned on.',
+          zhCN:'■ 确认Utility Panel指示灯On/Off\n\nUtility Panel的指示灯应处于点亮状态,仅在\'CP01 Power\' Lamp Breaker开启时点亮。',
+          zhTW:'■ 確認Utility Panel指示燈On/Off\n\nUtility Panel的指示燈應處於點亮狀態,僅在\'CP01 Power\' Lamp Breaker開啟時點亮。',
+          ja:'■ Utility Panelランプ On/Off確認\n\nUtility Panelのランプは点灯している必要があり、\'CP01 Power\' Lamp Breakerがオンの時のみ点灯します。',
+          vi:'■ Kiểm tra đèn Utility Panel On/Off\n\nĐèn trên Utility Panel phải sáng — chỉ sáng khi Lamp Breaker \'CP01 Power\' được bật.'
+        }},
+        {img:cmImg('A','qpm',23),tx:{
+          ko:'■ Auto/Teach 모드에 따른 상부 Door Lock/Unlock 상태 확인\n\nAuto Mode — 상부 Door가 모두 닫히고 잠겨야만 Motor 전원이 공급됩니다. 자동 운전 중 알람 발생 시: Reset 클릭 → Door Interlock 해제 → Door를 열고 원인 해소 → Door를 닫고 Interlock을 Lock으로 전환 → Lot Start로 재개.\nTeach Mode — 상부 Door가 열려 있고 잠기지 않아도 Motor 전원이 공급됩니다.',
+          en:'■ Check the upper door lock/unlock status according to Auto/Teach mode\n\nAuto Mode — Motor power is supplied only when all upper doors are closed and locked. If an alarm occurs during automatic operation: click Reset → release the Door Interlock → open the door and resolve the cause → close the door and switch the interlock to Lock → resume with Lot Start.\nTeach Mode — Motor power can be supplied even when the upper door is open and unlocked.',
+          zhCN:'■ 依Auto/Teach模式确认上部Door锁定/解锁状态\n\nAuto Mode——仅当所有上部Door关闭并锁定时才供给Motor电源。自动运行中发生警报时:点击Reset→解除Door Interlock→打开Door解决原因→关闭Door并将Interlock切换为Lock→以Lot Start恢复。\nTeach Mode——即使上部Door打开且未锁定,也可供给Motor电源。',
+          zhTW:'■ 依Auto/Teach模式確認上部Door鎖定/解鎖狀態\n\nAuto Mode——僅當所有上部Door關閉並鎖定時才供給Motor電源。自動運行中發生警報時:點擊Reset→解除Door Interlock→打開Door解決原因→關閉Door並將Interlock切換為Lock→以Lot Start恢復。\nTeach Mode——即使上部Door打開且未鎖定,也可供給Motor電源。',
+          ja:'■ Auto/Teachモードによる上部Doorロック/アンロック状態確認\n\nAuto Mode——上部Doorがすべて閉じてロックされている場合のみMotor電源が供給されます。自動運転中にアラームが発生した場合:Resetをクリック→Door Interlockを解除→Doorを開けて原因を解消→Doorを閉じてInterlockをLockに切替→Lot Startで再開。\nTeach Mode——上部Doorが開いていてロックされていなくてもMotor電源を供給できます。',
+          vi:'■ Kiểm tra trạng thái khóa/mở cửa trên theo chế độ Auto/Teach\n\nAuto Mode — chỉ cấp nguồn Motor khi tất cả cửa trên đóng và khóa. Khi có alarm trong lúc vận hành tự động: nhấn Reset → mở khóa Door Interlock → mở cửa và xử lý nguyên nhân → đóng cửa và chuyển Interlock sang Lock → khởi động lại bằng Lot Start.\nTeach Mode — vẫn cấp nguồn Motor ngay cả khi cửa trên mở và chưa khóa.'
+        }},
+        {img:cmImg('A','qpm',24),tx:{
+          ko:'■ EMS 버튼 Push/Pull 상태 확인\n\nMotor 전원을 공급하려면 설비에 설치된 3개의 EMS 버튼이 모두 Pull 상태여야 합니다. 3개 중 하나라도 눌려있으면 Motor 전원이 공급되지 않으며, EMS 버튼은 비상 시 Motor 전원을 차단하는 용도입니다.',
+          en:'■ EMS button push/pull status check\n\nTo supply motor power, all 3 EMS buttons installed on the facility must be kept in the pull state. Motor power is not supplied even if only one of the 3 EMS buttons is pressed; the EMS button is used to cut off motor power in an emergency.',
+          zhCN:'■ 确认EMS按钮Push/Pull状态\n\n为供给Motor电源,设备上安装的3个EMS按钮必须全部保持Pull状态。即使3个中只有一个被按下,也不会供给Motor电源;EMS按钮用于紧急情况下切断Motor电源。',
+          zhTW:'■ 確認EMS按鈕Push/Pull狀態\n\n為供給Motor電源,設備上安裝的3個EMS按鈕必須全部保持Pull狀態。即使3個中只有一個被按下,也不會供給Motor電源;EMS按鈕用於緊急情況下切斷Motor電源。',
+          ja:'■ EMSボタンPush/Pull状態確認\n\nMotor電源を供給するには、設備に設置された3個のEMSボタンがすべてPull状態である必要があります。3個のうち1個でも押されているとMotor電源は供給されず、EMSボタンは緊急時にMotor電源を遮断する用途です。',
+          vi:'■ Kiểm tra trạng thái Push/Pull của nút EMS\n\nĐể cấp nguồn Motor, cả 3 nút EMS lắp trên thiết bị phải ở trạng thái Pull. Nếu chỉ một trong 3 nút bị nhấn, nguồn Motor sẽ không được cấp; nút EMS dùng để ngắt nguồn Motor trong trường hợp khẩn cấp.'
+        }},
+        {img:cmImg('A','qpm',25),tx:{
+          ko:'■ 하부 Fan 동작을 위한 하부 Door 닫힘 상태 확인\n\n하부 Door에 설치된 Fan에 전원을 공급하려면 모든 하부 Door가 닫혀 있어야 합니다. 하부 Door Fan 전원은 자동으로 공급되며 수동으로 공급할 수 없습니다.',
+          en:'■ For lower fan operation, check the lower door close state\n\nIn order to supply power to the fan installed in the lower door, all lower doors must be closed. Power to the lower door fan is supplied automatically and cannot be supplied manually.',
+          zhCN:'■ 为下部风扇运行,确认下部门关闭状态\n\n为向下部门安装的风扇供电,所有下部门必须关闭。下部门风扇电源自动供给,无法手动供给。',
+          zhTW:'■ 為下部風扇運行,確認下部門關閉狀態\n\n為向下部門安裝的風扇供電,所有下部門必須關閉。下部門風扇電源自動供給,無法手動供給。',
+          ja:'■ 下部Fan動作のため下部Door閉状態を確認\n\n下部Doorに設置されたFanに電源を供給するには、すべての下部Doorが閉じている必要があります。下部Door Fanの電源は自動的に供給され、手動では供給できません。',
+          vi:'■ Kiểm tra trạng thái đóng cửa dưới để quạt phía dưới hoạt động\n\nĐể cấp nguồn cho quạt lắp ở cửa dưới, tất cả các cửa dưới phải đóng. Nguồn quạt cửa dưới được cấp tự động và không thể cấp thủ công.'
+        }},
+        {img:cmImg('A','qpm',26),tx:{
+          ko:'■ Host PC 전원 공급을 위한 UPS 전원 On/Off 상태 확인\n\nHost PC에 전원을 공급하려면 UPS 전원이 켜져 있어야 합니다. 설비 출하 및 전원 관련 작업 시에는 UPS 전원을 꺼야 합니다.',
+          en:'■ To supply power to the Host PC, check the On/Off status of the UPS power\n\nIn order to supply power to the Host PC, the UPS power must be turned on. When shipping the equipment or performing power-related work, the UPS power must be turned off.',
+          zhCN:'■ 为向Host PC供电,确认UPS电源On/Off状态\n\n为向Host PC供电,UPS电源必须开启。设备出货及电源相关作业时必须关闭UPS电源。',
+          zhTW:'■ 為向Host PC供電,確認UPS電源On/Off狀態\n\n為向Host PC供電,UPS電源必須開啟。設備出貨及電源相關作業時必須關閉UPS電源。',
+          ja:'■ Host PC電源供給のためUPS電源On/Off状態を確認\n\nHost PCに電源を供給するにはUPS電源がオンである必要があります。設備出荷時や電源関連作業時にはUPS電源をオフにする必要があります。',
+          vi:'■ Kiểm tra trạng thái On/Off nguồn UPS để cấp nguồn cho Host PC\n\nĐể cấp nguồn cho Host PC, nguồn UPS phải được bật. Khi xuất xưởng thiết bị hoặc thực hiện công việc liên quan đến nguồn điện, phải tắt nguồn UPS.'
+        }},
+        {img:cmImg('A','qpm',27),tx:{
+          ko:'■ PC·LED Controller 등 콘센트 On/Off 상태 확인\n\nPC, LED Controller 등에 전원을 공급하려면 Power Strip의 Main Switch를 켜야 합니다. (BLDC: DC Motor와 유사한 특성을 가진 동기 전동기 종류)',
+          en:'■ Check the power on/off status of electrical outlets such as PCs and LED controllers\n\nTo supply power to controllers such as the PC and LED controller, the main switch of the power strip must be turned on. (BLDC: a type of synchronous motor with characteristics similar to a DC motor.)',
+          zhCN:'■ 确认PC·LED controller等插座电源On/Off状态\n\n为向PC、LED controller等供电,必须打开Power Strip的Main Switch。(BLDC:一种具有类似DC Motor特性的同步电动机)',
+          zhTW:'■ 確認PC·LED controller等插座電源On/Off狀態\n\n為向PC、LED controller等供電,必須打開Power Strip的Main Switch。(BLDC:一種具有類似DC Motor特性的同步電動機)',
+          ja:'■ PC・LED controllerなどコンセントのOn/Off状態確認\n\nPC、LED controllerなどに電源を供給するには、Power StripのMain Switchをオンにする必要があります。(BLDC:DC Motorに似た特性を持つ同期電動機の一種)',
+          vi:'■ Kiểm tra trạng thái On/Off ổ cắm điện của PC·LED controller\n\nĐể cấp nguồn cho các controller như PC, LED controller, phải bật Main Switch của Power Strip. (BLDC: loại động cơ đồng bộ có đặc tính tương tự động cơ DC)'
+        }},
+        {img:cmImg('A','qpm',28),tx:{
+          ko:'■ 설비 메인 Air 공급 여부 확인\n\n각 Air Regulator의 압력이 4~6bar로 유지되도록 조정합니다. Regulator 압력은 설정을 통해 I/O 신호로 확인 가능합니다. Panel 타입은 Air1·2가 Panel Vacuum용, Pedestal 타입은 Pedestal Vacuum용, Tray 타입은 미사용이며, Air3는 Isolator·Air Gun용입니다.',
+          en:'■ Check if the main air of the facility is supplied\n\nAdjust the regulators so each air regulator\'s pressure is maintained at 4–6bar. The regulator pressure can be confirmed via I/O signal through settings. For the Panel type, Air1/2 are for the Panel vacuum; for the Pedestal type, they are for the Pedestal vacuum; the Tray type does not use them; Air3 is for the Isolator and Air Gun.',
+          zhCN:'■ 确认设备主Air是否供应\n\n调整各Air Regulator使压力维持在4~6bar。Regulator压力可通过设置以I/O信号确认。Panel类型:Air1、2用于Panel vacuum;Pedestal类型:用于Pedestal vacuum;Tray类型不使用;Air3用于Isolator、Air Gun。',
+          zhTW:'■ 確認設備主Air是否供應\n\n調整各Air Regulator使壓力維持在4~6bar。Regulator壓力可透過設定以I/O訊號確認。Panel類型:Air1、2用於Panel vacuum;Pedestal類型:用於Pedestal vacuum;Tray類型不使用;Air3用於Isolator、Air Gun。',
+          ja:'■ 設備メインAir供給有無確認\n\n各Air Regulatorの圧力が4~6barに維持されるよう調整します。Regulator圧力は設定によりI/O信号で確認できます。Panelタイプ:Air1・2はPanel vacuum用、Pedestalタイプ:Pedestal vacuum用、Trayタイプ:未使用、Air3:Isolator・Air Gun用です。',
+          vi:'■ Kiểm tra khí chính của thiết bị có được cấp hay không\n\nĐiều chỉnh để áp suất mỗi Air Regulator duy trì ở mức 4~6bar. Áp suất Regulator có thể xác nhận qua tín hiệu I/O thông qua cài đặt. Loại Panel: Air1, 2 dùng cho Panel vacuum; loại Pedestal: dùng cho Pedestal vacuum; loại Tray: không sử dụng; Air3: dùng cho Isolator, Air Gun.'
+        }},
+        {img:cmImg('A','qpm',29),tx:{
+          ko:'■ Operation Panel Button Lamp 상태 확인\n\n설비 내 모든 Circuit Breaker가 켜지면 Power Off 버튼 램프가 켜지고, Reset 버튼 램프는 약 500ms 주기로 점멸합니다. Power On 버튼을 누르면 Power On 램프가 켜지고 Power Off 램프는 꺼집니다. MUTE LAMP: Light Curtain Sensor 작동 중 Panel 작업이 필요할 때 Main Stage를 \'Mute Sensor\' 위치로 이동하면 점등됩니다. START는 자동 운전, STOP은 운전 정지, RESET은 알람 해제입니다.',
+          en:'■ Check the Operation Panel Button Lamp status\n\nWhen all circuit breakers in the facility are turned on, the Power Off button lamp turns on, and the Reset button lamp blinks with a cycle of about 500ms. Pressing the Power On button turns on the Power On lamp and turns off the Power Off lamp. MUTE LAMP: lights up when the main stage is moved to the \'Mute Sensor\' position to allow panel work while the light curtain sensor is active. START runs automated operation, STOP stops operation, and RESET clears the equipment alarm.',
+          zhCN:'■ 确认Operation Panel按钮指示灯状态\n\n设备内所有Circuit Breaker开启后,Power Off按钮指示灯亮起,Reset按钮指示灯以约500ms周期闪烁。按下Power On按钮后Power On指示灯亮起,Power Off指示灯熄灭。MUTE LAMP:在Light Curtain Sensor动作中需要进行Panel作业时,将Main Stage移到\'Mute Sensor\'位置即会点亮。START为自动运行,STOP为停止运行,RESET为解除警报。',
+          zhTW:'■ 確認Operation Panel按鈕指示燈狀態\n\n設備內所有Circuit Breaker開啟後,Power Off按鈕指示燈亮起,Reset按鈕指示燈以約500ms週期閃爍。按下Power On按鈕後Power On指示燈亮起,Power Off指示燈熄滅。MUTE LAMP:在Light Curtain Sensor動作中需要進行Panel作業時,將Main Stage移到\'Mute Sensor\'位置即會點亮。START為自動運行,STOP為停止運行,RESET為解除警報。',
+          ja:'■ Operation Panelボタンランプ状態確認\n\n設備内のすべてのCircuit Breakerがオンになると、Power Offボタンランプが点灯し、Resetボタンランプは約500ms周期で点滅します。Power Onボタンを押すとPower Onランプが点灯しPower Offランプが消灯します。MUTE LAMP:Light Curtain Sensor作動中にPanel作業が必要な場合、Main Stageを\'Mute Sensor\'位置へ移動すると点灯します。STARTは自動運転、STOPは運転停止、RESETはアラーム解除です。',
+          vi:'■ Kiểm tra trạng thái đèn nút Operation Panel\n\nKhi tất cả Circuit Breaker trong thiết bị được bật, đèn nút Power Off sáng, đèn nút Reset nhấp nháy theo chu kỳ khoảng 500ms. Khi nhấn nút Power On, đèn Power On sáng và đèn Power Off tắt. MUTE LAMP: sáng khi di chuyển Main Stage đến vị trí \'Mute Sensor\' để thực hiện công việc trên Panel trong khi Light Curtain Sensor đang hoạt động. START là vận hành tự động, STOP là dừng vận hành, RESET là giải trừ alarm.'
+        }},
+        {img:cmImg('A','qpm',30),tx:{
+          ko:'■ Main Switch & PC Power On #1\n\n① Main Handler Power Switch를 시계 방향으로 90° 돌려 켭니다. ② Circuit Protector On. ③ HOST PC On. ④ 3D Vision PC On.',
+          en:'■ Main Switch & PC Power On #1\n\n1. Turn the Main Handler Power Switch on by rotating clockwise 90°. 2. Circuit Protector On. 3. HOST PC On. 4. 3D Vision PC On.',
+          zhCN:'■ Main Switch & PC Power On #1\n\n①将Main Handler Power Switch顺时针旋转90°打开。②Circuit Protector On。③HOST PC On。④3D Vision PC On。',
+          zhTW:'■ Main Switch & PC Power On #1\n\n①將Main Handler Power Switch順時針旋轉90°打開。②Circuit Protector On。③HOST PC On。④3D Vision PC On。',
+          ja:'■ Main Switch & PC Power On #1\n\n①Main Handler Power Switchを時計回りに90°回してオンにします。②Circuit Protector On。③HOST PC On。④3D Vision PC On。',
+          vi:'■ Main Switch & PC Power On #1\n\n① Xoay Main Handler Power Switch theo chiều kim đồng hồ 90° để bật. ② Circuit Protector On. ③ HOST PC On. ④ 3D Vision PC On.'
+        }},
+        {img:cmImg('A','qpm',31),tx:{
+          ko:'■ Main Switch & Controller Power On #2\n\n⑤ LED Controller On. ⑥ PZT Controller On (PI PZT / NanoFaktur PZT 방식 모두 해당). ⑧ OP Panel On.',
+          en:'■ Main Switch & Controller Power On #2\n\n5. LED Controller On. 6. PZT Controller On (applies to both PI PZT and NanoFaktur PZT). 8. OP panel On.',
+          zhCN:'■ Main Switch & Controller Power On #2\n\n⑤LED Controller On。⑥PZT Controller On(PI PZT、NanoFaktur PZT两种方式均适用)。⑧OP panel On。',
+          zhTW:'■ Main Switch & Controller Power On #2\n\n⑤LED Controller On。⑥PZT Controller On(PI PZT、NanoFaktur PZT兩種方式皆適用)。⑧OP panel On。',
+          ja:'■ Main Switch & Controller Power On #2\n\n⑤LED Controller On。⑥PZT Controller On(PI PZT・NanoFaktur PZTいずれの方式も該当)。⑧OP panel On。',
+          vi:'■ Main Switch & Controller Power On #2\n\n⑤ LED Controller On. ⑥ PZT Controller On (áp dụng cho cả PI PZT và NanoFaktur PZT). ⑧ OP panel On.'
+        }},
+        {img:cmImg('A','qpm',32),tx:{
+          ko:'■ Safety Sticker 종류\n\nNANYA용은 중국어 스티커, SEMV 설비 전용 스티커를 부착하며, 그 외에는 영문 스티커를 부착합니다. Motor 방향 스티커는 공통으로 적용됩니다.',
+          en:'■ Safety sticker type\n\nFor NANYA, attach a Chinese sticker; for SEMV facilities, attach a sticker exclusive to SEMV; otherwise, attach an English sticker. The motor direction sticker is applied in common.',
+          zhCN:'■ Safety Sticker种类\n\nNANYA用附中文标签,SEMV设备专用标签,其余则附英文标签。Motor方向标签为共通适用。',
+          zhTW:'■ Safety Sticker種類\n\nNANYA用附中文標籤,SEMV設備專用標籤,其餘則附英文標籤。Motor方向標籤為共通適用。',
+          ja:'■ Safety Sticker種類\n\nNANYA用は中国語ステッカー、SEMV設備専用ステッカーを貼付し、それ以外は英語ステッカーを貼付します。Motor方向ステッカーは共通で適用されます。',
+          vi:'■ Loại Safety Sticker\n\nDùng nhãn tiếng Trung cho NANYA, nhãn riêng cho thiết bị SEMV, còn lại dán nhãn tiếng Anh. Nhãn hướng Motor được áp dụng chung.'
+        }},
+        {img:cmImg('A','qpm',33),tx:{
+          ko:'Safety Sticker 부착 위치 — FRONT VIEW',
+          en:'Safety sticker mounting position — FRONT VIEW',
+          zhCN:'Safety Sticker贴附位置——FRONT VIEW',
+          zhTW:'Safety Sticker貼附位置——FRONT VIEW',
+          ja:'Safety Sticker貼付位置——FRONT VIEW',
+          vi:'Vị trí dán Safety Sticker — FRONT VIEW'
+        }},
+        {img:cmImg('A','qpm',34),tx:{
+          ko:'Safety Sticker 부착 위치 — RIGHT VIEW',
+          en:'Safety sticker mounting position — RIGHT VIEW',
+          zhCN:'Safety Sticker貼附位置——RIGHT VIEW',
+          zhTW:'Safety Sticker貼附位置——RIGHT VIEW',
+          ja:'Safety Sticker貼付位置——RIGHT VIEW',
+          vi:'Vị trí dán Safety Sticker — RIGHT VIEW'
+        }},
+        {img:cmImg('A','qpm',35),tx:{
+          ko:'Safety Sticker 부착 위치 — REAR VIEW',
+          en:'Safety sticker mounting position — REAR VIEW',
+          zhCN:'Safety Sticker贴附位置——REAR VIEW',
+          zhTW:'Safety Sticker貼附位置——REAR VIEW',
+          ja:'Safety Sticker貼付位置——REAR VIEW',
+          vi:'Vị trí dán Safety Sticker — REAR VIEW'
+        }},
+        {img:cmImg('A','qpm',36),tx:{
+          ko:'Safety Sticker 부착 위치 — LEFT VIEW',
+          en:'Safety sticker mounting position — LEFT VIEW',
+          zhCN:'Safety Sticker贴附位置——LEFT VIEW',
+          zhTW:'Safety Sticker貼附位置——LEFT VIEW',
+          ja:'Safety Sticker貼付位置——LEFT VIEW',
+          vi:'Vị trí dán Safety Sticker — LEFT VIEW'
+        }},
+        {img:cmImg('A','qpm',37),tx:{
+          ko:'Safety Sticker 부착 위치 — TOP VIEW',
+          en:'Safety sticker mounting position — TOP VIEW',
+          zhCN:'Safety Sticker贴附位置——TOP VIEW',
+          zhTW:'Safety Sticker貼附位置——TOP VIEW',
+          ja:'Safety Sticker貼付位置——TOP VIEW',
+          vi:'Vị trí dán Safety Sticker — TOP VIEW'
+        }},
+        {img:cmImg('A','qpm',38),tx:{
+          ko:'기타 Safety Sticker 부착 위치입니다.',
+          en:'Other safety stickers\' mounting positions.',
+          zhCN:'其他Safety Sticker的贴附位置。',
+          zhTW:'其他Safety Sticker的貼附位置。',
+          ja:'その他のSafety Stickerの貼付位置です。',
+          vi:'Vị trí dán các Safety Sticker khác.'
+        }},
+        {img:cmImg('A','qpm',39),tx:{
+          ko:'Motor 방향 스티커 표기 — JIG IDX X축: (-)/(+), JIG IDX Y축: (-)/(+), Vision Z축: UP(-)/DOWN(+).',
+          en:'Motor direction sticker notation — JIG IDX X-axis: (-)/(+), JIG IDX Y-axis: (-)/(+), Vision Z-axis: UP(-)/DOWN(+).',
+          zhCN:'Motor方向标签标示——JIG IDX X轴:(-)/(+),JIG IDX Y轴:(-)/(+),Vision Z轴:UP(-)/DOWN(+)。',
+          zhTW:'Motor方向標籤標示——JIG IDX X軸:(-)/(+),JIG IDX Y軸:(-)/(+),Vision Z軸:UP(-)/DOWN(+)。',
+          ja:'Motor方向ステッカー表記——JIG IDX X軸:(-)/(+)、JIG IDX Y軸:(-)/(+)、Vision Z軸:UP(-)/DOWN(+)。',
+          vi:'Ký hiệu nhãn hướng Motor — Trục X của JIG IDX: (-)/(+), Trục Y của JIG IDX: (-)/(+), Trục Z của Vision: UP(-)/DOWN(+).'
+        }},
+        {img:cmImg('A','qpm',40),tx:{
+          ko:'■ Isolator 목적 및 기능\n\nIsolator는 3D 광학계 검사에 영향을 미치는 외부 진동을 억제하는 장치로, 석정반(Stone Table)의 네 모서리에 각각 설치되어 역할을 수행합니다(제어 기능은 3개 지점에 적용). 석정반의 Tuning 정도 또한 검사 성능에 영향을 미칩니다.',
+          en:'■ Isolator purpose and function\n\nThe Isolator is a device that suppresses external vibration affecting the 3D optical system\'s vision inspection, installed at each of the four corners of the stone table (the control function applies to 3 points). The degree of stone-plate tuning also affects inspection performance.',
+          zhCN:'■ Isolator用途及功能\n\nIsolator是抑制影响3D光学系统检查的外部振动的装置,分别安装在石定盘(Stone Table)四个角落发挥作用(控制功能应用于3个点位)。石定盘的Tuning程度也会影响检查性能。',
+          zhTW:'■ Isolator用途及功能\n\nIsolator是抑制影響3D光學系統檢查的外部振動的裝置,分別安裝在石定盤(Stone Table)四個角落發揮作用(控制功能應用於3個點位)。石定盤的Tuning程度也會影響檢查性能。',
+          ja:'■ Isolator目的及び機能\n\nIsolatorは3D光学系の検査に影響を与える外部振動を抑制する装置で、ストーンテーブル(Stone Table)の四隅にそれぞれ設置され機能します(制御機能は3地点に適用)。ストーンプレートのTuning度合いも検査性能に影響します。',
+          vi:'■ Mục đích và chức năng của Isolator\n\nIsolator là thiết bị triệt tiêu rung động bên ngoài ảnh hưởng đến kiểm tra của hệ quang học 3D, được lắp ở bốn góc của bàn đá (Stone Table) (chức năng điều khiển áp dụng cho 3 điểm). Mức độ Tuning của tấm đá cũng ảnh hưởng đến hiệu suất kiểm tra.'
+        }},
+        {img:cmImg('A','qpm',41),tx:{
+          ko:'■ Isolator Tuning Sequence #1\n\n모든 Speed Controller를 풀고, Precision Leveler 상·하단의 너트를 풉니다.',
+          en:'■ Isolator Tuning Sequence #1\n\nLoosen all speed controllers, then loosen the nuts on the top/bottom of the precision leveler.',
+          zhCN:'■ Isolator Tuning Sequence #1\n\n松开所有Speed Controller,再松开Precision Leveler上下端的螺母。',
+          zhTW:'■ Isolator Tuning Sequence #1\n\n鬆開所有Speed Controller,再鬆開Precision Leveler上下端的螺母。',
+          ja:'■ Isolator Tuning Sequence #1\n\nすべてのSpeed Controllerを緩め、Precision Levelerの上下のナットを緩めます。',
+          vi:'■ Isolator Tuning Sequence #1\n\nNới lỏng tất cả Speed Controller, sau đó nới lỏng các đai ốc ở trên/dưới của Precision Leveler.'
+        }},
+        {img:cmImg('A','qpm',42),tx:{
+          ko:'■ Isolator Tuning Sequence #2\n\nCap을 위로 들어올려 돌려서 조정합니다. Regulator 압력을 약 0.5MPa로 조정합니다.',
+          en:'■ Isolator Tuning Sequence #2\n\nLift the cap upward and adjust by turning it. Adjust the regulator pressure to about 0.5MPa.',
+          zhCN:'■ Isolator Tuning Sequence #2\n\n将Cap向上抬起并旋转调整。将Regulator压力调整至约0.5MPa。',
+          zhTW:'■ Isolator Tuning Sequence #2\n\n將Cap向上抬起並旋轉調整。將Regulator壓力調整至約0.5MPa。',
+          ja:'■ Isolator Tuning Sequence #2\n\nCapを上に持ち上げて回して調整します。Regulator圧力を約0.5MPaに調整します。',
+          vi:'■ Isolator Tuning Sequence #2\n\nNâng Cap lên trên và xoay để điều chỉnh. Điều chỉnh áp suất Regulator khoảng 0.5MPa.'
+        }},
+        {img:cmImg('A','qpm',43),tx:{
+          ko:'■ Isolator Tuning Sequence #3\n\nPrecision Leveler를 조정하여 간격을 10mm±2로 맞춥니다. 높이 설정이 완료되면 Precision Leveler의 너트를 고정합니다.',
+          en:'■ Isolator Tuning Sequence #3\n\nAdjust the precision leveler to set the gap to 10mm ±2. When the height setting is complete, fix the nut of the precision leveler.',
+          zhCN:'■ Isolator Tuning Sequence #3\n\n调整Precision Leveler使间隙为10mm±2。高度设置完成后固定Precision Leveler的螺母。',
+          zhTW:'■ Isolator Tuning Sequence #3\n\n調整Precision Leveler使間隙為10mm±2。高度設定完成後固定Precision Leveler的螺母。',
+          ja:'■ Isolator Tuning Sequence #3\n\nPrecision Levelerを調整し、隙間を10mm±2に合わせます。高さ設定が完了したらPrecision Levelerのナットを固定します。',
+          vi:'■ Isolator Tuning Sequence #3\n\nĐiều chỉnh Precision Leveler để khe hở đạt 10mm±2. Khi hoàn tất thiết lập độ cao, cố định đai ốc của Precision Leveler.'
+        }}
+      ]
     }
   },
 
-  G:{
+  F:{
     smtv:{
-      title:{ko:'G. Handler Teaching',en:'G. Handler Teaching',zhCN:'G. Handler Teaching',zhTW:'G. Handler Teaching',ja:'G. Handler Teaching'},
+      title:{ko:'F. Handler Teaching',en:'F. Handler Teaching',zhCN:'F. Handler Teaching',zhTW:'F. Handler Teaching',ja:'F. Handler Teaching'},
       chapters:[
         {from:1,title:{ko:'A. Elevator',en:'A. Elevator',zhCN:'A. Elevator',zhTW:'A. Elevator',ja:'A. Elevator'}},
         {from:25,title:{ko:'B. Load Multi Picker Pick Pos',en:'B. Load Multi Picker Pick Pos',zhCN:'B. Load Multi Picker Pick Pos',zhTW:'B. Load Multi Picker Pick Pos',ja:'B. Load Multi Picker Pick Pos'}},
@@ -2667,7 +3023,7 @@ var COURSE_MATERIALS={
       ]
     },
     nbga:{
-      title:{ko:'G. Handler Teaching',en:'G. Handler Teaching',zhCN:'G. Handler Teaching',zhTW:'G. Handler Teaching',ja:'G. Handler Teaching'},
+      title:{ko:'F. Handler Teaching',en:'F. Handler Teaching',zhCN:'F. Handler Teaching',zhTW:'F. Handler Teaching',ja:'F. Handler Teaching'},
       chapters:[
         {from:1,title:{ko:'A. Elevator',en:'A. Elevator',zhCN:'A. Elevator',zhTW:'A. Elevator',ja:'A. Elevator'}},
         {from:29,title:{ko:'B. Tray Sorter Module',en:'B. Tray Sorter Module',zhCN:'B. Tray Sorter Module',zhTW:'B. Tray Sorter Module',ja:'B. Tray Sorter Module'}},
@@ -3735,11 +4091,197 @@ var COURSE_MATERIALS={
           ja:'Illum Control設定ウィンドウを開き、\'UseMultiZMap\'がTRUEになっているか確認します(FALSEの場合はTRUEに変更)。\'3D_Img1\'を選択し、Height TargetでFringeがはっきり見えるようIntensityを4~5に設定します——Start Pos.ではFringeが見えず、Fringe Pos.では見える必要があります。設定完了後、保存してウィンドウを閉じます。'
         }}
       ]
+    },
+    qpm:{
+      title:{ko:'F. Handler Teaching',en:'F. Handler Teaching',zhCN:'F. Handler Teaching',zhTW:'F. Handler Teaching',ja:'F. Handler Teaching'},
+      chapters:[
+        {from:1,title:{ko:'A. Panel Type',en:'A. Panel Type',zhCN:'A. Panel Type',zhTW:'A. Panel Type',ja:'A. Panel Type'}},
+        {from:8,title:{ko:'B. Double Tray Type',en:'B. Double Tray Type',zhCN:'B. Double Tray Type',zhTW:'B. Double Tray Type',ja:'B. Double Tray Type'}},
+        {from:15,title:{ko:'C. Pedestal & Tray Type',en:'C. Pedestal & Tray Type',zhCN:'C. Pedestal & Tray Type',zhTW:'C. Pedestal & Tray Type',ja:'C. Pedestal & Tray Type'}}
+      ],
+      slides:[
+        {img:cmImg('F','qpm',1),tx:{
+          ko:'7. Handler Teaching — Optical Reference Position Teach (Panel Type)\n\nSystem ▸ Handler를 클릭합니다. Reference Position 유형은 Panel/Pedestal&Tray/Double Tray로 구분되며, 해당 유형에 맞는 Position을 Teaching합니다.',
+          en:'7. Handler Teaching — Optical Reference Position Teach (Panel Type)\n\nClick System ▸ Handler. The Reference Position type is divided into Panel, Pedestal & Tray, and Double Tray — teach the position appropriate for the type.',
+          zhCN:'7. Handler Teaching — Optical Reference Position Teach (Panel Type)\n\n点击System ▸ Handler。Reference Position类型分为Panel、Pedestal & Tray、Double Tray——对相应类型进行Position的Teaching。',
+          zhTW:'7. Handler Teaching — Optical Reference Position Teach (Panel Type)\n\n點擊System ▸ Handler。Reference Position類型分為Panel、Pedestal & Tray、Double Tray——對相應類型進行Position的Teaching。',
+          ja:'7. Handler Teaching — Optical Reference Position Teach (Panel Type)\n\nSystem ▸ Handlerをクリックします。Reference Positionの種類はPanel、Pedestal & Tray、Double Trayに分かれ、該当する種類に合わせてPositionをTeachingします。',
+          vi:'7. Handler Teaching — Optical Reference Position Teach (Panel Type)\n\nNhấp vào System ▸ Handler. Loại Reference Position được chia thành Panel, Pedestal & Tray, và Double Tray — Teaching vị trí phù hợp với loại tương ứng.'
+        }},
+        {img:cmImg('F','qpm',2),tx:{
+          ko:'Panel 좌측 상단 구멍 중심에 맞춥니다.',
+          en:'Align with the hole center on the upper left side of the panel.',
+          zhCN:'对准Panel左上方孔的中心。',
+          zhTW:'對準Panel左上方孔的中心。',
+          ja:'Panel左上の穴の中心に合わせます。',
+          vi:'Căn chỉnh theo tâm lỗ ở góc trên bên trái của Panel.'
+        }},
+        {img:cmImg('F','qpm',3),tx:{
+          ko:'\'Panel Jig Reference Position\'의 (X,Y,Z) 축을 선택합니다. Oblique CH1을 255로 설정한 뒤 Live를 확인합니다. 화면에서 마우스 우클릭 후 \'Show image Center line\' 메뉴를 선택합니다.',
+          en:'Select the (X, Y, Z) axis of the \'Panel Jig Reference Position\'. After setting Oblique CH1 to 255, check Live. Right-click on the image screen and select the \'Show image Center line\' menu.',
+          zhCN:'选择\'Panel Jig Reference Position\'的(X,Y,Z)轴。将Oblique CH1设为255后确认Live。在画面上右键点击,选择\'Show image Center line\'菜单。',
+          zhTW:'選擇\'Panel Jig Reference Position\'的(X,Y,Z)軸。將Oblique CH1設為255後確認Live。在畫面上右鍵點擊,選擇\'Show image Center line\'選單。',
+          ja:'\'Panel Jig Reference Position\'の(X,Y,Z)軸を選択します。Oblique CH1を255に設定した後Liveを確認します。画面上で右クリックし\'Show image Center line\'メニューを選択します。',
+          vi:'Chọn trục (X, Y, Z) của \'Panel Jig Reference Position\'. Sau khi đặt Oblique CH1 thành 255, kiểm tra Live. Nhấp chuột phải trên màn hình hình ảnh và chọn menu \'Show image Center line\'.'
+        }},
+        {img:cmImg('F','qpm',4),tx:{
+          ko:'Z축: AF 프로그램을 이용해 Panel의 Fringe 위치로 이동합니다.',
+          en:'Z axis: Move to the fringe position of the panel using the AF program.',
+          zhCN:'Z轴:使用AF程序移动到Panel的Fringe位置。',
+          zhTW:'Z軸:使用AF程式移動到Panel的Fringe位置。',
+          ja:'Z軸:AFプログラムを使用してPanelのFringe位置へ移動します。',
+          vi:'Trục Z: Di chuyển đến vị trí Fringe của Panel bằng chương trình AF.'
+        }},
+        {img:cmImg('F','qpm',5),tx:{
+          ko:'X, Y축: Motor Jog를 이용해 노란색 선을 구멍 중심으로 이동합니다.',
+          en:'X, Y-axis: Move the yellow line to the hole center using Motor Jog.',
+          zhCN:'X、Y轴:使用Motor Jog将黄线移动到孔中心。',
+          zhTW:'X、Y軸:使用Motor Jog將黃線移動到孔中心。',
+          ja:'X、Y軸:Motor Jogを使用して黄色い線を穴の中心へ移動します。',
+          vi:'Trục X, Y: Di chuyển đường màu vàng đến tâm lỗ bằng Motor Jog.'
+        }},
+        {img:cmImg('F','qpm',6),tx:{
+          ko:'해당 위치로 이동한 후 Teach 합니다. Teaching Position 값이 변경되었는지 확인하고, 확인 후 Apply 합니다.',
+          en:'After moving to the corresponding position, teach. Check if the teaching position value has changed, then Apply after confirmation.',
+          zhCN:'移动到相应位置后进行Teach。确认Teaching Position值是否已变更,确认后Apply。',
+          zhTW:'移動到相應位置後進行Teach。確認Teaching Position值是否已變更,確認後Apply。',
+          ja:'該当位置へ移動した後Teachします。Teaching Position値が変更されたか確認し、確認後Applyします。',
+          vi:'Sau khi di chuyển đến vị trí tương ứng, thực hiện teach. Kiểm tra xem giá trị teaching position đã thay đổi chưa, sau đó Apply.'
+        }},
+        {img:cmImg('F','qpm',7),tx:{
+          ko:'Position 값이 적용되었는지 확인한 뒤 Apply, Save 합니다. 나머지 축들도 같은 방식으로 Teaching을 진행합니다.',
+          en:'Check if the Position value is applied, then Apply and Save. Teaching is performed for each remaining axis in the same way.',
+          zhCN:'确认Position值已应用后,Apply、Save。其余各轴也以相同方式进行Teaching。',
+          zhTW:'確認Position值已套用後,Apply、Save。其餘各軸也以相同方式進行Teaching。',
+          ja:'Position値が適用されたか確認した後、Apply、Saveします。残りの各軸も同じ方法でTeachingを行います。',
+          vi:'Kiểm tra xem giá trị Position đã được áp dụng chưa, sau đó Apply, Save. Các trục còn lại cũng được Teaching theo cách tương tự.'
+        }},
+        {img:cmImg('F','qpm',8),tx:{
+          ko:'7. Handler Teaching — Optical Reference Position Teach (Double Tray Type)\n\nSystem ▸ Handler를 클릭합니다. Reference Position 유형은 Panel/Pedestal&Tray/Double Tray로 구분되며, 해당 유형에 맞는 Position을 Teaching합니다.',
+          en:'7. Handler Teaching — Optical Reference Position Teach (Double Tray Type)\n\nClick System ▸ Handler. The Reference Position type is divided into Panel, Pedestal & Tray, and Double Tray — teach the position appropriate for the type.',
+          zhCN:'7. Handler Teaching — Optical Reference Position Teach (Double Tray Type)\n\n点击System ▸ Handler。Reference Position类型分为Panel、Pedestal & Tray、Double Tray——对相应类型进行Position的Teaching。',
+          zhTW:'7. Handler Teaching — Optical Reference Position Teach (Double Tray Type)\n\n點擊System ▸ Handler。Reference Position類型分為Panel、Pedestal & Tray、Double Tray——對相應類型進行Position的Teaching。',
+          ja:'7. Handler Teaching — Optical Reference Position Teach (Double Tray Type)\n\nSystem ▸ Handlerをクリックします。Reference Positionの種類はPanel、Pedestal & Tray、Double Trayに分かれ、該当する種類に合わせてPositionをTeachingします。',
+          vi:'7. Handler Teaching — Optical Reference Position Teach (Double Tray Type)\n\nNhấp vào System ▸ Handler. Loại Reference Position được chia thành Panel, Pedestal & Tray, và Double Tray — Teaching vị trí phù hợp với loại tương ứng.'
+        }},
+        {img:cmImg('F','qpm',9),tx:{
+          ko:'Tray X Position: Tray 좌측 끝에 맞춥니다. Tray Y Position: Tray 좌측 상단 모서리에 맞춥니다.',
+          en:'Tray X Position: Align with the left end of the tray. Tray Y Position: Align with the upper left corner of the tray.',
+          zhCN:'Tray X Position:对齐Tray的左端。Tray Y Position:对齐Tray的左上角。',
+          zhTW:'Tray X Position:對齊Tray的左端。Tray Y Position:對齊Tray的左上角。',
+          ja:'Tray X Position:Trayの左端に合わせます。Tray Y Position:Trayの左上端に合わせます。',
+          vi:'Tray X Position: Căn chỉnh theo đầu bên trái của Tray. Tray Y Position: Căn chỉnh theo góc trên bên trái của Tray.'
+        }},
+        {img:cmImg('F','qpm',10),tx:{
+          ko:'\'Group2 Tray Jig Reference Position\'의 (X,Y,Z) 축을 선택합니다. Oblique CH1을 255로 설정한 뒤 Live를 확인합니다. 화면에서 마우스 우클릭 후 \'Show image Center line\' 메뉴를 선택합니다.',
+          en:'Select the (X, Y, Z) axis of the \'Group2 Tray Jig Reference Position\'. After setting Oblique CH1 to 255, check Live. Right-click on the image screen and select the \'Show image Center line\' menu.',
+          zhCN:'选择\'Group2 Tray Jig Reference Position\'的(X,Y,Z)轴。将Oblique CH1设为255后确认Live。在画面上右键点击,选择\'Show image Center line\'菜单。',
+          zhTW:'選擇\'Group2 Tray Jig Reference Position\'的(X,Y,Z)軸。將Oblique CH1設為255後確認Live。在畫面上右鍵點擊,選擇\'Show image Center line\'選單。',
+          ja:'\'Group2 Tray Jig Reference Position\'の(X,Y,Z)軸を選択します。Oblique CH1を255に設定した後Liveを確認します。画面上で右クリックし\'Show image Center line\'メニューを選択します。',
+          vi:'Chọn trục (X, Y, Z) của \'Group2 Tray Jig Reference Position\'. Sau khi đặt Oblique CH1 thành 255, kiểm tra Live. Nhấp chuột phải trên màn hình hình ảnh và chọn menu \'Show image Center line\'.'
+        }},
+        {img:cmImg('F','qpm',11),tx:{
+          ko:'X축: Motor Jog를 이용해 Tray 좌측 끝으로 이동합니다. Y축: Motor Jog를 이용해 Tray 상단으로 이동합니다.',
+          en:'X-axis: Move to the left end of the tray using Motor Jog. Y-axis: Move to the top of the tray using Motor Jog.',
+          zhCN:'X轴:使用Motor Jog移动到Tray左端。Y轴:使用Motor Jog移动到Tray顶部。',
+          zhTW:'X軸:使用Motor Jog移動到Tray左端。Y軸:使用Motor Jog移動到Tray頂部。',
+          ja:'X軸:Motor Jogを使用してTrayの左端へ移動します。Y軸:Motor Jogを使用してTrayの上部へ移動します。',
+          vi:'Trục X: Di chuyển đến đầu bên trái của Tray bằng Motor Jog. Trục Y: Di chuyển đến đầu trên của Tray bằng Motor Jog.'
+        }},
+        {img:cmImg('F','qpm',12),tx:{
+          ko:'해당 위치로 이동한 후 Teach 합니다. Teaching Position 값이 변경되었는지 확인하고, 확인 후 Apply 합니다.',
+          en:'After moving to the corresponding position, teach. Check if the teaching position value has changed, then Apply after confirmation.',
+          zhCN:'移动到相应位置后进行Teach。确认Teaching Position值是否已变更,确认后Apply。',
+          zhTW:'移動到相應位置後進行Teach。確認Teaching Position值是否已變更,確認後Apply。',
+          ja:'該当位置へ移動した後Teachします。Teaching Position値が変更されたか確認し、確認後Applyします。',
+          vi:'Sau khi di chuyển đến vị trí tương ứng, thực hiện teach. Kiểm tra xem giá trị teaching position đã thay đổi chưa, sau đó Apply.'
+        }},
+        {img:cmImg('F','qpm',13),tx:{
+          ko:'Position 값이 적용되었는지 확인한 뒤 Apply, Save 합니다. 나머지 축들도 같은 방식으로 Teaching을 진행합니다.',
+          en:'Check if the Position value is applied, then Apply and Save. Teaching is performed for each remaining axis in the same way.',
+          zhCN:'确认Position值已应用后,Apply、Save。其余各轴也以相同方式进行Teaching。',
+          zhTW:'確認Position值已套用後,Apply、Save。其餘各軸也以相同方式進行Teaching。',
+          ja:'Position値が適用されたか確認した後、Apply、Saveします。残りの各軸も同じ方法でTeachingを行います。',
+          vi:'Kiểm tra xem giá trị Position đã được áp dụng chưa, sau đó Apply, Save. Các trục còn lại cũng được Teaching theo cách tương tự.'
+        }},
+        {img:cmImg('F','qpm',14),tx:{
+          ko:'Z축: AF 프로그램을 이용해 제품의 Fringe 위치로 이동합니다. Panel Design에서 Tray Mode를 선택하고, \'Group 1 Reference Z\'에 AF Position 값을 입력한 뒤 Main에서 Apply, Save 합니다.',
+          en:'Z-axis: Move to the position of the product\'s fringe using the AF program. Select Tray Mode in Panel Design, enter the AF Position value into \'Group 1 Reference Z\', then Apply and Save in Main.',
+          zhCN:'Z轴:使用AF程序移动到产品的Fringe位置。在Panel Design中选择Tray Mode,将AF Position值输入\'Group 1 Reference Z\',然后在Main中Apply、Save。',
+          zhTW:'Z軸:使用AF程式移動到產品的Fringe位置。在Panel Design中選擇Tray Mode,將AF Position值輸入\'Group 1 Reference Z\',然後在Main中Apply、Save。',
+          ja:'Z軸:AFプログラムを使用して製品のFringe位置へ移動します。Panel DesignでTray Modeを選択し、\'Group 1 Reference Z\'にAF Position値を入力した後、MainでApply、Saveします。',
+          vi:'Trục Z: Di chuyển đến vị trí Fringe của sản phẩm bằng chương trình AF. Chọn Tray Mode trong Panel Design, nhập giá trị AF Position vào \'Group 1 Reference Z\', sau đó Apply, Save trong Main.'
+        }},
+        {img:cmImg('F','qpm',15),tx:{
+          ko:'7. Handler Teaching — Optical Reference Position Teach (Pedestal & Tray Type)\n\nSystem ▸ Handler를 클릭합니다. Reference Position 유형은 Panel/Pedestal&Tray/Double Tray로 구분되며, 해당 유형에 맞는 Position을 Teaching합니다.',
+          en:'7. Handler Teaching — Optical Reference Position Teach (Pedestal & Tray Type)\n\nClick System ▸ Handler. The Reference Position type is divided into Panel, Pedestal & Tray, and Double Tray — teach the position appropriate for the type.',
+          zhCN:'7. Handler Teaching — Optical Reference Position Teach (Pedestal & Tray Type)\n\n点击System ▸ Handler。Reference Position类型分为Panel、Pedestal & Tray、Double Tray——对相应类型进行Position的Teaching。',
+          zhTW:'7. Handler Teaching — Optical Reference Position Teach (Pedestal & Tray Type)\n\n點擊System ▸ Handler。Reference Position類型分為Panel、Pedestal & Tray、Double Tray——對相應類型進行Position的Teaching。',
+          ja:'7. Handler Teaching — Optical Reference Position Teach (Pedestal & Tray Type)\n\nSystem ▸ Handlerをクリックします。Reference Positionの種類はPanel、Pedestal & Tray、Double Trayに分かれ、該当する種類に合わせてPositionをTeachingします。',
+          vi:'7. Handler Teaching — Optical Reference Position Teach (Pedestal & Tray Type)\n\nNhấp vào System ▸ Handler. Loại Reference Position được chia thành Panel, Pedestal & Tray, và Double Tray — Teaching vị trí phù hợp với loại tương ứng.'
+        }},
+        {img:cmImg('F','qpm',16),tx:{
+          ko:'Pedestal & Tray Reference Position — Pedestal: 좌측 상단 구멍 중심에 맞춥니다. Tray X Position: Tray 좌측 끝에 맞춥니다. Tray Y Position: Tray 좌측 상단 모서리에 맞춥니다.',
+          en:'Pedestal & Tray Reference Position — Pedestal: align with the hole center on the upper left side. Tray X Position: align with the left end of the tray. Tray Y Position: align with the upper left corner of the tray.',
+          zhCN:'Pedestal & Tray Reference Position——Pedestal:对准左上方孔的中心。Tray X Position:对齐Tray左端。Tray Y Position:对齐Tray左上角。',
+          zhTW:'Pedestal & Tray Reference Position——Pedestal:對準左上方孔的中心。Tray X Position:對齊Tray左端。Tray Y Position:對齊Tray左上角。',
+          ja:'Pedestal & Tray Reference Position——Pedestal:左上の穴の中心に合わせます。Tray X Position:Trayの左端に合わせます。Tray Y Position:Trayの左上端に合わせます。',
+          vi:'Pedestal & Tray Reference Position — Pedestal: căn chỉnh theo tâm lỗ ở góc trên bên trái. Tray X Position: căn chỉnh theo đầu bên trái của Tray. Tray Y Position: căn chỉnh theo góc trên bên trái của Tray.'
+        }},
+        {img:cmImg('F','qpm',17),tx:{
+          ko:'\'Pedestal Jig Reference Position\'과 \'Tray Jig Reference Position\'의 (X,Y,Z) 축을 선택합니다. Oblique CH1을 255로 설정한 뒤 Live를 확인합니다. 화면에서 마우스 우클릭 후 \'Show image Center line\' 메뉴를 선택합니다.',
+          en:'Select the (X, Y, Z) axis of the \'Pedestal Jig Reference Position\' and \'Tray Jig Reference Position\'. After setting Oblique CH1 to 255, check Live. Right-click on the image screen and select the \'Show image Center line\' menu.',
+          zhCN:'选择\'Pedestal Jig Reference Position\'和\'Tray Jig Reference Position\'的(X,Y,Z)轴。将Oblique CH1设为255后确认Live。在画面上右键点击,选择\'Show image Center line\'菜单。',
+          zhTW:'選擇\'Pedestal Jig Reference Position\'和\'Tray Jig Reference Position\'的(X,Y,Z)軸。將Oblique CH1設為255後確認Live。在畫面上右鍵點擊,選擇\'Show image Center line\'選單。',
+          ja:'\'Pedestal Jig Reference Position\'と\'Tray Jig Reference Position\'の(X,Y,Z)軸を選択します。Oblique CH1を255に設定した後Liveを確認します。画面上で右クリックし\'Show image Center line\'メニューを選択します。',
+          vi:'Chọn trục (X, Y, Z) của \'Pedestal Jig Reference Position\' và \'Tray Jig Reference Position\'. Sau khi đặt Oblique CH1 thành 255, kiểm tra Live. Nhấp chuột phải trên màn hình hình ảnh và chọn menu \'Show image Center line\'.'
+        }},
+        {img:cmImg('F','qpm',18),tx:{
+          ko:'Pedestal Z축: AF 프로그램을 이용해 Pedestal의 Fringe 위치로 이동합니다.',
+          en:'Pedestal Z-axis: Move to the fringe position of the pedestal using the AF program.',
+          zhCN:'Pedestal Z轴:使用AF程序移动到Pedestal的Fringe位置。',
+          zhTW:'Pedestal Z軸:使用AF程式移動到Pedestal的Fringe位置。',
+          ja:'Pedestal Z軸:AFプログラムを使用してPedestalのFringe位置へ移動します。',
+          vi:'Trục Z của Pedestal: Di chuyển đến vị trí Fringe của Pedestal bằng chương trình AF.'
+        }},
+        {img:cmImg('F','qpm',19),tx:{
+          ko:'Tray Z축: AF 프로그램을 이용해 제품의 Fringe 위치로 이동합니다. Panel Design에서 Tray Mode를 선택하고, \'Group 1 Reference Z\'에 AF Position 값을 입력한 뒤 Main에서 Apply, Save 합니다.',
+          en:'Tray Z-axis: Move to the position of the product\'s fringe using the AF program. Select Tray Mode in Panel Design, enter the AF Position value into \'Group 1 Reference Z\', then Apply and Save in Main.',
+          zhCN:'Tray Z轴:使用AF程序移动到产品的Fringe位置。在Panel Design中选择Tray Mode,将AF Position值输入\'Group 1 Reference Z\',然后在Main中Apply、Save。',
+          zhTW:'Tray Z軸:使用AF程式移動到產品的Fringe位置。在Panel Design中選擇Tray Mode,將AF Position值輸入\'Group 1 Reference Z\',然後在Main中Apply、Save。',
+          ja:'Tray Z軸:AFプログラムを使用して製品のFringe位置へ移動します。Panel DesignでTray Modeを選択し、\'Group 1 Reference Z\'にAF Position値を入力した後、MainでApply、Saveします。',
+          vi:'Trục Z của Tray: Di chuyển đến vị trí Fringe của sản phẩm bằng chương trình AF. Chọn Tray Mode trong Panel Design, nhập giá trị AF Position vào \'Group 1 Reference Z\', sau đó Apply, Save trong Main.'
+        }},
+        {img:cmImg('F','qpm',20),tx:{
+          ko:'Pedestal X, Y축: Motor Jog를 이용해 노란색 선을 구멍 중심으로 이동합니다. Tray X축: Motor Jog를 이용해 Tray 좌측 끝으로 이동합니다. Tray Y축: Motor Jog를 이용해 Tray 상단으로 이동합니다.',
+          en:'Pedestal X, Y-axis: Move the yellow line to the hole center using Motor Jog. Tray X-axis: Move to the left end of the tray using Motor Jog. Tray Y-axis: Move to the top of the tray using Motor Jog.',
+          zhCN:'Pedestal X、Y轴:使用Motor Jog将黄线移动到孔中心。Tray X轴:使用Motor Jog移动到Tray左端。Tray Y轴:使用Motor Jog移动到Tray顶部。',
+          zhTW:'Pedestal X、Y軸:使用Motor Jog將黃線移動到孔中心。Tray X軸:使用Motor Jog移動到Tray左端。Tray Y軸:使用Motor Jog移動到Tray頂部。',
+          ja:'Pedestal X、Y軸:Motor Jogを使用して黄色い線を穴の中心へ移動します。Tray X軸:Motor Jogを使用してTrayの左端へ移動します。Tray Y軸:Motor Jogを使用してTrayの上部へ移動します。',
+          vi:'Trục X, Y của Pedestal: Di chuyển đường màu vàng đến tâm lỗ bằng Motor Jog. Trục X của Tray: Di chuyển đến đầu bên trái của Tray bằng Motor Jog. Trục Y của Tray: Di chuyển đến đầu trên của Tray bằng Motor Jog.'
+        }},
+        {img:cmImg('F','qpm',21),tx:{
+          ko:'해당 위치로 이동한 후 Teach 합니다. Teaching Position 값이 변경되었는지 확인하고, 확인 후 Apply 합니다.',
+          en:'After moving to the corresponding position, teach. Check if the teaching position value has changed, then Apply after confirmation.',
+          zhCN:'移动到相应位置后进行Teach。确认Teaching Position值是否已变更,确认后Apply。',
+          zhTW:'移動到相應位置後進行Teach。確認Teaching Position值是否已變更,確認後Apply。',
+          ja:'該当位置へ移動した後Teachします。Teaching Position値が変更されたか確認し、確認後Applyします。',
+          vi:'Sau khi di chuyển đến vị trí tương ứng, thực hiện teach. Kiểm tra xem giá trị teaching position đã thay đổi chưa, sau đó Apply.'
+        }},
+        {img:cmImg('F','qpm',22),tx:{
+          ko:'Position 값이 적용되었는지 확인한 뒤 Apply, Save 합니다. 나머지 축들도 같은 방식으로 Teaching을 진행합니다.',
+          en:'Check if the Position value is applied, then Apply and Save. Teaching is performed for each remaining axis in the same way.',
+          zhCN:'确认Position值已应用后,Apply、Save。其余各轴也以相同方式进行Teaching。',
+          zhTW:'確認Position值已套用後,Apply、Save。其餘各軸也以相同方式進行Teaching。',
+          ja:'Position値が適用されたか確認した後、Apply、Saveします。残りの各軸も同じ方法でTeachingを行います。',
+          vi:'Kiểm tra xem giá trị Position đã được áp dụng chưa, sau đó Apply, Save. Các trục còn lại cũng được Teaching theo cách tương tự.'
+        }}
+      ]
     }
   },
-  F:{
+  G:{
     smtv:{
-      title:{ko:'F. Consumables Inspection/Replacement',en:'F. Consumables Inspection/Replacement',zhCN:'F. Consumables Inspection/Replacement',zhTW:'F. Consumables Inspection/Replacement',ja:'F. Consumables Inspection/Replacement'},
+      title:{ko:'G. Consumables Inspection/Replacement',en:'G. Consumables Inspection/Replacement',zhCN:'G. Consumables Inspection/Replacement',zhTW:'G. Consumables Inspection/Replacement',ja:'G. Consumables Inspection/Replacement'},
       slides:[
         {img:cmImg('G','smtv',1),tx:{
           vi:'Đề cập đến việc kiểm tra và thay thế vật tư tiêu hao như Camera, đèn chiếu sáng, Controller, PC Board, Motor và Driver.',
@@ -3833,6 +4375,35 @@ var COURSE_MATERIALS={
           zhCN:'注脂注意事项。Ball Screw:每6个月在Shaft和Nipple处涂抹一次Shell Alvania润滑脂。LM Guide:每年在LM Rail和Nipple处涂抹一次Shell Alvania润滑脂。注意:切勿混用不同种类的润滑脂。机器人内部清洁:拆下上盖,经常用吸尘器清除内部异物。机器人电缆:若外皮出现粉状脱落,可在电缆之间少量涂抹润滑脂;若损伤严重则需更换。此外还需确认安装平台及支架固定螺栓的紧固状态,并在安装1个月后重新紧固一次。(依据THK提供的检查项目编写)',
           zhTW:'注脂注意事項。Ball Screw:每6個月在Shaft與Nipple處塗抹一次Shell Alvania潤滑脂。LM Guide:每年在LM Rail與Nipple處塗抹一次Shell Alvania潤滑脂。注意:切勿混用不同種類的潤滑脂。機器人內部清潔:拆下上蓋,經常用吸塵器清除內部異物。機器人纜線:若外皮出現粉狀剝落,可在纜線之間少量塗抹潤滑脂;若損傷嚴重則需更換。此外也需確認安裝平台及支架固定螺栓的鎖緊狀態,並於安裝1個月後重新鎖緊一次。(依據THK提供的檢查項目編寫)',
           ja:'グリス注入時の注意事項。Ball Screw:Shaft と Nipple に Shell Alvania グリスを6ヶ月に1回注入。LM Guide:LM Rail と Nipple に Shell Alvania グリスを1年に1回注入。注意:異なる種類のグリスを混用しないこと。ロボット内部清掃:上部カバーを外し、掃除機で内部の異物を頻繁に除去する。ロボットケーブル:被覆が粉状に剥がれた場合はケーブルの間に少量のグリスを塗布し、損傷が激しい場合は交換する。また設置プラットフォームおよびブラケット固定ボルトの締結状態を確認し、設置1ヶ月後に増し締めを行う。(THK提供の点検項目に基づき作成)'
+        }}
+      ]
+    },
+    qpm:{
+      title:{ko:'G. Consumables Inspection/Replacement',en:'G. Consumables Inspection/Replacement',zhCN:'G. Consumables Inspection/Replacement',zhTW:'G. Consumables Inspection/Replacement',ja:'G. Consumables Inspection/Replacement'},
+      slides:[
+        {img:cmImg('G','qpm',1),tx:{
+          ko:'9. Preventive Maintenance Schedule\n\niSIS-QPM의 예방 정비(Preventive Maintenance) 일정표입니다. 부품별 점검·청소·윤활 주기를 정리합니다.',
+          en:'9. Preventive Maintenance Schedule\n\nThe Preventive Maintenance schedule for the iSIS-QPM, listing inspection, cleaning, and lubrication cycles per part.',
+          zhCN:'9. Preventive Maintenance Schedule\n\niSIS-QPM的Preventive Maintenance(预防性维护)日程表,列出各部件的点检·清洁·润滑周期。',
+          zhTW:'9. Preventive Maintenance Schedule\n\niSIS-QPM的Preventive Maintenance(預防性維護)日程表,列出各零件的點檢·清潔·潤滑週期。',
+          ja:'9. Preventive Maintenance Schedule\n\niSIS-QPMのPreventive Maintenance(予防保全)スケジュールです。部品ごとの点検・清掃・潤滑周期をまとめます。',
+          vi:'9. Preventive Maintenance Schedule\n\nLịch bảo trì phòng ngừa (Preventive Maintenance) của iSIS-QPM, liệt kê chu kỳ kiểm tra·vệ sinh·bôi trơn theo từng bộ phận.'
+        }},
+        {img:cmImg('G','qpm',2),tx:{
+          ko:'예방 정비 주기 표기 기준\n\nD=매일, W=매주, M=매월, 3M=3개월마다, 6M=6개월마다, Y=매년 기준으로 각 부품의 점검/청소/윤활 주기를 표기합니다.',
+          en:'Preventive maintenance cycle notation\n\nD = daily, W = weekly, M = monthly, 3M = every 3 months, 6M = every 6 months, Y = yearly — each part\'s inspection/cleaning/lubrication cycle is marked using these criteria.',
+          zhCN:'预防性维护周期标注基准\n\nD=每日、W=每周、M=每月、3M=每3个月、6M=每6个月、Y=每年,以此标注各部件的点检/清洁/润滑周期。',
+          zhTW:'預防性維護週期標註基準\n\nD=每日、W=每週、M=每月、3M=每3個月、6M=每6個月、Y=每年,以此標註各零件的點檢/清潔/潤滑週期。',
+          ja:'予防保全周期の表記基準\n\nD=毎日、W=毎週、M=毎月、3M=3ヶ月ごと、6M=6ヶ月ごと、Y=毎年を基準に、各部品の点検/清掃/潤滑周期を表記します。',
+          vi:'Tiêu chuẩn ký hiệu chu kỳ bảo trì phòng ngừa\n\nD=hàng ngày, W=hàng tuần, M=hàng tháng, 3M=mỗi 3 tháng, 6M=mỗi 6 tháng, Y=hàng năm — chu kỳ kiểm tra/vệ sinh/bôi trơn của từng bộ phận được ký hiệu theo tiêu chuẩn này.'
+        }},
+        {img:cmImg('G','qpm',3),tx:{
+          ko:'그리스 주입 시 주의사항 (THK 권장 점검 항목 기준)\n\n1. 서로 다른 종류의 그리스를 섞지 않는다.\n2. Robot 내부 청소 — 상부 커버를 열고 진공청소기로 이물질 제거 (수시로).\n3. Robot Cable 손상 상태 — 케이블 피복이 가루처럼 벗겨지면 케이블 사이에 그리스를 소량 도포하고, 심하게 손상된 경우 교체한다.\n4. 설치대·브래킷 고정 볼트 체결 상태 — 설치 후 1개월 시점에 체결 상태를 점검·재체결한다.',
+          en:'Grease injection precautions (based on THK\'s recommended inspection items)\n\n1. Do not mix different kinds of grease.\n2. Robot interior cleaning — open the upper cover and remove foreign substances with a vacuum cleaner (as needed, frequently).\n3. Robot cable damage state — if the cable sheathing flakes into powder, apply a small amount of grease between the cables; replace if severely damaged.\n4. Installation platform / bracket fixing bolt fastening state — check and re-fasten one month after installation.',
+          zhCN:'注入黄油(Grease)时的注意事项(基于THK推荐点检项目)\n\n1. 不要混用不同种类的黄油。\n2. Robot内部清洁——打开上盖,用吸尘器清除内部异物(经常性)。\n3. Robot Cable损伤状态——若电缆外皮呈粉末状剥落,在电缆之间少量涂抹黄油;严重损坏时更换。\n4. 安装台·支架固定螺栓紧固状态——安装1个月后检查紧固状态并重新紧固。',
+          zhTW:'注入黃油(Grease)時的注意事項(依THK建議點檢項目)\n\n1. 不要混用不同種類的黃油。\n2. Robot內部清潔——打開上蓋,用吸塵器清除內部異物(經常性)。\n3. Robot Cable損傷狀態——若電纜外皮呈粉末狀剝落,在電纜之間少量塗抹黃油;嚴重損壞時更換。\n4. 安裝台·支架固定螺栓緊固狀態——安裝1個月後檢查緊固狀態並重新緊固。',
+          ja:'グリース注入時の注意事項(THK推奨点検項目に基づく)\n\n1. 異なる種類のグリースを混ぜない。\n2. Robot内部清掃——上部カバーを開け、掃除機で内部の異物を除去する(随時)。\n3. Robot Cableの損傷状態——ケーブル被覆が粉状に剥がれる場合はケーブル間に少量のグリースを塗布し、著しく損傷している場合は交換する。\n4. 設置台・ブラケット固定ボルトの締結状態——設置1ヶ月後に締結状態を点検・再締結する。',
+          vi:'Lưu ý khi bơm mỡ (Grease) (dựa trên hạng mục kiểm tra khuyến nghị của THK)\n\n1. Không trộn lẫn các loại mỡ khác nhau.\n2. Vệ sinh nội thất Robot — mở nắp trên và dùng máy hút bụi loại bỏ dị vật (thường xuyên khi cần).\n3. Tình trạng hư hỏng Cable của Robot — nếu lớp vỏ cáp bong ra dạng bột, bôi một lượng nhỏ mỡ giữa các cáp; nếu hư hỏng nặng thì thay thế.\n4. Tình trạng siết bu lông cố định của bệ lắp đặt·giá đỡ — kiểm tra và siết lại sau 1 tháng lắp đặt.'
         }}
       ]
     }
@@ -6956,6 +7527,1555 @@ var COURSE_MATERIALS={
           zhCN:'Outgoing Report表——出货前验证设备状态与品质的表格(具体项目·基准可能因客户而异)。项目:3D Table 1·2 Flatness(规格≤50µm,以AF Program+Dial Gauge测量9个点);3D V1·V2 Illumination Uniformity(≤10%,以Gray Target确认单一FOV内的均匀度);OCR or 2D ID(100%,全数检测);Dry Run(≥36hr,以Log File确认无警报);MTBI(≥60min无警报连续运转);Accuracy(≤1µm,以Step Height校正值基准误差);Repeatability(≤20%,将1个Unit置于3个Pocket测量30次计算PT ratio);Reproducibility(≤30%,将1个Unit置于5个Pocket于3天内测量18次);Correlation(≥75%,测量30个校正样本并与客户基准设备比较,若无则比较V1、V2);Tact Time(≤2.8秒,以第1~10个Tray的排出时间计算UPH)。2.2. Product Verification Progress过程中获得的各项数据均记录于此。',
           zhTW:'Outgoing Report表——出貨前驗證設備狀態與品質的表格(具體項目·基準可能因客戶而異)。項目:3D Table 1·2 Flatness(規格≤50µm,以AF Program+Dial Gauge測量9個點);3D V1·V2 Illumination Uniformity(≤10%,以Gray Target確認單一FOV內的均勻度);OCR or 2D ID(100%,全數檢測);Dry Run(≥36hr,以Log File確認無警報);MTBI(≥60min無警報連續運轉);Accuracy(≤1µm,以Step Height校正值基準誤差);Repeatability(≤20%,將1個Unit置於3個Pocket測量30次計算PT ratio);Reproducibility(≤30%,將1個Unit置於5個Pocket於3天內測量18次);Correlation(≥75%,測量30個校正樣本並與客戶基準設備比較,若無則比較V1、V2);Tact Time(≤2.8秒,以第1~10個Tray的排出時間計算UPH)。2.2. Product Verification Progress過程中獲得的各項資料均記錄於此。',
           ja:'Outgoing Report表——出荷前に設備の状態と品質を検証する表です(具体的な項目・基準は顧客により異なる場合があります)。項目:3D Table 1・2 Flatness(規格≤50µm、AF Program+Dial Gaugeで9点測定);3D V1・V2 Illumination Uniformity(≤10%、Gray Targetで単一FOV内の均一性を確認);OCR or 2D ID(100%、全数検査);Dry Run(≥36hr、Log Fileで無アラームを確認);MTBI(≥60min無アラーム連続稼働);Accuracy(≤1µm、Step Height校正値基準の誤差);Repeatability(≤20%、1UnitをPocket3箇所で30回測定しPT ratioを算出);Reproducibility(≤30%、1UnitをPocket5箇所で3日間に18回測定);Correlation(≥75%、校正サンプル30個を測定し顧客基準設備と比較、なければV1・V2を相互比較);Tact Time(≤2.8秒、Tray 1~10番目の排出時間からUPHを算出)。2.2. Product Verification Progress工程で得られた各種データがここに記録されます。'
+        }}
+      ]
+    },
+    qpm:{
+      title:{ko:'I. Advanced Troubleshooting / Data Verification',en:'I. Advanced Troubleshooting / Data Verification',zhCN:'I. Advanced Troubleshooting / Data Verification',zhTW:'I. Advanced Troubleshooting / Data Verification',ja:'I. Advanced Troubleshooting / Data Verification'},
+      chapters:[
+        {from:1,title:{ko:'A. Host PC & Network Setup',en:'A. Host PC & Network Setup',zhCN:'A. Host PC & Network Setup',zhTW:'A. Host PC & Network Setup',ja:'A. Host PC & Network Setup'}},
+        {from:6,title:{ko:'B. 3D Vision PC Setup',en:'B. 3D Vision PC Setup',zhCN:'B. 3D Vision PC Setup',zhTW:'B. 3D Vision PC Setup',ja:'B. 3D Vision PC Setup'}},
+        {from:10,title:{ko:'C. 3D Vision Camera Setup',en:'C. 3D Vision Camera Setup',zhCN:'C. 3D Vision Camera Setup',zhTW:'C. 3D Vision Camera Setup',ja:'C. 3D Vision Camera Setup'}},
+        {from:21,title:{ko:'D. AF Controller Setup',en:'D. AF Controller Setup',zhCN:'D. AF Controller Setup',zhTW:'D. AF Controller Setup',ja:'D. AF Controller Setup'}},
+        {from:34,title:{ko:'E. PI PZT Controller Setting',en:'E. PI PZT Controller Setting',zhCN:'E. PI PZT Controller Setting',zhTW:'E. PI PZT Controller Setting',ja:'E. PI PZT Controller Setting'}},
+        {from:39,title:{ko:'F. PI PZT Stage Tuning',en:'F. PI PZT Stage Tuning',zhCN:'F. PI PZT Stage Tuning',zhTW:'F. PI PZT Stage Tuning',ja:'F. PI PZT Stage Tuning'}},
+        {from:45,title:{ko:'G. NanoFaktur PZT Controller',en:'G. NanoFaktur PZT Controller',zhCN:'G. NanoFaktur PZT Controller',zhTW:'G. NanoFaktur PZT Controller',ja:'G. NanoFaktur PZT Controller'}},
+        {from:52,title:{ko:'H. NanoFaktur PZT Stage Tuning',en:'H. NanoFaktur PZT Stage Tuning',zhCN:'H. NanoFaktur PZT Stage Tuning',zhTW:'H. NanoFaktur PZT Stage Tuning',ja:'H. NanoFaktur PZT Stage Tuning'}},
+        {from:62,title:{ko:'I. 3D Optical Setting',en:'I. 3D Optical Setting',zhCN:'I. 3D Optical Setting',zhTW:'I. 3D Optical Setting',ja:'I. 3D Optical Setting'}},
+        {from:69,title:{ko:'J. AF Tuning',en:'J. AF Tuning',zhCN:'J. AF Tuning',zhTW:'J. AF Tuning',ja:'J. AF Tuning'}},
+        {from:87,title:{ko:'K. Tilt Tune',en:'K. Tilt Tune',zhCN:'K. Tilt Tune',zhTW:'K. Tilt Tune',ja:'K. Tilt Tune'}},
+        {from:100,title:{ko:'L. 3D Illumination & Reference Mirror',en:'L. 3D Illumination & Reference Mirror',zhCN:'L. 3D Illumination & Reference Mirror',zhTW:'L. 3D Illumination & Reference Mirror',ja:'L. 3D Illumination & Reference Mirror'}},
+        {from:106,title:{ko:'M. 3D Fringe Tuning',en:'M. 3D Fringe Tuning',zhCN:'M. 3D Fringe Tuning',zhTW:'M. 3D Fringe Tuning',ja:'M. 3D Fringe Tuning'}},
+        {from:112,title:{ko:'N. Camera Scale Calibration',en:'N. Camera Scale Calibration',zhCN:'N. Camera Scale Calibration',zhTW:'N. Camera Scale Calibration',ja:'N. Camera Scale Calibration'}},
+        {from:115,title:{ko:'O. AF Driver & Z-axis Limit Setting',en:'O. AF Driver & Z-axis Limit Setting',zhCN:'O. AF Driver & Z-axis Limit Setting',zhTW:'O. AF Driver & Z-axis Limit Setting',ja:'O. AF Driver & Z-axis Limit Setting'}},
+        {from:123,title:{ko:'P. LTS Setting & Verification',en:'P. LTS Setting & Verification',zhCN:'P. LTS Setting & Verification',zhTW:'P. LTS Setting & Verification',ja:'P. LTS Setting & Verification'}},
+        {from:138,title:{ko:'Q. Job(Recipe) Setup — Panel Design',en:'Q. Job(Recipe) Setup — Panel Design',zhCN:'Q. Job(Recipe) Setup — Panel Design',zhTW:'Q. Job(Recipe) Setup — Panel Design',ja:'Q. Job(Recipe) Setup — Panel Design'}},
+        {from:152,title:{ko:'R. Job(Recipe) Setup — Alignment & Barcode',en:'R. Job(Recipe) Setup — Alignment & Barcode',zhCN:'R. Job(Recipe) Setup — Alignment & Barcode',zhTW:'R. Job(Recipe) Setup — Alignment & Barcode',ja:'R. Job(Recipe) Setup — Alignment & Barcode'}},
+        {from:161,title:{ko:'S. Job(Recipe) Setup — Unit Design & FOV',en:'S. Job(Recipe) Setup — Unit Design & FOV',zhCN:'S. Job(Recipe) Setup — Unit Design & FOV',zhTW:'S. Job(Recipe) Setup — Unit Design & FOV',ja:'S. Job(Recipe) Setup — Unit Design & FOV'}},
+        {from:167,title:{ko:'T. Job(Recipe) Setup — Bump Scan/Align/Measure',en:'T. Job(Recipe) Setup — Bump Scan/Align/Measure',zhCN:'T. Job(Recipe) Setup — Bump Scan/Align/Measure',zhTW:'T. Job(Recipe) Setup — Bump Scan/Align/Measure',ja:'T. Job(Recipe) Setup — Bump Scan/Align/Measure'}},
+        {from:179,title:{ko:'U. Job(Recipe) Setup — 2D Measurement & Spec',en:'U. Job(Recipe) Setup — 2D Measurement & Spec',zhCN:'U. Job(Recipe) Setup — 2D Measurement & Spec',zhTW:'U. Job(Recipe) Setup — 2D Measurement & Spec',ja:'U. Job(Recipe) Setup — 2D Measurement & Spec'}},
+        {from:184,title:{ko:'V. Repeatability & Data Verification',en:'V. Repeatability & Data Verification',zhCN:'V. Repeatability & Data Verification',zhTW:'V. Repeatability & Data Verification',ja:'V. Repeatability & Data Verification'}}
+      ],
+      slides:[
+        {img:cmImg('I','qpm',1),tx:{
+          ko:'■ Host PC - IP Set\n\nNetwork and Internet Settings를 열고 Change adapter options 클릭, Lan Port 이름을 설정하여 AF·HOST PC 연결을 확인합니다. LAN 케이블을 뽑아 정상 연결 여부를 확인하고 IP Address를 확인합니다. (Host IP: 10.10.1.1/255.255.255.0, AF IP: 192.168.1.235/255.255.255.0)',
+          en:'■ Host PC - IP Set\n\nOpen Network and Internet Settings, click Change adapter options, and set the Lan Port name to check the AF/HOST PC connection. Unplug the LAN cable to verify it is properly connected, and check the IP address. (Host IP: 10.10.1.1/255.255.255.0, AF IP: 192.168.1.235/255.255.255.0)',
+          zhCN:'■ Host PC - IP Set\n\n打开Network and Internet Settings,点击Change adapter options,设置Lan Port名称以确认AF·HOST PC连接。拔出LAN线缆确认是否正确连接,并确认IP Address。(Host IP:10.10.1.1/255.255.255.0,AF IP:192.168.1.235/255.255.255.0)',
+          zhTW:'■ Host PC - IP Set\n\n打開Network and Internet Settings,點擊Change adapter options,設定Lan Port名稱以確認AF·HOST PC連接。拔出LAN線纜確認是否正確連接,並確認IP Address。(Host IP:10.10.1.1/255.255.255.0,AF IP:192.168.1.235/255.255.255.0)',
+          ja:'■ Host PC - IP Set\n\nNetwork and Internet Settingsを開き、Change adapter optionsをクリック、Lan Port名を設定してAF・HOST PC接続を確認します。LANケーブルを抜いて正しく接続されているか確認し、IP Addressを確認します。(Host IP:10.10.1.1/255.255.255.0、AF IP:192.168.1.235/255.255.255.0)',
+          vi:'■ Host PC - IP Set\n\nMở Network and Internet Settings, nhấp Change adapter options, đặt tên Lan Port để kiểm tra kết nối AF·HOST PC. Rút cáp LAN để kiểm tra kết nối đúng, và kiểm tra IP Address. (Host IP: 10.10.1.1/255.255.255.0, AF IP: 192.168.1.235/255.255.255.0)'
+        }},
+        {img:cmImg('I','qpm',2),tx:{
+          ko:'■ Host PC - Network Set\n\nHOST 아이콘 우클릭 ▸ Properties ▸ Configure ▸ Advanced ▸ Property(Speed & Duplex) ▸ Value를 10Gbps Full Duplex로 설정하고, Power Management에서 절전으로 인한 장치 꺼짐을 방지하도록 체크를 해제합니다. Network Card의 최대 성능을 사용하도록 설정합니다.',
+          en:'■ Host PC - Network Set\n\nRight-click the HOST icon ▸ Properties ▸ Configure ▸ Advanced ▸ Property (Speed & Duplex) ▸ set the Value to 10Gbps Full Duplex, and uncheck Power Management so the device is not turned off to save power. This sets the network card to use its maximum capacity.',
+          zhCN:'■ Host PC - Network Set\n\n右键点击HOST图标 ▸ Properties ▸ Configure ▸ Advanced ▸ Property(Speed & Duplex) ▸ 将Value设为10Gbps Full Duplex,并取消勾选Power Management以防止因省电而关闭设备。以此设定使用Network Card的最大性能。',
+          zhTW:'■ Host PC - Network Set\n\n右鍵點擊HOST圖示 ▸ Properties ▸ Configure ▸ Advanced ▸ Property(Speed & Duplex) ▸ 將Value設為10Gbps Full Duplex,並取消勾選Power Management以防止因省電而關閉裝置。以此設定使用Network Card的最大性能。',
+          ja:'■ Host PC - Network Set\n\nHOSTアイコンを右クリック ▸ Properties ▸ Configure ▸ Advanced ▸ Property(Speed & Duplex) ▸ Valueを10Gbps Full Duplexに設定し、省電力によるデバイスのオフを防ぐためPower Managementのチェックを外します。Network Cardの最大性能を使用するよう設定します。',
+          vi:'■ Host PC - Network Set\n\nNhấp chuột phải vào biểu tượng HOST ▸ Properties ▸ Configure ▸ Advanced ▸ Property(Speed & Duplex) ▸ đặt Value thành 10Gbps Full Duplex, và bỏ chọn Power Management để tránh thiết bị bị tắt do tiết kiệm điện. Thiết lập này để sử dụng tối đa hiệu năng của Network Card.'
+        }},
+        {img:cmImg('I','qpm',3),tx:{
+          ko:'■ Host PC - Device Connection Check (Ajin)\n\nDevice Management에서 필수 장치 설치 여부를 확인합니다. 필수: AjinExtek AXT_PCIB_RTEK(64-Bit) Motion Board.',
+          en:'■ Host PC - Device Connection Check (Ajin)\n\nCheck device installation in Device Management. Required: AjinExtek AXT_PCIB_RTEK (64-Bit) Motion Board.',
+          zhCN:'■ Host PC - Device Connection Check (Ajin)\n\n在Device Management中确认必要装置是否已安装。必须:AjinExtek AXT_PCIB_RTEK(64-Bit) Motion Board。',
+          zhTW:'■ Host PC - Device Connection Check (Ajin)\n\n在Device Management中確認必要裝置是否已安裝。必須:AjinExtek AXT_PCIB_RTEK(64-Bit) Motion Board。',
+          ja:'■ Host PC - Device Connection Check (Ajin)\n\nDevice Managementで必須デバイスのインストール状況を確認します。必須:AjinExtek AXT_PCIB_RTEK(64-Bit) Motion Board。',
+          vi:'■ Host PC - Device Connection Check (Ajin)\n\nKiểm tra việc cài đặt thiết bị trong Device Management. Bắt buộc: AjinExtek AXT_PCIB_RTEK (64-Bit) Motion Board.'
+        }},
+        {img:cmImg('I','qpm',4),tx:{
+          ko:'■ Host PC - Device Connection Check (ACS)\n\nDevice Management에서 필수 장치 설치 여부를 확인합니다. 필수: Hyper-V Virtual Ethernet Adapter #2.',
+          en:'■ Host PC - Device Connection Check (ACS)\n\nCheck device installation in Device Management. Required: Hyper-V Virtual Ethernet Adapter, #2.',
+          zhCN:'■ Host PC - Device Connection Check (ACS)\n\n在Device Management中确认必要装置是否已安装。必须:Hyper-V Virtual Ethernet Adapter #2。',
+          zhTW:'■ Host PC - Device Connection Check (ACS)\n\n在Device Management中確認必要裝置是否已安裝。必須:Hyper-V Virtual Ethernet Adapter #2。',
+          ja:'■ Host PC - Device Connection Check (ACS)\n\nDevice Managementで必須デバイスのインストール状況を確認します。必須:Hyper-V Virtual Ethernet Adapter #2。',
+          vi:'■ Host PC - Device Connection Check (ACS)\n\nKiểm tra việc cài đặt thiết bị trong Device Management. Bắt buộc: Hyper-V Virtual Ethernet Adapter #2.'
+        }},
+        {img:cmImg('I','qpm',5),tx:{
+          ko:'■ Host PC - Program Check\n\n\'Uninstall and change programs\' 앱을 열어, 설비에 따라 Ajin 또는 ACS를 적용합니다. 최신 버전은 Host 소프트웨어 개발자에게 확인하며, 각 프로그램의 byte(x64/x86)는 Host 프로그램 설치 사양에 따라 결정됩니다.',
+          en:'■ Host PC - Program Check\n\nOpen the \'Uninstall and change programs\' app and apply Ajin or ACS depending on the equipment. Check with the Host software developer for the latest version — the \'byte\' (x64 or x86) of each program is determined by the Host program installation specification.',
+          zhCN:'■ Host PC - Program Check\n\n打开\'Uninstall and change programs\'应用,根据设备套用Ajin或ACS。最新版本请与Host软件开发人员确认——各程序的byte(x64或x86)由Host程序安装规格决定。',
+          zhTW:'■ Host PC - Program Check\n\n打開\'Uninstall and change programs\'應用程式,依設備套用Ajin或ACS。最新版本請與Host軟體開發人員確認——各程式的byte(x64或x86)由Host程式安裝規格決定。',
+          ja:'■ Host PC - Program Check\n\n\'Uninstall and change programs\'アプリを開き、設備に応じてAjinまたはACSを適用します。最新バージョンはHostソフトウェア開発者に確認し、各プログラムのbyte(x64/x86)はHostプログラムのインストール仕様により決まります。',
+          vi:'■ Host PC - Program Check\n\nMở ứng dụng \'Uninstall and change programs\', áp dụng Ajin hoặc ACS tùy theo thiết bị. Kiểm tra phiên bản mới nhất với nhà phát triển phần mềm Host — \'byte\'(x64 hoặc x86) của mỗi chương trình được xác định theo thông số cài đặt chương trình Host.'
+        }},
+        {img:cmImg('I','qpm',6),tx:{
+          ko:'■ 3D Vision PC - IP Set\n\nNetwork & Internet Setting을 열고 Change adapter options 클릭, Lan Port 이름을 설정하여 PZT·Vision 연결을 확인합니다. \'Internet Protocol Version 4(TCP/IPv4)\'를 열어 IP Address를 확인합니다. (Vision IP: 10.10.1.11/255.255.255.0, PI PZT IP: 192.168.0.2/255.255.255.0, Nanofaktur PZT IP: 192.168.168.1)',
+          en:'■ 3D Vision PC - IP Set\n\nOpen Network & Internet Setting, click Change adapter options, and set the Lan Port name to check the PZT/Vision connection. Open \'Internet Protocol Version 4 (TCP/IPv4)\' and check the IP address. (Vision IP: 10.10.1.11/255.255.255.0, PI PZT IP: 192.168.0.2/255.255.255.0, Nanofaktur PZT IP: 192.168.168.1)',
+          zhCN:'■ 3D Vision PC - IP Set\n\n打开Network & Internet Setting,点击Change adapter options,设置Lan Port名称以确认PZT·Vision连接。打开\'Internet Protocol Version 4(TCP/IPv4)\'确认IP Address。(Vision IP:10.10.1.11/255.255.255.0,PI PZT IP:192.168.0.2/255.255.255.0,Nanofaktur PZT IP:192.168.168.1)',
+          zhTW:'■ 3D Vision PC - IP Set\n\n打開Network & Internet Setting,點擊Change adapter options,設定Lan Port名稱以確認PZT·Vision連接。打開\'Internet Protocol Version 4(TCP/IPv4)\'確認IP Address。(Vision IP:10.10.1.11/255.255.255.0,PI PZT IP:192.168.0.2/255.255.255.0,Nanofaktur PZT IP:192.168.168.1)',
+          ja:'■ 3D Vision PC - IP Set\n\nNetwork & Internet Settingを開き、Change adapter optionsをクリック、Lan Port名を設定してPZT・Vision接続を確認します。\'Internet Protocol Version 4(TCP/IPv4)\'を開きIP Addressを確認します。(Vision IP:10.10.1.11/255.255.255.0、PI PZT IP:192.168.0.2/255.255.255.0、Nanofaktur PZT IP:192.168.168.1)',
+          vi:'■ 3D Vision PC - IP Set\n\nMở Network & Internet Setting, nhấp Change adapter options, đặt tên Lan Port để kiểm tra kết nối PZT·Vision. Mở \'Internet Protocol Version 4(TCP/IPv4)\' để kiểm tra IP Address. (Vision IP: 10.10.1.11/255.255.255.0, PI PZT IP: 192.168.0.2/255.255.255.0, Nanofaktur PZT IP: 192.168.168.1)'
+        }},
+        {img:cmImg('I','qpm',7),tx:{
+          ko:'■ 3D Vision PC - Network Set\n\nVision 아이콘 우클릭 ▸ Properties ▸ Configure ▸ Advanced ▸ Property(Speed & Duplex) ▸ Value를 10Gbps Full Duplex로 설정하고 Power Management 체크를 해제합니다. VISION IP도 동일하게 10Gbps Full Duplex로 설정해 Network Card의 최대 성능을 사용합니다.',
+          en:'■ 3D Vision PC - Network Set\n\nRight-click the Vision icon ▸ Properties ▸ Configure ▸ Advanced ▸ Property (Speed & Duplex) ▸ set the Value to 10Gbps Full Duplex and uncheck Power Management. Likewise set VISION IP to 10Gbps Full Duplex to use the network card\'s maximum capacity.',
+          zhCN:'■ 3D Vision PC - Network Set\n\n右键点击Vision图标 ▸ Properties ▸ Configure ▸ Advanced ▸ Property(Speed & Duplex) ▸ 将Value设为10Gbps Full Duplex并取消勾选Power Management。VISION IP同样设为10Gbps Full Duplex以使用Network Card的最大性能。',
+          zhTW:'■ 3D Vision PC - Network Set\n\n右鍵點擊Vision圖示 ▸ Properties ▸ Configure ▸ Advanced ▸ Property(Speed & Duplex) ▸ 將Value設為10Gbps Full Duplex並取消勾選Power Management。VISION IP同樣設為10Gbps Full Duplex以使用Network Card的最大性能。',
+          ja:'■ 3D Vision PC - Network Set\n\nVisionアイコンを右クリック ▸ Properties ▸ Configure ▸ Advanced ▸ Property(Speed & Duplex) ▸ Valueを10Gbps Full Duplexに設定しPower Managementのチェックを外します。VISION IPも同様に10Gbps Full Duplexに設定しNetwork Cardの最大性能を使用します。',
+          vi:'■ 3D Vision PC - Network Set\n\nNhấp chuột phải vào biểu tượng Vision ▸ Properties ▸ Configure ▸ Advanced ▸ Property(Speed & Duplex) ▸ đặt Value thành 10Gbps Full Duplex và bỏ chọn Power Management. Tương tự đặt VISION IP thành 10Gbps Full Duplex để dùng tối đa hiệu năng Network Card.'
+        }},
+        {img:cmImg('I','qpm',8),tx:{
+          ko:'■ 3D Vision PC - Device Connection Check\n\nComputer Management에 진입하여 장치 설치 여부를 확인합니다.',
+          en:'■ 3D Vision PC - Device Connection Check\n\nEnter Computer Management and check device installation.',
+          zhCN:'■ 3D Vision PC - Device Connection Check\n\n进入Computer Management确认装置安装情况。',
+          zhTW:'■ 3D Vision PC - Device Connection Check\n\n進入Computer Management確認裝置安裝情況。',
+          ja:'■ 3D Vision PC - Device Connection Check\n\nComputer Managementに入り、デバイスのインストール状況を確認します。',
+          vi:'■ 3D Vision PC - Device Connection Check\n\nVào Computer Management để kiểm tra việc cài đặt thiết bị.'
+        }},
+        {img:cmImg('I','qpm',9),tx:{
+          ko:'■ 3D Vision PC - Program Check\n\n\'Uninstall and change programs\' 앱을 열어 최신 버전을 Vision 소프트웨어 개발자에게 확인합니다. 각 프로그램의 byte(x64/x86)는 Host 프로그램 설치 사양에 따라 결정됩니다.',
+          en:'■ 3D Vision PC - Program Check\n\nOpen the \'Uninstall and change programs\' app and check with the Vision software developer for the latest version. The \'byte\' (x64 or x86) of each program is determined by the Host program installation specification.',
+          zhCN:'■ 3D Vision PC - Program Check\n\n打开\'Uninstall and change programs\'应用,与Vision软件开发人员确认最新版本。各程序的byte(x64或x86)由Host程序安装规格决定。',
+          zhTW:'■ 3D Vision PC - Program Check\n\n打開\'Uninstall and change programs\'應用程式,與Vision軟體開發人員確認最新版本。各程式的byte(x64或x86)由Host程式安裝規格決定。',
+          ja:'■ 3D Vision PC - Program Check\n\n\'Uninstall and change programs\'アプリを開き、Visionソフトウェア開発者に最新バージョンを確認します。各プログラムのbyte(x64/x86)はHostプログラムのインストール仕様により決まります。',
+          vi:'■ 3D Vision PC - Program Check\n\nMở ứng dụng \'Uninstall and change programs\', kiểm tra phiên bản mới nhất với nhà phát triển phần mềm Vision. \'byte\'(x64 hoặc x86) của mỗi chương trình được xác định theo thông số cài đặt chương trình Host.'
+        }},
+        {img:cmImg('I','qpm',10),tx:{
+          ko:'■ 3D Vision Camera Firmware Check\n\niGrabXQProgrammer.exe를 실행해 Firmware 버전을 확인합니다. 업데이트: File▸Open에서 버전 선택 후 Program Start. 업데이트 후 PC 전원을 끄고 전원 케이블을 분리했다가 다시 연결해 전압·전류를 제거하고, PC를 재부팅해 업데이트를 확인합니다.',
+          en:'■ 3D Vision Camera Firmware Check\n\nRun iGrabXQProgrammer.exe to check the firmware version. To update: File ▸ Open, select the firmware version, then click Program Start. After the update, power off the PC, disconnect the power cable, then power on to remove voltage/current, and reboot the PC to confirm it was updated.',
+          zhCN:'■ 3D Vision Camera Firmware Check\n\n运行iGrabXQProgrammer.exe确认Firmware版本。更新方法:File▸Open选择版本后点击Program Start。更新后关闭PC电源、拔出电源线以消除电压·电流,再重新连接并重启PC确认已更新。',
+          zhTW:'■ 3D Vision Camera Firmware Check\n\n執行iGrabXQProgrammer.exe確認Firmware版本。更新方法:File▸Open選擇版本後點擊Program Start。更新後關閉PC電源、拔出電源線以消除電壓·電流,再重新連接並重啟PC確認已更新。',
+          ja:'■ 3D Vision Camera Firmware Check\n\niGrabXQProgrammer.exeを実行しFirmwareバージョンを確認します。更新方法:File▸Openでバージョンを選択しProgram Startをクリック。更新後はPCの電源を切り電源ケーブルを外して電圧・電流を除去し、PCを再起動して更新を確認します。',
+          vi:'■ 3D Vision Camera Firmware Check\n\nChạy iGrabXQProgrammer.exe để kiểm tra phiên bản Firmware. Cập nhật: File▸Open chọn phiên bản rồi nhấn Program Start. Sau khi cập nhật, tắt nguồn PC, rút cáp nguồn để loại bỏ điện áp·dòng điện, rồi khởi động lại PC để xác nhận đã cập nhật.'
+        }},
+        {img:cmImg('I','qpm',11),tx:{
+          ko:'■ 3D Vision Camera Memory Check\n\niGrabXQControl.exe를 실행합니다. Cam0에서 3,2,1,0을 클릭하고 Memory Size가 100MB인지 확인합니다. Apply 클릭 — Memory Size를 변경한 경우 Reboot 버튼을 클릭해 재부팅해야 적용됩니다.',
+          en:'■ 3D Vision Camera Memory Check\n\nRun iGrabXQControl.exe. Click 3, 2, 1, 0 on Cam0 and make sure the Memory Size is 100MB. Click Apply — if you change the memory size, you need to click the Reboot button and reboot to apply the change.',
+          zhCN:'■ 3D Vision Camera Memory Check\n\n运行iGrabXQControl.exe。在Cam0上点击3、2、1、0,确认Memory Size为100MB。点击Apply——若更改了Memory Size,需点击Reboot按钮重启才能生效。',
+          zhTW:'■ 3D Vision Camera Memory Check\n\n執行iGrabXQControl.exe。在Cam0上點擊3、2、1、0,確認Memory Size為100MB。點擊Apply——若更改了Memory Size,需點擊Reboot按鈕重啟才能生效。',
+          ja:'■ 3D Vision Camera Memory Check\n\niGrabXQControl.exeを実行します。Cam0で3、2、1、0をクリックし、Memory Sizeが100MBであることを確認します。Applyをクリック——Memory Sizeを変更した場合はRebootボタンをクリックし再起動して適用します。',
+          vi:'■ 3D Vision Camera Memory Check\n\nChạy iGrabXQControl.exe. Nhấp 3, 2, 1, 0 trên Cam0 và đảm bảo Memory Size là 100MB. Nhấp Apply — nếu thay đổi memory size, cần nhấp nút Reboot và khởi động lại để áp dụng.'
+        }},
+        {img:cmImg('I','qpm',12),tx:{
+          ko:'■ 3D Vision Camera Parameter 1/2\n\niCamCommXE.exe를 실행합니다. File-Connect를 클릭하고 Grabber와 Port를 선택해 Open합니다. xml 파일을 선택하고 Connect 합니다.',
+          en:'■ 3D Vision Camera Parameter 1/2\n\nRun iCamCommXE.exe. Click File-Connect. Select the Grabber and Port, then Open. Select the xml file and connect.',
+          zhCN:'■ 3D Vision Camera Parameter 1/2\n\n运行iCamCommXE.exe。点击File-Connect。选择Grabber和Port后Open。选择xml文件并Connect。',
+          zhTW:'■ 3D Vision Camera Parameter 1/2\n\n執行iCamCommXE.exe。點擊File-Connect。選擇Grabber和Port後Open。選擇xml檔案並Connect。',
+          ja:'■ 3D Vision Camera Parameter 1/2\n\niCamCommXE.exeを実行します。File-Connectをクリックします。GrabberとPortを選択しOpenします。xmlファイルを選択しConnectします。',
+          vi:'■ 3D Vision Camera Parameter 1/2\n\nChạy iCamCommXE.exe. Nhấp File-Connect. Chọn Grabber và Port rồi Open. Chọn file xml và kết nối.'
+        }},
+        {img:cmImg('I','qpm',13),tx:{
+          ko:'■ 3D Vision Camera Parameter 2/2\n\nAcquisitionStop을 클릭합니다. User를 Guru로 변경하고 위 목록과 같이 설정을 변경합니다. AcquisitionStart를 클릭합니다.',
+          en:'■ 3D Vision Camera Parameter 2/2\n\nClick AcquisitionStop. Change the user to Guru and change the settings as shown in the list above. Click AcquisitionStart.',
+          zhCN:'■ 3D Vision Camera Parameter 2/2\n\n点击AcquisitionStop。将User改为Guru,并按上方列表更改设置。点击AcquisitionStart。',
+          zhTW:'■ 3D Vision Camera Parameter 2/2\n\n點擊AcquisitionStop。將User改為Guru,並按上方列表更改設定。點擊AcquisitionStart。',
+          ja:'■ 3D Vision Camera Parameter 2/2\n\nAcquisitionStopをクリックします。UserをGuruに変更し、上記リストの通り設定を変更します。AcquisitionStartをクリックします。',
+          vi:'■ 3D Vision Camera Parameter 2/2\n\nNhấp AcquisitionStop. Đổi User thành Guru và thay đổi cài đặt như danh sách trên. Nhấp AcquisitionStart.'
+        }},
+        {img:cmImg('I','qpm',14),tx:{
+          ko:'■ 3D Vision Camera Live 1/4\n\niGrabXQCompact.exe를 실행합니다. Camera 채널이 활성화된 것을 확인하고 Open을 클릭합니다. \'XCF Parameter\'의 Open 버튼을 클릭해 \'Master.XCF\' 파일을 엽니다.',
+          en:'■ 3D Vision Camera Live 1/4\n\nRun iGrabXQCompact.exe. After confirming that the Camera channel is activated, click Open. Click the \'Open\' button in \'XCF Parameter\' and open the \'Master.XCF\' file.',
+          zhCN:'■ 3D Vision Camera Live 1/4\n\n运行iGrabXQCompact.exe。确认Camera通道已启用后点击Open。点击\'XCF Parameter\'中的\'Open\'按钮,打开\'Master.XCF\'文件。',
+          zhTW:'■ 3D Vision Camera Live 1/4\n\n執行iGrabXQCompact.exe。確認Camera通道已啟用後點擊Open。點擊\'XCF Parameter\'中的\'Open\'按鈕,開啟\'Master.XCF\'檔案。',
+          ja:'■ 3D Vision Camera Live 1/4\n\niGrabXQCompact.exeを実行します。Cameraチャンネルが有効になっていることを確認しOpenをクリックします。\'XCF Parameter\'の\'Open\'ボタンをクリックし\'Master.XCF\'ファイルを開きます。',
+          vi:'■ 3D Vision Camera Live 1/4\n\nChạy iGrabXQCompact.exe. Sau khi xác nhận kênh Camera đã kích hoạt, nhấp Open. Nhấp nút \'Open\' trong \'XCF Parameter\' và mở file \'Master.XCF\'.'
+        }},
+        {img:cmImg('I','qpm',15),tx:{
+          ko:'■ 3D Vision Camera Live 2/4\n\n\'Master.XCF\' 파일을 열어 위와 같이 설정을 변경합니다.',
+          en:'■ 3D Vision Camera Live 2/4\n\nOpen the \'Master.XCF\' file and change the settings as listed above.',
+          zhCN:'■ 3D Vision Camera Live 2/4\n\n打开\'Master.XCF\'文件并按上述内容更改设置。',
+          zhTW:'■ 3D Vision Camera Live 2/4\n\n開啟\'Master.XCF\'檔案並按上述內容更改設定。',
+          ja:'■ 3D Vision Camera Live 2/4\n\n\'Master.XCF\'ファイルを開き、上記の通り設定を変更します。',
+          vi:'■ 3D Vision Camera Live 2/4\n\nMở file \'Master.XCF\' và thay đổi cài đặt như đã liệt kê ở trên.'
+        }},
+        {img:cmImg('I','qpm',16),tx:{
+          ko:'■ 3D Vision Camera Live 3/4\n\n프로그램에서 Live 영상을 확인하려면 Trigger Type을 F/G Trigger로 변경합니다. Live를 클릭해 영상이 재생되는지 확인합니다 — 창 하단의 Framerate가 145~150/sec인지 확인합니다.',
+          en:'■ 3D Vision Camera Live 3/4\n\nTo check the live video on the program, change the Trigger Type to F/G Trigger. Click Live to check if the video is playing — check that the framerate at the bottom of the window is 145–150/sec.',
+          zhCN:'■ 3D Vision Camera Live 3/4\n\n如需在程序上确认Live影像,将Trigger Type改为F/G Trigger。点击Live确认影像是否播放——确认窗口下方的Framerate为145~150/sec。',
+          zhTW:'■ 3D Vision Camera Live 3/4\n\n如需在程式上確認Live影像,將Trigger Type改為F/G Trigger。點擊Live確認影像是否播放——確認視窗下方的Framerate為145~150/sec。',
+          ja:'■ 3D Vision Camera Live 3/4\n\nプログラムでLive映像を確認するには、Trigger TypeをF/G Triggerに変更します。Liveをクリックして映像が再生されるか確認します——ウィンドウ下部のFramerateが145~150/secであることを確認します。',
+          vi:'■ 3D Vision Camera Live 3/4\n\nĐể kiểm tra video Live trên chương trình, đổi Trigger Type thành F/G Trigger. Nhấp Live để kiểm tra video có phát không — kiểm tra framerate ở dưới cửa sổ là 145~150/sec.'
+        }},
+        {img:cmImg('I','qpm',17),tx:{
+          ko:'■ 3D Vision Camera Live 4/4\n\n영상이 나타나지 않으면 cam을 클릭해 Camera Parameter 설정 창에 진입합니다. 여전히 나타나지 않으면 Guru로 변경 후 \'Device Reset\' 버튼을 클릭하고 상태창의 Success 메시지를 확인합니다. Refresh를 클릭하고 PC를 재부팅합니다.',
+          en:'■ 3D Vision Camera Live 4/4\n\nIf the video does not appear, click cam to enter the Camera Parameter setting window. If it still does not appear, change to Guru and click the \'Device Reset\' button, checking for the Success message in the status window. Click Refresh and reboot the PC.',
+          zhCN:'■ 3D Vision Camera Live 4/4\n\n若影像未出现,点击cam进入Camera Parameter设置窗口。若仍未出现,切换为Guru后点击\'Device Reset\'按钮,并在状态窗口确认Success消息。点击Refresh并重启PC。',
+          zhTW:'■ 3D Vision Camera Live 4/4\n\n若影像未出現,點擊cam進入Camera Parameter設定視窗。若仍未出現,切換為Guru後點擊\'Device Reset\'按鈕,並在狀態視窗確認Success訊息。點擊Refresh並重啟PC。',
+          ja:'■ 3D Vision Camera Live 4/4\n\n映像が表示されない場合はcamをクリックしCamera Parameter設定ウィンドウに入ります。それでも表示されない場合はGuruに変更後\'Device Reset\'ボタンをクリックし、ステータスウィンドウでSuccessメッセージを確認します。Refreshをクリックし、PCを再起動します。',
+          vi:'■ 3D Vision Camera Live 4/4\n\nNếu video không hiện, nhấp cam để vào cửa sổ cài đặt Camera Parameter. Nếu vẫn không hiện, đổi sang Guru rồi nhấp nút \'Device Reset\', kiểm tra thông báo Success trong cửa sổ trạng thái. Nhấp Refresh và khởi động lại PC.'
+        }},
+        {img:cmImg('I','qpm',18),tx:{
+          ko:'■ 3D Vision LED Remote 1/2\n\n\'synctestpgm_vb2005-Shortcut.exe\'를 우클릭해 관리자 권한으로 실행합니다. Illum Test를 클릭하고 \'select the name of machine!!\' 창이 뜨면 OK를 클릭합니다. ISIS-CSPW를 확인하고 Sync All Para Download를 엽니다.',
+          en:'■ 3D Vision LED Remote 1/2\n\nRight-click \'synctestpgm_vb2005-Shortcut.exe\' and run as administrator. Click Illum Test, and when the \'select the name of machine!!\' window appears, click OK. Check ISIS-CSPW, then open Sync All Para Download.',
+          zhCN:'■ 3D Vision LED Remote 1/2\n\n右键点击\'synctestpgm_vb2005-Shortcut.exe\'以管理员身份运行。点击Illum Test,出现\'select the name of machine!!\'窗口时点击OK。确认ISIS-CSPW,打开Sync All Para Download。',
+          zhTW:'■ 3D Vision LED Remote 1/2\n\n右鍵點擊\'synctestpgm_vb2005-Shortcut.exe\'以系統管理員身份執行。點擊Illum Test,出現\'select the name of machine!!\'視窗時點擊OK。確認ISIS-CSPW,開啟Sync All Para Download。',
+          ja:'■ 3D Vision LED Remote 1/2\n\n\'synctestpgm_vb2005-Shortcut.exe\'を右クリックし管理者として実行します。Illum Testをクリックし、\'select the name of machine!!\'ウィンドウが表示されたらOKをクリックします。ISIS-CSPWを確認し、Sync All Para Downloadを開きます。',
+          vi:'■ 3D Vision LED Remote 1/2\n\nNhấp chuột phải vào \'synctestpgm_vb2005-Shortcut.exe\' và chạy với quyền quản trị. Nhấp Illum Test, khi cửa sổ \'select the name of machine!!\' hiện ra, nhấp OK. Kiểm tra ISIS-CSPW, mở Sync All Para Download.'
+        }},
+        {img:cmImg('I','qpm',19),tx:{
+          ko:'■ 3D Vision LED Remote 2/2\n\n\'iSIS-NBGA_3D_allpara\' 파일을 열고 OK를 클릭합니다. Download를 클릭한 뒤 OK를 클릭합니다. LED On을 클릭하고 채널 값을 변경해 채널별로 2D 조명이 동작하는지 확인합니다. On/Off를 클릭해 3D 조명 동작을 확인합니다.',
+          en:'■ 3D Vision LED Remote 2/2\n\nOpen the \'iSIS-NBGA_3D_allpara\' file and click OK. Click Download, then click OK. Click LED On and change the channel value to check that the 2D illumination works for each channel. Click On/Off to check whether the 3D illumination works.',
+          zhCN:'■ 3D Vision LED Remote 2/2\n\n打开\'iSIS-NBGA_3D_allpara\'文件并点击OK。点击Download后点击OK。点击LED On并更改channel值,确认各channel的2D照明是否动作。点击On/Off确认3D照明是否动作。',
+          zhTW:'■ 3D Vision LED Remote 2/2\n\n開啟\'iSIS-NBGA_3D_allpara\'檔案並點擊OK。點擊Download後點擊OK。點擊LED On並更改channel值,確認各channel的2D照明是否動作。點擊On/Off確認3D照明是否動作。',
+          ja:'■ 3D Vision LED Remote 2/2\n\n\'iSIS-NBGA_3D_allpara\'ファイルを開きOKをクリックします。Downloadをクリックした後OKをクリックします。LED Onをクリックしチャンネル値を変更して、チャンネルごとに2D照明が動作するか確認します。On/Offをクリックし3D照明の動作を確認します。',
+          vi:'■ 3D Vision LED Remote 2/2\n\nMở file \'iSIS-NBGA_3D_allpara\' và nhấp OK. Nhấp Download rồi nhấp OK. Nhấp LED On và thay đổi giá trị channel để kiểm tra đèn 2D hoạt động theo từng channel. Nhấp On/Off để kiểm tra đèn 3D hoạt động.'
+        }},
+        {img:cmImg('I','qpm',20),tx:{
+          ko:'■ 3D Vision Program linkage test\n\n\'IntekPlus.Qpm.SmartCamera.exe\'를 실행합니다. 로그에서 Smart Camera와 PZT의 연결 상태를 확인합니다(연결에 문제가 있으면 오류가 표시됩니다).',
+          en:'■ 3D Vision Program linkage test\n\nRun \'IntekPlus.Qpm.SmartCamera.exe\'. Check the connection status of the Smart Camera and PZT in the log (an error is displayed if the connection is faulty).',
+          zhCN:'■ 3D Vision Program linkage test\n\n运行\'IntekPlus.Qpm.SmartCamera.exe\'。在日志中确认Smart Camera与PZT的连接状态(连接异常时会显示错误)。',
+          zhTW:'■ 3D Vision Program linkage test\n\n執行\'IntekPlus.Qpm.SmartCamera.exe\'。在日誌中確認Smart Camera與PZT的連接狀態(連接異常時會顯示錯誤)。',
+          ja:'■ 3D Vision Program linkage test\n\n\'IntekPlus.Qpm.SmartCamera.exe\'を実行します。ログでSmart CameraとPZTの接続状態を確認します(接続に問題がある場合はエラーが表示されます)。',
+          vi:'■ 3D Vision Program linkage test\n\nChạy \'IntekPlus.Qpm.SmartCamera.exe\'. Kiểm tra trạng thái kết nối của Smart Camera và PZT trong log (hiển thị lỗi nếu kết nối có vấn đề).'
+        }},
+        {img:cmImg('I','qpm',21),tx:{
+          ko:'■ AF Controller(Specification)\n\n광 삼각측량(Optical Triangulation) 방식으로 Focus 위치를 검출하며, TFT Array·Photo Mask·반도체 Wafer 등에 활용됩니다. Capture Range 1500um(Wide Capture Range). Focus Update Rate 2KHz, Capture Range ±1500um. Laser 파장 655±5nm. RS232(9600~115200bps)/Ethernet 통신, 입력 전압 24V, DIO Input 4ch·Output 4ch. (New Version)',
+          en:'■ AF Controller(Specification)\n\nDetects the Focus position using optical triangulation, used in fields such as TFT Array, Photo Mask, and Semiconductor Wafer. Capture Range 1500um (Wide Capture Range). System performance: Focus Update Rate 2KHz, Capture Range ±1500um. Laser wavelength 655±5(nm). RS232 (9600~115200bps)/Ethernet, Input Voltage 24V, DIO: Input 4ch, Output 4ch. (New Version)',
+          zhCN:'■ AF Controller(Specification)\n\n采用光学三角测量(Optical Triangulation)方式检测Focus位置,可用于TFT Array、Photo Mask、半导体Wafer等领域。Capture Range 1500um(Wide Capture Range)。系统性能:Focus Update Rate 2KHz,Capture Range ±1500um。Laser波长655±5(nm)。RS232(9600~115200bps)/Ethernet通信,输入电压24V,DIO:Input 4ch、Output 4ch。(New Version)',
+          zhTW:'■ AF Controller(Specification)\n\n採用光學三角測量(Optical Triangulation)方式檢測Focus位置,可用於TFT Array、Photo Mask、半導體Wafer等領域。Capture Range 1500um(Wide Capture Range)。系統性能:Focus Update Rate 2KHz,Capture Range ±1500um。Laser波長655±5(nm)。RS232(9600~115200bps)/Ethernet通訊,輸入電壓24V,DIO:Input 4ch、Output 4ch。(New Version)',
+          ja:'■ AF Controller(Specification)\n\n光学三角測量(Optical Triangulation)方式でFocus位置を検出し、TFT Array・Photo Mask・半導体Waferなどの分野で使用されます。Capture Range 1500um(Wide Capture Range)。システム性能:Focus Update Rate 2KHz、Capture Range ±1500um。Laser波長655±5(nm)。RS232(9600~115200bps)/Ethernet通信、入力電圧24V、DIO:Input 4ch、Output 4ch。(New Version)',
+          vi:'■ AF Controller(Specification)\n\nPhát hiện vị trí Focus bằng phương pháp tam giác quang học (Optical Triangulation), dùng trong các lĩnh vực như TFT Array, Photo Mask, Semiconductor Wafer. Capture Range 1500um (Wide Capture Range). Hiệu suất hệ thống: Focus Update Rate 2KHz, Capture Range ±1500um. Bước sóng Laser 655±5(nm). RS232(9600~115200bps)/Ethernet, điện áp vào 24V, DIO: Input 4ch, Output 4ch. (New Version)'
+        }},
+        {img:cmImg('I','qpm',22),tx:{
+          ko:'■ AF Controller(Old Version)\n\n주요 연결부: Sensor Camera(Mini CL-Base/Mini CL-Full), Sensor Camera Power Output(12V), Ethernet Cable(PC 연결), Sensor Laser Power Output, RS232(PC 연결), Motor Driver Connect, Main Power Input(24V), Motor Limit Sensor Connect.',
+          en:'■ AF Controller(Old Version)\n\nKey connectors: Sensor Camera (Mini CL-Base/Mini CL-Full), Sensor Camera Power Output (12V), Ethernet Cable (connect to PC), Sensor Laser Power Output, RS232 (PC connect), Motor Driver Connect, Main Power Input (24V), Motor Limit Sensor Connect.',
+          zhCN:'■ AF Controller(Old Version)\n\n主要连接部:Sensor Camera(Mini CL-Base/Mini CL-Full)、Sensor Camera Power Output(12V)、Ethernet Cable(连接PC)、Sensor Laser Power Output、RS232(连接PC)、Motor Driver Connect、Main Power Input(24V)、Motor Limit Sensor Connect。',
+          zhTW:'■ AF Controller(Old Version)\n\n主要連接部:Sensor Camera(Mini CL-Base/Mini CL-Full)、Sensor Camera Power Output(12V)、Ethernet Cable(連接PC)、Sensor Laser Power Output、RS232(連接PC)、Motor Driver Connect、Main Power Input(24V)、Motor Limit Sensor Connect。',
+          ja:'■ AF Controller(Old Version)\n\n主な接続部:Sensor Camera(Mini CL-Base/Mini CL-Full)、Sensor Camera Power Output(12V)、Ethernet Cable(PC接続)、Sensor Laser Power Output、RS232(PC接続)、Motor Driver Connect、Main Power Input(24V)、Motor Limit Sensor Connect。',
+          vi:'■ AF Controller(Old Version)\n\nCác điểm kết nối chính: Sensor Camera(Mini CL-Base/Mini CL-Full), Sensor Camera Power Output(12V), Ethernet Cable(kết nối PC), Sensor Laser Power Output, RS232(kết nối PC), Motor Driver Connect, Main Power Input(24V), Motor Limit Sensor Connect.'
+        }},
+        {img:cmImg('I','qpm',23),tx:{
+          ko:'■ AF Controller(New Version)\n\n신버전도 구버전과 동일하게 Sensor Camera(Mini CL-Base/Mini CL-Full), Sensor Camera Power Output(12V), Ethernet Cable, Sensor Laser Power Output, RS232, Motor Driver Connect, Main Power Input(24V), Motor Limit Sensor Connect로 구성됩니다.',
+          en:'■ AF Controller(New Version)\n\nLike the old version, the new version has the same connectors: Sensor Camera (Mini CL-Base/Mini CL-Full), Sensor Camera Power Output (12V), Ethernet Cable, Sensor Laser Power Output, RS232, Motor Driver Connect, Main Power Input (24V), Motor Limit Sensor Connect.',
+          zhCN:'■ AF Controller(New Version)\n\n新版本与旧版本相同,同样由Sensor Camera(Mini CL-Base/Mini CL-Full)、Sensor Camera Power Output(12V)、Ethernet Cable、Sensor Laser Power Output、RS232、Motor Driver Connect、Main Power Input(24V)、Motor Limit Sensor Connect构成。',
+          zhTW:'■ AF Controller(New Version)\n\n新版本與舊版本相同,同樣由Sensor Camera(Mini CL-Base/Mini CL-Full)、Sensor Camera Power Output(12V)、Ethernet Cable、Sensor Laser Power Output、RS232、Motor Driver Connect、Main Power Input(24V)、Motor Limit Sensor Connect構成。',
+          ja:'■ AF Controller(New Version)\n\n新バージョンも旧バージョンと同様に、Sensor Camera(Mini CL-Base/Mini CL-Full)、Sensor Camera Power Output(12V)、Ethernet Cable、Sensor Laser Power Output、RS232、Motor Driver Connect、Main Power Input(24V)、Motor Limit Sensor Connectで構成されます。',
+          vi:'■ AF Controller(New Version)\n\nGiống phiên bản cũ, phiên bản mới cũng có Sensor Camera(Mini CL-Base/Mini CL-Full), Sensor Camera Power Output(12V), Ethernet Cable, Sensor Laser Power Output, RS232, Motor Driver Connect, Main Power Input(24V), Motor Limit Sensor Connect.'
+        }},
+        {img:cmImg('I','qpm',24),tx:{
+          ko:'■ AF Controller(Principle of Operation)\n\nMake0(Focus) — 대상이 가까워지거나 멀어질 때, Sensor Camera로 이미지를 계속 획득하면서 Motor를 이동시켜 지정된 Focus 위치와 동일한 거리를 유지합니다(Move Up/Move Down).',
+          en:'■ AF Controller(Principle of Operation)\n\nMake0 (Focus) — when the target moves near or away, the motor is moved while continuously acquiring images with the sensor camera to maintain the same distance as the designated focus position (Move Up/Move Down).',
+          zhCN:'■ AF Controller(Principle of Operation)\n\nMake0(Focus)——当目标靠近或远离时,一边用Sensor Camera持续获取影像,一边移动Motor以维持与指定Focus位置相同的距离(Move Up/Move Down)。',
+          zhTW:'■ AF Controller(Principle of Operation)\n\nMake0(Focus)——當目標靠近或遠離時,一邊用Sensor Camera持續取得影像,一邊移動Motor以維持與指定Focus位置相同的距離(Move Up/Move Down)。',
+          ja:'■ AF Controller(Principle of Operation)\n\nMake0(Focus)——対象が近づいたり離れたりする際、Sensor Cameraで画像を取得し続けながらMotorを移動し、指定したFocus位置と同じ距離を維持します(Move Up/Move Down)。',
+          vi:'■ AF Controller(Principle of Operation)\n\nMake0 (Focus) — khi đối tượng đến gần hoặc ra xa, Motor được di chuyển trong khi liên tục thu ảnh bằng Sensor Camera để duy trì khoảng cách giống với vị trí Focus đã chỉ định (Move Up/Move Down).'
+        }},
+        {img:cmImg('I','qpm',25),tx:{
+          ko:'■ AF Controller(Program Firmware Check)\n\niSAFProgram.exe를 실행해 AF에 연결한 뒤 Firmware 버전을 확인합니다. 업데이트가 필요하면 버전을 다운로드해 압축을 해제하고, 해당 파일을 연 뒤 Program Start를 클릭해 업데이트합니다.',
+          en:'■ AF Controller(Program Firmware Check)\n\nRun iSAFProgram.exe, connect to the AF, and check the firmware version. If an update is required, download the version and unzip it, then open the file to be updated and click Program Start to update.',
+          zhCN:'■ AF Controller(Program Firmware Check)\n\n运行iSAFProgram.exe,连接AF后确认Firmware版本。如需更新,下载版本并解压,打开待更新文件后点击Program Start进行更新。',
+          zhTW:'■ AF Controller(Program Firmware Check)\n\n執行iSAFProgram.exe,連接AF後確認Firmware版本。如需更新,下載版本並解壓縮,開啟待更新檔案後點擊Program Start進行更新。',
+          ja:'■ AF Controller(Program Firmware Check)\n\niSAFProgram.exeを実行しAFに接続してFirmwareバージョンを確認します。更新が必要な場合はバージョンをダウンロードして解凍し、更新対象ファイルを開いてProgram Startをクリックし更新します。',
+          vi:'■ AF Controller(Program Firmware Check)\n\nChạy iSAFProgram.exe, kết nối AF và kiểm tra phiên bản Firmware. Nếu cần cập nhật, tải phiên bản về và giải nén, mở file cần cập nhật rồi nhấp Program Start để cập nhật.'
+        }},
+        {img:cmImg('I','qpm',26),tx:{
+          ko:'■ AF Controller(Connection Check)\n\niAFCTRL_(x86/64)exe를 실행합니다(byte는 Host 프로그램 설치 사양에 따름). Ethernet으로 변경하고 Local IP에 AF IP를 입력한 뒤 Disconnect를 클릭합니다 — 초록색으로 연결되면 완료이며, 연결되지 않으면 AF 전원을 껐다가 다시 연결합니다.',
+          en:'■ AF Controller(Connection Check)\n\nRun iAFCTRL_(x86/64)exe (the byte is determined by the Host program installation specification). Change to Ethernet, enter the AF IP in Local IP, then click Disconnect — if it connects in green the connection is complete; if not, disconnect the AF power and plug it back in.',
+          zhCN:'■ AF Controller(Connection Check)\n\n运行iAFCTRL_(x86/64)exe(byte依Host程序安装规格而定)。切换为Ethernet,在Local IP中输入AF IP后点击Disconnect——若以绿色显示连接则完成,若未连接则断开AF电源后重新连接。',
+          zhTW:'■ AF Controller(Connection Check)\n\n執行iAFCTRL_(x86/64)exe(byte依Host程式安裝規格而定)。切換為Ethernet,在Local IP中輸入AF IP後點擊Disconnect——若以綠色顯示連接則完成,若未連接則斷開AF電源後重新連接。',
+          ja:'■ AF Controller(Connection Check)\n\niAFCTRL_(x86/64)exeを実行します(byteはHostプログラムのインストール仕様による)。Ethernetに変更し、Local IPにAF IPを入力してDisconnectをクリックします——緑色で接続されれば完了、接続されない場合はAF電源を切って再接続します。',
+          vi:'■ AF Controller(Connection Check)\n\nChạy iAFCTRL_(x86/64)exe (byte tùy theo thông số cài đặt chương trình Host). Đổi sang Ethernet, nhập AF IP vào Local IP rồi nhấp Disconnect — nếu kết nối hiện màu xanh lá là hoàn tất, nếu không thì ngắt nguồn AF rồi cắm lại.'
+        }},
+        {img:cmImg('I','qpm',27),tx:{
+          ko:'■ AF Controller(Sentech Camera Parameter)\n\niAFCTRL에서 Camera Mode를 확인합니다. AF 프로그램의 byte(x86/x64)에 맞춰 CLCtrl2(x86/X64).exe를 실행합니다. Comm▸Port Setting에서 COM1로 변경 후 OK를 클릭하고, read all을 클릭합니다.',
+          en:'■ AF Controller(Sentech Camera Parameter)\n\nCheck the Camera Mode in iAFCTRL. Run CLCtrl2(x86/X64).exe matching the AF program\'s byte (x86 or x64). Click Comm ▸ Port Setting, change it to COM1, and click OK, then click read all.',
+          zhCN:'■ AF Controller(Sentech Camera Parameter)\n\n在iAFCTRL中确认Camera Mode。根据AF程序的byte(x86/x64)运行CLCtrl2(x86/X64).exe。点击Comm▸Port Setting改为COM1后点击OK,再点击read all。',
+          zhTW:'■ AF Controller(Sentech Camera Parameter)\n\n在iAFCTRL中確認Camera Mode。根據AF程式的byte(x86/x64)執行CLCtrl2(x86/X64).exe。點擊Comm▸Port Setting改為COM1後點擊OK,再點擊read all。',
+          ja:'■ AF Controller(Sentech Camera Parameter)\n\niAFCTRLでCamera Modeを確認します。AFプログラムのbyte(x86/x64)に合わせてCLCtrl2(x86/X64).exeを実行します。Comm▸Port SettingでCOM1に変更しOKをクリックし、read allをクリックします。',
+          vi:'■ AF Controller(Sentech Camera Parameter)\n\nKiểm tra Camera Mode trong iAFCTRL. Chạy CLCtrl2(x86/X64).exe phù hợp với byte(x86/x64) của chương trình AF. Nhấp Comm▸Port Setting đổi thành COM1 rồi nhấp OK, sau đó nhấp read all.'
+        }},
+        {img:cmImg('I','qpm',28),tx:{
+          ko:'■ AF Controller(Sentech Camera Parameter Setting)\n\nSentech Camera의 세부 Parameter 설정 화면입니다.',
+          en:'■ AF Controller(Sentech Camera Parameter Setting)\n\nThe detailed parameter setting screen for the Sentech Camera.',
+          zhCN:'■ AF Controller(Sentech Camera Parameter Setting)\n\nSentech Camera的详细Parameter设置画面。',
+          zhTW:'■ AF Controller(Sentech Camera Parameter Setting)\n\nSentech Camera的詳細Parameter設定畫面。',
+          ja:'■ AF Controller(Sentech Camera Parameter Setting)\n\nSentech Cameraの詳細パラメータ設定画面です。',
+          vi:'■ AF Controller(Sentech Camera Parameter Setting)\n\nMàn hình cài đặt Parameter chi tiết của Sentech Camera.'
+        }},
+        {img:cmImg('I','qpm',29),tx:{
+          ko:'■ AF Controller(Parameter Setting)\n\nGrab ON, Enable Monitor, Camera Mode를 확인합니다. Device▸Parameter를 클릭합니다.',
+          en:'■ AF Controller(Parameter Setting)\n\nCheck Grab ON, Enable Monitor, and Camera Mode. Click Device ▸ Parameter.',
+          zhCN:'■ AF Controller(Parameter Setting)\n\n确认Grab ON、Enable Monitor、Camera Mode。点击Device▸Parameter。',
+          zhTW:'■ AF Controller(Parameter Setting)\n\n確認Grab ON、Enable Monitor、Camera Mode。點擊Device▸Parameter。',
+          ja:'■ AF Controller(Parameter Setting)\n\nGrab ON、Enable Monitor、Camera Modeを確認します。Device▸Parameterをクリックします。',
+          vi:'■ AF Controller(Parameter Setting)\n\nKiểm tra Grab ON, Enable Monitor, Camera Mode. Nhấp Device▸Parameter.'
+        }},
+        {img:cmImg('I','qpm',30),tx:{
+          ko:'■ AF Controller(Parameter Setting)\n\nAF 버전을 확인한 후 이미지 등 파라미터를 설정하고 Apply 합니다. File▸Save Param을 클릭해 저장합니다. (Old Version/New Version 각각 동일)',
+          en:'■ AF Controller(Parameter Setting)\n\nAfter checking the AF version, set the parameters such as images and apply. Click File ▸ Save Param to save. (Same for both Old Version and New Version)',
+          zhCN:'■ AF Controller(Parameter Setting)\n\n确认AF版本后设置影像等参数并Apply。点击File▸Save Param保存。(Old Version、New Version方式相同)',
+          zhTW:'■ AF Controller(Parameter Setting)\n\n確認AF版本後設定影像等參數並Apply。點擊File▸Save Param儲存。(Old Version、New Version方式相同)',
+          ja:'■ AF Controller(Parameter Setting)\n\nAFバージョンを確認した後、画像などのパラメータを設定しApplyします。File▸Save Paramをクリックして保存します。(Old Version、New Versionとも同様)',
+          vi:'■ AF Controller(Parameter Setting)\n\nSau khi kiểm tra phiên bản AF, thiết lập các tham số như hình ảnh rồi Apply. Nhấp File▸Save Param để lưu. (Áp dụng như nhau cho Old Version và New Version)'
+        }},
+        {img:cmImg('I','qpm',31),tx:{
+          ko:'■ AF Controller(Program Check)\n\nGrab ON, Enable Monitor, Camera Mode 상태에서 Z축을 1000um 내리며 실제로 내려가는지 육안으로 확인합니다. 1000um 이동 시 실측으로도 1000um(1mm) 이동해야 합니다.',
+          en:'■ AF Controller(Program Check)\n\nWith Grab ON, Enable Monitor, and Camera Mode active, lower the Z-axis by 1000um and visually check whether it actually moves down. When moving 1000um, the actual measurement should also show a 1000um (1mm) movement.',
+          zhCN:'■ AF Controller(Program Check)\n\n在Grab ON、Enable Monitor、Camera Mode状态下,将Z轴下降1000um,目视确认是否实际下降。移动1000um时,实测也应移动1000um(1mm)。',
+          zhTW:'■ AF Controller(Program Check)\n\n在Grab ON、Enable Monitor、Camera Mode狀態下,將Z軸下降1000um,目視確認是否實際下降。移動1000um時,實測也應移動1000um(1mm)。',
+          ja:'■ AF Controller(Program Check)\n\nGrab ON、Enable Monitor、Camera Modeの状態でZ軸を1000um下げ、実際に下がるか目視で確認します。1000um移動時、実測でも1000um(1mm)移動する必要があります。',
+          vi:'■ AF Controller(Program Check)\n\nỞ trạng thái Grab ON, Enable Monitor, Camera Mode, hạ trục Z xuống 1000um và kiểm tra bằng mắt xem có thực sự đi xuống không. Khi di chuyển 1000um, số đo thực tế cũng phải di chuyển 1000um(1mm).'
+        }},
+        {img:cmImg('I','qpm',32),tx:{
+          ko:'■ AF Moving Check – Pulse check\n\nMotor 제어 프로그램의 \'Cur Pos.\'에서 0.00 위치의 실제 높이를 측정합니다. (이미지 예시: 30mm(30000um))',
+          en:'■ AF Moving Check – Pulse check\n\nIn the motor control program\'s \'Cur Pos.\', measure the actual height of the 0.00 position. (The image shows an example of 30mm (30000um).)',
+          zhCN:'■ AF Moving Check – Pulse check\n\n在Motor控制程序的\'Cur Pos.\'中测量0.00位置的实际高度。(图示为30mm(30000um))',
+          zhTW:'■ AF Moving Check – Pulse check\n\n在Motor控制程式的\'Cur Pos.\'中測量0.00位置的實際高度。(圖示為30mm(30000um))',
+          ja:'■ AF Moving Check – Pulse check\n\nMotor制御プログラムの\'Cur Pos.\'で0.00位置の実際の高さを測定します。(画像例:30mm(30000um))',
+          vi:'■ AF Moving Check – Pulse check\n\nTại \'Cur Pos.\' của chương trình điều khiển Motor, đo chiều cao thực tế tại vị trí 0.00. (Hình minh họa: 30mm(30000um))'
+        }},
+        {img:cmImg('I','qpm',33),tx:{
+          ko:'■ AF Moving Check – Actual Moving\n\nStep에 5000을 적용한 후 Down 버튼을 클릭합니다. 현재 위치 값이 0.00에서 -5000.00으로 이동했는지 확인하고, 실측으로도 30mm(30000um)에서 25mm(25000um)로 변화하는지 확인합니다. AF 제어 프로그램의 이동값과 실제 H/W 이동량이 반드시 일치해야 하며, 일치하지 않으면 Z축 Driver의 Pulse 설정을 확인합니다.',
+          en:'■ AF Moving Check – Actual Moving\n\nAfter applying 5000 to the step, click the Down button. Confirm the current position value has moved from 0.00 to -5000.00, and that the actual measurement changes from 30mm (30000um) to 25mm (25000um). The AF control program\'s movement value and the actual H/W movement amount must match — if they do not, check the pulse setting of the Z-axis driver.',
+          zhCN:'■ AF Moving Check – Actual Moving\n\n将5000应用于Step后点击Down按钮。确认当前位置值从0.00移动到-5000.00,并确认实测也从30mm(30000um)变化到25mm(25000um)。AF控制程序的移动值与实际H/W移动量必须一致,若不一致则检查Z轴驱动器的Pulse设置。',
+          zhTW:'■ AF Moving Check – Actual Moving\n\n將5000套用於Step後點擊Down按鈕。確認目前位置值從0.00移動到-5000.00,並確認實測也從30mm(30000um)變化到25mm(25000um)。AF控制程式的移動值與實際H/W移動量必須一致,若不一致則檢查Z軸驅動器的Pulse設定。',
+          ja:'■ AF Moving Check – Actual Moving\n\nStepに5000を適用した後Downボタンをクリックします。現在位置値が0.00から-5000.00へ移動したことを確認し、実測でも30mm(30000um)から25mm(25000um)へ変化することを確認します。AF制御プログラムの移動値と実際のH/W移動量は一致している必要があり、一致しない場合はZ軸ドライバのパルス設定を確認します。',
+          vi:'■ AF Moving Check – Actual Moving\n\nSau khi áp dụng 5000 vào Step, nhấp nút Down. Xác nhận giá trị vị trí hiện tại đã di chuyển từ 0.00 đến -5000.00, và số đo thực tế cũng thay đổi từ 30mm(30000um) sang 25mm(25000um). Giá trị di chuyển của chương trình điều khiển AF và lượng di chuyển H/W thực tế phải khớp nhau — nếu không khớp, kiểm tra cài đặt pulse của driver trục Z.'
+        }},
+        {img:cmImg('I','qpm',34),tx:{
+          ko:'■ PI PZT Controller Setting\n\nPIMikroMove.exe를 실행합니다. Vision PC 후면의 USB 3.0 포트와 PZT Controller 포트를 USB 케이블로 연결합니다.',
+          en:'■ PI PZT Controller Setting\n\nRun PIMikroMove.exe. Connect the USB 3.0 port on the back of the Vision PC to the PZT Controller\'s port using a USB cable.',
+          zhCN:'■ PI PZT Controller Setting\n\n运行PIMikroMove.exe。用USB线缆将Vision PC背面的USB 3.0端口与PZT Controller的端口连接。',
+          zhTW:'■ PI PZT Controller Setting\n\n執行PIMikroMove.exe。用USB線纜將Vision PC背面的USB 3.0埠與PZT Controller的埠連接。',
+          ja:'■ PI PZT Controller Setting\n\nPIMikroMove.exeを実行します。Vision PC背面のUSB 3.0ポートとPZT ControllerのポートをUSBケーブルで接続します。',
+          vi:'■ PI PZT Controller Setting\n\nChạy PIMikroMove.exe. Nối cổng USB 3.0 ở mặt sau Vision PC với cổng của PZT Controller bằng cáp USB.'
+        }},
+        {img:cmImg('I','qpm',35),tx:{
+          ko:'Controller Connection에서 E-754 ▸ USB를 선택해 Controller 연결을 확인합니다. Controller가 확인되면 \'Connect\' 버튼을 클릭합니다.',
+          en:'Select Controller Connection ▸ E-754 ▸ USB to check the controller connection. Once the controller is verified, click the \'Connect\' button.',
+          zhCN:'在Controller Connection中选择E-754 ▸ USB确认Controller连接。确认Controller后点击\'Connect\'按钮。',
+          zhTW:'在Controller Connection中選擇E-754 ▸ USB確認Controller連接。確認Controller後點擊\'Connect\'按鈕。',
+          ja:'Controller ConnectionでE-754 ▸ USBを選択しController接続を確認します。Controllerが確認できたら\'Connect\'ボタンをクリックします。',
+          vi:'Chọn Controller Connection ▸ E-754 ▸ USB để kiểm tra kết nối controller. Sau khi xác nhận controller, nhấp nút \'Connect\'.'
+        }},
+        {img:cmImg('I','qpm',36),tx:{
+          ko:'연결 상태를 확인합니다. Auto Zero가 정상이면 5~6번은 생략 가능합니다. 상태 확인 후 \'Auto Zero\' 버튼을 클릭하고, 완료되면 \'OK\'를 클릭한 뒤 \'Close\' 버튼을 클릭합니다.',
+          en:'Check the connection status. If Auto Zero is OK, steps 5–6 can be omitted. After checking the status, click the \'Auto Zero\' button; when Auto Zero is complete, click \'OK\', then click the \'Close\' button.',
+          zhCN:'确认连接状态。若Auto Zero正常,可省略第5~6步。确认状态后点击\'Auto Zero\'按钮,完成后点击\'OK\',再点击\'Close\'按钮。',
+          zhTW:'確認連接狀態。若Auto Zero正常,可省略第5~6步。確認狀態後點擊\'Auto Zero\'按鈕,完成後點擊\'OK\',再點擊\'Close\'按鈕。',
+          ja:'接続状態を確認します。Auto Zeroが正常であれば5~6番は省略可能です。状態確認後\'Auto Zero\'ボタンをクリックし、完了したら\'OK\'をクリックした後\'Close\'ボタンをクリックします。',
+          vi:'Kiểm tra trạng thái kết nối. Nếu Auto Zero bình thường, có thể bỏ qua bước 5~6. Sau khi kiểm tra trạng thái, nhấp nút \'Auto Zero\', khi hoàn tất nhấp \'OK\', sau đó nhấp nút \'Close\'.'
+        }},
+        {img:cmImg('I','qpm',37),tx:{
+          ko:'\'Servo\'를 체크합니다. \'Home\' 버튼을 클릭하고 \'Current Value/Position\'의 움직임을 확인합니다 — 약 2~30um 움직임은 정상이며, 100um 이상이면 문제가 있는 것으로 판단해 PZT Dynamic Tune으로 안정화합니다. 상단 탭에서 Tool▸Command entry를 선택해 다음 명령을 순서대로 입력합니다: \"ifs 100 ipstart 0\", \"ifs 100 ipmask 255.255.255.0\", \"ifs 100 ipadr 192.168.0.1:50000\", \"ifs?\". 프로그램 종료 후 PZT Controller 전원을 끄고, 전원을 켜기 전에 USB 케이블을 분리합니다.',
+          en:'Check \'Servo\'. Click the \'Home\' button and check the movement of \'Current Value/Position\' — a movement of about 2–30um is good, and more than 100um is judged as a problem, requiring PZT Dynamic Tune to stabilize it. Select Tool ▸ Command entry from the top tab and enter the following commands in order: \"ifs 100 ipstart 0\", \"ifs 100 ipmask 255.255.255.0\", \"ifs 100 ipadr 192.168.0.1:50000\", \"ifs?\". After finishing the program, turn off the power of the PZT Controller; disconnect the USB cable before turning the power back on.',
+          zhCN:'勾选\'Servo\'。点击\'Home\'按钮,确认\'Current Value/Position\'的变动——约2~30um变动为正常,若超过100um则判断为异常,需用PZT Dynamic Tune使其稳定。从上方标签选择Tool▸Command entry,依序输入以下命令:\"ifs 100 ipstart 0\"、\"ifs 100 ipmask 255.255.255.0\"、\"ifs 100 ipadr 192.168.0.1:50000\"、\"ifs?\"。程序结束后关闭PZT Controller电源,开启电源前先拔除USB线缆。',
+          zhTW:'勾選\'Servo\'。點擊\'Home\'按鈕,確認\'Current Value/Position\'的變動——約2~30um變動為正常,若超過100um則判斷為異常,需用PZT Dynamic Tune使其穩定。從上方標籤選擇Tool▸Command entry,依序輸入以下命令:\"ifs 100 ipstart 0\"、\"ifs 100 ipmask 255.255.255.0\"、\"ifs 100 ipadr 192.168.0.1:50000\"、\"ifs?\"。程式結束後關閉PZT Controller電源,開啟電源前先拔除USB線纜。',
+          ja:'\'Servo\'をチェックします。\'Home\'ボタンをクリックし\'Current Value/Position\'の動きを確認します——約2~30umの動きは正常で、100um以上の場合は問題ありと判断しPZT Dynamic Tuneで安定化します。上部タブからTool▸Command entryを選択し、以下のコマンドを順に入力します:\"ifs 100 ipstart 0\"、\"ifs 100 ipmask 255.255.255.0\"、\"ifs 100 ipadr 192.168.0.1:50000\"、\"ifs?\"。プログラム終了後PZT Controllerの電源を切り、電源を入れる前にUSBケーブルを外します。',
+          vi:'Chọn \'Servo\'. Nhấp nút \'Home\' và kiểm tra chuyển động của \'Current Value/Position\' — chuyển động khoảng 2~30um là tốt, trên 100um được coi là có vấn đề, cần dùng PZT Dynamic Tune để ổn định. Chọn Tool▸Command entry từ tab trên cùng và nhập các lệnh sau theo thứ tự: \"ifs 100 ipstart 0\", \"ifs 100 ipmask 255.255.255.0\", \"ifs 100 ipadr 192.168.0.1:50000\", \"ifs?\". Sau khi kết thúc chương trình, tắt nguồn PZT Controller; ngắt cáp USB trước khi bật nguồn lại.'
+        }},
+        {img:cmImg('I','qpm',38),tx:{
+          ko:'프로그램을 다시 실행합니다. \'TCP/IP\' 탭에서 PZT Controller 통신을 확인한 뒤 \'Connect\' 버튼을 클릭합니다. \'Servo\'를 체크하고 \'↔\' 버튼을 눌러 \'Demo Motion\' 창이 뜨면 \'Start\'를 눌러 PZT Control이 정상 동작하는지 확인합니다. \'Stage\'가 \'on target\'으로 바뀌는지 확인합니다(문제 시 \'over flow\' 표시). 프로그램을 종료합니다.',
+          en:'Run the program again. After checking the PZT controller communication in the \'TCP/IP\' tab, click the \'Connect\' button. Check \'Servo\', press the \'↔\' button, and when the \'Demo Motion\' window appears, press \'Start\' to check whether PZT Control works well. Check if \'Stage\' changes to \'on target\' (in case of a problem, \'over flow\' is displayed). End the program.',
+          zhCN:'再次运行程序。在\'TCP/IP\'标签中确认PZT controller通信后点击\'Connect\'按钮。勾选\'Servo\',按下\'↔\'按钮,出现\'Demo Motion\'窗口后按\'Start\'确认PZT Control是否正常动作。确认\'Stage\'是否变为\'on target\'(异常时显示\'over flow\')。结束程序。',
+          zhTW:'再次執行程式。在\'TCP/IP\'標籤中確認PZT controller通訊後點擊\'Connect\'按鈕。勾選\'Servo\',按下\'↔\'按鈕,出現\'Demo Motion\'視窗後按\'Start\'確認PZT Control是否正常動作。確認\'Stage\'是否變為\'on target\'(異常時顯示\'over flow\')。結束程式。',
+          ja:'プログラムを再度実行します。\'TCP/IP\'タブでPZT controller通信を確認した後\'Connect\'ボタンをクリックします。\'Servo\'をチェックし\'↔\'ボタンを押し、\'Demo Motion\'ウィンドウが表示されたら\'Start\'を押してPZT Controlが正常に動作するか確認します。\'Stage\'が\'on target\'に変わるか確認します(問題がある場合は\'over flow\'と表示)。プログラムを終了します。',
+          vi:'Chạy lại chương trình. Sau khi kiểm tra giao tiếp PZT controller trong tab \'TCP/IP\', nhấp nút \'Connect\'. Chọn \'Servo\', nhấn nút \'↔\', khi cửa sổ \'Demo Motion\' hiện ra, nhấn \'Start\' để kiểm tra PZT Control hoạt động tốt không. Kiểm tra \'Stage\' có chuyển thành \'on target\' không (nếu có vấn đề sẽ hiện \'over flow\'). Kết thúc chương trình.'
+        }},
+        {img:cmImg('I','qpm',39),tx:{
+          ko:'■ PI PZT Stage Tuning\n\n상단 메뉴에서 Tools▸Show dynamic tuner를 선택합니다.',
+          en:'■ PI PZT Stage Tuning\n\nSelect Tools ▸ Show dynamic tuner from the top menu.',
+          zhCN:'■ PI PZT Stage Tuning\n\n从上方菜单选择Tools▸Show dynamic tuner。',
+          zhTW:'■ PI PZT Stage Tuning\n\n從上方選單選擇Tools▸Show dynamic tuner。',
+          ja:'■ PI PZT Stage Tuning\n\n上部メニューからTools▸Show dynamic tunerを選択します。',
+          vi:'■ PI PZT Stage Tuning\n\nChọn Tools▸Show dynamic tuner từ menu trên cùng.'
+        }},
+        {img:cmImg('I','qpm',40),tx:{
+          ko:'\'Servo/Closed Loop\' 체크박스를 해제해 Servo를 끕니다. Step 값을 다음과 같이 설정합니다: Offset:0, Amplitude: Piezo 전체 변위량의 10~15%.',
+          en:'Uncheck the \'Servo/Closed Loop\' checkbox to turn off the Servo. Set the Step value as follows: Offset: 0, Amplitude: 10–15% of the Piezo\'s total displacement.',
+          zhCN:'取消勾选\'Servo/Closed Loop\'复选框以关闭Servo。将Step值设置如下:Offset:0,Amplitude:Piezo总位移量的10~15%。',
+          zhTW:'取消勾選\'Servo/Closed Loop\'核取方塊以關閉Servo。將Step值設定如下:Offset:0,Amplitude:Piezo總位移量的10~15%。',
+          ja:'\'Servo/Closed Loop\'チェックボックスを外しServoをオフにします。Step値を次のように設定します:Offset:0、Amplitude:Piezo全体変位量の10~15%。',
+          vi:'Bỏ chọn checkbox \'Servo/Closed Loop\' để tắt Servo. Đặt giá trị Step như sau: Offset: 0, Amplitude: 10–15% tổng độ dịch chuyển của Piezo.'
+        }},
+        {img:cmImg('I','qpm',41),tx:{
+          ko:'Cursor 1 값을 확인합니다. Notch Frequency 1 입력란을 우클릭해 Cursor 1 값으로 변경합니다 — Servo-Loop I-Term 값도 자동으로 변경됩니다. CCL Level 변경을 요청받으면 \"advanced\"를 입력합니다. Notch Rejection 1 값을 0.04 또는 0.05로 설정합니다.',
+          en:'Check the value of Cursor 1. Right-click the Notch Frequency 1 input box to change it to the value of Cursor 1 — the value of Servo-Loop I-Term is also automatically changed. If asked to change the CCL level, enter \"advanced\". Set the Notch Rejection 1 value to 0.04 or 0.05.',
+          zhCN:'确认Cursor 1的值。右键点击Notch Frequency 1输入框将其改为Cursor 1的值——Servo-Loop I-Term值也会自动改变。若要求更改CCL level,输入\"advanced\"。将Notch Rejection 1值设为0.04或0.05。',
+          zhTW:'確認Cursor 1的值。右鍵點擊Notch Frequency 1輸入框將其改為Cursor 1的值——Servo-Loop I-Term值也會自動改變。若要求更改CCL level,輸入\"advanced\"。將Notch Rejection 1值設為0.04或0.05。',
+          ja:'Cursor 1の値を確認します。Notch Frequency 1の入力欄を右クリックしCursor 1の値に変更します——Servo-Loop I-Termの値も自動的に変更されます。CCL levelの変更を求められた場合は\"advanced\"と入力します。Notch Rejection 1の値を0.04または0.05に設定します。',
+          vi:'Kiểm tra giá trị Cursor 1. Nhấp chuột phải vào ô nhập Notch Frequency 1 để đổi thành giá trị Cursor 1 — giá trị Servo-Loop I-Term cũng tự động thay đổi. Nếu được yêu cầu đổi CCL level, nhập \"advanced\". Đặt giá trị Notch Rejection 1 thành 0.04 hoặc 0.05.'
+        }},
+        {img:cmImg('I','qpm',42),tx:{
+          ko:'\'Save as Default(EEPROM)\'를 클릭해 변경 사항을 저장합니다.',
+          en:'Click \'Save as Default (EEPROM)\' to save the changes.',
+          zhCN:'点击\'Save as Default(EEPROM)\'保存变更内容。',
+          zhTW:'點擊\'Save as Default(EEPROM)\'儲存變更內容。',
+          ja:'\'Save as Default(EEPROM)\'をクリックし変更内容を保存します。',
+          vi:'Nhấp \'Save as Default (EEPROM)\' để lưu các thay đổi.'
+        }},
+        {img:cmImg('I','qpm',43),tx:{
+          ko:'\'Servo/Close Loop\'를 선택하고 \'Step Response\'를 클릭해 그래프를 확인합니다. Piezo가 목표 지점에 도달한 후 진동이 없는지 확인합니다.',
+          en:'Select \'Servo/Close Loop\' and click \'Step Response\' to check the graph. Verify that there is no vibration after the Piezo reaches the target point.',
+          zhCN:'选择\'Servo/Close Loop\'并点击\'Step Response\'查看图表。确认Piezo到达目标点后无振动。',
+          zhTW:'選擇\'Servo/Close Loop\'並點擊\'Step Response\'查看圖表。確認Piezo到達目標點後無震動。',
+          ja:'\'Servo/Close Loop\'を選択し\'Step Response\'をクリックしてグラフを確認します。Piezoが目標点に到達した後、振動がないことを確認します。',
+          vi:'Chọn \'Servo/Close Loop\' và nhấp \'Step Response\' để kiểm tra biểu đồ. Xác nhận không có rung động sau khi Piezo đạt đến điểm mục tiêu.'
+        }},
+        {img:cmImg('I','qpm',44),tx:{
+          ko:'Servo를 켠 뒤 \'Current Value/Position\'의 흔들림이 정상 범위(현재 위치 기준 ±0.030um) 이내인지 확인합니다.',
+          en:'Turn on Servo and check that the shaking of \'Current Value/Position\' is within the normal range (±0.030um from the current position).',
+          zhCN:'打开Servo后确认\'Current Value/Position\'的抖动是否在正常范围内(以当前位置为基准±0.030um)。',
+          zhTW:'打開Servo後確認\'Current Value/Position\'的抖動是否在正常範圍內(以目前位置為基準±0.030um)。',
+          ja:'Servoをオンにし、\'Current Value/Position\'の揺れが正常範囲(現在位置基準±0.030um)以内であることを確認します。',
+          vi:'Bật Servo và kiểm tra độ rung của \'Current Value/Position\' có nằm trong phạm vi bình thường không (±0.030um so với vị trí hiện tại).'
+        }},
+        {img:cmImg('I','qpm',45),tx:{
+          ko:'■ NanoFaktur PZT Controller\n\nVision PC의 PZT IP를 확인합니다(IP: 192.168.168.1). nFControl.exe를 실행합니다.',
+          en:'■ NanoFaktur PZT Controller\n\nCheck the PZT IP of the Vision PC (IP: 192.168.168.1). Execute nFControl.exe.',
+          zhCN:'■ NanoFaktur PZT Controller\n\n确认Vision PC的PZT IP(IP:192.168.168.1)。执行nFControl.exe。',
+          zhTW:'■ NanoFaktur PZT Controller\n\n確認Vision PC的PZT IP(IP:192.168.168.1)。執行nFControl.exe。',
+          ja:'■ NanoFaktur PZT Controller\n\nVision PCのPZT IPを確認します(IP:192.168.168.1)。nFControl.exeを実行します。',
+          vi:'■ NanoFaktur PZT Controller\n\nKiểm tra PZT IP của Vision PC (IP: 192.168.168.1). Chạy nFControl.exe.'
+        }},
+        {img:cmImg('I','qpm',46),tx:{
+          ko:'■ NanoFaktur PZT Controller\n\nnFControl.exe 실행 화면입니다.',
+          en:'■ NanoFaktur PZT Controller\n\nThe nFControl.exe program screen.',
+          zhCN:'■ NanoFaktur PZT Controller\n\nnFControl.exe执行画面。',
+          zhTW:'■ NanoFaktur PZT Controller\n\nnFControl.exe執行畫面。',
+          ja:'■ NanoFaktur PZT Controller\n\nnFControl.exe実行画面です。',
+          vi:'■ NanoFaktur PZT Controller\n\nMàn hình chạy chương trình nFControl.exe.'
+        }},
+        {img:cmImg('I','qpm',47),tx:{
+          ko:'■ NanoFaktur PZT Controller Firmware Update 1/5\n\nPZT Controller와 PC를 USB 케이블로 연결합니다. nFUpdater.exe를 실행합니다.',
+          en:'■ NanoFaktur PZT Controller Firmware Update 1/5\n\nConnect the PZT controller and PC with a USB cable. Run nFUpdater.exe.',
+          zhCN:'■ NanoFaktur PZT Controller Firmware Update 1/5\n\n用USB线缆连接PZT controller与PC。运行nFUpdater.exe。',
+          zhTW:'■ NanoFaktur PZT Controller Firmware Update 1/5\n\n用USB線纜連接PZT controller與PC。執行nFUpdater.exe。',
+          ja:'■ NanoFaktur PZT Controller Firmware Update 1/5\n\nPZT ControllerとPCをUSBケーブルで接続します。nFUpdater.exeを実行します。',
+          vi:'■ NanoFaktur PZT Controller Firmware Update 1/5\n\nNối PZT controller và PC bằng cáp USB. Chạy nFUpdater.exe.'
+        }},
+        {img:cmImg('I','qpm',48),tx:{
+          ko:'■ NanoFaktur PZT Controller Firmware Update 2/5\n\n\'USB <RNDIS driver>\'를 선택하고 connect 버튼을 클릭합니다. 연결 후 Load 버튼을 눌러 업데이트할 Firmware 파일을 선택합니다. 프로그램 및 버전에 맞는 Firmware를 불러옵니다.',
+          en:'■ NanoFaktur PZT Controller Firmware Update 2/5\n\nSelect the \'USB <RNDIS driver>\', click the connect button, and after connecting, press the Load button to select the firmware file to be updated — load the firmware that matches the program and version.',
+          zhCN:'■ NanoFaktur PZT Controller Firmware Update 2/5\n\n选择\'USB <RNDIS driver>\',点击connect按钮,连接后按Load按钮选择要更新的Firmware文件——载入与程序及版本相符的Firmware。',
+          zhTW:'■ NanoFaktur PZT Controller Firmware Update 2/5\n\n選擇\'USB <RNDIS driver>\',點擊connect按鈕,連接後按Load按鈕選擇要更新的Firmware檔案——載入與程式及版本相符的Firmware。',
+          ja:'■ NanoFaktur PZT Controller Firmware Update 2/5\n\n\'USB <RNDIS driver>\'を選択しconnectボタンをクリックします。接続後Loadボタンを押し更新するFirmwareファイルを選択します——プログラム及びバージョンに合ったFirmwareを読み込みます。',
+          vi:'■ NanoFaktur PZT Controller Firmware Update 2/5\n\nChọn \'USB <RNDIS driver>\', nhấp nút connect, sau khi kết nối nhấn nút Load để chọn file firmware cần cập nhật — tải firmware phù hợp với chương trình và phiên bản.'
+        }},
+        {img:cmImg('I','qpm',49),tx:{
+          ko:'■ NanoFaktur PZT Controller Firmware Update 3/5\n\n상태 창에서 선택한 파일 경로를 확인합니다. Start 버튼을 클릭해 업데이트를 진행합니다. 업데이트 완료 메시지가 표시되면 Controller가 자동으로 재부팅됩니다.',
+          en:'■ NanoFaktur PZT Controller Firmware Update 3/5\n\nCheck the path of the selected file in the status window. Click the Start button to run the update. After the update complete message is displayed, the controller will automatically reboot.',
+          zhCN:'■ NanoFaktur PZT Controller Firmware Update 3/5\n\n在状态窗口确认所选文件的路径。点击Start按钮执行更新。显示更新完成消息后,Controller将自动重启。',
+          zhTW:'■ NanoFaktur PZT Controller Firmware Update 3/5\n\n在狀態視窗確認所選檔案的路徑。點擊Start按鈕執行更新。顯示更新完成訊息後,Controller將自動重啟。',
+          ja:'■ NanoFaktur PZT Controller Firmware Update 3/5\n\nステータスウィンドウで選択したファイルのパスを確認します。Startボタンをクリックして更新を実行します。更新完了メッセージが表示されるとControllerが自動的に再起動します。',
+          vi:'■ NanoFaktur PZT Controller Firmware Update 3/5\n\nKiểm tra đường dẫn file đã chọn trong cửa sổ trạng thái. Nhấp nút Start để tiến hành cập nhật. Sau khi hiện thông báo hoàn tất cập nhật, controller sẽ tự động khởi động lại.'
+        }},
+        {img:cmImg('I','qpm',50),tx:{
+          ko:'■ NanoFaktur PZT Controller Firmware Update 4/5\n\nMain▸Parameters에서 \'Close-loop soft high limit\' 범위가 300 또는 600인지 확인합니다(Stage 사양이 300이면 300, 600이면 600). 주의: 이 파라미터가 \"0\"이면 Stage가 동작하지 않습니다.',
+          en:'■ NanoFaktur PZT Controller Firmware Update 4/5\n\nIn Main ▸ Parameters, make sure the \'Close-loop soft high limit\' range is 300 or 600 (300 if the stage spec is 300, 600 if 600). Note: when this parameter is \"0\", the Stage does not work.',
+          zhCN:'■ NanoFaktur PZT Controller Firmware Update 4/5\n\n在Main▸Parameters中确认\'Close-loop soft high limit\'范围是300还是600(Stage规格为300则设300,为600则设600)。注意:此参数为\"0\"时Stage将无法动作。',
+          zhTW:'■ NanoFaktur PZT Controller Firmware Update 4/5\n\n在Main▸Parameters中確認\'Close-loop soft high limit\'範圍是300還是600(Stage規格為300則設300,為600則設600)。注意:此參數為\"0\"時Stage將無法動作。',
+          ja:'■ NanoFaktur PZT Controller Firmware Update 4/5\n\nMain▸Parametersで\'Close-loop soft high limit\'の範囲が300または600であることを確認します(Stage仕様が300なら300、600なら600)。注意:このパラメータが\"0\"の場合Stageは動作しません。',
+          vi:'■ NanoFaktur PZT Controller Firmware Update 4/5\n\nTrong Main▸Parameters, đảm bảo phạm vi \'Close-loop soft high limit\' là 300 hoặc 600 (300 nếu thông số Stage là 300, 600 nếu là 600). Lưu ý: khi tham số này là \"0\", Stage sẽ không hoạt động.'
+        }},
+        {img:cmImg('I','qpm',51),tx:{
+          ko:'■ NanoFaktur PZT Controller Firmware Update 5/5\n\nMain▸Command Terminal을 선택합니다. \'Command Terminal\'에 ?0xfffb를 입력합니다. Firmware 버전을 확인합니다.',
+          en:'■ NanoFaktur PZT Controller Firmware Update 5/5\n\nSelect Main ▸ Command Terminal. Enter ?0xfffb in the \'Command Terminal\'. Check the firmware version.',
+          zhCN:'■ NanoFaktur PZT Controller Firmware Update 5/5\n\n选择Main▸Command Terminal。在\'Command Terminal\'中输入?0xfffb。确认Firmware版本。',
+          zhTW:'■ NanoFaktur PZT Controller Firmware Update 5/5\n\n選擇Main▸Command Terminal。在\'Command Terminal\'中輸入?0xfffb。確認Firmware版本。',
+          ja:'■ NanoFaktur PZT Controller Firmware Update 5/5\n\nMain▸Command Terminalを選択します。\'Command Terminal\'に?0xfffbを入力します。Firmwareバージョンを確認します。',
+          vi:'■ NanoFaktur PZT Controller Firmware Update 5/5\n\nChọn Main▸Command Terminal. Nhập ?0xfffb vào \'Command Terminal\'. Kiểm tra phiên bản Firmware.'
+        }},
+        {img:cmImg('I','qpm',52),tx:{
+          ko:'■ NanoFaktur PZT Stage Tuning\n\nPID-Tuning을 클릭합니다.',
+          en:'■ NanoFaktur PZT Stage Tuning\n\nClick PID-Tuning.',
+          zhCN:'■ NanoFaktur PZT Stage Tuning\n\n点击PID-Tuning。',
+          zhTW:'■ NanoFaktur PZT Stage Tuning\n\n點擊PID-Tuning。',
+          ja:'■ NanoFaktur PZT Stage Tuning\n\nPID-Tuningをクリックします。',
+          vi:'■ NanoFaktur PZT Stage Tuning\n\nNhấp PID-Tuning.'
+        }},
+        {img:cmImg('I','qpm',53),tx:{
+          ko:'Servo를 끄고 LP-Filter를 None으로 선택합니다.',
+          en:'Turn off Servo and select LP-Filter as None.',
+          zhCN:'关闭Servo,将LP-Filter选择为None。',
+          zhTW:'關閉Servo,將LP-Filter選擇為None。',
+          ja:'Servoをオフにし、LP-FilterをNoneに選択します。',
+          vi:'Tắt Servo và chọn LP-Filter là None.'
+        }},
+        {img:cmImg('I','qpm',54),tx:{
+          ko:'0V부터 Amplitude 3V를 입력해 Check를 클릭합니다. 돋보기로 피크 지점을 확대합니다. (x;y)를 클릭하고 마우스를 정점으로 이동해 Freq[Hz] 값을 확인합니다.',
+          en:'From 0V, input Amplitude 3V and click Check. Use a magnifying glass to enlarge the peak point. Click (x;y) and move the mouse to the vertex to check the Freq[Hz] figure.',
+          zhCN:'从0V开始输入Amplitude 3V并点击Check。用放大镜放大峰值点。点击(x;y)并将鼠标移到顶点确认Freq[Hz]数值。',
+          zhTW:'從0V開始輸入Amplitude 3V並點擊Check。用放大鏡放大峰值點。點擊(x;y)並將滑鼠移到頂點確認Freq[Hz]數值。',
+          ja:'0VからAmplitude 3Vを入力しCheckをクリックします。虫眼鏡でピーク地点を拡大します。(x;y)をクリックしマウスを頂点へ移動しFreq[Hz]の値を確認します。',
+          vi:'Từ 0V, nhập Amplitude 3V và nhấp Check. Dùng kính lúp phóng to điểm đỉnh. Nhấp (x;y) và di chuột đến đỉnh để kiểm tra giá trị Freq[Hz].'
+        }},
+        {img:cmImg('I','qpm',55),tx:{
+          ko:'Notch-Filter1을 활성화(enabled)로 변경한 후 Freq[Hz] 값을 입력하고 Check를 클릭합니다. 위 과정을 반복해 FFT[dB] 최적값을 찾습니다. ①과 같던 그래프가 ②처럼 피크 지점이 변하는지 확인합니다.',
+          en:'After changing Notch-Filter1 to enabled, enter the Freq[Hz] value and click Check. Repeat the above process to find the optimal FFT[dB] value. Check if the graph shown in ① changes its peak point as shown in ②.',
+          zhCN:'将Notch-Filter1改为启用(enabled)后,输入Freq[Hz]值并点击Check。重复上述过程找出最佳FFT[dB]值。确认①所示的图形峰值点是否如②所示发生变化。',
+          zhTW:'將Notch-Filter1改為啟用(enabled)後,輸入Freq[Hz]值並點擊Check。重複上述過程找出最佳FFT[dB]值。確認①所示的圖形峰值點是否如②所示發生變化。',
+          ja:'Notch-Filter1を有効(enabled)に変更した後、Freq[Hz]値を入力しCheckをクリックします。上記の過程を繰り返しFFT[dB]の最適値を見つけます。①のグラフが②のようにピーク地点が変化するか確認します。',
+          vi:'Sau khi đổi Notch-Filter1 thành enabled, nhập giá trị Freq[Hz] và nhấp Check. Lặp lại quá trình trên để tìm giá trị FFT[dB] tối ưu. Kiểm tra xem đồ thị ở ① có thay đổi điểm đỉnh như ② không.'
+        }},
+        {img:cmImg('I','qpm',56),tx:{
+          ko:'LP-Filter를 IIR로 변경하고 Frequency(Hz)를 200으로 설정한 뒤 Check를 클릭합니다. IIR이 활성화되면 그래프의 진폭 두께가 1과 같이(IIR None 상태 대비) 변화했는지 확인합니다.',
+          en:'Change LP-Filter to IIR, set Frequency (Hz) to 200, and click Check. When IIR is activated, check whether the amplitude thickness of the graph has changed as shown in 1 (compared to the IIR None state).',
+          zhCN:'将LP-Filter改为IIR,将Frequency(Hz)设为200后点击Check。IIR启用后,确认图形的振幅厚度是否如1所示发生变化(相对于IIR None状态)。',
+          zhTW:'將LP-Filter改為IIR,將Frequency(Hz)設為200後點擊Check。IIR啟用後,確認圖形的振幅厚度是否如1所示發生變化(相對於IIR None狀態)。',
+          ja:'LP-FilterをIIRに変更し、Frequency(Hz)を200に設定した後Checkをクリックします。IIRが有効化されると、グラフの振幅の太さが1のように変化したか確認します(IIR None状態との比較)。',
+          vi:'Đổi LP-Filter thành IIR, đặt Frequency (Hz) là 200 rồi nhấp Check. Khi IIR được kích hoạt, kiểm tra xem độ dày biên độ của đồ thị có thay đổi như hình 1 không (so với trạng thái IIR None).'
+        }},
+        {img:cmImg('I','qpm',57),tx:{
+          ko:'Servo ON — From: 0[um] / Amplitude: 3[um]. Check를 클릭합니다.',
+          en:'Servo ON — From: 0 [um] / Amplitude: 3 [um]. Click Check.',
+          zhCN:'Servo ON——From:0[um] / Amplitude:3[um]。点击Check。',
+          zhTW:'Servo ON——From:0[um] / Amplitude:3[um]。點擊Check。',
+          ja:'Servo ON——From:0[um] / Amplitude:3[um]。Checkをクリックします。',
+          vi:'Servo ON — From: 0[um] / Amplitude: 3[um]. Nhấp Check.'
+        }},
+        {img:cmImg('I','qpm',58),tx:{
+          ko:'PID-Tuning의 목적: 위 그래프처럼 Tune하여 설비별로 PZT를 최적화하는 것입니다. Amplitude 값을 변경하며 그래프를 확인합니다 (<Amplitude:50um>, <Amplitude:100um>). PID-Tuning의 목표: 빠르게, 진동 없이, Overshoot 없이 동작하도록 하는 것입니다.',
+          en:'Purpose of PID-Tuning: to optimize the PZT per machine by tuning as shown in the graph above. Change the Amplitude value and check the graph (<Amplitude: 50 [um]>, <Amplitude: 100 [um]>). Goal of PID-Tuning: quickly, with no vibration, and no overshoot.',
+          zhCN:'PID-Tuning的目的:如上图所示进行Tune,以按机台优化PZT。变更Amplitude值并确认图形(<Amplitude:50[um]>、<Amplitude:100[um]>)。PID-Tuning的目标:快速、无振动、无overshoot。',
+          zhTW:'PID-Tuning的目的:如上圖所示進行Tune,以按機台優化PZT。變更Amplitude值並確認圖形(<Amplitude:50[um]>、<Amplitude:100[um]>)。PID-Tuning的目標:快速、無震動、無overshoot。',
+          ja:'PID-Tuningの目的:上のグラフのようにTuneし、機台ごとにPZTを最適化することです。Amplitude値を変更しグラフを確認します(<Amplitude:50[um]>、<Amplitude:100[um]>)。PID-Tuningの目標:素早く、振動なく、Overshootなく動作させることです。',
+          vi:'Mục đích của PID-Tuning: tối ưu hóa PZT theo từng máy bằng cách Tune như đồ thị trên. Thay đổi giá trị Amplitude và kiểm tra đồ thị (<Amplitude:50[um]>, <Amplitude:100[um]>). Mục tiêu của PID-Tuning: nhanh, không rung, không overshoot.'
+        }},
+        {img:cmImg('I','qpm',59),tx:{
+          ko:'P-term 설정 방법 [0.01씩 증가, 최대 0.1(권장값)] — 설정 범위 내에서 값을 변경해 최적값을 찾습니다. ①②③ 그래프를 비교하면 ③의 P-term 값(0.02)의 파형이 양호합니다. P-term 최적값 설정 후 I-term을 진행합니다. (① P-term:0.04, ② P-term:0.06, ③ P-term:0.02)',
+          en:'How to set the P-term [increase by 0.01, up to a maximum of 0.1 (recommended value)] — change the value within the setting range to find the optimal value. Comparing graphs ①, ②, and ③, the waveform of the P-term value in ③ (0.02) is good. After setting the optimal P-term value, proceed to the I-term. (① P-term: 0.04, ② P-term: 0.06, ③ P-term: 0.02)',
+          zhCN:'P-term设置方法[以0.01递增,最大0.1(推荐值)]——在设置范围内变更数值以找出最佳值。比较①②③图形,③的P-term值(0.02)波形较佳。设置P-term最佳值后进行I-term。(①P-term:0.04,②P-term:0.06,③P-term:0.02)',
+          zhTW:'P-term設定方法[以0.01遞增,最大0.1(建議值)]——在設定範圍內變更數值以找出最佳值。比較①②③圖形,③的P-term值(0.02)波形較佳。設定P-term最佳值後進行I-term。(①P-term:0.04,②P-term:0.06,③P-term:0.02)',
+          ja:'P-term設定方法[0.01ずつ増加、最大0.1(推奨値)]——設定範囲内で値を変更し最適値を見つけます。①②③のグラフを比較すると③のP-term値(0.02)の波形が良好です。P-term最適値設定後I-termを行います。(①P-term:0.04、②P-term:0.06、③P-term:0.02)',
+          vi:'Cách đặt P-term [tăng dần 0.01, tối đa 0.1 (giá trị khuyến nghị)] — thay đổi giá trị trong phạm vi cài đặt để tìm giá trị tối ưu. So sánh các đồ thị ①②③, dạng sóng của giá trị P-term ở ③ (0.02) là tốt. Sau khi đặt giá trị P-term tối ưu, tiến hành I-term. (① P-term:0.04, ② P-term:0.06, ③ P-term:0.02)'
+        }},
+        {img:cmImg('I','qpm',60),tx:{
+          ko:'I-term 설정 방법 [5~10씩 증가, 최대 100(권장값)] — 설정 범위 내에서 값을 변경해 최적값을 찾습니다. ①②③ 비교 시 ③의 I-term 값의 파형이 양호합니다. 주의: D-term은 사용하지 않습니다.',
+          en:'How to set the I-term [increase by 5–10, up to 100 (recommended value)] — change the value within the setting range to find the optimal value. Comparing ①, ②, and ③, the waveform of the I-term value in ③ is good. CAUTION: Do not use the D-term.',
+          zhCN:'I-term设置方法[以5~10递增,最大100(推荐值)]——在设置范围内变更数值以找出最佳值。比较①②③,③的I-term值波形较佳。注意:不使用D-term。',
+          zhTW:'I-term設定方法[以5~10遞增,最大100(建議值)]——在設定範圍內變更數值以找出最佳值。比較①②③,③的I-term值波形較佳。注意:不使用D-term。',
+          ja:'I-term設定方法[5~10ずつ増加、最大100(推奨値)]——設定範囲内で値を変更し最適値を見つけます。①②③を比較すると③のI-term値の波形が良好です。注意:D-termは使用しません。',
+          vi:'Cách đặt I-term [tăng dần 5~10, tối đa 100 (giá trị khuyến nghị)] — thay đổi giá trị trong phạm vi cài đặt để tìm giá trị tối ưu. So sánh ①②③, dạng sóng của giá trị I-term ở ③ là tốt. LƯU Ý: không sử dụng D-term.'
+        }},
+        {img:cmImg('I','qpm',61),tx:{
+          ko:'PID-Tuning이 완료되면 Parameter를 Default로 저장하고 닫습니다.',
+          en:'When PID-Tuning is completed, save the parameter as default and close.',
+          zhCN:'PID-Tuning完成后,将Parameter保存为Default并关闭。',
+          zhTW:'PID-Tuning完成後,將Parameter儲存為Default並關閉。',
+          ja:'PID-Tuningが完了したらパラメータをDefaultとして保存し閉じます。',
+          vi:'Khi hoàn tất PID-Tuning, lưu Parameter làm mặc định và đóng lại.'
+        }},
+        {img:cmImg('I','qpm',62),tx:{
+          ko:'■ 3D Optical Setting – Working Check(3D Vision)\n\nLenz to Cube B/S Top: Single = 8mm. Illumination Frame to Object Top: 11mm. Illumination Frame 높이 조정은 Main Camera Focus 작업이 완료된 후 진행합니다.',
+          en:'■ 3D Optical Setting – Working Check(3D Vision)\n\nLens to Cube B/S Top: Single = 8mm. Illumination Frame to Object Top: 11mm. Adjusting the height of the illumination frame is carried out after the main camera focus operation is completed.',
+          zhCN:'■ 3D Optical Setting – Working Check(3D Vision)\n\nLens to Cube B/S Top:Single=8mm。Illumination Frame to Object Top:11mm。Illumination Frame高度调整在Main Camera Focus作业完成后进行。',
+          zhTW:'■ 3D Optical Setting – Working Check(3D Vision)\n\nLens to Cube B/S Top:Single=8mm。Illumination Frame to Object Top:11mm。Illumination Frame高度調整在Main Camera Focus作業完成後進行。',
+          ja:'■ 3D Optical Setting – Working Check(3D Vision)\n\nLens to Cube B/S Top:Single=8mm。Illumination Frame to Object Top:11mm。Illumination Frameの高さ調整はMain Camera Focus作業完了後に行います。',
+          vi:'■ 3D Optical Setting – Working Check(3D Vision)\n\nLens to Cube B/S Top: Single = 8mm. Illumination Frame to Object Top: 11mm. Việc điều chỉnh chiều cao Illumination Frame được thực hiện sau khi hoàn tất thao tác lấy nét Main Camera Focus.'
+        }},
+        {img:cmImg('I','qpm',63),tx:{
+          ko:'■ 3D Optical Setting – 3D Vision Camera Angle (Panel Type)\n\n센터 라인 양 끝이 기준선(Reference Line)의 흰색 기준선과 일치하는지 확인합니다. 일치하지 않으면 해당 볼트를 풀고 H/W를 기준선에 맞게 조정합니다.',
+          en:'■ 3D Optical Setting – 3D Vision Camera Angle (Panel Type)\n\nEnsure that both ends of the center line match the white reference line. If it does not match, loosen the corresponding bolt and adjust the H/W to match the baseline.',
+          zhCN:'■ 3D Optical Setting – 3D Vision Camera Angle (Panel Type)\n\n确认中心线两端是否与基准线的白色基准线一致。若不一致,松开相应螺栓并调整H/W使其对齐基准线。',
+          zhTW:'■ 3D Optical Setting – 3D Vision Camera Angle (Panel Type)\n\n確認中心線兩端是否與基準線的白色基準線一致。若不一致,鬆開相應螺栓並調整H/W使其對齊基準線。',
+          ja:'■ 3D Optical Setting – 3D Vision Camera Angle (Panel Type)\n\nセンターラインの両端が基準線の白い基準線と一致しているか確認します。一致しない場合は該当ボルトを緩めH/Wを基準線に合わせて調整します。',
+          vi:'■ 3D Optical Setting – 3D Vision Camera Angle (Panel Type)\n\nĐảm bảo hai đầu của đường tâm khớp với vạch tham chiếu màu trắng. Nếu không khớp, nới lỏng bu lông tương ứng và điều chỉnh H/W cho khớp với đường chuẩn.'
+        }},
+        {img:cmImg('I','qpm',64),tx:{
+          ko:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Panel Type)\n\n상단(Upper) 기준으로 십자선 위치를 맞춘 후 직진도를 확인합니다. Motor를 이용해 Upper·Lower 상태의 직진도를 확인하며, 직진도 오차가 20um를 초과하면 Jig 직진도를 재설정해야 합니다.',
+          en:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Panel Type)\n\nAfter aligning the position of the crosshair based on the Upper level, check the straightness. Using the motor, check the straightness of the Upper and Lower states — if the straightness error exceeds 20um, the straightness of the Jig should be reset.',
+          zhCN:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Panel Type)\n\n以Upper基准对齐十字线位置后确认直线度。使用Motor确认Upper·Lower状态的直线度——若直线度误差超过20um,应重新设定Jig直线度。',
+          zhTW:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Panel Type)\n\n以Upper基準對齊十字線位置後確認直線度。使用Motor確認Upper·Lower狀態的直線度——若直線度誤差超過20um,應重新設定Jig直線度。',
+          ja:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Panel Type)\n\nUpperを基準に十字線の位置を合わせた後、直進度を確認します。MotorでUpper・Lower状態の直進度を確認し、誤差が20umを超える場合はJigの直進度を再設定します。',
+          vi:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Panel Type)\n\nSau khi căn chỉnh vị trí chữ thập theo mức Upper, kiểm tra độ thẳng. Dùng Motor kiểm tra độ thẳng ở trạng thái Upper·Lower — nếu sai số độ thẳng vượt quá 20um, cần thiết lập lại độ thẳng của Jig.'
+        }},
+        {img:cmImg('I','qpm',65),tx:{
+          ko:'■ 3D Optical Setting – 3D Vision Camera Angle (Tray Type)\n\n센터 라인 양 끝이 Teaching Tray의 흰색 기준선과 일치하는지 확인합니다. 일치하지 않으면 해당 볼트를 풀고 H/W를 기준선에 맞게 조정합니다.',
+          en:'■ 3D Optical Setting – 3D Vision Camera Angle (Tray Type)\n\nEnsure that both ends of the center line match the white reference line of the teaching tray. If it does not match, loosen the corresponding bolt and adjust the H/W to match the baseline.',
+          zhCN:'■ 3D Optical Setting – 3D Vision Camera Angle (Tray Type)\n\n确认中心线两端是否与Teaching Tray的白色基准线一致。若不一致,松开相应螺栓并调整H/W使其对齐基准线。',
+          zhTW:'■ 3D Optical Setting – 3D Vision Camera Angle (Tray Type)\n\n確認中心線兩端是否與Teaching Tray的白色基準線一致。若不一致,鬆開相應螺栓並調整H/W使其對齊基準線。',
+          ja:'■ 3D Optical Setting – 3D Vision Camera Angle (Tray Type)\n\nセンターラインの両端がTeaching Trayの白い基準線と一致しているか確認します。一致しない場合は該当ボルトを緩めH/Wを基準線に合わせて調整します。',
+          vi:'■ 3D Optical Setting – 3D Vision Camera Angle (Tray Type)\n\nĐảm bảo hai đầu của đường tâm khớp với vạch tham chiếu màu trắng của Teaching Tray. Nếu không khớp, nới lỏng bu lông tương ứng và điều chỉnh H/W cho khớp với đường chuẩn.'
+        }},
+        {img:cmImg('I','qpm',66),tx:{
+          ko:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Tray Type)\n\n상단(Upper) 기준으로 십자선 위치를 맞춘 후 직진도를 확인합니다. Motor를 이용해 Upper·Lower 상태의 직진도를 확인하며, 직진도 오차가 20um를 초과하면 Jig 직진도를 재설정해야 합니다.',
+          en:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Tray Type)\n\nAfter aligning the position of the crosshair based on the Upper level, check the straightness. Using the motor, check the straightness of the Upper and Lower states — if the straightness error exceeds 20um, the straightness of the Jig should be reset.',
+          zhCN:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Tray Type)\n\n以Upper基准对齐十字线位置后确认直线度。使用Motor确认Upper·Lower状态的直线度——若直线度误差超过20um,应重新设定Jig直线度。',
+          zhTW:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Tray Type)\n\n以Upper基準對齊十字線位置後確認直線度。使用Motor確認Upper·Lower狀態的直線度——若直線度誤差超過20um,應重新設定Jig直線度。',
+          ja:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Tray Type)\n\nUpperを基準に十字線の位置を合わせた後、直進度を確認します。MotorでUpper・Lower状態の直進度を確認し、誤差が20umを超える場合はJigの直進度を再設定します。',
+          vi:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Tray Type)\n\nSau khi căn chỉnh vị trí chữ thập theo mức Upper, kiểm tra độ thẳng. Dùng Motor kiểm tra độ thẳng ở trạng thái Upper·Lower — nếu sai số độ thẳng vượt quá 20um, cần thiết lập lại độ thẳng của Jig.'
+        }},
+        {img:cmImg('I','qpm',67),tx:{
+          ko:'■ 3D Optical Setting – 3D Vision Camera Angle (Pedestal Type)\n\n센터 라인 양 끝이 기준선의 흰색 기준선과 일치하는지 확인합니다. 일치하지 않으면 해당 볼트를 풀고 H/W를 기준선에 맞게 조정합니다.',
+          en:'■ 3D Optical Setting – 3D Vision Camera Angle (Pedestal Type)\n\nEnsure that both ends of the center line match the white reference line. If it does not match, loosen the corresponding bolt and adjust the H/W to match the baseline.',
+          zhCN:'■ 3D Optical Setting – 3D Vision Camera Angle (Pedestal Type)\n\n确认中心线两端是否与基准线的白色基准线一致。若不一致,松开相应螺栓并调整H/W使其对齐基准线。',
+          zhTW:'■ 3D Optical Setting – 3D Vision Camera Angle (Pedestal Type)\n\n確認中心線兩端是否與基準線的白色基準線一致。若不一致,鬆開相應螺栓並調整H/W使其對齊基準線。',
+          ja:'■ 3D Optical Setting – 3D Vision Camera Angle (Pedestal Type)\n\nセンターラインの両端が基準線の白い基準線と一致しているか確認します。一致しない場合は該当ボルトを緩めH/Wを基準線に合わせて調整します。',
+          vi:'■ 3D Optical Setting – 3D Vision Camera Angle (Pedestal Type)\n\nĐảm bảo hai đầu của đường tâm khớp với vạch tham chiếu màu trắng. Nếu không khớp, nới lỏng bu lông tương ứng và điều chỉnh H/W cho khớp với đường chuẩn.'
+        }},
+        {img:cmImg('I','qpm',68),tx:{
+          ko:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Pedestal Type)\n\n상단(Upper) 기준으로 십자선 위치를 맞춘 후 직진도를 확인합니다. Motor를 이용해 Upper·Lower 상태의 직진도를 확인하며, 직진도 오차가 20um를 초과하면 Jig 직진도를 재설정해야 합니다.',
+          en:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Pedestal Type)\n\nAfter aligning the position of the crosshair based on the Upper level, check the straightness. Using the motor, check the straightness of the Upper and Lower states — if the straightness error exceeds 20um, the straightness of the Jig should be reset.',
+          zhCN:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Pedestal Type)\n\n以Upper基准对齐十字线位置后确认直线度。使用Motor确认Upper·Lower状态的直线度——若直线度误差超过20um,应重新设定Jig直线度。',
+          zhTW:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Pedestal Type)\n\n以Upper基準對齊十字線位置後確認直線度。使用Motor確認Upper·Lower狀態的直線度——若直線度誤差超過20um,應重新設定Jig直線度。',
+          ja:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Pedestal Type)\n\nUpperを基準に十字線の位置を合わせた後、直進度を確認します。MotorでUpper・Lower状態の直進度を確認し、誤差が20umを超える場合はJigの直進度を再設定します。',
+          vi:'■ 3D Optical Setting – 3D Vision Camera and Jig straightness (Pedestal Type)\n\nSau khi căn chỉnh vị trí chữ thập theo mức Upper, kiểm tra độ thẳng. Dùng Motor kiểm tra độ thẳng ở trạng thái Upper·Lower — nếu sai số độ thẳng vượt quá 20um, cần thiết lập lại độ thẳng của Jig.'
+        }},
+        {img:cmImg('I','qpm',69),tx:{
+          ko:'■ AF Tuning – AF Control UI\n\nAF Control 프로그램의 UI 화면입니다.',
+          en:'■ AF Tuning – AF Control UI\n\nThe UI screen of the AF Control program.',
+          zhCN:'■ AF Tuning – AF Control UI\n\nAF Control程序的UI画面。',
+          zhTW:'■ AF Tuning – AF Control UI\n\nAF Control程式的UI畫面。',
+          ja:'■ AF Tuning – AF Control UI\n\nAF ControlプログラムのUI画面です。',
+          vi:'■ AF Tuning – AF Control UI\n\nMàn hình UI của chương trình AF Control.'
+        }},
+        {img:cmImg('I','qpm',70),tx:{
+          ko:'■ AF Tuning – Using Sequence\n\nMotor controls의 Open config를 클릭해 AF를 활성화합니다. \'Ethernet Connect\'에서 연결 상태를 확인합니다. Grab ON/Enable Monitor/Camera Mode를 확인합니다. Status Monitor에서 상태를 확인합니다.',
+          en:'■ AF Tuning – Using Sequence\n\nClick Open config in Motor controls to activate AF. Check the connection status in \'Ethernet Connect\'. Check Grab ON / Enable Monitor / Camera Mode. Check the status in Status Monitor.',
+          zhCN:'■ AF Tuning – Using Sequence\n\n点击Motor controls中的Open config以启动AF。在\'Ethernet Connect\'中确认连接状态。确认Grab ON/Enable Monitor/Camera Mode。在Status Monitor中确认状态。',
+          zhTW:'■ AF Tuning – Using Sequence\n\n點擊Motor controls中的Open config以啟動AF。在\'Ethernet Connect\'中確認連接狀態。確認Grab ON/Enable Monitor/Camera Mode。在Status Monitor中確認狀態。',
+          ja:'■ AF Tuning – Using Sequence\n\nMotor controlsのOpen configをクリックしAFを有効化します。\'Ethernet Connect\'で接続状態を確認します。Grab ON/Enable Monitor/Camera Modeを確認します。Status Monitorで状態を確認します。',
+          vi:'■ AF Tuning – Using Sequence\n\nNhấp Open config trong Motor controls để kích hoạt AF. Kiểm tra trạng thái kết nối trong \'Ethernet Connect\'. Kiểm tra Grab ON / Enable Monitor / Camera Mode. Kiểm tra trạng thái trong Status Monitor.'
+        }},
+        {img:cmImg('I','qpm',71),tx:{
+          ko:'■ AF Tuning – Main Camera Focus\n\nProduct를 Panel 중앙에 놓습니다. Device Bump가 제품 중앙에서 레이저가 보이도록 Panel 위에 배치합니다. Service▸Tilt▸CH0을 255로 설정 후 CH0을 클릭해 Live를 확인합니다. Live 화면에서 Bump가 초점이 맞는 지점을 찾습니다.',
+          en:'■ AF Tuning – Main Camera Focus\n\nPlace the product in the center of the panel. Place the device bump on the panel so the laser is visible in the center of the product. After setting Service ▸ Tilt ▸ CH0 to 255, click CH0 to check Live. Check the live screen and find the point where the bump is in focus.',
+          zhCN:'■ AF Tuning – Main Camera Focus\n\n将Product放在Panel中央。将Device Bump放在Panel上,使激光在产品中央可见。将Service▸Tilt▸CH0设为255后点击CH0确认Live。在Live画面中找到Bump对焦的位置。',
+          zhTW:'■ AF Tuning – Main Camera Focus\n\n將Product放在Panel中央。將Device Bump放在Panel上,使雷射在產品中央可見。將Service▸Tilt▸CH0設為255後點擊CH0確認Live。在Live畫面中找到Bump對焦的位置。',
+          ja:'■ AF Tuning – Main Camera Focus\n\nProductをPanel中央に置きます。Device BumpをPanel上に、レーザーが製品中央に見えるよう配置します。Service▸Tilt▸CH0を255に設定後CH0をクリックしLiveを確認します。Live画面でBumpの焦点が合う地点を見つけます。',
+          vi:'■ AF Tuning – Main Camera Focus\n\nĐặt Product ở giữa Panel. Đặt Device Bump trên Panel sao cho laser hiển thị ở giữa sản phẩm. Sau khi đặt Service▸Tilt▸CH0 thành 255, nhấp CH0 để kiểm tra Live. Kiểm tra màn hình Live và tìm điểm mà Bump lấy nét.'
+        }},
+        {img:cmImg('I','qpm',72),tx:{
+          ko:'■ AF Tuning – Camera Sync Check\n\n\'Camera Sync\'를 연결해 Laser Camera Live를 확인합니다. 연결이 완료되면 우측 이미지와 같은 Camera 표준 메시지가 표시됩니다. \'OK\' 버튼을 클릭해 완료합니다. \'Camera : Not Found\' 메시지가 나타나면 통신 포트를 확인합니다.',
+          en:'■ AF Tuning – Camera Sync Check\n\nConnect \'Camera Sync\' to check the laser camera live. When the connection is complete, the camera standard message appears as shown in the image on the right. Click the \'OK\' button to complete. If a \'Camera: Not Found\' message appears, check the communication port.',
+          zhCN:'■ AF Tuning – Camera Sync Check\n\n连接\'Camera Sync\'以确认Laser Camera Live。连接完成后会显示如右图所示的Camera标准消息。点击\'OK\'按钮完成。若出现\'Camera : Not Found\'消息,请确认通信端口。',
+          zhTW:'■ AF Tuning – Camera Sync Check\n\n連接\'Camera Sync\'以確認Laser Camera Live。連接完成後會顯示如右圖所示的Camera標準訊息。點擊\'OK\'按鈕完成。若出現\'Camera : Not Found\'訊息,請確認通訊埠。',
+          ja:'■ AF Tuning – Camera Sync Check\n\n\'Camera Sync\'を接続しLaser Camera Liveを確認します。接続が完了すると右の画像のようなCamera標準メッセージが表示されます。\'OK\'ボタンをクリックして完了します。\'Camera : Not Found\'メッセージが表示された場合は通信ポートを確認します。',
+          vi:'■ AF Tuning – Camera Sync Check\n\nKết nối \'Camera Sync\' để kiểm tra Laser Camera Live. Khi kết nối hoàn tất, thông báo chuẩn của camera hiện ra như hình bên phải. Nhấp nút \'OK\' để hoàn tất. Nếu hiện thông báo \'Camera : Not Found\', kiểm tra cổng giao tiếp.'
+        }},
+        {img:cmImg('I','qpm',73),tx:{
+          ko:'■ AF Tuning – Laser Live View\n\nAF Control 프로그램 상단 메뉴의 \'Option\' 탭에서 \'Tuning Guide\'를 선택합니다. \'Align Laser ROI\' 메뉴를 선택해 Live 프로그램을 실행합니다. \'LIVE\' 버튼을 클릭합니다.',
+          en:'■ AF Tuning – Laser Live View\n\nSelect \'Tuning Guide\' from the \'Option\' tab of the AF Control program\'s upper menu. Run the Live program by selecting the \'Align Laser ROI\' menu. Click the \'LIVE\' button.',
+          zhCN:'■ AF Tuning – Laser Live View\n\n从AF Control程序上方菜单的\'Option\'标签中选择\'Tuning Guide\'。选择\'Align Laser ROI\'菜单运行Live程序。点击\'LIVE\'按钮。',
+          zhTW:'■ AF Tuning – Laser Live View\n\n從AF Control程式上方選單的\'Option\'標籤中選擇\'Tuning Guide\'。選擇\'Align Laser ROI\'選單執行Live程式。點擊\'LIVE\'按鈕。',
+          ja:'■ AF Tuning – Laser Live View\n\nAF Controlプログラム上部メニューの\'Option\'タブから\'Tuning Guide\'を選択します。\'Align Laser ROI\'メニューを選択しLiveプログラムを実行します。\'LIVE\'ボタンをクリックします。',
+          vi:'■ AF Tuning – Laser Live View\n\nChọn \'Tuning Guide\' từ tab \'Option\' của menu trên của chương trình AF Control. Chạy chương trình Live bằng cách chọn menu \'Align Laser ROI\'. Nhấp nút \'LIVE\'.'
+        }},
+        {img:cmImg('I','qpm',74),tx:{
+          ko:'■ AF Tuning – Live View Check H/W\n\nLive 화면이 나타나면 LED Controller를 찾아 Manual로 전환하고 CH1의 LED 밝기를 최대로 조정합니다. 좌측: 조명 없는 Live 화면. 중앙: LED Controller 화면. 우측: LED Controller를 Manual Mode로 전환 후 CH1 밝기를 조정한 화면.',
+          en:'■ AF Tuning – Live View Check H/W\n\nWhen the live screen appears, find the LED Controller, switch to Manual, and adjust the LED brightness of CH1 to the maximum. Left: the live screen without lighting. Center: the LED Controller image. Right: the screen after switching the LED Controller to Manual Mode and adjusting the brightness of CH1.',
+          zhCN:'■ AF Tuning – Live View Check H/W\n\nLive画面出现后,找到LED Controller切换为Manual,将CH1的LED亮度调至最大。左:无照明的Live画面。中:LED Controller画面。右:将LED Controller切换为Manual Mode后调整CH1亮度的画面。',
+          zhTW:'■ AF Tuning – Live View Check H/W\n\nLive畫面出現後,找到LED Controller切換為Manual,將CH1的LED亮度調至最大。左:無照明的Live畫面。中:LED Controller畫面。右:將LED Controller切換為Manual Mode後調整CH1亮度的畫面。',
+          ja:'■ AF Tuning – Live View Check H/W\n\nLive画面が表示されたらLED Controllerを見つけてManualに切り替え、CH1のLED輝度を最大に調整します。左:照明なしのLive画面。中央:LED Controller画面。右:LED ControllerをManual Modeに切り替えCH1輝度を調整した画面。',
+          vi:'■ AF Tuning – Live View Check H/W\n\nKhi màn hình Live hiện ra, tìm LED Controller, chuyển sang Manual, và chỉnh độ sáng LED của CH1 lên mức tối đa. Trái: màn hình Live không có đèn. Giữa: hình ảnh LED Controller. Phải: màn hình sau khi chuyển LED Controller sang Manual Mode và chỉnh độ sáng CH1.'
+        }},
+        {img:cmImg('I','qpm',75),tx:{
+          ko:'■ AF Tuning – Center Matching\n\nⓐ는 AF Camera Module입니다. ①번 볼트를 풀고 ②번 카메라 본체를 좌우로 움직여 밝은 부분을 확인합니다. ⓑ처럼 밝은 부분이 화면 중앙에 오면 볼트를 다시 고정하고 최종 상태를 확인합니다. \'STOP\' → \'Camera Default Set\' → \'APPLY ROI & EXIT\' 순으로 클릭해 설정을 완료합니다(STOP 후 종료 시 Camera Parameter Partial의 \'Variable Partial Start Lines[24H.25H]\' 값이 자동으로 \'0\'으로 변경되며, 이 상태에서 Laser Tuning을 진행하면 Laser Tune이 잘 보이지 않습니다). LED Control을 Remote Mode로 전환합니다.',
+          en:'■ AF Tuning – Center Matching\n\nⓐ is the AF Camera Module. Loosen bolt ① and move the camera body ② left/right to check the bright part. As shown in ⓑ, once the bright part is centered on the screen, fix the loosened bolt again and check the final state. Click \'STOP\' → \'Camera Default Set\' → \'APPLY ROI & EXIT\' in order to complete the setup (if it ends after \'STOP\', the Camera Parameter Partial\'s \'Variable Partial Start Lines[24H.25H]\' value is automatically changed to \'0\' — if laser tuning is performed in this \'0\' state, the laser tune is difficult to see). Switch LED Control to Remote Mode.',
+          zhCN:'■ AF Tuning – Center Matching\n\nⓐ为AF Camera Module。松开①号螺栓,左右移动②号相机本体确认亮部。如ⓑ所示,亮部位于画面中央后重新固定螺栓并确认最终状态。依\'STOP\'→\'Camera Default Set\'→\'APPLY ROI & EXIT\'顺序点击完成设置(若在STOP后结束,Camera Parameter Partial的\'Variable Partial Start Lines[24H.25H]\'值会自动变为\'0\',此状态下进行Laser Tuning会难以看清)。将LED Control切换为Remote Mode。',
+          zhTW:'■ AF Tuning – Center Matching\n\nⓐ為AF Camera Module。鬆開①號螺栓,左右移動②號相機本體確認亮部。如ⓑ所示,亮部位於畫面中央後重新固定螺栓並確認最終狀態。依\'STOP\'→\'Camera Default Set\'→\'APPLY ROI & EXIT\'順序點擊完成設定(若在STOP後結束,Camera Parameter Partial的\'Variable Partial Start Lines[24H.25H]\'值會自動變為\'0\',此狀態下進行Laser Tuning會難以看清)。將LED Control切換為Remote Mode。',
+          ja:'■ AF Tuning – Center Matching\n\nⓐはAF Camera Moduleです。①のボルトを緩め②のカメラ本体を左右に動かし明るい部分を確認します。ⓑのように明るい部分が画面中央に来たらボルトを再度固定し最終状態を確認します。\'STOP\'→\'Camera Default Set\'→\'APPLY ROI & EXIT\'の順にクリックして設定を完了します(STOP後に終了するとCamera Parameter Partialの\'Variable Partial Start Lines[24H.25H]\'値が自動的に\'0\'に変更され、この状態でLaser Tuningを行うとLaser Tuneが見えにくくなります)。LED ControlをRemote Modeに切り替えます。',
+          vi:'■ AF Tuning – Center Matching\n\nⓐ là AF Camera Module. Nới lỏng bu lông ① và di chuyển thân camera ② sang trái/phải để kiểm tra phần sáng. Như ⓑ, khi phần sáng ở giữa màn hình, cố định lại bu lông và kiểm tra trạng thái cuối. Nhấp theo thứ tự \'STOP\' → \'Camera Default Set\' → \'APPLY ROI & EXIT\' để hoàn tất thiết lập (nếu kết thúc sau \'STOP\', giá trị \'Variable Partial Start Lines[24H.25H]\' của Camera Parameter Partial tự động đổi thành \'0\' — nếu thực hiện Laser Tuning ở trạng thái \'0\' này, laser tune sẽ khó nhìn thấy). Chuyển LED Control sang Remote Mode.'
+        }},
+        {img:cmImg('I','qpm',76),tx:{
+          ko:'■ AF Tuning – Laser Tune (1/4)\n\nAF Control 프로그램 상단 메뉴의 \'Option\' 탭에서 \'Tuning Guide\'를 선택합니다. \'Align Laser Beam\'을 클릭해 실행합니다. 위 그림처럼 레이저가 SR쪽에 위치하도록 Panel을 이동하며 조정합니다.',
+          en:'■ AF Tuning – Laser Tune (1/4)\n\nSelect \'Tuning Guide\' from the \'Option\' tab of the AF Control program\'s upper menu. Click \'Align Laser Beam\' to run it. Move the panel and adjust it so the laser is located on the SR side as shown in the figure above.',
+          zhCN:'■ AF Tuning – Laser Tune (1/4)\n\n从AF Control程序上方菜单的\'Option\'标签中选择\'Tuning Guide\'。点击\'Align Laser Beam\'执行。如上图所示移动Panel调整,使激光位于SR侧。',
+          zhTW:'■ AF Tuning – Laser Tune (1/4)\n\n從AF Control程式上方選單的\'Option\'標籤中選擇\'Tuning Guide\'。點擊\'Align Laser Beam\'執行。如上圖所示移動Panel調整,使雷射位於SR側。',
+          ja:'■ AF Tuning – Laser Tune (1/4)\n\nAF Controlプログラム上部メニューの\'Option\'タブから\'Tuning Guide\'を選択します。\'Align Laser Beam\'をクリックして実行します。上図のようにレーザーがSR側に位置するようPanelを移動して調整します。',
+          vi:'■ AF Tuning – Laser Tune (1/4)\n\nChọn \'Tuning Guide\' từ tab \'Option\' của menu trên của chương trình AF Control. Nhấp \'Align Laser Beam\' để chạy. Di chuyển Panel và điều chỉnh sao cho laser nằm ở phía SR như hình trên.'
+        }},
+        {img:cmImg('I','qpm',77),tx:{
+          ko:'■ AF Tuning – Laser Tune (2/4)\n\nTuning 창이 열리면 \'auto\' 버튼을 클릭합니다. 영상 화면에서 마우스 우클릭 후 \'Center Cross Mark\' 메뉴를 선택합니다. 화면 X/Y 기준 중앙에 노란색 선이 나타나는지 확인합니다.',
+          en:'■ AF Tuning – Laser Tune (2/4)\n\nWhen the tuning window is opened, click the \'auto\' button. Right-click the mouse on the video screen and select the \'Center Cross Mark\' menu. Check that a yellow line appears in the center of the X/Y reference on the screen.',
+          zhCN:'■ AF Tuning – Laser Tune (2/4)\n\n打开Tuning窗口后点击\'auto\'按钮。在影像画面上右键点击,选择\'Center Cross Mark\'菜单。确认画面X/Y基准中央是否出现黄线。',
+          zhTW:'■ AF Tuning – Laser Tune (2/4)\n\n開啟Tuning視窗後點擊\'auto\'按鈕。在影像畫面上右鍵點擊,選擇\'Center Cross Mark\'選單。確認畫面X/Y基準中央是否出現黃線。',
+          ja:'■ AF Tuning – Laser Tune (2/4)\n\nTuningウィンドウが開いたら\'auto\'ボタンをクリックします。映像画面上でマウスを右クリックし\'Center Cross Mark\'メニューを選択します。画面のX/Y基準中央に黄色い線が現れるか確認します。',
+          vi:'■ AF Tuning – Laser Tune (2/4)\n\nKhi cửa sổ tuning mở ra, nhấp nút \'auto\'. Nhấp chuột phải trên màn hình video và chọn menu \'Center Cross Mark\'. Kiểm tra xem đường màu vàng có xuất hiện ở giữa tham chiếu X/Y trên màn hình không.'
+        }},
+        {img:cmImg('I','qpm',78),tx:{
+          ko:'■ AF Tuning – Laser Tune (3/4)\n\n①번 볼트를 풀어 돌리면 레이저의 밝기(Intensity)를 조정할 수 있습니다. ②번 볼트를 풀어 돌리면 레이저의 두께(Angle & Width)를 조정할 수 있습니다. ③번 볼트로 레이저의 위치를 좌우로 조정하며 Align Laser Beam 화면의 흰색 레이저 선을 확인합니다(Position — 정밀 설정 시에만 사용). 표준값: Angle=0~±0.2, Intensity=180~200, Width=7 이하, Position=GOOD. 완료되면 \'stop\' 버튼을 클릭해 Laser Tuning 페이지를 종료합니다. AF 프로그램 메인 화면에서 \'Make0\'을 클릭합니다.',
+          en:'■ AF Tuning – Laser Tune (3/4)\n\nLoosening and turning bolt ① adjusts the laser\'s brightness (Intensity). Loosening and turning bolt ② adjusts the laser\'s thickness (Angle & Width). Bolt ③ adjusts the laser\'s position left/right, checked against the white laser line on the Align Laser Beam screen (Position — used only in precision settings). Standard values: Angle = 0 to ±0.2, Intensity = 180–200, Width = 7 or less, Position = GOOD. When finished, click the \'stop\' button to exit the Laser Tuning page. Click \'Make0\' on the AF program\'s main screen.',
+          zhCN:'■ AF Tuning – Laser Tune (3/4)\n\n松开①号螺栓并旋转可调整激光的亮度(Intensity)。松开②号螺栓并旋转可调整激光的粗细(Angle & Width)。③号螺栓左右调整激光位置,并对照Align Laser Beam画面的白色激光线确认(Position——仅用于精密设置)。标准值:Angle=0~±0.2,Intensity=180~200,Width=7以下,Position=GOOD。完成后点击\'stop\'按钮退出Laser Tuning页面。在AF程序主画面点击\'Make0\'。',
+          zhTW:'■ AF Tuning – Laser Tune (3/4)\n\n鬆開①號螺栓並旋轉可調整雷射的亮度(Intensity)。鬆開②號螺栓並旋轉可調整雷射的粗細(Angle & Width)。③號螺栓左右調整雷射位置,並對照Align Laser Beam畫面的白色雷射線確認(Position——僅用於精密設定)。標準值:Angle=0~±0.2,Intensity=180~200,Width=7以下,Position=GOOD。完成後點擊\'stop\'按鈕退出Laser Tuning頁面。在AF程式主畫面點擊\'Make0\'。',
+          ja:'■ AF Tuning – Laser Tune (3/4)\n\n①のボルトを緩めて回すとレーザーの明るさ(Intensity)を調整できます。②のボルトを緩めて回すとレーザーの太さ(Angle & Width)を調整できます。③のボルトでレーザーの位置を左右に調整し、Align Laser Beam画面の白いレーザー線を確認します(Position——精密設定時のみ使用)。標準値:Angle=0~±0.2、Intensity=180~200、Width=7以下、Position=GOOD。完了したら\'stop\'ボタンをクリックしLaser Tuningページを終了します。AFプログラムのメイン画面で\'Make0\'をクリックします。',
+          vi:'■ AF Tuning – Laser Tune (3/4)\n\nNới lỏng và xoay bu lông ① để điều chỉnh độ sáng laser (Intensity). Nới lỏng và xoay bu lông ② để điều chỉnh độ dày laser (Angle & Width). Bu lông ③ điều chỉnh vị trí laser sang trái/phải, kiểm tra qua đường laser trắng trên màn hình Align Laser Beam (Position — chỉ dùng khi cài đặt chính xác). Giá trị chuẩn: Angle=0~±0.2, Intensity=180~200, Width=7 trở xuống, Position=GOOD. Khi xong, nhấp nút \'stop\' để thoát trang Laser Tuning. Nhấp \'Make0\' trên màn hình chính chương trình AF.'
+        }},
+        {img:cmImg('I','qpm',79),tx:{
+          ko:'■ AF Tuning – Laser Calibration (1/4)\n\nLaser Tune이 완료되면 \'Make0\'을 클릭해 Focus 지점을 설정합니다. AF Control 프로그램 상단 메뉴의 \'Device\' 탭에서 \'Calibration\' 기능을 선택합니다.',
+          en:'■ AF Tuning – Laser Calibration (1/4)\n\nWhen Laser Tune is complete, click \'Make0\' to set the Focus point. Select the \'Calibration\' function in the \'Device\' tab of the AF Control program\'s top menu.',
+          zhCN:'■ AF Tuning – Laser Calibration (1/4)\n\nLaser Tune完成后点击\'Make0\'设置Focus点。在AF Control程序上方菜单的\'Device\'标签中选择\'Calibration\'功能。',
+          zhTW:'■ AF Tuning – Laser Calibration (1/4)\n\nLaser Tune完成後點擊\'Make0\'設定Focus點。在AF Control程式上方選單的\'Device\'標籤中選擇\'Calibration\'功能。',
+          ja:'■ AF Tuning – Laser Calibration (1/4)\n\nLaser Tuneが完了したら\'Make0\'をクリックしFocus点を設定します。AF Controlプログラム上部メニューの\'Device\'タブで\'Calibration\'機能を選択します。',
+          vi:'■ AF Tuning – Laser Calibration (1/4)\n\nKhi Laser Tune hoàn tất, nhấp \'Make0\' để đặt điểm Focus. Chọn chức năng \'Calibration\' trong tab \'Device\' của menu trên chương trình AF Control.'
+        }},
+        {img:cmImg('I','qpm',80),tx:{
+          ko:'■ AF Tuning – Laser Calibration (2/4)\n\n좌측 이미지처럼 Calibration 표준 설정을 지정합니다. \'Scan Start\'를 클릭해 그래프를 생성합니다.',
+          en:'■ AF Tuning – Laser Calibration (2/4)\n\nSet the calibration normal settings as shown in the image on the left. Create a graph by clicking \'Scan Start\'.',
+          zhCN:'■ AF Tuning – Laser Calibration (2/4)\n\n如左图设置Calibration标准值。点击\'Scan Start\'生成图形。',
+          zhTW:'■ AF Tuning – Laser Calibration (2/4)\n\n如左圖設定Calibration標準值。點擊\'Scan Start\'生成圖形。',
+          ja:'■ AF Tuning – Laser Calibration (2/4)\n\n左の画像のようにCalibration標準設定を指定します。\'Scan Start\'をクリックしグラフを生成します。',
+          vi:'■ AF Tuning – Laser Calibration (2/4)\n\nĐặt cài đặt chuẩn Calibration như hình bên trái. Nhấp \'Scan Start\' để tạo đồ thị.'
+        }},
+        {img:cmImg('I','qpm',81),tx:{
+          ko:'■ AF Tuning – Laser Calibration (3/4)\n\n좌측 이미지와 같은 그래프가 생성되면 정상입니다. 우측 이미지와 같으면 비정상이며, 이 경우 AF Camera를 180° 회전해 고정합니다. 좌측 이미지와 같아지면 \'Fitting\' 버튼을 클릭합니다.',
+          en:'■ AF Tuning – Laser Calibration (3/4)\n\nIf a graph like the image on the left is created, it is normal. If it is like the image on the right, it is abnormal — in this case, rotate the AF Camera 180° and fix it. Once it matches the image on the left, click the \'Fitting\' button.',
+          zhCN:'■ AF Tuning – Laser Calibration (3/4)\n\n若生成如左图的图形则为正常。若如右图则为异常,此时将AF Camera旋转180°固定。变得与左图相同后,点击\'Fitting\'按钮。',
+          zhTW:'■ AF Tuning – Laser Calibration (3/4)\n\n若生成如左圖的圖形則為正常。若如右圖則為異常,此時將AF Camera旋轉180°固定。變得與左圖相同後,點擊\'Fitting\'按鈕。',
+          ja:'■ AF Tuning – Laser Calibration (3/4)\n\n左の画像のようなグラフが生成されれば正常です。右の画像のような場合は異常であり、この場合AF Cameraを180°回転させて固定します。左の画像と同じになったら\'Fitting\'ボタンをクリックします。',
+          vi:'■ AF Tuning – Laser Calibration (3/4)\n\nNếu tạo ra đồ thị giống hình bên trái là bình thường. Nếu giống hình bên phải là bất thường — trường hợp này xoay AF Camera 180° và cố định. Khi giống hình bên trái, nhấp nút \'Fitting\'.'
+        }},
+        {img:cmImg('I','qpm',82),tx:{
+          ko:'■ AF Tuning – Laser Calibration (4/4)\n\n\'fitting view\' 버튼을 클릭하면 Fitting 그래프를 볼 수 있습니다(이 그래프는 Vision Software 알고리즘에 적용됩니다). 모든 확인이 끝나면 \'Apply\' 버튼을 클릭해 Calibration 창을 종료합니다.',
+          en:'■ AF Tuning – Laser Calibration (4/4)\n\nClicking the \'fitting view\' button lets you view the fitting graph (this graph applies to the vision software algorithms). After checking everything, click the \'Apply\' button to exit the calibration window.',
+          zhCN:'■ AF Tuning – Laser Calibration (4/4)\n\n点击\'fitting view\'按钮可查看fitting图形(该图形应用于Vision Software算法)。全部确认完毕后,点击\'Apply\'按钮退出Calibration窗口。',
+          zhTW:'■ AF Tuning – Laser Calibration (4/4)\n\n點擊\'fitting view\'按鈕可查看fitting圖形(該圖形應用於Vision Software演算法)。全部確認完畢後,點擊\'Apply\'按鈕退出Calibration視窗。',
+          ja:'■ AF Tuning – Laser Calibration (4/4)\n\n\'fitting view\'ボタンをクリックするとfittingグラフを確認できます(このグラフはVision Softwareアルゴリズムに適用されます)。すべて確認したら\'Apply\'ボタンをクリックしCalibrationウィンドウを終了します。',
+          vi:'■ AF Tuning – Laser Calibration (4/4)\n\nNhấp nút \'fitting view\' để xem đồ thị fitting (đồ thị này áp dụng cho thuật toán Vision Software). Sau khi kiểm tra xong mọi thứ, nhấp nút \'Apply\' để thoát cửa sổ calibration.'
+        }},
+        {img:cmImg('I','qpm',83),tx:{
+          ko:'■ AF Tuning – \'Variable Partial Start Lines[24H.25H]\' Setting (1/2)\n\n\'Camera Sync\'를 체크해 통신을 연결합니다. \'Option ▸ Tuning Guide ▸ Align Laser ROI\'를 선택합니다. Live 창이 열려 있는지 확인합니다.',
+          en:'■ AF Tuning – \'Variable Partial Start Lines[24H.25H]\' Setting (1/2)\n\nCheck \'Camera Sync\' to connect communication. Select \'Option ▸ Tuning Guide ▸ Align Laser ROI\'. Check that the Live window is open.',
+          zhCN:'■ AF Tuning – \'Variable Partial Start Lines[24H.25H]\' Setting (1/2)\n\n勾选\'Camera Sync\'以连接通信。选择\'Option ▸ Tuning Guide ▸ Align Laser ROI\'。确认Live窗口已打开。',
+          zhTW:'■ AF Tuning – \'Variable Partial Start Lines[24H.25H]\' Setting (1/2)\n\n勾選\'Camera Sync\'以連接通訊。選擇\'Option ▸ Tuning Guide ▸ Align Laser ROI\'。確認Live視窗已開啟。',
+          ja:'■ AF Tuning – \'Variable Partial Start Lines[24H.25H]\' Setting (1/2)\n\n\'Camera Sync\'をチェックし通信を接続します。\'Option ▸ Tuning Guide ▸ Align Laser ROI\'を選択します。Liveウィンドウが開いているか確認します。',
+          vi:'■ AF Tuning – \'Variable Partial Start Lines[24H.25H]\' Setting (1/2)\n\nChọn \'Camera Sync\' để kết nối giao tiếp. Chọn \'Option ▸ Tuning Guide ▸ Align Laser ROI\'. Kiểm tra cửa sổ Live đã mở.'
+        }},
+        {img:cmImg('I','qpm',84),tx:{
+          ko:'■ AF Tuning – \'Variable Partial Start Lines[24H.25H]\' Setting (2/2)\n\n\'LIVE\'를 클릭해 레이저와 ROI 위치를 확인합니다. \'STOP\'을 클릭하면 ROI 위치를 원하는 곳으로 변경할 수 있습니다. ROI 위치 설정 후 \'Camera Default Set\' → \'APPLY ROI & EXIT\' 순으로 종료합니다. 설정 완료 후 Camera Parameter 설정을 열어 적용된 값을 확인합니다.',
+          en:'■ AF Tuning – \'Variable Partial Start Lines[24H.25H]\' Setting (2/2)\n\nClick \'LIVE\' to check the location of the laser and ROI. Clicking \'STOP\' lets you change the ROI location as desired. After setting the ROI location, end in the order \'Camera Default Set\' → \'APPLY ROI & EXIT\'. After finishing the setting, open the Camera Parameter setting and check the applied value.',
+          zhCN:'■ AF Tuning – \'Variable Partial Start Lines[24H.25H]\' Setting (2/2)\n\n点击\'LIVE\'确认激光与ROI位置。点击\'STOP\'可将ROI位置改为所需位置。设置ROI位置后,依\'Camera Default Set\'→\'APPLY ROI & EXIT\'顺序结束。设置完成后打开Camera Parameter设置确认已应用的值。',
+          zhTW:'■ AF Tuning – \'Variable Partial Start Lines[24H.25H]\' Setting (2/2)\n\n點擊\'LIVE\'確認雷射與ROI位置。點擊\'STOP\'可將ROI位置改為所需位置。設定ROI位置後,依\'Camera Default Set\'→\'APPLY ROI & EXIT\'順序結束。設定完成後開啟Camera Parameter設定確認已套用的值。',
+          ja:'■ AF Tuning – \'Variable Partial Start Lines[24H.25H]\' Setting (2/2)\n\n\'LIVE\'をクリックしレーザーとROIの位置を確認します。\'STOP\'をクリックするとROI位置を希望の場所に変更できます。ROI位置設定後、\'Camera Default Set\'→\'APPLY ROI & EXIT\'の順に終了します。設定完了後Camera Parameter設定を開き適用された値を確認します。',
+          vi:'■ AF Tuning – \'Variable Partial Start Lines[24H.25H]\' Setting (2/2)\n\nNhấp \'LIVE\' để kiểm tra vị trí laser và ROI. Nhấp \'STOP\' để đổi vị trí ROI theo ý muốn. Sau khi đặt vị trí ROI, kết thúc theo thứ tự \'Camera Default Set\' → \'APPLY ROI & EXIT\'. Sau khi hoàn tất cài đặt, mở cài đặt Camera Parameter để kiểm tra giá trị đã áp dụng.'
+        }},
+        {img:cmImg('I','qpm',85),tx:{
+          ko:'■ AF Tuning – Home & Pos0\n\n\'Device ▸ Homing\' 기능을 선택합니다. \'Homing\' 버튼을 클릭해 AF Z축 Home 동작을 진행합니다. Homing이 완료되면 녹색 표시등이 Complete를 나타냅니다. \'Motor Homing\' 화면을 종료합니다. \'Pos0\' 버튼을 클릭해 \'Cur Pos.\'가 \'0.00\' 상태인지 확인합니다. 이 과정으로 Laser Tune이 완료됩니다.',
+          en:'■ AF Tuning – Home & Pos0\n\nSelect the \'Device ▸ Homing\' function. Click the \'Homing\' button to proceed with the AF Z-axis home operation. When homing is complete, the green indicator shows Complete. Exit the \'Motor Homing\' screen. Click the \'Pos0\' button to check that \'Cur Pos.\' is at \'0.00\'. This completes the Laser Tune process.',
+          zhCN:'■ AF Tuning – Home & Pos0\n\n选择\'Device ▸ Homing\'功能。点击\'Homing\'按钮进行AF Z轴Home动作。Homing完成后绿色指示灯显示Complete。退出\'Motor Homing\'画面。点击\'Pos0\'按钮确认\'Cur Pos.\'是否为\'0.00\'状态。至此完成Laser Tune流程。',
+          zhTW:'■ AF Tuning – Home & Pos0\n\n選擇\'Device ▸ Homing\'功能。點擊\'Homing\'按鈕進行AF Z軸Home動作。Homing完成後綠色指示燈顯示Complete。退出\'Motor Homing\'畫面。點擊\'Pos0\'按鈕確認\'Cur Pos.\'是否為\'0.00\'狀態。至此完成Laser Tune流程。',
+          ja:'■ AF Tuning – Home & Pos0\n\n\'Device ▸ Homing\'機能を選択します。\'Homing\'ボタンをクリックしAF Z軸のHome動作を行います。Homingが完了すると緑色のインジケーターがCompleteを示します。\'Motor Homing\'画面を終了します。\'Pos0\'ボタンをクリックし\'Cur Pos.\'が\'0.00\'状態か確認します。この過程でLaser Tuneが完了します。',
+          vi:'■ AF Tuning – Home & Pos0\n\nChọn chức năng \'Device ▸ Homing\'. Nhấp nút \'Homing\' để thực hiện thao tác Home trục Z của AF. Khi homing hoàn tất, đèn xanh hiện Complete. Thoát màn hình \'Motor Homing\'. Nhấp nút \'Pos0\' để kiểm tra \'Cur Pos.\' có ở trạng thái \'0.00\' không. Quá trình này hoàn tất Laser Tune.'
+        }},
+        {img:cmImg('I','qpm',86),tx:{
+          ko:'■ AF Tuning – Save\n\n\'File ▸ Save Param\'을 선택합니다. \'AutoFocus.saf\'를 선택하고 저장 버튼을 클릭하면 완료됩니다.',
+          en:'■ AF Tuning – Save\n\nSelect \'File ▸ Save Param\'. Select \'AutoFocus.saf\', click the save button, and it is done.',
+          zhCN:'■ AF Tuning – Save\n\n选择\'File ▸ Save Param\'。选择\'AutoFocus.saf\',点击保存按钮即完成。',
+          zhTW:'■ AF Tuning – Save\n\n選擇\'File ▸ Save Param\'。選擇\'AutoFocus.saf\',點擊儲存按鈕即完成。',
+          ja:'■ AF Tuning – Save\n\n\'File ▸ Save Param\'を選択します。\'AutoFocus.saf\'を選択し保存ボタンをクリックすれば完了です。',
+          vi:'■ AF Tuning – Save\n\nChọn \'File ▸ Save Param\'. Chọn \'AutoFocus.saf\', nhấp nút save là xong.'
+        }},
+        {img:cmImg('I','qpm',87),tx:{
+          ko:'■ Tilt Tune — 설정 절차\n\nJig에 Tilt Block을 놓습니다. Tilt 페이지에서 CH01~03 조명 밝기를 255로 설정합니다. Z축 Motor를 In Focus 위치로 이동해 Single Tracking을 수행합니다. Live 영상으로 초점을 확인합니다. Parameter에서 Block Size 128, Scan Step 10.0um, Scan Lower Offset 90um, Scan Upper Offset 90um으로 설정합니다. \'Scan\' 버튼을 클릭해 결과를 확인합니다. Tilt Score 값을 보며 광학계 모듈을 좌·우·전·후로 조정합니다 — Tilt Map과 Z-Map을 확인하며 Score 값이 3 이하가 될 때까지 조정합니다(3 이하이면 Pass).',
+          en:'■ Tilt Tune — Setting Procedure\n\nPlace the Tilt Block on the Jig. On the Tilt page, set the illumination brightness of CH01–03 to 255. Move the Z-axis motor to the In Focus position and perform Single Tracking. Check the live video and focus. In the parameters, set Block Size 128, Scan Step 10.0um, Scan Lower Offset 90um, Scan Upper Offset 90um. Click the \'Scan\' button to review the results. Watching the Tilt score value, adjust the optical system module left/right/front/rear — checking the Tilt Map and Z-Map, adjust until the Score value is 3 or less (a score of 3 or less is a Pass).',
+          zhCN:'■ Tilt Tune — 设定步骤\n\n将Tilt Block放在Jig上。在Tilt页面将CH01~03照明亮度设为255。将Z轴Motor移到In Focus位置并进行Single Tracking。用Live影像确认对焦。在Parameter中设置Block Size 128、Scan Step 10.0um、Scan Lower Offset 90um、Scan Upper Offset 90um。点击\'Scan\'按钮查看结果。观察Tilt score值,调整光学系统模块的左右前后——一边查看Tilt Map与Z-Map,调整至Score值为3以下(3以下为Pass)。',
+          zhTW:'■ Tilt Tune — 設定步驟\n\n將Tilt Block放在Jig上。在Tilt頁面將CH01~03照明亮度設為255。將Z軸Motor移到In Focus位置並進行Single Tracking。用Live影像確認對焦。在Parameter中設定Block Size 128、Scan Step 10.0um、Scan Lower Offset 90um、Scan Upper Offset 90um。點擊\'Scan\'按鈕查看結果。觀察Tilt score值,調整光學系統模組的左右前後——一邊查看Tilt Map與Z-Map,調整至Score值為3以下(3以下為Pass)。',
+          ja:'■ Tilt Tune — 設定手順\n\nJigにTilt Blockを置きます。TiltページでCH01~03の照明輝度を255に設定します。Z軸MotorをIn Focus位置へ移動しSingle Trackingを行います。Live映像で焦点を確認します。ParameterでBlock Size 128、Scan Step 10.0um、Scan Lower Offset 90um、Scan Upper Offset 90umに設定します。\'Scan\'ボタンをクリックし結果を確認します。Tilt score値を見ながら光学系モジュールを左右前後に調整します——Tilt MapとZ-Mapを確認しながらScore値が3以下になるまで調整します(3以下でPass)。',
+          vi:'■ Tilt Tune — Quy trình cài đặt\n\nĐặt Tilt Block lên Jig. Trên trang Tilt, đặt độ sáng chiếu CH01~03 thành 255. Di chuyển Motor trục Z đến vị trí In Focus và thực hiện Single Tracking. Kiểm tra video Live và lấy nét. Trong parameter, đặt Block Size 128, Scan Step 10.0um, Scan Lower Offset 90um, Scan Upper Offset 90um. Nhấp nút \'Scan\' để xem kết quả. Theo dõi giá trị Tilt score, điều chỉnh module quang học sang trái/phải/trước/sau — vừa kiểm tra Tilt Map và Z-Map, vừa điều chỉnh đến khi giá trị Score ≤3 (Score ≤3 là Pass).'
+        }},
+        {img:cmImg('I','qpm',88),tx:{
+          ko:'Service에서 Tilt 기능을 선택합니다.',
+          en:'Select the tilt function in the service.',
+          zhCN:'在service中选择tilt功能。',
+          zhTW:'在service中選擇tilt功能。',
+          ja:'serviceでtilt機能を選択します。',
+          vi:'Chọn chức năng tilt trong service.'
+        }},
+        {img:cmImg('I','qpm',89),tx:{
+          ko:'Illumination: 조명 밝기 조정 및 Live On. Scan: 입력된 사양 데이터를 기준으로 Tilt를 계산합니다. Scan Stop: 진행 중인 Scan을 중단합니다. Scan Step: \'n\' 값 단위(um)로 Z축을 구동합니다. Scan Lower/Upper Offset: \'n\' 값만큼 이미지를 획득합니다. Block Size: 전체 이미지를 Block으로 지정하는 값 — 예: 3060×3060 이미지 크기에서 \"255\"는 12×12 크기의 Block 255개로 나눈 값입니다. Current Image Index: Tilt Map, Z-Map.',
+          en:'Illumination: lighting brightness adjustment and live on. Scan: calculates the tilt based on the input spec data. Scan Stop: used to stop a scan in progress. Scan Step: drives the Z axis in micro units of the \'n\' value. Scan Lower Offset, Upper Offset: acquires as many images as the \'n\' value quantity. Block Size: a value specifying the entire image as blocks — e.g., for an image size of 3060×3060, a value of \"255\" is calculated by dividing it into 255 blocks of size 12×12. Current Image Index: Tilt Map, Z-Map.',
+          zhCN:'Illumination:照明亮度调整及live on。Scan:根据输入的规格数据计算tilt。Scan Stop:用于停止正在进行的scan。Scan Step:以\'n\'值为单位(um)驱动Z轴。Scan Lower Offset、Upper Offset:按\'n\'值数量获取影像。Block Size:将整体影像指定为block的数值——例如影像尺寸为3060×3060时,\"255\"是以12×12大小的block划分为255个所得的值。Current Image Index:Tilt Map、Z-Map。',
+          zhTW:'Illumination:照明亮度調整及live on。Scan:根據輸入的規格數據計算tilt。Scan Stop:用於停止正在進行的scan。Scan Step:以\'n\'值為單位(um)驅動Z軸。Scan Lower Offset、Upper Offset:按\'n\'值數量取得影像。Block Size:將整體影像指定為block的數值——例如影像尺寸為3060×3060時,\"255\"是以12×12大小的block劃分為255個所得的值。Current Image Index:Tilt Map、Z-Map。',
+          ja:'Illumination:照明輝度調整及びlive on。Scan:入力された仕様データに基づきtiltを計算します。Scan Stop:進行中のscanを停止する際に使用します。Scan Step:\'n\'値のマイクロ単位(um)でZ軸を駆動します。Scan Lower Offset、Upper Offset:\'n\'値の数だけ画像を取得します。Block Size:画像全体をblockとして指定する値——例えば画像サイズ3060×3060の場合、\"255\"は12×12サイズのblock 255個に分割した値です。Current Image Index:Tilt Map、Z-Map。',
+          vi:'Illumination: điều chỉnh độ sáng và live on. Scan: tính toán tilt dựa trên dữ liệu thông số đầu vào. Scan Stop: dùng để dừng scan đang thực hiện. Scan Step: điều khiển trục Z theo đơn vị micro của giá trị \'n\'. Scan Lower Offset, Upper Offset: thu số ảnh bằng với số lượng giá trị \'n\'. Block Size: giá trị chỉ định toàn bộ ảnh thành các block — ví dụ ảnh kích thước 3060×3060, giá trị \"255\" được tính bằng cách chia thành 255 block kích thước 12×12. Current Image Index: Tilt Map, Z-Map.'
+        }},
+        {img:cmImg('I','qpm',90),tx:{
+          ko:'설정 순서\n\n1. JIG Table에 Tilt Block을 놓습니다.\n2. Tilt Check 프로그램의 \'Illumination\' 탭에서 \'CH0~02\' 조명 밝기를 \'255\'로 설정합니다.',
+          en:'Setting sequence\n\n1. Place the Tilt Block on the JIG Table.\n2. Set the lighting brightness of \'CH0~02\' to \'255\' in the \'Illumination\' tab of the Tilt Check program.',
+          zhCN:'设置顺序\n\n1. 将Tilt Block放在JIG Table上。\n2. 在Tilt Check程序的\'Illumination\'标签中将\'CH0~02\'照明亮度设为\'255\'。',
+          zhTW:'設定順序\n\n1. 將Tilt Block放在JIG Table上。\n2. 在Tilt Check程式的\'Illumination\'標籤中將\'CH0~02\'照明亮度設為\'255\'。',
+          ja:'設定順序\n\n1. JIG TableにTilt Blockを置きます。\n2. Tilt Checkプログラムの\'Illumination\'タブで\'CH0~02\'の照明輝度を\'255\'に設定します。',
+          vi:'Trình tự cài đặt\n\n1. Đặt Tilt Block lên JIG Table.\n2. Trong tab \'Illumination\' của chương trình Tilt Check, đặt độ sáng chiếu \'CH0~02\' thành \'255\'.'
+        }},
+        {img:cmImg('I','qpm',91),tx:{
+          ko:'3. Z축 Motor를 In Focus 위치로 이동해 Single Tracking을 수행합니다.\n4. Live 영상으로 초점을 확인합니다.\n5. Parameter를 Block Size 128, Scan Step 10.0um, Scan Lower Offset 90um, Scan Upper Offset 90um으로 변경하고 저장합니다.\n6. \'Scan\' 버튼을 클릭해 결과를 확인합니다.',
+          en:'3. Move the Z-axis motor to the In Focus position and perform Single Tracking.\n4. Check the live video to check focus.\n5. Change the parameters to Block Size 128, Scan Step 10.0um, Scan Lower Offset 90um, Scan Upper Offset 90um, and save.\n6. Click the \'Scan\' button to review the results.',
+          zhCN:'3. 将Z轴Motor移到In Focus位置并进行Single Tracking。\n4. 用Live影像确认对焦。\n5. 将参数改为Block Size 128、Scan Step 10.0um、Scan Lower Offset 90um、Scan Upper Offset 90um并保存。\n6. 点击\'Scan\'按钮查看结果。',
+          zhTW:'3. 將Z軸Motor移到In Focus位置並進行Single Tracking。\n4. 用Live影像確認對焦。\n5. 將參數改為Block Size 128、Scan Step 10.0um、Scan Lower Offset 90um、Scan Upper Offset 90um並儲存。\n6. 點擊\'Scan\'按鈕查看結果。',
+          ja:'3. Z軸MotorをIn Focus位置へ移動しSingle Trackingを行います。\n4. Live映像で焦点を確認します。\n5. パラメータをBlock Size 128、Scan Step 10.0um、Scan Lower Offset 90um、Scan Upper Offset 90umに変更し保存します。\n6. \'Scan\'ボタンをクリックし結果を確認します。',
+          vi:'3. Di chuyển Motor trục Z đến vị trí In Focus và thực hiện Single Tracking.\n4. Kiểm tra video Live để lấy nét.\n5. Đổi tham số thành Block Size 128, Scan Step 10.0um, Scan Lower Offset 90um, Scan Upper Offset 90um và lưu lại.\n6. Nhấp nút \'Scan\' để xem kết quả.'
+        }},
+        {img:cmImg('I','qpm',92),tx:{
+          ko:'7. Profile View Graph의 Peak가 중앙에 오도록 설정합니다 — 그래프가 우측에 있으면 Z축을 위로 이동해 Make0을 클릭 후 Scan하고, 좌측에 있으면 Z축을 아래로 이동해 Make0을 클릭 후 Scan합니다.',
+          en:'7. Set the peak of the Profile View Graph to be in the center — if the graph is on the right, move the Z axis up, click Make0, and scan. If the graph is on the left, move the Z axis down, click Make0, and scan.',
+          zhCN:'7. 将Profile View Graph的峰值设为居中——若图形偏右,将Z轴上移后点击Make0并scan;若偏左,将Z轴下移后点击Make0并scan。',
+          zhTW:'7. 將Profile View Graph的峰值設為居中——若圖形偏右,將Z軸上移後點擊Make0並scan;若偏左,將Z軸下移後點擊Make0並scan。',
+          ja:'7. Profile View Graphのピークが中央に来るよう設定します——グラフが右にある場合はZ軸を上に移動しMake0をクリックしてscan、左にある場合はZ軸を下に移動しMake0をクリックしてscanします。',
+          vi:'7. Đặt đỉnh của Profile View Graph vào giữa — nếu đồ thị lệch phải, di chuyển trục Z lên, nhấp Make0 rồi scan; nếu lệch trái, di chuyển trục Z xuống, nhấp Make0 rồi scan.'
+        }},
+        {img:cmImg('I','qpm',93),tx:{
+          ko:'8. Tilt Map을 확인하며 광학계 모듈을 전·후로 조정합니다 — Tilt Map을 보면서 설정하며, 고정 볼트의 위치는 그림과 같습니다. (Front View)',
+          en:'8. While looking at the Tilt Map, set the optical system module forward/backward — set it while checking the Tilt Map; the position of the fixing bolt is as shown in the picture. (Front View)',
+          zhCN:'8. 一边确认Tilt Map一边前后调整光学系统模块——边看Tilt Map边设置,固定螺栓位置如图所示。(Front View)',
+          zhTW:'8. 一邊確認Tilt Map一邊前後調整光學系統模組——邊看Tilt Map邊設定,固定螺栓位置如圖所示。(Front View)',
+          ja:'8. Tilt Mapを確認しながら光学系モジュールを前後に調整します——Tilt Mapを見ながら設定し、固定ボルトの位置は図の通りです。(Front View)',
+          vi:'8. Vừa xem Tilt Map vừa điều chỉnh module quang học ra trước/sau — thiết lập trong khi kiểm tra Tilt Map, vị trí bu lông cố định như trong hình. (Front View)'
+        }},
+        {img:cmImg('I','qpm',94),tx:{
+          ko:'고정 볼트를 풀고 다이얼 게이지를 통해 색상이 중앙에 오도록 Tilt를 조정합니다. 주의: 볼트를 다시 고정한 후 Scan합니다. (Not Good / Good, Top View, Left View)',
+          en:'Release the fixing bolt and adjust the tilt so that the color is in the center through the dial gauge. Caution: scan after fixing the loosened bolt. (Not Good / Good, Top View, Left View)',
+          zhCN:'松开固定螺栓,通过千分表调整tilt使颜色位于中央。注意:重新固定螺栓后再scan。(Not Good/Good,Top View,Left View)',
+          zhTW:'鬆開固定螺栓,透過千分表調整tilt使顏色位於中央。注意:重新固定螺栓後再scan。(Not Good/Good,Top View,Left View)',
+          ja:'固定ボルトを緩め、ダイヤルゲージを通して色が中央に来るようtiltを調整します。注意:緩めたボルトを再度固定してからscanします。(Not Good/Good、Top View、Left View)',
+          vi:'Nới lỏng bu lông cố định và điều chỉnh tilt qua đồng hồ so để màu ở giữa. Lưu ý: scan sau khi đã cố định lại bu lông đã nới lỏng. (Not Good/Good, Top View, Left View)'
+        }},
+        {img:cmImg('I','qpm',95),tx:{
+          ko:'Tilt Tune 조정 절차를 계속 진행합니다 (5. Vision Setting).',
+          en:'Continuing the Tilt Tune adjustment procedure (5. Vision Setting).',
+          zhCN:'继续进行Tilt Tune调整流程(5. Vision Setting)。',
+          zhTW:'繼續進行Tilt Tune調整流程(5. Vision Setting)。',
+          ja:'Tilt Tune調整手順を続けます(5. Vision Setting)。',
+          vi:'Tiếp tục quy trình điều chỉnh Tilt Tune (5. Vision Setting).'
+        }},
+        {img:cmImg('I','qpm',96),tx:{
+          ko:'9. Z-Map을 확인하며 광학계 모듈을 좌·우로 조정합니다 — Z-Map을 보면서 설정하며, 고정 볼트의 위치는 그림과 같습니다. (Front View, Z-Map)',
+          en:'9. While looking at the Z-Map, set the optical system module left/right — set it while checking the Z-Map; the position of the fixing bolt is as shown in the picture. (Front View, Z-Map)',
+          zhCN:'9. 一边确认Z-Map一边左右调整光学系统模块——边看Z-Map边设置,固定螺栓位置如图所示。(Front View、Z-Map)',
+          zhTW:'9. 一邊確認Z-Map一邊左右調整光學系統模組——邊看Z-Map邊設定,固定螺栓位置如圖所示。(Front View、Z-Map)',
+          ja:'9. Z-Mapを確認しながら光学系モジュールを左右に調整します——Z-Mapを見ながら設定し、固定ボルトの位置は図の通りです。(Front View、Z-Map)',
+          vi:'9. Vừa xem Z-Map vừa điều chỉnh module quang học sang trái/phải — thiết lập trong khi kiểm tra Z-Map, vị trí bu lông cố định như trong hình. (Front View, Z-Map)'
+        }},
+        {img:cmImg('I','qpm',97),tx:{
+          ko:'고정 볼트를 풀고 다이얼 게이지를 통해 색상이 중앙에 오도록 Tilt를 조정합니다. 주의: 볼트를 다시 고정한 후 Scan합니다. (Not Good / Good, Front View)',
+          en:'Release the fixing bolt and adjust the tilt so that the color is in the center through the dial gauge. Caution: scan after fixing the loosened bolt. (Not Good / Good, Front View)',
+          zhCN:'松开固定螺栓,通过千分表调整tilt使颜色位于中央。注意:重新固定螺栓后再scan。(Not Good/Good,Front View)',
+          zhTW:'鬆開固定螺栓,透過千分表調整tilt使顏色位於中央。注意:重新固定螺栓後再scan。(Not Good/Good,Front View)',
+          ja:'固定ボルトを緩め、ダイヤルゲージを通して色が中央に来るようtiltを調整します。注意:緩めたボルトを再度固定してからscanします。(Not Good/Good、Front View)',
+          vi:'Nới lỏng bu lông cố định và điều chỉnh tilt qua đồng hồ so để màu ở giữa. Lưu ý: scan sau khi đã cố định lại bu lông đã nới lỏng. (Not Good/Good, Front View)'
+        }},
+        {img:cmImg('I','qpm',98),tx:{
+          ko:'다이얼 게이지에 따른 H/W 이동 방향을 나타냅니다. (Front View)',
+          en:'This is the direction of H/W movement by the dial gauge. (Front View)',
+          zhCN:'这是依千分表的H/W移动方向。(Front View)',
+          zhTW:'這是依千分表的H/W移動方向。(Front View)',
+          ja:'これはダイヤルゲージによるH/W移動方向です。(Front View)',
+          vi:'Đây là hướng di chuyển H/W theo đồng hồ so. (Front View)'
+        }},
+        {img:cmImg('I','qpm',99),tx:{
+          ko:'10. 최종 결과값을 확인합니다 — Tilt Min: 가장 낮은 높이값. Tilt Max: 가장 높은 높이값. Tilt Score(Min)-(Max): 결과값이 3 Score 이하이면 Pass 판정. (Reject/Pass)',
+          en:'10. Check the final result value — Tilt Min: the value with the lowest height. Tilt Max: the highest value in height. Tilt Score (Min)–(Max): Pass judgment if the result value is 3 Score or less. (Reject/Pass)',
+          zhCN:'10. 确认最终结果值——Tilt Min:最低高度值。Tilt Max:最高高度值。Tilt Score(Min)-(Max):结果值为3 Score以下时判定为Pass。(Reject/Pass)',
+          zhTW:'10. 確認最終結果值——Tilt Min:最低高度值。Tilt Max:最高高度值。Tilt Score(Min)-(Max):結果值為3 Score以下時判定為Pass。(Reject/Pass)',
+          ja:'10. 最終結果値を確認します——Tilt Min:最も低い高さ値。Tilt Max:最も高い値。Tilt Score(Min)-(Max):結果値が3 Score以下であればPass判定。(Reject/Pass)',
+          vi:'10. Kiểm tra giá trị kết quả cuối cùng — Tilt Min: giá trị chiều cao thấp nhất. Tilt Max: giá trị chiều cao cao nhất. Tilt Score (Min)-(Max): kết quả ≤3 Score thì đánh giá Pass. (Reject/Pass)'
+        }},
+        {img:cmImg('I','qpm',100),tx:{
+          ko:'■ 3D Illumination – Hardware Setting (Kohler Coaxial)\n\n광학 조리개(Optical Aperture)와 광원 원(Optical Circle)을 조정합니다.',
+          en:'■ 3D Illumination – Hardware Setting (Kohler Coaxial)\n\nAdjust the optical aperture and the optical circle.',
+          zhCN:'■ 3D Illumination – Hardware Setting (Kohler Coaxial)\n\n调整光学光圈(Optical Aperture)与光学圆(Optical Circle)。',
+          zhTW:'■ 3D Illumination – Hardware Setting (Kohler Coaxial)\n\n調整光學光圈(Optical Aperture)與光學圓(Optical Circle)。',
+          ja:'■ 3D Illumination – Hardware Setting (Kohler Coaxial)\n\n光学絞り(Optical Aperture)と光学円(Optical Circle)を調整します。',
+          vi:'■ 3D Illumination – Hardware Setting (Kohler Coaxial)\n\nĐiều chỉnh khẩu độ quang học (Optical Aperture) và vòng quang học (Optical Circle).'
+        }},
+        {img:cmImg('I','qpm',101),tx:{
+          ko:'Service ▸ Fringe를 클릭합니다. \'Teaching Mirror\'를 \'Jig\' Table 중앙에 놓습니다. 3D Illumination 값을 1.6으로 설정한 뒤 3D를 클릭해 Live를 확인합니다. Live 영상을 보며 \'Teaching Mirror\'가 보이는 위치로 Stage를 이동합니다. AF Control 프로그램을 이용해 Teaching Mirror에 초점을 맞춥니다.',
+          en:'Click Service ▸ Fringe. Place the \'Teaching Mirror\' in the center of the \'Jig\' table. After setting the 3D illumination value to 1.6, click 3D to view Live. While checking the live image, move the stage to a position where the \'Teaching Mirror\' is visible. Use the AF control program to set focus on the teaching mirror.',
+          zhCN:'点击Service▸Fringe。将\'Teaching Mirror\'放在\'Jig\'Table中央。将3D Illumination值设为1.6后点击3D确认Live。一边确认Live影像,一边将Stage移到能看见\'Teaching Mirror\'的位置。使用AF Control程序对Teaching Mirror进行对焦。',
+          zhTW:'點擊Service▸Fringe。將\'Teaching Mirror\'放在\'Jig\'Table中央。將3D Illumination值設為1.6後點擊3D確認Live。一邊確認Live影像,一邊將Stage移到能看見\'Teaching Mirror\'的位置。使用AF Control程式對Teaching Mirror進行對焦。',
+          ja:'Service▸Fringeをクリックします。\'Teaching Mirror\'を\'Jig\'Table中央に置きます。3D Illumination値を1.6に設定した後3Dをクリックしliveを確認します。live映像を見ながら\'Teaching Mirror\'が見える位置にStageを移動します。AF Controlプログラムを使ってTeaching Mirrorに焦点を合わせます。',
+          vi:'Nhấp Service▸Fringe. Đặt \'Teaching Mirror\' ở giữa bàn \'Jig\'. Sau khi đặt giá trị 3D Illumination thành 1.6, nhấp 3D để xem Live. Vừa kiểm tra hình ảnh Live, vừa di chuyển Stage đến vị trí thấy được \'Teaching Mirror\'. Dùng chương trình AF control để lấy nét trên teaching mirror.'
+        }},
+        {img:cmImg('I','qpm',102),tx:{
+          ko:'Live 화면에서 마우스 우클릭 후 \'Show pixel info\'를 선택합니다. Live 화면 상단의 RGB 값이 160이 되도록 Illumination Aperture를 조정합니다.',
+          en:'Right-click on the live screen and select \'Show pixel info\'. Adjust the illumination aperture until the RGB value at the top of the live screen shows 160.',
+          zhCN:'在Live画面上右键点击,选择\'Show pixel info\'。调整Illumination Aperture,直到Live画面上方的RGB值显示为160。',
+          zhTW:'在Live畫面上右鍵點擊,選擇\'Show pixel info\'。調整Illumination Aperture,直到Live畫面上方的RGB值顯示為160。',
+          ja:'Live画面上でマウスを右クリックし\'Show pixel info\'を選択します。Live画面上部のRGB値が160になるようIllumination Apertureを調整します。',
+          vi:'Nhấp chuột phải trên màn hình Live và chọn \'Show pixel info\'. Điều chỉnh Illumination Aperture đến khi giá trị RGB ở đầu màn hình Live hiển thị 160.'
+        }},
+        {img:cmImg('I','qpm',103),tx:{
+          ko:'■ Reference Mirror Cleaning\n\nReference Mirror는 먼지를 제거해야 합니다. 광학계 아래에 Stage가 없어야 합니다(초점이 맞지 않는 상태여야 함). Motor Controls로 Stage를 이동해 Live 영상에서 보이지 않도록 합니다. Service ▸ Fringe를 선택합니다.',
+          en:'■ Reference Mirror Cleaning\n\nThe Reference Mirror needs to be dusted. There must be no stage under the optical system (must be out of focus). Use Motor Controls to move the stage so it is not visible in the live video. Select Service ▸ Fringe.',
+          zhCN:'■ Reference Mirror Cleaning\n\nReference Mirror需要除尘。光学系统下方不得有Stage(必须处于失焦状态)。用Motor Controls移动Stage,使其在Live影像中不可见。选择Service▸Fringe。',
+          zhTW:'■ Reference Mirror Cleaning\n\nReference Mirror需要除塵。光學系統下方不得有Stage(必須處於失焦狀態)。用Motor Controls移動Stage,使其在Live影像中不可見。選擇Service▸Fringe。',
+          ja:'■ Reference Mirror Cleaning\n\nReference Mirrorはホコリを除去する必要があります。光学系の下にStageがあってはなりません(ピントが合わない状態である必要があります)。Motor ControlsでStageを移動しLive映像に映らないようにします。Service▸Fringeを選択します。',
+          vi:'■ Reference Mirror Cleaning\n\nReference Mirror cần được lau bụi. Không được có Stage bên dưới hệ quang học (phải ở trạng thái mất nét). Dùng Motor Controls di chuyển Stage để không thấy trong video Live. Chọn Service▸Fringe.'
+        }},
+        {img:cmImg('I','qpm',104),tx:{
+          ko:'그림처럼 3D Illumination 값(밝기)을 조정합니다. 표시된 부분이 먼지입니다. (먼지를 제거하기 전 Bump LIVE 화면)',
+          en:'Adjust the 3D illumination value (brightness) as shown in the picture. The marked spots are dust. (Bump LIVE screen before dust removal.)',
+          zhCN:'如图调整3D Illumination值(亮度)。标记的部分为灰尘。(除尘前的Bump LIVE画面)',
+          zhTW:'如圖調整3D Illumination值(亮度)。標記的部分為灰塵。(除塵前的Bump LIVE畫面)',
+          ja:'図のように3D Illumination値(明るさ)を調整します。マークされた部分がホコリです。(ホコリ除去前のBump LIVE画面)',
+          vi:'Điều chỉnh giá trị 3D Illumination (độ sáng) như trong hình. Các điểm được đánh dấu là bụi. (Màn hình Bump LIVE trước khi lau bụi)'
+        }},
+        {img:cmImg('I','qpm',105),tx:{
+          ko:'알코올과 렌즈 와이퍼를 이용해 먼지를 제거합니다. 거울에 흠집이 나지 않도록 주의합니다. (GOOD/BAD)',
+          en:'Remove dust using alcohol and a lens wiper. Be careful not to scratch the mirror. (GOOD/BAD)',
+          zhCN:'使用酒精和镜头擦拭布清除灰尘。注意不要刮伤镜面。(GOOD/BAD)',
+          zhTW:'使用酒精和鏡頭擦拭布清除灰塵。注意不要刮傷鏡面。(GOOD/BAD)',
+          ja:'アルコールとレンズワイパーを使ってホコリを除去します。ミラーに傷が付かないよう注意します。(GOOD/BAD)',
+          vi:'Dùng cồn và khăn lau ống kính để lau bụi. Cẩn thận không làm xước gương. (GOOD/BAD)'
+        }},
+        {img:cmImg('I','qpm',106),tx:{
+          ko:'■ 3D Fringe Tuning – Live Window\n\n광학계가 Tuning Mirror 중앙에 위치하도록 Handler를 조정합니다.',
+          en:'■ 3D Fringe Tuning – Live Window\n\nAdjust the handler so that the optical system is located in the center of the tuning mirror.',
+          zhCN:'■ 3D Fringe Tuning – Live Window\n\n调整Handler使光学系统位于tuning mirror中央。',
+          zhTW:'■ 3D Fringe Tuning – Live Window\n\n調整Handler使光學系統位於tuning mirror中央。',
+          ja:'■ 3D Fringe Tuning – Live Window\n\n光学系がtuning mirror中央に位置するようHandlerを調整します。',
+          vi:'■ 3D Fringe Tuning – Live Window\n\nĐiều chỉnh Handler sao cho hệ quang học nằm ở giữa tuning mirror.'
+        }},
+        {img:cmImg('I','qpm',107),tx:{
+          ko:'■ 3D Fringe Tuning – Auto Focus\n\nService ▸ Central_Wavelength를 선택합니다. 3D Lighting 값을 1.6으로 설정하고 3D를 클릭해 Live를 확인합니다. Open config를 클릭해 AF를 실행하고 Focus가 일치하는 지점을 찾습니다.',
+          en:'■ 3D Fringe Tuning – Auto Focus\n\nSelect Service ▸ Central_Wavelength. Set the 3D lighting value to 1.6 and click 3D to see Live. Click Open config to run AF and find a point where the Focus matches.',
+          zhCN:'■ 3D Fringe Tuning – Auto Focus\n\n选择Service▸Central_Wavelength。将3D Lighting值设为1.6,点击3D确认Live。点击Open config运行AF,找到Focus一致的点。',
+          zhTW:'■ 3D Fringe Tuning – Auto Focus\n\n選擇Service▸Central_Wavelength。將3D Lighting值設為1.6,點擊3D確認Live。點擊Open config執行AF,找到Focus一致的點。',
+          ja:'■ 3D Fringe Tuning – Auto Focus\n\nService▸Central_Wavelengthを選択します。3D Lighting値を1.6に設定し3DをクリックしLiveを確認します。Open configをクリックしAFを実行しFocusが一致する点を見つけます。',
+          vi:'■ 3D Fringe Tuning – Auto Focus\n\nChọn Service▸Central_Wavelength. Đặt giá trị 3D Lighting thành 1.6 và nhấp 3D để xem Live. Nhấp Open config để chạy AF và tìm điểm mà Focus khớp.'
+        }},
+        {img:cmImg('I','qpm',108),tx:{
+          ko:'■ 3D Fringe Tuning – Fringe Setting (1/2)\n\nMicrometer 조정을 위해 하단 4점 볼트를 풀어야 합니다. Micrometer를 조정해 Fringe를 찾습니다. 빗살(Comb) 무늬 형태를 찾습니다.',
+          en:'■ 3D Fringe Tuning – Fringe Setting (1/2)\n\nThe lower 4-point bolt must be released for Micrometer adjustment. Find the fringe by adjusting the micrometer. Find the shape of the comb pattern.',
+          zhCN:'■ 3D Fringe Tuning – Fringe Setting (1/2)\n\n为进行Micrometer调整,须松开下方4点螺栓。通过调整micrometer找到fringe。找出梳状(Comb)图案的形态。',
+          zhTW:'■ 3D Fringe Tuning – Fringe Setting (1/2)\n\n為進行Micrometer調整,須鬆開下方4點螺栓。透過調整micrometer找到fringe。找出梳狀(Comb)圖案的形態。',
+          ja:'■ 3D Fringe Tuning – Fringe Setting (1/2)\n\nMicrometer調整のため下部4点のボルトを緩める必要があります。micrometerを調整しfringeを見つけます。くし状(Comb)パターンの形状を見つけます。',
+          vi:'■ 3D Fringe Tuning – Fringe Setting (1/2)\n\nCần nới lỏng bu lông 4 điểm phía dưới để điều chỉnh Micrometer. Tìm fringe bằng cách điều chỉnh micrometer. Tìm hình dạng vân lược (Comb pattern).'
+        }},
+        {img:cmImg('I','qpm',109),tx:{
+          ko:'■ 3D Fringe Tuning – Fringe Setting (2/2)\n\nFringe를 찾은 후 그림처럼 두 개의 Control을 이용해 Fringe 범위를 크게 조정합니다. Micrometer 조정 후 하단 4점 볼트를 고정합니다.',
+          en:'■ 3D Fringe Tuning – Fringe Setting (2/2)\n\nLocate the Fringe and use the two controls to greatly adjust the range of the Fringe, as shown in the figure. After adjusting the micrometer, secure the lower 4-point bolt.',
+          zhCN:'■ 3D Fringe Tuning – Fringe Setting (2/2)\n\n找到fringe后,如图所示用两个control大幅调整fringe的范围。调整micrometer后固定下方4点螺栓。',
+          zhTW:'■ 3D Fringe Tuning – Fringe Setting (2/2)\n\n找到fringe後,如圖所示用兩個control大幅調整fringe的範圍。調整micrometer後固定下方4點螺栓。',
+          ja:'■ 3D Fringe Tuning – Fringe Setting (2/2)\n\nfringeを見つけた後、図のように2つのcontrolを使いfringeの範囲を大きく調整します。micrometer調整後、下部4点のボルトを固定します。',
+          vi:'■ 3D Fringe Tuning – Fringe Setting (2/2)\n\nSau khi tìm thấy Fringe, dùng hai control để điều chỉnh mạnh phạm vi Fringe như trong hình. Sau khi điều chỉnh micrometer, cố định bu lông 4 điểm phía dưới.'
+        }},
+        {img:cmImg('I','qpm',110),tx:{
+          ko:'■ 3D Fringe Tuning – Wave Length (Setting)\n\nService ▸ Central wavelength를 선택합니다. Illumination: 3D 1.6us, Block Size: 256, Scan Step 50.00nm, Lower Offset: 5.0um, Upper Offset: 5.0um으로 설정합니다.',
+          en:'■ 3D Fringe Tuning – Wave Length (Setting)\n\nSelect Service ▸ Central wavelength. Set Illumination: 3D 1.6us, Block Size: 256, Scan Step 50.00nm, Lower Offset: 5.0um, Upper Offset: 5.0um.',
+          zhCN:'■ 3D Fringe Tuning – Wave Length (Setting)\n\n选择Service▸Central wavelength。设置Illumination:3D 1.6us,Block Size:256,Scan Step 50.00nm,Lower Offset:5.0um,Upper Offset:5.0um。',
+          zhTW:'■ 3D Fringe Tuning – Wave Length (Setting)\n\n選擇Service▸Central wavelength。設定Illumination:3D 1.6us,Block Size:256,Scan Step 50.00nm,Lower Offset:5.0um,Upper Offset:5.0um。',
+          ja:'■ 3D Fringe Tuning – Wave Length (Setting)\n\nService▸Central wavelengthを選択します。Illumination:3D 1.6us、Block Size:256、Scan Step 50.00nm、Lower Offset:5.0um、Upper Offset:5.0umに設定します。',
+          vi:'■ 3D Fringe Tuning – Wave Length (Setting)\n\nChọn Service▸Central wavelength. Đặt Illumination: 3D 1.6us, Block Size: 256, Scan Step 50.00nm, Lower Offset: 5.0um, Upper Offset: 5.0um.'
+        }},
+        {img:cmImg('I','qpm',111),tx:{
+          ko:'■ 3D Fringe Tuning – Wave Length (Calculation)\n\nScan을 클릭해 Profile View의 Fringe 파형이 일정한지 확인합니다. \'Average Central Wavelength\' 값이 630mm(±10)인지 확인합니다. \'Apply System Parameter\'를 클릭하면 \'Average Central Wavelength\' 값이 \'Current Block Central Wavelength\'에 적용되며, Current Block Central Wavelength를 Apply한 뒤 저장합니다.',
+          en:'■ 3D Fringe Tuning – Wave Length (Calculation)\n\nClick Scan to check that the fringe waveform in the profile view is constant. Check that the value of \'Average Central Wavelength\' is 630mm (±10). Clicking \'Apply System Parameter\' applies the \'Average Central Wavelength\' value to \'Current Block Central Wavelength\' — apply and save the Current Block Central Wavelength.',
+          zhCN:'■ 3D Fringe Tuning – Wave Length (Calculation)\n\n点击Scan确认profile view中的fringe波形是否恒定。确认\'Average Central Wavelength\'值是否为630mm(±10)。点击\'Apply System Parameter\'后,\'Average Central Wavelength\'值将应用于\'Current Block Central Wavelength\'——将Current Block Central Wavelength应用并保存。',
+          zhTW:'■ 3D Fringe Tuning – Wave Length (Calculation)\n\n點擊Scan確認profile view中的fringe波形是否恆定。確認\'Average Central Wavelength\'值是否為630mm(±10)。點擊\'Apply System Parameter\'後,\'Average Central Wavelength\'值將應用於\'Current Block Central Wavelength\'——將Current Block Central Wavelength應用並儲存。',
+          ja:'■ 3D Fringe Tuning – Wave Length (Calculation)\n\nScanをクリックしprofile viewのfringe波形が一定であることを確認します。\'Average Central Wavelength\'値が630mm(±10)であることを確認します。\'Apply System Parameter\'をクリックすると\'Average Central Wavelength\'値が\'Current Block Central Wavelength\'に適用されます——Current Block Central Wavelengthを適用し保存します。',
+          vi:'■ 3D Fringe Tuning – Wave Length (Calculation)\n\nNhấp Scan để kiểm tra dạng sóng fringe trong profile view có ổn định không. Kiểm tra giá trị \'Average Central Wavelength\' có phải 630mm(±10). Nhấp \'Apply System Parameter\' sẽ áp dụng giá trị \'Average Central Wavelength\' vào \'Current Block Central Wavelength\' — áp dụng và lưu Current Block Central Wavelength.'
+        }},
+        {img:cmImg('I','qpm',112),tx:{
+          ko:'■ Camera Scale Calibration – Grid Position Setting (X/Y)\n\nService ▸ 2D_scale을 선택합니다. CH0 조명 값을 255로 설정한 뒤 CH0을 클릭해 Live 화면을 확인합니다. Open config를 클릭해 AF를 실행하고 Focus가 일치하는 지점을 찾습니다. 영상 화면에서 마우스 우클릭 후 \'Center Cross Mark\' 메뉴를 선택합니다. Motor의 X, Y축을 이동해 \'Center Line\'을 2D Scale Target 중앙에 맞춥니다.',
+          en:'■ Camera Scale Calibration – Grid Position Setting (X/Y)\n\nSelect Service ▸ 2D_scale. After setting the lighting value of CH0 to 255, click CH0 to check the \'Live screen\'. Click Open config to run AF and find a point where the Focus matches. Right-click the mouse on the video screen and select the \'Center Cross Mark\' menu. Set the \'Center Line\' to the center of the 2D Scale Target by moving the X and Y axes of the motor.',
+          zhCN:'■ Camera Scale Calibration – Grid Position Setting (X/Y)\n\n选择Service▸2D_scale。将CH0照明值设为255后点击CH0确认\'Live screen\'。点击Open config运行AF,找到Focus一致的点。在影像画面上右键点击,选择\'Center Cross Mark\'菜单。移动Motor的X、Y轴,将\'Center Line\'对准2D Scale Target中央。',
+          zhTW:'■ Camera Scale Calibration – Grid Position Setting (X/Y)\n\n選擇Service▸2D_scale。將CH0照明值設為255後點擊CH0確認\'Live screen\'。點擊Open config執行AF,找到Focus一致的點。在影像畫面上右鍵點擊,選擇\'Center Cross Mark\'選單。移動Motor的X、Y軸,將\'Center Line\'對準2D Scale Target中央。',
+          ja:'■ Camera Scale Calibration – Grid Position Setting (X/Y)\n\nService▸2D_scaleを選択します。CH0の照明値を255に設定した後CH0をクリックし\'Live screen\'を確認します。Open configをクリックしAFを実行しFocusが一致する点を見つけます。映像画面上でマウスを右クリックし\'Center Cross Mark\'メニューを選択します。MotorのX、Y軸を移動し\'Center Line\'を2D Scale Target中央に合わせます。',
+          vi:'■ Camera Scale Calibration – Grid Position Setting (X/Y)\n\nChọn Service▸2D_scale. Sau khi đặt giá trị chiếu sáng CH0 thành 255, nhấp CH0 để kiểm tra \'màn hình Live\'. Nhấp Open config để chạy AF và tìm điểm mà Focus khớp. Nhấp chuột phải trên màn hình video và chọn menu \'Center Cross Mark\'. Di chuyển trục X, Y của motor để đặt \'Center Line\' vào giữa 2D Scale Target.'
+        }},
+        {img:cmImg('I','qpm',113),tx:{
+          ko:'■ Camera Scale Calibration – Scale Calibration Check (1/2)\n\nscan 버튼을 클릭합니다. \'Reprojection Error Criteria\' 값과 \'Reprojection Error\' 값의 차이가 ±1.000px 이내이면 Pass로 판정합니다. \'Apply System Parameter\' 버튼을 클릭해 결과를 적용·저장합니다.',
+          en:'■ Camera Scale Calibration – Scale Calibration Check (1/2)\n\nClick the scan button. It is judged Pass when the difference between the \'Reprojection Error Criteria\' value and the \'Reprojection Error\' value is within ±1.000px. Click the \'Apply System Parameter\' button to apply and save the results.',
+          zhCN:'■ Camera Scale Calibration – Scale Calibration Check (1/2)\n\n点击scan按钮。当\'Reprojection Error Criteria\'值与\'Reprojection Error\'值的差在±1.000px以内时判定为Pass。点击\'Apply System Parameter\'按钮应用并保存结果。',
+          zhTW:'■ Camera Scale Calibration – Scale Calibration Check (1/2)\n\n點擊scan按鈕。當\'Reprojection Error Criteria\'值與\'Reprojection Error\'值的差在±1.000px以內時判定為Pass。點擊\'Apply System Parameter\'按鈕套用並儲存結果。',
+          ja:'■ Camera Scale Calibration – Scale Calibration Check (1/2)\n\nscanボタンをクリックします。\'Reprojection Error Criteria\'値と\'Reprojection Error\'値の差が±1.000px以内であればPassと判定します。\'Apply System Parameter\'ボタンをクリックし結果を適用・保存します。',
+          vi:'■ Camera Scale Calibration – Scale Calibration Check (1/2)\n\nNhấp nút scan. Được đánh giá Pass khi chênh lệch giữa giá trị \'Reprojection Error Criteria\' và \'Reprojection Error\' trong khoảng ±1.000px. Nhấp nút \'Apply System Parameter\' để áp dụng và lưu kết quả.'
+        }},
+        {img:cmImg('I','qpm',114),tx:{
+          ko:'■ Camera Scale Calibration – Scale Calibration Check (2/2)\n\n\'C:\\intekplus\\Utc\\QPM\\Main\\Config\' 경로의 파일을 열어 Scale 값이 저장되었는지 확인합니다.',
+          en:'■ Camera Scale Calibration – Scale Calibration Check (2/2)\n\nOpen the file in the \'C:\\intekplus\\Utc\\QPM\\Main\\Config\' path and check whether the scale value has been saved.',
+          zhCN:'■ Camera Scale Calibration – Scale Calibration Check (2/2)\n\n打开\'C:\\intekplus\\Utc\\QPM\\Main\\Config\'路径下的文件,确认Scale值是否已保存。',
+          zhTW:'■ Camera Scale Calibration – Scale Calibration Check (2/2)\n\n開啟\'C:\\intekplus\\Utc\\QPM\\Main\\Config\'路徑下的檔案,確認Scale值是否已儲存。',
+          ja:'■ Camera Scale Calibration – Scale Calibration Check (2/2)\n\n\'C:\\intekplus\\Utc\\QPM\\Main\\Config\'パスのファイルを開き、Scale値が保存されたか確認します。',
+          vi:'■ Camera Scale Calibration – Scale Calibration Check (2/2)\n\nMở file tại đường dẫn \'C:\\intekplus\\Utc\\QPM\\Main\\Config\' và kiểm tra giá trị Scale đã được lưu chưa.'
+        }},
+        {img:cmImg('I','qpm',115),tx:{
+          ko:'■ AF Driver Setting\n\nMotor Driver의 Function Setting과 Dial Setting 구성입니다.',
+          en:'■ AF Driver Setting\n\nThe Motor Driver\'s Function Setting and Dial Setting configuration.',
+          zhCN:'■ AF Driver Setting\n\nMotor Driver的Function Setting与Dial Setting构成。',
+          zhTW:'■ AF Driver Setting\n\nMotor Driver的Function Setting與Dial Setting構成。',
+          ja:'■ AF Driver Setting\n\nMotor DriverのFunction SettingとDial Settingの構成です。',
+          vi:'■ AF Driver Setting\n\nCấu hình Function Setting và Dial Setting của Motor Driver.'
+        }},
+        {img:cmImg('I','qpm',116),tx:{
+          ko:'■ AF Driver Setting — 1Pulse 입력 방식\n\n1. CW: Motion Signal — Stepping Motor의 회전 속도·각도를 결정하는 신호를 인가합니다.\n2. CCW: Turn Signal[H:정회전, L:역회전] — Stepping Motor의 회전 방향을 결정하는 신호를 인가합니다.',
+          en:'■ AF Driver Setting — 1Pulse input method\n\n1. CW: Motion Signal — apply the signal to determine the rotation speed and angle of the stepping motor.\n2. CCW: Turn Signal [H: forward rotation, L: reverse rotation] — apply a signal to determine the rotation direction of the stepping motor.',
+          zhCN:'■ AF Driver Setting — 1Pulse输入方式\n\n1. CW:Motion Signal——施加信号以决定Stepping Motor的转速·角度。\n2. CCW:Turn Signal[H:正转,L:反转]——施加信号以决定Stepping Motor的旋转方向。',
+          zhTW:'■ AF Driver Setting — 1Pulse輸入方式\n\n1. CW:Motion Signal——施加訊號以決定Stepping Motor的轉速·角度。\n2. CCW:Turn Signal[H:正轉,L:反轉]——施加訊號以決定Stepping Motor的旋轉方向。',
+          ja:'■ AF Driver Setting — 1Pulse入力方式\n\n1. CW:Motion Signal——Stepping Motorの回転速度・角度を決定する信号を印加します。\n2. CCW:Turn Signal[H:正転、L:逆転]——Stepping Motorの回転方向を決定する信号を印加します。',
+          vi:'■ AF Driver Setting — Phương thức nhập 1Pulse\n\n1. CW: Motion Signal — áp tín hiệu để xác định tốc độ·góc quay của Stepping Motor.\n2. CCW: Turn Signal[H: quay thuận, L: quay ngược] — áp tín hiệu để xác định hướng quay của Stepping Motor.'
+        }},
+        {img:cmImg('I','qpm',117),tx:{
+          ko:'■ AF Driver Setting — 2Pulse 입력 방식\n\n1. CW: Forward Motion — Stepping Motor의 회전 속도·각도를 결정하는 신호를 인가합니다.\n2. CCW: Reverse Motion — Stepping Motor의 회전 속도·각도를 결정하는 신호를 인가합니다.',
+          en:'■ AF Driver Setting — 2Pulse input method\n\n1. CW: Forward Motion — apply the signal to determine the rotation speed and angle of the stepping motor.\n2. CCW: Reverse Motion — apply the signal to determine the rotation speed and angle of the stepping motor.',
+          zhCN:'■ AF Driver Setting — 2Pulse输入方式\n\n1. CW:Forward Motion——施加信号以决定Stepping Motor的转速·角度。\n2. CCW:Reverse Motion——施加信号以决定Stepping Motor的转速·角度。',
+          zhTW:'■ AF Driver Setting — 2Pulse輸入方式\n\n1. CW:Forward Motion——施加訊號以決定Stepping Motor的轉速·角度。\n2. CCW:Reverse Motion——施加訊號以決定Stepping Motor的轉速·角度。',
+          ja:'■ AF Driver Setting — 2Pulse入力方式\n\n1. CW:Forward Motion——Stepping Motorの回転速度・角度を決定する信号を印加します。\n2. CCW:Reverse Motion——Stepping Motorの回転速度・角度を決定する信号を印加します。',
+          vi:'■ AF Driver Setting — Phương thức nhập 2Pulse\n\n1. CW: Forward Motion — áp tín hiệu để xác định tốc độ·góc quay của Stepping Motor.\n2. CCW: Reverse Motion — áp tín hiệu để xác định tốc độ·góc quay của Stepping Motor.'
+        }},
+        {img:cmImg('I','qpm',118),tx:{
+          ko:'■ AF Driver Setting\n\nDial of STEP[9]: Reducer 적용 전. Dial of STEP[6]: Reducer 적용 후.',
+          en:'■ AF Driver Setting\n\nDial of STEP [9]: before applying the reducer. Dial of STEP [6]: after applying the reducer.',
+          zhCN:'■ AF Driver Setting\n\nDial of STEP[9]:应用Reducer前。Dial of STEP[6]:应用Reducer后。',
+          zhTW:'■ AF Driver Setting\n\nDial of STEP[9]:套用Reducer前。Dial of STEP[6]:套用Reducer後。',
+          ja:'■ AF Driver Setting\n\nDial of STEP[9]:Reducer適用前。Dial of STEP[6]:Reducer適用後。',
+          vi:'■ AF Driver Setting\n\nDial of STEP[9]: trước khi áp dụng reducer. Dial of STEP[6]: sau khi áp dụng reducer.'
+        }},
+        {img:cmImg('I','qpm',119),tx:{
+          ko:'■ AF Driver Setting — AF Parameter Calculation Method\n\nRef. Pulse/um 계산 방법: Z축 Ball Screw Pitch(1회전당 이동 거리, 예: 5mm/회전)를 확인합니다. Z축을 구동하는 Stepping Motor Driver의 분해능을 확인합니다 — 예: Oriental Motor RK Series는 Step Dial을 9로 설정. Dial 9 → Step Angle 0.018° → 1회전당 20,000pulse. Dial 6 → Step Angle 0.072° → 1회전당 5,000pulse. 비례식(Ball Screw Pitch:분해능=1um:X)으로 1um 이동에 필요한 Pulse수(X)를 계산합니다. Dial 9 기준: X=1um×20,000pulse/5mm(5,000um)=4pulse/um → Reducer(10:1) 적용 시 40pulse/um. Dial 6 기준: X=1um×5,000pulse/5mm(5,000um)=1pulse/um → Reducer(10:1) 적용 시 10pulse/um.',
+          en:'■ AF Driver Setting — AF Parameter Calculation Method\n\nReference Pulse/um calculation method: check the Z-axis ball screw pitch (distance moved per revolution, e.g. 5mm per rotation). Check the resolution of the stepping motor driver that moves the Z-axis — e.g. for an Oriental Motor RK Series driver, set the step dial to 9. Dial 9 → Step angle 0.018° → 20,000 pulses per rotation. Dial 6 → Step angle 0.072° → 5,000 pulses per rotation. Using the proportional formula (Ball Screw Pitch : resolution = 1um : X), calculate the number of pulses (X) needed to move 1um. For Dial 9: X = 1um × 20,000pulse / 5mm(5,000um) = 4pulse/um → with a 10:1 reducer, 40pulse/um. For Dial 6: X = 1um × 5,000pulse / 5mm(5,000um) = 1pulse/um → with a 10:1 reducer, 10pulse/um.',
+          zhCN:'■ AF Driver Setting — AF Parameter Calculation Method\n\nRef. Pulse/um计算方法:确认Z轴Ball Screw Pitch(每转移动距离,例如5mm/转)。确认驱动Z轴的Stepping Motor Driver分辨率——例如Oriental Motor RK Series将Step Dial设为9。Dial 9→Step Angle 0.018°→每转20,000pulse。Dial 6→Step Angle 0.072°→每转5,000pulse。以比例式(Ball Screw Pitch:分辨率=1um:X)计算移动1um所需的Pulse数(X)。以Dial 9为准:X=1um×20,000pulse/5mm(5,000um)=4pulse/um→应用Reducer(10:1)后为40pulse/um。以Dial 6为准:X=1um×5,000pulse/5mm(5,000um)=1pulse/um→应用Reducer(10:1)后为10pulse/um。',
+          zhTW:'■ AF Driver Setting — AF Parameter Calculation Method\n\nRef. Pulse/um計算方法:確認Z軸Ball Screw Pitch(每轉移動距離,例如5mm/轉)。確認驅動Z軸的Stepping Motor Driver解析度——例如Oriental Motor RK Series將Step Dial設為9。Dial 9→Step Angle 0.018°→每轉20,000pulse。Dial 6→Step Angle 0.072°→每轉5,000pulse。以比例式(Ball Screw Pitch:解析度=1um:X)計算移動1um所需的Pulse數(X)。以Dial 9為準:X=1um×20,000pulse/5mm(5,000um)=4pulse/um→套用Reducer(10:1)後為40pulse/um。以Dial 6為準:X=1um×5,000pulse/5mm(5,000um)=1pulse/um→套用Reducer(10:1)後為10pulse/um。',
+          ja:'■ AF Driver Setting — AF Parameter Calculation Method\n\nRef. Pulse/um計算方法:Z軸Ball Screw Pitch(1回転あたりの移動距離、例:5mm/回転)を確認します。Z軸を駆動するStepping Motor Driverの分解能を確認します——例:Oriental Motor RK SeriesではStep Dialを9に設定。Dial 9→Step Angle 0.018°→1回転あたり20,000pulse。Dial 6→Step Angle 0.072°→1回転あたり5,000pulse。比例式(Ball Screw Pitch:分解能=1um:X)で1um移動に必要なPulse数(X)を計算します。Dial 9基準:X=1um×20,000pulse/5mm(5,000um)=4pulse/um→Reducer(10:1)適用時40pulse/um。Dial 6基準:X=1um×5,000pulse/5mm(5,000um)=1pulse/um→Reducer(10:1)適用時10pulse/um。',
+          vi:'■ AF Driver Setting — AF Parameter Calculation Method\n\nCách tính Ref. Pulse/um: kiểm tra Ball Screw Pitch trục Z (khoảng cách di chuyển mỗi vòng quay, ví dụ 5mm/vòng). Kiểm tra độ phân giải của Stepping Motor Driver dẫn động trục Z — ví dụ với driver Oriental Motor dòng RK, đặt Step Dial thành 9. Dial 9 → Step Angle 0.018° → 20.000 pulse mỗi vòng. Dial 6 → Step Angle 0.072° → 5.000 pulse mỗi vòng. Dùng công thức tỷ lệ (Ball Screw Pitch : độ phân giải = 1um : X) để tính số pulse (X) cần để di chuyển 1um. Với Dial 9: X=1um×20.000pulse/5mm(5.000um)=4pulse/um → với reducer 10:1, thành 40pulse/um. Với Dial 6: X=1um×5.000pulse/5mm(5.000um)=1pulse/um → với reducer 10:1, thành 10pulse/um.'
+        }},
+        {img:cmImg('I','qpm',120),tx:{
+          ko:'■ Vision Z axis Limit Setting – Panel Type\n\nVision Z축 Limit Sensor의 Dog Bolt를 풀고 Dog를 들어올려 고정합니다. AF 프로그램으로 \'2D 조명\'과 \'Panel Table\' 높이를 8mm로 설정합니다. Limit Down Sensor가 빨간색으로 표시된 지점에서 Dog Bolt를 고정합니다.',
+          en:'■ Vision Z axis Limit Setting – Panel Type\n\nLoosen the Dog bolt on the Vision Z-axis limit sensor and lift the Dog to fix it. Use the AF program to set the \'2D lighting\' and the \'Panel table\' height to 8mm. Secure the dog bolt where the Limit Down sensor is marked red.',
+          zhCN:'■ Vision Z axis Limit Setting – Panel Type\n\n松开Vision Z轴限位传感器的Dog Bolt,抬起Dog后固定。用AF程序将\'2D lighting\'与\'Panel table\'高度设为8mm。在Limit Down Sensor标记为红色的位置固定Dog Bolt。',
+          zhTW:'■ Vision Z axis Limit Setting – Panel Type\n\n鬆開Vision Z軸限位感測器的Dog Bolt,抬起Dog後固定。用AF程式將\'2D lighting\'與\'Panel table\'高度設為8mm。在Limit Down Sensor標記為紅色的位置固定Dog Bolt。',
+          ja:'■ Vision Z axis Limit Setting – Panel Type\n\nVision Z軸リミットセンサーのDog Boltを緩めDogを持ち上げて固定します。AFプログラムで\'2D lighting\'と\'Panel table\'の高さを8mmに設定します。Limit Down Sensorが赤色で表示された位置でDog Boltを固定します。',
+          vi:'■ Vision Z axis Limit Setting – Panel Type\n\nNới lỏng Dog bolt trên cảm biến giới hạn trục Z của Vision và nâng Dog lên để cố định. Dùng chương trình AF đặt \'2D lighting\' và chiều cao \'Panel table\' thành 8mm. Cố định dog bolt tại vị trí cảm biến Limit Down đánh dấu màu đỏ.'
+        }},
+        {img:cmImg('I','qpm',121),tx:{
+          ko:'■ Vision Z axis Limit Setting – Tray, Double Tray\n\nVision Z축 Limit Sensor의 Dog Bolt를 풀고 Dog를 들어올려 고정합니다. AF 프로그램으로 \'2D 조명\'과 \'Tray Clamp\' 높이를 5mm로 설정합니다. Limit Down Sensor가 빨간색으로 표시된 지점에서 Dog Bolt를 고정합니다.',
+          en:'■ Vision Z axis Limit Setting – Tray, Double Tray\n\nLoosen the Dog bolt on the Vision Z-axis limit sensor and lift the Dog to fix it. Use the AF program to set the \'2D lighting\' and the \'Tray clamp\' height to 5mm. Secure the dog bolt where the Limit Down sensor is marked red.',
+          zhCN:'■ Vision Z axis Limit Setting – Tray, Double Tray\n\n松开Vision Z轴限位传感器的Dog Bolt,抬起Dog后固定。用AF程序将\'2D lighting\'与\'Tray clamp\'高度设为5mm。在Limit Down Sensor标记为红色的位置固定Dog Bolt。',
+          zhTW:'■ Vision Z axis Limit Setting – Tray, Double Tray\n\n鬆開Vision Z軸限位感測器的Dog Bolt,抬起Dog後固定。用AF程式將\'2D lighting\'與\'Tray clamp\'高度設為5mm。在Limit Down Sensor標記為紅色的位置固定Dog Bolt。',
+          ja:'■ Vision Z axis Limit Setting – Tray, Double Tray\n\nVision Z軸リミットセンサーのDog Boltを緩めDogを持ち上げて固定します。AFプログラムで\'2D lighting\'と\'Tray clamp\'の高さを5mmに設定します。Limit Down Sensorが赤色で表示された位置でDog Boltを固定します。',
+          vi:'■ Vision Z axis Limit Setting – Tray, Double Tray\n\nNới lỏng Dog bolt trên cảm biến giới hạn trục Z của Vision và nâng Dog lên để cố định. Dùng chương trình AF đặt \'2D lighting\' và chiều cao \'Tray clamp\' thành 5mm. Cố định dog bolt tại vị trí cảm biến Limit Down đánh dấu màu đỏ.'
+        }},
+        {img:cmImg('I','qpm',122),tx:{
+          ko:'■ Vision Z axis Limit Setting – Pedestal & Tray Type\n\nVision Z축 Limit Sensor의 Dog Bolt를 풀고 Dog를 들어올려 고정합니다. AF 프로그램으로 \'2D 조명\'과 \'Tray Clamp\' 높이를 5mm로 설정합니다. Limit Down Sensor가 빨간색으로 표시된 지점에서 Dog Bolt를 고정합니다.',
+          en:'■ Vision Z axis Limit Setting – Pedestal & Tray Type\n\nLoosen the Dog bolt on the Vision Z-axis limit sensor and lift the Dog to fix it. Use the AF program to set the \'2D lighting\' and the \'Tray clamp\' height to 5mm. Secure the dog bolt where the Limit Down sensor is marked red.',
+          zhCN:'■ Vision Z axis Limit Setting – Pedestal & Tray Type\n\n松开Vision Z轴限位传感器的Dog Bolt,抬起Dog后固定。用AF程序将\'2D lighting\'与\'Tray clamp\'高度设为5mm。在Limit Down Sensor标记为红色的位置固定Dog Bolt。',
+          zhTW:'■ Vision Z axis Limit Setting – Pedestal & Tray Type\n\n鬆開Vision Z軸限位感測器的Dog Bolt,抬起Dog後固定。用AF程式將\'2D lighting\'與\'Tray clamp\'高度設為5mm。在Limit Down Sensor標記為紅色的位置固定Dog Bolt。',
+          ja:'■ Vision Z axis Limit Setting – Pedestal & Tray Type\n\nVision Z軸リミットセンサーのDog Boltを緩めDogを持ち上げて固定します。AFプログラムで\'2D lighting\'と\'Tray clamp\'の高さを5mmに設定します。Limit Down Sensorが赤色で表示された位置でDog Boltを固定します。',
+          vi:'■ Vision Z axis Limit Setting – Pedestal & Tray Type\n\nNới lỏng Dog bolt trên cảm biến giới hạn trục Z của Vision và nâng Dog lên để cố định. Dùng chương trình AF đặt \'2D lighting\' và chiều cao \'Tray clamp\' thành 5mm. Cố định dog bolt tại vị trí cảm biến Limit Down đánh dấu màu đỏ.'
+        }},
+        {img:cmImg('I','qpm',123),tx:{
+          ko:'■ LTS Setting & Verification\n\nUtility ▸ Optics Diagnosis를 클릭합니다. Optics Diagnosis에는 3D, Gray, Grid의 3가지 광학 진단 유형이 있습니다.',
+          en:'■ LTS Setting & Verification\n\nClick Utility ▸ Optics Diagnosis. Optics Diagnosis has three optical diagnostic types: 3D, Gray, and Grid.',
+          zhCN:'■ LTS Setting & Verification\n\n点击Utility▸Optics Diagnosis。Optics Diagnosis有3D、Gray、Grid三种光学诊断类型。',
+          zhTW:'■ LTS Setting & Verification\n\n點擊Utility▸Optics Diagnosis。Optics Diagnosis有3D、Gray、Grid三種光學診斷類型。',
+          ja:'■ LTS Setting & Verification\n\nUtility▸Optics Diagnosisをクリックします。Optics Diagnosisには3D、Gray、Gridの3つの光学診断タイプがあります。',
+          vi:'■ LTS Setting & Verification\n\nNhấp Utility▸Optics Diagnosis. Optics Diagnosis có ba loại chẩn đoán quang học: 3D, Gray, Grid.'
+        }},
+        {img:cmImg('I','qpm',124),tx:{
+          ko:'■ Grid Target(Matrix) Setting – Positions Teaching (1/2)\n\nGrid 버튼을 클릭합니다. Move 버튼을 클릭해 \'Target\' 위치로 이동합니다. Oblique Illumination 조명 값을 255로 설정한 뒤 클릭해 Live를 확인합니다.',
+          en:'■ Grid Target(Matrix) Setting – Positions Teaching (1/2)\n\nClick the Grid button. Click the Move button to the \'Target\' position. After setting the Oblique illumination lighting value to 255, click to see Live.',
+          zhCN:'■ Grid Target(Matrix) Setting – Positions Teaching (1/2)\n\n点击Grid按钮。点击Move按钮移动到\'Target\'位置。将Oblique illumination照明值设为255后点击查看Live。',
+          zhTW:'■ Grid Target(Matrix) Setting – Positions Teaching (1/2)\n\n點擊Grid按鈕。點擊Move按鈕移動到\'Target\'位置。將Oblique illumination照明值設為255後點擊查看Live。',
+          ja:'■ Grid Target(Matrix) Setting – Positions Teaching (1/2)\n\nGridボタンをクリックします。Moveボタンをクリックし\'Target\'位置へ移動します。Oblique illuminationの照明値を255に設定した後クリックしLiveを確認します。',
+          vi:'■ Grid Target(Matrix) Setting – Positions Teaching (1/2)\n\nNhấp nút Grid. Nhấp nút Move để đến vị trí \'Target\'. Sau khi đặt giá trị chiếu sáng Oblique illumination thành 255, nhấp để xem Live.'
+        }},
+        {img:cmImg('I','qpm',125),tx:{
+          ko:'■ Grid Target(Matrix) Setting – Positions Teaching (2/2)\n\nOpen config에서 AF 프로그램을 실행한 뒤 Grid Target 위치에 초점을 맞춥니다. 영상 화면에서 마우스 우클릭 후 \'Show image Center line\' 메뉴를 선택합니다. Motor Controls로 Grid Target의 중심 위치를 설정합니다. \'Teach position\'을 클릭해 저장합니다.',
+          en:'■ Grid Target(Matrix) Setting – Positions Teaching (2/2)\n\nAfter executing the AF program in Open config, focus on the \'Grid Target\' position. Right-click the mouse on the video screen and select the \'Show image Center line\' menu. Set the center position of the Grid Target using Motor Controls. Click \'Teach position\' and save.',
+          zhCN:'■ Grid Target(Matrix) Setting – Positions Teaching (2/2)\n\n在Open config中执行AF程序后,对Grid Target位置进行对焦。在影像画面上右键点击,选择\'Show image Center line\'菜单。用Motor Controls设置Grid Target的中心位置。点击\'Teach position\'并保存。',
+          zhTW:'■ Grid Target(Matrix) Setting – Positions Teaching (2/2)\n\n在Open config中執行AF程式後,對Grid Target位置進行對焦。在影像畫面上右鍵點擊,選擇\'Show image Center line\'選單。用Motor Controls設定Grid Target的中心位置。點擊\'Teach position\'並儲存。',
+          ja:'■ Grid Target(Matrix) Setting – Positions Teaching (2/2)\n\nOpen configでAFプログラムを実行した後、Grid Target位置に焦点を合わせます。映像画面上でマウスを右クリックし\'Show image Center line\'メニューを選択します。Motor ControlsでGrid Targetの中心位置を設定します。\'Teach position\'をクリックし保存します。',
+          vi:'■ Grid Target(Matrix) Setting – Positions Teaching (2/2)\n\nSau khi chạy chương trình AF trong Open config, lấy nét tại vị trí Grid Target. Nhấp chuột phải trên màn hình video và chọn menu \'Show image Center line\'. Đặt vị trí trung tâm của Grid Target bằng Motor Controls. Nhấp \'Teach position\' và lưu.'
+        }},
+        {img:cmImg('I','qpm',126),tx:{
+          ko:'■ Grid Target(Matrix) Setting – Calibration (1/2)\n\nTarget Size X 10.00mm, Y 9.00mm으로 설정합니다. Scale Criterium을 0.100um으로 설정합니다. Angle Criterium을 1.00000deg으로 설정합니다.',
+          en:'■ Grid Target(Matrix) Setting – Calibration (1/2)\n\nSet Target Size X 10.00mm, Y 9.00mm. Set the Scale criterium to 0.100um. Set the Angle criterium to 1.00000 deg.',
+          zhCN:'■ Grid Target(Matrix) Setting – Calibration (1/2)\n\n将Target Size设为X 10.00mm、Y 9.00mm。将Scale criterium设为0.100um。将Angle criterium设为1.00000 deg。',
+          zhTW:'■ Grid Target(Matrix) Setting – Calibration (1/2)\n\n將Target Size設為X 10.00mm、Y 9.00mm。將Scale criterium設為0.100um。將Angle criterium設為1.00000 deg。',
+          ja:'■ Grid Target(Matrix) Setting – Calibration (1/2)\n\nTarget SizeをX 10.00mm、Y 9.00mmに設定します。Scale criteriumを0.100umに設定します。Angle criteriumを1.00000degに設定します。',
+          vi:'■ Grid Target(Matrix) Setting – Calibration (1/2)\n\nĐặt Target Size X 10.00mm, Y 9.00mm. Đặt Scale criterium: 0.100um. Đặt Angle criterium: 1.00000 deg.'
+        }},
+        {img:cmImg('I','qpm',127),tx:{
+          ko:'■ Grid Target(Matrix) Setting – Calibration (2/2)\n\nScan을 클릭해 테스트를 진행합니다. \'Pass or fail\' 결과가 Pass 판정인지 확인합니다. \'Register as Reference\' 버튼을 클릭해 결과값을 적용·저장합니다.',
+          en:'■ Grid Target(Matrix) Setting – Calibration (2/2)\n\nClick Scan and proceed with the test. Check whether the result of "Pass or fail" is a Pass judgment. Click the Register as Reference button to apply and save the result value.',
+          zhCN:'■ Grid Target(Matrix) Setting – Calibration (2/2)\n\n点击Scan进行测试。确认\"Pass or fail\"结果是否判定为Pass。点击Register as Reference按钮应用并保存结果值。',
+          zhTW:'■ Grid Target(Matrix) Setting – Calibration (2/2)\n\n點擊Scan進行測試。確認\"Pass or fail\"結果是否判定為Pass。點擊Register as Reference按鈕套用並儲存結果值。',
+          ja:'■ Grid Target(Matrix) Setting – Calibration (2/2)\n\nScanをクリックしテストを進めます。\"Pass or fail\"の結果がPass判定か確認します。Register as Referenceボタンをクリックし結果値を適用・保存します。',
+          vi:'■ Grid Target(Matrix) Setting – Calibration (2/2)\n\nNhấp Scan để tiến hành kiểm tra. Kiểm tra kết quả \"Pass or fail\" có phải là Pass. Nhấp nút Register as Reference để áp dụng và lưu giá trị kết quả.'
+        }},
+        {img:cmImg('I','qpm',128),tx:{
+          ko:'■ Gray Target Setting – Positions Teaching (1/2)\n\nGrid 버튼을 클릭합니다. Move 버튼을 클릭해 \'Target\' 위치로 이동합니다. \'Oblique illumination 1\' 조명 값을 255로 설정한 뒤 클릭해 Live를 확인합니다.',
+          en:'■ Gray Target Setting – Positions Teaching (1/2)\n\nClick the Grid button. Click the Move button to the \'Target\' position. After setting the \'Oblique illumination 1\' lighting value to 255, click to see Live.',
+          zhCN:'■ Gray Target Setting – Positions Teaching (1/2)\n\n点击Grid按钮。点击Move按钮移动到\'Target\'位置。将\'Oblique illumination 1\'照明值设为255后点击查看Live。',
+          zhTW:'■ Gray Target Setting – Positions Teaching (1/2)\n\n點擊Grid按鈕。點擊Move按鈕移動到\'Target\'位置。將\'Oblique illumination 1\'照明值設為255後點擊查看Live。',
+          ja:'■ Gray Target Setting – Positions Teaching (1/2)\n\nGridボタンをクリックします。Moveボタンをクリックし\'Target\'位置へ移動します。\'Oblique illumination 1\'の照明値を255に設定した後クリックしLiveを確認します。',
+          vi:'■ Gray Target Setting – Positions Teaching (1/2)\n\nNhấp nút Grid. Nhấp nút Move để đến vị trí \'Target\'. Sau khi đặt giá trị chiếu sáng \'Oblique illumination 1\' thành 255, nhấp để xem Live.'
+        }},
+        {img:cmImg('I','qpm',129),tx:{
+          ko:'■ Gray Target Setting – Positions Teaching (2/2)\n\nOpen config에서 AF 프로그램을 실행한 뒤 Gray Target 위치에 초점을 맞춥니다. 영상 화면에서 마우스 우클릭 후 \'Show image Center line\' 메뉴를 선택합니다. Motor Controls로 Gray Target의 중심 위치를 설정합니다. \'Teach position\'을 클릭해 저장합니다.',
+          en:'■ Gray Target Setting – Positions Teaching (2/2)\n\nAfter executing the AF program in Open config, focus on the \'Gray Target\' position. Right-click the mouse on the video screen and select the \'Show image Center line\' menu. Set the center position of the Gray Target using Motor Controls. Click \'Teach position\' and save.',
+          zhCN:'■ Gray Target Setting – Positions Teaching (2/2)\n\n在Open config中执行AF程序后,对Gray Target位置进行对焦。在影像画面上右键点击,选择\'Show image Center line\'菜单。用Motor Controls设置Gray Target的中心位置。点击\'Teach position\'并保存。',
+          zhTW:'■ Gray Target Setting – Positions Teaching (2/2)\n\n在Open config中執行AF程式後,對Gray Target位置進行對焦。在影像畫面上右鍵點擊,選擇\'Show image Center line\'選單。用Motor Controls設定Gray Target的中心位置。點擊\'Teach position\'並儲存。',
+          ja:'■ Gray Target Setting – Positions Teaching (2/2)\n\nOpen configでAFプログラムを実行した後、Gray Target位置に焦点を合わせます。映像画面上でマウスを右クリックし\'Show image Center line\'メニューを選択します。Motor ControlsでGray Targetの中心位置を設定します。\'Teach position\'をクリックし保存します。',
+          vi:'■ Gray Target Setting – Positions Teaching (2/2)\n\nSau khi chạy chương trình AF trong Open config, lấy nét tại vị trí Gray Target. Nhấp chuột phải trên màn hình video và chọn menu \'Show image Center line\'. Đặt vị trí trung tâm của Gray Target bằng Motor Controls. Nhấp \'Teach position\' và lưu.'
+        }},
+        {img:cmImg('I','qpm',130),tx:{
+          ko:'■ Gray Target Setting – Measurement\n\nCriterium을 10.0%로 설정합니다. Scan을 클릭해 테스트를 진행합니다. \'Average Intensity\' 값이 160이 되도록 채널 값을 변경합니다. \'Pass or fail\' 결과가 Pass 판정인지 확인합니다. \'Register as Reference\' 버튼을 클릭해 결과값을 적용·저장합니다.',
+          en:'■ Gray Target Setting – Measurement\n\nSet it to 10.0% in Criterium. Click Scan and proceed with the test. Change the value of channels so that the \'Average intensity\' value is 160. Check whether the result of "Pass or fail" is a Pass judgment. Click the Register as Reference button to apply and save the result value.',
+          zhCN:'■ Gray Target Setting – Measurement\n\n在Criterium中设为10.0%。点击Scan进行测试。调整各channel的值,使\'Average intensity\'值为160。确认\"Pass or fail\"结果是否判定为Pass。点击Register as Reference按钮应用并保存结果值。',
+          zhTW:'■ Gray Target Setting – Measurement\n\n在Criterium中設為10.0%。點擊Scan進行測試。調整各channel的值,使\'Average intensity\'值為160。確認\"Pass or fail\"結果是否判定為Pass。點擊Register as Reference按鈕套用並儲存結果值。',
+          ja:'■ Gray Target Setting – Measurement\n\nCriteriumを10.0%に設定します。Scanをクリックしテストを進めます。\'Average intensity\'値が160になるようchannelの値を変更します。\"Pass or fail\"の結果がPass判定か確認します。Register as Referenceボタンをクリックし結果値を適用・保存します。',
+          vi:'■ Gray Target Setting – Measurement\n\nĐặt Criterium là 10.0%. Nhấp Scan để tiến hành kiểm tra. Thay đổi giá trị channel sao cho giá trị \'Average intensity\' là 160. Kiểm tra kết quả \"Pass or fail\" có phải là Pass. Nhấp nút Register as Reference để áp dụng và lưu giá trị kết quả.'
+        }},
+        {img:cmImg('I','qpm',131),tx:{
+          ko:'■ Step Height Target Setting – Positions Teaching (1/2)\n\n3D 버튼을 클릭합니다. Move 버튼을 클릭해 \'Target\' 위치로 이동합니다. \'Coaxial Illumination\' 조명 값을 1.6으로 설정한 뒤 클릭해 Live를 확인합니다.',
+          en:'■ Step Height Target Setting – Positions Teaching (1/2)\n\nClick the 3D button. Click the Move button to the \'Target\' position. After setting the \'Coaxial illumination\' lighting value to 1.6, click to see Live.',
+          zhCN:'■ Step Height Target Setting – Positions Teaching (1/2)\n\n点击3D按钮。点击Move按钮移动到\'Target\'位置。将\'Coaxial illumination\'照明值设为1.6后点击查看Live。',
+          zhTW:'■ Step Height Target Setting – Positions Teaching (1/2)\n\n點擊3D按鈕。點擊Move按鈕移動到\'Target\'位置。將\'Coaxial illumination\'照明值設為1.6後點擊查看Live。',
+          ja:'■ Step Height Target Setting – Positions Teaching (1/2)\n\n3Dボタンをクリックします。Moveボタンをクリックし\'Target\'位置へ移動します。\'Coaxial illumination\'の照明値を1.6に設定した後クリックしLiveを確認します。',
+          vi:'■ Step Height Target Setting – Positions Teaching (1/2)\n\nNhấp nút 3D. Nhấp nút Move để đến vị trí \'Target\'. Sau khi đặt giá trị chiếu sáng \'Coaxial illumination\' thành 1.6, nhấp để xem Live.'
+        }},
+        {img:cmImg('I','qpm',132),tx:{
+          ko:'■ Step Height Target Setting – Positions Teaching (2/2)\n\nAF 프로그램을 이용해 Target의 Fringe 위치로 이동합니다. 영상 화면에서 마우스 우클릭 후 \'Show image Center line\' 메뉴를 선택합니다. Motor의 X, Y축을 이동해 Grid Target 중심 위치를 설정합니다. \'Teach position\'을 클릭해 저장합니다.',
+          en:'■ Step Height Target Setting – Positions Teaching (2/2)\n\nMove to the fringe position of the Target using the AF program. Right-click the mouse on the video screen and select the \'Show image Center line\' menu. Move the motor X and Y axes to set the grid target center position. Click \'Teach position\' and save.',
+          zhCN:'■ Step Height Target Setting – Positions Teaching (2/2)\n\n使用AF程序移动到Target的fringe位置。在影像画面上右键点击,选择\'Show image Center line\'菜单。移动Motor的X、Y轴设置grid target中心位置。点击\'Teach position\'并保存。',
+          zhTW:'■ Step Height Target Setting – Positions Teaching (2/2)\n\n使用AF程式移動到Target的fringe位置。在影像畫面上右鍵點擊,選擇\'Show image Center line\'選單。移動Motor的X、Y軸設定grid target中心位置。點擊\'Teach position\'並儲存。',
+          ja:'■ Step Height Target Setting – Positions Teaching (2/2)\n\nAFプログラムを使用してTargetのfringe位置へ移動します。映像画面上でマウスを右クリックし\'Show image Center line\'メニューを選択します。MotorのX、Y軸を移動しgrid target中心位置を設定します。\'Teach position\'をクリックし保存します。',
+          vi:'■ Step Height Target Setting – Positions Teaching (2/2)\n\nDi chuyển đến vị trí fringe của Target bằng chương trình AF. Nhấp chuột phải trên màn hình video và chọn menu \'Show image Center line\'. Di chuyển trục X, Y của motor để đặt vị trí trung tâm grid target. Nhấp \'Teach position\' và lưu.'
+        }},
+        {img:cmImg('I','qpm',133),tx:{
+          ko:'■ Step Height Target Setting – Measurement\n\n\'Image Scan Parameters\'를 설정합니다. Scan을 클릭해 테스트를 진행합니다. \'Pass or fail\' 결과가 Pass 판정인지 확인합니다. \'Register as Reference\' 버튼을 클릭해 결과값을 적용·저장합니다.',
+          en:'■ Step Height Target Setting – Measurement\n\nSet the \'Image Scan parameters\'. Click Scan and proceed with the test. Check whether the result of "Pass or fail" is a Pass judgment. Click the Register as Reference button to apply and save the result value.',
+          zhCN:'■ Step Height Target Setting – Measurement\n\n设置\'Image Scan parameters\'。点击Scan进行测试。确认\"Pass or fail\"结果是否判定为Pass。点击Register as Reference按钮应用并保存结果值。',
+          zhTW:'■ Step Height Target Setting – Measurement\n\n設定\'Image Scan parameters\'。點擊Scan進行測試。確認\"Pass or fail\"結果是否判定為Pass。點擊Register as Reference按鈕套用並儲存結果值。',
+          ja:'■ Step Height Target Setting – Measurement\n\n\'Image Scan parameters\'を設定します。Scanをクリックしテストを進めます。\"Pass or fail\"の結果がPass判定か確認します。Register as Referenceボタンをクリックし結果値を適用・保存します。',
+          vi:'■ Step Height Target Setting – Measurement\n\nĐặt \'Image Scan parameters\'. Nhấp Scan để tiến hành kiểm tra. Kiểm tra kết quả \"Pass or fail\" có phải là Pass. Nhấp nút Register as Reference để áp dụng và lưu giá trị kết quả.'
+        }},
+        {img:cmImg('I','qpm',134),tx:{
+          ko:'■ Optics Diagnosis (1/4)\n\nMain에서 \'Optics Diagnosis\'를 클릭합니다. Lot ID, Operation, Repeat Count를 설정한 후 시작합니다.',
+          en:'■ Optics Diagnosis (1/4)\n\nClick \'Optics Diagnosis\' at the main. Start after setting Lot ID, Operation, and Repeat Count.',
+          zhCN:'■ Optics Diagnosis (1/4)\n\n在Main中点击\'Optics Diagnosis\'。设置Lot ID、Operation、Repeat Count后开始。',
+          zhTW:'■ Optics Diagnosis (1/4)\n\n在Main中點擊\'Optics Diagnosis\'。設定Lot ID、Operation、Repeat Count後開始。',
+          ja:'■ Optics Diagnosis (1/4)\n\nMainで\'Optics Diagnosis\'をクリックします。Lot ID、Operation、Repeat Countを設定した後開始します。',
+          vi:'■ Optics Diagnosis (1/4)\n\nNhấp \'Optics Diagnosis\' tại main. Bắt đầu sau khi đặt Lot ID, Operation, Repeat Count.'
+        }},
+        {img:cmImg('I','qpm',135),tx:{
+          ko:'■ Optics Diagnosis (2/4)\n\n3D Target, Gray Target, Grid Target 각각의 결과에 대해 위와 같은 방식으로 Pass 판정을 확인합니다.',
+          en:'■ Optics Diagnosis (2/4)\n\nCheck the Pass determination for the 3D Target, Gray Target, and Grid Target results in the same way as above.',
+          zhCN:'■ Optics Diagnosis (2/4)\n\n对3D Target、Gray Target、Grid Target各自的结果,以上述方式确认Pass判定。',
+          zhTW:'■ Optics Diagnosis (2/4)\n\n對3D Target、Gray Target、Grid Target各自的結果,以上述方式確認Pass判定。',
+          ja:'■ Optics Diagnosis (2/4)\n\n3D Target、Gray Target、Grid Targetそれぞれの結果について、上記と同様の方法でPass判定を確認します。',
+          vi:'■ Optics Diagnosis (2/4)\n\nXác nhận đánh giá Pass cho kết quả của 3D Target, Gray Target, Grid Target theo cách như trên.'
+        }},
+        {img:cmImg('I','qpm',136),tx:{
+          ko:'■ Optics Diagnosis (3/4)\n\n\'System\'에서 리포트가 저장되는 경로를 확인합니다.',
+          en:'■ Optics Diagnosis (3/4)\n\nCheck the path where the report is saved in \'System\'.',
+          zhCN:'■ Optics Diagnosis (3/4)\n\n在\'System\'中确认报告的保存路径。',
+          zhTW:'■ Optics Diagnosis (3/4)\n\n在\'System\'中確認報告的儲存路徑。',
+          ja:'■ Optics Diagnosis (3/4)\n\n\'System\'でレポートの保存先パスを確認します。',
+          vi:'■ Optics Diagnosis (3/4)\n\nKiểm tra đường dẫn lưu báo cáo trong \'System\'.'
+        }},
+        {img:cmImg('I','qpm',137),tx:{
+          ko:'■ Optics Diagnosis (4/4)\n\nLTS Report에서 (Height Target, Gray Target, Grid Target) 데이터를 확인합니다.',
+          en:'■ Optics Diagnosis (4/4)\n\nCheck the (Height Target, Gray Target, Grid Target) data in the LTS Report.',
+          zhCN:'■ Optics Diagnosis (4/4)\n\n在LTS Report中确认(Height Target、Gray Target、Grid Target)数据。',
+          zhTW:'■ Optics Diagnosis (4/4)\n\n在LTS Report中確認(Height Target、Gray Target、Grid Target)數據。',
+          ja:'■ Optics Diagnosis (4/4)\n\nLTS Reportで(Height Target、Gray Target、Grid Target)データを確認します。',
+          vi:'■ Optics Diagnosis (4/4)\n\nKiểm tra dữ liệu (Height Target, Gray Target, Grid Target) trong LTS Report.'
+        }},
+        {img:cmImg('I','qpm',138),tx:{
+          ko:'■ Panel Design – Panel Type (1/4)\n\n먼저 Unit을 Fixing Pin 가장자리에 밀착시키고, Guide Pin을 Unit에 최대한 가깝게 붙입니다.',
+          en:'■ Panel Design – Panel Type (1/4)\n\nFirst, press the unit against the edge of the fixing pin and bring the guide pin as close to the unit as possible.',
+          zhCN:'■ Panel Design – Panel Type (1/4)\n\n首先将Unit紧贴Fixing Pin边缘,并使Guide Pin尽量靠近Unit。',
+          zhTW:'■ Panel Design – Panel Type (1/4)\n\n首先將Unit緊貼Fixing Pin邊緣,並使Guide Pin盡量靠近Unit。',
+          ja:'■ Panel Design – Panel Type (1/4)\n\nまずUnitをFixing Pinの端に密着させ、Guide PinをUnitにできるだけ近づけます。',
+          vi:'■ Panel Design – Panel Type (1/4)\n\nĐầu tiên, ép unit sát vào mép fixing pin và đưa guide pin đến gần unit nhất có thể.'
+        }},
+        {img:cmImg('I','qpm',139),tx:{
+          ko:'■ Panel Design – Panel Type (2/4)\n\nMain에서 \'Vacuum on\'을 클릭하고 Ejector Display에서 80~90MPa인지 확인합니다.',
+          en:'■ Panel Design – Panel Type (2/4)\n\nClick "Vacuum on" in the main and check 80–90MPa on the Ejector display.',
+          zhCN:'■ Panel Design – Panel Type (2/4)\n\n在Main中点击\"Vacuum on\",确认Ejector display是否为80~90MPa。',
+          zhTW:'■ Panel Design – Panel Type (2/4)\n\n在Main中點擊\"Vacuum on\",確認Ejector display是否為80~90MPa。',
+          ja:'■ Panel Design – Panel Type (2/4)\n\nMainで\"Vacuum on\"をクリックし、Ejector displayで80~90MPaであることを確認します。',
+          vi:'■ Panel Design – Panel Type (2/4)\n\nNhấp \"Vacuum on\" trong main và kiểm tra 80-90 MPa trên Ejector display.'
+        }},
+        {img:cmImg('I','qpm',140),tx:{
+          ko:'■ Panel Design – Panel Type (3/4)\n\nBasic Information — Inspection Mode(검사 유형: Panel/Pedestal&Tray/Double Tray), Part Number(샘플명), Operation ID(샘플 ID). Panel Mode — Size(패널 샘플의 X,Y 크기), Z Offset(샘플 두께), Rotation(샘플 방향). Unit Information — 패널의 X,Y 크기. Arrangement — Count X,Y(패널 Unit 수량), Pitch X,Y(간격). Vision Offset — Unit 중심 X,Y,Z 간격 치수.',
+          en:'■ Panel Design – Panel Type (3/4)\n\nBasic information — Inspection Mode (inspection type: Panel/Pedestal & Tray/Double Tray), Part number (sample name), Operation ID (sample ID). Panel mode — Size (the X, Y size of the panel sample), Z Offset (sample thickness), Rotation (sample orientation). Unit information — size in X, Y of the panel. Arrangement — Count X, Y (quantity of panel units), Pitch X, Y (spacing). Vision Offset — unit center X, Y, Z interval dimensions.',
+          zhCN:'■ Panel Design – Panel Type (3/4)\n\nBasic information——Inspection Mode(检查类型:Panel/Pedestal & Tray/Double Tray)、Part number(样品名)、Operation ID(样品ID)。Panel mode——Size(panel样品的X、Y尺寸)、Z Offset(样品厚度)、Rotation(样品方向)。Unit information——panel的X、Y尺寸。Arrangement——Count X、Y(panel unit数量)、Pitch X、Y(间距)。Vision Offset——unit中心X、Y、Z间隔尺寸。',
+          zhTW:'■ Panel Design – Panel Type (3/4)\n\nBasic information——Inspection Mode(檢查類型:Panel/Pedestal & Tray/Double Tray)、Part number(樣品名)、Operation ID(樣品ID)。Panel mode——Size(panel樣品的X、Y尺寸)、Z Offset(樣品厚度)、Rotation(樣品方向)。Unit information——panel的X、Y尺寸。Arrangement——Count X、Y(panel unit數量)、Pitch X、Y(間距)。Vision Offset——unit中心X、Y、Z間隔尺寸。',
+          ja:'■ Panel Design – Panel Type (3/4)\n\nBasic information——Inspection Mode(検査タイプ:Panel/Pedestal & Tray/Double Tray)、Part number(サンプル名)、Operation ID(サンプルID)。Panel mode——Size(panelサンプルのX、Yサイズ)、Z Offset(サンプル厚さ)、Rotation(サンプル向き)。Unit information——panelのX、Yサイズ。Arrangement——Count X、Y(panel unit数量)、Pitch X、Y(間隔)。Vision Offset——unit中心のX、Y、Z間隔寸法。',
+          vi:'■ Panel Design – Panel Type (3/4)\n\nBasic information — Inspection Mode (loại kiểm tra: Panel/Pedestal & Tray/Double Tray), Part number (tên mẫu), Operation ID (ID mẫu). Panel mode — Size (kích thước X, Y của mẫu panel), Z Offset (độ dày mẫu), Rotation (hướng mẫu). Unit information — kích thước X, Y của panel. Arrangement — Count X, Y (số lượng unit panel), Pitch X, Y (khoảng cách). Vision Offset — kích thước khoảng cách X, Y, Z tâm unit.'
+        }},
+        {img:cmImg('I','qpm',141),tx:{
+          ko:'■ Panel Design – Panel Type (4/4)\n\nPanel Design에서 변경이 필요한 항목을 클릭한 후 값을 입력해야 합니다.',
+          en:'■ Panel Design – Panel Type (4/4)\n\nYou need to enter a value after clicking the specific item that needs to be changed on Panel Design.',
+          zhCN:'■ Panel Design – Panel Type (4/4)\n\n在Panel Design中点击需要变更的具体项目后需输入数值。',
+          zhTW:'■ Panel Design – Panel Type (4/4)\n\n在Panel Design中點擊需要變更的具體項目後需輸入數值。',
+          ja:'■ Panel Design – Panel Type (4/4)\n\nPanel Designで変更が必要な項目をクリックした後、値を入力する必要があります。',
+          vi:'■ Panel Design – Panel Type (4/4)\n\nCần nhập giá trị sau khi nhấp vào mục cụ thể cần thay đổi trên Panel Design.'
+        }},
+        {img:cmImg('I','qpm',142),tx:{
+          ko:'■ Panel Design – Pedestal & Tray Type (1/6)\n\n두 가지 검사 방식에 맞는 검사 도구를 설치합니다. Pedestal: Pedestal을 우측 상단 모서리로 밀어 고정합니다. Tray: Tray Jig의 손잡이를 풀고 Tray를 Pin 쪽으로 밀어 손잡이를 고정합니다.',
+          en:'■ Panel Design – Pedestal & Tray Type (1/6)\n\nInstall inspection tools according to the two inspection methods. Pedestal: push the pedestal to the upper right corner to secure it. Tray: release the knob of the Tray Jig and push the Tray to the pin to fix the knob.',
+          zhCN:'■ Panel Design – Pedestal & Tray Type (1/6)\n\n根据两种检查方式安装检查工具。Pedestal:将pedestal推向右上角固定。Tray:松开Tray Jig的旋钮,将Tray推向pin固定旋钮。',
+          zhTW:'■ Panel Design – Pedestal & Tray Type (1/6)\n\n根據兩種檢查方式安裝檢查工具。Pedestal:將pedestal推向右上角固定。Tray:鬆開Tray Jig的旋鈕,將Tray推向pin固定旋鈕。',
+          ja:'■ Panel Design – Pedestal & Tray Type (1/6)\n\n2つの検査方式に応じた検査ツールを設置します。Pedestal:pedestalを右上角へ押し固定します。Tray:Tray Jigのノブを緩めTrayをpin側へ押しノブを固定します。',
+          vi:'■ Panel Design – Pedestal & Tray Type (1/6)\n\nLắp công cụ kiểm tra theo hai phương pháp. Pedestal: đẩy pedestal vào góc trên bên phải để cố định. Tray: nới lỏng núm của Tray Jig, đẩy Tray vào pin và cố định núm.'
+        }},
+        {img:cmImg('I','qpm',143),tx:{
+          ko:'■ Panel Design – Pedestal & Tray Type (2/6)\n\nPedestal의 경우, Main에서 \'Vacuum on\'을 클릭하고 Ejector Display에서 80~90MPa인지 확인합니다.',
+          en:'■ Panel Design – Pedestal & Tray Type (2/6)\n\nFor Pedestal, click \'Vacuum on\' in Main and check 80–90MPa in the Ejector Display.',
+          zhCN:'■ Panel Design – Pedestal & Tray Type (2/6)\n\n对于Pedestal,在Main中点击\'Vacuum on\',确认Ejector Display是否为80~90MPa。',
+          zhTW:'■ Panel Design – Pedestal & Tray Type (2/6)\n\n對於Pedestal,在Main中點擊\'Vacuum on\',確認Ejector Display是否為80~90MPa。',
+          ja:'■ Panel Design – Pedestal & Tray Type (2/6)\n\nPedestalの場合、Mainで\'Vacuum on\'をクリックし、Ejector Displayで80~90MPaであることを確認します。',
+          vi:'■ Panel Design – Pedestal & Tray Type (2/6)\n\nVới Pedestal, nhấp \'Vacuum on\' trong Main và kiểm tra 80-90 MPa trong Ejector Display.'
+        }},
+        {img:cmImg('I','qpm',144),tx:{
+          ko:'■ Panel Design – Pedestal & Tray Type (3/6) <Pedestal>\n\nBasic Information — Inspection Mode, Part Number, Operation ID. Singulated Unit Mode — Vacuum Mode(Single/Dual: 샘플 1개당 연결된 Vacuum 장치 수), Body Width(Long/Short: Pedestal 크기 설정), Size X,Y,Thickness(Unit 두께), Vision Offset X,Y(Unit 중심 기준 Offset).',
+          en:'■ Panel Design – Pedestal & Tray Type (3/6) <Pedestal>\n\nBasic information — Inspection Mode, Part number, Operation ID. Singulated Unit mode — Vacuum mode (Single/Dual: number of vacuum devices connected per sample), Body Width (Long/Short: pedestal size settings), Size X, Y, Thickness (enter the thickness of the unit), Vision Offset X, Y (offset from the unit center position value).',
+          zhCN:'■ Panel Design – Pedestal & Tray Type (3/6) <Pedestal>\n\nBasic information——Inspection Mode、Part number、Operation ID。Singulated Unit mode——Vacuum mode(Single/Dual:每个样品连接的vacuum装置数量)、Body Width(Long/Short:pedestal尺寸设置)、Size X、Y、Thickness(输入unit厚度)、Vision Offset X、Y(相对unit中心位置值的偏移)。',
+          zhTW:'■ Panel Design – Pedestal & Tray Type (3/6) <Pedestal>\n\nBasic information——Inspection Mode、Part number、Operation ID。Singulated Unit mode——Vacuum mode(Single/Dual:每個樣品連接的vacuum裝置數量)、Body Width(Long/Short:pedestal尺寸設定)、Size X、Y、Thickness(輸入unit厚度)、Vision Offset X、Y(相對unit中心位置值的偏移)。',
+          ja:'■ Panel Design – Pedestal & Tray Type (3/6) <Pedestal>\n\nBasic information——Inspection Mode、Part number、Operation ID。Singulated Unit mode——Vacuum mode(Single/Dual:サンプル1個あたり接続されるvacuum装置数)、Body Width(Long/Short:pedestalサイズ設定)、Size X、Y、Thickness(unitの厚さを入力)、Vision Offset X、Y(unit中心位置値からのオフセット)。',
+          vi:'■ Panel Design – Pedestal & Tray Type (3/6) <Pedestal>\n\nBasic information — Inspection Mode, Part number, Operation ID. Singulated Unit mode — Vacuum mode (Single/Dual: số thiết bị vacuum kết nối trên mỗi mẫu), Body Width (Long/Short: cài đặt kích thước pedestal), Size X, Y, Thickness (nhập độ dày unit), Vision Offset X, Y (offset từ giá trị vị trí tâm unit).'
+        }},
+        {img:cmImg('I','qpm',145),tx:{
+          ko:'■ Panel Design – Pedestal & Tray Type (4/6) <Tray>\n\nBasic Information은 동일합니다. Tray Mode — Size X,Y(Tray 전체 길이), Thickness(샘플 두께), DX,DY(첫 Pocket 중심에서 두 번째 Pocket 중심까지 거리), X0(Tray 좌측 끝에서 첫 Pocket X 중심까지 거리), Y0(Tray 상단 끝에서 첫 Pocket Y 중심까지 거리), Rotation(샘플 방향), Vision Offset(Bump·Gerber 위치 설정).',
+          en:'■ Panel Design – Pedestal & Tray Type (4/6) <Tray>\n\nBasic information is the same. Tray mode — Size X, Y (total length of Tray X, Y-direction), Thickness (sample thickness), DX, DY (distance from the center of the first pocket to the second pocket center), X0 (distance from the Tray left end point to the center of the first pocket in the X-direction), Y0 (distance from the Tray upper side end point to the center of the first pocket in the Y-direction), Rotation (sample orientation), Vision Offset (bump and Gerber position setting).',
+          zhCN:'■ Panel Design – Pedestal & Tray Type (4/6) <Tray>\n\nBasic information相同。Tray mode——Size X、Y(Tray X、Y方向总长)、Thickness(样品厚度)、DX、DY(第一个Pocket中心到第二个Pocket中心的距离)、X0(Tray左端点到X方向第一个Pocket中心的距离)、Y0(Tray上端点到Y方向第一个Pocket中心的距离)、Rotation(样品方向)、Vision Offset(bump与Gerber位置设置)。',
+          zhTW:'■ Panel Design – Pedestal & Tray Type (4/6) <Tray>\n\nBasic information相同。Tray mode——Size X、Y(Tray X、Y方向總長)、Thickness(樣品厚度)、DX、DY(第一個Pocket中心到第二個Pocket中心的距離)、X0(Tray左端點到X方向第一個Pocket中心的距離)、Y0(Tray上端點到Y方向第一個Pocket中心的距離)、Rotation(樣品方向)、Vision Offset(bump與Gerber位置設定)。',
+          ja:'■ Panel Design – Pedestal & Tray Type (4/6) <Tray>\n\nBasic informationは同様です。Tray mode——Size X、Y(Tray X、Y方向の全長)、Thickness(サンプル厚さ)、DX、DY(最初のPocket中心から2番目のPocket中心までの距離)、X0(Tray左端からX方向最初のPocket中心までの距離)、Y0(Tray上端からY方向最初のPocket中心までの距離)、Rotation(サンプル向き)、Vision Offset(bump・Gerber位置設定)。',
+          vi:'■ Panel Design – Pedestal & Tray Type (4/6) <Tray>\n\nBasic information giống nhau. Tray mode — Size X, Y (tổng chiều dài Tray theo hướng X, Y), Thickness (độ dày mẫu), DX, DY (khoảng cách từ tâm pocket đầu tiên đến pocket thứ hai), X0 (khoảng cách từ đầu trái Tray đến tâm pocket đầu tiên theo X), Y0 (khoảng cách từ đầu trên Tray đến tâm pocket đầu tiên theo Y), Rotation (hướng mẫu), Vision Offset (cài đặt vị trí bump và Gerber).'
+        }},
+        {img:cmImg('I','qpm',146),tx:{
+          ko:'■ Panel Design – Pedestal & Tray Type (5/6) <Tray>\n\nUnit Information — Size X,Y(샘플 치수). Arrangement — Count X,Y(Tray X,Y 방향 Pocket 수량), Pitch X,Y(Tray 간격). Reference Setting — Group1 Reference Z(Z축 기본 위치).',
+          en:'■ Panel Design – Pedestal & Tray Type (5/6) <Tray>\n\nUnit information — Size X, Y (dimensions of the sample). Arrangement — Count X, Y (Tray X, Y direction pocket quantity), Pitch X, Y (Tray spacing). Reference Setting — Group1 Reference Z (Z-axis default position).',
+          zhCN:'■ Panel Design – Pedestal & Tray Type (5/6) <Tray>\n\nUnit information——Size X、Y(样品尺寸)。Arrangement——Count X、Y(Tray X、Y方向Pocket数量)、Pitch X、Y(Tray间距)。Reference Setting——Group1 Reference Z(Z轴默认位置)。',
+          zhTW:'■ Panel Design – Pedestal & Tray Type (5/6) <Tray>\n\nUnit information——Size X、Y(樣品尺寸)。Arrangement——Count X、Y(Tray X、Y方向Pocket數量)、Pitch X、Y(Tray間距)。Reference Setting——Group1 Reference Z(Z軸預設位置)。',
+          ja:'■ Panel Design – Pedestal & Tray Type (5/6) <Tray>\n\nUnit information——Size X、Y(サンプル寸法)。Arrangement——Count X、Y(Tray X、Y方向Pocket数量)、Pitch X、Y(Tray間隔)。Reference Setting——Group1 Reference Z(Z軸デフォルト位置)。',
+          vi:'■ Panel Design – Pedestal & Tray Type (5/6) <Tray>\n\nUnit information — Size X, Y (kích thước mẫu). Arrangement — Count X, Y (số lượng pocket theo hướng X, Y của Tray), Pitch X, Y (khoảng cách Tray). Reference Setting — Group1 Reference Z (vị trí mặc định trục Z).'
+        }},
+        {img:cmImg('I','qpm',147),tx:{
+          ko:'■ Panel Design – Pedestal & Tray Type (6/6)\n\n두 검사 방식 중 선택 후 필요한 세부 값을 입력합니다. (<Tray>/<Pedestal>)',
+          en:'■ Panel Design – Pedestal & Tray Type (6/6)\n\nAfter selecting one of the two inspection methods in Panel Design, enter the specific values required. (<Tray>/<Pedestal>)',
+          zhCN:'■ Panel Design – Pedestal & Tray Type (6/6)\n\n在Panel Design中选择两种检查方式后,输入所需的具体数值。(<Tray>/<Pedestal>)',
+          zhTW:'■ Panel Design – Pedestal & Tray Type (6/6)\n\n在Panel Design中選擇兩種檢查方式後,輸入所需的具體數值。(<Tray>/<Pedestal>)',
+          ja:'■ Panel Design – Pedestal & Tray Type (6/6)\n\nPanel Designで2つの検査方式を選択した後、必要な詳細値を入力します。(<Tray>/<Pedestal>)',
+          vi:'■ Panel Design – Pedestal & Tray Type (6/6)\n\nSau khi chọn một trong hai phương pháp kiểm tra trong Panel Design, nhập các giá trị chi tiết cần thiết. (<Tray>/<Pedestal>)'
+        }},
+        {img:cmImg('I','qpm',148),tx:{
+          ko:'■ Panel Design – Double Tray Type (1/4)\n\nTray Jig의 손잡이를 풀고 Tray를 Pin 쪽으로 밀어 손잡이를 고정합니다.',
+          en:'■ Panel Design – Double Tray Type (1/4)\n\nRelease the knob of the Tray Jig and push the Tray to the pin to fix the knob.',
+          zhCN:'■ Panel Design – Double Tray Type (1/4)\n\n松开Tray Jig的旋钮,将Tray推向pin固定旋钮。',
+          zhTW:'■ Panel Design – Double Tray Type (1/4)\n\n鬆開Tray Jig的旋鈕,將Tray推向pin固定旋鈕。',
+          ja:'■ Panel Design – Double Tray Type (1/4)\n\nTray Jigのノブを緩めTrayをpin側へ押しノブを固定します。',
+          vi:'■ Panel Design – Double Tray Type (1/4)\n\nNới lỏng núm của Tray Jig, đẩy Tray vào pin và cố định núm.'
+        }},
+        {img:cmImg('I','qpm',149),tx:{
+          ko:'■ Panel Design – Double Tray Type (2/4) <Tray>\n\nBasic Information은 동일합니다. Tray Mode — Size X,Y(Tray 전체 길이), Thickness(샘플 두께), DX,DY(첫 Pocket 중심에서 두 번째 Pocket 중심까지 거리), X0(Tray 좌측 끝에서 첫 Pocket X 중심까지 거리), Y0(Tray 상단 끝에서 첫 Pocket Y 중심까지 거리), Rotation(샘플 방향), Vision Offset(Bump·Gerber 위치 설정).',
+          en:'■ Panel Design – Double Tray Type (2/4) <Tray>\n\nBasic information is the same. Tray mode — Size X, Y (total length of Tray X, Y-direction), Thickness (sample thickness), DX, DY (distance from the center of the first pocket to the second pocket center), X0 (distance from the Tray left end point to the center of the first pocket in the X-direction), Y0 (distance from the Tray upper side end point to the center of the first pocket in the Y-direction), Rotation (sample orientation), Vision Offset (bump and Gerber position setting).',
+          zhCN:'■ Panel Design – Double Tray Type (2/4) <Tray>\n\nBasic information相同。Tray mode——Size X、Y(Tray X、Y方向总长)、Thickness(样品厚度)、DX、DY(第一个Pocket中心到第二个Pocket中心的距离)、X0(Tray左端点到X方向第一个Pocket中心的距离)、Y0(Tray上端点到Y方向第一个Pocket中心的距离)、Rotation(样品方向)、Vision Offset(bump与Gerber位置设置)。',
+          zhTW:'■ Panel Design – Double Tray Type (2/4) <Tray>\n\nBasic information相同。Tray mode——Size X、Y(Tray X、Y方向總長)、Thickness(樣品厚度)、DX、DY(第一個Pocket中心到第二個Pocket中心的距離)、X0(Tray左端點到X方向第一個Pocket中心的距離)、Y0(Tray上端點到Y方向第一個Pocket中心的距離)、Rotation(樣品方向)、Vision Offset(bump與Gerber位置設定)。',
+          ja:'■ Panel Design – Double Tray Type (2/4) <Tray>\n\nBasic informationは同様です。Tray mode——Size X、Y(Tray X、Y方向の全長)、Thickness(サンプル厚さ)、DX、DY(最初のPocket中心から2番目のPocket中心までの距離)、X0(Tray左端からX方向最初のPocket中心までの距離)、Y0(Tray上端からY方向最初のPocket中心までの距離)、Rotation(サンプル向き)、Vision Offset(bump・Gerber位置設定)。',
+          vi:'■ Panel Design – Double Tray Type (2/4) <Tray>\n\nBasic information giống nhau. Tray mode — Size X, Y (tổng chiều dài Tray theo hướng X, Y), Thickness (độ dày mẫu), DX, DY (khoảng cách từ tâm pocket đầu tiên đến pocket thứ hai), X0 (khoảng cách từ đầu trái Tray đến tâm pocket đầu tiên theo X), Y0 (khoảng cách từ đầu trên Tray đến tâm pocket đầu tiên theo Y), Rotation (hướng mẫu), Vision Offset (cài đặt vị trí bump và Gerber).'
+        }},
+        {img:cmImg('I','qpm',150),tx:{
+          ko:'■ Panel Design – Double Tray Type (3/4) <Tray>\n\nUnit Information — Size X,Y(샘플 치수). Arrangement — Count X,Y(Tray X,Y 방향 Pocket 수량), Pitch X,Y(Tray 간격). Reference Setting — Group1 Reference Z(Z축 기본 위치).',
+          en:'■ Panel Design – Double Tray Type (3/4) <Tray>\n\nUnit information — Size X, Y (dimensions of the sample). Arrangement — Count X, Y (Tray X, Y direction pocket quantity), Pitch X, Y (Tray spacing). Reference Setting — Group1 Reference Z (Z-axis default position).',
+          zhCN:'■ Panel Design – Double Tray Type (3/4) <Tray>\n\nUnit information——Size X、Y(样品尺寸)。Arrangement——Count X、Y(Tray X、Y方向Pocket数量)、Pitch X、Y(Tray间距)。Reference Setting——Group1 Reference Z(Z轴默认位置)。',
+          zhTW:'■ Panel Design – Double Tray Type (3/4) <Tray>\n\nUnit information——Size X、Y(樣品尺寸)。Arrangement——Count X、Y(Tray X、Y方向Pocket數量)、Pitch X、Y(Tray間距)。Reference Setting——Group1 Reference Z(Z軸預設位置)。',
+          ja:'■ Panel Design – Double Tray Type (3/4) <Tray>\n\nUnit information——Size X、Y(サンプル寸法)。Arrangement——Count X、Y(Tray X、Y方向Pocket数量)、Pitch X、Y(Tray間隔)。Reference Setting——Group1 Reference Z(Z軸デフォルト位置)。',
+          vi:'■ Panel Design – Double Tray Type (3/4) <Tray>\n\nUnit information — Size X, Y (kích thước mẫu). Arrangement — Count X, Y (số lượng pocket theo hướng X, Y của Tray), Pitch X, Y (khoảng cách Tray). Reference Setting — Group1 Reference Z (vị trí mặc định trục Z).'
+        }},
+        {img:cmImg('I','qpm',151),tx:{
+          ko:'■ Panel Design – Double Tray Type (4/4)\n\nPanel Design에서 변경이 필요한 항목을 클릭한 후 값을 입력해야 합니다.',
+          en:'■ Panel Design – Double Tray Type (4/4)\n\nYou need to enter a value after clicking the specific item that needs to be changed on Panel Design.',
+          zhCN:'■ Panel Design – Double Tray Type (4/4)\n\n在Panel Design中点击需要变更的具体项目后需输入数值。',
+          zhTW:'■ Panel Design – Double Tray Type (4/4)\n\n在Panel Design中點擊需要變更的具體項目後需輸入數值。',
+          ja:'■ Panel Design – Double Tray Type (4/4)\n\nPanel Designで変更が必要な項目をクリックした後、値を入力する必要があります。',
+          vi:'■ Panel Design – Double Tray Type (4/4)\n\nCần nhập giá trị sau khi nhấp vào mục cụ thể cần thay đổi trên Panel Design.'
+        }},
+        {img:cmImg('I','qpm',152),tx:{
+          ko:'■ Panel Alignment (1/6)\n\n제품의 Fiducial(기준점)은 Panel Type에서만 지정합니다. Pedestal & Tray, Double Tray Type은 Fiducial 기능이 없습니다.',
+          en:'■ Panel Alignment (1/6)\n\nThe fiducial (reference point) of the product must be specified in the Panel Type. Pedestal & Tray and Double Tray Type do not have a fiducial function.',
+          zhCN:'■ Panel Alignment (1/6)\n\n产品的Fiducial(基准点)必须在Panel Type中指定。Pedestal & Tray、Double Tray Type没有Fiducial功能。',
+          zhTW:'■ Panel Alignment (1/6)\n\n產品的Fiducial(基準點)必須在Panel Type中指定。Pedestal & Tray、Double Tray Type沒有Fiducial功能。',
+          ja:'■ Panel Alignment (1/6)\n\n製品のFiducial(基準点)はPanel Typeでのみ指定します。Pedestal & Tray、Double Tray TypeにはFiducial機能がありません。',
+          vi:'■ Panel Alignment (1/6)\n\nFiducial (điểm tham chiếu) của sản phẩm phải được chỉ định trong Panel Type. Loại Pedestal & Tray và Double Tray không có chức năng fiducial.'
+        }},
+        {img:cmImg('I','qpm',153),tx:{
+          ko:'■ Panel Alignment (2/6)\n\n제품의 Fiducial 위치를 설정합니다. SELECT: Fiducial 위치 선택(Left up/Right Up/Left down/Right down). MOVE: 선택한 유형을 클릭해 해당 위치로 이동. Oblique CH0를 255로 설정한 후 Live를 확인합니다. Search Area Width/Height: Fiducial 크기에 맞게 설정합니다.',
+          en:'■ Panel Alignment (2/6)\n\nSet the Fiducial position of the product. SELECT: select the fiducial position (Left up/Right Up/Left down/Right down). MOVE: click the selected type to move it to its location. Check live after setting Oblique CH0 to 255. Search area Width/Height: set according to the size of the Fiducial.',
+          zhCN:'■ Panel Alignment (2/6)\n\n设置产品的Fiducial位置。SELECT:选择fiducial位置(Left up/Right Up/Left down/Right down)。MOVE:点击所选类型移动到该位置。将Oblique CH0设为255后确认Live。Search area Width/Height:依Fiducial尺寸设置。',
+          zhTW:'■ Panel Alignment (2/6)\n\n設定產品的Fiducial位置。SELECT:選擇fiducial位置(Left up/Right Up/Left down/Right down)。MOVE:點擊所選類型移動到該位置。將Oblique CH0設為255後確認Live。Search area Width/Height:依Fiducial尺寸設定。',
+          ja:'■ Panel Alignment (2/6)\n\n製品のFiducial位置を設定します。SELECT:fiducial位置を選択(Left up/Right Up/Left down/Right down)。MOVE:選択したタイプをクリックしその位置へ移動。Oblique CH0を255に設定した後Liveを確認します。Search area Width/Height:Fiducialのサイズに合わせて設定します。',
+          vi:'■ Panel Alignment (2/6)\n\nĐặt vị trí Fiducial của sản phẩm. SELECT: chọn vị trí fiducial (Left up/Right Up/Left down/Right down). MOVE: nhấp loại đã chọn để di chuyển đến vị trí đó. Kiểm tra Live sau khi đặt Oblique CH0 thành 255. Search area Width/Height: đặt theo kích thước Fiducial.'
+        }},
+        {img:cmImg('I','qpm',154),tx:{
+          ko:'■ Panel Alignment (3/6)\n\nFiducial 위치는 X, Y 평행 좌표로 지정됩니다.',
+          en:'■ Panel Alignment (3/6)\n\nThe Fiducial position is specified as the parallel \'X, Y\' position.',
+          zhCN:'■ Panel Alignment (3/6)\n\nFiducial位置以平行的\'X、Y\'座标指定。',
+          zhTW:'■ Panel Alignment (3/6)\n\nFiducial位置以平行的\'X、Y\'座標指定。',
+          ja:'■ Panel Alignment (3/6)\n\nFiducial位置は平行な\'X、Y\'座標として指定されます。',
+          vi:'■ Panel Alignment (3/6)\n\nVị trí Fiducial được chỉ định theo tọa độ song song \'X, Y\'.'
+        }},
+        {img:cmImg('I','qpm',155),tx:{
+          ko:'■ Panel Alignment (4/6)\n\n먼저 Left-up부터 진행합니다. Live 영상을 확인하며 Open Config(AF)로 초점을 맞춘 뒤, MOTOR CONTROLS를 이용해 그림처럼 조정합니다. Fiducial Information의 Search Area(Width, Height) 값을 변경해 Fiducial 크기에 맞춥니다.',
+          en:'■ Panel Alignment (4/6)\n\nFirst, proceed with Left-up. Check the live video and adjust the focus using Open Config (AF), then adjust it as shown in the picture using MOTOR CONTROLS. Change the value of the Search area (width, height) in Fiducial information and set it to the size that matches the Fiducial.',
+          zhCN:'■ Panel Alignment (4/6)\n\n首先从Left-up开始进行。确认Live影像并用Open Config(AF)对焦,再用MOTOR CONTROLS如图调整。变更Fiducial information中Search area(width、height)的数值,使其符合Fiducial尺寸。',
+          zhTW:'■ Panel Alignment (4/6)\n\n首先從Left-up開始進行。確認Live影像並用Open Config(AF)對焦,再用MOTOR CONTROLS如圖調整。變更Fiducial information中Search area(width、height)的數值,使其符合Fiducial尺寸。',
+          ja:'■ Panel Alignment (4/6)\n\nまずLeft-upから進めます。Live映像を確認しOpen Config(AF)で焦点を合わせた後、MOTOR CONTROLSで図のように調整します。Fiducial informationのSearch area(width、height)の値を変更しFiducialのサイズに合わせます。',
+          vi:'■ Panel Alignment (4/6)\n\nĐầu tiên tiến hành Left-up. Kiểm tra video Live và lấy nét bằng Open Config (AF), sau đó điều chỉnh như hình bằng MOTOR CONTROLS. Thay đổi giá trị Search area (width, height) trong Fiducial information để khớp kích thước Fiducial.'
+        }},
+        {img:cmImg('I','qpm',156),tx:{
+          ko:'■ Panel Alignment (5/6)\n\nLive를 중지하고 Scan을 클릭해 테스트합니다. DEBUG INFO LIST의 Blob Info 결과를 확인한 뒤 Apply 합니다. 나머지 위치(Right-up, Right-down, Left-down)도 같은 방식으로 설정 후 Apply 합니다.',
+          en:'■ Panel Alignment (5/6)\n\nLive stop, click Scan, and test. Apply after checking the Blob info result in DEBUG INFO LIST. Apply after setting each remaining position (Right-up, Right-down, Left-down) in the same way.',
+          zhCN:'■ Panel Alignment (5/6)\n\n停止Live,点击Scan进行测试。确认DEBUG INFO LIST中的Blob info结果后Apply。其余位置(Right-up、Right-down、Left-down)也以相同方式设置后Apply。',
+          zhTW:'■ Panel Alignment (5/6)\n\n停止Live,點擊Scan進行測試。確認DEBUG INFO LIST中的Blob info結果後Apply。其餘位置(Right-up、Right-down、Left-down)也以相同方式設定後Apply。',
+          ja:'■ Panel Alignment (5/6)\n\nLiveを停止しScanをクリックしてテストします。DEBUG INFO LISTのBlob info結果を確認した後Applyします。残りの位置(Right-up、Right-down、Left-down)も同様に設定後Applyします。',
+          vi:'■ Panel Alignment (5/6)\n\nDừng Live, nhấp Scan và kiểm tra. Apply sau khi kiểm tra kết quả Blob info trong DEBUG INFO LIST. Apply sau khi thiết lập các vị trí còn lại (Right-up, Right-down, Left-down) theo cách tương tự.'
+        }},
+        {img:cmImg('I','qpm',157),tx:{
+          ko:'■ Panel Alignment (6/6)\n\nMain에서 \'Vacuum on ▸ align\'을 클릭합니다. Oblique Image를 보며 Fiducial Align 위치를 최종 확인합니다.',
+          en:'■ Panel Alignment (6/6)\n\nClick \'Vacuum on ▸ align\' in Main. Final check the Fiducial Align position while looking at the oblique image.',
+          zhCN:'■ Panel Alignment (6/6)\n\n在Main中点击\'Vacuum on ▸ align\'。查看oblique image最终确认Fiducial Align位置。',
+          zhTW:'■ Panel Alignment (6/6)\n\n在Main中點擊\'Vacuum on ▸ align\'。查看oblique image最終確認Fiducial Align位置。',
+          ja:'■ Panel Alignment (6/6)\n\nMainで\'Vacuum on ▸ align\'をクリックします。oblique imageを見ながらFiducial Align位置を最終確認します。',
+          vi:'■ Panel Alignment (6/6)\n\nNhấp \'Vacuum on ▸ align\' trong Main. Kiểm tra lần cuối vị trí Fiducial Align trong khi xem oblique image.'
+        }},
+        {img:cmImg('I','qpm',158),tx:{
+          ko:'■ Unit Barcode (1/3)\n\nUnit Barcode 버튼을 클릭합니다. Move 버튼을 클릭해 \'Barcode\' 위치로 이동합니다. Oblique Illumination 조명 값을 255로 설정한 뒤 클릭해 Live를 확인합니다.',
+          en:'■ Unit Barcode (1/3)\n\nClick the Unit Barcode button. Click the Move button to the \'Barcode\' position. After setting the Oblique illumination lighting value to 255, click to see Live.',
+          zhCN:'■ Unit Barcode (1/3)\n\n点击Unit Barcode按钮。点击Move按钮移动到\'Barcode\'位置。将Oblique illumination照明值设为255后点击查看Live。',
+          zhTW:'■ Unit Barcode (1/3)\n\n點擊Unit Barcode按鈕。點擊Move按鈕移動到\'Barcode\'位置。將Oblique illumination照明值設為255後點擊查看Live。',
+          ja:'■ Unit Barcode (1/3)\n\nUnit Barcodeボタンをクリックします。Moveボタンをクリックし\'Barcode\'位置へ移動します。Oblique illuminationの照明値を255に設定した後クリックしLiveを確認します。',
+          vi:'■ Unit Barcode (1/3)\n\nNhấp nút Unit Barcode. Nhấp nút Move để đến vị trí \'Barcode\'. Sau khi đặt giá trị chiếu sáng Oblique illumination thành 255, nhấp để xem Live.'
+        }},
+        {img:cmImg('I','qpm',159),tx:{
+          ko:'■ Unit Barcode (2/3)\n\nMotor Controls로 Barcode의 중심 위치를 설정합니다. Open Config에서 AF 프로그램을 실행해 Barcode 초점을 조정합니다. Barcode Size X,Y를 설정합니다. Barcode Search Area를 설정합니다.',
+          en:'■ Unit Barcode (2/3)\n\nSet the center position of the barcode using \'Motor controls\'. After executing the AF program in Open config, adjust the barcode focus. Set Barcode Size X, Y. Set the barcode search area.',
+          zhCN:'■ Unit Barcode (2/3)\n\n用\'Motor controls\'设置barcode的中心位置。在Open config中执行AF程序后调整barcode对焦。设置Barcode Size X、Y。设置barcode search area。',
+          zhTW:'■ Unit Barcode (2/3)\n\n用\'Motor controls\'設定barcode的中心位置。在Open config中執行AF程式後調整barcode對焦。設定Barcode Size X、Y。設定barcode search area。',
+          ja:'■ Unit Barcode (2/3)\n\n\'Motor controls\'でbarcodeの中心位置を設定します。Open configでAFプログラムを実行しbarcodeの焦点を調整します。Barcode Size X、Yを設定します。barcode search areaを設定します。',
+          vi:'■ Unit Barcode (2/3)\n\nĐặt vị trí trung tâm của barcode bằng \'Motor controls\'. Sau khi chạy chương trình AF trong Open config, điều chỉnh nét cho barcode. Đặt Barcode Size X, Y. Đặt barcode search area.'
+        }},
+        {img:cmImg('I','qpm',160),tx:{
+          ko:'■ Unit Barcode (3/3)\n\nScan을 클릭해 테스트를 진행합니다. \'Result\'에서 테스트 결과를 확인합니다. \'Update specification from calculated\' 버튼을 클릭해 계산된 값을 \'Specification X,Y\'에 적용합니다. Apply 후 Main에서 저장합니다.',
+          en:'■ Unit Barcode (3/3)\n\nClick Scan and proceed with the test. Check the test result in \'Result\'. Click the \'Update specification from calculated\' button to apply the resulting values to \'Specification X, Y\'. After Apply, save in Main.',
+          zhCN:'■ Unit Barcode (3/3)\n\n点击Scan进行测试。在\'Result\'中确认测试结果。点击\'Update specification from calculated\'按钮将计算结果应用于\'Specification X、Y\'。Apply后在Main中保存。',
+          zhTW:'■ Unit Barcode (3/3)\n\n點擊Scan進行測試。在\'Result\'中確認測試結果。點擊\'Update specification from calculated\'按鈕將計算結果套用於\'Specification X、Y\'。Apply後在Main中儲存。',
+          ja:'■ Unit Barcode (3/3)\n\nScanをクリックしテストを進めます。\'Result\'でテスト結果を確認します。\'Update specification from calculated\'ボタンをクリックし計算結果を\'Specification X、Y\'に適用します。Apply後Mainで保存します。',
+          vi:'■ Unit Barcode (3/3)\n\nNhấp Scan để tiến hành kiểm tra. Kiểm tra kết quả kiểm tra trong \'Result\'. Nhấp nút \'Update specification from calculated\' để áp dụng giá trị tính toán vào \'Specification X, Y\'. Sau khi Apply, lưu trong Main.'
+        }},
+        {img:cmImg('I','qpm',161),tx:{
+          ko:'■ Unit Design (1/4)\n\n\'.csv\' 파일 형식으로 미리 변환해 \'C:\\IntekPlus\\QPM\\Main\\Gerber\' 경로에 저장해야 합니다. \'Open Gerber\'를 클릭해 사용할 Gerber File을 선택합니다. Bump Diameter, Bump Height 값을 입력하고 OK를 클릭합니다.',
+          en:'■ Unit Design (1/4)\n\nThe file type \'.csv\' must be pre-converted and stored in the path \'C:\\IntekPlus\\QPM\\Main\\Gerber\'. Click \'Open Gerber\' to select the Gerber File to use. Enter the value of the Bump diameter and Bump height, then click the OK button.',
+          zhCN:'■ Unit Design (1/4)\n\n必须预先将文件类型转换为\'.csv\'并存放于\'C:\\IntekPlus\\QPM\\Main\\Gerber\'路径。点击\'Open Gerber\'选择要使用的Gerber File。输入Bump diameter、Bump height数值后点击OK按钮。',
+          zhTW:'■ Unit Design (1/4)\n\n必須預先將檔案類型轉換為\'.csv\'並存放於\'C:\\IntekPlus\\QPM\\Main\\Gerber\'路徑。點擊\'Open Gerber\'選擇要使用的Gerber File。輸入Bump diameter、Bump height數值後點擊OK按鈕。',
+          ja:'■ Unit Design (1/4)\n\nファイル形式\'.csv\'に事前変換し\'C:\\IntekPlus\\QPM\\Main\\Gerber\'パスに保存する必要があります。\'Open Gerber\'をクリックし使用するGerber Fileを選択します。Bump diameter、Bump heightの値を入力しOKボタンをクリックします。',
+          vi:'■ Unit Design (1/4)\n\nLoại file \'.csv\' phải được chuyển đổi trước và lưu tại đường dẫn \'C:\\IntekPlus\\QPM\\Main\\Gerber\'. Nhấp \'Open Gerber\' để chọn Gerber File cần dùng. Nhập giá trị Bump diameter, Bump height rồi nhấp nút OK.'
+        }},
+        {img:cmImg('I','qpm',162),tx:{
+          ko:'■ Unit Design (2/4)\n\nSRO Information에 적용된 Spec을 확인합니다. Sample Type(Round 또는 Flat)을 설정합니다. 실제 샘플과 Bump 이미지가 일치하지 않으면 Bump Map을 설정합니다.',
+          en:'■ Unit Design (2/4)\n\nCheck the spec applied in SRO information. Set the sample type (Round or Flat). If the actual sample and the bump image do not match, set the bump map.',
+          zhCN:'■ Unit Design (2/4)\n\n确认SRO information中已应用的spec。设置sample type(Round或Flat)。若实际样品与bump影像不一致,则设置bump map。',
+          zhTW:'■ Unit Design (2/4)\n\n確認SRO information中已套用的spec。設定sample type(Round或Flat)。若實際樣品與bump影像不一致,則設定bump map。',
+          ja:'■ Unit Design (2/4)\n\nSRO informationに適用されたspecを確認します。sample type(RoundまたはFlat)を設定します。実際のサンプルとbump画像が一致しない場合はbump mapを設定します。',
+          vi:'■ Unit Design (2/4)\n\nKiểm tra spec đã áp dụng trong SRO information. Đặt sample type (Round hoặc Flat). Nếu mẫu thực tế và ảnh bump không khớp, đặt bump map.'
+        }},
+        {img:cmImg('I','qpm',163),tx:{
+          ko:'■ Unit Design (3/4)\n\nFlip X, Y: 이미지를 좌우/상하 반전합니다. Rotation: 이미지를 회전합니다.',
+          en:'■ Unit Design (3/4)\n\nFlip X, Y: mirror the image. Rotation: image rotation.',
+          zhCN:'■ Unit Design (3/4)\n\nFlip X、Y:镜像影像。Rotation:影像旋转。',
+          zhTW:'■ Unit Design (3/4)\n\nFlip X、Y:鏡像影像。Rotation:影像旋轉。',
+          ja:'■ Unit Design (3/4)\n\nFlip X、Y:画像をミラー反転します。Rotation:画像回転。',
+          vi:'■ Unit Design (3/4)\n\nFlip X, Y: lật ảnh. Rotation: xoay ảnh.'
+        }},
+        {img:cmImg('I','qpm',164),tx:{
+          ko:'■ Unit Design (4/4)\n\nColor Map View: Die별(두 FOV로 구분) 및 Redundant Bump(설정 시 선택된 Redundant Gerber File)를 나타냅니다. Apply 후 Main ▸ Save 합니다.',
+          en:'■ Unit Design (4/4)\n\nColor map view: die by die (divided into two FOVs), and Redundant Bump (the redundant Gerber file selected when setting). After Apply, Main ▸ Save.',
+          zhCN:'■ Unit Design (4/4)\n\nColor map view:按die区分(分为两个FOV),以及Redundant Bump(设置时所选的Redundant Gerber File)。Apply后Main▸Save。',
+          zhTW:'■ Unit Design (4/4)\n\nColor map view:按die區分(分為兩個FOV),以及Redundant Bump(設定時所選的Redundant Gerber File)。Apply後Main▸Save。',
+          ja:'■ Unit Design (4/4)\n\nColor map view:die別(2つのFOVに区分)、及びRedundant Bump(設定時に選択したRedundant Gerber File)。Apply後Main▸Saveします。',
+          vi:'■ Unit Design (4/4)\n\nColor map view: theo từng die (chia thành hai FOV), và Redundant Bump (Redundant Gerber File đã chọn khi cài đặt). Sau khi Apply, Main▸Save.'
+        }},
+        {img:cmImg('I','qpm',165),tx:{
+          ko:'■ FOV division (1/2)\n\n샘플의 FOV Division 사양을 확인합니다.',
+          en:'■ FOV division (1/2)\n\nCheck the sample spec of the FOV division.',
+          zhCN:'■ FOV division (1/2)\n\n确认样品的FOV division规格。',
+          zhTW:'■ FOV division (1/2)\n\n確認樣品的FOV division規格。',
+          ja:'■ FOV division (1/2)\n\nサンプルのFOV division仕様を確認します。',
+          vi:'■ FOV division (1/2)\n\nKiểm tra thông số FOV division của mẫu.'
+        }},
+        {img:cmImg('I','qpm',166),tx:{
+          ko:'■ FOV division (2/2)\n\nFOV Count: FOV 개수. Die List: 두 Die 중 사용할 Die 선택. SRO List: 두 SRO 중 사용할 SRO 선택. Merge: C4 Edit 이후 영역을 병합하는 기능. 필요한 값을 입력한 뒤 Apply 후 Main ▸ Save 합니다.',
+          en:'■ FOV division (2/2)\n\nFOV count: number of FOVs. Die list: select the die to be used among the two dies. SRO list: select the SRO to be used among two SROs. Merge: a function to merge areas after C4 Edit. Enter the specific values required, then Apply and Main ▸ Save.',
+          zhCN:'■ FOV division (2/2)\n\nFOV count:FOV数量。Die list:在两个die中选择使用的die。SRO list:在两个SRO中选择使用的SRO。Merge:C4 Edit后合并区域的功能。输入所需数值后Apply,再Main▸Save。',
+          zhTW:'■ FOV division (2/2)\n\nFOV count:FOV數量。Die list:在兩個die中選擇使用的die。SRO list:在兩個SRO中選擇使用的SRO。Merge:C4 Edit後合併區域的功能。輸入所需數值後Apply,再Main▸Save。',
+          ja:'■ FOV division (2/2)\n\nFOV count:FOV数。Die list:2つのdieのうち使用するdieを選択。SRO list:2つのSROのうち使用するSROを選択。Merge:C4 Edit後に領域を統合する機能。必要な値を入力した後Apply、Main▸Saveします。',
+          vi:'■ FOV division (2/2)\n\nFOV count: số lượng FOV. Die list: chọn die sử dụng trong hai die. SRO list: chọn SRO sử dụng trong hai SRO. Merge: chức năng gộp vùng sau C4 Edit. Nhập các giá trị cần thiết, sau đó Apply và Main▸Save.'
+        }},
+        {img:cmImg('I','qpm',167),tx:{
+          ko:'■ Bump Scanning (1/4)\n\nMove to unit[X,Y]: 검사할 Unit 좌표를 선택합니다. Move to for: Die 위치를 선택합니다. 선택 후 Jig가 해당 좌표로 이동합니다. Scan 버튼을 클릭합니다.',
+          en:'■ Bump Scanning (1/4)\n\nMove to unit [X, Y]: select the unit coordinates. Move to for: select the location of the die. After selection, the Jig moves to the corresponding coordinates. Click the Scan button.',
+          zhCN:'■ Bump Scanning (1/4)\n\nMove to unit[X,Y]:选择unit坐标。Move to for:选择die的位置。选择后Jig移动到相应坐标。点击Scan按钮。',
+          zhTW:'■ Bump Scanning (1/4)\n\nMove to unit[X,Y]:選擇unit座標。Move to for:選擇die的位置。選擇後Jig移動到相應座標。點擊Scan按鈕。',
+          ja:'■ Bump Scanning (1/4)\n\nMove to unit[X,Y]:unit座標を選択します。Move to for:dieの位置を選択します。選択後Jigが該当座標へ移動します。Scanボタンをクリックします。',
+          vi:'■ Bump Scanning (1/4)\n\nMove to unit[X,Y]: chọn tọa độ unit. Move to for: chọn vị trí die. Sau khi chọn, Jig di chuyển đến tọa độ tương ứng. Nhấp nút Scan.'
+        }},
+        {img:cmImg('I','qpm',168),tx:{
+          ko:'■ Bump Scanning (2/4) — Scanning Parameters\n\nCentral Wavelength: 중심 광파장. Scan Order: 파장을 얻기 위해 파형을 분할하는 지점 수. Scan Step: 자동 계산되어 표시됩니다. Fringe Position: 간섭무늬가 발생하는 PZT 위치. Scan Upper/Lower Offset: PZT Scan 영역. Frame Count — Oblique Illumination: 검사에 사용되는 조명 수. Coaxial Illumination: Scan Step과 Scan Range로 계산된 Frame Count 표시. Cuda Delay Frame Count: 이미지 획득 후 Cuda 계산 시 프레임 계산 순서를 지연시키는 값. Last No Calc Frame Count: 전체 프레임 중 Cuda 계산에서 제외되는 마지막 프레임 수.',
+          en:'■ Bump Scanning (2/4) — Scanning Parameters\n\nCentral wavelength: center wavelength of light. Scan order: the number of points dividing the waveform to obtain the wavelength. Scan step: automatically calculated and displayed. Fringe position: the PZT location where the interference pattern occurs. Scan upper, lower offset: the PZT scan area. Frame Count — Oblique illumination: number of lights used for inspection. Coaxial Illumination: shows the frame count calculated by scan step and scan range. Cuda delay frame count: when calculating Cuda after acquiring an image, the frame calculation order is delayed by this count. Last no calc frame count: excluded from the Cuda calculation out of the entire frame.',
+          zhCN:'■ Bump Scanning (2/4) — Scanning Parameters\n\nCentral wavelength:光的中心波长。Scan order:为获取波长而分割波形的点数。Scan step:自动计算并显示。Fringe position:产生干涉图案的PZT位置。Scan upper、lower offset:PZT扫描区域。Frame Count——Oblique illumination:检查所用的光源数。Coaxial Illumination:显示由scan step与scan range计算出的frame count。Cuda delay frame count:获取影像后进行Cuda计算时,帧计算顺序延迟的数量。Last no calc frame count:整体frame中被排除在Cuda计算之外的最后帧数。',
+          zhTW:'■ Bump Scanning (2/4) — Scanning Parameters\n\nCentral wavelength:光的中心波長。Scan order:為取得波長而分割波形的點數。Scan step:自動計算並顯示。Fringe position:產生干涉圖案的PZT位置。Scan upper、lower offset:PZT掃描區域。Frame Count——Oblique illumination:檢查所用的光源數。Coaxial Illumination:顯示由scan step與scan range計算出的frame count。Cuda delay frame count:取得影像後進行Cuda計算時,幀計算順序延遲的數量。Last no calc frame count:整體frame中被排除在Cuda計算之外的最後幀數。',
+          ja:'■ Bump Scanning (2/4) — Scanning Parameters\n\nCentral wavelength:光の中心波長。Scan order:波長を得るために波形を分割する点数。Scan step:自動計算され表示されます。Fringe position:干渉縞が発生するPZT位置。Scan upper、lower offset:PZTスキャン領域。Frame Count——Oblique illumination:検査に使用する光源数。Coaxial Illumination:scan stepとscan rangeで計算されたframe countを表示。Cuda delay frame count:画像取得後Cuda計算時にフレーム計算順序を遅延させる数。Last no calc frame count:全フレームのうちCuda計算から除外される最後のフレーム数。',
+          vi:'■ Bump Scanning (2/4) — Scanning Parameters\n\nCentral wavelength: bước sóng trung tâm của ánh sáng. Scan order: số điểm chia dạng sóng để lấy bước sóng. Scan step: được tính tự động và hiển thị. Fringe position: vị trí PZT nơi xảy ra vân giao thoa. Scan upper, lower offset: vùng scan PZT. Frame Count — Oblique illumination: số đèn dùng để kiểm tra. Coaxial Illumination: hiển thị frame count tính từ scan step và scan range. Cuda delay frame count: khi tính Cuda sau khi thu ảnh, thứ tự tính khung hình bị trễ theo số này. Last no calc frame count: số khung cuối bị loại khỏi tính toán Cuda trong toàn bộ khung hình.'
+        }},
+        {img:cmImg('I','qpm',169),tx:{
+          ko:'■ Bump Scanning (3/4) — LCSI Algorithm Parameters\n\nNoise Threshold: 간섭무늬 신호 변동값이 특정 기준 이하이면 계산에 반영하지 않는 파라미터. Bad Pixel Threshold: Bad Pixel 데이터의 임계값 설정. Filtering Count: Z-map 필터링 횟수. Use Dual Illumination: 두 조명 값을 사용합니다. Illumination — Oblique: 2D 조명 값. Mix: Coaxial+Oblique. Coaxial: 3D 조명 값.',
+          en:'■ Bump Scanning (3/4) — LCSI Algorithm Parameters\n\nNoise threshold: a parameter that is not applied to the calculation when the fringe signal\'s variation is at or below the threshold. Bad pixel threshold: sets the threshold for bad pixel data. Filtering count: Z-map filtering count. Use dual illumination: uses two lighting values. Illumination — Oblique: 2D lighting values. Mix: Coaxial + Oblique. Coaxial: 3D lighting values.',
+          zhCN:'■ Bump Scanning (3/4) — LCSI Algorithm Parameters\n\nNoise threshold:当干涉信号变动值低于此临界值时不纳入计算的参数。Bad pixel threshold:设置bad pixel数据的临界值。Filtering count:Z-map滤波次数。Use dual illumination:使用两种照明值。Illumination——Oblique:2D照明值。Mix:Coaxial+Oblique。Coaxial:3D照明值。',
+          zhTW:'■ Bump Scanning (3/4) — LCSI Algorithm Parameters\n\nNoise threshold:當干涉訊號變動值低於此臨界值時不納入計算的參數。Bad pixel threshold:設定bad pixel數據的臨界值。Filtering count:Z-map濾波次數。Use dual illumination:使用兩種照明值。Illumination——Oblique:2D照明值。Mix:Coaxial+Oblique。Coaxial:3D照明值。',
+          ja:'■ Bump Scanning (3/4) — LCSI Algorithm Parameters\n\nNoise threshold:干渉信号の変動値が一定基準以下の場合、計算に反映しないパラメータ。Bad pixel threshold:bad pixelデータの閾値設定。Filtering count:Z-mapフィルタリング回数。Use dual illumination:2つの照明値を使用します。Illumination——Oblique:2D照明値。Mix:Coaxial+Oblique。Coaxial:3D照明値。',
+          vi:'■ Bump Scanning (3/4) — LCSI Algorithm Parameters\n\nNoise threshold: tham số không áp dụng vào tính toán khi độ biến thiên tín hiệu vân giao thoa dưới ngưỡng này. Bad pixel threshold: đặt ngưỡng cho dữ liệu bad pixel. Filtering count: số lần lọc Z-map. Use dual illumination: sử dụng hai giá trị chiếu sáng. Illumination — Oblique: giá trị chiếu 2D. Mix: Coaxial+Oblique. Coaxial: giá trị chiếu 3D.'
+        }},
+        {img:cmImg('I','qpm',170),tx:{
+          ko:'■ Bump Scanning (4/4)\n\n해당 파라미터를 설정합니다. Illumination에서 Bump가 선명하게 보이도록 밝기를 설정합니다. Apply 후 Main ▸ Save 합니다.',
+          en:'■ Bump Scanning (4/4)\n\nSet the corresponding parameter. Set the brightness so that the bump can be seen clearly in Illumination. After Apply, Main ▸ Save.',
+          zhCN:'■ Bump Scanning (4/4)\n\n设置相应参数。在Illumination中设置亮度以清晰显示bump。Apply后Main▸Save。',
+          zhTW:'■ Bump Scanning (4/4)\n\n設定相應參數。在Illumination中設定亮度以清晰顯示bump。Apply後Main▸Save。',
+          ja:'■ Bump Scanning (4/4)\n\n該当パラメータを設定します。Illuminationでbumpが鮮明に見えるよう明るさを設定します。Apply後Main▸Saveします。',
+          vi:'■ Bump Scanning (4/4)\n\nĐặt tham số tương ứng. Đặt độ sáng trong Illumination để bump hiển thị rõ. Sau khi Apply, Main▸Save.'
+        }},
+        {img:cmImg('I','qpm',171),tx:{
+          ko:'■ Bump Alignment (1/4)\n\nMain ▸ Align ▸ Bump Alignment 순서로 클릭합니다.',
+          en:'■ Bump Alignment (1/4)\n\nClick \'Main\' ▸ \'Align\' and then \'Bump Alignment\'.',
+          zhCN:'■ Bump Alignment (1/4)\n\n依次点击\'Main\'▸\'Align\'再点\'Bump Alignment\'。',
+          zhTW:'■ Bump Alignment (1/4)\n\n依序點擊\'Main\'▸\'Align\'再點\'Bump Alignment\'。',
+          ja:'■ Bump Alignment (1/4)\n\n\'Main\'▸\'Align\'の順にクリックし\'Bump Alignment\'をクリックします。',
+          vi:'■ Bump Alignment (1/4)\n\nNhấp \'Main\' ▸ \'Align\' rồi \'Bump Alignment\'.'
+        }},
+        {img:cmImg('I','qpm',172),tx:{
+          ko:'■ Bump Alignment (2/4)\n\nMove to unit[X,Y]: 검사할 Unit 좌표를 선택합니다. Move to for: Die 위치를 선택합니다. 선택 후 Jig가 해당 좌표로 이동합니다. Scan 버튼을 클릭합니다.',
+          en:'■ Bump Alignment (2/4)\n\nMove to unit [X, Y]: select the unit coordinates. Move to for: select the location of the die. After selection, the Jig moves to the corresponding coordinates. Click the Scan button.',
+          zhCN:'■ Bump Alignment (2/4)\n\nMove to unit[X,Y]:选择unit坐标。Move to for:选择die的位置。选择后Jig移动到相应坐标。点击Scan按钮。',
+          zhTW:'■ Bump Alignment (2/4)\n\nMove to unit[X,Y]:選擇unit座標。Move to for:選擇die的位置。選擇後Jig移動到相應座標。點擊Scan按鈕。',
+          ja:'■ Bump Alignment (2/4)\n\nMove to unit[X,Y]:unit座標を選択します。Move to for:dieの位置を選択します。選択後Jigが該当座標へ移動します。Scanボタンをクリックします。',
+          vi:'■ Bump Alignment (2/4)\n\nMove to unit[X,Y]: chọn tọa độ unit. Move to for: chọn vị trí die. Sau khi chọn, Jig di chuyển đến tọa độ tương ứng. Nhấp nút Scan.'
+        }},
+        {img:cmImg('I','qpm',173),tx:{
+          ko:'■ Bump Alignment (3/4)\n\nGlobal Search Offset: Align할 영역의 크기를 조절하는 파라미터. Max Sampling Count: 최대 Sampling 횟수 설정. Gray Z-map Threshold Offset: Z-map 임계값 설정. Image Threshold Offset: Bump 이미지의 임계값 설정.',
+          en:'■ Bump Alignment (3/4)\n\nGlobal search offset: a parameter that controls the size of the area to be aligned. Max Sampling Count: sets the maximum number of samplings. Gray z-map threshold offset: sets the Z-map threshold. Image threshold offset: sets the threshold value of the bump image.',
+          zhCN:'■ Bump Alignment (3/4)\n\nGlobal search offset:控制对齐区域大小的参数。Max Sampling Count:设置最大取样次数。Gray z-map threshold offset:设置Z-map阈值。Image threshold offset:设置bump影像的阈值。',
+          zhTW:'■ Bump Alignment (3/4)\n\nGlobal search offset:控制對齊區域大小的參數。Max Sampling Count:設定最大取樣次數。Gray z-map threshold offset:設定Z-map閾值。Image threshold offset:設定bump影像的閾值。',
+          ja:'■ Bump Alignment (3/4)\n\nGlobal search offset:アライメントする領域の大きさを制御するパラメータ。Max Sampling Count:最大サンプリング回数を設定。Gray z-map threshold offset:Z-mapの閾値を設定。Image threshold offset:bump画像の閾値を設定。',
+          vi:'■ Bump Alignment (3/4)\n\nGlobal search offset: tham số điều khiển kích thước vùng cần align. Max Sampling Count: đặt số lần lấy mẫu tối đa. Gray z-map threshold offset: đặt ngưỡng Z-map. Image threshold offset: đặt ngưỡng ảnh bump.'
+        }},
+        {img:cmImg('I','qpm',174),tx:{
+          ko:'■ Bump Alignment (4/4)\n\n\'Global Align Parameters\'를 설정하고 테스트합니다. 결과값으로 Align 성공 여부를 확인합니다. Apply 후 Main ▸ Save 합니다.',
+          en:'■ Bump Alignment (4/4)\n\nSet the \'Global align parameters\' and test. The result value confirms the Align success decision. After Apply, Main ▸ Save.',
+          zhCN:'■ Bump Alignment (4/4)\n\n设置\'Global align parameters\'并测试。以结果值确认Align成功与否。Apply后Main▸Save。',
+          zhTW:'■ Bump Alignment (4/4)\n\n設定\'Global align parameters\'並測試。以結果值確認Align成功與否。Apply後Main▸Save。',
+          ja:'■ Bump Alignment (4/4)\n\n\'Global align parameters\'を設定しテストします。結果値でAlign成功判定を確認します。Apply後Main▸Saveします。',
+          vi:'■ Bump Alignment (4/4)\n\nĐặt \'Global align parameters\' và kiểm tra. Giá trị kết quả xác nhận Align thành công. Sau khi Apply, Main▸Save.'
+        }},
+        {img:cmImg('I','qpm',175),tx:{
+          ko:'■ Bump Measurement (1/4)\n\nMove to unit[X,Y]: 검사할 Unit 좌표를 선택합니다. Move to for: Die 위치를 선택합니다. 선택 후 Jig가 해당 좌표로 이동합니다. Scan 버튼을 클릭합니다.',
+          en:'■ Bump Measurement (1/4)\n\nMove to unit [X, Y]: select the unit coordinates. Move to for: select the location of the die. After selection, the Jig moves to the corresponding coordinates. Click the Scan button.',
+          zhCN:'■ Bump Measurement (1/4)\n\nMove to unit[X,Y]:选择unit坐标。Move to for:选择die的位置。选择后Jig移动到相应坐标。点击Scan按钮。',
+          zhTW:'■ Bump Measurement (1/4)\n\nMove to unit[X,Y]:選擇unit座標。Move to for:選擇die的位置。選擇後Jig移動到相應座標。點擊Scan按鈕。',
+          ja:'■ Bump Measurement (1/4)\n\nMove to unit[X,Y]:unit座標を選択します。Move to for:dieの位置を選択します。選択後Jigが該当座標へ移動します。Scanボタンをクリックします。',
+          vi:'■ Bump Measurement (1/4)\n\nMove to unit[X,Y]: chọn tọa độ unit. Move to for: chọn vị trí die. Sau khi chọn, Jig di chuyển đến tọa độ tương ứng. Nhấp nút Scan.'
+        }},
+        {img:cmImg('I','qpm',176),tx:{
+          ko:'■ Bump Measurement (2/4) — Basic Parameters\n\nUse Logical Pixel: Logical Pixel 사용 여부. Logical Pixel Visibility Lower/Upper Bound: Bump 최종 높이 대비 Visibility Pixel 비율. Use Visibility Weight: 하한~상한 범위 값에 가중치 적용 여부. Valid Pixel Count Threshold: Bump의 Logical Pixel 합이 이 값보다 작으면 Bad 처리. Bump Z Type – POR: Calculation Algorithm(계산 알고리즘 선택), Outer/Inner Diameter Ratio(높이 계산에 사용할 Bump 영역 비율), Pixel Percent(계산에 사용할 Pixel 비율).',
+          en:'■ Bump Measurement (2/4) — Basic Parameters\n\nUse logical pixel: logical pixel usage status. Logical pixel visibility lower, upper bound: the proportion of visibility pixels to the final height of the bump. Use visibility weight: whether or not weight is applied to values between the lower and upper limit. Valid pixel count threshold: bad if the logical pixel sum of the bump is less than this value. Bump Z type – POR: Calculation algorithm (select calculation algorithm), Outer/inner diameter ratio (ratio of bump area used when calculating height), Pixel percent (percentage of pixels to be used for calculation).',
+          zhCN:'■ Bump Measurement (2/4) — Basic Parameters\n\nUse logical pixel:logical pixel使用状态。Logical pixel visibility lower、upper bound:相对bump最终高度的visibility pixel比例。Use visibility weight:是否对下限~上限之间的值套用权重。Valid pixel count threshold:若bump的logical pixel总和小于此值则判为bad。Bump Z type – POR:Calculation algorithm(选择计算算法)、Outer、inner diameter ratio(计算高度时使用的bump区域比例)、Pixel percent(计算所用的像素百分比)。',
+          zhTW:'■ Bump Measurement (2/4) — Basic Parameters\n\nUse logical pixel:logical pixel使用狀態。Logical pixel visibility lower、upper bound:相對bump最終高度的visibility pixel比例。Use visibility weight:是否對下限~上限之間的值套用權重。Valid pixel count threshold:若bump的logical pixel總和小於此值則判為bad。Bump Z type – POR:Calculation algorithm(選擇計算演算法)、Outer、inner diameter ratio(計算高度時使用的bump區域比例)、Pixel percent(計算所用的像素百分比)。',
+          ja:'■ Bump Measurement (2/4) — Basic Parameters\n\nUse logical pixel:logical pixelの使用状況。Logical pixel visibility lower、upper bound:bump最終高さに対するvisibility pixelの割合。Use visibility weight:下限~上限間の値に重みを適用するか。Valid pixel count threshold:bumpのlogical pixel合計がこの値未満ならbad判定。Bump Z type – POR:Calculation algorithm(計算アルゴリズム選択)、Outer、inner diameter ratio(高さ計算に使用するbump領域の比率)、Pixel percent(計算に使用するピクセル割合)。',
+          vi:'■ Bump Measurement (2/4) — Basic Parameters\n\nUse logical pixel: trạng thái sử dụng logical pixel. Logical pixel visibility lower, upper bound: tỷ lệ pixel hiển thị so với chiều cao cuối của bump. Use visibility weight: có áp trọng số cho giá trị giữa cận dưới~trên hay không. Valid pixel count threshold: bad nếu tổng logical pixel của bump nhỏ hơn giá trị này. Bump Z type – POR: Calculation algorithm (chọn thuật toán tính), Outer/inner diameter ratio (tỷ lệ vùng bump dùng khi tính chiều cao), Pixel percent (phần trăm pixel dùng để tính).'
+        }},
+        {img:cmImg('I','qpm',177),tx:{
+          ko:'■ Bump Measurement (3/4) — Substrate Parameters\n\nBump Ignore Diameter Ratio: 계산에 사용하지 않을 Bump 영역 비율. Calculation Diameter Ratio: 계산에 사용할 영역 비율. Sorted Value Ratio Lower/Upper: 정렬된 값의 비율.',
+          en:'■ Bump Measurement (3/4) — Substrate Parameters\n\nBump ignore diameter ratio: the ratio of the bump area not to be used in the calculation. Calculation diameter ratio: the ratio of the area to be used for the calculation. Sorted value ratio lower, upper: the ratio of the sorted values.',
+          zhCN:'■ Bump Measurement (3/4) — Substrate Parameters\n\nBump ignore diameter ratio:计算中不使用的bump区域比例。Calculation diameter ratio:计算所用的区域比例。Sorted value ratio lower、upper:排序值的比例。',
+          zhTW:'■ Bump Measurement (3/4) — Substrate Parameters\n\nBump ignore diameter ratio:計算中不使用的bump區域比例。Calculation diameter ratio:計算所用的區域比例。Sorted value ratio lower、upper:排序值的比例。',
+          ja:'■ Bump Measurement (3/4) — Substrate Parameters\n\nBump ignore diameter ratio:計算に使用しないbump領域の比率。Calculation diameter ratio:計算に使用する領域の比率。Sorted value ratio lower、upper:ソートされた値の比率。',
+          vi:'■ Bump Measurement (3/4) — Substrate Parameters\n\nBump ignore diameter ratio: tỷ lệ vùng bump không dùng trong tính toán. Calculation diameter ratio: tỷ lệ vùng dùng để tính toán. Sorted value ratio lower, upper: tỷ lệ giá trị đã sắp xếp.'
+        }},
+        {img:cmImg('I','qpm',178),tx:{
+          ko:'■ Bump Measurement (4/4)\n\n\'Bump Parameter\' Spec을 설정합니다. 테스트 진행 후 결과값이 \"Align Measure Success\"인지 확인합니다. Apply 후 Main ▸ Save 합니다.',
+          en:'■ Bump Measurement (4/4)\n\nSet the \'Bump Parameter\' spec. After the test progresses, confirm that the result value is "Align Measure success". After Apply, Main ▸ Save.',
+          zhCN:'■ Bump Measurement (4/4)\n\n设置\'Bump Parameter\' spec。测试进行后确认结果值是否为\"Align Measure success\"。Apply后Main▸Save。',
+          zhTW:'■ Bump Measurement (4/4)\n\n設定\'Bump Parameter\' spec。測試進行後確認結果值是否為\"Align Measure success\"。Apply後Main▸Save。',
+          ja:'■ Bump Measurement (4/4)\n\n\'Bump Parameter\' Specを設定します。テスト実行後、結果値が\"Align Measure success\"であることを確認します。Apply後Main▸Saveします。',
+          vi:'■ Bump Measurement (4/4)\n\nĐặt spec \'Bump Parameter\'. Sau khi kiểm tra tiến hành, xác nhận giá trị kết quả là \"Align Measure success\". Sau khi Apply, Main▸Save.'
+        }},
+        {img:cmImg('I','qpm',179),tx:{
+          ko:'■ 2D Measurement (1/4)\n\nMove to unit[X,Y]: 검사할 Unit 좌표를 선택합니다. Move to for: Die 위치를 선택합니다. 선택 후 Jig가 해당 좌표로 이동합니다. Scan 버튼을 클릭합니다.',
+          en:'■ 2D Measurement (1/4)\n\nMove to unit [X, Y]: select the unit coordinates. Move to for: select the location of the die. After selection, the Jig moves to the corresponding coordinates. Click the Scan button.',
+          zhCN:'■ 2D Measurement (1/4)\n\nMove to unit[X,Y]:选择unit坐标。Move to for:选择die的位置。选择后Jig移动到相应坐标。点击Scan按钮。',
+          zhTW:'■ 2D Measurement (1/4)\n\nMove to unit[X,Y]:選擇unit座標。Move to for:選擇die的位置。選擇後Jig移動到相應座標。點擊Scan按鈕。',
+          ja:'■ 2D Measurement (1/4)\n\nMove to unit[X,Y]:unit座標を選択します。Move to for:dieの位置を選択します。選択後Jigが該当座標へ移動します。Scanボタンをクリックします。',
+          vi:'■ 2D Measurement (1/4)\n\nMove to unit[X,Y]: chọn tọa độ unit. Move to for: chọn vị trí die. Sau khi chọn, Jig di chuyển đến tọa độ tương ứng. Nhấp nút Scan.'
+        }},
+        {img:cmImg('I','qpm',180),tx:{
+          ko:'■ 2D Measurement (2/4)\n\nDefect2D – Missing2D, Bridge: Use Image Index(검사 항목에 사용할 이미지), Image Threshold(이미지 이진화 기준값), Threshold Reverse(이진화 이미지 반전), Missing Search ROI Size(Missing 검사에 사용할 영역 크기), Bump Minimum Blob Size(Bridge 검사에 사용할 최소 Blob 크기). Measurement – Diameter(Top/Bottom): Use Image Index 1st,2nd(검사 항목에 사용할 이미지), Image Operator(두 이미지 간 연산 기호 선택), Edge Direction Out to in(외곽 길이의 Edge Count Point에서 Bump 중심으로 Scan), Edge Direction In to Out(길이의 Edge Count Point에서 Bump 중심으로 Scan).',
+          en:'■ 2D Measurement (2/4)\n\nDefect2D – Missing2D, Bridge: Use Image Index (images to be used for inspection items), Image Threshold (values to be used for image binarization), Threshold Reverse (invert the binarized image), Missing Search ROI Size (area size to use for missing inspection), Bump Minimum Blob Size (blob size of target to use for Bridge inspection). Measurement – Diameter (Top/Bottom): Use Image Index 1st, 2nd (images to be used for inspection items), Image Operator (select the operation symbol between two images), Edge Direction Out to in (scan from the Edge Count Point of the Outer Length to the Bump Center), Edge Direction In to Out (scan from the Edge Count Point of the Length to the Bump Center).',
+          zhCN:'■ 2D Measurement (2/4)\n\nDefect2D – Missing2D、Bridge:Use Image Index(检查项目所用影像)、Image Threshold(影像二值化基准值)、Threshold Reverse(反转二值化影像)、Missing Search ROI Size(missing检查所用区域大小)、Bump Minimum Blob Size(Bridge检查所用最小blob大小)。Measurement – Diameter(Top/Bottom):Use Image Index 1st、2nd(检查项目所用影像)、Image Operator(选择两影像间的运算符号)、Edge Direction Out to in(从外围长度的Edge Count Point向bump中心scan)、Edge Direction In to Out(从长度的Edge Count Point向bump中心scan)。',
+          zhTW:'■ 2D Measurement (2/4)\n\nDefect2D – Missing2D、Bridge:Use Image Index(檢查項目所用影像)、Image Threshold(影像二值化基準值)、Threshold Reverse(反轉二值化影像)、Missing Search ROI Size(missing檢查所用區域大小)、Bump Minimum Blob Size(Bridge檢查所用最小blob大小)。Measurement – Diameter(Top/Bottom):Use Image Index 1st、2nd(檢查項目所用影像)、Image Operator(選擇兩影像間的運算符號)、Edge Direction Out to in(從外圍長度的Edge Count Point向bump中心scan)、Edge Direction In to Out(從長度的Edge Count Point向bump中心scan)。',
+          ja:'■ 2D Measurement (2/4)\n\nDefect2D – Missing2D、Bridge:Use Image Index(検査項目に使用する画像)、Image Threshold(画像二値化基準値)、Threshold Reverse(二値化画像の反転)、Missing Search ROI Size(missing検査に使用する領域サイズ)、Bump Minimum Blob Size(Bridge検査に使用する最小blobサイズ)。Measurement – Diameter(Top/Bottom):Use Image Index 1st、2nd(検査項目に使用する画像)、Image Operator(2画像間の演算記号選択)、Edge Direction Out to in(外周長さのEdge Count Pointからbump中心へscan)、Edge Direction In to Out(長さのEdge Count Pointからbump中心へscan)。',
+          vi:'■ 2D Measurement (2/4)\n\nDefect2D – Missing2D, Bridge: Use Image Index (ảnh dùng cho hạng mục kiểm tra), Image Threshold (giá trị dùng để nhị phân hóa ảnh), Threshold Reverse (đảo ảnh nhị phân), Missing Search ROI Size (kích thước vùng dùng để kiểm tra missing), Bump Minimum Blob Size (kích thước blob tối thiểu dùng kiểm tra Bridge). Measurement – Diameter (Top/Bottom): Use Image Index 1st, 2nd (ảnh dùng cho hạng mục kiểm tra), Image Operator (chọn ký hiệu phép toán giữa hai ảnh), Edge Direction Out to in (scan từ Edge Count Point của Outer Length đến tâm Bump), Edge Direction In to Out (scan từ Edge Count Point của Length đến tâm Bump).'
+        }},
+        {img:cmImg('I','qpm',181),tx:{
+          ko:'■ 2D Measurement (3/4)\n\nEdge Type: Edge Point Pixel의 밝기 변화가 증가·감소할 때를 선택하는 파라미터. Edge Count: Bump Edge를 검출하는 Point 수. Edge Outer Length: 지름 Edge를 검출하는 범위. Noise Min, Max: 지름의 Edge Point 중 특정 조건의 Point를 필터링하는 기능. Center Point: Bump의 중심점 선택. Stdev: Stdev 값의 ± 범위를 벗어난 데이터를 필터링하는 값. Gain/Offset: 측정값에 대한 Gain/Offset.',
+          en:'■ 2D Measurement (3/4)\n\nEdge Type: a parameter for selecting when the brightness change of the Edge Point Pixel increases or decreases. Edge Count: the number of points detecting the Bump Edge. Edge Outer Length: the range for detecting the diameter edge. Noise Min, Max: a function for filtering out points with specific conditions among the edge points of the diameter. Center Point: selection of the Bump\'s center point. Stdev: a value for filtering data outside the +/- range of the Stdev Value. Gain/Offset: gain/offset for the measured value.',
+          zhCN:'■ 2D Measurement (3/4)\n\nEdge Type:选择Edge Point Pixel亮度变化增加或减少时的参数。Edge Count:检测Bump Edge的点数。Edge Outer Length:检测直径edge的范围。Noise Min、Max:在直径的edge点中过滤特定条件点的功能。Center Point:选择bump的中心点。Stdev:过滤超出Stdev值±范围数据的值。Gain/Offset:对测量值的gain/offset。',
+          zhTW:'■ 2D Measurement (3/4)\n\nEdge Type:選擇Edge Point Pixel亮度變化增加或減少時的參數。Edge Count:偵測Bump Edge的點數。Edge Outer Length:偵測直徑edge的範圍。Noise Min、Max:在直徑的edge點中過濾特定條件點的功能。Center Point:選擇bump的中心點。Stdev:過濾超出Stdev值±範圍數據的值。Gain/Offset:對測量值的gain/offset。',
+          ja:'■ 2D Measurement (3/4)\n\nEdge Type:Edge Point Pixelの輝度変化が増加・減少する場合を選択するパラメータ。Edge Count:Bump Edgeを検出するポイント数。Edge Outer Length:直径edgeを検出する範囲。Noise Min、Max:直径のedgeポイントのうち特定条件のポイントをフィルタリングする機能。Center Point:bumpの中心点選択。Stdev:Stdev値の±範囲外のデータをフィルタリングする値。Gain/Offset:測定値に対するgain/offset。',
+          vi:'■ 2D Measurement (3/4)\n\nEdge Type: tham số chọn khi độ sáng của Edge Point Pixel tăng hoặc giảm. Edge Count: số điểm phát hiện Bump Edge. Edge Outer Length: phạm vi phát hiện edge đường kính. Noise Min, Max: chức năng lọc bỏ các điểm có điều kiện cụ thể trong số các edge point của đường kính. Center Point: chọn điểm tâm của Bump. Stdev: giá trị lọc dữ liệu ngoài phạm vi ± của giá trị Stdev. Gain/Offset: gain/offset cho giá trị đo.'
+        }},
+        {img:cmImg('I','qpm',182),tx:{
+          ko:'■ 2D Measurement (4/4)\n\n\'Bump Parameter\' Spec을 설정합니다. Test를 클릭해 결과가 \"Align Measure Success\"인지 확인합니다. Apply 후 Main ▸ Save 합니다.',
+          en:'■ 2D Measurement (4/4)\n\nSet the \'Bump Parameter\' spec. Click Test and check that the result is "Align Measure Success". After Apply, Main ▸ Save.',
+          zhCN:'■ 2D Measurement (4/4)\n\n设置\'Bump Parameter\' spec。点击Test确认结果是否为\"Align Measure Success\"。Apply后Main▸Save。',
+          zhTW:'■ 2D Measurement (4/4)\n\n設定\'Bump Parameter\' spec。點擊Test確認結果是否為\"Align Measure Success\"。Apply後Main▸Save。',
+          ja:'■ 2D Measurement (4/4)\n\n\'Bump Parameter\' Specを設定します。Testをクリックし結果が\"Align Measure Success\"であることを確認します。Apply後Main▸Saveします。',
+          vi:'■ 2D Measurement (4/4)\n\nĐặt spec \'Bump Parameter\'. Nhấp Test và kiểm tra kết quả là \"Align Measure Success\". Sau khi Apply, Main▸Save.'
+        }},
+        {img:cmImg('I','qpm',183),tx:{
+          ko:'■ Inspection Spec\n\n해당되는 Scan 항목을 선택하고 Spec을 설정합니다.',
+          en:'■ Inspection spec\n\nSelect the applicable scan items and set the Spec.',
+          zhCN:'■ Inspection spec\n\n选择适用的scan项目并设置Spec。',
+          zhTW:'■ Inspection spec\n\n選擇適用的scan項目並設定Spec。',
+          ja:'■ Inspection spec\n\n該当するscan項目を選択しSpecを設定します。',
+          vi:'■ Inspection spec\n\nChọn các hạng mục scan phù hợp và đặt Spec.'
+        }},
+        {img:cmImg('I','qpm',184),tx:{
+          ko:'■ Static / Dynamic Repeatability – Static (1/2)\n\nUtility ▸ Static Repeatability를 선택합니다. Unit MAP에서 Unit을 더블클릭하면 Jig가 해당 위치로 이동합니다. Repeat Count: 반복 횟수를 설정합니다. Type: Height, Top Z, Bottom Z, Diameter, Top Diameter 검사 항목을 설정합니다.',
+          en:'■ Static / Dynamic Repeatability – Static (1/2)\n\nSelect Utility ▸ Static repeatability. Double-clicking a unit in the Unit MAP moves the Jig to that position. Repeat count: set the number of iterations. Type: set the Height, TOP Z, Bottom Z, Diameter, Top Diameter inspection items.',
+          zhCN:'■ Static / Dynamic Repeatability – Static (1/2)\n\n选择Utility▸Static repeatability。在Unit MAP中双击unit,Jig会移动到该位置。Repeat count:设置重复次数。Type:设置Height、TOP Z、Bottom Z、Diameter、Top Diameter检查项目。',
+          zhTW:'■ Static / Dynamic Repeatability – Static (1/2)\n\n選擇Utility▸Static repeatability。在Unit MAP中雙擊unit,Jig會移動到該位置。Repeat count:設定重複次數。Type:設定Height、TOP Z、Bottom Z、Diameter、Top Diameter檢查項目。',
+          ja:'■ Static / Dynamic Repeatability – Static (1/2)\n\nUtility▸Static repeatabilityを選択します。Unit MAPでunitをダブルクリックするとJigがその位置へ移動します。Repeat count:繰り返し回数を設定します。Type:Height、TOP Z、Bottom Z、Diameter、Top Diameter検査項目を設定します。',
+          vi:'■ Static / Dynamic Repeatability – Static (1/2)\n\nChọn Utility▸Static repeatability. Nhấp đúp vào unit trong Unit MAP sẽ di chuyển Jig đến vị trí đó. Repeat count: đặt số lần lặp. Type: đặt các hạng mục kiểm tra Height, TOP Z, Bottom Z, Diameter, Top Diameter.'
+        }},
+        {img:cmImg('I','qpm',185),tx:{
+          ko:'■ Static / Dynamic Repeatability – Static (2/2)\n\nStart를 클릭한 후 검사를 진행하며 결과값을 확인합니다.',
+          en:'■ Static / Dynamic Repeatability – Static (2/2)\n\nAfter clicking Start, check the result value by proceeding with the inspection.',
+          zhCN:'■ Static / Dynamic Repeatability – Static (2/2)\n\n点击Start后进行检查并确认结果值。',
+          zhTW:'■ Static / Dynamic Repeatability – Static (2/2)\n\n點擊Start後進行檢查並確認結果值。',
+          ja:'■ Static / Dynamic Repeatability – Static (2/2)\n\nStartをクリックした後、検査を進め結果値を確認します。',
+          vi:'■ Static / Dynamic Repeatability – Static (2/2)\n\nSau khi nhấp Start, tiến hành kiểm tra và xem giá trị kết quả.'
+        }},
+        {img:cmImg('I','qpm',186),tx:{
+          ko:'■ Static / Dynamic Repeatability – Dynamic (1/2)\n\nUtility ▸ Dynamic Repeatability를 선택합니다. Start를 클릭한 후 Unit MAP에서 검사할 Unit을 설정합니다. Repeat Count 설정 후 OK를 클릭하면 검사가 진행됩니다.',
+          en:'■ Static / Dynamic Repeatability – Dynamic (1/2)\n\nSelect Utility ▸ Dynamic repeatability. After clicking Start, configure the units to inspect in the Unit MAP. After setting the Repeat count, click OK to proceed with the inspection.',
+          zhCN:'■ Static / Dynamic Repeatability – Dynamic (1/2)\n\n选择Utility▸Dynamic repeatability。点击Start后在Unit MAP中设置要检查的unit。设置Repeat count后点击OK即进行检查。',
+          zhTW:'■ Static / Dynamic Repeatability – Dynamic (1/2)\n\n選擇Utility▸Dynamic repeatability。點擊Start後在Unit MAP中設定要檢查的unit。設定Repeat count後點擊OK即進行檢查。',
+          ja:'■ Static / Dynamic Repeatability – Dynamic (1/2)\n\nUtility▸Dynamic repeatabilityを選択します。Startをクリックした後Unit MAPで検査するunitを設定します。Repeat count設定後OKをクリックすると検査が進みます。',
+          vi:'■ Static / Dynamic Repeatability – Dynamic (1/2)\n\nChọn Utility▸Dynamic repeatability. Sau khi nhấp Start, thiết lập các unit cần kiểm tra trong Unit MAP. Sau khi đặt Repeat count, nhấp OK để tiến hành kiểm tra.'
+        }},
+        {img:cmImg('I','qpm',187),tx:{
+          ko:'■ Static / Dynamic Repeatability – Dynamic (2/2)\n\nType: Height, Top Z, Bottom Z, Diameter, Top Diameter 검사 항목을 설정합니다. Total Score: FOV#0, FOV#1의 평균값입니다. FOV#0, #1: 각 FOV의 데이터 정보입니다.',
+          en:'■ Static / Dynamic Repeatability – Dynamic (2/2)\n\nType: set the Height, TOP Z, Bottom Z, Diameter, Top Diameter inspection items. Total score: the average value of FOV#0, 1. FOV#0, 1: data information in each FOV.',
+          zhCN:'■ Static / Dynamic Repeatability – Dynamic (2/2)\n\nType:设置Height、TOP Z、Bottom Z、Diameter、Top Diameter检查项目。Total score:FOV#0、1的平均值。FOV#0、1:各FOV中的数据信息。',
+          zhTW:'■ Static / Dynamic Repeatability – Dynamic (2/2)\n\nType:設定Height、TOP Z、Bottom Z、Diameter、Top Diameter檢查項目。Total score:FOV#0、1的平均值。FOV#0、1:各FOV中的數據資訊。',
+          ja:'■ Static / Dynamic Repeatability – Dynamic (2/2)\n\nType:Height、TOP Z、Bottom Z、Diameter、Top Diameter検査項目を設定します。Total score:FOV#0、1の平均値。FOV#0、1:各FOVのデータ情報。',
+          vi:'■ Static / Dynamic Repeatability – Dynamic (2/2)\n\nType: đặt các hạng mục kiểm tra Height, TOP Z, Bottom Z, Diameter, Top Diameter. Total score: giá trị trung bình của FOV#0, 1. FOV#0, 1: thông tin dữ liệu trong mỗi FOV.'
+        }},
+        {img:cmImg('I','qpm',188),tx:{
+          ko:'■ Data Verification (1/3)\n\n검증용 제품을 Jig Table에 올려놓습니다.',
+          en:'■ Data Verification (1/3)\n\nPlace the verification product on the jig table.',
+          zhCN:'■ Data Verification (1/3)\n\n将验证用产品放在jig table上。',
+          zhTW:'■ Data Verification (1/3)\n\n將驗證用產品放在jig table上。',
+          ja:'■ Data Verification (1/3)\n\n検証用製品をjig tableに置きます。',
+          vi:'■ Data Verification (1/3)\n\nĐặt sản phẩm dùng để xác nhận lên jig table.'
+        }},
+        {img:cmImg('I','qpm',189),tx:{
+          ko:'■ Data Verification (2/3)\n\nMain ▸ Start를 클릭한 뒤 LOT 정보와 Test Option을 설정합니다. Unit MAP에서 검사할 Unit을 설정합니다. Repeat Count 설정 후 OK를 클릭하면 검사가 진행됩니다.',
+          en:'■ Data Verification (2/3)\n\nAfter clicking Main ▸ Start, set the LOT information and Test option. Set up the units to be inspected in the Unit MAP. After setting the Repeat count, click OK to proceed with the inspection.',
+          zhCN:'■ Data Verification (2/3)\n\n点击Main▸Start后设置LOT信息与Test option。在Unit MAP中设置要检查的unit。设置Repeat count后点击OK即进行检查。',
+          zhTW:'■ Data Verification (2/3)\n\n點擊Main▸Start後設定LOT資訊與Test option。在Unit MAP中設定要檢查的unit。設定Repeat count後點擊OK即進行檢查。',
+          ja:'■ Data Verification (2/3)\n\nMain▸Startをクリックした後LOT情報とTest optionを設定します。Unit MAPで検査するunitを設定します。Repeat count設定後OKをクリックすると検査が進みます。',
+          vi:'■ Data Verification (2/3)\n\nSau khi nhấp Main▸Start, đặt thông tin LOT và Test option. Thiết lập các unit cần kiểm tra trong Unit MAP. Sau khi đặt Repeat count, nhấp OK để tiến hành kiểm tra.'
+        }},
+        {img:cmImg('I','qpm',190),tx:{
+          ko:'■ Data Verification (3/3)\n\n위 이미지는 검사 완료 후 결과 리포트가 저장되는 경로입니다. 위 정보는 결과 리포트에서 확인해야 합니다.',
+          en:'■ Data Verification (3/3)\n\nThe image above is the path where the result report is saved after the inspection is completed. The above information should be checked in the result report.',
+          zhCN:'■ Data Verification (3/3)\n\n上图为检查完成后结果报告的保存路径。上述信息应在结果报告中确认。',
+          zhTW:'■ Data Verification (3/3)\n\n上圖為檢查完成後結果報告的儲存路徑。上述資訊應在結果報告中確認。',
+          ja:'■ Data Verification (3/3)\n\n上の画像は検査完了後、結果レポートが保存されるパスです。上記の情報は結果レポートで確認する必要があります。',
+          vi:'■ Data Verification (3/3)\n\nHình trên là đường dẫn lưu báo cáo kết quả sau khi kiểm tra hoàn tất. Thông tin trên cần được kiểm tra trong báo cáo kết quả.'
         }}
       ]
     }
