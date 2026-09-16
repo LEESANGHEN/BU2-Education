@@ -9629,6 +9629,10 @@ function renderMaterialViewer(){
         +'<button class="btn sm" onclick="cmNextChapter()" '+(curCh===chs.length-1?'disabled':'')+'>'+esc(chNavLbl.next)+'</button>'
       +'</div>'
     ):'')
+    +'<div style="margin-top:10px;text-align:center;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">'
+      +'<button class="btn sm" onclick="cmDownloadPrompt(\'pptx\')">'+esc(CM_DL_PPTX_LABEL[langKey()]||CM_DL_PPTX_LABEL.en)+'</button>'
+      +'<button class="btn sm" onclick="cmDownloadPrompt(\'docx\')">'+esc(CM_DL_DOCX_LABEL[langKey()]||CM_DL_DOCX_LABEL.en)+'</button>'
+    +'</div>'
     +'<div class="mfoot"><button class="btn pri" onclick="cmClose()">닫기</button></div>'
   ,true);
   // 슬라이드에 진입/이동할 때마다 현재 언어로 자동 재생 (이전 슬라이드 음성은 위 cmStopSpeak()로 이미 정지됨)
@@ -9640,3 +9644,146 @@ function cmNext(){
   if(mat&&CM.idx<mat.slides.length-1){CM.idx++;renderMaterialViewer();}
 }
 function cmSetLang(l){setLang(l);renderMaterialViewer();}
+
+/* ── PPT/Word 다운로드 — 다운로드 시점에만 pptxgenjs/docx 라이브러리를 CDN에서 불러온다
+   (평소 페이지 로딩 비용을 늘리지 않기 위해 지연 로딩). 선택한 언어의 캡션만 담아
+   슬라이드 이미지+설명을 순서대로 이어붙인 PPT 또는 Word 파일을 생성해 즉시 다운로드한다. */
+var CM_PPTX_CDN='https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js';
+var CM_DOCX_CDN='https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js';
+var CM_DL_PPTX_LABEL={ko:'📊 PPT 다운로드',en:'📊 Download PPT',zhCN:'📊 下载PPT',zhTW:'📊 下載PPT',ja:'📊 PPTダウンロード',vi:'📊 Tải PPT'};
+var CM_DL_DOCX_LABEL={ko:'📄 Word 다운로드',en:'📄 Download Word',zhCN:'📄 下载Word',zhTW:'📄 下載Word',ja:'📄 Wordダウンロード',vi:'📄 Tải Word'};
+var CM_DL_PICK_LABEL={ko:'다운로드할 언어를 선택하세요',en:'Select a language to download',zhCN:'请选择要下载的语言',zhTW:'請選擇要下載的語言',ja:'ダウンロードする言語を選択してください',vi:'Chọn ngôn ngữ để tải xuống'};
+var CM_DL_CANCEL_LABEL={ko:'취소',en:'Cancel',zhCN:'取消',zhTW:'取消',ja:'キャンセル',vi:'Hủy'};
+var CM_DL_GENERATING_LABEL={ko:'자료를 생성하는 중입니다...',en:'Generating the file...',zhCN:'正在生成文件...',zhTW:'正在生成檔案...',ja:'ファイルを生成しています...',vi:'Đang tạo tệp...'};
+var CM_DL_FAILED_LABEL={ko:'파일 생성에 실패했습니다.',en:'Failed to generate the file.',zhCN:'文件生成失败。',zhTW:'檔案生成失敗。',ja:'ファイルの生成に失敗しました。',vi:'Tạo tệp thất bại.'};
+
+function cmDownloadPrompt(format){
+  var pickLbl=CM_DL_PICK_LABEL[langKey()]||CM_DL_PICK_LABEL.en;
+  var cancelLbl=CM_DL_CANCEL_LABEL[langKey()]||CM_DL_CANCEL_LABEL.en;
+  mw(
+    '<div class="mtit">'+esc(pickLbl)+'</div>'
+    +'<div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0">'
+      +LANGS.map(function(l){return '<button class="btn" onclick="cmStartDownload(\''+format+'\',\''+l.id+'\')">'+esc(l.label)+'</button>';}).join('')
+    +'</div>'
+    +'<div class="mfoot"><button class="btn" onclick="renderMaterialViewer()">'+esc(cancelLbl)+'</button></div>'
+  ,true);
+}
+function cmRenderDownloadProgress(done,total){
+  var lbl=CM_DL_GENERATING_LABEL[langKey()]||CM_DL_GENERATING_LABEL.en;
+  mw(
+    '<div class="mtit">'+esc(lbl)+'</div>'
+    +'<div style="text-align:center;padding:28px 0;font-size:13px;color:var(--tx-second)">'+done+' / '+total+'</div>'
+  ,true);
+}
+function cmStartDownload(format,rawLang){
+  var mat=COURSE_MATERIALS[CM.code]&&COURSE_MATERIALS[CM.code][CM.equip];
+  if(!mat)return;
+  var lang=langKey(rawLang); // LANGS의 id는 'zh-CN'처럼 하이픈 포함 — tx/title 객체 키(zhCN)와 맞춰준다
+  var titleTxt=(mat.title&&(mat.title[lang]||mat.title.en))||'';
+  var fullTitle=(titleTxt+' - '+(CM_EQUIP_LABEL[CM.equip]||CM.equip.toUpperCase())).trim();
+  cmRenderDownloadProgress(0,mat.slides.length);
+  var builder=format==='pptx'?cmBuildPptx:cmBuildDocx;
+  builder(mat,lang,fullTitle,cmRenderDownloadProgress).then(function(){
+    renderMaterialViewer();
+  }).catch(function(err){
+    alert((CM_DL_FAILED_LABEL[langKey()]||CM_DL_FAILED_LABEL.en)+'\n'+(err&&err.message||''));
+    renderMaterialViewer();
+  });
+}
+function cmLoadScript(src){
+  return new Promise(function(resolve,reject){
+    if(document.querySelector('script[src="'+src+'"]')){resolve();return;}
+    var s=document.createElement('script');
+    s.src=src;
+    s.onload=function(){resolve();};
+    s.onerror=function(){reject(new Error('library load failed: '+src));};
+    document.head.appendChild(s);
+  });
+}
+function cmEnsurePptxLib(){return typeof PptxGenJS!=='undefined'?Promise.resolve():cmLoadScript(CM_PPTX_CDN);}
+function cmEnsureDocxLib(){return typeof docx!=='undefined'?Promise.resolve():cmLoadScript(CM_DOCX_CDN);}
+function cmFetchImageDataUri(url){
+  return fetch(url).then(function(r){
+    if(!r.ok)throw new Error('image fetch failed: '+url);
+    return r.blob();
+  }).then(function(blob){
+    return new Promise(function(resolve,reject){
+      var fr=new FileReader();
+      fr.onload=function(){resolve(fr.result);};
+      fr.onerror=function(){reject(new Error('image read failed'));};
+      fr.readAsDataURL(blob);
+    });
+  });
+}
+function cmFetchImageArrayBuffer(url){
+  return fetch(url).then(function(r){
+    if(!r.ok)throw new Error('image fetch failed: '+url);
+    return r.arrayBuffer();
+  });
+}
+function cmSafeFileName(s){return String(s||'manual').replace(/[\\/:*?"<>|]/g,'_');}
+function cmBuildPptx(mat,lang,fullTitle,onProgress){
+  return cmEnsurePptxLib().then(function(){
+    var pres=new PptxGenJS();
+    pres.layout='LAYOUT_WIDE';
+    var t=pres.addSlide();
+    t.addText(fullTitle,{x:0.5,y:3.0,w:12.33,h:1.5,fontSize:30,bold:true,align:'center'});
+    var slides=mat.slides,total=slides.length,done=0;
+    var chain=Promise.resolve();
+    slides.forEach(function(sl){
+      chain=chain.then(function(){
+        return cmFetchImageDataUri(sl.img).then(function(dataUri){
+          var s=pres.addSlide();
+          s.addImage({data:dataUri,x:0.4,y:0.35,w:8.6,h:4.84});
+          var txt=(sl.tx&&(sl.tx[lang]||sl.tx.en))||'';
+          if(txt)s.addText(txt,{x:9.2,y:0.35,w:3.7,h:6.6,fontSize:11,valign:'top',wrap:true});
+          done++;
+          if(onProgress)onProgress(done,total);
+        });
+      });
+    });
+    return chain.then(function(){
+      return pres.writeFile({fileName:cmSafeFileName(fullTitle)+'_'+lang+'.pptx'});
+    });
+  });
+}
+function cmBuildDocx(mat,lang,fullTitle,onProgress){
+  return cmEnsureDocxLib().then(function(){
+    var D=docx;
+    var children=[new D.Paragraph({text:fullTitle,heading:D.HeadingLevel.TITLE,alignment:D.AlignmentType.CENTER})];
+    var slides=mat.slides,total=slides.length,done=0;
+    var chain=Promise.resolve();
+    slides.forEach(function(sl,i){
+      chain=chain.then(function(){
+        return cmFetchImageArrayBuffer(sl.img).then(function(buf){
+          children.push(new D.Paragraph({
+            children:[new D.ImageRun({type:'jpg',data:buf,transformation:{width:560,height:315}})],
+            alignment:D.AlignmentType.CENTER,
+            spacing:{before:300,after:150}
+          }));
+          var txt=(sl.tx&&(sl.tx[lang]||sl.tx.en))||'';
+          txt.split('\n').forEach(function(line){
+            children.push(new D.Paragraph({children:[new D.TextRun(line)]}));
+          });
+          children.push(new D.Paragraph({text:(i+1)+' / '+total,alignment:D.AlignmentType.RIGHT,spacing:{after:400}}));
+          done++;
+          if(onProgress)onProgress(done,total);
+        });
+      });
+    });
+    return chain.then(function(){
+      var doc=new D.Document({sections:[{children:children}]});
+      return D.Packer.toBlob(doc).then(function(blob){
+        cmDownloadBlob(blob,cmSafeFileName(fullTitle)+'_'+lang+'.docx');
+      });
+    });
+  });
+}
+function cmDownloadBlob(blob,filename){
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download=filename;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
+}
