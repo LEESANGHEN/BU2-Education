@@ -2,6 +2,12 @@
    📥 신청 접수함 (관리자 — 외부 신청서 검토 및 대상자 등록)
 ═══════════════════════════════════════════ */
 var APPLY_LS_KEY='edu_apply_sheets_url';
+/* 메인 데이터(app.js의 DEFAULT_SHEETS_URL)와 달리 이 기본값이 없으면, 처음 로그인하는
+   사람마다 localStorage가 비어있어 "⚙ 신청서 Sheets 설정"을 직접 입력하기 전까지
+   신청 관련 통계가 전부 0으로 보인다 — 메인 데이터와 동일하게 최초 접속 시 자동으로
+   채워지도록 기본값을 심어둔다. */
+var DEFAULT_APPLY_SHEETS_URL='https://script.google.com/macros/s/AKfycbz2IHQCJE1YzGTwtatQtwolUIrZ1FzmykqLCG8bhIFTTkNPlYbMiIkKdvQsegE1VInF/exec';
+(function(){try{if(DEFAULT_APPLY_SHEETS_URL&&!localStorage.getItem(APPLY_LS_KEY))localStorage.setItem(APPLY_LS_KEY,DEFAULT_APPLY_SHEETS_URL);}catch(e){}})();
 var APPS={list:[],filter:'all'};
 
 /* a.equipment는 배열(다중 선택)이 정상이나, 이 기능 도입 전 제출된 신청서는 단일 문자열이었다.

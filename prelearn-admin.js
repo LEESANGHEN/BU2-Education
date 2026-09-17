@@ -2,6 +2,12 @@
    🧑‍🎓 사전학습 현황 (관리자 — 설비별 학습자 진도/퀴즈 결과 조회)
 ═══════════════════════════════════════════ */
 var PRELEARN_LS_KEY='edu_prelearn_sheets_url';
+/* 메인 데이터(app.js의 DEFAULT_SHEETS_URL)와 달리 이 기본값이 없으면, 처음 로그인하는
+   사람마다 localStorage가 비어있어 "⚙ 사전학습 Sheets 설정"을 직접 입력하기 전까지
+   사전학습 현황이 전부 0으로 보인다 — 메인 데이터와 동일하게 최초 접속 시 자동으로
+   채워지도록 기본값을 심어둔다. */
+var DEFAULT_PRELEARN_SHEETS_URL='https://script.google.com/macros/s/AKfycbytVgXC5ZG8NvkYhHYdvPEk4tQKmSCy6pND7l11as057tMIS5LC0WXuNFJNI4o-ij2l/exec';
+(function(){try{if(DEFAULT_PRELEARN_SHEETS_URL&&!localStorage.getItem(PRELEARN_LS_KEY))localStorage.setItem(PRELEARN_LS_KEY,DEFAULT_PRELEARN_SHEETS_URL);}catch(e){}})();
 var PLA={list:[],equipFilter:'all',viewMode:'progress',examResults:[]};
 
 var ADMIN_COURSE_CHAPTERS={
