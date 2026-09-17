@@ -177,7 +177,7 @@ function loadFromSheets(callback){
   authedGet(url+'?action=load')
     .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
     .then(function(data){
-      if(data.error)throw new Error(data.error);
+      if(data.error){var e=new Error(data.error);e.reason=data.reason;throw e;}
       FIELDS.forEach(function(f){
         if(data[f]!==undefined&&(Array.isArray(data[f])?data[f].length:true))S[f]=data[f];
       });
@@ -196,8 +196,8 @@ function loadFromSheets(callback){
       if(callback)callback();
     })
     .catch(function(err){
-      console.warn('불러오기 실패:',err.message);
-      if(led){led.className='conn-led err';txt.textContent='연결 실패';}
+      console.warn('불러오기 실패:',err.message,err.reason||'');
+      if(led){led.className='conn-led err';txt.textContent='연결 실패'+(err.reason?(' ['+err.reason+']'):'');}
       if(callback)callback();
     });
 }
