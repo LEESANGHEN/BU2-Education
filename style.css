@@ -128,6 +128,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-siz
 .home-greet{font-size:16px;font-weight:600;color:var(--tx-primary)}
 .home-greet-sub{font-size:12px;color:var(--tx-second);margin-top:2px}
 .home-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;margin-top:16px}
+.home-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.home-mini-row{display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid var(--bd-light)}
+.home-mini-row:last-child{border-bottom:none}
 .home-card{background:var(--bg-panel);border:1px solid var(--bd-main);border-radius:8px;padding:14px}
 .home-card-title{font-size:13px;font-weight:600;color:var(--tx-primary);margin-bottom:10px}
 .home-sched-row{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--bd-light)}
@@ -954,6 +957,7 @@ input[type=text]:focus,input[type=date]:focus,input[type=email]:focus,input[type
   .nav-sidebar::-webkit-scrollbar{display:none}
   .nav-item{flex-shrink:0;width:auto;padding:6px 10px}
   .home-grid{grid-template-columns:1fr}
+  .home-grid-3{grid-template-columns:1fr}
 
   /* 간트 사이드바: 모바일에서 기본 숨김, .open 클래스 시 오버레이 */
   #view_gantt .sidebar{display:none;position:absolute;top:0;left:0;bottom:0;z-index:50;box-shadow:4px 0 12px rgba(0,0,0,.4)}

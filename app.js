@@ -310,6 +310,40 @@ function renderHomeTab(){
     +'</div>';
   }).join(''):'<div style="font-size:12px;color:var(--tx-dim);padding:8px 0">예정된 교육 일정이 없습니다.</div>';
 
+  var levelDist=[0,0,0,0,0]; // index 0=미승인, 1~4=Level0~3
+  (S.trainees||[]).forEach(function(t){levelDist[currentApprovedLevel(t.id)+1]++;});
+  var traineeCard='<div class="home-card" style="cursor:pointer" onclick="switchTab(\'trainee\')">'
+    +'<div class="home-card-title">대상자별 이수 현황</div>'
+    +'<div class="home-mini-row"><span>전체 대상자</span><b>'+(S.trainees||[]).length+'명</b></div>'
+    +[0,1,2,3].map(function(lv){return '<div class="home-mini-row"><span>Level '+lv+' 승인</span><b>'+levelDist[lv+1]+'명</b></div>';}).join('')
+  +'</div>';
+
+  var recentAppr=(S.approvals||[]).filter(function(a){return a.status==='approved';})
+    .sort(function(a,b){return (b.approvalDate||'')<(a.approvalDate||'')?-1:1;}).slice(0,4);
+  var histRows=recentAppr.length?recentAppr.map(function(a){
+    var t=trainee(a.traineeId)||{};
+    return '<div class="home-mini-row"><span>'+esc(t.name||'(삭제된 대상자)')+' · Level '+a.level+'</span><span style="color:var(--tx-second)">'+esc(a.approvalDate||'')+'</span></div>';
+  }).join(''):'<div style="font-size:12px;color:var(--tx-dim);padding:8px 0">최근 이수 이력이 없습니다.</div>';
+  var histCard='<div class="home-card" style="cursor:pointer" onclick="switchTab(\'history\')">'
+    +'<div class="home-card-title">최근 이력 (Level 승인)</div>'+histRows+'</div>';
+
+  var plCard;
+  if(typeof getPrelearnSheetsUrl==='function'&&getPrelearnSheetsUrl()&&typeof PLA!=='undefined'){
+    var allRows=plFlattenRows();
+    var plCompleted=allRows.filter(function(x){return x.course.completedAt;}).length;
+    var plAvgPct=allRows.length?Math.round(allRows.reduce(function(s,x){var total=plSectionsFor(x.eq).length;return s+(total?plPassedCount(x.course,x.eq)/total:0);},0)/allRows.length*100):0;
+    plCard='<div class="home-card" style="cursor:pointer" onclick="switchTab(\'prelearn\')">'
+      +'<div class="home-card-title">사전학습 현황</div>'
+      +'<div class="home-mini-row"><span>전체 학습자</span><b>'+PLA.list.length+'명</b></div>'
+      +'<div class="home-mini-row"><span>과정 완료(설비별)</span><b>'+plCompleted+'건</b></div>'
+      +'<div class="home-mini-row"><span>평균 진행률</span><b>'+plAvgPct+'%</b></div>'
+    +'</div>';
+  }else{
+    plCard='<div class="home-card" style="cursor:pointer" onclick="switchTab(\'prelearn\')">'
+      +'<div class="home-card-title">사전학습 현황</div>'
+      +'<div style="font-size:12px;color:var(--tx-dim);padding:8px 0">사전학습 Sheets가 연결되지 않았습니다.</div></div>';
+  }
+
   wrap.innerHTML='<div class="home-greet">안녕하세요, '+esc(homeUserLabel())+'님</div>'
     +'<div class="home-greet-sub">'+dateLbl+' · 대기중인 신청 '+counts.pending+'건이 있습니다</div>'
     +'<div class="sum-row" style="margin-top:16px">'+cards+'</div>'
@@ -320,7 +354,8 @@ function renderHomeTab(){
         +'<div class="home-quick-btn" onclick="switchTab(\'schedule\');openVisitModal(null)">📅 교육 방문 등록</div>'
         +'<div class="home-quick-btn" onclick="switchTab(\'course\')" style="margin-bottom:0">📚 교육 자료 보기</div>'
       +'</div>'
-    +'</div>';
+    +'</div>'
+    +'<div class="home-grid-3">'+traineeCard+histCard+plCard+'</div>';
   applyAdminModeUI();
 }
 function renderAll(){
