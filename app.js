@@ -316,11 +316,12 @@ function renderHomeTab(){
     +'<div class="home-grid">'
       +'<div class="home-card"><div class="home-card-title">다가오는 교육 일정</div>'+schedRows+'</div>'
       +'<div class="home-card"><div class="home-card-title">빠른 작업</div>'
-        +'<div class="home-quick-btn" onclick="openApplyLinkInfo()">🔗 신청서 링크 복사</div>'
-        +'<div class="home-quick-btn" onclick="switchTab(\'schedule\');openVisitModal(null)">📅 교육 방문 등록</div>'
+        +'<div class="home-quick-btn admin-only-btn" style="display:none" onclick="openApplyLinkInfo()">🔗 신청서 링크 복사</div>'
+        +'<div class="home-quick-btn admin-only-btn" style="display:none" onclick="switchTab(\'schedule\');openVisitModal(null)">📅 교육 방문 등록</div>'
         +'<div class="home-quick-btn" onclick="switchTab(\'course\')" style="margin-bottom:0">📚 교육 자료 보기</div>'
       +'</div>'
     +'</div>';
+  applyAdminModeUI(); // innerHTML로 새로 삽입된 관리자 전용 빠른 작업(.admin-only-btn)에 현재 모드를 즉시 반영
 }
 function renderAll(){
   if(_activeTab==='home')renderHomeTab();

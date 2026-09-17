@@ -43,12 +43,12 @@
             <button class="btn sm" onclick="schMoveMonth(1)">▶</button>
             <button class="btn sm" onclick="schGotoToday()">오늘</button>
           </div>
-          <button class="btn pri" onclick="openVisitModal(null)">+ 교육 방문 등록</button>
+          <button class="btn pri admin-only-btn" style="display:none" onclick="openVisitModal(null)">+ 교육 방문 등록</button>
         </div>
         <div id="tools_trainee" style="display:none;gap:6px;align-items:center;flex-wrap:wrap">
           <input type="text" class="gantt-search" placeholder="이름/소속 검색" oninput="trSearch(this.value)" autocomplete="off">
           <select id="trCountrySel" onchange="trFilterCountry(this.value)" style="width:auto"></select>
-          <button class="btn pri" onclick="openTraineeModal(null)">+ 대상자 등록</button>
+          <button class="btn pri admin-only-btn" style="display:none" onclick="openTraineeModal(null)">+ 대상자 등록</button>
         </div>
         <div id="tools_course" style="display:none"></div>
         <div id="tools_history" style="display:none"></div>
@@ -129,9 +129,9 @@
   <script src="app.js?v=20260917a"></script>
   <script src="applications.js?v=20260903a"></script>
   <script src="schedule.js?v=20260903a"></script>
-  <script src="trainee.js?v=20260908a"></script>
+  <script src="trainee.js?v=20260917a"></script>
   <script src="course-materials.js?v=13"></script>
-  <script src="course.js?v=20260911b"></script>
+  <script src="course.js?v=20260917a"></script>
   <script src="history.js?v=20260827e"></script>
   <script src="cert-i18n.js?v=20260903b"></script>
   <script src="certificate.js?v=20260903d"></script>

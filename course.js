@@ -13,7 +13,7 @@ function renderCourseTab(){
       +'<td style="font-size:11px">'+esc(l.competency)+'</td>'
       +'<td style="font-size:11px;color:var(--tx-second)">'+esc(l.evalMethod)+'</td>'
       +'<td>'+esc(l.duration)+'</td>'
-      +'<td><button class="btn sm" onclick="openLevelModal(\''+l.id+'\')">편집</button></td>'
+      +'<td><button class="btn sm admin-only-btn" style="display:none" onclick="openLevelModal(\''+l.id+'\')">편집</button></td>'
     +'</tr>';
   }).join('');
 
@@ -35,7 +35,7 @@ function renderCourseTab(){
           }).join('');
         })()+'</div></td>'
       +'<td style="font-size:11px;color:var(--tx-second)">'+esc(m.resources||'')+'</td>'
-      +'<td><button class="btn sm" onclick="openModuleModal(\''+m.id+'\')">편집</button> <button class="btn sm red" onclick="deleteModule(\''+m.id+'\')">삭제</button></td>'
+      +'<td><button class="btn sm admin-only-btn" style="display:none" onclick="openModuleModal(\''+m.id+'\')">편집</button> <button class="btn sm red admin-only-btn" style="display:none" onclick="deleteModule(\''+m.id+'\')">삭제</button></td>'
     +'</tr>';
   }).join('');
   var hoursSummary=[0,1,2,3].map(function(lv){
@@ -56,7 +56,7 @@ function renderCourseTab(){
       +'<td style="font-size:11px">'+esc(it.module)+(modLbl?'<br><span style="color:var(--tx-second)">🔗 '+esc(modLbl)+'</span>':'')+'</td>'
       +'<td style="font-size:11px">'+esc(it.item)+'</td>'
       +'<td>'+it.order+'</td>'
-      +'<td><button class="btn sm" onclick="openChecklistItemModal(\''+it.id+'\')">편집</button> <button class="btn sm red" onclick="deleteChecklistItem(\''+it.id+'\')">삭제</button></td>'
+      +'<td><button class="btn sm admin-only-btn" style="display:none" onclick="openChecklistItemModal(\''+it.id+'\')">편집</button> <button class="btn sm red admin-only-btn" style="display:none" onclick="deleteChecklistItem(\''+it.id+'\')">삭제</button></td>'
     +'</tr>';
   }).join('');
 
@@ -75,7 +75,7 @@ function renderCourseTab(){
     +'<div class="td-section">'
       +'<div class="td-sectitle" style="display:flex;justify-content:space-between;align-items:center">'
         +'<span>커리큘럼 매트릭스 (교육 모듈)</span>'
-        +'<button class="btn sm pri" onclick="openModuleModal(null)">+ 모듈 추가</button>'
+        +'<button class="btn sm pri admin-only-btn" style="display:none" onclick="openModuleModal(null)">+ 모듈 추가</button>'
       +'</div>'
       +'<div class="sum-row">'+hoursSummary+'</div>'
       +'<table class="dtbl sm"><thead><tr><th style="width:36px">No</th><th style="width:160px">모듈명</th><th>세부 교육내용</th><th style="width:70px">Level</th><th style="width:90px">교육방법</th><th style="width:60px">시간</th><th style="width:120px">교육 자료</th><th style="width:140px">필요 자료/장비</th><th style="width:110px"></th></tr></thead><tbody>'+moduleRows+'</tbody></table>'
@@ -83,7 +83,7 @@ function renderCourseTab(){
     +'<div class="td-section">'
       +'<div class="td-sectitle" style="display:flex;justify-content:space-between;align-items:center">'
         +'<span>이수 체크리스트 관리 (사전학습·온사이트)</span>'
-        +'<button class="btn sm pri" onclick="openChecklistItemModal(null)">+ 항목 추가</button>'
+        +'<button class="btn sm pri admin-only-btn" style="display:none" onclick="openChecklistItemModal(null)">+ 항목 추가</button>'
       +'</div>'
       +'<div class="dbox" style="margin-bottom:10px;font-size:11.5px;color:var(--tx-second)">대상자별 이수 현황 모달에 표시되는 개별 체크 항목입니다. 🔗로 표시된 항목은 커리큘럼 매트릭스의 모듈과 연결되어 있어 그 모듈을 편집하면 모듈명·Level(및 항목이 1개뿐이면 문구까지)이 자동으로 따라 바뀝니다.</div>'
       +'<table class="dtbl sm"><thead><tr><th style="width:70px">구분</th><th style="width:70px">Level</th><th style="width:160px">모듈</th><th>세부 이수 항목</th><th style="width:50px">순서</th><th style="width:110px"></th></tr></thead><tbody>'+ciRows+'</tbody></table>'
@@ -91,6 +91,8 @@ function renderCourseTab(){
     +'<div class="td-section"><div class="td-sectitle">Level별 평가 기준 및 재평가 규정 (참고)</div>'
       +'<table class="dtbl sm"><thead><tr><th style="width:60px">Level</th><th>평가 방법</th><th>합격 기준</th><th style="width:150px">평가자</th><th>불합격 시 조치</th></tr></thead><tbody>'+evalRows+'</tbody></table>'
     +'</div>';
+
+  applyAdminModeUI(); // innerHTML로 새로 삽입된 편집/삭제 버튼(.admin-only-btn)에 현재 모드를 즉시 반영
 }
 
 /* S.levels에 evalPass/evalEvaluator/evalRetry가 없는 구버전 캐시 데이터를 위한 대체값 */

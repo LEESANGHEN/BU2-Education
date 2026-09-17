@@ -43,7 +43,7 @@ function renderTraineeTab(){
       +'<td>'+[0,1,2,3].map(function(lv){return levelChip(t.id,lv);}).join('')+'</td>'
       +'<td>'+(curLv>=0?('<span class="lv-cur-badge">Level '+curLv+' 승인</span>'):'<span class="lv-cur-badge none">미승인</span>')+'</td>'
       +'<td>'+(lastVisit?esc(lastVisit.startDate+' ~ '+lastVisit.endDate):'-')+'</td>'
-      +'<td onclick="event.stopPropagation()"><button class="btn sm" onclick="openTraineeModal(\''+t.id+'\')">편집</button> <button class="btn sm red" onclick="deleteTrainee(\''+t.id+'\')">삭제</button></td>'
+      +'<td onclick="event.stopPropagation()"><button class="btn sm admin-only-btn" style="display:none" onclick="openTraineeModal(\''+t.id+'\')">편집</button> <button class="btn sm red admin-only-btn" style="display:none" onclick="deleteTrainee(\''+t.id+'\')">삭제</button></td>'
     +'</tr>';
   }).join('');
 
@@ -52,6 +52,7 @@ function renderTraineeTab(){
       +'<th>이름</th><th>구분</th><th>소속</th><th>국가/지역</th><th>직책</th>'
       +'<th>Level 진행률 (L0 · L1 · L2 · L3)</th><th>현재 승인 Level</th><th>최근 방문</th><th>관리</th>'
     +'</tr></thead><tbody>'+rows+'</tbody></table></div>';
+  applyAdminModeUI(); // innerHTML로 새로 삽입된 편집/삭제 버튼(.admin-only-btn)에 현재 모드를 즉시 반영
 }
 function levelChip(traineeId,level){
   var prog=levelProgress(traineeId,level);
