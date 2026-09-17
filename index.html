@@ -9,7 +9,7 @@
   <script>
     (function(){var t=localStorage.getItem('edu_theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
   </script>
-  <link rel="stylesheet" href="style.css?v=20260916a">
+  <link rel="stylesheet" href="style.css?v=20260917a">
 </head>
 <body>
   <div id="authOverlay" class="auth-overlay"></div>
@@ -80,33 +80,39 @@
         </div>
       </div>
     </div>
-    <div class="tab-bar">
-      <div class="tab-nav">
-        <button class="tab-btn" id="tab_course" onclick="switchTab('course')">📚 교육 과정 관리</button>
-        <button class="tab-btn on" id="tab_apply" onclick="switchTab('apply')">📥 신청 접수함</button>
-        <button class="tab-btn" id="tab_schedule" onclick="switchTab('schedule')">📅 교육 일정</button>
-        <button class="tab-btn" id="tab_trainee" onclick="switchTab('trainee')">👤 대상자별 이수 현황</button>
-        <button class="tab-btn" id="tab_history" onclick="switchTab('history')">📋 이력 관리</button>
-        <button class="tab-btn" id="tab_prelearn" onclick="switchTab('prelearn')">🧑‍🎓 사전학습 현황</button>
+    <div class="body-row">
+      <div class="nav-sidebar" id="navSidebar">
+        <button class="nav-item on" id="tab_home" onclick="switchTab('home')"><span class="ni-ico">🏠</span><span>홈</span></button>
+        <button class="nav-item" id="tab_course" onclick="switchTab('course')"><span class="ni-ico">📚</span><span>교육 과정 관리</span></button>
+        <button class="nav-item" id="tab_apply" onclick="switchTab('apply')"><span class="ni-ico">📥</span><span>신청 접수함</span></button>
+        <button class="nav-item" id="tab_schedule" onclick="switchTab('schedule')"><span class="ni-ico">📅</span><span>교육 일정</span></button>
+        <button class="nav-item" id="tab_trainee" onclick="switchTab('trainee')"><span class="ni-ico">👤</span><span>대상자별 이수 현황</span></button>
+        <button class="nav-item" id="tab_history" onclick="switchTab('history')"><span class="ni-ico">📋</span><span>이력 관리</span></button>
+        <button class="nav-item" id="tab_prelearn" onclick="switchTab('prelearn')"><span class="ni-ico">🧑‍🎓</span><span>사전학습 현황</span></button>
       </div>
-    </div>
-    <div class="content" id="view_course" style="display:none">
-      <div class="main"><div class="scroll-main" id="course_wrap"></div></div>
-    </div>
-    <div class="content" id="view_apply">
-      <div class="main"><div class="scroll-main" id="apply_wrap"></div></div>
-    </div>
-    <div class="content" id="view_schedule" style="display:none">
-      <div class="main"><div class="scroll-main" id="sch_wrap"></div></div>
-    </div>
-    <div class="content" id="view_trainee" style="display:none">
-      <div class="main"><div class="scroll-main" id="tr_wrap"></div></div>
-    </div>
-    <div class="content" id="view_history" style="display:none">
-      <div class="main"><div class="scroll-main" id="hist_wrap"></div></div>
-    </div>
-    <div class="content" id="view_prelearn" style="display:none">
-      <div class="main"><div class="scroll-main" id="prelearn_wrap"></div></div>
+      <div class="content-area">
+        <div class="content" id="view_home">
+          <div class="main"><div class="scroll-main" id="home_wrap"></div></div>
+        </div>
+        <div class="content" id="view_course" style="display:none">
+          <div class="main"><div class="scroll-main" id="course_wrap"></div></div>
+        </div>
+        <div class="content" id="view_apply" style="display:none">
+          <div class="main"><div class="scroll-main" id="apply_wrap"></div></div>
+        </div>
+        <div class="content" id="view_schedule" style="display:none">
+          <div class="main"><div class="scroll-main" id="sch_wrap"></div></div>
+        </div>
+        <div class="content" id="view_trainee" style="display:none">
+          <div class="main"><div class="scroll-main" id="tr_wrap"></div></div>
+        </div>
+        <div class="content" id="view_history" style="display:none">
+          <div class="main"><div class="scroll-main" id="hist_wrap"></div></div>
+        </div>
+        <div class="content" id="view_prelearn" style="display:none">
+          <div class="main"><div class="scroll-main" id="prelearn_wrap"></div></div>
+        </div>
+      </div>
     </div>
   </div>
   <div id="mc"></div>
@@ -120,7 +126,7 @@
   <script src="prelearn-equipment.js?v=20260828c"></script>
   <script src="prelearn-data-smtv.js?v=20260828b"></script>
   <script src="prelearn-data-nbga.js?v=20260828b"></script>
-  <script src="app.js?v=20260908c"></script>
+  <script src="app.js?v=20260917a"></script>
   <script src="applications.js?v=20260903a"></script>
   <script src="schedule.js?v=20260903a"></script>
   <script src="trainee.js?v=20260908a"></script>

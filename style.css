@@ -116,6 +116,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-siz
 .sname{flex:1;font-size:11px;color:var(--tx-second);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .scnt{font-size:9px;padding:1px 4px;border-radius:5px;background:var(--bg-hover);color:var(--tx-dim);border:1px solid var(--bd-main);flex-shrink:0}
 .main{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden}
+/* 좌측 내비게이션 사이드바 — 로그인 후 메인 탭 전환용(기존 상단 탭바를 대체) */
+.body-row{display:flex;flex:1;min-height:0}
+.content-area{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden}
+.nav-sidebar{width:200px;flex-shrink:0;display:flex;flex-direction:column;gap:2px;padding:12px 8px;background:var(--bg-panel);border-right:1.5px solid var(--bd-strong);overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:6px;border:none;background:transparent;color:var(--tx-second);font-size:12px;font-weight:500;cursor:pointer;text-align:left;width:100%}
+.nav-item:hover{background:var(--bg-hover);color:var(--tx-primary)}
+.nav-item.on{background:var(--bg-hover);color:var(--tx-primary)}
+.ni-ico{font-size:14px;flex-shrink:0}
+/* 홈 대시보드 */
+.home-greet{font-size:16px;font-weight:600;color:var(--tx-primary)}
+.home-greet-sub{font-size:12px;color:var(--tx-second);margin-top:2px}
+.home-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:14px;margin-top:16px}
+.home-card{background:var(--bg-panel);border:1px solid var(--bd-main);border-radius:8px;padding:14px}
+.home-card-title{font-size:13px;font-weight:600;color:var(--tx-primary);margin-bottom:10px}
+.home-sched-row{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--bd-light)}
+.home-sched-row:last-child{border-bottom:none}
+.home-sched-date{width:44px;text-align:center;flex-shrink:0}
+.home-sched-date .m{font-size:10px;color:var(--tx-dim)}
+.home-sched-date .d{font-size:15px;font-weight:700;color:var(--tx-primary)}
+.home-quick-btn{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;background:var(--bg-hover);color:var(--tx-primary);font-size:12px;cursor:pointer;margin-bottom:6px;border:1px solid var(--bd-main)}
+.home-quick-btn:hover{background:var(--bg-deep)}
 /* 간트 헤더 */
 .gscroll{flex:1;overflow:auto;-webkit-overflow-scrolling:touch}
 .gwrap{display:inline-block;min-width:100%}
@@ -926,6 +947,13 @@ input[type=text]:focus,input[type=date]:focus,input[type=email]:focus,input[type
   .tab-bar::-webkit-scrollbar{display:none}
   .tab-nav{gap:2px}
   .tab-btn{flex-shrink:0;padding:4px 10px;font-size:11px}
+
+  /* 내비게이션 사이드바: 모바일에서는 상단 가로 스크롤 바로 전환 */
+  .body-row{flex-direction:column}
+  .nav-sidebar{width:auto;flex-direction:row;overflow-x:auto;overflow-y:hidden;white-space:nowrap;padding:6px 8px;border-right:none;border-bottom:1.5px solid var(--bd-strong);scrollbar-width:none}
+  .nav-sidebar::-webkit-scrollbar{display:none}
+  .nav-item{flex-shrink:0;width:auto;padding:6px 10px}
+  .home-grid{grid-template-columns:1fr}
 
   /* 간트 사이드바: 모바일에서 기본 숨김, .open 클래스 시 오버레이 */
   #view_gantt .sidebar{display:none;position:absolute;top:0;left:0;bottom:0;z-index:50;box-shadow:4px 0 12px rgba(0,0,0,.4)}

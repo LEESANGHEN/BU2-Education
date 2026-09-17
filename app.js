@@ -253,15 +253,16 @@ document.addEventListener('click',function(e){
 /* ═══════════════════════════════════════════
    탭 전환
 ═══════════════════════════════════════════ */
-var _activeTab='apply';
+var _activeTab='home';
 function switchTab(tab){
   _activeTab=tab;
-  ['apply','schedule','trainee','course','history','prelearn'].forEach(function(t){
+  ['home','apply','schedule','trainee','course','history','prelearn'].forEach(function(t){
     document.getElementById('view_'+t).style.display=(t===tab)?'flex':'none';
-    document.getElementById('tab_'+t).className='tab-btn'+(t===tab?' on':'');
+    document.getElementById('tab_'+t).className='nav-item'+(t===tab?' on':'');
     var tools=document.getElementById('tools_'+t);
     if(tools)tools.style.display=(t===tab)?'flex':'none';
   });
+  if(tab==='home')renderHomeTab();
   if(tab==='apply')renderApplyTab();
   if(tab==='schedule')renderScheduleTab();
   if(tab==='trainee')renderTraineeTab();
@@ -269,7 +270,60 @@ function switchTab(tab){
   if(tab==='history')renderHistoryTab();
   if(tab==='prelearn')renderPrelearnTab();
 }
+/* 홈 탭 — 로그인 직후 보이는 대시보드. 인사말/오늘 날짜, 신청 현황 요약 카드,
+   다가오는 교육 일정, 빠른 작업 바로가기로 구성한다. 데이터는 각 탭이 이미 쓰는
+   APPS.list/S.visits/S.trainees를 그대로 재사용하고, 새 데이터를 만들지 않는다. */
+function homeUserLabel(){
+  try{
+    var u=firebase.auth().currentUser;
+    if(u&&u.email)return u.email.split('@')[0];
+  }catch(e){}
+  return '관리자';
+}
+function renderHomeTab(){
+  var wrap=document.getElementById('home_wrap');
+  if(!wrap)return;
+  var today=new Date();
+  var dateLbl=today.getFullYear()+'년 '+(today.getMonth()+1)+'월 '+today.getDate()+'일';
+
+  var counts={pending:0,registered:0,rejected:0};
+  var appTotal=(typeof APPS!=='undefined'&&APPS.list)?APPS.list.length:0;
+  if(typeof APPS!=='undefined'&&APPS.list)APPS.list.forEach(function(a){if(counts[a.status]!==undefined)counts[a.status]++;});
+
+  var cards='<div class="sum-card" style="cursor:pointer" onclick="switchTab(\'apply\')"><div class="sum-n">'+appTotal+'</div><div class="sum-l">전체 신청</div></div>'
+    +'<div class="sum-card" style="cursor:pointer" onclick="switchTab(\'apply\')"><div class="sum-n" style="color:#e0a838">'+counts.pending+'</div><div class="sum-l">대기중</div></div>'
+    +'<div class="sum-card" style="cursor:pointer" onclick="switchTab(\'apply\')"><div class="sum-n" style="color:#4ade9a">'+counts.registered+'</div><div class="sum-l">등록완료</div></div>'
+    +'<div class="sum-card" style="cursor:pointer" onclick="switchTab(\'apply\')"><div class="sum-n" style="color:#e07070">'+counts.rejected+'</div><div class="sum-l">반려</div></div>';
+
+  var todayStr0=todayStr();
+  var upcoming=(S.visits||[]).filter(function(v){return (v.endDate||v.startDate)>=todayStr0&&v.status!=='cancelled';})
+    .sort(function(a,b){return a.startDate<b.startDate?-1:1;}).slice(0,5);
+  var schedRows=upcoming.length?upcoming.map(function(v){
+    var t=trainee(v.traineeId)||{};
+    var st=visitStatus(v.status);
+    var d=new Date(v.startDate);
+    return '<div class="home-sched-row" style="cursor:pointer" onclick="switchTab(\'schedule\')">'
+      +'<div class="home-sched-date"><div class="m">'+(d.getMonth()+1)+'월</div><div class="d">'+d.getDate()+'</div></div>'
+      +'<div style="min-width:0;flex:1"><div style="font-size:12px;color:var(--tx-primary)">'+esc(t.name||'-')+' · Level '+(v.targetLevel||'-')+'</div>'
+      +'<div style="font-size:11px;color:var(--tx-second)">'+esc(v.startDate)+' ~ '+esc(v.endDate||v.startDate)+'</div></div>'
+      +'<span class="grpbadge" style="background:'+st.color+'">'+esc(st.label)+'</span>'
+    +'</div>';
+  }).join(''):'<div style="font-size:12px;color:var(--tx-dim);padding:8px 0">예정된 교육 일정이 없습니다.</div>';
+
+  wrap.innerHTML='<div class="home-greet">안녕하세요, '+esc(homeUserLabel())+'님</div>'
+    +'<div class="home-greet-sub">'+dateLbl+' · 대기중인 신청 '+counts.pending+'건이 있습니다</div>'
+    +'<div class="sum-row" style="margin-top:16px">'+cards+'</div>'
+    +'<div class="home-grid">'
+      +'<div class="home-card"><div class="home-card-title">다가오는 교육 일정</div>'+schedRows+'</div>'
+      +'<div class="home-card"><div class="home-card-title">빠른 작업</div>'
+        +'<div class="home-quick-btn" onclick="openApplyLinkInfo()">🔗 신청서 링크 복사</div>'
+        +'<div class="home-quick-btn" onclick="switchTab(\'schedule\');openVisitModal(null)">📅 교육 방문 등록</div>'
+        +'<div class="home-quick-btn" onclick="switchTab(\'course\')" style="margin-bottom:0">📚 교육 자료 보기</div>'
+      +'</div>'
+    +'</div>';
+}
 function renderAll(){
+  if(_activeTab==='home')renderHomeTab();
   if(_activeTab==='apply')renderApplyTab();
   renderScheduleTab();
   if(_activeTab==='trainee')renderTraineeTab();
@@ -292,7 +346,7 @@ document.addEventListener('DOMContentLoaded',function(){
    기존 DOMContentLoaded 핸들러에서 이 부분만 분리했다. */
 function startApp(){
   loadData();
-  switchTab('apply');
+  switchTab('home');
   loadFromSheets(function(){renderAll();});
   loadApplications(function(){renderAll();});
   // 대상자별 이수 현황(사전학습 연동 표시)에서 쓸 수 있도록 활성 탭과 무관하게 미리 불러온다
