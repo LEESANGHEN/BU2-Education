@@ -1,12 +1,23 @@
 /* ═══════════════════════════════════════════
    상태 / 유틸
 ═══════════════════════════════════════════ */
-var S={trainees:[],visits:[],levels:[],modules:[],checklistItems:[],completions:[],approvals:[]};
+var S={trainees:[],visits:[],levels:[],modules:[],checklistItems:[],completions:[],approvals:[],auditLog:[]};
 
 function uid(p){return p+'_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
 /* onclick="fn('+jarg(id)+')" 형태로 쓰면 id가 null이어도 문자열 "null"로 뭉개지지 않고 실제 null이 전달된다 */
 function jarg(id){return id?("'"+id+"'"):'null';}
 function deepCopy(o){return JSON.parse(JSON.stringify(o));}
+
+/* 관리자 작업 감사 로그 — 편집/삭제/승인 등 데이터를 바꾸는 액션이 일어날 때마다 호출한다.
+   saveData() 이전에 불러서 S.auditLog도 같은 저장 트랜잭션에 실려 나가게 한다.
+   500건을 넘으면 오래된 것부터 잘라내 무한 증식을 막는다(감사 목적상 최근 이력이면 충분). */
+function logAudit(action,detail){
+  var email='(알 수 없음)';
+  try{var u=firebase.auth().currentUser;if(u&&u.email)email=u.email;}catch(e){}
+  S.auditLog=S.auditLog||[];
+  S.auditLog.unshift({at:new Date().toISOString(),by:email,action:action,detail:detail||''});
+  if(S.auditLog.length>500)S.auditLog.length=500;
+}
 
 /* ═══════════════════════════════════════════
    관리자 모드 (BU2 Portal과 동일한 방식 — 제목 Ctrl+클릭으로 전환)
@@ -112,7 +123,7 @@ function traineeVisits(traineeId){
 ═══════════════════════════════════════════ */
 var SHEETS_LS_KEY='edu_sheets_url';
 var CACHE_KEY='edu_data_cache';
-var FIELDS=['trainees','visits','levels','modules','checklistItems','completions','approvals'];
+var FIELDS=['trainees','visits','levels','modules','checklistItems','completions','approvals','auditLog'];
 // ↓↓↓ Code.gs를 새 Google Sheet에 배포한 뒤 나오는 /exec URL로 교체하세요. (INSTRUCTIONS.md 참고)
 var DEFAULT_SHEETS_URL='https://script.google.com/macros/s/AKfycbwl8JLDnO7Q2n249zqhKmS5OLRjSzhcO1Vcl_aTWNRc6d-7TwHz0k-7FmEY4m7GyzYSFw/exec';
 (function(){try{if(DEFAULT_SHEETS_URL&&!localStorage.getItem(SHEETS_LS_KEY))localStorage.setItem(SHEETS_LS_KEY,DEFAULT_SHEETS_URL);}catch(e){}})();
@@ -256,7 +267,7 @@ document.addEventListener('click',function(e){
 var _activeTab='home';
 function switchTab(tab){
   _activeTab=tab;
-  ['home','apply','schedule','trainee','course','history','prelearn'].forEach(function(t){
+  ['home','apply','schedule','trainee','course','history','prelearn','stats'].forEach(function(t){
     document.getElementById('view_'+t).style.display=(t===tab)?'flex':'none';
     document.getElementById('tab_'+t).className='nav-item'+(t===tab?' on':'');
     var tools=document.getElementById('tools_'+t);
@@ -269,6 +280,7 @@ function switchTab(tab){
   if(tab==='course')renderCourseTab();
   if(tab==='history')renderHistoryTab();
   if(tab==='prelearn')renderPrelearnTab();
+  if(tab==='stats')renderStatsTab();
 }
 /* 홈 탭 — 로그인 직후 보이는 대시보드. 인사말/오늘 날짜, 신청 현황 요약 카드,
    다가오는 교육 일정, 빠른 작업 바로가기로 구성한다. 데이터는 각 탭이 이미 쓰는
@@ -280,11 +292,47 @@ function homeUserLabel(){
   }catch(e){}
   return '관리자';
 }
+/* 두 날짜(YYYY-MM-DD 또는 ISO 문자열) 사이의 경과 일수 — 시간대 영향을 줄이기 위해 정오 기준으로 비교한다 */
+function daysBetween(fromStr,toStr){
+  var a=new Date(String(fromStr).slice(0,10)+'T12:00:00');
+  var b=new Date(String(toStr).slice(0,10)+'T12:00:00');
+  return Math.round((b-a)/86400000);
+}
+/* 홈 화면 리마인더 — ① 3일 넘게 대기중인 신청, ② 7일 이내 방문인데 사전학습(자가학습)을
+   완료·인증기준 충족하지 못한 대상자. 둘 다 없으면 빈 배열을 반환해 배너 자체를 숨긴다. */
+function homeComputeReminders(){
+  var out=[];
+  var todayS=todayStr();
+  if(typeof APPS!=='undefined'&&APPS.list){
+    var stale=APPS.list.filter(function(a){return a.status==='pending'&&daysBetween(a.submittedAt||todayS,todayS)>=3;});
+    if(stale.length)out.push({label:'3일 이상 대기중인 신청 '+stale.length+'건',tab:'apply'});
+  }
+  var soon=(S.visits||[]).filter(function(v){
+    return v.status!=='done'&&v.status!=='cancelled'&&v.startDate>=todayS&&daysBetween(todayS,v.startDate)<=7;
+  });
+  if(soon.length&&typeof findPrelearnRecord==='function'){
+    var notReady=soon.filter(function(v){
+      var t=trainee(v.traineeId);
+      if(!t||!t.equipment)return false;
+      var rec=findPrelearnRecord(t.name,t.org);
+      var course=rec&&rec.courses&&rec.courses[t.equipment];
+      return !(course&&course.completedAt&&plCourseAllPassed(course,t.equipment));
+    });
+    if(notReady.length)out.push({label:'7일 이내 방문 중 사전학습 미완료 '+notReady.length+'명',tab:'trainee'});
+  }
+  return out;
+}
 function renderHomeTab(){
   var wrap=document.getElementById('home_wrap');
   if(!wrap)return;
   var today=new Date();
   var dateLbl=today.getFullYear()+'년 '+(today.getMonth()+1)+'월 '+today.getDate()+'일';
+  var reminders=homeComputeReminders();
+  var reminderBanner=reminders.length?(
+    '<div class="home-reminder-banner">'
+      +reminders.map(function(r){return '<div class="home-reminder-item" onclick="switchTab(\''+r.tab+'\')">⚠ '+esc(r.label)+'</div>';}).join('')
+    +'</div>'
+  ):'';
 
   var counts={pending:0,registered:0,rejected:0};
   var appTotal=(typeof APPS!=='undefined'&&APPS.list)?APPS.list.length:0;
@@ -344,8 +392,21 @@ function renderHomeTab(){
       +'<div style="font-size:12px;color:var(--tx-dim);padding:8px 0">사전학습 Sheets가 연결되지 않았습니다.</div></div>';
   }
 
+  var ym=todayStr().slice(0,7);
+  var monthApps=(typeof APPS!=='undefined'&&APPS.list)?APPS.list.filter(function(a){return (a.submittedAt||'').slice(0,7)===ym;}).length:0;
+  var doneVisits=(S.visits||[]).filter(function(v){return v.status==='done';});
+  var monthDoneVisits=doneVisits.filter(function(v){return (v.endDate||'').slice(0,7)===ym;}).length;
+  var avgVisitDays=doneVisits.length?Math.round(doneVisits.reduce(function(s,v){return s+(daysBetween(v.startDate,v.endDate)+1);},0)/doneVisits.length*10)/10:0;
+  var statsCard='<div class="home-card" style="cursor:pointer" onclick="switchTab(\'stats\')">'
+    +'<div class="home-card-title">이번달 하이라이트</div>'
+    +'<div class="home-mini-row"><span>이번달 신청</span><b>'+monthApps+'건</b></div>'
+    +'<div class="home-mini-row"><span>이번달 완료 방문</span><b>'+monthDoneVisits+'건</b></div>'
+    +'<div class="home-mini-row"><span>방문 평균 소요일</span><b>'+avgVisitDays+'일</b></div>'
+  +'</div>';
+
   wrap.innerHTML='<div class="home-greet">안녕하세요, '+esc(homeUserLabel())+'님</div>'
     +'<div class="home-greet-sub">'+dateLbl+' · 대기중인 신청 '+counts.pending+'건이 있습니다</div>'
+    +reminderBanner
     +'<div class="sum-row" style="margin-top:16px">'+cards+'</div>'
     +'<div class="home-grid">'
       +'<div class="home-card"><div class="home-card-title">다가오는 교육 일정</div>'+schedRows+'</div>'
@@ -355,7 +416,7 @@ function renderHomeTab(){
         +'<div class="home-quick-btn" onclick="switchTab(\'course\')" style="margin-bottom:0">📚 교육 자료 보기</div>'
       +'</div>'
     +'</div>'
-    +'<div class="home-grid-3">'+traineeCard+histCard+plCard+'</div>';
+    +'<div class="home-grid-3">'+traineeCard+histCard+plCard+statsCard+'</div>';
   applyAdminModeUI();
 }
 function renderAll(){
@@ -366,6 +427,7 @@ function renderAll(){
   if(_activeTab==='course')renderCourseTab();
   if(_activeTab==='history')renderHistoryTab();
   if(_activeTab==='prelearn')renderPrelearnTab();
+  if(_activeTab==='stats')renderStatsTab();
 }
 
 /* ═══════════════════════════════════════════

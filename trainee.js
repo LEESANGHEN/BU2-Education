@@ -122,17 +122,23 @@ function saveTrainee(id,hasCallback){
   if(id){
     var i=S.trainees.findIndex(function(x){return x.id===id;});
     S.trainees[i]=Object.assign({},S.trainees[i],rec);
-  }else S.trainees.push(rec);
+    logAudit('대상자 편집',rec.name+' ('+(rec.org||'-')+')');
+  }else{
+    S.trainees.push(rec);
+    logAudit('대상자 등록',rec.name+' ('+(rec.org||'-')+')');
+  }
   saveData();cm();
   if(hasCallback&&window._trAfterSave)window._trAfterSave(rec.id);
   renderTraineeTab();
 }
 function deleteTrainee(id){
   if(!confirm('이 대상자와 관련된 방문 일정·이수 기록을 모두 삭제할까요?'))return;
+  var t=trainee(id);
   S.trainees=S.trainees.filter(function(t){return t.id!==id;});
   S.visits=S.visits.filter(function(v){return v.traineeId!==id;});
   S.completions=S.completions.filter(function(c){return c.traineeId!==id;});
   S.approvals=S.approvals.filter(function(a){return a.traineeId!==id;});
+  logAudit('대상자 삭제',t?t.name:id);
   saveData();cm();renderTraineeTab();
 }
 
@@ -408,6 +414,8 @@ function approveLevel(traineeId,level){
     rec.followUpDate=(document.getElementById('appr_3_followUpDate')||{}).value||'';
     rec.followUpNote=(document.getElementById('appr_3_followUpNote')||{}).value||'';
   }
+  var _t=trainee(traineeId);
+  logAudit('Level 승인',(_t?_t.name:traineeId)+' · Level '+level);
   saveData();
   window._curDetailTrainee=traineeId;
   openTraineeDetail(traineeId,level);

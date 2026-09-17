@@ -86,7 +86,24 @@ function renderHistoryTab(){
       +'<button class="btn sm" onclick="exportVisitsCSV()">⬇ CSV 내보내기</button>'
     +'</div>'
       +'<table class="dtbl sm"><thead><tr><th style="width:170px">방문 기간</th><th>이름</th><th>소속</th><th style="width:110px">Level</th><th style="width:80px">상태</th><th>비고</th></tr></thead><tbody>'+(visitRows||'<tr><td colspan="6" class="empty">이력이 없습니다.</td></tr>')+'</tbody></table>'
-    +'</div>';
+    +'</div>'
+    +auditLogSection();
+}
+/* 관리자 작업 감사 로그 — 편집/삭제/승인 등 데이터 변경 액션을 누가 언제 했는지 보여준다.
+   위 필터(HIST)와는 별개로 항상 최근 100건만 표시한다(감사 목적상 최근 이력이면 충분). */
+function auditLogSection(){
+  var log=(S.auditLog||[]).slice(0,100);
+  var rows=log.map(function(e){
+    return '<tr>'
+      +'<td style="font-size:11px;white-space:nowrap">'+esc((e.at||'').replace('T',' ').slice(0,16))+'</td>'
+      +'<td style="font-size:11px">'+esc(e.by||'')+'</td>'
+      +'<td style="font-size:11px">'+esc(e.action||'')+'</td>'
+      +'<td style="font-size:11px;color:var(--tx-second)">'+esc(e.detail||'')+'</td>'
+    +'</tr>';
+  }).join('');
+  return '<div class="td-section"><div class="td-sectitle">관리자 작업 이력 (최근 '+log.length+'건)</div>'
+    +'<table class="dtbl sm"><thead><tr><th style="width:130px">시각</th><th style="width:180px">관리자</th><th style="width:160px">작업</th><th>상세</th></tr></thead><tbody>'+(rows||'<tr><td colspan="4" class="empty">작업 이력이 없습니다.</td></tr>')+'</tbody></table>'
+  +'</div>';
 }
 function histSet(k,v){HIST[k]=v;renderHistoryTab();}
 function histReset(){HIST={from:'',to:'',orgFilter:'all',country:'all',level:'all'};renderHistoryTab();}

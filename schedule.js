@@ -238,14 +238,22 @@ function saveVisit(id){
     note:document.getElementById('v_note').value.trim(),
     dayStatus:(existing&&existing.dayStatus)?existing.dayStatus:{}
   };
+  var _tr=trainee(traineeId);
   if(id){
     var i=S.visits.findIndex(function(x){return x.id===id;});
     S.visits[i]=rec;
-  }else S.visits.push(rec);
+    logAudit('교육 방문 편집',(_tr?_tr.name:traineeId)+' · '+start+'~'+end);
+  }else{
+    S.visits.push(rec);
+    logAudit('교육 방문 등록',(_tr?_tr.name:traineeId)+' · '+start+'~'+end);
+  }
   saveData();cm();renderScheduleTab();
 }
 function deleteVisit(id){
   if(!confirm('이 교육 방문 일정을 삭제할까요?'))return;
+  var v=S.visits.find(function(x){return x.id===id;});
+  var vt=v?trainee(v.traineeId):null;
+  logAudit('교육 방문 삭제',(vt?vt.name:(v?v.traineeId:id))+(v?(' · '+v.startDate+'~'+v.endDate):''));
   S.visits=S.visits.filter(function(v){return v.id!==id;});
   saveData();cm();renderScheduleTab();
 }

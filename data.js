@@ -130,4 +130,4 @@ var APPROVAL_ROLES=[
 ];
 var ROLE_LBL={trainerSign:'교육담당자',partLeadSign:'파트장',groupLeadSign:'그룹장',committeeSign:'심사위원'};
 
-var DEF={trainees:[],visits:[],levels:DEF_LEVELS,modules:DEF_MODULES,checklistItems:DEF_CHECKLIST,completions:[],approvals:[]};
+var DEF={trainees:[],visits:[],levels:DEF_LEVELS,modules:DEF_MODULES,checklistItems:DEF_CHECKLIST,completions:[],approvals:[],auditLog:[]};

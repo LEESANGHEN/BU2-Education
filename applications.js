@@ -227,6 +227,7 @@ function confirmRegisterFromApplication(id){
 
   a.status='registered';
   a.registeredBy={name:coordName,org:coordOrg,position:coordPosition,at:new Date().toISOString()};
+  logAudit('신청서 승인(대상자 등록)',a.traineeName+' ('+(a.org||'-')+')');
   saveApplications();
 
   cm();
@@ -293,6 +294,7 @@ function confirmRejectApplication(id){
 
   a.status='rejected';
   a.rejectedBy={name:name,org:org,email:email,reason:reason,at:new Date().toISOString()};
+  logAudit('신청서 반려',a.traineeName+' ('+(a.org||'-')+') — '+reason);
   saveApplications();
   cm();renderApplyTab();
 
@@ -315,6 +317,8 @@ function confirmRejectApplication(id){
 }
 function deleteApplication(id){
   if(!confirm('이 신청서를 완전히 삭제할까요?'))return;
+  var a=APPS.list.find(function(x){return x.id===id;});
+  logAudit('신청서 삭제',a?(a.traineeName+' ('+(a.org||'-')+')'):id);
   APPS.list=APPS.list.filter(function(a){return a.id!==id;});
   saveApplications();
   cm();renderApplyTab();

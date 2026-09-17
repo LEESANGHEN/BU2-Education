@@ -126,6 +126,7 @@ function saveLevel(id){
   l.evalPass=document.getElementById('l_pass').value.trim();
   l.evalEvaluator=document.getElementById('l_evaluator').value.trim();
   l.evalRetry=document.getElementById('l_retry').value.trim();
+  logAudit('Level 정의 편집','Level '+l.level+' ('+l.title+')');
   saveData();cm();renderCourseTab();
 }
 
@@ -164,13 +165,19 @@ function saveModule(id){
     var i=S.modules.findIndex(function(x){return x.id===id;});
     S.modules[i]=rec;
     syncChecklistFromModule(rec);
-  }else S.modules.push(rec);
+    logAudit('모듈 편집',rec.code+'. '+rec.name);
+  }else{
+    S.modules.push(rec);
+    logAudit('모듈 추가',rec.code+'. '+rec.name);
+  }
   saveData();cm();renderCourseTab();
 }
 /* syncChecklistFromModule()는 app.js에 정의되어 있다(데이터 로드 시 자동 재동기화와 공유하기 위함) */
 function deleteModule(id){
   if(!confirm('이 모듈을 삭제할까요?'))return;
+  var m=S.modules.find(function(x){return x.id===id;});
   S.modules=S.modules.filter(function(m){return m.id!==id;});
+  logAudit('모듈 삭제',m?(m.code+'. '+m.name):id);
   saveData();cm();renderCourseTab();
 }
 
@@ -213,6 +220,7 @@ function saveChecklistItem(id){
   var linkedModule=moduleId?S.modules.find(function(x){return x.id===moduleId;}):null;
   if(linkedModule)rec.module=linkedModule.name;
   else if(!rec.module){alert('모듈을 연결하지 않을 경우 모듈 표시명을 입력해주세요.');return;}
+  var isNew=!id;
   if(id){
     var i=S.checklistItems.findIndex(function(x){return x.id===id;});
     rec.no=S.checklistItems[i].no;
@@ -222,11 +230,14 @@ function saveChecklistItem(id){
     S.checklistItems.push(rec);
   }
   if(linkedModule)syncChecklistFromModule(linkedModule);
+  logAudit(isNew?'이수 체크리스트 항목 추가':'이수 체크리스트 항목 편집',rec.module+' — '+rec.item);
   saveData();cm();renderCourseTab();
 }
 function deleteChecklistItem(id){
   if(!confirm('이 이수 체크리스트 항목을 삭제할까요? (이미 기록된 이수 체크 데이터도 함께 삭제됩니다)'))return;
+  var it=S.checklistItems.find(function(x){return x.id===id;});
   S.checklistItems=S.checklistItems.filter(function(x){return x.id!==id;});
   S.completions=S.completions.filter(function(c){return c.itemId!==id;});
+  logAudit('이수 체크리스트 항목 삭제',it?(it.module+' — '+it.item):id);
   saveData();cm();renderCourseTab();
 }
