@@ -251,7 +251,7 @@ input[type=text]:focus,input[type=date]:focus,input[type=email]:focus,input[type
 .auth-box .mtit{font-size:28px;margin-bottom:32px;color:#16162a}
 .auth-box .fg{margin-bottom:24px}
 .auth-box .fl{font-size:22px;margin-bottom:8px;color:#5b5b74}
-.auth-box input[type=email],.auth-box input[type=password]{padding:12px 18px;font-size:24px;border-radius:10px;background:#f6f6fa;border-color:#d9d9e4;color:#16162a}
+.auth-box input[type=email],.auth-box input[type=password],.auth-box input[type=text],.auth-box input[type=tel]{padding:12px 18px;font-size:24px;border-radius:10px;background:#f6f6fa;border-color:#d9d9e4;color:#16162a}
 .auth-box .chkrow{font-size:16px!important;color:#3a3a4a!important}
 .auth-box .chkrow input[type=checkbox]{width:18px;height:18px}
 .auth-box .mfoot{margin-top:32px;padding-top:24px;border-top-color:#e9e9f2}
@@ -259,6 +259,7 @@ input[type=text]:focus,input[type=date]:focus,input[type=email]:focus,input[type
 .auth-box .btn.sm{font-size:22px;padding:4px 16px}
 .auth-box div[style*="text-align:center"] a{color:#3a5fcd!important}
 .auth-err{background:#ffecec;border:1px solid #e2a0a0;color:#b23a3a;font-size:24px;padding:16px 20px;border-radius:10px;margin-bottom:28px}
+.auth-info{background:#eaf7f0;border:1px solid #a3d9bb;color:#1f7a4d;font-size:24px;padding:16px 20px;border-radius:10px;margin-bottom:28px}
 /* 브라우저가 저장된 아이디/비번을 자동완성하는 "그 순간"을 감지하기 위한 트릭 —
    :-webkit-autofill 상태가 되면 이 빈 애니메이션이 시작되고, auth.js가 그 이벤트를
    감지해서 즉시 값을 비운다. setTimeout/setInterval로 타이밍을 맞추는 것보다 정확하다. */

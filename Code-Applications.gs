@@ -22,6 +22,31 @@
 var SHEET_NAME = 'BU2_EDU_APPLICATIONS';
 var CHUNK_SIZE = 40000;
 
+/* ── 로그인 게이트 ── 공개 신청서 제출(submitApplication)은 로그인 없이 열어두고,
+ * 관리자 전용 액션(신청 목록 조회·상태 저장·각종 이메일 발송)만 검증한다.
+ * firebase-config.js의 apiKey와 동일한 값으로 채우세요. 비밀값이 아닙니다.
+ */
+var FIREBASE_WEB_API_KEY = 'AIzaSyBUiaNYIToY3I3iphbZ1SMkAaA9Z1B4zkE';
+var ALLOWED_EMAIL_DOMAIN = '@intekplus.com';
+
+function _verifyIdToken_(idToken) {
+  if (!idToken) return null;
+  try {
+    var resp = UrlFetchApp.fetch(
+      'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=' + FIREBASE_WEB_API_KEY,
+      { method: 'post', contentType: 'application/json',
+        payload: JSON.stringify({ idToken: idToken }), muteHttpExceptions: true }
+    );
+    var data = JSON.parse(resp.getContentText());
+    if (!data.users || !data.users.length) return null;
+    var email = String(data.users[0].email || '').toLowerCase();
+    if (email.slice(-ALLOWED_EMAIL_DOMAIN.length) !== ALLOWED_EMAIL_DOMAIN) return null;
+    return email;
+  } catch (e) {
+    return null;
+  }
+}
+
 function _getSheet_() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sh = ss.getSheetByName(SHEET_NAME);
@@ -60,6 +85,54 @@ function _writeState_(obj) {
   sh.getRange(1, 1, rows.length, 1).setValues(rows);
 }
 
+/* ── 계정 디렉터리 (ID/PW 로그인용) ──
+ * 이 스프레드시트 안에 별도 시트 탭을 하나 더 둔다. 신청서 데이터와 마찬가지로 로그인 전
+ * (비인증) 상태에서 호출되는 액션이므로, 대상자 명단 등 민감 데이터가 있는 메인 백엔드
+ * (Code.gs)가 아니라 이미 공개 접근이 전제된 이 백엔드에 둔다. 비밀번호는 저장하지 않는다 —
+ * 실제 인증은 Firebase Auth가 전담하고, 여기는 순수 ID↔이메일↔프로필 조회용 디렉터리다.
+ */
+var ACCOUNTS_SHEET_NAME = 'BU2_EDU_ACCOUNTS';
+
+function _getAccountsSheet_() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sh = ss.getSheetByName(ACCOUNTS_SHEET_NAME);
+  if (!sh) {
+    sh = ss.insertSheet(ACCOUNTS_SHEET_NAME);
+    try { sh.hideSheet(); } catch (e) {}
+  }
+  return sh;
+}
+
+function _readAccountsState_() {
+  var sh = _getAccountsSheet_();
+  var lastRow = sh.getLastRow();
+  if (lastRow < 1) return {accounts: []};
+  var vals = sh.getRange(1, 1, lastRow, 1).getValues();
+  var raw = vals.map(function (r) { return r[0] || ''; }).join('');
+  if (!raw) return {accounts: []};
+  try {
+    var state = JSON.parse(raw);
+    if (!state.accounts) state.accounts = [];
+    return state;
+  } catch (e) {
+    return {accounts: []};
+  }
+}
+
+function _writeAccountsState_(obj) {
+  var sh = _getAccountsSheet_();
+  sh.clearContents();
+  var raw = JSON.stringify(obj);
+  var rows = [];
+  for (var i = 0; i < raw.length; i += CHUNK_SIZE) {
+    rows.push([raw.substring(i, i + CHUNK_SIZE)]);
+  }
+  if (!rows.length) rows.push(['']);
+  sh.getRange(1, 1, rows.length, 1).setValues(rows);
+}
+
+var ACCOUNT_ID_PATTERN = /^[a-zA-Z0-9_]{4,20}$/;
+
 function _esc_(s) {
   return String(s == null ? '' : s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -74,8 +147,24 @@ function doGet(e) {
   var action = e && e.parameter && e.parameter.action;
   if (action === 'ping') return _json_({ ok: true });
   if (action === 'load') {
+    if (!_verifyIdToken_(e.parameter.idToken)) return _json_({ error: 'unauthorized' });
     var state = _readState_();
     return _json_({ applications: state.applications || [] });
+  }
+  // 회원가입 화면의 "중복확인" 버튼 전용 — 로그인 전에 호출되므로 비인증
+  if (action === 'checkId') {
+    var wantId = String(e.parameter.id || '').trim().toLowerCase();
+    if (!wantId) return _json_({ error: 'missing id' });
+    var accSt = _readAccountsState_();
+    var taken = accSt.accounts.some(function (a) { return String(a.id || '').toLowerCase() === wantId; });
+    return _json_({ available: !taken });
+  }
+  // ID/PW 로그인, 비밀번호 재설정에서 ID→이메일 역조회 전용 — 로그인 전에 호출되므로 비인증
+  if (action === 'lookupEmail') {
+    var lookId = String(e.parameter.id || '').trim().toLowerCase();
+    var accSt2 = _readAccountsState_();
+    var found = accSt2.accounts.filter(function (a) { return String(a.id || '').toLowerCase() === lookId; })[0];
+    return _json_({ email: found ? found.email : null });
   }
   return _json_({ error: 'unknown action: ' + action });
 }
@@ -101,8 +190,31 @@ function doPost(e) {
       return _json_({ ok: true, id: rec.id });
     }
 
+    // 회원가입 화면 전용 — Firebase 계정 생성 직후 호출. 비밀번호는 절대 받지 않는다(Firebase가
+    // 전담). ID 형식·이메일 도메인을 서버에서도 재검증해 클라이언트 우회를 막는다.
+    if (body.action === 'registerAccount') {
+      var acc = body.account || {};
+      var accId = String(acc.id || '').trim();
+      var accEmail = String(acc.email || '').trim().toLowerCase();
+      if (!ACCOUNT_ID_PATTERN.test(accId)) return _json_({ error: 'invalid_id' });
+      if (accEmail.slice(-ALLOWED_EMAIL_DOMAIN.length) !== ALLOWED_EMAIL_DOMAIN) return _json_({ error: 'invalid_domain' });
+      var accState = _readAccountsState_();
+      var accTaken = accState.accounts.some(function (a) { return String(a.id || '').toLowerCase() === accId.toLowerCase(); });
+      if (accTaken) return _json_({ error: 'id_taken' });
+      accState.accounts.push({
+        id: accId,
+        email: accEmail,
+        name: String(acc.name || ''),
+        phone: String(acc.phone || ''),
+        createdAt: new Date().toISOString()
+      });
+      _writeAccountsState_(accState);
+      return _json_({ ok: true });
+    }
+
     // 관리자 앱 전용 — 신청 접수함 검토/등록/반려 상태를 통째로 갱신
     if (body.action === 'save') {
+      if (!_verifyIdToken_(body.idToken)) return _json_({ error: 'unauthorized' });
       var state2 = { applications: body.applications || [] };
       _writeState_(state2);
       return _json_({ ok: true });
@@ -111,6 +223,7 @@ function doPost(e) {
     // 관리자가 "대상자로 등록" 클릭 시 — 대상자 이메일로 사전 선행학습 링크 발송
     // (Apps Script 배포 계정의 Gmail로 발송됩니다. 별도 SMS/이메일 서비스 가입·API 키가 필요 없습니다.)
     if (body.action === 'sendPrelearnEmail') {
+      if (!_verifyIdToken_(body.idToken)) return _json_({ error: 'unauthorized' });
       var to = body.to;
       if (!to) return _json_({ error: 'missing recipient email' });
       var subject = '[BU2] Online Pre-Learning — ' + (body.equipmentName || body.equipment || '') +
@@ -135,6 +248,7 @@ function doPost(e) {
 
     // 관리자가 "대상자별 이수 현황"에서 "📧 이메일로 전송" 클릭 시 — 대상자 이메일로 필기평가(exam.html) 링크 발송
     if (body.action === 'sendExamEmail') {
+      if (!_verifyIdToken_(body.idToken)) return _json_({ error: 'unauthorized' });
       var eTo = body.to;
       if (!eTo) return _json_({ error: 'missing recipient email' });
       var eSubject = '[BU2] Written Exam — ' + (body.equipmentName || '') + ' (' + (body.traineeName || '') + ')';
@@ -157,6 +271,7 @@ function doPost(e) {
 
     // 관리자가 이수증 화면에서 "📧 이메일로 전송" 클릭 시 — 화면에 보이는 이수증과 동일한 내용을 대상자 이메일로 발송
     if (body.action === 'sendCertificateEmail') {
+      if (!_verifyIdToken_(body.idToken)) return _json_({ error: 'unauthorized' });
       var cTo = body.to;
       if (!cTo) return _json_({ error: 'missing recipient email' });
       var cLevel = (body.level != null) ? body.level : '';
@@ -234,6 +349,7 @@ function doPost(e) {
     // 관리자가 "반려" 제출 시 — 신청자 이메일로 반려 사유 안내 메일 발송
     // (담당자 이메일을 회신 주소로 지정해, 신청자가 바로 답장으로 문의할 수 있게 한다)
     if (body.action === 'sendRejectionEmail') {
+      if (!_verifyIdToken_(body.idToken)) return _json_({ error: 'unauthorized' });
       var rTo = body.to;
       if (!rTo) return _json_({ error: 'missing recipient email' });
       var rSubject = '[BU2] Training Application Declined — ' + (body.traineeName || body.applicantName || '');
