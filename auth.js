@@ -274,7 +274,7 @@ function doSignupNew(){
   firebase.auth().createUserWithEmailAndPassword(email,pw)
     .then(function(cred){
       createdUser=cred.user;
-      return cred.user.sendEmailVerification({url:location.origin+location.pathname});
+      return cred.user.sendEmailVerification();
     })
     .then(function(){
       return fetch(getApplySheetsUrl(),{method:'POST',headers:{'Content-Type':'text/plain'},
@@ -284,7 +284,6 @@ function doSignupNew(){
     .then(function(data){
       if(data.error){
         var msg=data.error==='id_taken'?_at('idTaken'):(data.error==='invalid_domain'?_at('domainSignupErr'):_at('idInvalid'));
-        if(createdUser)return createdUser.delete().catch(function(){}).then(function(){throw new Error(msg);});
         throw new Error(msg);
       }
       return firebase.auth().signOut();
@@ -295,8 +294,15 @@ function doSignupNew(){
       renderAuthGate('login',null,_at('signupSuccessInfo').split('{email}').join(email));
     })
     .catch(function(err){
-      _signupInProgress=false;
-      renderAuthGate('signup',err.message,null,prefill);
+      /* 계정 생성 이후 어느 단계에서 실패하든(이메일 인증 발송 실패, 네트워크 오류,
+         ID 중복 경합 등) 방금 만든 Firebase 계정을 여기서 한 번에 정리한다 — 실패 지점마다
+         따로 처리하면 이메일 인증 발송처럼 계정 등록 이전 단계의 실패는 정리되지 않고
+         고아 계정으로 남는다(재가입 시도 시 "이미 사용 중인 이메일" 오류의 원인이 된다). */
+      var cleanup=createdUser?createdUser.delete().catch(function(){}):Promise.resolve();
+      cleanup.then(function(){
+        _signupInProgress=false;
+        renderAuthGate('signup',err.message,null,prefill);
+      });
     });
 }
 
@@ -349,7 +355,7 @@ firebase.auth().onAuthStateChanged(function(user){
   }else if(user&&_domainOk(user.email)&&!user.emailVerified){
     /* 이메일 인증 전이면 앱에 들어오지 못하게 막는다 — 링크 만료/분실 대비로 인증 메일을
        한 번 더 재발송해준다(중복 발송돼도 무해하다). */
-    try{user.sendEmailVerification({url:location.origin+location.pathname});}catch(e){}
+    try{user.sendEmailVerification();}catch(e){}
     firebase.auth().signOut();
     renderAuthGate('login',null,_at('emailNotVerifiedInfo'));
   }else if(user){
