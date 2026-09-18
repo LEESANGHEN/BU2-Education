@@ -242,13 +242,17 @@ input[type=text]:focus,input[type=date]:focus,input[type=email]:focus,input[type
    라이트 톤으로 고정한다(변수 대신 직접 색상 지정). .mtit/.fl/input/.btn 등은 앱 전역
    공용 클래스라 여기서는 .auth-box 하위로만 범위를 좁혀 재정의해서 다른 모달·폼에는
    영향을 주지 않는다. */
-.auth-overlay{display:none;position:fixed;inset:0;z-index:9999;overflow-y:auto;padding:6vh 6vw;box-sizing:border-box;
+/* 로그인은 배경 사진 속 인텍플러스 건물/로고를 가리지 않도록 우측에 배치하고(기존 디자인),
+   회원가입은 필드가 많아 화면보다 길어질 수 있어 중앙 정렬 + 스크롤을 지원한다
+   (auth.js의 renderAuthGate가 mode에 따라 auth-overlay-center 클래스를 붙였다 뗀다). */
+.auth-overlay{display:none;position:fixed;inset:0;z-index:9999;align-items:flex-start;justify-content:flex-end;overflow-y:auto;padding:6vh 6vw;box-sizing:border-box;
   background:linear-gradient(rgba(10,14,22,.28),rgba(10,14,22,.28)),url('Images/login-bg.jpg') center/cover no-repeat,var(--bg-base)}
-/* margin:auto로 중앙 정렬한다 — flex 컨테이너(overlay)에서 margin:auto는 내용이 뷰포트보다
-   작을 땐 완전 중앙 정렬, 내용이 더 커서 넘칠 땐 auto 마진이 0으로 줄어들며 컨테이너의
-   overflow-y:auto로 스크롤이 가능해진다(align-items:center만 쓰면 넘칠 때 위/아래가
+.auth-box{width:640px;max-width:94vw;background:#ffffff;border:1.5px solid #e2e2ec;border-radius:20px;padding:48px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+/* margin:auto로 중앙 정렬한다 — flex 컨테이너에서 margin:auto는 내용이 뷰포트보다 작을 땐
+   완전 중앙 정렬, 내용이 더 커서 넘칠 땐 auto 마진이 0으로 줄어들며 overflow-y:auto로
+   스크롤이 가능해진다(align-items/justify-content만으로 중앙 정렬하면 넘칠 때 위/아래가
    잘려서 스크롤로도 닿지 않는 문제가 생겨 이 방식을 쓴다). */
-.auth-box{width:640px;max-width:94vw;margin:auto;background:#ffffff;border:1.5px solid #e2e2ec;border-radius:20px;padding:48px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.auth-overlay.auth-overlay-center .auth-box{margin:auto}
 .auth-box .auth-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;padding-bottom:20px;border-bottom:1.5px solid #e9e9f2}
 .auth-box .auth-logo{height:46px;width:auto;max-width:230px;object-fit:contain}
 .auth-box .auth-topbar select{width:auto;padding:6px 10px;font-size:13px;background:#f6f6fa;color:#16162a;border-color:#d9d9e4}

@@ -171,6 +171,7 @@ function renderAuthGate(mode, errMsg, infoMsg, prefill){
   var overlay=document.getElementById('authOverlay');
   if(!overlay)return;
   overlay.style.display='flex';
+  overlay.className='auth-overlay'+(mode==='signup'?' auth-overlay-center':'');
   var appEl=document.querySelector('.app');
   if(appEl)appEl.style.display='none';
   var isSignup=mode==='signup';
