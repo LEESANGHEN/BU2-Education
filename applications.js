@@ -231,6 +231,10 @@ function confirmRegisterFromApplication(id){
   S.visits.push(v);
   saveData();
 
+  // 사전학습 링크에 이 ID를 실어보내면(tid) 대상자가 이름/소속을 다시 입력하지 않아도, 기기를
+  // 바꿔 재접속해도 항상 같은 사전학습 기록으로 연결된다 — 이름/소속 오타로 별개의 빈 기록이
+  // 새로 만들어지던 문제를 근본적으로 막는다.
+  a.registeredTraineeId=t.id;
   a.status='registered';
   a.registeredBy={name:coordName,org:coordOrg,position:coordPosition,at:new Date().toISOString()};
   logAudit('신청서 승인(대상자 등록)',a.traineeName+' ('+(a.org||'-')+')');
@@ -247,8 +251,15 @@ function confirmRegisterFromApplication(id){
 function sendPrelearnEmailFor(a,cb){
   var url=getApplySheetsUrl();
   if(!url||!a.traineeEmail){if(cb)cb(false,'이메일 주소 없음');return;}
+  if(!a.registeredTraineeId){
+    // registeredTraineeId 도입 이전에 등록된 신청서는 이름+소속으로 대상자 레코드를 찾아
+    // 보정한다 — "링크 재발송"을 한 번만 눌러도 이후부터는 안정적인 tid 매칭을 쓰게 된다.
+    var match=(S.trainees||[]).find(function(t){return t.name===a.traineeName&&t.org===(a.org||'');});
+    if(match)a.registeredTraineeId=match.id;
+  }
   var eqIds=appEquipList(a);
-  var link=location.origin+location.pathname.replace(/index\.html$/,'').replace(/\/$/,'')+'/prelearn.html?eq='+encodeURIComponent(eqIds.join(','));
+  var link=location.origin+location.pathname.replace(/index\.html$/,'').replace(/\/$/,'')+'/prelearn.html?eq='+encodeURIComponent(eqIds.join(','))
+    +(a.registeredTraineeId?('&tid='+encodeURIComponent(a.registeredTraineeId)):'');
   authedPost(url,{
     action:'sendPrelearnEmail',to:a.traineeEmail,traineeName:a.traineeName,
     equipment:eqIds.join(','),equipmentName:appEquipNames(a),link:link

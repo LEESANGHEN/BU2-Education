@@ -18,7 +18,7 @@ function quizPoolFor(equip,code){
   return (COURSE_DATA[equip]&&COURSE_DATA[equip].quiz&&COURSE_DATA[equip].quiz[code])||[];
 }
 
-var PL={record:null,equip:null,ci:0,si:0,li:0,mode:'pick',quizPick:{},allowedEquip:null};
+var PL={record:null,equip:null,ci:0,si:0,li:0,mode:'pick',quizPick:{},allowedEquip:null,tid:null};
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function uid(p){return p+'_'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
@@ -111,7 +111,28 @@ function renderPick(){
 }
 function pickEquipment(id){
   if(!confirm(pt('equipConfirmMsg')))return;
-  PL.equip=id;PL.mode='gate';renderGate();
+  enterEquip(id);
+}
+/* 신청서 승인 시 발송되는 링크에는 대상자 고유 ID(tid)가 실려 있다 — 이 ID로 기존 기록을
+   찾으면 이름/소속을 다시 입력할 필요 없이 바로 이어서 진행(또는 완료 후 재접속 시 본인의
+   기존 결과 확인)할 수 있다. 링크에 tid가 없거나(과거에 발송된 링크) 아직 기록이 없으면
+   기존처럼 이름/소속 입력 화면(Gate)으로 보낸다. */
+function enterEquip(id){
+  PL.equip=id;
+  if(PL.tid){
+    loadAllRecords(function(records){
+      var found=records.find(function(r){return r.traineeId===PL.tid;});
+      if(found){
+        PL.record=found;
+        try{localStorage.setItem(PL_ID_KEY,found.id);}catch(e){}
+        enterCourse();
+        return;
+      }
+      PL.mode='gate';renderGate();
+    });
+    return;
+  }
+  PL.mode='gate';renderGate();
 }
 
 /* ── 시작 화면(Gate) ── */
@@ -146,25 +167,36 @@ function startLearning(){
 
   var savedId=localStorage.getItem(PL_ID_KEY);
   loadAllRecords(function(records){
+    // 링크에 실린 대상자 고유 ID(tid)가 최우선 — 이름/소속 오타나 기기 변경에 영향받지 않는다.
+    // 그다음 이 브라우저에 저장된 ID, 마지막으로 이름+소속 일치를 시도한다(과거 발송 링크 호환용).
     var found=null;
-    if(savedId)found=records.find(function(r){return r.id===savedId;});
+    if(PL.tid)found=records.find(function(r){return r.traineeId===PL.tid;});
+    if(!found&&savedId)found=records.find(function(r){return r.id===savedId;});
     if(!found){
       found=records.find(function(r){return r.name&&r.org&&r.name.toLowerCase()===name.toLowerCase()&&r.org.toLowerCase()===org.toLowerCase();});
     }
     if(found){
       PL.record=found;
       PL.record.name=name;PL.record.org=org;PL.record.orgType=orgType;PL.record.contact=contact;
+      if(PL.tid)PL.record.traineeId=PL.tid;
       localStorage.setItem(PL_ID_KEY,found.id);
     }else{
-      PL.record={id:uid('pl'),name:name,org:org,orgType:orgType,contact:contact,startedAt:new Date().toISOString(),courses:{}};
+      PL.record={id:uid('pl'),name:name,org:org,orgType:orgType,contact:contact,traineeId:PL.tid||undefined,startedAt:new Date().toISOString(),courses:{}};
     }
-    if(!PL.record.courses)PL.record.courses={};
-    if(!PL.record.courses[PL.equip])PL.record.courses[PL.equip]={progress:{},startedAt:new Date().toISOString()};
-    resumePosition();
-    if(PL.mode!=='done'){PL.mode='slide';}
-    renderViewer();
-    saveProgress();
+    enterCourse();
   });
+}
+/* 대상자 고유 ID(tid) 매칭으로 이미 찾은 기록, 또는 방금 Gate에서 입력받아 찾거나 새로 만든
+   기록(PL.record)을 가지고 실제 학습 화면으로 들어간다 — 이미 이 설비를 최종 완료한 기록이면
+   resumePosition()이 모든 섹션에 진행 기록이 있음을 감지해 자동으로 완료(review) 화면으로
+   보내므로, 완료자가 재접속해도 퀴즈를 다시 풀지 않고 본인의 기존 결과만 보게 된다. */
+function enterCourse(){
+  if(!PL.record.courses)PL.record.courses={};
+  if(!PL.record.courses[PL.equip])PL.record.courses[PL.equip]={progress:{},startedAt:new Date().toISOString()};
+  resumePosition();
+  if(PL.mode!=='done'){PL.mode='slide';}
+  renderViewer();
+  saveProgress();
 }
 
 /* ── 진행 상태 저장/불러오기 ── */
@@ -405,10 +437,11 @@ document.addEventListener('DOMContentLoaded',function(){
   document.getElementById('langLabelText').textContent=pt('langLabel');
   var params=new URLSearchParams(location.search);
   var eqParam=params.get('eq');
+  PL.tid=params.get('tid')||null;
   var allowed=eqParam?eqParam.split(',').map(function(s){return s.trim();}).filter(function(id){return equipmentById(id)&&COURSE_DATA[id]&&COURSE_DATA[id].chapters;}):[];
   PL.allowedEquip=allowed.length?allowed:null;
   if(allowed.length===1){
-    PL.equip=allowed[0];PL.mode='gate';renderGate();
+    enterEquip(allowed[0]);
   }else{
     renderPick();
   }
