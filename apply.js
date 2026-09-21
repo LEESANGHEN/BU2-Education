@@ -114,14 +114,6 @@ function renderForm(){
       +'<div class="apf-tblwrap"><table class="apf-tbl"><thead><tr><th>'+esc(t('thCode'))+'</th><th>'+esc(t('thLevel'))+'</th><th>'+esc(t('thModule'))+'</th><th style="width:110px">'+esc(t('thHas'))+'</th><th>'+esc(t('thNote'))+'</th></tr></thead><tbody>'+assessRows+'</tbody></table></div>'
     +'</div>'
 
-    +'<div class="apf-sec"><h2>'+esc(t('sec5'))+'</h2>'
-      +'<div class="apf-row2">'
-        +'<div class="apf-field"><label><input type="checkbox" id="f_pre0Done"> '+esc(t('pre0'))+'</label><input type="text" id="f_pre0Method" placeholder="'+esc(t('methodPh'))+'" style="margin-top:6px"></div>'
-        +'<div class="apf-field"><label><input type="checkbox" id="f_pre1Done"> '+esc(t('pre1'))+'</label><input type="text" id="f_pre1Method" placeholder="'+esc(t('methodPh'))+'" style="margin-top:6px"></div>'
-      +'</div>'
-      +'<p class="apf-hint">'+esc(t('sec5hint'))+'</p>'
-    +'</div>'
-
     +'<div class="apf-sec"><h2>'+esc(t('sec6'))+'</h2>'
       +field('','specialNotes','<textarea id="f_specialNotes" rows="3" placeholder="'+esc(t('sec6ph'))+'"></textarea>')
     +'</div>'
@@ -212,8 +204,6 @@ function submitApplication(){
     desiredLevel:Number(val('f_desiredLevel')),desiredStart:val('f_desiredStart'),desiredEnd:val('f_desiredEnd'),
     totalDays:val('f_totalDays'),
     selfAssessment:selfAssessment,
-    pre0Done:checked('f_pre0Done'),pre0Method:val('f_pre0Method'),
-    pre1Done:checked('f_pre1Done'),pre1Method:val('f_pre1Method'),
     specialNotes:val('f_specialNotes'),
     branchApproverName:val('f_branchApproverName'),
     submitLang:getLang(),

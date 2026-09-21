@@ -158,16 +158,10 @@ function openApplicationDetail(id){
       +'<table class="dtbl sm"><thead><tr><th>코드</th><th>Level</th><th>모듈</th><th>보유여부</th><th>비고</th></tr></thead><tbody>'+assessRows+'</tbody></table>'
     +'</div>'
 
-    +'<div class="td-section"><div class="td-sectitle">5. 사전 선행학습 이수 확인</div>'
-      +'<div class="fr">'
-        +infoBox('Level 0 이론 선행학습',(a.pre0Done?'✅ 이수 · '+esc(a.pre0Method||''):'❌ 미이수'))
-        +infoBox('Level 1 SW조작 기초 선행학습',(a.pre1Done?'✅ 이수 · '+esc(a.pre1Method||''):'❌ 미이수'))
-      +'</div></div>'
-
-    +'<div class="td-section"><div class="td-sectitle">6. 특이사항 및 요청사항</div>'
+    +'<div class="td-section"><div class="td-sectitle">5. 특이사항 및 요청사항</div>'
       +'<div class="dbox">'+esc(a.specialNotes||'(없음)')+'</div></div>'
 
-    +'<div class="td-section"><div class="td-sectitle">7. 신청자 확인</div>'
+    +'<div class="td-section"><div class="td-sectitle">6. 신청자 확인</div>'
       +'<div class="fr">'+infoBox('신청자 서명',a.branchApproverName)+infoBox('접수 시각',(a.submittedAt||'').replace('T',' ').slice(0,19))+'</div></div>'
 
     +(a.status==='registered'&&a.registeredBy?('<div style="font-size:11px;color:var(--tx-second);margin-bottom:4px">✅ 승인 담당자 · '+esc(a.registeredBy.name||'')+(a.registeredBy.org?(' · '+esc(a.registeredBy.org)):'')+(a.registeredBy.position?(' · '+esc(a.registeredBy.position)):'')+' ('+esc((a.registeredBy.at||'').replace('T',' ').slice(0,16))+')</div>'):'')
