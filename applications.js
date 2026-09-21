@@ -106,12 +106,18 @@ function renderApplyTab(){
 function appSetFilter(f){APPS.filter=f;renderApplyTab();}
 function refreshApplications(){loadApplications(function(){renderApplyTab();});}
 
+function _applyFormUrl(){
+  return location.origin+location.pathname.replace(/index\.html$/,'').replace(/\/$/,'')+'/apply.html';
+}
 function openApplyLinkInfo(){
-  var url=location.origin+location.pathname.replace(/index\.html$/,'').replace(/\/$/,'')+'/apply.html';
+  var url=_applyFormUrl();
   mw('<div class="mtit">🔗 교육 신청서 링크</div>'
     +'<div style="font-size:12px;color:var(--tx-second);margin-bottom:12px">해외지사 · Agent · 고객사 담당자에게 아래 주소를 공유하면 직접 신청서를 작성해 제출할 수 있습니다. (관리자 로그인 불필요, 조회 권한 없음 — 제출만 가능)</div>'
     +'<div class="fg"><input type="text" value="'+esc(url)+'" readonly onclick="this.select()" style="font-size:11px"></div>'
     +'<div class="mfoot"><button class="btn sm" onclick="cm()">닫기</button></div>');
+}
+function previewApplyForm(){
+  window.open(_applyFormUrl(),'_blank','noopener');
 }
 
 function openApplicationDetail(id){
