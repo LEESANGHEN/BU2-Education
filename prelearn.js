@@ -168,10 +168,16 @@ function startLearning(){
   var savedId=localStorage.getItem(PL_ID_KEY);
   loadAllRecords(function(records){
     // 링크에 실린 대상자 고유 ID(tid)가 최우선 — 이름/소속 오타나 기기 변경에 영향받지 않는다.
-    // 그다음 이 브라우저에 저장된 ID, 마지막으로 이름+소속 일치를 시도한다(과거 발송 링크 호환용).
+    // 그다음 이 브라우저에 저장된 ID를 시도하되, 지금 입력한 이름과 그 기록의 이름이 일치할
+    // 때만 신뢰한다 — 같은 브라우저로 예전에 다른 사람(예: 관리자 테스트) 이름으로 학습한
+    // 적이 있으면 savedId만 믿고 엉뚱한 사람의 기록에 새 이름을 덮어씌우는 사고가 나기 때문.
+    // 마지막으로 이름+소속 일치를 시도한다(과거 발송 링크 호환용).
     var found=null;
     if(PL.tid)found=records.find(function(r){return r.traineeId===PL.tid;});
-    if(!found&&savedId)found=records.find(function(r){return r.id===savedId;});
+    if(!found&&savedId){
+      var savedRec=records.find(function(r){return r.id===savedId;});
+      if(savedRec&&savedRec.name&&savedRec.name.toLowerCase().trim()===name.toLowerCase())found=savedRec;
+    }
     if(!found){
       found=records.find(function(r){return r.name&&r.org&&r.name.toLowerCase()===name.toLowerCase()&&r.org.toLowerCase()===org.toLowerCase();});
     }
