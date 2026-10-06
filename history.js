@@ -88,22 +88,33 @@ function renderHistoryTab(){
       +'<table class="dtbl sm"><thead><tr><th style="width:170px">방문 기간</th><th>이름</th><th>소속</th><th style="width:110px">Level</th><th style="width:80px">상태</th><th>비고</th></tr></thead><tbody>'+(visitRows||'<tr><td colspan="6" class="empty">이력이 없습니다.</td></tr>')+'</tbody></table>'
     +'</div>'
     +auditLogSection();
+  applyAdminModeUI();
 }
 /* 관리자 작업 감사 로그 — 편집/삭제/승인 등 데이터 변경 액션을 누가 언제 했는지 보여준다.
    위 필터(HIST)와는 별개로 항상 최근 100건만 표시한다(감사 목적상 최근 이력이면 충분). */
 function auditLogSection(){
   var log=(S.auditLog||[]).slice(0,100);
-  var rows=log.map(function(e){
+  var rows=log.map(function(e,i){
     return '<tr>'
       +'<td style="font-size:11px;white-space:nowrap">'+esc((e.at||'').replace('T',' ').slice(0,16))+'</td>'
       +'<td style="font-size:11px">'+esc(e.by||'')+'</td>'
       +'<td style="font-size:11px">'+esc(e.action||'')+'</td>'
       +'<td style="font-size:11px;color:var(--tx-second)">'+esc(e.detail||'')+'</td>'
+      +'<td class="admin-only-btn" style="display:none;width:60px"><button class="btn sm red" onclick="deleteAuditEntry('+i+')">삭제</button></td>'
     +'</tr>';
   }).join('');
   return '<div class="td-section"><div class="td-sectitle">관리자 작업 이력 (최근 '+log.length+'건)</div>'
-    +'<table class="dtbl sm"><thead><tr><th style="width:130px">시각</th><th style="width:180px">관리자</th><th style="width:160px">작업</th><th>상세</th></tr></thead><tbody>'+(rows||'<tr><td colspan="4" class="empty">작업 이력이 없습니다.</td></tr>')+'</tbody></table>'
+    +'<table class="dtbl sm"><thead><tr><th style="width:130px">시각</th><th style="width:180px">관리자</th><th style="width:160px">작업</th><th>상세</th><th class="admin-only-btn" style="display:none;width:60px"></th></tr></thead><tbody>'+(rows||'<tr><td colspan="4" class="empty">작업 이력이 없습니다.</td></tr>')+'</tbody></table>'
   +'</div>';
+}
+/* 감사 로그 항목 삭제 — 삭제 자체를 다시 로그에 남기면 지운 만큼 새 항목이 생겨 의미가 없어지므로 기록하지 않는다 */
+function deleteAuditEntry(idx){
+  var e=(S.auditLog||[])[idx];
+  if(!e)return;
+  if(!confirm('이 작업 이력을 삭제할까요?\n\n'+(e.at||'').replace('T',' ').slice(0,16)+' · '+(e.action||'')+' · '+(e.detail||'')))return;
+  S.auditLog.splice(idx,1);
+  saveData();
+  renderHistoryTab();
 }
 function histSet(k,v){HIST[k]=v;renderHistoryTab();}
 function histReset(){HIST={from:'',to:'',orgFilter:'all',country:'all',level:'all'};renderHistoryTab();}
