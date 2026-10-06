@@ -1,0 +1,14 @@
+{
+  "name": "BU2 교육 관리",
+  "short_name": "교육 관리",
+  "description": "BU2 설비교육 Level 0~3 관리",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1a1a1f",
+  "theme_color": "#1a1a1f",
+  "icons": [
+    { "src": "Images/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "Images/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
