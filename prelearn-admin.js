@@ -46,7 +46,7 @@ function plQuizStats(course,eq){
   });
   return {correct:correct,total:total,pct:total?Math.round(correct/total*100):0};
 }
-/* 전체 문항 합산 정답률 80% 이상 — Level 0~1 사전학습 인증 기준 충족 여부 판단에 쓰인다 */
+/* 전체 문항 합산 정답률 80% 이상 — L1 사전학습 인증 기준 충족 여부 판단에 쓰인다 */
 function plCourseAllPassed(course,eq){
   var st=plQuizStats(course,eq);
   return st.total>0&&st.pct>=80;
@@ -91,7 +91,7 @@ function savePrelearnSheetsUrl(){
 function openPrelearnLinkInfo(){
   var url=location.origin+location.pathname.replace(/index\.html$/,'').replace(/\/$/,'')+'/prelearn.html';
   mw('<div class="mtit">🔗 사전 선행학습 링크</div>'
-    +'<div style="font-size:12px;color:var(--tx-second);margin-bottom:12px">본사 방문 예정자에게 아래 주소를 공유하면 설비를 선택하고 Level 0~1 온라인 사전 학습을 진행할 수 있습니다. (신청서 등록 시에는 해당 설비로 바로 연결되는 링크가 자동으로 이메일 발송됩니다.)</div>'
+    +'<div style="font-size:12px;color:var(--tx-second);margin-bottom:12px">본사 방문 예정자에게 아래 주소를 공유하면 설비를 선택하고 L1 온라인 사전 학습을 진행할 수 있습니다. (신청서 등록 시에는 해당 설비로 바로 연결되는 링크가 자동으로 이메일 발송됩니다.)</div>'
     +'<div class="fg"><input type="text" value="'+esc(url)+'" readonly onclick="this.select()" style="font-size:11px"></div>'
     +'<div class="mfoot"><button class="btn sm" onclick="cm()">닫기</button></div>');
 }
@@ -186,7 +186,7 @@ function renderPrelearnTab(){
       +'<td style="font-size:11px;color:'+(qs.total&&qs.pct>=80?'#4ade9a':'var(--tx-second)')+'">'+qs.correct+'/'+qs.total+(qs.total?(' ('+qs.pct+'%)'):'')+'</td>'
       +'<td style="font-size:11px">'+esc((course.startedAt||'').slice(0,10))+'</td>'
       +'<td style="font-size:11px">'+esc((r.lastActivityAt||'').replace('T',' ').slice(0,16))+'</td>'
-      +'<td>'+(course.completedAt?(plCourseAllPassed(course,eq)?'<span class="lv-cur-badge">✅ 인증기준 충족</span>':'<span class="lv-cur-badge wait">⚠ Level0 재교육 필요</span>'):'<span class="lv-cur-badge none">진행중</span>')+'</td>'
+      +'<td>'+(course.completedAt?(plCourseAllPassed(course,eq)?'<span class="lv-cur-badge">✅ 인증기준 충족</span>':'<span class="lv-cur-badge wait">⚠ L1 재교육 필요</span>'):'<span class="lv-cur-badge none">진행중</span>')+'</td>'
     +'</tr>';
   }).join('');
 
@@ -208,7 +208,7 @@ function openPrelearnDetail(id,eq){
     return '<tr><td>'+s.code+'</td><td>'+esc((s.title&&s.title.ko)||'')+'</td><td>'+(p?(Number(p.quizScore)+'/'+Number(p.quizTotal)):'-')+'</td><td>'+(p?(Number(p.attempts)||1):'-')+'</td><td>'+(p&&p.passed?'<span style="color:#4ade9a">통과</span>':(p?'<span style="color:#e07070">미통과</span>':'<span style="color:var(--tx-faint)">미학습</span>'))+'</td></tr>';
   }).join('');
   var qs=plQuizStats(course,eq);
-  var verdict=!course.completedAt?'<span class="lv-cur-badge none">진행중</span>':(plCourseAllPassed(course,eq)?'<span class="lv-cur-badge">✅ 인증기준 충족 (퀴즈 정답률 '+qs.pct+'%)</span>':'<span class="lv-cur-badge wait">⚠ 인증기준 미충족(정답률 '+qs.pct+'%) — 방문 중 Level0부터 교육 필요</span>');
+  var verdict=!course.completedAt?'<span class="lv-cur-badge none">진행중</span>':(plCourseAllPassed(course,eq)?'<span class="lv-cur-badge">✅ 인증기준 충족 (퀴즈 정답률 '+qs.pct+'%)</span>':'<span class="lv-cur-badge wait">⚠ 인증기준 미충족(정답률 '+qs.pct+'%) — 방문 중 L1부터 교육 필요</span>');
   mw('<div class="mtit">'+esc(r.name)+' <span class="grpbadge" style="background:'+ot.color+'">'+esc(ot.label)+'</span> <span style="font-size:12px;color:var(--tx-second);font-weight:400">'+esc(r.org||'')+' · '+esc(equipmentName(eq,'ko'))+'</span></div>'
     +'<div style="margin-bottom:12px">'+verdict+'</div>'
     +'<div class="fr" style="grid-template-columns:repeat(4,1fr);margin-bottom:14px">'

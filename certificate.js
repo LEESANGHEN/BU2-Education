@@ -45,8 +45,8 @@ function openCertificate(traineeId,level){
       +'<div class="cert-no">'+esc(ctd('certNo'))+' '+esc(appr.id||('CERT-'+traineeId+'-L'+level))+'</div>'
       +'<div class="cert-row"><div class="cert-lbl">'+esc(ctd('name'))+'</div><div class="cert-val">'+esc(t.name)+'</div><div class="cert-lbl">'+esc(ctd('org'))+'</div><div class="cert-val">'+esc(ot.label)+' · '+esc(t.org||'')+'</div></div>'
       +'<div class="cert-row"><div class="cert-lbl">'+esc(ctd('position'))+'</div><div class="cert-val">'+esc(t.position||'-')+'</div><div class="cert-lbl">'+esc(ctd('country'))+'</div><div class="cert-val">'+esc(t.country||'-')+'</div></div>'
-      +'<div class="cert-statement">'+esc(ctd('statement1'))+'<br><b>Level '+level+' · '+esc(lvTitle)+'</b> '+esc(ctd('statement2'))+'</div>'
-      +'<div class="cert-comp"><div class="cert-comp-title">'+esc(ctd('competencyTitle'))+' (Level '+level+')</div><div class="cert-comp-text">'+esc(lvCompetency)+'</div></div>'
+      +'<div class="cert-statement">'+esc(ctd('statement1'))+'<br><b>L'+level+' · '+esc(lvTitle)+'</b> '+esc(ctd('statement2'))+'</div>'
+      +'<div class="cert-comp"><div class="cert-comp-title">'+esc(ctd('competencyTitle'))+' (L'+level+')</div><div class="cert-comp-text">'+esc(lvCompetency)+'</div></div>'
       +'<div class="cert-row"><div class="cert-lbl">'+esc(ctd('itemsDone'))+'</div><div class="cert-val">'+prog.done+' / '+prog.total+' ('+prog.pct+'%)</div><div class="cert-lbl">'+esc(ctd('approvalDate'))+'</div><div class="cert-val">'+esc(appr.approvalDate||'')+'</div></div>'
       +itemsHtml
       +followUp

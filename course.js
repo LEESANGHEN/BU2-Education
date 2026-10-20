@@ -7,7 +7,7 @@ function renderCourseTab(){
 
   var levelRows=S.levels.slice().sort(function(a,b){return a.level-b.level;}).map(function(l){
     return '<tr>'
-      +'<td><b>Level '+l.level+'</b></td>'
+      +'<td><b>L'+l.level+'</b></td>'
       +'<td>'+esc(l.title)+'</td>'
       +'<td style="font-size:11px;color:var(--tx-second)">'+esc(l.target)+'</td>'
       +'<td style="font-size:11px">'+esc(l.competency)+'</td>'
@@ -24,7 +24,7 @@ function renderCourseTab(){
       +'<td><b>'+esc(m.code)+'</b></td>'
       +'<td>'+esc(m.name)+'</td>'
       +'<td style="font-size:11px;color:var(--tx-second)">'+esc(m.detail)+'</td>'
-      +'<td>Level '+m.level+'</td>'
+      +'<td>L'+m.level+'</td>'
       +'<td>'+esc(m.method)+'</td>'
       +'<td>'+m.hours+'h</td>'
       +'<td><div style="display:flex;flex-wrap:wrap;gap:4px">'+(function(){
@@ -38,9 +38,9 @@ function renderCourseTab(){
       +'<td><button class="btn sm admin-only-btn" style="display:none" onclick="openModuleModal(\''+m.id+'\')">편집</button> <button class="btn sm red admin-only-btn" style="display:none" onclick="deleteModule(\''+m.id+'\')">삭제</button></td>'
     +'</tr>';
   }).join('');
-  var hoursSummary=[0,1,2,3].map(function(lv){
+  var hoursSummary=[1,2,3].map(function(lv){
     var h=hoursByLevel[lv]||0;
-    return '<div class="sum-card"><div class="sum-n">'+h+'h</div><div class="sum-l">Level '+lv+' 합계 ('+(h/8).toFixed(1)+'일)</div></div>';
+    return '<div class="sum-card"><div class="sum-n">'+h+'h</div><div class="sum-l">L'+lv+' 합계 ('+(h/8).toFixed(1)+'일)</div></div>';
   }).join('');
 
   var moduleOptLabel={};
@@ -52,7 +52,7 @@ function renderCourseTab(){
     var modLbl=it.moduleId?(moduleOptLabel[it.moduleId]||'(연결된 모듈 없음)'):'';
     return '<tr>'
       +'<td>'+(phaseLbl[it.phase]||it.phase)+'</td>'
-      +'<td>Level '+it.level+'</td>'
+      +'<td>L'+it.level+'</td>'
       +'<td style="font-size:11px">'+esc(it.module)+(modLbl?'<br><span style="color:var(--tx-second)">🔗 '+esc(modLbl)+'</span>':'')+'</td>'
       +'<td style="font-size:11px">'+esc(it.item)+'</td>'
       +'<td>'+it.order+'</td>'
@@ -65,11 +65,11 @@ function renderCourseTab(){
     var pass=(l.evalPass!=null&&l.evalPass!=='')?l.evalPass:fb.pass;
     var evaluator=(l.evalEvaluator!=null&&l.evalEvaluator!=='')?l.evalEvaluator:fb.evaluator;
     var retry=(l.evalRetry!=null&&l.evalRetry!=='')?l.evalRetry:fb.retry;
-    return '<tr><td>Level '+l.level+'</td><td style="font-size:11px">'+esc(l.evalMethod||'')+'</td><td style="font-size:11px">'+esc(pass||'')+'</td><td style="font-size:11px">'+esc(evaluator||'')+'</td><td style="font-size:11px;color:var(--tx-second)">'+esc(retry||'')+'</td></tr>';
+    return '<tr><td>L'+l.level+'</td><td style="font-size:11px">'+esc(l.evalMethod||'')+'</td><td style="font-size:11px">'+esc(pass||'')+'</td><td style="font-size:11px">'+esc(evaluator||'')+'</td><td style="font-size:11px;color:var(--tx-second)">'+esc(retry||'')+'</td></tr>';
   }).join('');
 
   wrap.innerHTML=
-    '<div class="td-section"><div class="td-sectitle">Level 0~3 정의</div>'
+    '<div class="td-section"><div class="td-sectitle">L1~L3 정의</div>'
       +'<table class="dtbl sm"><thead><tr><th style="width:60px">Level</th><th style="width:170px">교육 목표</th><th style="width:150px">주요 대상</th><th>핵심 역량</th><th style="width:160px">평가 방법</th><th style="width:90px">예상 소요기간</th><th style="width:60px"></th></tr></thead><tbody>'+levelRows+'</tbody></table>'
     +'</div>'
     +'<div class="td-section">'
@@ -104,7 +104,7 @@ function openLevelModal(id){
   var pass=(l.evalPass!=null&&l.evalPass!=='')?l.evalPass:(fb.pass||'');
   var evaluator=(l.evalEvaluator!=null&&l.evalEvaluator!=='')?l.evalEvaluator:(fb.evaluator||'');
   var retry=(l.evalRetry!=null&&l.evalRetry!=='')?l.evalRetry:(fb.retry||'');
-  mw('<div class="mtit">Level '+l.level+' 정의 편집</div>'
+  mw('<div class="mtit">L'+l.level+' 정의 편집</div>'
     +'<div class="fg"><label class="fl">교육 목표</label><input type="text" id="l_title" value="'+esc(l.title)+'"></div>'
     +'<div class="fg"><label class="fl">주요 대상</label><input type="text" id="l_target" value="'+esc(l.target)+'"></div>'
     +'<div class="fg"><label class="fl">핵심 역량</label><textarea id="l_comp" rows="3">'+esc(l.competency)+'</textarea></div>'
@@ -126,16 +126,16 @@ function saveLevel(id){
   l.evalPass=document.getElementById('l_pass').value.trim();
   l.evalEvaluator=document.getElementById('l_evaluator').value.trim();
   l.evalRetry=document.getElementById('l_retry').value.trim();
-  logAudit('Level 정의 편집','Level '+l.level+' ('+l.title+')');
+  logAudit('Level 정의 편집','L'+l.level+' ('+l.title+')');
   saveData();cm();renderCourseTab();
 }
 
 function openModuleModal(id){
-  var m=id?S.modules.find(function(x){return x.id===id;}):{id:'',code:'',name:'',detail:'',level:0,method:'이론',hours:4,resources:''};
+  var m=id?S.modules.find(function(x){return x.id===id;}):{id:'',code:'',name:'',detail:'',level:1,method:'이론',hours:4,resources:''};
   mw('<div class="mtit">'+(id?'모듈 편집':'+ 모듈 추가')+'</div>'
     +'<div class="fr">'
       +'<div class="fg"><label class="fl">코드</label><input type="text" id="m_code" value="'+esc(m.code)+'" maxlength="3"></div>'
-      +'<div class="fg"><label class="fl">Level</label><select id="m_level">'+[0,1,2,3].map(function(n){return '<option value="'+n+'"'+(m.level===n?' selected':'')+'>Level '+n+'</option>';}).join('')+'</select></div>'
+      +'<div class="fg"><label class="fl">Level</label><select id="m_level">'+[1,2,3].map(function(n){return '<option value="'+n+'"'+(m.level===n?' selected':'')+'>L'+n+'</option>';}).join('')+'</select></div>'
     +'</div>'
     +'<div class="fg"><label class="fl">모듈명</label><input type="text" id="m_name" value="'+esc(m.name)+'"></div>'
     +'<div class="fg"><label class="fl">세부 교육내용</label><textarea id="m_detail" rows="2">'+esc(m.detail)+'</textarea></div>'
@@ -193,7 +193,7 @@ function openChecklistItemModal(id){
   mw('<div class="mtit">'+(id?'이수 체크리스트 항목 편집':'+ 이수 체크리스트 항목 추가')+'</div>'
     +'<div class="fr">'
       +'<div class="fg"><label class="fl">구분</label><select id="ci_phase"><option value="pre"'+(it.phase==='pre'?' selected':'')+'>사전학습(pre)</option><option value="onsite"'+(it.phase==='onsite'?' selected':'')+'>온사이트(onsite)</option></select></div>'
-      +'<div class="fg"><label class="fl">Level (사전학습은 0~1만 사용)</label><select id="ci_level">'+[0,1,2,3].map(function(n){return '<option value="'+n+'"'+(it.level===n?' selected':'')+'>Level '+n+'</option>';}).join('')+'</select></div>'
+      +'<div class="fg"><label class="fl">Level (사전학습은 L1만 사용)</label><select id="ci_level">'+[1,2,3].map(function(n){return '<option value="'+n+'"'+(it.level===n?' selected':'')+'>L'+n+'</option>';}).join('')+'</select></div>'
     +'</div>'
     +'<div class="fg"><label class="fl">모듈 연결</label><select id="ci_moduleId">'+modOpts+'</select></div>'
     +'<div class="fg"><label class="fl">모듈 표시명 (연결 안 할 경우에만 직접 입력 — 연결했으면 저장 시 그 모듈의 현재 이름으로 자동 대체됩니다)</label><input type="text" id="ci_module" value="'+esc(it.module||'')+'"></div>'

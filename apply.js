@@ -90,12 +90,12 @@ function renderForm(){
   var orgTypeSuggestions=ORG_TYPES.map(function(o){return '<option value="'+esc(tOrgType(o.id))+'">';}).join('');
   var countryOpts='<option value="">-</option>'+COUNTRIES.map(function(c){return '<option value="'+c+'">'+esc(tCountry(c))+'</option>';}).join('');
   var visitCatOpts='<option value="">-</option>'+VISIT_CATS.map(function(v){return '<option value="'+v.id+'">'+esc(tVisitCat(v.id))+'</option>';}).join('');
-  var levelOpts=[0,1,2,3].map(function(n){return '<option value="'+n+'">Level '+n+'</option>';}).join('');
+  var levelOpts=[1,2,3].map(function(n){return '<option value="'+n+'">L'+n+'</option>';}).join('');
 
   var assessRows=DEF_MODULES.slice().sort(function(a,b){return a.level-b.level||a.code.localeCompare(b.code);}).map(function(m){
     return '<tr>'
       +'<td>'+m.code+'</td>'
-      +'<td>Level '+m.level+'</td>'
+      +'<td>L'+m.level+'</td>'
       +'<td>'+esc(tModule(m.id,'name'))+'<div class="apf-hint">'+esc(tModule(m.id,'detail'))+'</div></td>'
       +'<td><select data-mod="'+m.id+'" class="apf-has"><option value="N">'+esc(t('hasN'))+'</option><option value="partial">'+esc(t('hasPartial'))+'</option><option value="Y">'+esc(t('hasY'))+'</option></select></td>'
       +'<td><input type="text" data-mod-note="'+m.id+'" placeholder="'+esc(t('assessNotePh'))+'"></td>'

@@ -12,7 +12,7 @@ function historyApprovals(){
     if(HIST.to&&(r.a.approvalDate||'')>HIST.to)return false;
     if(HIST.orgFilter!=='all'&&normOrgTypeId(r.t.orgType)!==HIST.orgFilter)return false;
     if(HIST.country!=='all'&&r.t.country!==HIST.country)return false;
-    if(HIST.level!=='all'&&String(r.a.level)!==HIST.level)return false;
+    if(HIST.level!=='all'&&String(lvNorm(r.a.level))!==HIST.level)return false;
     return true;
   }).sort(function(x,y){return (y.a.approvalDate||'')<(x.a.approvalDate||'')?-1:1;});
 }
@@ -43,7 +43,7 @@ function renderHistoryTab(){
       +'<td><span class="grpbadge" style="background:'+ot.color+'">'+esc(ot.label)+'</span></td>'
       +'<td>'+esc(r.t.org||'')+'</td>'
       +'<td>'+esc(r.t.country||'')+'</td>'
-      +'<td>Level '+esc(r.a.level)+'</td>'
+      +'<td>'+esc(lvLbl(r.a.level))+'</td>'
       +'<td style="font-size:11px">'+esc(r.a.trainerSign||'')+'</td>'
       +'<td style="font-size:11px">'+esc(r.a.partLeadSign||'')+'</td>'
       +'<td style="font-size:11px">'+(r.a.level===3?(r.a.followUpDone?('완료 · '+esc(r.a.followUpDate||'')):'대기'):'-')+'</td>'
@@ -57,7 +57,7 @@ function renderHistoryTab(){
       +'<td>'+esc(r.v.startDate)+' ~ '+esc(r.v.endDate)+'</td>'
       +'<td>'+esc(r.t.name||'(삭제된 대상자)')+'</td>'
       +'<td>'+esc(r.t.org||'')+'</td>'
-      +'<td>Lv'+esc(r.v.targetLevel)+(r.v.confirmedLevel!==''&&r.v.confirmedLevel!=null?(' → '+esc(r.v.confirmedLevel)+' 확정'):'')+'</td>'
+      +'<td>'+esc(lvLbl(r.v.targetLevel))+(r.v.confirmedLevel!==''&&r.v.confirmedLevel!=null?(' → '+esc(lvLbl(r.v.confirmedLevel))+' 확정'):'')+'</td>'
       +'<td><span style="color:'+st.color+'">●</span> '+esc(st.label)+'</td>'
       +'<td style="font-size:11px;color:var(--tx-second)">'+esc(r.v.note||'')+'</td>'
     +'</tr>';
@@ -72,7 +72,7 @@ function renderHistoryTab(){
       +'<input type="date" value="'+HIST.to+'" onchange="histSet(\'to\',this.value)" title="종료일">'
       +'<select onchange="histSet(\'orgFilter\',this.value)"><option value="all">전체 구분</option>'+ORG_TYPES.map(function(o){return '<option value="'+o.id+'"'+(HIST.orgFilter===o.id?' selected':'')+'>'+o.label+'</option>';}).join('')+'</select>'
       +'<select onchange="histSet(\'country\',this.value)">'+countryOpts+'</select>'
-      +'<select onchange="histSet(\'level\',this.value)"><option value="all">전체 Level</option>'+[0,1,2,3].map(function(n){return '<option value="'+n+'"'+(HIST.level===String(n)?' selected':'')+'>Level '+n+'</option>';}).join('')+'</select>'
+      +'<select onchange="histSet(\'level\',this.value)"><option value="all">전체 Level</option>'+[1,2,3].map(function(n){return '<option value="'+n+'"'+(HIST.level===String(n)?' selected':'')+'>L'+n+'</option>';}).join('')+'</select>'
       +'<button class="btn sm" onclick="histReset()">필터 초기화</button>'
     +'</div>'
     +'<div class="td-section"><div class="td-sectitle" style="display:flex;justify-content:space-between">'
@@ -148,14 +148,14 @@ function downloadCSV(filename,csv){
 function exportApprovalsCSV(){
   var head=['승인일자','이름','구분','소속','국가','Level','교육담당자','파트장','그룹장','심사위원','Follow-Up완료','Follow-Up일자'];
   var rows=[head].concat(historyApprovals().map(function(r){
-    return [r.a.approvalDate,r.t.name,orgType(r.t.orgType||'branch').label,r.t.org,r.t.country,r.a.level,r.a.trainerSign,r.a.partLeadSign,r.a.groupLeadSign||'',r.a.committeeSign||'',r.a.level===3?(r.a.followUpDone?'Y':'N'):'',r.a.level===3?(r.a.followUpDate||''):''];
+    return [r.a.approvalDate,r.t.name,orgType(r.t.orgType||'branch').label,r.t.org,r.t.country,lvLbl(r.a.level),r.a.trainerSign,r.a.partLeadSign,r.a.groupLeadSign||'',r.a.committeeSign||'',r.a.level===3?(r.a.followUpDone?'Y':'N'):'',r.a.level===3?(r.a.followUpDate||''):''];
   }));
   downloadCSV('교육이력_Level승인_'+todayStr()+'.csv',toCSV(rows));
 }
 function exportVisitsCSV(){
   var head=['시작일','종료일','이름','소속','국가','희망Level','확정Level','상태','비고'];
   var rows=[head].concat(historyVisits().map(function(r){
-    return [r.v.startDate,r.v.endDate,r.t.name,r.t.org,r.t.country,r.v.targetLevel,r.v.confirmedLevel,visitStatus(r.v.status).label,r.v.note];
+    return [r.v.startDate,r.v.endDate,r.t.name,r.t.org,r.t.country,lvLbl(r.v.targetLevel),(r.v.confirmedLevel===''||r.v.confirmedLevel==null?'':lvLbl(r.v.confirmedLevel)),visitStatus(r.v.status).label,r.v.note];
   }));
   downloadCSV('교육이력_방문_'+todayStr()+'.csv',toCSV(rows));
 }

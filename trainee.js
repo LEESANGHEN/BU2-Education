@@ -40,8 +40,8 @@ function renderTraineeTab(){
       +'<td>'+esc(t.org||'-')+'</td>'
       +'<td>'+esc(t.country||'-')+(t.region?(' · '+esc(t.region)):'')+'</td>'
       +'<td>'+esc(t.position||'-')+'</td>'
-      +'<td>'+[0,1,2,3].map(function(lv){return levelChip(t.id,lv);}).join('')+'</td>'
-      +'<td>'+(curLv>=0?('<span class="lv-cur-badge">Level '+curLv+' 승인</span>'):'<span class="lv-cur-badge none">미승인</span>')+'</td>'
+      +'<td>'+[1,2,3].map(function(lv){return levelChip(t.id,lv);}).join('')+'</td>'
+      +'<td>'+(curLv>=1?('<span class="lv-cur-badge">L'+curLv+' 승인</span>'):'<span class="lv-cur-badge none">미승인</span>')+'</td>'
       +'<td>'+(lastVisit?esc(lastVisit.startDate+' ~ '+lastVisit.endDate):'-')+'</td>'
       +'<td onclick="event.stopPropagation()"><button class="btn sm admin-only-btn" style="display:none" onclick="openTraineeModal(\''+t.id+'\')">편집</button> <button class="btn sm red admin-only-btn" style="display:none" onclick="deleteTrainee(\''+t.id+'\')">삭제</button></td>'
     +'</tr>';
@@ -50,7 +50,7 @@ function renderTraineeTab(){
   wrap.innerHTML='<div class="sum-row">'+cards+'</div>'
     +'<div class="tbl-wrap"><table class="dtbl"><thead><tr>'
       +'<th>이름</th><th>구분</th><th>소속</th><th>국가/지역</th><th>직책</th>'
-      +'<th>Level 진행률 (L0 · L1 · L2 · L3)</th><th>현재 승인 Level</th><th>최근 방문</th><th>관리</th>'
+      +'<th>Level 진행률 (L1 · L2 · L3)</th><th>현재 승인 Level</th><th>최근 방문</th><th>관리</th>'
     +'</tr></thead><tbody>'+rows+'</tbody></table></div>';
   applyAdminModeUI(); // innerHTML로 새로 삽입된 편집/삭제 버튼(.admin-only-btn)에 현재 모드를 즉시 반영
 }
@@ -61,7 +61,7 @@ function levelChip(traineeId,level){
   if(appr&&appr.status==='approved')cls+=' done';
   else if(prog.pct===100)cls+=' wait';
   else if(prog.pct>0)cls+=' going';
-  return '<span class="'+cls+'" title="Level '+level+' · '+prog.done+'/'+prog.total+' ('+prog.pct+'%)">L'+level+' '+prog.pct+'%</span>';
+  return '<span class="'+cls+'" title="L'+level+' · '+prog.done+'/'+prog.total+' ('+prog.pct+'%)">L'+level+' '+prog.pct+'%</span>';
 }
 function trFilterOrg(id){TR.orgFilter=id;renderTraineeTab();}
 function trFilterCountry(v){TR.country=v;renderTraineeTab();}
@@ -150,13 +150,13 @@ function openTraineeDetail(id,openLevel){
   window._curDetailTrainee=id;
   if(openLevel!=null)_detailOpenLevel=openLevel;
   var ot=orgType(t.orgType);
-  var pre=checklistFor(0,'pre').concat(checklistFor(1,'pre'));
+  var pre=checklistFor(1,'pre');
   var preRows=pre.map(function(it){return preItemRow(t.id,it);}).join('');
 
-  var levelSections=[0,1,2,3].map(function(lv){return levelSection(t.id,lv);}).join('');
+  var levelSections=[1,2,3].map(function(lv){return levelSection(t.id,lv);}).join('');
 
   mw('<div class="mtit">'+esc(t.name)+' <span class="grpbadge" style="background:'+ot.color+'">'+esc(ot.label)+'</span> <span style="color:var(--tx-second);font-size:12px;font-weight:400">'+esc(t.org||'')+' · '+esc(t.country||'')+'</span></div>'
-    +'<div class="td-section"><div class="td-sectitle">사전 선행학습 (Level 0~1, 방문 전 자가학습)</div>'
+    +'<div class="td-section"><div class="td-sectitle">사전 선행학습 (L1, 방문 전 자가학습)</div>'
       +renderPrelearnSummary(t)
       +'<table class="dtbl sm"><thead><tr><th style="width:60px">Level</th><th>학습 항목</th><th style="width:70px">이수</th><th style="width:120px">학습일자</th><th>비고</th></tr></thead><tbody>'+preRows+'</tbody></table>'
     +'</div>'
@@ -182,7 +182,7 @@ function renderPrelearnSummary(t){
     var qs=plQuizStats(course,eq);
     var verdict=!course.completedAt
       ?('<span style="color:var(--tx-second)">진행중</span>')
-      :(plCourseAllPassed(course,eq)?'<span style="color:#4ade9a">✅ 인증기준 충족('+qs.pct+'%)</span>':'<span style="color:#e07070">⚠ 인증기준 미충족('+qs.pct+'%) · Level0 재교육 필요</span>');
+      :(plCourseAllPassed(course,eq)?'<span style="color:#4ade9a">✅ 인증기준 충족('+qs.pct+'%)</span>':'<span style="color:#e07070">⚠ 인증기준 미충족('+qs.pct+'%) · L1 재교육 필요</span>');
     return '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px">'
       +'<b style="min-width:110px">'+esc(equipmentName(eq,'ko'))+'</b>'
       +'<div class="lv-progbar" style="width:100px"><div class="lv-progfill" style="width:'+pct+'%"></div></div>'
@@ -201,9 +201,9 @@ function applyPrelearnToChecklist(traineeId){
   if(!rec){alert('매칭되는 온라인 사전학습 기록을 찾을 수 없습니다 (이름·소속 기준).');return;}
   var courses=rec.courses||{};
   var passedEq=Object.keys(courses).find(function(eq){return courses[eq].completedAt&&plCourseAllPassed(courses[eq],eq);});
-  if(!passedEq){alert('전체 섹션을 통과한 사전학습 기록이 없습니다. 방문 중 Level 0부터 교육을 진행해야 합니다.');return;}
-  if(!confirm('사전학습('+equipmentName(passedEq,'ko')+') 통과 결과를 이수 체크리스트(Level 0~1, 7개 항목)에 반영할까요?'))return;
-  var pre=checklistFor(0,'pre').concat(checklistFor(1,'pre'));
+  if(!passedEq){alert('전체 섹션을 통과한 사전학습 기록이 없습니다. 방문 중 L1부터 교육을 진행해야 합니다.');return;}
+  if(!confirm('사전학습('+equipmentName(passedEq,'ko')+') 통과 결과를 이수 체크리스트(L1, 사전학습 7개 항목)에 반영할까요?'))return;
+  var pre=checklistFor(1,'pre');
   var today=todayStr();
   pre.forEach(function(it){
     var c=completionOf(traineeId,it.id);
@@ -215,8 +215,8 @@ function applyPrelearnToChecklist(traineeId){
   openTraineeDetail(traineeId);
   renderTraineeTab();
 }
-/* Level 0 전용 — 온사이트 별도 페이지(exam.html)에서 응시한 필기평가 결과를 보여주고,
-   합격 시 "os6: Level0 필기평가 합격" 항목에 반영하는 버튼을 제공한다 */
+/* L1 전용 — 온사이트 별도 페이지(exam.html)에서 응시한 필기평가 결과를 보여주고,
+   합격 시 "os6: L1 필기평가 합격" 항목에 반영하는 버튼을 제공한다 */
 function renderExamBlock(traineeId){
   var t=trainee(traineeId);
   if(!t)return '';
@@ -270,7 +270,7 @@ function applyExamResultToChecklist(traineeId){
   var latest=results[0];
   if(!latest){alert('응시 기록이 없습니다.');return;}
   if(!latest.passed){alert('최근 응시 결과가 합격 기준(80%)에 미달합니다 ('+latest.pct+'%). 반영할 수 없습니다.');return;}
-  if(!confirm('필기평가 결과('+latest.score+'/'+latest.total+', '+latest.pct+'%)를 "Level0 필기평가 합격" 항목에 반영할까요?'))return;
+  if(!confirm('필기평가 결과('+latest.score+'/'+latest.total+', '+latest.pct+'%)를 "L1 필기평가 합격" 항목에 반영할까요?'))return;
   var c=completionOf(traineeId,'os6');
   if(!c){c={id:uid('cp'),traineeId:traineeId,itemId:'os6',done:'N',trainer:'',date:'',note:''};S.completions.push(c);}
   c.done='Y';c.date=todayStr();c.note='온라인 필기평가 자동반영 ('+latest.score+'/'+latest.total+', '+latest.pct+'%)';
@@ -282,7 +282,7 @@ function applyExamResultToChecklist(traineeId){
 function preItemRow(traineeId,it){
   var c=completionOf(traineeId,it.id)||{};
   return '<tr>'
-    +'<td>L'+it.level+'</td>'
+    +'<td>'+lvLbl(it.level)+'</td>'
     +'<td>'+esc(it.item)+'</td>'
     +'<td><input type="checkbox" '+(c.done==='Y'?'checked':'')+' onchange="setPreDone(\''+traineeId+'\',\''+it.id+'\',this.checked)"></td>'
     +'<td><input type="date" value="'+esc(c.date||'')+'" onchange="setCompField(\''+traineeId+'\',\''+it.id+'\',\'date\',this.value)"></td>'
@@ -331,21 +331,21 @@ function levelSection(traineeId,level){
 
   return '<div class="td-section">'
     +'<div class="td-sectitle" onclick="toggleLevelSection('+level+')" style="cursor:pointer;display:flex;align-items:center;gap:8px">'
-      +'<span>'+(open?'▾':'▸')+'</span><span>Level '+level+' · '+esc(lv.title||'')+'</span>'
+      +'<span>'+(open?'▾':'▸')+'</span><span>L'+level+' · '+esc(lv.title||'')+'</span>'
       +'<div class="lv-progbar" style="flex:1;max-width:160px"><div class="lv-progfill" style="width:'+prog.pct+'%"></div></div>'
       +'<span style="font-size:11px;color:var(--tx-second)">'+prog.done+'/'+prog.total+' ('+prog.pct+'%)</span>'
       +statusBadge
     +'</div>'
     +(open?(
       '<table class="dtbl sm"><thead><tr><th>모듈</th><th>세부 이수 항목</th><th style="width:60px">이수</th><th style="width:110px">확인 트레이너</th><th style="width:120px">확인일자</th><th>비고</th></tr></thead><tbody>'+rows+'</tbody></table>'
-      +(level===0?renderExamBlock(traineeId):'')
+      +(level===1?renderExamBlock(traineeId):'')
       +'<div class="td-approve">'
         +'<div class="fr" style="grid-template-columns:repeat('+Math.max(roles.length,1)+',1fr)">'+signRows+'</div>'
         +'<div class="fr">'
           +'<div class="fg"><label class="fl">승인일자</label><input type="date" id="apprdate_'+level+'" value="'+esc(appr&&appr.approvalDate||todayStr())+'"></div>'
           +followUp
         +'</div>'
-        +'<div style="text-align:right"><button class="btn sm pri" onclick="approveLevel(\''+traineeId+'\','+level+')">Level '+level+' 승인 저장</button></div>'
+        +'<div style="text-align:right"><button class="btn sm pri" onclick="approveLevel(\''+traineeId+'\','+level+')">L'+level+' 승인 저장</button></div>'
       +'</div>'
     ):'')
   +'</div>';
@@ -409,7 +409,7 @@ function approveLevel(traineeId,level){
   /* 이수 항목이 다 채워지지 않았는데 승인하면 이수증이 잘못 발급될 수 있어 한 번 더 확인한다 */
   var pg=levelProgress(traineeId,level);
   if(pg.total>0&&pg.pct<100){
-    if(!confirm('Level '+level+' 이수 항목이 '+pg.done+'/'+pg.total+' ('+pg.pct+'%)만 체크되어 있습니다. 그래도 승인할까요?'))return;
+    if(!confirm('L'+level+' 이수 항목이 '+pg.done+'/'+pg.total+' ('+pg.pct+'%)만 체크되어 있습니다. 그래도 승인할까요?'))return;
   }
   rec.approvalDate=document.getElementById('apprdate_'+level).value||todayStr();
   rec.status='approved';
@@ -421,7 +421,7 @@ function approveLevel(traineeId,level){
   }
   if(existing){Object.assign(existing,rec);}else{S.approvals.push(rec);}
   var _t=trainee(traineeId);
-  logAudit('Level 승인',(_t?_t.name:traineeId)+' · Level '+level);
+  logAudit('Level 승인',(_t?_t.name:traineeId)+' · L'+level);
   saveData();
   window._curDetailTrainee=traineeId;
   openTraineeDetail(traineeId,level);

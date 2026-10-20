@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════
-   Level 0~1 온라인 사전 선행학습 (다중 설비군 지원)
+   L1 온라인 사전 선행학습 (다중 설비군 지원)
 ═══════════════════════════════════════════ */
 // ↓↓↓ Code-Prelearn.gs를 별도 Google Sheet에 배포한 뒤 나오는 /exec URL로 교체하세요.
 var PRELEARN_SHEETS_URL='https://script.google.com/macros/s/AKfycbytVgXC5ZG8NvkYhHYdvPEk4tQKmSCy6pND7l11as057tMIS5LC0WXuNFJNI4o-ij2l/exec';

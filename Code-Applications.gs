@@ -351,7 +351,7 @@ function doPost(e) {
       var ceErr = _mailPrecheck_(cTo, '', false);
       if (ceErr) return _json_({ error: ceErr });
       var cLevel = (body.level != null) ? _esc_(_singleLine_(body.level, 10)) : '';
-      var cSubject = '[BU2] Certificate of Completion — Level ' + _singleLine_(body.level, 10) + ' (' + _singleLine_(body.traineeName, 60) + ')';
+      var cSubject = '[BU2] Certificate of Completion — L' + _singleLine_(body.level, 10) + ' (' + _singleLine_(body.traineeName, 60) + ')';
       // 이수증 화면(certificate.js)에서 이미 선택된 언어로 번역해 전달한 라벨 — 없으면 한국어 기본값 사용
       var L = body.labels || {};
       var lbl = function (key, fallback) { return (L[key] != null && L[key] !== '') ? L[key] : fallback; };
@@ -399,9 +399,9 @@ function doPost(e) {
         '<td style="color:#888">' + _esc_(lbl('position', '직책')) + '</td><td>' + _esc_(body.position || '-') + '</td>' +
         '<td style="color:#888">' + _esc_(lbl('country', '국가')) + '</td><td>' + _esc_(body.country || '-') + '</td>' +
         '</tr></table>' +
-        '<p style="line-height:1.8">' + _esc_(lbl('statement1', '위 사람은 BU2 FCBGA Substrate 검사 장비 교육 과정 중')) + '<br><b>Level ' + cLevel + ' · ' + _esc_(body.levelTitle || '') + '</b> ' + _esc_(lbl('statement2', '과정을 성실히 이수하였음을 증명합니다.')) + '</p>' +
+        '<p style="line-height:1.8">' + _esc_(lbl('statement1', '위 사람은 BU2 FCBGA Substrate 검사 장비 교육 과정 중')) + '<br><b>L' + cLevel + ' · ' + _esc_(body.levelTitle || '') + '</b> ' + _esc_(lbl('statement2', '과정을 성실히 이수하였음을 증명합니다.')) + '</p>' +
         '<div style="background:#f7f5ef;padding:12px 16px;margin:14px 0;border-radius:4px">' +
-        '<div style="font-weight:600;margin-bottom:4px">' + _esc_(lbl('competencyTitle', '핵심 역량')) + ' (Level ' + cLevel + ')</div>' +
+        '<div style="font-weight:600;margin-bottom:4px">' + _esc_(lbl('competencyTitle', '핵심 역량')) + ' (L' + cLevel + ')</div>' +
         '<div style="font-size:12px;color:#555">' + _esc_(body.competency || '') + '</div>' +
         '</div>' +
         '<table style="width:100%;font-size:13px;margin:14px 0"><tr>' +

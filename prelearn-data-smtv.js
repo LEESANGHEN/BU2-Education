@@ -12,7 +12,7 @@ function imgOnlyS(n,suffix){
 }
 
 var PRELEARN_CHAPTERS_SMTV=[
-{code:'1',title:{ko:'1장. 설비 소개 (Level 0)',en:'Chapter 1. Introduce',zhCN:'第1章 设备介绍 (Level 0)',zhTW:'第1章 設備介紹 (Level 0)',ja:'第1章 設備紹介 (Level 0)'},
+{code:'1',title:{ko:'1장. 설비 소개 (L1)',en:'Chapter 1. Introduce',zhCN:'第1章 设备介绍 (L1)',zhTW:'第1章 設備介紹 (L1)',ja:'第1章 設備紹介 (L1)'},
  sections:[
   {code:'1.1.1',title:{ko:'설비 소개 및 검사 항목',en:'Introduction & Inspection Items',zhCN:'设备介绍及检测项目',zhTW:'設備介紹及檢測項目',ja:'設備紹介及び検査項目'},slides:[
     dividerS(4),
@@ -341,7 +341,7 @@ var PRELEARN_CHAPTERS_SMTV=[
     })
   ]}
  ]},
-{code:'2',title:{ko:'2장. 설비 조작 (Level 1)',en:'Chapter 2. Operation',zhCN:'第2章 设备操作 (Level 1)',zhTW:'第2章 設備操作 (Level 1)',ja:'第2章 設備操作 (Level 1)'},
+{code:'2',title:{ko:'2장. 설비 조작 (L1)',en:'Chapter 2. Operation',zhCN:'第2章 设备操作 (L1)',zhTW:'第2章 設備操作 (L1)',ja:'第2章 設備操作 (L1)'},
  sections:[
   {code:'2.1.1',title:{ko:'전원 투입 순서',en:'Electrical Turn-on Sequence',zhCN:'电源开启顺序',zhTW:'電源開啟順序',ja:'電源投入順序'},slides:[
     dividerS(80),

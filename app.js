@@ -99,6 +99,74 @@ function syncAllChecklistFromModules(){
   return changed;
 }
 
+/* ── 교육 단계 통합 마이그레이션: 예전 Level 0 + Level 1 → L1 ──
+   저장된 데이터(서버/캐시)에 Level 0이 남아 있으면 한 번 L1로 합친다. 여러 번 호출해도 안전(멱등)하며,
+   실제로 바뀐 게 있으면 true를 돌려주므로 호출부에서 저장해야 한다. */
+function migrateLevelsV2(){
+  var changed=false;
+  // 1) 단계 정의: lv0 제거, lv1은 통합 정의로(관리자가 직접 고치지 않은 기본값일 때만 교체)
+  var lvs=S.levels||[];
+  if(lvs.some(function(l){return Number(l.level)===0;})){
+    var lv1=lvs.find(function(l){return Number(l.level)===1;});
+    var def1=DEF_LEVELS.find(function(l){return l.level===1;});
+    S.levels=lvs.filter(function(l){return Number(l.level)!==0;});
+    if(!lv1)S.levels.unshift(deepCopy(def1));
+    else if(lv1.title==='기본 기능 조작 (Basic Operator)')Object.assign(lv1,deepCopy(def1));
+    changed=true;
+  }
+  // 2) 모듈
+  (S.modules||[]).forEach(function(m){if(Number(m.level)===0){m.level=1;changed=true;}});
+  // 3) 체크리스트: level 0 → 1 (사전/온사이트 각각 기존 순서 유지: 구 Level 0 항목이 앞)
+  var items=S.checklistItems||[];
+  if(items.some(function(it){return Number(it.level)===0;})){
+    ['pre','onsite'].forEach(function(ph){
+      var grp=items.filter(function(it){return it.phase===ph&&(Number(it.level)===0||Number(it.level)===1);});
+      grp.sort(function(a,b){return (Number(a.level)-Number(b.level))||((a.order||0)-(b.order||0));});
+      grp.forEach(function(it,i){it.level=1;it.order=i;});
+    });
+    items.forEach(function(it){if(Number(it.level)===0)it.level=1;});
+    changed=true;
+  }
+  // 기본 평가 항목 문구의 "Level0/1/2/3" → "L1/L1/L2/L3" (관리자가 문구를 바꾸지 않은 경우에만)
+  var NEW_TXT={
+    os6:['Level0 필기평가 합격 (80% 이상 정답)','L1 필기평가 합격 (80% 이상 정답)'],
+    os12:['Level1 실기평가 합격 (체크리스트 전 항목 Pass)','L1 실기평가 합격 (체크리스트 전 항목 Pass)'],
+    os17:['Level2 실기시험(고장 시나리오 2종 이상) 합격','L2 실기시험(고장 시나리오 2종 이상) 합격'],
+    os23:['Level3 종합실기 + 승인위원회 심사 합격','L3 종합실기 + 승인위원회 심사 합격']
+  };
+  items.forEach(function(it){
+    var t=NEW_TXT[it.id];
+    if(t&&it.item===t[0]){it.item=t[1];changed=true;}
+  });
+  // 4) 승인 기록: 한 대상자의 Level 0/1 승인을 L1 하나로(승인 완료된 것을 우선, 둘 다면 더 늦은 승인일)
+  var aps=S.approvals||[];
+  if(aps.some(function(a){return Number(a.level)===0;})){
+    var byT={};
+    aps.forEach(function(a){
+      if(Number(a.level)>1)return;
+      (byT[a.traineeId]=byT[a.traineeId]||[]).push(a);
+    });
+    var drop={};
+    Object.keys(byT).forEach(function(tid){
+      var g=byT[tid];
+      g.sort(function(x,y){
+        var ax=x.status==='approved'?1:0,ay=y.status==='approved'?1:0;
+        return (ay-ax)||String(y.approvalDate||'').localeCompare(String(x.approvalDate||''))||(Number(y.level)-Number(x.level));
+      });
+      var keep=g[0];keep.level=1;
+      g.slice(1).forEach(function(x){drop[x.id]=true;});
+    });
+    S.approvals=aps.filter(function(a){return !drop[a.id];});
+    changed=true;
+  }
+  // 5) 방문 일정의 희망/확정 Level
+  (S.visits||[]).forEach(function(v){
+    if(v.targetLevel!=null&&v.targetLevel!==''&&Number(v.targetLevel)===0){v.targetLevel=1;changed=true;}
+    if(v.confirmedLevel!==''&&v.confirmedLevel!=null&&Number(v.confirmedLevel)===0){v.confirmedLevel=1;changed=true;}
+  });
+  return changed;
+}
+
 /* ── 조회 헬퍼 ── */
 function checklistFor(level,phase){
   return S.checklistItems.filter(function(c){return c.level===Number(level)&&c.phase===phase;})
@@ -117,7 +185,7 @@ function levelProgress(traineeId,level){
   return {done:done,total:items.length,pct:Math.round(done/items.length*100)};
 }
 function currentApprovedLevel(traineeId){
-  var lv=-1;
+  var lv=0; // 0 = 미승인, 승인된 가장 높은 단계는 1~3
   S.approvals.forEach(function(a){
     if(a.traineeId===traineeId&&a.status==='approved'&&a.level>lv)lv=a.level;
   });
@@ -151,6 +219,7 @@ function loadData(){
         if(!S.modules.length)S.modules=deepCopy(DEF_MODULES);
         if(!S.checklistItems.length)S.checklistItems=deepCopy(DEF_CHECKLIST);
         ensureChecklistModuleIds();
+        migrateLevelsV2();
         syncAllChecklistFromModules();
         return;
       }
@@ -234,8 +303,9 @@ function loadFromSheets(callback){
          (loadData의 캐시 전용 경로에서는 저장하지 않음 — 네트워크 데이터보다 먼저 그려지는
          임시 화면이라 여기서만 확정 저장한다) */
       var idsFilled=ensureChecklistModuleIds();
+      var migrated=migrateLevelsV2();
       var synced=syncAllChecklistFromModules();
-      if(idsFilled||synced)saveData();
+      if(idsFilled||synced||migrated)saveData();
       saveCache();
       if(led){led.className='conn-led ok';txt.textContent='연결 정상';}
       if(callback)callback();
@@ -430,25 +500,25 @@ function renderHomeTab(){
     var d=pd(v.startDate);
     return '<div class="home-sched-row" style="cursor:pointer" onclick="switchTab(\'schedule\')">'
       +'<div class="home-sched-date"><div class="m">'+(d.getMonth()+1)+'월</div><div class="d">'+d.getDate()+'</div></div>'
-      +'<div style="min-width:0;flex:1"><div style="font-size:12px;color:var(--tx-primary)">'+esc(t.name||'-')+' · Level '+(v.targetLevel||'-')+'</div>'
+      +'<div style="min-width:0;flex:1"><div style="font-size:12px;color:var(--tx-primary)">'+esc(t.name||'-')+' · '+(v.targetLevel===''||v.targetLevel==null?'-':lvLbl(v.targetLevel))+'</div>'
       +'<div style="font-size:11px;color:var(--tx-second)">'+esc(v.startDate)+' ~ '+esc(v.endDate||v.startDate)+'</div></div>'
       +'<span class="grpbadge" style="background:'+st.color+'">'+esc(st.label)+'</span>'
     +'</div>';
   }).join(''):'<div style="font-size:12px;color:var(--tx-dim);padding:8px 0">예정된 교육 일정이 없습니다.</div>';
 
-  var levelDist=[0,0,0,0,0]; // index 0=미승인, 1~4=Level0~3
-  (S.trainees||[]).forEach(function(t){levelDist[currentApprovedLevel(t.id)+1]++;});
+  var levelDist=[0,0,0,0]; // index 0=미승인, 1~3=L1~L3
+  (S.trainees||[]).forEach(function(t){levelDist[currentApprovedLevel(t.id)]++;});
   var traineeCard='<div class="home-card" style="cursor:pointer" onclick="switchTab(\'trainee\')">'
     +'<div class="home-card-title">대상자별 이수 현황</div>'
     +'<div class="home-mini-row"><span>전체 대상자</span><b>'+(S.trainees||[]).length+'명</b></div>'
-    +[0,1,2,3].map(function(lv){return '<div class="home-mini-row"><span>Level '+lv+' 승인</span><b>'+levelDist[lv+1]+'명</b></div>';}).join('')
+    +[1,2,3].map(function(lv){return '<div class="home-mini-row"><span>L'+lv+' 승인</span><b>'+levelDist[lv]+'명</b></div>';}).join('')
   +'</div>';
 
   var recentAppr=(S.approvals||[]).filter(function(a){return a.status==='approved';})
     .sort(function(a,b){return (b.approvalDate||'')<(a.approvalDate||'')?-1:1;}).slice(0,4);
   var histRows=recentAppr.length?recentAppr.map(function(a){
     var t=trainee(a.traineeId)||{};
-    return '<div class="home-mini-row"><span>'+esc(t.name||'(삭제된 대상자)')+' · Level '+a.level+'</span><span style="color:var(--tx-second)">'+esc(a.approvalDate||'')+'</span></div>';
+    return '<div class="home-mini-row"><span>'+esc(t.name||'(삭제된 대상자)')+' · '+lvLbl(a.level)+'</span><span style="color:var(--tx-second)">'+esc(a.approvalDate||'')+'</span></div>';
   }).join(''):'<div style="font-size:12px;color:var(--tx-dim);padding:8px 0">최근 이수 이력이 없습니다.</div>';
   var histCard='<div class="home-card" style="cursor:pointer" onclick="switchTab(\'history\')">'
     +'<div class="home-card-title">최근 이력 (Level 승인)</div>'+histRows+'</div>';

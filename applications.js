@@ -113,7 +113,7 @@ function renderApplyTab(){
       +'<td><span class="grpbadge" style="background:'+ot.color+'">'+esc(ot.label)+'</span></td>'
       +'<td>'+esc(a.org||'')+'</td>'
       +'<td>'+esc(appEquipNames(a))+'</td>'
-      +'<td>Level '+esc(a.desiredLevel)+'</td>'
+      +'<td>'+esc(lvLbl(a.desiredLevel))+'</td>'
       +'<td>'+esc(a.desiredStart||'')+' ~ '+esc(a.desiredEnd||'')+'</td>'
       +'<td>'+esc(a.applicantName||'')+'</td>'
       +'<td><span class="app-status '+esc(a.status)+'">'+stLbl+'</span></td>'
@@ -148,7 +148,7 @@ function openApplicationDetail(id){
   var ot=orgType(a.orgType||'branch');
   var assessRows=(a.selfAssessment||[]).map(function(s){
     var hasLbl=esc({Y:'Y (보유)',N:'N (없음)',partial:'일부'}[s.has]||s.has);
-    return '<tr><td>'+esc(s.code)+'</td><td>Level '+esc(s.level)+'</td><td>'+esc(s.name)+'</td><td>'+hasLbl+'</td><td style="font-size:11px;color:var(--tx-second)">'+esc(s.note||'')+'</td></tr>';
+    return '<tr><td>'+esc(s.code)+'</td><td>'+esc(lvLbl(s.level))+'</td><td>'+esc(s.name)+'</td><td>'+hasLbl+'</td><td style="font-size:11px;color:var(--tx-second)">'+esc(s.note||'')+'</td></tr>';
   }).join('');
   var stLbl=esc({pending:'대기중',registered:'등록완료',rejected:'반려'}[a.status]||a.status);
   id=esc(a.id);
@@ -165,14 +165,14 @@ function openApplicationDetail(id){
       +'<div class="fr" style="grid-template-columns:repeat(3,1fr)">'
         +infoBox('성명',a.traineeName)+infoBox('직책',a.traineePosition)+infoBox('담당업무',a.traineeTask)
         +infoBox('방문구분',(VISIT_CATS.find(function(v){return v.id===a.visitCategory;})||{}).label)
-        +infoBox('이전 이수 Level',a.priorLevel!==''&&a.priorLevel!=null?('Level '+a.priorLevel):'-')
+        +infoBox('이전 이수 Level',a.priorLevel!==''&&a.priorLevel!=null?lvLbl(a.priorLevel):'-')
         +infoBox('경력(년)',a.experienceYears)+infoBox('대상자 연락처',a.traineeContact)
         +'<div class="fg"><label class="fl">대상자 이메일 (사전학습 링크 발송)</label><div class="dbox" style="margin-bottom:0;display:flex;justify-content:space-between;align-items:center;gap:8px"><span>'+(a.traineeEmail?esc(a.traineeEmail):'-')+'</span><button class="btn sm" style="flex-shrink:0" onclick="event.stopPropagation();editApplicationEmail(\''+id+'\')">✏️ 수정</button></div></div>'
       +'</div></div>'
 
     +'<div class="td-section"><div class="td-sectitle">3. 방문 계획 및 희망 Level</div>'
       +'<div class="fr" style="grid-template-columns:repeat(3,1fr)">'
-        +infoBox('교육 희망 설비',appEquipNames(a))+infoBox('희망 Level','Level '+(Number(a.desiredLevel)||0))+infoBox('방문 희망 시작일',a.desiredStart)
+        +infoBox('교육 희망 설비',appEquipNames(a))+infoBox('희망 Level',lvLbl(a.desiredLevel))+infoBox('방문 희망 시작일',a.desiredStart)
         +infoBox('방문 희망 종료일',a.desiredEnd)+infoBox('총 방문일수',a.totalDays)
         +infoBox('국가',a.country)
       +'</div></div>'
@@ -251,7 +251,7 @@ function confirmRegisterFromApplication(id){
   var v={
     id:uid('vis'),traineeId:t.id,planType:'custom',
     startDate:a.desiredStart,endDate:a.desiredEnd,
-    targetLevel:Number(a.desiredLevel)||0,confirmedLevel:'',status:'planned',
+    targetLevel:lvNorm(a.desiredLevel),confirmedLevel:'',status:'planned',
     coordinatorName:coordName,coordinatorOrg:coordOrg,coordinatorPosition:coordPosition,
     note:'신청서 기반 자동 등록'
   };

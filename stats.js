@@ -25,7 +25,7 @@ function statsCountryDist(){
     var c=t.country||'기타';
     if(!byCountry[c])byCountry[c]={total:0,approved:0};
     byCountry[c].total++;
-    if(currentApprovedLevel(t.id)>=0)byCountry[c].approved++;
+    if(currentApprovedLevel(t.id)>=1)byCountry[c].approved++;
   });
   return Object.keys(byCountry).map(function(c){
     var d=byCountry[c];
