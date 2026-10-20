@@ -38,12 +38,18 @@ var FIELDS = ['trainees', 'visits', 'levels', 'modules', 'checklistItems', 'comp
 var FIREBASE_WEB_API_KEY = 'AIzaSyBUiaNYIToY3I3iphbZ1SMkAaA9Z1B4zkE';
 var ALLOWED_EMAIL_DOMAIN = '@intekplus.com';
 
+/* 로그인 검증 스위치 — 임원 보고(시연) 기간에만 false로 두고, 정식 운영 시 true로 되돌린 뒤
+ * 새 버전으로 재배포한다. false인 동안은 이 URL을 아는 누구나 데이터를 조회·수정할 수 있다.
+ * 클라이언트의 firebase-config.js REQUIRE_LOGIN과 항상 같은 값으로 맞춘다. */
+var REQUIRE_LOGIN = false;
+
 /* Firebase ID 토큰을 Identity Toolkit REST API로 서버 검증한다.
    Apps Script는 커스텀 헤더를 못 받으므로 토큰은 파라미터(GET) 또는 body(POST)로 전달받는다.
    { email, reason } 형태로 반환한다 — 유효하면 email이 채워지고, 실패하면 email이 null이며
    reason에 대략적인 실패 분류만 담는다(익명 요청자에게 노출되는 응답이므로 토큰 원문·응답 본문 등
    민감할 수 있는 상세 내용은 담지 않는다 — 진단에 필요한 최소 분류만). */
 function _verifyIdToken_(idToken) {
+  if (!REQUIRE_LOGIN) return { email: '(로그인 해제)', reason: 'login_disabled' };
   if (!idToken) return { email: null, reason: 'no_token' };
   try {
     var resp = UrlFetchApp.fetch(

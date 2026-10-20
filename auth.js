@@ -344,7 +344,24 @@ function doLogout(){firebase.auth().signOut();}
 
 try{firebase.auth().languageCode=getLang();}catch(e){}
 
+/* 시연 모드(REQUIRE_LOGIN=false): 로그인 화면을 건너뛰고 바로 앱을 연다. 아래 onAuthStateChanged
+   로그인 게이트는 그대로 남아 있으며, firebase-config.js에서 true로 되돌리면 다시 동작한다. */
+if(!REQUIRE_LOGIN){
+  var _noLoginStart=function(){
+    var overlay=document.getElementById('authOverlay');
+    if(overlay)overlay.style.display='none';
+    var appEl=document.querySelector('.app');
+    if(appEl)appEl.style.display='';
+    var lo=document.querySelector('.topbar button[onclick="doLogout()"]');
+    if(lo)lo.style.display='none';
+    if(typeof startApp==='function')startApp();
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',_noLoginStart);
+  else _noLoginStart();
+}
+
 firebase.auth().onAuthStateChanged(function(user){
+  if(!REQUIRE_LOGIN)return;
   if(_signupInProgress)return; // doSignupNew()가 회원가입 뒷정리(인증메일 발송/디렉터리 등록/로그아웃)를 진행 중 — 이 훅이 끼어들지 않게 한다
   if(user&&_domainOk(user.email)&&user.emailVerified){
     var overlay=document.getElementById('authOverlay');

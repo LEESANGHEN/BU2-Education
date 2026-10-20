@@ -29,7 +29,13 @@ var CHUNK_SIZE = 40000;
 var FIREBASE_WEB_API_KEY = 'AIzaSyBUiaNYIToY3I3iphbZ1SMkAaA9Z1B4zkE';
 var ALLOWED_EMAIL_DOMAIN = '@intekplus.com';
 
+/* 로그인 검증 스위치 — 임원 보고(시연) 기간에만 false로 두고, 정식 운영 시 true로 되돌린 뒤
+ * 새 버전으로 재배포한다. false인 동안은 이 URL을 아는 누구나 신청 목록을 조회·수정하고
+ * 안내 메일 발송을 실행할 수 있다. 클라이언트의 firebase-config.js REQUIRE_LOGIN과 같은 값으로 맞춘다. */
+var REQUIRE_LOGIN = false;
+
 function _verifyIdToken_(idToken) {
+  if (!REQUIRE_LOGIN) return '(로그인 해제)';
   if (!idToken) return null;
   try {
     var resp = UrlFetchApp.fetch(
