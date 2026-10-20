@@ -304,7 +304,7 @@ function fetchLearner(q,cb){
     .then(function(r){return r.json();})
     .then(function(data){
       if(data.error)throw new Error(data.error);
-      QUIZ_OVERRIDES=data.quizOverrides||{};
+      QUIZ_OVERRIDES=data.quizOverrides||{};if(typeof plViPatch==="function")plViPatch(QUIZ_OVERRIDES);
       cb(data.record||null,true);
     })
     .catch(function(){cb(null,false);});

@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded',function(){
   var eq=params.get('eq');
   fetch(PRELEARN_SHEETS_URL+'?action=quizOverrides')
     .then(function(r){return r.json();})
-    .then(function(data){EX.quizOverrides=data.quizOverrides||{};})
+    .then(function(data){EX.quizOverrides=data.quizOverrides||{};if(typeof plViPatch==="function")plViPatch(EX.quizOverrides);})
     .catch(function(){})
     .then(function(){
       if(eq&&equipmentById(eq)&&EXAM_COURSE_DATA[eq]&&EXAM_COURSE_DATA[eq].chapters){
