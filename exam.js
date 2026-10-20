@@ -17,7 +17,8 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){retur
 function tx(obj){if(!obj)return '';var k=langKey();return obj[k]||obj.en||'';}
 
 function initTheme(){
-  var saved=localStorage.getItem('edu_theme')||'dark';
+  var saved='dark';
+  try{saved=localStorage.getItem('edu_theme')||'dark';}catch(e){}
   document.documentElement.setAttribute('data-theme',saved);
   var btn=document.getElementById('themeToggle');
   if(btn)btn.textContent=saved==='dark'?'🌙':'☀️';
@@ -26,7 +27,7 @@ function toggleTheme(){
   var cur=document.documentElement.getAttribute('data-theme')||'dark';
   var next=cur==='dark'?'light':'dark';
   document.documentElement.setAttribute('data-theme',next);
-  localStorage.setItem('edu_theme',next);
+  try{localStorage.setItem('edu_theme',next);}catch(e){}
   var btn=document.getElementById('themeToggle');
   if(btn)btn.textContent=next==='dark'?'🌙':'☀️';
 }
@@ -86,6 +87,7 @@ function startExam(){
   EX.orgType=document.getElementById('ex_orgtype').value.trim();
   EX.contact=document.getElementById('ex_contact').value.trim();
   EX.pool=examFullPool(EX.equip);
+  if(!EX.pool.length){alert(pt('examNoQuestions'));return;} // 문항이 0개일 때 제출되면 0/0 결과가 저장된다
   EX.picks={};
   EX.mode='exam';
   renderExam();
@@ -105,9 +107,19 @@ function examFullPool(equip){
     var ov=EX.quizOverrides[equip]&&EX.quizOverrides[equip][s.code];
     var base=(EXAM_COURSE_DATA[equip]&&EXAM_COURSE_DATA[equip].quiz&&EXAM_COURSE_DATA[equip].quiz[s.code])||[];
     var qs=(ov&&ov.length)?ov:base;
-    qs.forEach(function(q){pool.push({sectionCode:s.code,sectionTitle:s.title,q:q});});
+    qs.forEach(function(q){pool.push({sectionCode:s.code,sectionTitle:s.title,q:examShuffleChoices(q)});});
   });
   return pool;
+}
+/* 원본은 정답이 1번인 문항이 대부분이라 보기를 섞지 않으면 "항상 1번"만 찍어도 합격선에 근접한다.
+   보기와 정답 번호를 함께 바꾼 복사본을 응시 시작 때 한 번 만들어 화면·채점이 모두 이 복사본을 쓴다. */
+function examShuffleChoices(q){
+  var order=q.choices.map(function(_,i){return i;});
+  for(var i=order.length-1;i>0;i--){
+    var j=Math.floor(Math.random()*(i+1));
+    var tmp=order[i];order[i]=order[j];order[j]=tmp;
+  }
+  return {q:q.q,choices:order.map(function(i){return q.choices[i];}),answer:order.indexOf(q.answer)};
 }
 
 /* ── 시험 화면 ── */
@@ -119,7 +131,7 @@ function renderExam(){
       +'<div style="font-size:11px;color:var(--tx-second);margin-bottom:2px">'+esc(item.sectionCode)+' '+esc(tx(item.sectionTitle))+'</div>'
       +'<div class="pl-qtext">'+(qi+1)+'. '+esc(tx(q.q))+'</div>'
       +q.choices.map(function(c,idx){
-        return '<label class="pl-choice"><input type="radio" name="eq'+qi+'" value="'+idx+'" onchange="examPick('+qi+','+idx+')"> '+esc(tx(c))+'</label>';
+        return '<label class="pl-choice"><input type="radio" name="eq'+qi+'" value="'+idx+'" onchange="examPick('+qi+','+idx+')"'+(EX.picks[qi]===idx?' checked':'')+'> '+esc(tx(c))+'</label>';
       }).join('')
     +'</div>';
   }).join('');
@@ -146,14 +158,25 @@ function submitExam(){
   EX.mode='result';
   var btn=document.getElementById('ex_submit_btn');
   if(btn){btn.disabled=true;btn.textContent=pt('examSubmitting');}
+  sendExamResult();
+}
+/* 결과를 서버에 저장한다 — 실패하면 결과 화면에 경고와 재전송 버튼을 보여준다(서버가 점수로 합격 여부를 다시 계산한다) */
+function sendExamResult(){
+  var res=EX.lastResult;
   var url=PRELEARN_SHEETS_URL;
   fetch(url,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({
     action:'submitExam',
-    examResult:{equipment:EX.equip,traineeName:EX.name,traineeOrg:EX.org,traineeOrgType:EX.orgType,traineeContact:EX.contact,score:correct,total:total,pct:pct,passed:passed}
+    examResult:{equipment:EX.equip,traineeName:EX.name,traineeOrg:EX.org,traineeOrgType:EX.orgType,traineeContact:EX.contact,score:res.correct,total:res.total}
   })})
     .then(function(r){return r.text();})
-    .then(function(){renderResult(EX.lastResult);})
-    .catch(function(){renderResult(EX.lastResult);});
+    .then(function(text){
+      var data;
+      try{data=JSON.parse(text);}catch(e){throw new Error('invalid-response');}
+      if(data.error)throw new Error(data.error);
+      EX.saveFailed=false;
+      renderResult(EX.lastResult);
+    })
+    .catch(function(){EX.saveFailed=true;renderResult(EX.lastResult);});
 }
 
 /* ── 결과 화면 ── */
@@ -165,7 +188,10 @@ function renderResult(res){
     +'<p>'+esc(res.name)+' ('+esc(res.org)+') — '+esc(equipmentName(res.equip))+'</p>'
     +'<div style="margin-top:14px;font-weight:700;font-size:20px;color:'+(res.passed?'#4ade9a':'#e07070')+'">'+res.correct+'/'+res.total+' ('+res.pct+'%)</div>'
     +'<div style="margin-top:8px;color:'+(res.passed?'#4ade9a':'#e07070')+'">'+esc(res.passed?pt('examPassMsg'):pt('examFailMsg'))+'</div>'
-    +'<p style="margin-top:20px;font-size:12px;color:var(--tx-second)">'+esc(pt('examThanks'))+'</p>'
+    +(EX.saveFailed
+      ?('<div class="apf-warn" style="margin-top:16px">'+esc(pt('examSaveFail'))+'</div>'
+        +'<button class="apf-submit" style="margin-top:12px" onclick="sendExamResult()">'+esc(pt('examRetryBtn'))+'</button>')
+      :'<p style="margin-top:20px;font-size:12px;color:var(--tx-second)">'+esc(pt('examThanks'))+'</p>')
   +'</div>';
 }
 
@@ -180,7 +206,7 @@ document.addEventListener('DOMContentLoaded',function(){
   }
   var params=new URLSearchParams(location.search);
   var eq=params.get('eq');
-  fetch(PRELEARN_SHEETS_URL+'?action=load')
+  fetch(PRELEARN_SHEETS_URL+'?action=quizOverrides')
     .then(function(r){return r.json();})
     .then(function(data){EX.quizOverrides=data.quizOverrides||{};})
     .catch(function(){})

@@ -160,19 +160,44 @@ function saveCache(){
    true — 이 상태에서 저장하면 엉뚱한 서버에 메인 데이터가 전송되고, 사전학습 서버는 저장 요청마다
    학습 기록이 지워질 수 있어 서버 전송을 막는다(로컬 캐시 저장은 계속된다). */
 var _mainUrlWrong=false,_fixUrlOffered=false;
+/* 서버 데이터를 한 번도 정상적으로 받아오지 못한 상태(_serverLoaded=false)에서 저장하면, 오래된 캐시나
+   기본값이 서버의 최신 데이터를 덮어쓸 수 있다 — 그 경우 서버 전송은 막고 이 브라우저에만 저장한다.
+   저장 요청은 한 번에 하나씩만 보내고(겹치면 마지막 상태로 한 번 더), 실패하면 알린다. */
+var _serverLoaded=false,_saving=false,_savePending=false,_saveFailAlerted=false,_offlineWarned=false;
 function saveData(){
   saveCache();
   var url=getSheetsUrl();
   if(!url||location.protocol==='file:')return;
   if(_mainUrlWrong){updateConnStatus('err');return;}
+  if(!_serverLoaded){
+    updateConnStatus('err');
+    if(!_offlineWarned){
+      _offlineWarned=true;
+      alert('서버에서 최신 데이터를 아직 불러오지 못해, 지금 입력한 내용은 이 브라우저에만 저장됩니다.\n연결을 확인하고 페이지를 새로고침한 뒤 다시 입력해주세요.');
+    }
+    return;
+  }
+  if(_saving){_savePending=true;return;}
+  _saving=true;
   var body={action:'save'};FIELDS.forEach(function(f){body[f]=S[f];});
   authedPost(url,body)
     .then(function(r){return r.json();})
     .then(function(data){
-      if(data.error){console.warn('저장 실패:',data.error);updateConnStatus('err');}
-      else updateConnStatus('ok');
+      if(data.error)throw new Error(data.error);
+      _saveFailAlerted=false;
+      updateConnStatus('ok');
     })
-    .catch(function(err){console.warn('저장 실패:',err.message);updateConnStatus('err');});
+    .catch(function(err){
+      console.warn('저장 실패:',err.message);updateConnStatus('err');
+      if(!_saveFailAlerted){
+        _saveFailAlerted=true;
+        alert('서버 저장에 실패했습니다. 입력한 내용은 이 브라우저에는 보관되어 있습니다.\n잠시 후 다시 저장되는지 상단 연결 상태를 확인해주세요. ('+err.message+')');
+      }
+    })
+    .then(function(){
+      _saving=false;
+      if(_savePending){_savePending=false;saveData();}
+    });
 }
 function loadFromSheets(callback){
   var url=getSheetsUrl();
@@ -187,7 +212,7 @@ function loadFromSheets(callback){
         _mainUrlWrong=true;offerFixMainUrl();
         var we=new Error('wrong_backend');we.reason='wrong_url';throw we;
       }
-      _mainUrlWrong=false;
+      _mainUrlWrong=false;_serverLoaded=true;_offlineWarned=false;
       FIELDS.forEach(function(f){
         if(data[f]!==undefined&&(Array.isArray(data[f])?data[f].length:true))S[f]=data[f];
       });
@@ -357,7 +382,7 @@ function homeComputeReminders(){
     var notReady=soon.filter(function(v){
       var t=trainee(v.traineeId);
       if(!t||!t.equipment)return false;
-      var rec=findPrelearnRecord(t.name,t.org);
+      var rec=findPrelearnRecord(t.name,t.org,t.id);
       var course=rec&&rec.courses&&rec.courses[t.equipment];
       return !(course&&course.completedAt&&plCourseAllPassed(course,t.equipment));
     });

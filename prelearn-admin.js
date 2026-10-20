@@ -52,7 +52,12 @@ function plCourseAllPassed(course,eq){
   return st.total>0&&st.pct>=80;
 }
 /* 이름+소속으로 사전학습 기록을 찾는다 (신청서/대상자 등록 시점의 표기와 대소문자·공백 차이 허용) */
-function findPrelearnRecord(name,org){
+function findPrelearnRecord(name,org,traineeId){
+  // 신청서 승인으로 발송된 링크의 대상자 고유 ID(tid)로 학습한 기록은 이름·소속 표기가 달라도 정확히 연결한다
+  if(traineeId){
+    var byTid=PLA.list.find(function(r){return r.traineeId===traineeId;});
+    if(byTid)return byTid;
+  }
   if(!name||!org)return null;
   var n=String(name).toLowerCase().trim(),o=String(org).toLowerCase().trim();
   return PLA.list.find(function(r){return r.name&&r.org&&r.name.toLowerCase().trim()===n&&r.org.toLowerCase().trim()===o;})||null;
@@ -94,7 +99,8 @@ function openPrelearnLinkInfo(){
 function loadPrelearn(cb){
   var url=getPrelearnSheetsUrl();
   if(!url){if(cb)cb();return;}
-  fetch(url+'?action=load')
+  // 전체 학습자 목록(이름·연락처·시험 결과)은 관리자 전용 — 로그인 토큰을 실어 요청한다
+  authedGet(url+'?action=load')
     .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
     .then(function(data){
       if(data.error)throw new Error(data.error);
@@ -111,11 +117,18 @@ function refreshPrelearn(){
     else renderPrelearnTab();
   });
 }
-function savePrelearnRecords(){
+/* 학습자 기록 삭제 — 기록 id만 서버에 보내 지운다. 로드해 둔 전체 목록을 통째로 덮어쓰면 그 사이 학습자가
+   새로 저장한 진도가 함께 사라지기 때문이다. 실패하면 알리고 화면 목록을 서버 기준으로 다시 불러온다. */
+function deletePrelearnRecordsOnServer(ids){
   var url=getPrelearnSheetsUrl();
   if(!url)return;
-  authedPost(url,{action:'save',records:PLA.list})
-    .catch(function(err){console.warn('사전학습 저장 실패:',err.message);});
+  authedPost(url,{action:'deleteRecords',ids:ids})
+    .then(function(r){return r.json();})
+    .then(function(data){if(data.error)throw new Error(data.error);})
+    .catch(function(err){
+      alert('사전학습 기록 삭제에 실패했습니다: '+err.message);
+      refreshPrelearn();
+    });
 }
 
 /* 학습자 x 설비 조합으로 평탄화 (한 사람이 여러 설비를 학습할 수 있으므로) */
@@ -163,7 +176,7 @@ function renderPrelearnTab(){
     var passed=plPassedCount(course,eq);
     var pct=total?Math.round(passed/total*100):0;
     var qs=plQuizStats(course,eq);
-    return '<tr onclick="openPrelearnDetail(\''+r.id+'\',\''+eq+'\')">'
+    return '<tr onclick="openPrelearnDetail(\''+esc(r.id)+'\',\''+esc(eq)+'\')">'
       +'<td><b>'+esc(r.name||'')+'</b></td>'
       +'<td><span class="grpbadge" style="background:'+ot.color+'">'+esc(ot.label)+'</span></td>'
       +'<td>'+esc(r.org||'')+'</td>'
@@ -192,7 +205,7 @@ function openPrelearnDetail(id,eq){
   var ot=orgType(r.orgType||'branch');
   var rows=plSectionsFor(eq).map(function(s){
     var p=course.progress&&course.progress[s.code];
-    return '<tr><td>'+s.code+'</td><td>'+esc((s.title&&s.title.ko)||'')+'</td><td>'+(p?(p.quizScore+'/'+p.quizTotal):'-')+'</td><td>'+(p?(p.attempts||1):'-')+'</td><td>'+(p&&p.passed?'<span style="color:#4ade9a">통과</span>':(p?'<span style="color:#e07070">미통과</span>':'<span style="color:var(--tx-faint)">미학습</span>'))+'</td></tr>';
+    return '<tr><td>'+s.code+'</td><td>'+esc((s.title&&s.title.ko)||'')+'</td><td>'+(p?(Number(p.quizScore)+'/'+Number(p.quizTotal)):'-')+'</td><td>'+(p?(Number(p.attempts)||1):'-')+'</td><td>'+(p&&p.passed?'<span style="color:#4ade9a">통과</span>':(p?'<span style="color:#e07070">미통과</span>':'<span style="color:var(--tx-faint)">미학습</span>'))+'</td></tr>';
   }).join('');
   var qs=plQuizStats(course,eq);
   var verdict=!course.completedAt?'<span class="lv-cur-badge none">진행중</span>':(plCourseAllPassed(course,eq)?'<span class="lv-cur-badge">✅ 인증기준 충족 (퀴즈 정답률 '+qs.pct+'%)</span>':'<span class="lv-cur-badge wait">⚠ 인증기준 미충족(정답률 '+qs.pct+'%) — 방문 중 Level0부터 교육 필요</span>');
@@ -205,12 +218,12 @@ function openPrelearnDetail(id,eq){
       +'<div class="fg"><label class="fl">완료일</label><div class="dbox" style="margin-bottom:0">'+(course.completedAt?esc(course.completedAt.slice(0,10)):'-')+'</div></div>'
     +'</div>'
     +'<table class="dtbl sm"><thead><tr><th style="width:70px">섹션</th><th>제목</th><th style="width:70px">점수</th><th style="width:60px">시도</th><th style="width:80px">결과</th></tr></thead><tbody>'+rows+'</tbody></table>'
-    +'<div class="mfoot"><button class="btn sm red" onclick="deletePrelearnRecord(\''+id+'\')" style="margin-right:auto">전체 기록 삭제</button><button class="btn sm" onclick="cm()">닫기</button></div>',true);
+    +'<div class="mfoot"><button class="btn sm red" onclick="deletePrelearnRecord(\''+esc(id)+'\')" style="margin-right:auto">전체 기록 삭제</button><button class="btn sm" onclick="cm()">닫기</button></div>',true);
 }
 function deletePrelearnRecord(id){
   if(!confirm('이 학습자의 모든 설비 학습 기록을 삭제할까요?'))return;
   PLA.list=PLA.list.filter(function(r){return r.id!==id;});
-  savePrelearnRecords();
+  deletePrelearnRecordsOnServer([id]);
   cm();renderPrelearnTab();
 }
 
@@ -257,7 +270,7 @@ function qaSwitchSection(v){QA.code=v;qaLoadPool();renderQuizAdminView();}
 function qaSetQ(qi,langK,val){QA.pool[qi].q[langK]=val;}
 function qaSetChoice(qi,ci,langK,val){QA.pool[qi].choices[ci][langK]=val;}
 function qaSetAnswer(qi,ci){QA.pool[qi].answer=ci;}
-/* 한국어 입력을 기준으로 영/중간/중번/일 4개 언어를 Apps Script LanguageApp으로 일괄 번역해 채워넣는다 */
+/* 한국어 입력을 기준으로 영/중간/중번/일/베트남어 5개 언어를 Apps Script LanguageApp으로 일괄 번역해 채워넣는다 */
 function qaTranslateAll(qi){
   var koQ=(document.getElementById('qa_q_'+qi+'_ko')||{}).value||'';
   if(!koQ.trim()){alert('한국어 문항 내용을 먼저 입력해주세요.');return;}
@@ -267,8 +280,8 @@ function qaTranslateAll(qi){
   if(!url)return;
   var btn=document.getElementById('qa_translate_btn_'+qi);
   if(btn){btn.disabled=true;btn.textContent='번역 중...';}
-  var realKeys={en:'en',zhCN:'zh-CN',zhTW:'zh-TW',ja:'ja'};
-  authedPost(url,{action:'translate',texts:texts,source:'ko',targets:['en','zh-CN','zh-TW','ja']})
+  var realKeys={en:'en',zhCN:'zh-CN',zhTW:'zh-TW',ja:'ja',vi:'vi'};
+  authedPost(url,{action:'translate',texts:texts,source:'ko',targets:['en','zh-CN','zh-TW','ja','vi']})
     .then(function(r){return r.json();})
     .then(function(data){
       if(!data.ok){alert('번역 실패: '+(data.error||''));return;}
@@ -305,7 +318,7 @@ function qaDeleteQ(qi){
   renderQuizAdminView();
 }
 function qaAddQ(){
-  QA.pool.push({q:{ko:'',en:'',zhCN:'',zhTW:'',ja:''},choices:[0,1,2,3].map(function(){return {ko:'',en:'',zhCN:'',zhTW:'',ja:''};}),answer:0});
+  QA.pool.push({q:{ko:'',en:'',zhCN:'',zhTW:'',ja:'',vi:''},choices:[0,1,2,3].map(function(){return {ko:'',en:'',zhCN:'',zhTW:'',ja:'',vi:''};}),answer:0});
   renderQuizAdminView();
   var el=document.getElementById('qa_card_'+(QA.pool.length-1));
   if(el)el.scrollIntoView({behavior:'smooth',block:'center'});

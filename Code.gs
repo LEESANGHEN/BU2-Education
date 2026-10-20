@@ -62,6 +62,10 @@ function _verifyIdToken_(idToken) {
     if (code !== 200 || !data.users || !data.users.length) {
       return { email: null, reason: 'lookup_failed_http' + code };
     }
+    // Firebase 웹 API 키는 공개값이라 누구나 가입해 토큰을 받을 수 있으므로, 메일 인증을 마친 계정만 허용한다
+    if (data.users[0].emailVerified !== true) {
+      return { email: null, reason: 'email_not_verified' };
+    }
     var email = String(data.users[0].email || '').toLowerCase();
     if (email.slice(-ALLOWED_EMAIL_DOMAIN.length) !== ALLOWED_EMAIL_DOMAIN) {
       return { email: null, reason: 'domain_mismatch' };
@@ -82,6 +86,8 @@ function _getSheet_() {
   return sh;
 }
 
+/* 저장된 JSON이 깨져 있으면 빈 데이터로 취급하지 않고 예외를 던진다 — 빈 상태로 보고 다음 저장이
+ * 들어오면 남은 데이터를 덮어써 버리기 때문이다. */
 function _readState_() {
   var sh = _getSheet_();
   var lastRow = sh.getLastRow();
@@ -92,20 +98,45 @@ function _readState_() {
   try {
     return JSON.parse(raw);
   } catch (e) {
-    return {};
+    throw new Error('state_corrupt');
   }
 }
 
-function _writeState_(obj) {
-  var sh = _getSheet_();
-  sh.clearContents();
-  var raw = JSON.stringify(obj);
+/* 새 내용을 먼저 덮어쓰고 남는 행만 지운다(clearContents 후 쓰면 그 사이 읽는 요청이 빈 데이터를 본다) */
+function _writeRows_(sh, raw) {
   var rows = [];
   for (var i = 0; i < raw.length; i += CHUNK_SIZE) {
     rows.push([raw.substring(i, i + CHUNK_SIZE)]);
   }
   if (!rows.length) rows.push(['']);
+  var prevLast = sh.getLastRow();
   sh.getRange(1, 1, rows.length, 1).setValues(rows);
+  if (prevLast > rows.length) sh.getRange(rows.length + 1, 1, prevLast - rows.length, 1).clearContent();
+}
+
+/* 저장 직전 상태를 숨김 시트에 한 단계 백업한다 — 클라이언트 오류로 빈/잘못된 데이터가 저장돼도
+ * 직전 상태를 시트에서 복구할 수 있다(BU2_EDU_DATA_PREV 시트의 A열을 이어 붙이면 JSON 원문). */
+function _backupPrev_() {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var src = _getSheet_();
+    var last = src.getLastRow();
+    if (last < 1) return;
+    var vals = src.getRange(1, 1, last, 1).getValues();
+    var bk = ss.getSheetByName(SHEET_NAME + '_PREV');
+    if (!bk) {
+      bk = ss.insertSheet(SHEET_NAME + '_PREV');
+      try { bk.hideSheet(); } catch (e) {}
+    }
+    var prevLast = bk.getLastRow();
+    bk.getRange(1, 1, vals.length, 1).setValues(vals);
+    if (prevLast > vals.length) bk.getRange(vals.length + 1, 1, prevLast - vals.length, 1).clearContent();
+  } catch (e) { /* 백업 실패가 저장 자체를 막지 않게 한다 */ }
+}
+
+function _writeState_(obj) {
+  _backupPrev_();
+  _writeRows_(_getSheet_(), JSON.stringify(obj));
 }
 
 function _json_(obj) {
@@ -114,6 +145,10 @@ function _json_(obj) {
 }
 
 function doGet(e) {
+  try { return _doGet_(e); } catch (err) { return _json_({ error: String(err) }); }
+}
+
+function _doGet_(e) {
   var action = e && e.parameter && e.parameter.action;
   if (action === 'ping') return _json_({ ok: true });
   if (action === 'load') {
@@ -135,11 +170,22 @@ function doPost(e) {
     if (body.action === 'save') {
       var v = _verifyIdToken_(body.idToken);
       if (!v.email) return _json_({ error: 'unauthorized', reason: v.reason });
-      var state = _readState_();
-      FIELDS.forEach(function (f) {
-        if (body[f] !== undefined) state[f] = body[f];
-      });
-      _writeState_(state);
+      // 각 필드는 배열이어야 한다(잘못된 형식이 저장돼 다음 불러오기를 깨뜨리는 것 방지)
+      for (var i = 0; i < FIELDS.length; i++) {
+        var fv = body[FIELDS[i]];
+        if (fv !== undefined && !Array.isArray(fv)) return _json_({ error: 'invalid field: ' + FIELDS[i] });
+      }
+      var lock = LockService.getScriptLock();
+      lock.waitLock(20000);
+      try {
+        var state = _readState_();
+        FIELDS.forEach(function (f) {
+          if (body[f] !== undefined) state[f] = body[f];
+        });
+        _writeState_(state);
+      } finally {
+        lock.releaseLock();
+      }
       return _json_({ ok: true });
     }
     return _json_({ error: 'unknown action: ' + body.action });

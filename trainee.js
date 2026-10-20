@@ -166,7 +166,7 @@ function openTraineeDetail(id,openLevel){
 /* 온라인 사전학습(prelearn) 기록을 이름·소속으로 매칭해 이 대상자의 이수 현황 화면에 요약으로 보여준다 */
 function renderPrelearnSummary(t){
   if(typeof findPrelearnRecord!=='function')return '';
-  var rec=findPrelearnRecord(t.name,t.org);
+  var rec=findPrelearnRecord(t.name,t.org,t.id);
   if(!rec){
     return '<div class="dbox" style="margin-bottom:10px;font-size:11.5px;color:var(--tx-second)">온라인 사전학습 기록 없음 (이름·소속 일치 기준 — 교육 신청서 등록 시 자동 발송된 링크로 학습을 완료하면 여기에 표시됩니다)</div>';
   }
@@ -191,13 +191,13 @@ function renderPrelearnSummary(t){
     +'</div>';
   }).join('');
   return '<div class="dbox" style="margin-bottom:10px">'+rows
-    +'<button class="btn sm pri" style="margin-top:6px" onclick="applyPrelearnToChecklist(\''+t.id+'\')">✅ 사전학습 결과 반영</button>'
+    +'<button class="btn sm pri" style="margin-top:6px" onclick="applyPrelearnToChecklist(\''+esc(t.id)+'\')">✅ 사전학습 결과 반영</button>'
   +'</div>';
 }
 function applyPrelearnToChecklist(traineeId){
   var t=trainee(traineeId);
   if(!t)return;
-  var rec=findPrelearnRecord(t.name,t.org);
+  var rec=findPrelearnRecord(t.name,t.org,t.id);
   if(!rec){alert('매칭되는 온라인 사전학습 기록을 찾을 수 없습니다 (이름·소속 기준).');return;}
   var courses=rec.courses||{};
   var passedEq=Object.keys(courses).find(function(eq){return courses[eq].completedAt&&plCourseAllPassed(courses[eq],eq);});

@@ -43,11 +43,11 @@ function renderHistoryTab(){
       +'<td><span class="grpbadge" style="background:'+ot.color+'">'+esc(ot.label)+'</span></td>'
       +'<td>'+esc(r.t.org||'')+'</td>'
       +'<td>'+esc(r.t.country||'')+'</td>'
-      +'<td>Level '+r.a.level+'</td>'
+      +'<td>Level '+esc(r.a.level)+'</td>'
       +'<td style="font-size:11px">'+esc(r.a.trainerSign||'')+'</td>'
       +'<td style="font-size:11px">'+esc(r.a.partLeadSign||'')+'</td>'
       +'<td style="font-size:11px">'+(r.a.level===3?(r.a.followUpDone?('완료 · '+esc(r.a.followUpDate||'')):'대기'):'-')+'</td>'
-      +'<td>'+(r.t.name?('<button class="btn sm gsh" onclick="openCertificate(\''+r.a.traineeId+'\','+r.a.level+')">🎓 이수증</button>'):'-')+'</td>'
+      +'<td>'+(r.t.name?('<button class="btn sm gsh" onclick="openCertificate(\''+esc(r.a.traineeId)+'\','+(Number(r.a.level)||0)+')">🎓 이수증</button>'):'-')+'</td>'
     +'</tr>';
   }).join('');
 
@@ -57,8 +57,8 @@ function renderHistoryTab(){
       +'<td>'+esc(r.v.startDate)+' ~ '+esc(r.v.endDate)+'</td>'
       +'<td>'+esc(r.t.name||'(삭제된 대상자)')+'</td>'
       +'<td>'+esc(r.t.org||'')+'</td>'
-      +'<td>Lv'+r.v.targetLevel+(r.v.confirmedLevel!==''?(' → '+r.v.confirmedLevel+' 확정'):'')+'</td>'
-      +'<td><span style="color:'+st.color+'">●</span> '+st.label+'</td>'
+      +'<td>Lv'+esc(r.v.targetLevel)+(r.v.confirmedLevel!==''&&r.v.confirmedLevel!=null?(' → '+esc(r.v.confirmedLevel)+' 확정'):'')+'</td>'
+      +'<td><span style="color:'+st.color+'">●</span> '+esc(st.label)+'</td>'
       +'<td style="font-size:11px;color:var(--tx-second)">'+esc(r.v.note||'')+'</td>'
     +'</tr>';
   }).join('');
@@ -100,17 +100,24 @@ function auditLogSection(){
       +'<td style="font-size:11px">'+esc(e.by||'')+'</td>'
       +'<td style="font-size:11px">'+esc(e.action||'')+'</td>'
       +'<td style="font-size:11px;color:var(--tx-second)">'+esc(e.detail||'')+'</td>'
-      +'<td class="admin-only-btn" style="display:none;width:60px"><button class="btn sm red" onclick="deleteAuditEntry('+i+')">삭제</button></td>'
+      +'<td class="admin-only-btn" style="display:none;width:60px"><button class="btn sm red" onclick="deleteAuditEntry('+i+',\''+esc(e.at||'')+'\')">삭제</button></td>'
     +'</tr>';
   }).join('');
   return '<div class="td-section"><div class="td-sectitle">관리자 작업 이력 (최근 '+log.length+'건)</div>'
-    +'<table class="dtbl sm"><thead><tr><th style="width:130px">시각</th><th style="width:180px">관리자</th><th style="width:160px">작업</th><th>상세</th><th class="admin-only-btn" style="display:none;width:60px"></th></tr></thead><tbody>'+(rows||'<tr><td colspan="4" class="empty">작업 이력이 없습니다.</td></tr>')+'</tbody></table>'
+    +'<table class="dtbl sm"><thead><tr><th style="width:130px">시각</th><th style="width:180px">관리자</th><th style="width:160px">작업</th><th>상세</th><th class="admin-only-btn" style="display:none;width:60px"></th></tr></thead><tbody>'+(rows||'<tr><td colspan="5" class="empty">작업 이력이 없습니다.</td></tr>')+'</tbody></table>'
   +'</div>';
 }
 /* 감사 로그 항목 삭제 — 삭제 자체를 다시 로그에 남기면 지운 만큼 새 항목이 생겨 의미가 없어지므로 기록하지 않는다 */
-function deleteAuditEntry(idx){
-  var e=(S.auditLog||[])[idx];
-  if(!e)return;
+function deleteAuditEntry(idx,at){
+  var log=S.auditLog||[];
+  var e=log[idx];
+  // 다른 곳에서 동기화로 목록이 바뀌어 위치가 어긋났다면 시각으로 다시 찾는다(엉뚱한 항목 삭제 방지)
+  if(!e||(at!=null&&(e.at||'')!==at)){
+    idx=-1;
+    for(var k=0;k<log.length;k++){if((log[k].at||'')===at){idx=k;break;}}
+    e=idx>=0?log[idx]:null;
+  }
+  if(!e){alert('이미 변경된 이력입니다. 목록을 새로고침합니다.');renderHistoryTab();return;}
   if(!confirm('이 작업 이력을 삭제할까요?\n\n'+(e.at||'').replace('T',' ').slice(0,16)+' · '+(e.action||'')+' · '+(e.detail||'')))return;
   S.auditLog.splice(idx,1);
   saveData();
@@ -122,7 +129,11 @@ function histReset(){HIST={from:'',to:'',orgFilter:'all',country:'all',level:'al
 function toCSV(rows){
   return rows.map(function(r){
     return r.map(function(c){
-      var s=String(c==null?'':c).replace(/"/g,'""');
+      var s=String(c==null?'':c);
+      /* 엑셀이 수식으로 실행하지 않도록, 신청서·외부 입력에서 온 값이 = + - @ 로 시작하면 앞에 ' 를 붙인다
+         (숫자·날짜처럼 정상적으로 -가 앞에 오는 값은 영향이 없도록 음수 숫자는 제외) */
+      if(/^[=+\-@\t\r]/.test(s)&&!/^-?\d+(\.\d+)?$/.test(s))s="'"+s;
+      s=s.replace(/"/g,'""');
       return /[",\n]/.test(s)?('"'+s+'"'):s;
     }).join(',');
   }).join('\r\n');

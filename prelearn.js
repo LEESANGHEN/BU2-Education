@@ -27,7 +27,12 @@ function tx(obj){ // {ko,en,zhCN,zhTW,ja} 중 현재 언어 텍스트, 없으면
   var k=langKey();
   return obj[k]||obj.en||'';
 }
-function fmtQuizMsg(tpl,pct){return tpl.replace('{0}',pct);}
+// replace에 함수를 넘겨, 값에 $& 같은 패턴이 있어도 그대로 들어가게 한다
+function fmtQuizMsg(tpl,pct){return tpl.replace('{0}',function(){return pct;});}
+/* 저장소가 차단된 환경(사파리 프라이빗 모드, 일부 인앱 브라우저)에서는 localStorage 접근이 예외를 던진다 —
+   그대로 두면 학습 시작 버튼이나 페이지 로딩이 멈추므로 try/catch로 감싼다. */
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
 
 /* 학습자 x 설비 x 섹션 별로 결정론적인(같은 사람은 항상 같은 결과) 시드 기반 난수.
    같은 학습자는 재접속/재응시해도 항상 같은 문제 조합을 받고, 서로 다른 학습자는
@@ -45,24 +50,40 @@ function seededPRNG(seedStr){
     return (h>>>0)/4294967296;
   };
 }
+/* 보기 순서를 학습자별로 고정된 방식으로 섞는다. 원본 데이터는 정답이 1번인 문항이 대부분이라 섞지 않으면
+   "항상 1번"만 찍어도 합격선에 근접한다. 보기와 정답 번호를 함께 바꾼 복사본을 돌려주므로 화면·채점·확인 화면은
+   그대로 복사본 기준으로 동작한다. 이 기능이 도입되기 전에 만든 기록(shuf 없음)은 저장된 선택과 어긋나지 않게 섞지 않는다. */
+function shuffleChoices(q,seedStr){
+  var rand=seededPRNG(seedStr);
+  var order=q.choices.map(function(_,i){return i;});
+  for(var i=order.length-1;i>0;i--){
+    var j=Math.floor(rand()*(i+1));
+    var tmp=order[i];order[i]=order[j];order[j]=tmp;
+  }
+  return {q:q.q,choices:order.map(function(i){return q.choices[i];}),answer:order.indexOf(q.answer)};
+}
 /* 섹션 문제은행(pool)에서 학습자별로 고정된 1~2문항을 뽑는다 (pool이 2개 이하면 그대로 전부 사용) */
 function pickSectionQuiz(pool,sec){
   if(!pool||!pool.length)return [];
   var n=Math.min(2,pool.length);
-  if(pool.length<=n)return pool;
   var learnerId=(PL.record&&PL.record.id)||'anon';
-  var rand=seededPRNG(learnerId+'|'+PL.equip+'|'+sec.code);
   var idxs=pool.map(function(_,i){return i;});
-  for(var i=idxs.length-1;i>0;i--){
-    var j=Math.floor(rand()*(i+1));
-    var tmp=idxs[i];idxs[i]=idxs[j];idxs[j]=tmp;
+  if(pool.length>n){
+    var rand=seededPRNG(learnerId+'|'+PL.equip+'|'+sec.code);
+    for(var i=idxs.length-1;i>0;i--){
+      var j=Math.floor(rand()*(i+1));
+      var tmp=idxs[i];idxs[i]=idxs[j];idxs[j]=tmp;
+    }
+    idxs=idxs.slice(0,n).sort(function(a,b){return a-b;});
   }
-  idxs=idxs.slice(0,n).sort(function(a,b){return a-b;});
-  return idxs.map(function(i){return pool[i];});
+  var shuf=PL.record&&PL.record.shuf;
+  return idxs.map(function(i){
+    return shuf?shuffleChoices(pool[i],learnerId+'|'+PL.equip+'|'+sec.code+'|c'+i):pool[i];
+  });
 }
 
 function initTheme(){
-  var saved=localStorage.getItem('edu_theme')||'dark';
+  var saved=lsGet('edu_theme')||'dark';
   document.documentElement.setAttribute('data-theme',saved);
   var btn=document.getElementById('themeToggle');
   if(btn)btn.textContent=saved==='dark'?'🌙':'☀️';
@@ -71,7 +92,7 @@ function toggleTheme(){
   var cur=document.documentElement.getAttribute('data-theme')||'dark';
   var next=cur==='dark'?'light':'dark';
   document.documentElement.setAttribute('data-theme',next);
-  localStorage.setItem('edu_theme',next);
+  lsSet('edu_theme',next);
   var btn=document.getElementById('themeToggle');
   if(btn)btn.textContent=next==='dark'?'🌙':'☀️';
 }
@@ -120,11 +141,12 @@ function pickEquipment(id){
 function enterEquip(id){
   PL.equip=id;
   if(PL.tid){
-    loadAllRecords(function(records){
-      var found=records.find(function(r){return r.traineeId===PL.tid;});
+    fetchLearner({tid:PL.tid},function(found,ok){
+      // 서버 오류를 "기록 없음"으로 착각해 Gate로 보내면 완료자가 새 기록을 만들어 처음부터 다시 응시하게 된다
+      if(!ok){showLoadError(function(){enterEquip(id);});return;}
       if(found){
         PL.record=found;
-        try{localStorage.setItem(PL_ID_KEY,found.id);}catch(e){}
+        lsSet(PL_ID_KEY,found.id);
         enterCourse();
         return;
       }
@@ -133,6 +155,13 @@ function enterEquip(id){
     return;
   }
   PL.mode='gate';renderGate();
+}
+/* 서버에서 학습 기록을 불러오지 못했을 때 — 새 기록을 만들지 않고 재시도만 안내한다 */
+function showLoadError(retryFn){
+  var root=document.getElementById('plRoot');
+  window._plRetry=retryFn;
+  root.innerHTML='<div class="apf-card pl-gate"><div class="apf-warn">'+esc(pt('loadFail'))+'</div>'
+    +'<button class="apf-submit" style="margin-top:16px" onclick="window._plRetry&&window._plRetry()">'+esc(pt('startBtn'))+'</button></div>';
 }
 
 /* ── 시작 화면(Gate) ── */
@@ -165,31 +194,31 @@ function startLearning(){
   var orgType=document.getElementById('pl_orgtype').value;
   var contact=document.getElementById('pl_contact').value.trim();
 
-  var savedId=localStorage.getItem(PL_ID_KEY);
-  loadAllRecords(function(records){
-    // 링크에 실린 대상자 고유 ID(tid)가 최우선 — 이름/소속 오타나 기기 변경에 영향받지 않는다.
-    // 그다음 이 브라우저에 저장된 ID를 시도하되, 지금 입력한 이름과 그 기록의 이름이 일치할
-    // 때만 신뢰한다 — 같은 브라우저로 예전에 다른 사람(예: 관리자 테스트) 이름으로 학습한
-    // 적이 있으면 savedId만 믿고 엉뚱한 사람의 기록에 새 이름을 덮어씌우는 사고가 나기 때문.
-    // 마지막으로 이름+소속 일치를 시도한다(과거 발송 링크 호환용).
-    var found=null;
-    if(PL.tid)found=records.find(function(r){return r.traineeId===PL.tid;});
-    if(!found&&savedId){
-      var savedRec=records.find(function(r){return r.id===savedId;});
-      if(savedRec&&savedRec.name&&savedRec.name.toLowerCase().trim()===name.toLowerCase())found=savedRec;
-    }
-    if(!found){
-      found=records.find(function(r){return r.name&&r.org&&r.name.toLowerCase()===name.toLowerCase()&&r.org.toLowerCase()===org.toLowerCase();});
-    }
+  var btn=document.querySelector('.pl-gate .apf-submit');
+  if(btn)btn.disabled=true;
+  // 서버가 링크의 대상자 고유 ID(tid) → (이 브라우저에 저장된 ID + 입력한 이름 일치) → 이름+소속 순으로
+  // 본인 기록을 찾아 돌려준다. 저장된 ID만 믿으면 같은 브라우저로 예전에 다른 사람 이름으로 학습한 경우
+  // 엉뚱한 사람의 기록에 새 이름이 덮어씌워지므로 이름 일치를 함께 확인한다.
+  fetchLearner({tid:PL.tid,id:lsGet(PL_ID_KEY),name:name,org:org},function(found,ok){
+    if(btn)btn.disabled=false;
+    if(!ok){alert(pt('loadFail'));return;} // 서버 오류를 "기록 없음"으로 착각해 새 기록을 만들지 않는다
     if(found){
       PL.record=found;
-      PL.record.name=name;PL.record.org=org;PL.record.orgType=orgType;PL.record.contact=contact;
+      PL.record.name=name;PL.record.org=org;
+      PL.record.orgType=orgType||PL.record.orgType||'';
+      PL.record.contact=contact||PL.record.contact||''; // 비워 둔 연락처가 기존 값을 지우지 않게
       if(PL.tid)PL.record.traineeId=PL.tid;
-      localStorage.setItem(PL_ID_KEY,found.id);
+      lsSet(PL_ID_KEY,found.id);
+      enterCourse();
     }else{
-      PL.record={id:uid('pl'),name:name,org:org,orgType:orgType,contact:contact,traineeId:PL.tid||undefined,startedAt:new Date().toISOString(),courses:{}};
+      // 새 기록 — 서버가 발급한 최종 id를 받은 뒤에 학습을 시작한다(문항 선택·보기 섞기의 시드가 id에서 나오므로
+      // 도중에 id가 바뀌면 같은 섹션의 문항이 달라진다)
+      PL.record={id:uid('pl'),name:name,org:org,orgType:orgType,contact:contact,traineeId:PL.tid||undefined,shuf:1,startedAt:new Date().toISOString(),courses:{}};
+      saveProgress(function(saved){
+        if(!saved){PL.record=null;alert(pt('saveFail'));return;}
+        enterCourse();
+      });
     }
-    enterCourse();
   });
 }
 /* 대상자 고유 ID(tid) 매칭으로 이미 찾은 기록, 또는 방금 Gate에서 입력받아 찾거나 새로 만든
@@ -201,30 +230,84 @@ function enterCourse(){
   if(!PL.record.courses[PL.equip])PL.record.courses[PL.equip]={progress:{},startedAt:new Date().toISOString()};
   resumePosition();
   if(PL.mode!=='done'){PL.mode='slide';}
+  else if(!PL.record.courses[PL.equip].completedAt){
+    // 모든 섹션 퀴즈를 제출했는데 마지막 "다음" 버튼을 누르기 전에 창을 닫아 완료 시각이 비어 있던 기록을 메운다
+    PL.record.courses[PL.equip].completedAt=new Date().toISOString();
+  }
   renderViewer();
   saveProgress();
 }
 
 /* ── 진행 상태 저장/불러오기 ── */
 function courseProgress(){return PL.record.courses[PL.equip].progress;}
+
+/* 저장은 한 번에 하나씩 순서대로 보내고(연속 호출이 서로 추월해 오래된 상태가 최종본이 되는 것 방지),
+   실패하면 자동으로 재시도한 뒤에도 안 되면 사용자에게 알린다. 서버 응답은 서버가 보존한 기존 제출 결과를
+   로컬에 반영한다(같은 섹션을 다른 탭에서 먼저 제출했다면 그 결과가 우선). cb(ok)는 저장 성공 여부를 받는다. */
+var _saveBusy=false,_savePending=false,_saveWaiters=[],_saveFailShown=false;
+function flushSaveWaiters(ok){
+  var w=_saveWaiters;_saveWaiters=[];
+  w.forEach(function(f){try{f(ok);}catch(e){}});
+}
 function saveProgress(cb){
-  if(!PRELEARN_SHEETS_URL||!PL.record){if(cb)cb();return;}
+  if(cb)_saveWaiters.push(cb);
+  if(!PRELEARN_SHEETS_URL||!PL.record){flushSaveWaiters(true);return;}
+  if(_saveBusy){_savePending=true;return;}
+  doSaveProgress(0);
+}
+function reconcileFromServer(rec){
+  if(!rec||!rec.courses)return;
+  if(rec.shuf!==undefined)PL.record.shuf=rec.shuf;
+  if(rec.traineeId)PL.record.traineeId=rec.traineeId;
+  Object.keys(rec.courses).forEach(function(eq){
+    var sc=rec.courses[eq];
+    if(!PL.record.courses[eq])PL.record.courses[eq]={progress:{},startedAt:sc.startedAt};
+    var lc=PL.record.courses[eq];
+    if(sc.startedAt)lc.startedAt=sc.startedAt;
+    if(sc.completedAt&&!lc.completedAt)lc.completedAt=sc.completedAt;
+    Object.keys(sc.progress||{}).forEach(function(code){lc.progress[code]=sc.progress[code];});
+  });
+}
+function doSaveProgress(attempt){
+  _saveBusy=true;_savePending=false;
   PL.record.lastActivityAt=new Date().toISOString();
   fetch(PRELEARN_SHEETS_URL,{method:'POST',headers:{'Content-Type':'text/plain'},
     body:JSON.stringify({action:'upsertProgress',record:PL.record})})
     .then(function(r){return r.text();})
     .then(function(text){
-      try{var data=JSON.parse(text);if(data.id){PL.record.id=data.id;localStorage.setItem(PL_ID_KEY,data.id);}}catch(e){}
-      if(cb)cb();
+      var data;
+      try{data=JSON.parse(text);}catch(e){throw new Error('invalid-response');}
+      if(data.error)throw new Error(data.error);
+      if(data.id){PL.record.id=data.id;lsSet(PL_ID_KEY,data.id);}
+      reconcileFromServer(data.record);
+      _saveFailShown=false;_saveBusy=false;
+      if(_savePending){doSaveProgress(0);return;}
+      flushSaveWaiters(true);
     })
-    .catch(function(){if(cb)cb();});
+    .catch(function(err){
+      if(attempt<2&&err.message!=='forbidden'&&err.message!=='invalid_record'){
+        setTimeout(function(){doSaveProgress(attempt+1);},1500*(attempt+1));
+        return;
+      }
+      _saveBusy=false;_savePending=false;
+      if(!_saveFailShown){_saveFailShown=true;alert(pt('saveFail'));}
+      flushSaveWaiters(false);
+    });
 }
-function loadAllRecords(cb){
-  if(!PRELEARN_SHEETS_URL){cb([]);return;}
-  fetch(PRELEARN_SHEETS_URL+'?action=load')
+/* 본인 기록 1건 조회 — 서버가 tid → (저장된 id + 이름 일치) → 이름+소속 순으로 찾아 돌려준다(전체 목록은 받지 않는다).
+   cb(record|null, ok): ok=false는 네트워크/서버 오류로, "기록 없음"(ok=true, record=null)과 구분한다. */
+function fetchLearner(q,cb){
+  if(!PRELEARN_SHEETS_URL){cb(null,true);return;}
+  var qs='?action=learner';
+  Object.keys(q).forEach(function(k){if(q[k])qs+='&'+k+'='+encodeURIComponent(q[k]);});
+  fetch(PRELEARN_SHEETS_URL+qs)
     .then(function(r){return r.json();})
-    .then(function(data){QUIZ_OVERRIDES=data.quizOverrides||{};cb(data.records||[]);})
-    .catch(function(){cb([]);});
+    .then(function(data){
+      if(data.error)throw new Error(data.error);
+      QUIZ_OVERRIDES=data.quizOverrides||{};
+      cb(data.record||null,true);
+    })
+    .catch(function(){cb(null,false);});
 }
 
 /* ── 섹션/챕터 헬퍼 ── */
@@ -295,7 +378,11 @@ function renderToc(){
       }).join('');
   }).join('');
 }
-function plJump(ci,si){PL.ci=ci;PL.si=si;PL.li=0;PL.mode='slide';renderViewer();}
+function plJump(ci,si){
+  // 퀴즈를 풀고 있는 동안(아직 제출 전)에는 목차로 빠져나가 다른 섹션으로 건너뛸 수 없다
+  if(PL.mode==='quiz'&&!courseProgress()[curSection().code])return;
+  PL.ci=ci;PL.si=si;PL.li=0;PL.mode='slide';renderViewer();
+}
 function plPrev(){
   if(PL.li>0){PL.li--;renderViewer();return;}
   if(PL.si>0){PL.si--;PL.li=curChapter().sections[PL.si].slides.length-1;renderViewer();return;}
@@ -312,8 +399,14 @@ function advanceSection(){
   var ch=curChapter();
   if(PL.si<ch.sections.length-1){PL.si++;PL.li=0;PL.mode='slide';renderViewer();return;}
   if(PL.ci<chapters().length-1){PL.ci++;PL.si=0;PL.li=0;PL.mode='slide';renderViewer();return;}
+  // 마지막 섹션에서 "다음"을 눌렀더라도, 퀴즈를 제출하지 않은 섹션이 남아 있으면 완료 처리하지 않고 그 섹션으로 보낸다
+  var missing=allSections().filter(function(s){return !courseProgress()[s.code];})[0];
+  if(missing){
+    alert(pt('sectionsMissing'));
+    PL.ci=missing.ci;PL.si=missing.si;PL.li=0;PL.mode='slide';renderViewer();return;
+  }
   PL.mode='done';
-  PL.record.courses[PL.equip].completedAt=new Date().toISOString();
+  if(!PL.record.courses[PL.equip].completedAt)PL.record.courses[PL.equip].completedAt=new Date().toISOString();
   saveProgress();
   renderViewer();
 }
@@ -334,7 +427,8 @@ function renderQuizFresh(sec){
     return '<div class="pl-qrow" id="pl_qrow_'+qi+'">'
       +'<div class="pl-qtext" id="pl_qtext_'+qi+'">'+(qi+1)+'. '+esc(tx(q.q))+'</div>'
       +q.choices.map(function(c,idx){
-        return '<label class="pl-choice" id="pl_choice_'+qi+'_'+idx+'"><input type="radio" name="q'+qi+'" value="'+idx+'" onchange="plPick('+qi+','+idx+')"> '+esc(tx(c))+'</label>';
+        // 언어를 바꿔 화면을 다시 그려도 이미 고른 답이 유지되도록 checked를 복원한다
+        return '<label class="pl-choice" id="pl_choice_'+qi+'_'+idx+'"><input type="radio" name="q'+qi+'" value="'+idx+'" onchange="plPick('+qi+','+idx+')"'+(PL.quizPick[qi]===idx?' checked':'')+'> '+esc(tx(c))+'</label>';
       }).join('')
     +'</div>';
   }).join('');
@@ -365,6 +459,10 @@ function submitQuiz(){
   var passed=(correct/qs.length)>=PASS_RATIO;
   var prog=courseProgress();
   prog[sec.code]={viewed:true,quizScore:correct,quizTotal:qs.length,passed:passed,attempts:((prog[sec.code]&&prog[sec.code].attempts)||0)+1,picks:picks};
+  // 이 제출로 모든 섹션 퀴즈가 끝났다면 완료 시각을 바로 기록한다(마지막 "다음" 버튼을 누르기 전에 창을 닫아도 완료로 남게)
+  if(allSections().every(function(s){return courseProgress()[s.code];})&&!PL.record.courses[PL.equip].completedAt){
+    PL.record.courses[PL.equip].completedAt=new Date().toISOString();
+  }
   saveProgress();
   renderQuizReview(sec,prog[sec.code]);
 }
@@ -383,14 +481,14 @@ function renderQuizReview(sec,prog){
       return '<label class="pl-choice'+extra+'"><input type="radio" disabled '+(idx===pickedIdx?'checked':'')+'> '+esc(tx(c))+'</label>';
     }).join('');
     return '<div class="pl-qrow '+(ok?'pl-qrow-ok':'pl-qrow-bad')+'">'
-      +'<div class="pl-qtext">'+(qi+1)+'. '+esc(tx(q.q))+' <span class="pl-qmark">'+(ok?pt('markCorrect'):fmtQuizMsg(pt('markWrong'),tx(q.choices[q.answer])))+'</span></div>'
+      +'<div class="pl-qtext">'+(qi+1)+'. '+esc(tx(q.q))+' <span class="pl-qmark">'+(ok?pt('markCorrect'):fmtQuizMsg(pt('markWrong'),esc(tx(q.choices[q.answer]))))+'</span></div>'
       +choicesHtml
     +'</div>';
   }).join('');
   var passed=prog.passed;
   var msg=passed
-    ?('<div style="color:#4ade9a;font-weight:600;margin-top:10px">✅ '+prog.quizScore+'/'+prog.quizTotal+' '+esc(pt('quizPass'))+'</div>')
-    :('<div style="color:#e07070;font-weight:600;margin-top:10px">❌ '+prog.quizScore+'/'+prog.quizTotal+' '+esc(fmtQuizMsg(pt('quizFail'),Math.round(PASS_RATIO*100)))+'</div>');
+    ?('<div style="color:#4ade9a;font-weight:600;margin-top:10px">✅ '+Number(prog.quizScore)+'/'+Number(prog.quizTotal)+' '+esc(pt('quizPass'))+'</div>')
+    :('<div style="color:#e07070;font-weight:600;margin-top:10px">❌ '+Number(prog.quizScore)+'/'+Number(prog.quizTotal)+' '+esc(fmtQuizMsg(pt('quizFail'),Math.round(PASS_RATIO*100)))+'</div>');
   root.innerHTML='<div class="pl-layout">'
     +'<div class="pl-side">'+renderToc()+'</div>'
     +'<div class="pl-main">'
@@ -425,7 +523,7 @@ function renderDone(){
   var rows=secs.map(function(s){
     var sec=sectionAt(s.ci,s.si);
     var p=courseProgress()[sec.code];
-    return '<tr><td>'+sec.code+'</td><td>'+esc(tx(sec.title))+'</td><td>'+(p?(p.quizScore+'/'+p.quizTotal):'-')+'</td><td>'+(p&&p.passed?('<span style="color:#4ade9a">'+esc(pt('passLbl'))+'</span>'):('<span style="color:#e07070">'+esc(pt('failLbl'))+'</span>'))+'</td></tr>';
+    return '<tr><td>'+sec.code+'</td><td>'+esc(tx(sec.title))+'</td><td>'+(p?(Number(p.quizScore)+'/'+Number(p.quizTotal)):'-')+'</td><td>'+(p&&p.passed?('<span style="color:#4ade9a">'+esc(pt('passLbl'))+'</span>'):('<span style="color:#e07070">'+esc(pt('failLbl'))+'</span>'))+'</td></tr>';
   }).join('');
   root.innerHTML='<div class="apf-card apf-done">'
     +'<h1>'+esc(pt('doneTitle'))+'</h1>'

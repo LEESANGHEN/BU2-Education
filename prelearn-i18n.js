@@ -46,6 +46,11 @@ ko:{
   examSubmitConfirm:'한번 제출하면 답을 수정할 수 없습니다. 그래도 제출하시겠습니까?',examSubmitting:'제출 중...',
   examResultTitle:'필기평가 결과',examPassMsg:'합격 기준(80%)을 충족했습니다.',examFailMsg:'합격 기준(80%)에 미달했습니다.',
   examThanks:'수고하셨습니다. 결과는 담당자가 확인합니다.',
+  loadFail:'서버에서 학습 기록을 불러오지 못했습니다. 인터넷 연결을 확인하고 잠시 후 다시 시도해주세요.',
+  saveFail:'학습 기록을 서버에 저장하지 못했습니다. 인터넷 연결을 확인하고, 이 페이지를 닫지 말고 잠시 후 다시 시도해주세요.',
+  sectionsMissing:'아직 퀴즈를 제출하지 않은 섹션이 있습니다. 해당 섹션으로 이동합니다.',
+  examSaveFail:'⚠ 결과를 서버에 저장하지 못했습니다. 아래 버튼으로 다시 전송해주세요.',examRetryBtn:'다시 전송',
+  examNoQuestions:'이 설비에는 등록된 문항이 없습니다. 담당자에게 문의해주세요.',
   warnMsg:'⚠ 이 학습 페이지는 아직 연결 설정이 완료되지 않았습니다. 관리자에게 문의해주세요.'
 },
 en:{
@@ -87,6 +92,11 @@ en:{
   examSubmitConfirm:'Once submitted, your answers cannot be changed. Do you want to submit?',examSubmitting:'Submitting...',
   examResultTitle:'Exam Result',examPassMsg:'You met the passing criteria (80%).',examFailMsg:'You did not meet the passing criteria (80%).',
   examThanks:'Thank you. The coordinator will review your result.',
+  loadFail:'Could not load your learning record from the server. Please check your internet connection and try again in a moment.',
+  saveFail:'Could not save your learning record to the server. Please check your internet connection, keep this page open, and try again in a moment.',
+  sectionsMissing:'Some sections still have no submitted quiz. Taking you to that section.',
+  examSaveFail:'⚠ The result could not be saved to the server. Please resend it with the button below.',examRetryBtn:'Resend',
+  examNoQuestions:'No questions are registered for this equipment. Please contact the administrator.',
   warnMsg:'⚠ This learning page has not been configured yet. Please contact the administrator.'
 },
 'zh-CN':{
@@ -128,6 +138,11 @@ en:{
   examSubmitConfirm:'提交后将无法修改答案。确定要提交吗？',examSubmitting:'提交中...',
   examResultTitle:'笔试评估结果',examPassMsg:'已达到及格标准(80%)。',examFailMsg:'未达到及格标准(80%)。',
   examThanks:'辛苦了。负责人将确认您的结果。',
+  loadFail:'无法从服务器加载学习记录。请检查网络连接后稍后重试。',
+  saveFail:'无法将学习记录保存到服务器。请检查网络连接，不要关闭此页面，稍后重试。',
+  sectionsMissing:'仍有未提交测验的章节，将为您跳转到该章节。',
+  examSaveFail:'⚠ 结果未能保存到服务器，请点击下方按钮重新发送。',examRetryBtn:'重新发送',
+  examNoQuestions:'该设备尚未登记题目，请联系管理员。',
   warnMsg:'⚠ 此学习页面尚未完成连接设置，请联系管理员。'
 },
 'zh-TW':{
@@ -169,6 +184,11 @@ en:{
   examSubmitConfirm:'提交後將無法修改答案。確定要提交嗎？',examSubmitting:'提交中...',
   examResultTitle:'筆試評估結果',examPassMsg:'已達到及格標準(80%)。',examFailMsg:'未達到及格標準(80%)。',
   examThanks:'辛苦了。負責人將確認您的結果。',
+  loadFail:'無法從伺服器載入學習紀錄。請檢查網路連線後稍後重試。',
+  saveFail:'無法將學習紀錄儲存到伺服器。請檢查網路連線，不要關閉此頁面，稍後重試。',
+  sectionsMissing:'仍有尚未提交測驗的章節，將為您跳轉到該章節。',
+  examSaveFail:'⚠ 結果未能儲存到伺服器，請點擊下方按鈕重新傳送。',examRetryBtn:'重新傳送',
+  examNoQuestions:'此設備尚未登錄題目，請聯絡管理員。',
   warnMsg:'⚠ 此學習頁面尚未完成連線設定，請聯絡管理員。'
 },
 ja:{
@@ -210,6 +230,11 @@ ja:{
   examSubmitConfirm:'一度提出すると回答を修正できません。それでも提出しますか？',examSubmitting:'提出中...',
   examResultTitle:'筆記試験結果',examPassMsg:'合格基準(80%)を満たしました。',examFailMsg:'合格基準(80%)に達しませんでした。',
   examThanks:'お疲れ様でした。結果は担当者が確認します。',
+  loadFail:'サーバーから学習記録を読み込めませんでした。インターネット接続を確認して、しばらくしてからもう一度お試しください。',
+  saveFail:'学習記録をサーバーに保存できませんでした。インターネット接続を確認し、このページを閉じずに、しばらくしてからもう一度お試しください。',
+  sectionsMissing:'クイズを提出していないセクションがあります。そのセクションに移動します。',
+  examSaveFail:'⚠ 結果をサーバーに保存できませんでした。下のボタンで再送信してください。',examRetryBtn:'再送信',
+  examNoQuestions:'この設備には登録された問題がありません。管理者にお問い合わせください。',
   warnMsg:'⚠ この学習ページはまだ接続設定が完了していません。管理者にお問い合わせください。'
 },
 vi:{
@@ -251,6 +276,11 @@ vi:{
   examSubmitConfirm:'Sau khi nộp, bạn không thể sửa câu trả lời. Bạn có muốn nộp không?',examSubmitting:'Đang nộp...',
   examResultTitle:'Kết quả bài thi',examPassMsg:'Bạn đã đạt tiêu chuẩn (80%).',examFailMsg:'Bạn chưa đạt tiêu chuẩn (80%).',
   examThanks:'Cảm ơn bạn. Người phụ trách sẽ xem xét kết quả của bạn.',
+  loadFail:'Không thể tải hồ sơ học tập từ máy chủ. Vui lòng kiểm tra kết nối Internet và thử lại sau ít phút.',
+  saveFail:'Không thể lưu hồ sơ học tập lên máy chủ. Vui lòng kiểm tra kết nối Internet, giữ nguyên trang này và thử lại sau ít phút.',
+  sectionsMissing:'Vẫn còn phần chưa nộp bài kiểm tra. Hệ thống sẽ chuyển bạn đến phần đó.',
+  examSaveFail:'⚠ Không thể lưu kết quả lên máy chủ. Vui lòng gửi lại bằng nút bên dưới.',examRetryBtn:'Gửi lại',
+  examNoQuestions:'Thiết bị này chưa có câu hỏi nào được đăng ký. Vui lòng liên hệ quản trị viên.',
   warnMsg:'⚠ Trang học này chưa được cấu hình kết nối. Vui lòng liên hệ quản trị viên.'
 }
 };

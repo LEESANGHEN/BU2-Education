@@ -8,7 +8,7 @@ var APPLY_LS_KEY='edu_apply_sheets_url';
    채워지도록 기본값을 심어둔다. */
 var DEFAULT_APPLY_SHEETS_URL='https://script.google.com/macros/s/AKfycbz2IHQCJE1YzGTwtatQtwolUIrZ1FzmykqLCG8bhIFTTkNPlYbMiIkKdvQsegE1VInF/exec';
 (function(){try{if(DEFAULT_APPLY_SHEETS_URL&&!localStorage.getItem(APPLY_LS_KEY))localStorage.setItem(APPLY_LS_KEY,DEFAULT_APPLY_SHEETS_URL);}catch(e){}})();
-var APPS={list:[],filter:'all'};
+var APPS={list:[],filter:'all',deleted:[],seq:0,chain:Promise.resolve()};
 
 /* a.equipment는 배열(다중 선택)이 정상이나, 이 기능 도입 전 제출된 신청서는 단일 문자열이었다.
    두 형태 모두 지원하기 위해 항상 배열로 정규화해서 사용한다. */
@@ -54,11 +54,33 @@ function loadApplications(callback){
       if(callback)callback();
     });
 }
+/* 저장은 한 번에 하나씩 순서대로 보낸다. 서버는 id 기준으로 합쳐 저장하므로(관리자가 화면을 열어둔
+   사이 새로 접수된 신청서가 사라지지 않음), 삭제는 deletedIds로 따로 알려주고 응답으로 받은 최신 목록을
+   화면에 반영한다. 실패하면 조용히 넘어가지 않고 알린다. */
 function saveApplications(){
   var url=getApplySheetsUrl();
   if(!url)return;
-  authedPost(url,{action:'save',applications:APPS.list})
-    .catch(function(err){console.warn('신청서 저장 실패:',err.message);});
+  var mySeq=++APPS.seq;
+  APPS.chain=APPS.chain.then(function(){
+    var sentDeleted=APPS.deleted.slice();
+    return authedPost(url,{action:'save',applications:APPS.list,deletedIds:sentDeleted})
+      .then(function(r){return r.text();})
+      .then(function(text){
+        var data;try{data=JSON.parse(text);}catch(e){throw new Error('invalid response');}
+        if(data.error)throw new Error(data.error);
+        APPS.deleted=APPS.deleted.filter(function(id){return sentDeleted.indexOf(id)<0;});
+        // 그 사이 또 수정했다면(더 새로운 저장이 대기 중) 화면 목록은 덮지 않는다
+        if(mySeq===APPS.seq&&Array.isArray(data.applications)){
+          var before=APPS.list.length;
+          APPS.list=data.applications;
+          if(APPS.list.length!==before&&document.getElementById('apply_wrap'))renderApplyTab();
+        }
+      })
+      .catch(function(err){
+        console.warn('신청서 저장 실패:',err.message);
+        alert('신청서 저장에 실패했습니다. 잠시 후 다시 시도해주세요. ('+err.message+')');
+      });
+  });
 }
 
 function renderApplyTab(){
@@ -84,17 +106,17 @@ function renderApplyTab(){
   }
   var rows=list.map(function(a){
     var ot=orgType(a.orgType||'branch');
-    var stLbl={pending:'대기중',registered:'등록완료',rejected:'반려'}[a.status]||a.status;
-    return '<tr onclick="openApplicationDetail(\''+a.id+'\')">'
+    var stLbl=esc({pending:'대기중',registered:'등록완료',rejected:'반려'}[a.status]||a.status);
+    return '<tr onclick="openApplicationDetail(\''+esc(a.id)+'\')">'
       +'<td>'+esc((a.submittedAt||'').slice(0,10))+'</td>'
       +'<td><b>'+esc(a.traineeName||'')+'</b></td>'
       +'<td><span class="grpbadge" style="background:'+ot.color+'">'+esc(ot.label)+'</span></td>'
       +'<td>'+esc(a.org||'')+'</td>'
       +'<td>'+esc(appEquipNames(a))+'</td>'
-      +'<td>Level '+a.desiredLevel+'</td>'
+      +'<td>Level '+esc(a.desiredLevel)+'</td>'
       +'<td>'+esc(a.desiredStart||'')+' ~ '+esc(a.desiredEnd||'')+'</td>'
       +'<td>'+esc(a.applicantName||'')+'</td>'
-      +'<td><span class="app-status '+a.status+'">'+stLbl+'</span></td>'
+      +'<td><span class="app-status '+esc(a.status)+'">'+stLbl+'</span></td>'
     +'</tr>';
   }).join('');
 
@@ -125,12 +147,13 @@ function openApplicationDetail(id){
   if(!a)return;
   var ot=orgType(a.orgType||'branch');
   var assessRows=(a.selfAssessment||[]).map(function(s){
-    var hasLbl={Y:'Y (보유)',N:'N (없음)',partial:'일부'}[s.has]||s.has;
-    return '<tr><td>'+esc(s.code)+'</td><td>Level '+s.level+'</td><td>'+esc(s.name)+'</td><td>'+hasLbl+'</td><td style="font-size:11px;color:var(--tx-second)">'+esc(s.note||'')+'</td></tr>';
+    var hasLbl=esc({Y:'Y (보유)',N:'N (없음)',partial:'일부'}[s.has]||s.has);
+    return '<tr><td>'+esc(s.code)+'</td><td>Level '+esc(s.level)+'</td><td>'+esc(s.name)+'</td><td>'+hasLbl+'</td><td style="font-size:11px;color:var(--tx-second)">'+esc(s.note||'')+'</td></tr>';
   }).join('');
-  var stLbl={pending:'대기중',registered:'등록완료',rejected:'반려'}[a.status]||a.status;
+  var stLbl=esc({pending:'대기중',registered:'등록완료',rejected:'반려'}[a.status]||a.status);
+  id=esc(a.id);
 
-  mw('<div class="mtit">'+esc(a.traineeName||'')+' 교육 신청서 <span class="app-status '+a.status+'">'+stLbl+'</span></div>'
+  mw('<div class="mtit">'+esc(a.traineeName||'')+' 교육 신청서 <span class="app-status '+esc(a.status)+'">'+stLbl+'</span></div>'
 
     +'<div class="td-section"><div class="td-sectitle">1. 신청 정보</div>'
       +'<div class="fr" style="grid-template-columns:repeat(3,1fr)">'
@@ -149,7 +172,7 @@ function openApplicationDetail(id){
 
     +'<div class="td-section"><div class="td-sectitle">3. 방문 계획 및 희망 Level</div>'
       +'<div class="fr" style="grid-template-columns:repeat(3,1fr)">'
-        +infoBox('교육 희망 설비',appEquipNames(a))+infoBox('희망 Level','Level '+a.desiredLevel)+infoBox('방문 희망 시작일',a.desiredStart)
+        +infoBox('교육 희망 설비',appEquipNames(a))+infoBox('희망 Level','Level '+(Number(a.desiredLevel)||0))+infoBox('방문 희망 시작일',a.desiredStart)
         +infoBox('방문 희망 종료일',a.desiredEnd)+infoBox('총 방문일수',a.totalDays)
         +infoBox('국가',a.country)
       +'</div></div>'
@@ -212,6 +235,10 @@ function confirmRegisterFromApplication(id){
   if(!coordName){alert('담당자 이름을 입력해주세요.');return;}
   var coordOrg=document.getElementById('reg_coord_org').value.trim();
   var coordPosition=document.getElementById('reg_coord_position').value.trim();
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(a.desiredStart||'')||!/^\d{4}-\d{2}-\d{2}$/.test(a.desiredEnd||'')||a.desiredEnd<a.desiredStart){
+    alert('신청서의 방문 희망 시작일/종료일이 올바르지 않아 등록할 수 없습니다. 신청자에게 확인해주세요.');return;
+  }
+  if(a.status!=='pending'){alert('이미 처리된 신청서입니다.');cm();renderApplyTab();return;}
 
   var t={
     id:uid('tr'),name:a.traineeName,orgType:a.orgType||'branch',org:a.org||'',
@@ -337,6 +364,7 @@ function deleteApplication(id){
   var a=APPS.list.find(function(x){return x.id===id;});
   logAudit('신청서 삭제',a?(a.traineeName+' ('+(a.org||'-')+')'):id);
   APPS.list=APPS.list.filter(function(a){return a.id!==id;});
+  APPS.deleted.push(id);
   saveApplications();
   cm();renderApplyTab();
 }

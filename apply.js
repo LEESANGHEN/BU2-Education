@@ -8,8 +8,11 @@ function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){retur
 function todayStr(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function pd(s){var d=new Date(s);d.setHours(0,0,0,0);return d;}
 
+/* 저장소가 차단된 환경(사파리 프라이빗 모드, 일부 인앱 브라우저)에서는 localStorage 접근 자체가
+   예외를 던지므로 try/catch로 감싼다 — 그렇지 않으면 첫 줄에서 멈춰 신청서가 아예 표시되지 않는다. */
 function initTheme(){
-  var saved=localStorage.getItem('edu_theme')||'dark';
+  var saved='dark';
+  try{saved=localStorage.getItem('edu_theme')||'dark';}catch(e){}
   document.documentElement.setAttribute('data-theme',saved);
   var btn=document.getElementById('themeToggle');
   if(btn)btn.textContent=saved==='dark'?'🌙':'☀️';
@@ -18,7 +21,7 @@ function toggleTheme(){
   var cur=document.documentElement.getAttribute('data-theme')||'dark';
   var next=cur==='dark'?'light':'dark';
   document.documentElement.setAttribute('data-theme',next);
-  localStorage.setItem('edu_theme',next);
+  try{localStorage.setItem('edu_theme',next);}catch(e){}
   var btn=document.getElementById('themeToggle');
   if(btn)btn.textContent=next==='dark'?'🌙':'☀️';
 }
@@ -28,12 +31,48 @@ function renderLangSelect(){
   if(!sel)return;
   sel.innerHTML=LANGS.map(function(l){return '<option value="'+l.id+'"'+(l.id===getLang()?' selected':'')+'>'+l.label+'</option>';}).join('');
 }
-function changeLang(v){
-  setLang(v);
+var _submitted=false,_lastKey='',_clientToken='';
+/* 언어를 바꾸면 폼을 통째로 다시 그리므로, 입력값·체크·자가진단 선택을 미리 읽어 두었다가 복원한다 */
+function captureFormState(){
+  var st={fields:{},eq:[],mod:{},note:{}};
+  Array.prototype.slice.call(document.querySelectorAll('#formRoot [id^="f_"]')).forEach(function(el){
+    st.fields[el.id]=(el.type==='checkbox')?{c:el.checked}:{v:el.value};
+  });
+  Array.prototype.slice.call(document.querySelectorAll('.f_equipment_cb:checked')).forEach(function(el){st.eq.push(el.value);});
+  Array.prototype.slice.call(document.querySelectorAll('[data-mod]')).forEach(function(el){st.mod[el.getAttribute('data-mod')]=el.value;});
+  Array.prototype.slice.call(document.querySelectorAll('[data-mod-note]')).forEach(function(el){st.note[el.getAttribute('data-mod-note')]=el.value;});
+  return st;
+}
+function restoreFormState(st){
+  Object.keys(st.fields).forEach(function(id){
+    var el=document.getElementById(id);if(!el)return;
+    if(st.fields[id].c!==undefined)el.checked=st.fields[id].c;else el.value=st.fields[id].v;
+  });
+  Array.prototype.slice.call(document.querySelectorAll('.f_equipment_cb')).forEach(function(el){el.checked=st.eq.indexOf(el.value)>=0;});
+  Object.keys(st.mod).forEach(function(k){var el=document.querySelector('[data-mod="'+k+'"]');if(el)el.value=st.mod[k];});
+  Object.keys(st.note).forEach(function(k){var el=document.querySelector('[data-mod-note="'+k+'"]');if(el)el.value=st.note[k];});
+  if(document.getElementById('f_desiredStart'))calcDays();
+}
+function applyLangChrome(){
+  document.documentElement.lang=getLang();
+  document.title=t('formTitle');
   document.getElementById('pageTitle').textContent=t('pageTitle');
   var lbl=document.getElementById('langLabelText');
   if(lbl)lbl.textContent=t('langLabel');
+}
+function changeLang(v){
+  var st=_submitted?null:captureFormState();
+  setLang(v);
+  applyLangChrome();
+  if(_submitted){renderDone();return;}
   renderForm();
+  restoreFormState(st);
+}
+function renderDone(){
+  document.getElementById('formRoot').innerHTML='<div class="apf-card apf-done">'
+    +'<h1>'+t('doneTitle')+'</h1>'
+    +'<p>'+t('doneMsg')+'</p>'
+    +'</div>';
 }
 
 function renderForm(){
@@ -131,14 +170,35 @@ function renderForm(){
     +'</div>';
 }
 function field(label,name,inputHtml){
-  return '<div class="apf-field">'+(label?('<label>'+esc(label)+'</label>'):'')+inputHtml+'</div>';
+  // 라벨을 입력창과 연결(클릭 시 포커스, 스크린리더 낭독) — 해당 id의 입력창이 있을 때만 for를 단다
+  var forAttr=(label&&inputHtml.indexOf('id="f_'+name+'"')>=0)?(' for="f_'+name+'"'):'';
+  return '<div class="apf-field">'+(label?('<label'+forAttr+'>'+esc(label)+'</label>'):'')+inputHtml+'</div>';
+}
+function daysBetweenInclusive(s,e){
+  if(!s||!e)return 0;
+  var days=Math.round((pd(e)-pd(s))/86400000)+1;
+  return days>0?days:0;
 }
 function calcDays(){
-  var s=document.getElementById('f_desiredStart').value,e=document.getElementById('f_desiredEnd').value;
   var out=document.getElementById('f_totalDays');
-  if(!s||!e){out.value='';return;}
-  var days=Math.round((pd(e)-pd(s))/86400000)+1;
-  out.value=(days>0?days:0)+t('daysUnit');
+  var days=daysBetweenInclusive(document.getElementById('f_desiredStart').value,document.getElementById('f_desiredEnd').value);
+  // 종료일이 시작일보다 빠른 경우 "0일"로 보이지 않도록 비운다(제출 시 날짜 순서 오류로 안내)
+  out.value=days>0?(days+t('daysUnit')):'';
+}
+/* 소속 유형은 자유 입력(datalist)이라 현지어 라벨이 그대로 들어올 수 있다 — 관리자 앱은 id 또는 한국어
+   라벨만 알아보므로, 어느 언어 라벨이든 일치하면 한국어 라벨로 통일한다(일치 항목이 없으면 원문 유지) */
+function normalizeOrgType(raw){
+  var s=String(raw||'').trim().toLowerCase();
+  if(!s)return '';
+  for(var i=0;i<ORG_TYPES.length;i++){
+    var o=ORG_TYPES[i];
+    if(s===o.id.toLowerCase()||s===String(o.label).toLowerCase())return o.label;
+    for(var k=0;k<LANGS.length;k++){
+      var lbl=I18N[LANGS[k].id]&&I18N[LANGS[k].id].orgTypeLbl&&I18N[LANGS[k].id].orgTypeLbl[o.id];
+      if(lbl&&s===String(lbl).toLowerCase())return o.label;
+    }
+  }
+  return String(raw).trim();
 }
 function val(id){var el=document.getElementById(id);return el?el.value.trim():'';}
 function checked(id){var el=document.getElementById(id);return el?el.checked:false;}
@@ -193,23 +253,31 @@ function submitApplication(){
     return {moduleId:m.id,code:m.code,name:m.name,level:m.level,has:hasEl?hasEl.value:'N',note:noteEl?noteEl.value.trim():''};
   });
 
+  // 총 교육일수는 화면 언어와 무관하게 날짜에서 다시 계산해 한국어 형식으로 저장한다(관리자 앱은 한국어 전용)
+  var totalDaysN=daysBetweenInclusive(val('f_desiredStart'),val('f_desiredEnd'));
   var app={
     applyDate:val('f_applyDate'),
-    orgType:val('f_orgType'),org:val('f_org'),country:val('f_country'),
+    orgType:normalizeOrgType(val('f_orgType')),org:val('f_org'),country:val('f_country'),
     applicantName:val('f_applicantName'),applicantPosition:val('f_applicantPosition'),applicantContact:val('f_applicantContact'),applicantEmail:val('f_applicantEmail'),
     traineeName:val('f_traineeName'),traineePosition:val('f_traineePosition'),traineeTask:val('f_traineeTask'),
     traineeContact:val('f_traineeContact'),traineeEmail:val('f_traineeEmail'),
     visitCategory:val('f_visitCategory'),priorLevel:val('f_priorLevel'),experienceYears:val('f_experienceYears'),
     equipment:equipmentIds,
     desiredLevel:Number(val('f_desiredLevel')),desiredStart:val('f_desiredStart'),desiredEnd:val('f_desiredEnd'),
-    totalDays:val('f_totalDays'),
+    totalDays:totalDaysN+'일',
     selfAssessment:selfAssessment,
     specialNotes:val('f_specialNotes'),
     branchApproverName:val('f_branchApproverName'),
-    submitLang:getLang(),
-    // 응답이 유실돼도 서버가 같은 토큰의 중복 저장을 막아주므로 재시도가 안전해진다
-    clientToken:'ct_'+Date.now()+'_'+Math.random().toString(36).slice(2,10)
+    submitLang:getLang()
   };
+  // 응답이 유실돼도 서버가 같은 토큰의 중복 저장을 막아주므로 재제출이 안전해진다. 토큰은 제출 내용이
+  // 같은 동안 재사용하고(네트워크 오류 후 사용자가 다시 눌러도 중복 접수 방지), 내용이 바뀌면 새로 만든다.
+  var key=JSON.stringify(app);
+  if(key!==_lastKey||!_clientToken){
+    _lastKey=key;
+    _clientToken='ct_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
+  }
+  app.clientToken=_clientToken;
 
   var btn=document.getElementById('apf_submit_btn');
   btn.disabled=true;btn.textContent=t('submitting');
@@ -223,16 +291,16 @@ function submitWithRetry(app,retriesLeft){
       var data;
       try{data=JSON.parse(text);}catch(e){throw new Error('invalid-response');}
       if(data.error)throw new Error(data.error);
-      document.getElementById('formRoot').innerHTML='<div class="apf-card apf-done">'
-        +'<h1>'+t('doneTitle')+'</h1>'
-        +'<p>'+t('doneMsg')+'</p>'
-        +'</div>';
+      _submitted=true;
+      renderDone();
     })
     .catch(function(err){
       // Apps Script는 배포 직후 첫 요청에서 간헐적으로 정상 응답 대신 리다이렉트 HTML을
       // 반환하는 경우가 있다 (저장 자체는 이미 서버에서 처리됨). clientToken 덕분에
       // 재시도해도 신청이 중복 저장되지 않으므로, 잠시 대기 후 자동으로 다시 시도한다.
-      if(retriesLeft>0&&err.message==='invalid-response'){
+      // 네트워크 오류(fetch 실패)도 같은 이유로 자동 재시도한다 — 응답만 유실됐을 수 있다.
+      var isNet=(err&&err.name==='TypeError');
+      if(retriesLeft>0&&(err.message==='invalid-response'||isNet)){
         setTimeout(function(){submitWithRetry(app,retriesLeft-1);},1500);
         return;
       }
@@ -244,7 +312,6 @@ function submitWithRetry(app,retriesLeft){
 document.addEventListener('DOMContentLoaded',function(){
   initTheme();
   renderLangSelect();
-  document.getElementById('pageTitle').textContent=t('pageTitle');
-  document.getElementById('langLabelText').textContent=t('langLabel');
+  applyLangChrome();
   renderForm();
 });
