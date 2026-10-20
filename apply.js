@@ -6,7 +6,13 @@ var APPLY_SHEETS_URL='https://script.google.com/macros/s/AKfycbz2IHQCJE1YzGTwtat
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function todayStr(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-function pd(s){var d=new Date(s);d.setHours(0,0,0,0);return d;}
+/* 'YYYY-MM-DD' 문자열은 new Date(s)가 UTC 자정으로 해석해, UTC보다 늦은 시간대 반대편(미국 등)에서는
+   하루 전 날짜로 보인다 — 날짜만 있는 문자열은 항상 로컬 날짜로 만든다 */
+function pd(s){
+  var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(String(s||''));
+  var d=m?new Date(Number(m[1]),Number(m[2])-1,Number(m[3])):new Date(s);
+  d.setHours(0,0,0,0);return d;
+}
 
 /* 저장소가 차단된 환경(사파리 프라이빗 모드, 일부 인앱 브라우저)에서는 localStorage 접근 자체가
    예외를 던지므로 try/catch로 감싼다 — 그렇지 않으면 첫 줄에서 멈춰 신청서가 아예 표시되지 않는다. */

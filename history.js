@@ -10,7 +10,7 @@ function historyApprovals(){
   }).filter(function(r){
     if(HIST.from&&(r.a.approvalDate||'')<HIST.from)return false;
     if(HIST.to&&(r.a.approvalDate||'')>HIST.to)return false;
-    if(HIST.orgFilter!=='all'&&r.t.orgType!==HIST.orgFilter)return false;
+    if(HIST.orgFilter!=='all'&&normOrgTypeId(r.t.orgType)!==HIST.orgFilter)return false;
     if(HIST.country!=='all'&&r.t.country!==HIST.country)return false;
     if(HIST.level!=='all'&&String(r.a.level)!==HIST.level)return false;
     return true;
@@ -23,7 +23,7 @@ function historyVisits(){
   }).filter(function(r){
     if(HIST.from&&r.v.startDate<HIST.from)return false;
     if(HIST.to&&r.v.endDate>HIST.to)return false;
-    if(HIST.orgFilter!=='all'&&r.t.orgType!==HIST.orgFilter)return false;
+    if(HIST.orgFilter!=='all'&&normOrgTypeId(r.t.orgType)!==HIST.orgFilter)return false;
     if(HIST.country!=='all'&&r.t.country!==HIST.country)return false;
     return true;
   }).sort(function(x,y){return y.v.startDate<x.v.startDate?-1:1;});

@@ -340,7 +340,14 @@ function doResetPw(){
     })
     .catch(function(err){alert(_at('resetPwFailPrefix')+err.message);});
 }
-function doLogout(){firebase.auth().signOut();}
+/* 로그아웃하면 이 브라우저에 남은 교육 데이터 캐시를 지우고 화면을 새로 불러온다 — 같은 PC를 다른 사람이
+   이어서 쓰더라도 이전 사용자의 데이터가 메모리·캐시에 남지 않게 한다. */
+function doLogout(){
+  firebase.auth().signOut().catch(function(){}).then(function(){
+    try{localStorage.removeItem('edu_data_cache');}catch(e){}
+    location.reload();
+  });
+}
 
 try{firebase.auth().languageCode=getLang();}catch(e){}
 
@@ -360,6 +367,9 @@ if(!REQUIRE_LOGIN){
   else _noLoginStart();
 }
 
+/* 안내/오류 문구를 띄운 뒤 signOut()하면 "로그아웃됨" 콜백이 곧바로 빈 로그인 화면으로 다시 그려 문구가
+   사라진다 — 다음 한 번의 로그아웃 콜백에서 이 문구를 이어서 보여준다. */
+var _authNotice=null;
 firebase.auth().onAuthStateChanged(function(user){
   if(!REQUIRE_LOGIN)return;
   if(_signupInProgress)return; // doSignupNew()가 회원가입 뒷정리(인증메일 발송/디렉터리 등록/로그아웃)를 진행 중 — 이 훅이 끼어들지 않게 한다
@@ -372,17 +382,18 @@ firebase.auth().onAuthStateChanged(function(user){
   }else if(user&&_domainOk(user.email)&&!user.emailVerified){
     /* 이메일 인증 전이면 앱에 들어오지 못하게 막는다 — 링크 만료/분실 대비로 인증 메일을
        한 번 더 재발송해준다(중복 발송돼도 무해하다). */
-    try{user.sendEmailVerification();}catch(e){}
-    firebase.auth().signOut();
-    renderAuthGate('login',null,_at('emailNotVerifiedInfo'));
+    _authNotice={info:_at('emailNotVerifiedInfo')};
+    Promise.resolve().then(function(){return user.sendEmailVerification();}).catch(function(){})
+      .then(function(){return firebase.auth().signOut();});
   }else if(user){
     /* Firebase 자체는 가입 도메인을 제한하지 않으므로(devtools로 직접 가입 가능),
        로그인 후에도 다시 한번 확인해 잘못된 도메인 세션은 즉시 로그아웃시킨다.
        실제 데이터 보호는 각 .gs 백엔드의 서버측 재검사가 담당한다. */
+    _authNotice={err:_at('domainOnlyErr')};
     firebase.auth().signOut();
-    renderAuthGate('login',_at('domainOnlyErr'));
   }else{
-    renderAuthGate('login');
+    var n=_authNotice;_authNotice=null;
+    renderAuthGate('login',n&&n.err||null,n&&n.info||null);
   }
 });
 

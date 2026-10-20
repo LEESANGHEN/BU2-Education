@@ -9690,15 +9690,24 @@ function cmStartDownload(format,rawLang){
     renderMaterialViewer();
   });
 }
+/* 같은 라이브러리를 동시에 여러 번 요청해도 한 번만 로드하고(로딩 중인데 태그만 있다고 먼저 resolve되어
+   전역 객체가 아직 없는 문제 방지), 실패하면 태그를 지워 다음 시도에서 다시 받을 수 있게 한다 */
+var _cmScriptPromises={};
 function cmLoadScript(src){
-  return new Promise(function(resolve,reject){
-    if(document.querySelector('script[src="'+src+'"]')){resolve();return;}
+  if(_cmScriptPromises[src])return _cmScriptPromises[src];
+  var p=new Promise(function(resolve,reject){
     var s=document.createElement('script');
     s.src=src;
     s.onload=function(){resolve();};
-    s.onerror=function(){reject(new Error('library load failed: '+src));};
+    s.onerror=function(){
+      if(s.parentNode)s.parentNode.removeChild(s);
+      delete _cmScriptPromises[src];
+      reject(new Error('library load failed: '+src));
+    };
     document.head.appendChild(s);
   });
+  _cmScriptPromises[src]=p;
+  return p;
 }
 function cmEnsurePptxLib(){return typeof PptxGenJS!=='undefined'?Promise.resolve():cmLoadScript(CM_PPTX_CDN);}
 function cmEnsureDocxLib(){return typeof docx!=='undefined'?Promise.resolve():cmLoadScript(CM_DOCX_CDN);}

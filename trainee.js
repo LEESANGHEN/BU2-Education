@@ -11,7 +11,7 @@ function renderTraineeTab(){
     return;
   }
   var list=S.trainees.filter(function(t){
-    if(TR.orgFilter!=='all'&&t.orgType!==TR.orgFilter)return false;
+    if(TR.orgFilter!=='all'&&normOrgTypeId(t.orgType)!==TR.orgFilter)return false;
     if(TR.country!=='all'&&t.country!==TR.country)return false;
     if(TR.search){
       var hay=(t.name+' '+(t.org||'')+' '+(t.position||'')).toLowerCase();
@@ -24,7 +24,7 @@ function renderTraineeTab(){
   S.trainees.forEach(function(t){byCountry[t.country||'기타']=(byCountry[t.country||'기타']||0)+1;});
   var cards='<div class="sum-card"><div class="sum-n">'+S.trainees.length+'</div><div class="sum-l">전체 대상자</div></div>'
     +ORG_TYPES.map(function(o){
-      var n=S.trainees.filter(function(t){return t.orgType===o.id;}).length;
+      var n=S.trainees.filter(function(t){return normOrgTypeId(t.orgType)===o.id;}).length;
       return '<div class="sum-card"><div class="sum-n" style="color:'+o.color+'">'+n+'</div><div class="sum-l">'+esc(o.label)+'</div></div>';
     }).join('')
     +'<div class="sum-card"><div class="sum-n">'+Object.keys(byCountry).length+'</div><div class="sum-l">진출 국가/지역 수</div></div>';
@@ -106,7 +106,7 @@ function saveTrainee(id,hasCallback){
   if(!name){alert('이름을 입력해주세요.');return;}
   var rec={
     id:id||uid('tr'),name:name,
-    orgType:document.getElementById('t_orgtype').value.trim(),
+    orgType:normOrgTypeId(document.getElementById('t_orgtype').value.trim()),
     org:document.getElementById('t_org').value.trim(),
     country:document.getElementById('t_country').value,
     region:document.getElementById('t_region').value.trim(),
@@ -391,8 +391,8 @@ function setCompField(traineeId,itemId,field,value){
 }
 function approveLevel(traineeId,level){
   var roles=(APPROVAL_ROLES.find(function(r){return r.level===level;})||{roles:[]}).roles;
-  var rec=approvalOf(traineeId,level);
-  if(!rec){rec={id:uid('ap'),traineeId:traineeId,level:level};S.approvals.push(rec);}
+  var existing=approvalOf(traineeId,level);
+  var rec=existing?Object.assign({},existing):{id:uid('ap'),traineeId:traineeId,level:level};
   roles.forEach(function(r){
     var el=document.getElementById('appr_'+level+'_'+r);
     if(el)rec[r]=el.value.trim();
@@ -406,6 +406,11 @@ function approveLevel(traineeId,level){
   if(missing.length){
     if(!confirm('서명(승인자) 미입력 항목이 있습니다 ('+missing.map(function(r){return ROLE_LBL[r];}).join(', ')+'). 그래도 저장할까요?'))return;
   }
+  /* 이수 항목이 다 채워지지 않았는데 승인하면 이수증이 잘못 발급될 수 있어 한 번 더 확인한다 */
+  var pg=levelProgress(traineeId,level);
+  if(pg.total>0&&pg.pct<100){
+    if(!confirm('Level '+level+' 이수 항목이 '+pg.done+'/'+pg.total+' ('+pg.pct+'%)만 체크되어 있습니다. 그래도 승인할까요?'))return;
+  }
   rec.approvalDate=document.getElementById('apprdate_'+level).value||todayStr();
   rec.status='approved';
   if(level===3){
@@ -414,6 +419,7 @@ function approveLevel(traineeId,level){
     rec.followUpDate=(document.getElementById('appr_3_followUpDate')||{}).value||'';
     rec.followUpNote=(document.getElementById('appr_3_followUpNote')||{}).value||'';
   }
+  if(existing){Object.assign(existing,rec);}else{S.approvals.push(rec);}
   var _t=trainee(traineeId);
   logAudit('Level 승인',(_t?_t.name:traineeId)+' · Level '+level);
   saveData();

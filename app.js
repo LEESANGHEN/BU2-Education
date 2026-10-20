@@ -46,9 +46,19 @@ function normDate(s){
   return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 }
 function todayStr(){return normDate(new Date());}
-function pd(s){var d=new Date(s);d.setHours(0,0,0,0);return d;}
+/* 'YYYY-MM-DD' 문자열은 new Date(s)가 UTC 자정으로 해석해, UTC보다 늦은 시간대 반대편(미국 등)에서는
+   하루 전 날짜로 보인다 — 날짜만 있는 문자열은 항상 로컬 날짜로 만든다 */
+function pd(s){
+  var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(String(s||''));
+  var d=m?new Date(Number(m[1]),Number(m[2])-1,Number(m[3])):new Date(s);
+  d.setHours(0,0,0,0);return d;
+}
 /* id('branch' 등 기존 코드값) 또는 자유 입력 텍스트(자사 신입사원 등) 둘 다 지원한다.
    알려진 소속 유형이 아니면 입력한 텍스트를 그대로 라벨로 보여준다(기본값으로 잘못 표시하지 않기 위함) */
+function normOrgTypeId(v){
+  var o=ORG_TYPES.find(function(x){return x.id===v||x.label===v;});
+  return o?o.id:(v||'');
+}
 function orgType(v){return ORG_TYPES.find(function(o){return o.id===v||o.label===v;})||{id:v||'',label:v||'-',color:'#6b6b8a'};}
 function visitStatus(id){return VISIT_STATUS.find(function(v){return v.id===id;})||VISIT_STATUS[0];}
 function trainee(id){return S.trainees.find(function(t){return t.id===id;});}
@@ -417,7 +427,7 @@ function renderHomeTab(){
   var schedRows=upcoming.length?upcoming.map(function(v){
     var t=trainee(v.traineeId)||{};
     var st=visitStatus(v.status);
-    var d=new Date(v.startDate);
+    var d=pd(v.startDate);
     return '<div class="home-sched-row" style="cursor:pointer" onclick="switchTab(\'schedule\')">'
       +'<div class="home-sched-date"><div class="m">'+(d.getMonth()+1)+'월</div><div class="d">'+d.getDate()+'</div></div>'
       +'<div style="min-width:0;flex:1"><div style="font-size:12px;color:var(--tx-primary)">'+esc(t.name||'-')+' · Level '+(v.targetLevel||'-')+'</div>'

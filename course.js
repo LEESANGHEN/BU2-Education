@@ -223,15 +223,22 @@ function saveChecklistItem(id){
   var isNew=!id;
   if(id){
     var i=S.checklistItems.findIndex(function(x){return x.id===id;});
+    if(i<0){alert('편집 중이던 항목이 이미 삭제되었습니다.');cm();renderCourseTab();return;}
     rec.no=S.checklistItems[i].no;
     S.checklistItems[i]=rec;
   }else{
     rec.no=S.checklistItems.filter(function(x){return x.phase===rec.phase;}).length+1;
     S.checklistItems.push(rec);
   }
-  if(linkedModule)syncChecklistFromModule(linkedModule);
+  var wantItem=rec.item,wantLevel=rec.level,resetNotes=[];
+  if(linkedModule){
+    syncChecklistFromModule(linkedModule);
+    if(rec.item!==wantItem)resetNotes.push('세부 이수 항목 문구');
+    if(rec.level!==wantLevel)resetNotes.push('Level');
+  }
   logAudit(isNew?'이수 체크리스트 항목 추가':'이수 체크리스트 항목 편집',rec.module+' — '+rec.item);
   saveData();cm();renderCourseTab();
+  if(resetNotes.length)alert('연결된 모듈('+linkedModule.code+'. '+linkedModule.name+')의 내용과 자동으로 맞춰져 입력하신 '+resetNotes.join(', ')+'은(는) 모듈 값으로 되돌려졌습니다.\n이 값을 바꾸려면 "교육 과정 관리"에서 해당 모듈을 수정하거나, 항목의 모듈 연결을 "연결 안 됨"으로 바꿔주세요.');
 }
 function deleteChecklistItem(id){
   if(!confirm('이 이수 체크리스트 항목을 삭제할까요? (이미 기록된 이수 체크 데이터도 함께 삭제됩니다)'))return;

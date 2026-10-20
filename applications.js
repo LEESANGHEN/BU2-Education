@@ -241,7 +241,7 @@ function confirmRegisterFromApplication(id){
   if(a.status!=='pending'){alert('이미 처리된 신청서입니다.');cm();renderApplyTab();return;}
 
   var t={
-    id:uid('tr'),name:a.traineeName,orgType:a.orgType||'branch',org:a.org||'',
+    id:uid('tr'),name:a.traineeName,orgType:normOrgTypeId(a.orgType||'branch'),org:a.org||'',
     country:a.country||'한국',region:'',position:a.traineePosition||'',task:a.traineeTask||'',
     contact:a.traineeContact||a.applicantContact||'',email:a.traineeEmail||'',visitCategory:a.visitCategory||'new',
     experienceYears:a.experienceYears||'',equipment:appEquipList(a)[0]||'',note:'교육 신청서 기반 자동 등록 ('+(a.applyDate||'')+')'
