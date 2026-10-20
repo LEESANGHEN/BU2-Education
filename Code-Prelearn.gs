@@ -130,8 +130,11 @@ function doPost(e) {
     // 관리자 앱 전용 — 학습자 진도 전체 목록 갱신(삭제 등). quizOverrides는 보존한다.
     if (body.action === 'save') {
       if (!_verifyIdToken_(body.idToken)) return _json_({ error: 'unauthorized' });
+      // records 배열이 없는 요청(예: 메인 데이터 저장이 잘못 들어온 경우)이 학습 기록 전체를 빈 목록으로
+      // 덮어쓰지 않도록 막는다. 관리자 화면의 삭제는 빈 배열([])을 명시적으로 보내므로 그대로 동작한다.
+      if (!Array.isArray(body.records)) return _json_({ error: 'invalid_records' });
       var state2 = _readState_();
-      state2.records = body.records || [];
+      state2.records = body.records;
       _writeState_(state2);
       return _json_({ ok: true });
     }

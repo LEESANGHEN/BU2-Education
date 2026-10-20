@@ -156,10 +156,15 @@ function saveCache(){
     localStorage.setItem(CACHE_KEY,JSON.stringify(snap));
   }catch(e){}
 }
+/* "Sheets 설정" 주소가 메인 데이터용이 아닌 다른 서버(사전학습/신청서)로 잘못 들어간 것이 확인되면
+   true — 이 상태에서 저장하면 엉뚱한 서버에 메인 데이터가 전송되고, 사전학습 서버는 저장 요청마다
+   학습 기록이 지워질 수 있어 서버 전송을 막는다(로컬 캐시 저장은 계속된다). */
+var _mainUrlWrong=false,_fixUrlOffered=false;
 function saveData(){
   saveCache();
   var url=getSheetsUrl();
   if(!url||location.protocol==='file:')return;
+  if(_mainUrlWrong){updateConnStatus('err');return;}
   var body={action:'save'};FIELDS.forEach(function(f){body[f]=S[f];});
   authedPost(url,body)
     .then(function(r){return r.json();})
@@ -178,6 +183,11 @@ function loadFromSheets(callback){
     .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
     .then(function(data){
       if(data.error){var e=new Error(data.error);e.reason=data.reason;throw e;}
+      if(!FIELDS.some(function(f){return data[f]!==undefined;})){
+        _mainUrlWrong=true;offerFixMainUrl();
+        var we=new Error('wrong_backend');we.reason='wrong_url';throw we;
+      }
+      _mainUrlWrong=false;
       FIELDS.forEach(function(f){
         if(data[f]!==undefined&&(Array.isArray(data[f])?data[f].length:true))S[f]=data[f];
       });
@@ -226,7 +236,40 @@ function openSheetsSettings(){
 function saveSheetsUrl(){
   var u=document.getElementById('sheets_url').value.trim();
   if(!u){alert('URL을 입력해주세요.');return;}
-  setSheetsUrl(u);cm();checkConn();
+  setSheetsUrl(u);_mainUrlWrong=false;_fixUrlOffered=false;cm();checkConn();
+}
+/* 메인 데이터 주소가 잘못 설정된 브라우저를 한 번에 바로잡는다. 서버 저장이 성공한 뒤에만 주소를
+   바꾸므로, 중간에 실패해도 이 브라우저의 데이터는 그대로 남고(이후 서버 값으로 덮어써지지 않음),
+   시작 전에 현재 데이터를 JSON 파일로 먼저 내려받아 둔다. */
+function offerFixMainUrl(){
+  if(_fixUrlOffered)return;
+  _fixUrlOffered=true;
+  mw('<div class="mtit">⚠ 메인 데이터 주소가 잘못 설정되어 있습니다</div>'
+    +'<div style="font-size:12px;color:var(--tx-second);line-height:1.8;margin-bottom:12px">'
+    +'이 브라우저의 "Sheets 설정" 주소가 교육 관리 메인 데이터용이 아닌 다른 서버(사전학습/신청서)로 되어 있어, 입력한 데이터가 서버에 저장되지 않고 이 브라우저에만 남아 있습니다. 다른 PC·브라우저에서는 이 데이터가 보이지 않습니다.<br><br>'
+    +'아래 버튼을 누르면 ① 현재 데이터를 JSON 파일로 먼저 내려받고 ② 지금 화면의 데이터를 올바른 메인 서버에 저장한 뒤 ③ 주소를 바로잡습니다. <b>서버에 있던 기존 메인 데이터는 지금 화면의 데이터로 덮어써집니다.</b></div>'
+    +'<div class="mfoot"><button class="btn sm" onclick="cm()">나중에</button><button class="btn sm pri" onclick="fixMainUrl()">백업 후 서버에 저장하고 주소 바로잡기</button></div>');
+}
+function fixMainUrl(){
+  var snap={};FIELDS.forEach(function(f){snap[f]=S[f];});
+  try{
+    var d=new Date(),p=function(n){return String(n).padStart(2,'0');};
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([JSON.stringify(snap,null,2)],{type:'application/json'}));
+    a.download='edu_backup_'+d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'_'+p(d.getHours())+p(d.getMinutes())+'.json';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+  }catch(e){}
+  var body={action:'save'};FIELDS.forEach(function(f){body[f]=S[f];});
+  authedPost(DEFAULT_SHEETS_URL,body)
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(data.error)throw new Error(data.error);
+      setSheetsUrl(DEFAULT_SHEETS_URL);_mainUrlWrong=false;_fixUrlOffered=false;
+      saveCache();cm();
+      alert('완료했습니다. 현재 데이터를 메인 서버에 저장하고 주소를 바로잡았습니다.');
+      loadFromSheets(function(){renderAll();});
+    })
+    .catch(function(err){alert('서버 저장에 실패했습니다: '+err.message+'\n주소와 이 브라우저의 데이터는 그대로입니다. 잠시 후 다시 시도해주세요.');});
 }
 
 /* ═══════════════════════════════════════════
